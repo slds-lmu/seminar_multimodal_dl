@@ -1,5 +1,5 @@
 book_filename: book
-repo: https://github.com/compstat-lmu/seminar-skeleton/
+repo: https://github.com/compstat-lmu/seminar_multimodal_dl/
 output_dir: _book
 clean: [packages.bib, bookdown.bbl]
 delete_merged_file: true
