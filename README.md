@@ -1,35 +1,10 @@
-# Seminar Book Skeleton
+# Seminar: Multimodal Deep Learning
 
 ## Setup a new seminar repo
 
-This skeleton was design by using the [Limitations of Interpretable Machine Learning Methods seminar](https://github.com/compstat-lmu/iml_methods_limitations) as template.
+In the last few years, there have been several breakthroughs in the methodologies used in Natural Language Processing (NLP) as well as Computer Vision (CV). Beyond these improvements on single-modality models, large-scale multi-modal approaches have become a very active area of research.
 
-1. Create a new repository for your seminar.
-1. Download, clone, whatever the files from the skeleton repo (this repo) and copy all files except the `.git` folder (or select `seminar_website_skeleton` as template when creating a new repository).
-1. Update `DESCRIPTION`:
-    - Adjust `Package` with your seminar name
-    - Adjust `Title` with your title
-    - Put each package in the `Depends` section that is required to build the book
-1. Update `index.Rmd`:
-    - Adjust `title` to your seminar title
-    - Adjust `description` to a short description of the seminar
-    - If present, uncomment the image with the `cover-image` and put it into the YAML header
-    - Adjust the content to your needs, e.g. write a preface and foreword
-    - If not otherwise requested, I would suggest to leave Chris as author of the foreword to give him credit for his effort
-1. Update `README.md`:
-    - Use your seminar title as title
-    - Write a small intro that readers knows what the seminar is about
-    - You can leave everything below `How this book came about`
-1. Update `_output.yml`:
-    - Adjust `before` and insert the title of the book
-    - Adjust `edit` and insert the url to the repo
-1. Update `_bookdown.yml`:
-    - Adjust `repo` and, again, insert the url of the repo
-1. Update `98-acknowledgments.Rmd`:
-    - Insert supervising professor (and link)
-    - If requested, insert other acknowledgements (e.g. ZDB)
-
-Run `make' to` test if everything works fine and can be build.
+In this seminar, we are planning to review these approaches and create a solid overview of the field, starting with the current state-of-the-art approaches in the two subfields of Deep Learning individually. We will further discuss modeling frameworks, where one modality is transformed into the other as well as models in which one modality is utilized to enhance representation learning for the other. Finally, we plan to also potentially cover other modalities as well as general-purpose multi-modal models, which are able to handle different tasks on different modalities within one unified architecture. Interesting applications/use cases could also be potential topics for a seminar paper.
 
 ## Style guide
 
