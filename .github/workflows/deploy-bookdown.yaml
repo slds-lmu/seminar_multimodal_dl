@@ -15,9 +15,7 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install bookdown
-        run: |
-          Rscript -e 'install.packages(c("rmarkdown", "bookdown", "tinytex"));tinytex::install_tinytex()'
-          Rscript -e 'update.packages(ask = FALSE, checkBuilt = TRUE);tinytex::tlmgr_update()'
+        run: Rscript -e 'install.packages(c("rmarkdown", "bookdown", "tinytex"));tinytex::install_tinytex()'
       - name: Render Book
         run: make
       - uses: actions/upload-artifact@v1
