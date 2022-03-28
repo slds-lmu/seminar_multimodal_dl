@@ -1,5 +1,5 @@
-Package: seminar-skeleton
-Title: Seminar Skeleton
+Package: multimodal-dl
+Title: Multimodal Deep Learning
 Version: 0.0.1
 Depends:
   devtools,
