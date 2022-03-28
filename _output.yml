@@ -6,11 +6,11 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">TITLE OF THE BOOK></li>
+        <li><a href="./">Multimodal Deep Learning></li>
       after: |
         <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
     download: [pdf, epub]
-    edit: https://github.com/compstat-lmu/seminar-skeleton/edit/master/%s
+    edit: https://github.com/compstat-lmu/seminar_multimodal_dl/edit/master/%s
     sharing:
       github: yes
       facebook: no
