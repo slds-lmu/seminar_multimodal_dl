@@ -10,7 +10,7 @@ bookdown::gitbook:
       after: |
         <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
     download: [pdf, epub]
-    edit: https://github.com/compstat-lmu/seminar_multimodal_dl/edit/master/%s
+    edit: https://github.com/compstat-lmu/seminar_multimodal_dl/
     sharing:
       github: yes
       facebook: no
