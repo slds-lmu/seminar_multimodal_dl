@@ -1,5 +1,5 @@
 ---
-title: "Seminar Skeleton"
+title: "Multimodal Deep Learning"
 author: ""
 date: "`r Sys.Date()`"
 documentclass: krantz
@@ -10,7 +10,7 @@ colorlinks: yes
 lot: False
 lof: False
 site: bookdown::bookdown_site
-description: "DESCRIPTION OF THE SEMINAR"
+description: "In the last few years, there have been several breakthroughs in the methodologies used in Natural Language Processing (NLP) as well as Computer Vision (CV). Beyond these improvements on single-modality models, large-scale multi-modal approaches have become a very active area of research. In this seminar, we are planning to review these approaches and create a solid overview of the field, starting with the current state-of-the-art approaches in the two subfields of Deep Learning individually. We will further discuss modeling frameworks, where one modality is transformed into the other as well as models in which one modality is utilized to enhance representation learning for the other. Finally, we plan to also potentially cover other modalities as well as general-purpose multi-modal models, which are able to handle different tasks on different modalities within one unified architecture. Interesting applications/use cases could also be potential topics for a seminar paper."
 graphics: yes
 ---
 <!--- cover-image: images/cover.png -->
