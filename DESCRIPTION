@@ -1,0 +1,10 @@
+Package: seminar-skeleton
+Title: Seminar Skeleton
+Version: 0.0.1
+Depends:
+  devtools,
+  knitr,
+  bookdown,
+  tidyverse,
+  ggpubr,
+  svglite
