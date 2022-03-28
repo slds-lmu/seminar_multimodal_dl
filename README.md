@@ -25,12 +25,6 @@ The proposed convention here does not have to be adopted. It's just a suggestion
 - Chapters are saved in the home directory of the repository and have a prefix `xx-chapter-name.Rmd` (e.g. `01-about-linear-models.Rmd`)
 - Code, data, figures, and results are stored in the directories mentioned above in subdirectories that are named as the chapter itself. E.g. the R code `fit-linear-model.R` for the chapter `01-about-linear-models.Rmd` is saved in `code/01-about-linaer-models/fit-linear-model.R`. The same holds for data, figures, and results.
 
-## Set up GitHub actions
-
-- [Optional when created from template] Create a new Branch `gh-pages`. This one should then automatically set as built branch in the settings.
-- Push something in the master to trigger the auto build.
-- Add a valid email in `.github/workflows/deploy-bookdown.yaml`
-
 ## How this book came about
 
 This book is the result of a student seminar for Master Statistics and Master Data Science at the LMU in the summer semester 2020.
