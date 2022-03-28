@@ -1,0 +1,12 @@
+fig:ch01-figure01
+introduction
+intro-about-the-seminar-topic
+outline-of-the-booklet
+chapter-1
+lorem-ipsum
+using-figures
+using-tex
+using-stored-results
+chapter-2
+lorem-ipsum-1
+acknowledgements
