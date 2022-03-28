@@ -99,6 +99,6 @@ The simulations, data examples and visualizations were created with R [@rlang].
 To combine R-code and Markdown, we used rmarkdown.
 The book was compiled with the bookdown package.
 We collaborated using git and github.
-For details, head over to the [book's repository](link/to/repo).
+For details, head over to the [book's repository](https://github.com/slds-lmu/seminar_multimodal_dl).
 
 
