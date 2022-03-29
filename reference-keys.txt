@@ -9,4 +9,6 @@ using-tex
 using-stored-results
 chapter-2
 lorem-ipsum-1
+epilogue
+test
 acknowledgements
