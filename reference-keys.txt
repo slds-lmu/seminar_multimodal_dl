@@ -19,6 +19,7 @@ title-7
 title-8
 chapter-2
 lorem-ipsum-1
+title-9
 epilogue
 test
 acknowledgements
