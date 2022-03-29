@@ -4,6 +4,7 @@ intro-about-the-seminar-topic
 outline-of-the-booklet
 introducing-the-modalities
 title
+title-1
 chapter-1
 lorem-ipsum
 using-figures
