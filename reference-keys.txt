@@ -13,6 +13,10 @@ using-tex
 using-stored-results
 title-3
 title-4
+title-5
+title-6
+title-7
+title-8
 chapter-2
 lorem-ipsum-1
 epilogue
