@@ -12,7 +12,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 ## Using Figures
 
-```{r ch01-figure01, echo=FALSE, out.width="80%", fig.cap="(ref:ch01-figure1)", fig.align="center"}
+```{r ch01-figure01-old, echo=FALSE, out.width="80%", fig.cap="(ref:ch01-figure1)", fig.align="center"}
 knitr::include_graphics("figures/01-chapter1/ch01-figure01.png")
 ```
 (ref:ch01-figure1) This is the caption of the figure!
