@@ -5,6 +5,7 @@ outline-of-the-booklet
 introducing-the-modalities
 title
 title-1
+title-2
 chapter-1
 lorem-ipsum
 using-figures
