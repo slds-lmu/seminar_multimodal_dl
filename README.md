@@ -42,7 +42,7 @@ With RStudio: https://support.rstudio.com/hc/en-us/articles/200532077-Version-Co
 
 With command-line:
 ```
-git clone git@github.com:compstat-lmu/seminar_website_skeleton.git
+git clone git@github.com/slds-lmu/seminar_multimodal_dl.git
 ```
 
 Step 2: Install dependencies
