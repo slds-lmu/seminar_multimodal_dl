@@ -62,17 +62,23 @@ This results in a multitude of capabilities, for example optical character recog
 Performance-wise CLIP can be competitive with task-specific supervised models, while never seeing an instance of the specific dataset before.
 This suggests an important step towards closing the “robustness gap”, where machine learning models fail to meet the expectations set by their previous performance on ImageNet test-sets, on new datasets.
 
-Finally, “Text plus Images” discusses, based on (Baevski et. al, 2022), how text and image inputs can be incorporated into a single unifying framework in order to get closer to a general self-supervised learning model.
-Data2vec is a multimodal self-supervised learning model which uses a single framework for either speech, NLP or computer vision.
+Final part, “Text plus Images”, discusses how text and image inputs can be incorporated into a single unifying framework in order to get closer to a general self-supervised learning model.
+There are two key advantages that make such a model particularly interesting.
+Devoid of human labelling, self-supervised models don't suffer from the same capacity constraints as regular supervised learning models. 
+On top of that, while there have been notable advances in dealing with different modalities, it is often unclear to which extend a model structure generalizes across different modalities. 
+Rather than potentially learning modality-specific biases, a general multipurpose framework can help increase robustness while also simplifying the learner porfolio and thereby better emulating human learning processes. \
+Data2vec (Baevski et. al, 2022) is a new multimodal self-supervised learning model which uses a single framework for either speech, NLP or computer vision.
 This is in contrast to earlier models which used different algorithms for different modalities.
-The core idea of data2vec, developed by MetaAI, is to predict latent representations of the full input data based on a masked view of the input in a self-distillation setup using a standard Transformer architecture (Baevski et al, 2022). As a result, the main improvement is in the framework, not the models themselves.
-In fact, the models used have been well-established.
-The transformer architecture follows (Vaswani et al, 2017).
-Transformers have several advantages over CNNs, such as xyz (citation needed). Hence, they see more and more use.
-In the following picture (insert graphic), the standard Vaswani transformer architecture is depicted.
-The central building block of the framework is a student-teacher structure that allows the learning process to occur without supervision.
-To achieve this, inputs serve not only as learning targets, but also training data by being masked. The encoding and masking strategies are modality-specific.
-Through the use of continuous and contextualized target representations via self-attention, they are richer than a fixed set of targets based on local context as used in most prior work (Baevski et al., 2022).
-The model is then trained to predict the model representation of the original unmasked training sample based
-As far as the results are concerned, data2vec is effective in all three modalities (insert graphic).
+The core idea of data2vec, developed by MetaAI, is to predict latent representations of the full input data based on a masked view of the input in a self-distillation setup using a standard transformer architecture (Baevski et al, 2022). As a result, the main improvement is in the framework, not the underlying models themselves.
+For example, the transformer architecture follows (Vaswani et al, 2017).
+Transformers have several advantages over CNNs, such as encoding the relative position of features (citation needed). Hence, they see more and more use.
+The central building block of the data2vec framework is a student-teacher structure that allows the learning process to occur without supervision.
+To achieve this, inputs serve both as training data, but also as learning targets by being masked.
+A key issue to be aware of is model collapse, i.e the model collapsing into a constant representation. Normalization helps prevent that as well as the domination of certain layers with high norm.
+The encoding, normalization and masking strategies are modality-specific.
+However, the learning objective remains the same across all modalities. 
+The model is trained to predict the model representation of the original unmasked training sample.
+As a result of the use of continuous and contextualized target representations achieved via self-attention, those are richer than a fixed set of targets based on local context as used in most prior work. 
+On top of that, working with latent representations of the network itself can be seen as a simplification of many prior modality-specific models. (Baevski et al., 2022)
+As far as the results are concerned, data2vec is effective in all three modalities.
 It sets new state of the art scores on computer vision, speech recognition as well as speech learning benchmarking sets.
