@@ -25,9 +25,9 @@ The second part “Text2Image discusses”...
 The third part, “Images supporting Language Models” deals with the integration of visual elements in pure textual language models.
 Distributional semantic models such as Word2Vec and BERT assume that the meaning of a given word or sentence can be understood by looking at how (in which context) and when the word or the sentence appear in the text corpus, namely from its “distribution” within the text.
 But this assumption has been historically questioned because words and sentences must be grounded in other perceptual dimensions, in order to understand their meaning (see for example the “symbol grounding problem”, Harnad 1990).
-For these reasons, a broad range of models has been developed with the aim to improve pure language models leveraging on the addition of other perceptual information, such as visual ones.
+For these reasons, a broad range of models has been developed with the aim to improve pure language models, leveraging on the addition of other perceptual information, such as visual ones.
 This subchapter focuses in particular on the integration of visual elements (images) to support pure language models for various tasks at the word-level and sentence-level.
-The starting point is always a language model, on which visual representations (extracted often with the help of large pools of images like MS Coco, see chapter 2.4 - Img2Text for further references) are to be “integrated”.
+The starting point is always a language model, on which visual representations (extracted often with the help of large pools of images like MS Coco, see chapter "Img2Text" for further references) are to be “integrated”.
 But how?
 There has been proposed a wide range of solutions: on one side of the spectrum, textual elements and visual ones are learned separately and then “combined” together whereas on the other side, the learning of textual and visual features takes place simultaneously/jointly. 
 
@@ -41,7 +41,7 @@ For example, Silberer et al. (2014) implement a model where a one-to-one corresp
 Text and visual representations are passed to two separate unimodal encoders and both outputs are then fed to a bimodal autoencoder.
 On the other side, Bordes et. al (2020) propose a “text objective function” whose parameters are shared with an additional “grounded objective function”.
 The training of the latter takes place in what the authors called a “grounded space”, which allows to avoid the one-to-one correspondence between textual and visual space.
-These are just introductory examples and between these two approaches, there are many shades of gray (maybe more than fifty…).
+These are just introductory examples and between these two approaches there are many shades of gray (maybe more than fifty…).
 These models exhibit in many instances better performance than pure language models but they still struggle on some aspects, for example when they deal with abstract words and sentences.
 
 The fourth part “Text supporting Image Models” describes approaches where natural language is used as an easily available source of supervision for CV models, in contrast to manually labeled datasets.
