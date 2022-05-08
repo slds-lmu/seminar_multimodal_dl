@@ -1,5 +1,5 @@
 # Chapter 2 Multimodal architectures 
-*Authors: Luyang Chu, Karol, Giacomo Loss, Max Schneider, Steffen Jauch-Walser*
+*Authors: Luyang Chu, Karol Urbanczyk, Giacomo Loss, Max Schneider, Steffen Jauch-Walser*
 *Supervisor: Christian Heumann*
 
 ## Introduction
@@ -20,7 +20,14 @@ However, the potential of applications of transformer architecture in the multi-
 With the help of COCO dataset, a transformer-based architecture: Meshed-Memory Transformer for Image Captioning ($M^2$) will be introduced to improve both image encoding and the language generation steps. 
 The performance of ($M^2$) Transformer and different fully-attentive models will be evaluated and compared on the COCO dataset.
 
-The second part “Text2Image discusses”...
+The second part describes the idea of incorporating textual input in order to generate visual representations. Current advancements in this field have been made possible largely due to recent breakthroughs in NLP, which first allowed for learning contextual representations of text. Transformer-like architectures are being used to encode the input into embedding vectors, which are later helpful in guiding the process of image generation.
+The chapter looks into details and discusses two state-of-the-art model architectures by OpenAI, which both condition on text representations. Surprisingly, none of them uses GAN approach - a method which probably has been seen as a go-to idea for image generation over the last years. 
+First of the models is DALL-E (Ramesh et. al, 2021), which essentially combines Variational Encoder (VAE) with Autoregressive Transformer. In the first step, VAE is being trained to learn downsized image representations. Such embeddings are concatenated with text embeddings into one text-image pair input. However, both of them use different dimensionality and vocabulary size. In the second step, the transformer is trained on a next token prediction task given these data pairs. Finally, at inference time, the model is able to generate image in the following way:
+1.	Encode text input into text embedding
+2.	Use trained transformer from step 2 to generate image embedding
+3.	Use VAE from step 1 to generate image from image embedding
+The next approach to text-to-image generation is a GLIDE model (Nichol et. al, 2021),. GLIDE stands for Guided Language to Image Diffusion for Generation and Editing. Its idea is to use Diffusion Models. In its core, Diffusion Model is a simple idea – random noise is being added to the image in an iterative fashion, and then model learns how to reconstruct this image. In the case of GLIDE this learning process is conditioned on the text prompt, which is first passed through a transformer.
+Both models differ in their results. While DALL-E’s result images might have been overwhelming back in the beginning of 2021, GLIDE is thought to significantly improve on photorealism and resolution of the generated image. Since the field has already seen further improvements following GLIDE, these new developments are also going to be mentioned in the chapter.
 
 The third part, “Images supporting Language Models” deals with the integration of visual elements in pure textual language models.
 Distributional semantic models such as Word2Vec and BERT assume that the meaning of a given word or sentence can be understood by looking at how (in which context) and when the word or the sentence appear in the text corpus, namely from its “distribution” within the text.
