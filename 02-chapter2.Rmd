@@ -1,12 +1,71 @@
-# Chapter 2
+# Chapter 2 Multimodal architectures 
+*Authors: Luyang Chu, Giacomo Loss, Max Schneider, Steffen Jauch-Walser*
+*Supervisor: Christian Heumann*
 
-*Authors: Author 1, Author 2*
+## Introduction
 
-*Supervisor: Supervisor*
+Multimodal learning refers to the process of learning representations from different types of input modalities, such as for example image data, text or speech.
+Due to methodological breakthroughs in the fields of Natural Language Processing (NLP) as well as Computer Vision (CV), in recent years multimodal models have gained increasing attention as they are able to strengthen predictions and better emulate the way humans learn.
+This chapter focuses on discussing images and text as input data.
+The remainder of the chapter is structured as follows: 
 
-## Lorem Ipsum
+The first part “Image2Text” discusses how the transformer-based architectures improve meaningful captions for complex images.
+Whether it is seeing a photograph and describing it or parsing a complex scene and describing its context, it is not a difficult task for humans.
+Indeed, people can quickly summarize a complicated scene in a few words. But it’s much more complex and challenging for computers.
+This chapter starts to focus on images as input modalities.
+With a primary goal of advancing the state-of-art in object recognition by diving deeper into a border question of scene understanding, a new large scale, richly annotated dataset Microsoft COCO is introduced.
+COCO stands for Common Objects in Context, it addresses three core problems in scene understanding: object detection (non-iconic views), segmentation, and captioning.
+For tasks like machine translation and language understanding in NLP, Transformer-based architecture is widely used.
+However, the potential of applications of transformer architecture in the multi-modal context has not been fully covered.
+With the help of COCO dataset, a transformer-based architecture: Meshed-Memory Transformer for Image Captioning (M^2) will be introduced to improve both image encoding and the language generation steps.
+The performance of (M^2) Transformer and different fully-attentive models will be evaluated and compared on the COCO dataset.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+The second part “Text2Image discusses”...
 
-@rlang
+The third part, “Images supporting Language Models” deals with the integration of visual elements in pure textual language models.
+Distributional semantic models such as Word2Vec and BERT assume that the meaning of a given word or sentence can be understood by looking at how (in which context) and when the word or the sentence appear in the text corpus, namely from its “distribution” within the text.
+But this assumption has been historically questioned because words and sentences must be grounded in other perceptual dimensions, in order to understand their meaning (see for example the “symbol grounding problem”, Harnad 1990).
+For these reasons, a broad range of models has been developed with the aim to improve pure language models leveraging on the addition of other perceptual information, such as visual ones.
+This subchapter focuses in particular on the integration of visual elements (images) to support pure language models for various tasks at the word-level and sentence-level.
+The starting point is always a language model, on which visual representations (extracted often with the help of large pools of images like MS Coco, see chapter 2.4 - Img2Text for further references) are to be “integrated”.
+But how?
+There has been proposed a wide range of solutions: on one side of the spectrum, textual elements and visual ones are learned separately and then “combined” together whereas on the other side, the learning of textual and visual features takes place simultaneously/jointly. 
 
+<br>
+```{r, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Left, Silberer et al., 2014: stacked autoencoders to learn higher-level embeddings from textual and visual modalities, encoded as vectors of attributes. Right, Bordes et al., 2020: textual and visual information fused in an Intermediate space denoted as “grounded space”; the “grounding objective function” is not applied directly on sentence embeddings but trained on this intermediate space, on which sentence embeddings are projected.", }
+knitr::include_graphics("figures/02-chapter2/Img_Ch_Intro.png")
+```
+<br>
+
+For example, Silberer et al. (2014) implement a model where a one-to-one correspondence between textual and visual space is assumed.
+Text and visual representations are passed to two separate unimodal encoders and both outputs are then fed to a bimodal autoencoder.
+On the other side, Bordes et. al (2020) propose a “text objective function” whose parameters are shared with an additional “grounded objective function”.
+The training of the latter takes place in what the authors called a “grounded space”, which allows to avoid the one-to-one correspondence between textual and visual space.
+These are just introductory examples and between these two approaches, there are many shades of gray (maybe more than fifty…).
+These models exhibit in many instances better performance than pure language models but they still struggle on some aspects, for example when they deal with abstract words and sentences.
+
+The fourth part “Text supporting Image Models” describes approaches where natural language is used as an easily available source of supervision for CV models, in contrast to manually labeled datasets.
+An important example for the use of natural language supervision in CV is the CLIP model (Radford, Kim et al., 2021).
+Inspired by recent successes in NLP with pre-train methods directly learning from raw text (e. g. GPT-n;  Generative Pre-trained Transformer; Brown et al., 2020), CLIP stands for Contrastive Language-Image Pre-training.
+The new WIT (WebImageText) dataset with 400 million text-image pairs scraped from the internet constitutes its training data.
+It is used for jointly pre-training an image encoder and a text encoder.
+The contrastive goal is the correct prediction which natural language text pertains to which image inside the current batch.
+This leads to a flexible model which at test time uses the learned text encoder as a “zero-shot” classifier on embeddings of the target dataset’s classes.
+This results in a multitude of capabilities, for example optical character recognition, geo-location and action-recognition.
+Performance-wise CLIP can be competitive with task-specific supervised models, while never seeing an instance of the specific dataset before.
+This suggests an important step towards closing the “robustness gap”, where machine learning models fail to meet the expectations set by their previous performance on ImageNet test-sets, on new datasets.
+
+Finally, “Text plus Images” discusses, based on (Baevski et. al, 2022), how text and image inputs can be incorporated into a single unifying framework in order to get closer to a general self-supervised learning model.
+Data2vec is a multimodal self-supervised learning model which uses a single framework for either speech, NLP or computer vision.
+This is in contrast to earlier models which used different algorithms for different modalities.
+The core idea of data2vec, developed by MetaAI, is to predict latent representations of the full input data based on a masked view of the input in a self-distillation setup using a standard Transformer architecture (Baevski et al, 2022). As a result, the main improvement is in the framework, not the models themselves.
+In fact, the models used have been well-established.
+The transformer architecture follows (Vaswani et al, 2017).
+Transformers have several advantages over CNNs, such as xyz (citation needed). Hence, they see more and more use.
+In the following picture (insert graphic), the standard Vaswani transformer architecture is depicted.
+The central building block of the framework is a student-teacher structure that allows the learning process to occur without supervision.
+To achieve this, inputs serve not only as learning targets, but also training data by being masked. The encoding and masking strategies are modality-specific.
+Through the use of continuous and contextualized target representations via self-attention, they are richer than a fixed set of targets based on local context as used in most prior work (Baevski et al., 2022).
+The model is then trained to predict the model representation of the original unmasked training sample based
+As far as the results are concerned, data2vec is effective in all three modalities (insert graphic).
+It sets new state of the art scores on computer vision, speech recognition as well as speech learning benchmarking sets.
