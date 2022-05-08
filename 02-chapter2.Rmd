@@ -1,5 +1,5 @@
 # Chapter 2 Multimodal architectures 
-*Authors: Luyang Chu, Giacomo Loss, Max Schneider, Steffen Jauch-Walser*
+*Authors: Luyang Chu, Karol, Giacomo Loss, Max Schneider, Steffen Jauch-Walser*
 *Supervisor: Christian Heumann*
 
 ## Introduction
@@ -9,16 +9,16 @@ Due to methodological breakthroughs in the fields of Natural Language Processing
 This chapter focuses on discussing images and text as input data.
 The remainder of the chapter is structured as follows: 
 
-The first part “Image2Text” discusses how the transformer-based architectures improve meaningful captions for complex images.
+The first part “Image2Text” discusses how the transformer-based architectures improve meaningful captions for complex images from a new large scale,
+richly annotated dataset COCO. 
 Whether it is seeing a photograph and describing it or parsing a complex scene and describing its context, it is not a difficult task for humans.
-Indeed, people can quickly summarize a complicated scene in a few words. But it’s much more complex and challenging for computers.
-This chapter starts to focus on images as input modalities.
-With a primary goal of advancing the state-of-art in object recognition by diving deeper into a border question of scene understanding, a new large scale, richly annotated dataset Microsoft COCO is introduced.
-COCO stands for Common Objects in Context, it addresses three core problems in scene understanding: object detection (non-iconic views), segmentation, and captioning.
-For tasks like machine translation and language understanding in NLP, Transformer-based architecture is widely used.
-However, the potential of applications of transformer architecture in the multi-modal context has not been fully covered.
-With the help of COCO dataset, a transformer-based architecture: Meshed-Memory Transformer for Image Captioning (M^2) will be introduced to improve both image encoding and the language generation steps.
-The performance of (M^2) Transformer and different fully-attentive models will be evaluated and compared on the COCO dataset.
+But it’s much more complex and challenging for computers. We starts to focus on images as input modalities. 
+In 2014 Microsoft COCO was developed with a primary goal of advancing the state-of-art in object recognition by diving deeper into a border question of scene understanding. 
+COCO stands for Common Objects in Context, it addresses three core problems in scene understanding: object detection (non-iconic views), segmentation, and captioning. 
+For tasks like machine translation and language understanding in NLP, Transformer-based architecture is widely used. 
+However, the potential of applications of transformer architecture in the multi-modal context has not been fully covered. 
+With the help of COCO dataset, a transformer-based architecture: Meshed-Memory Transformer for Image Captioning ($M^2$) will be introduced to improve both image encoding and the language generation steps. 
+The performance of ($M^2$) Transformer and different fully-attentive models will be evaluated and compared on the COCO dataset.
 
 The second part “Text2Image discusses”...
 
