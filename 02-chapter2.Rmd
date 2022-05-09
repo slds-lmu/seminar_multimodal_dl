@@ -21,7 +21,7 @@ However, the potential of applications of transformer architecture in the multi-
 With the help of the COCO dataset, a transformer-based architecture: Meshed-Memory Transformer for Image Captioning ($M^2$) will be introduced to improve both image encoding and the language generation steps.
 The performance of the ($M^2$) Transformer and different fully-attentive models will be evaluated and compared on the COCO dataset.
 
-Next, the idea of incorporating textual input in order to generate visual representations is described.
+Next, in "Text2Image", the idea of incorporating textual input in order to generate visual representations is described.
 Current advancements in this field have been made possible largely due to recent breakthroughs in NLP, which firstly allowed for learning contextual representations of text.
 Transformer-like architectures are being used to encode the input into embedding vectors, which are later helpful in guiding the process of image generation.
 The chapter looks into details and discusses two SOTA model architectures by OpenAI, which both condition on text representations.
@@ -46,12 +46,13 @@ Since the field has already seen further improvements following GLIDE, these new
 
 The third part, “Images supporting Language Models” deals with the integration of visual elements in pure textual language models.
 Distributional semantic models such as Word2Vec and BERT assume that the meaning of a given word or sentence can be understood by looking at how (in which context) and when the word or the sentence appear in the text corpus, namely from its “distribution” within the text.
-But this assumption has been historically questioned because words and sentences must be grounded in other perceptual dimensions, in order to understand their meaning (see for example the “symbol grounding problem”, Harnad 1990).
+But this assumption has been historically questioned, because words and sentences must be grounded in other perceptual dimensions, in order to understand their meaning (see for example the “symbol grounding problem”, Harnad 1990).
 For these reasons, a broad range of models has been developed with the aim to improve pure language models, leveraging on the addition of other perceptual information, such as visual ones.
 This subchapter focuses in particular on the integration of visual elements (images) to support pure language models for various tasks at the word-level and sentence-level.
-The starting point is always a language model, on which visual representations (extracted often with the help of large pools of images like MS Coco, see chapter "Img2Text" for further references) are to be “integrated”.
+The starting point is always a language model, on which visual representations (extracted often with the help of large pools of images like MS COCO, see chapter "Img2Text" for further references) are to be “integrated”.
 But how?
-There has been proposed a wide range of solutions: on one side of the spectrum, textual elements and visual ones are learned separately and then “combined” together whereas on the other side, the learning of textual and visual features takes place simultaneously/jointly.
+There has been proposed a wide range of solutions:
+On one side of the spectrum, textual elements and visual ones are learned separately and then “combined” together whereas on the other side, the learning of textual and visual features takes place simultaneously/jointly.
 
 <br>
 ```{r, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Left, Silberer et al., 2014: stacked autoencoders to learn higher-level embeddings from textual and visual modalities, encoded as vectors of attributes. Right, Bordes et al., 2020: textual and visual information fused in an Intermediate space denoted as “grounded space”; the “grounding objective function” is not applied directly on sentence embeddings but trained on this intermediate space, on which sentence embeddings are projected.", }
@@ -64,36 +65,42 @@ Text and visual representations are passed to two separate unimodal encoders and
 On the other side, Bordes et. al (2020) propose a “text objective function” whose parameters are shared with an additional “grounded objective function”.
 The training of the latter takes place in what the authors called a “grounded space”, which allows to avoid the one-to-one correspondence between textual and visual space.
 These are just introductory examples and between these two approaches there are many shades of gray (maybe more than fifty…).
-These models exhibit in many instances better performance than pure language models but they still struggle on some aspects, for example when they deal with abstract words and sentences.
+These models exhibit in many instances better performance than pure language models, but they still struggle on some aspects, for example when they deal with abstract words and sentences.
 
-The fourth part “Text supporting Image Models” describes approaches where natural language is used as an easily available source of supervision for CV models, in contrast to manually labeled datasets.
-An important example for this is the CLIP model (Radford, Kim et al., 2021).
-Inspired by recent successes in NLP with pre-train methods directly learning from raw text (e. g. GPT-n;  Generative Pre-trained Transformer; Brown et al., 2020), CLIP stands for Contrastive Language-Image Pre-training.
-The new WIT (WebImageText) dataset with 400 million text-image pairs scraped from the internet constitutes its training data.
-It is used for jointly pre-training an image encoder and a text encoder.
-The contrastive goal is to correctly predict which natural language text pertains to which image inside the current batch.
-This leads to a flexible model, which at test time uses the learned text encoder as a “zero-shot” classifier on embeddings of the target dataset’s classes.
-A multitude of capabilities is learned that way, for example optical character recognition, geo-location and action-recognition.
+Afterwards, in the part “Text supporting Image Models”, approaches where natural language is used as supervision for CV models are described.
+Intuitively these models should be more powerful compared to models supervised solely by manually labeled data, simply because there is much more training data available.
+An important example for this is the CLIP model (Radford, Kim et al., 2021), with its new WIT (WebImageText) dataset comprising 400 million text-image pairs scraped from the internet.
+Similar to "Text2Image" the recent successes in NLP have inspired new approaches in this field.
+Most importantly their pre-train methods, which directly learn from raw text (e. g. GPT-n; Generative Pre-trained Transformer; Brown et al., 2020).
+So, CLIP stands for Contrastive Language-Image Pre-training.
+A transformer-like architecture is used for jointly pre-training a text encoder and an image encoder .
+For this the contrastive goal, to correctly predict which natural language text pertains to which image inside a certain batch, is employed.
+Training this way turned out to be more efficient than to generate captions for images.
+This leads to a flexible model which at test time uses the learned text encoder as a “zero-shot” classifier on embeddings of the target dataset’s classes.
+The model, for example, can perform optical character recognition, geo-location and action-recognition.
 Performance-wise CLIP can be competitive with task-specific supervised models, while never seeing an instance of the specific dataset before.
 This suggests an important step towards closing the “robustness gap”, where machine learning models fail to meet the expectations set by their previous performance on ImageNet test-sets, on new datasets.
 
-Final part, “Text plus Images”, discusses how text and image inputs can be incorporated into a single unifying framework in order to get closer to a general self-supervised learning model.
+Finally, “Text plus Images” discusses how text and image inputs can be incorporated into a single unifying framework in order to get closer to a general self-supervised learning model.
 There are two key advantages that make such a model particularly interesting.
-Devoid of human labelling, self-supervised models don't suffer from the same capacity constraints as regular supervised learning models.
+Like in previous parts, devoid of human labelling, self-supervised models don't suffer from the same capacity constraints as regular supervised learning models.
 On top of that, while there have been notable advances in dealing with different modalities, it is often unclear to which extend a model structure generalizes across different modalities.
-Rather than potentially learning modality-specific biases, a general multipurpose framework can help increase robustness while also simplifying the learner porfolio and thereby better emulating human learning processes. \
+Rather than potentially learning modality-specific biases, a general multipurpose framework can help to increase robustness while also simplifying the learner portfolio and thereby better emulating human learning processes. \
 Data2vec (Baevski et. al, 2022) is a new multimodal self-supervised learning model which uses a single framework for either speech, NLP or computer vision.
 This is in contrast to earlier models which used different algorithms for different modalities.
-The core idea of data2vec, developed by MetaAI, is to predict latent representations of the full input data based on a masked view of the input in a self-distillation setup using a standard transformer architecture (Baevski et al, 2022). As a result, the main improvement is in the framework, not the underlying models themselves.
+The core idea of data2vec, developed by MetaAI, is to predict latent representations of the full input data based on a masked view of the input in a self-distillation setup using a standard transformer architecture (Baevski et al, 2022).
+As a result, the main improvement is in the framework, not the underlying models themselves.
 For example, the transformer architecture follows (Vaswani et al, 2017).
-Transformers have several advantages over CNNs, such as encoding the relative position of features (citation needed). Hence, they see more and more use.
+Transformers have several advantages over CNNs, such as encoding the relative position of features (citation needed).
+Hence, they see more and more use.
 The central building block of the data2vec framework is a student-teacher structure that allows the learning process to occur without supervision.
 To achieve this, inputs serve both as training data and also as learning targets by being masked.
-A key issue to be aware of is model collapse, i.e the model collapsing into a constant representation. Normalization helps prevent that as well as the domination of certain layers with high norm.
+A key issue to be aware of is model collapse, i.e the model collapsing into a constant representation.
+Normalization helps to prevent that, as well as the domination of certain layers with high norm.
 The encoding, normalization and masking strategies are modality-specific.
 However, the learning objective remains the same across all modalities.
 The model is trained to predict the model representation of the original unmasked training sample.
-As a result of the use of continuous and contextualized target representations achieved via self-attention, those are richer than a fixed set of targets based on local context as used in most prior work.
+As a result of the use of continuous and contextualized target, representations achieved via self-attention, those are richer than a fixed set of targets based on local context as used in most prior work.
 On top of that, working with latent representations of the network itself can be seen as a simplification of many prior modality-specific models. (Baevski et al., 2022)
 As far as the results are concerned, data2vec is effective in all three modalities.
-It sets new state of the art scores on computer vision, speech recognition as well as speech learning benchmarking sets.
+It sets new SOTA scores on computer vision, speech recognition as well as speech learning benchmarking sets.
