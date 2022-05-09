@@ -73,7 +73,7 @@ The core idea of data2vec, developed by MetaAI, is to predict latent representat
 For example, the transformer architecture follows (Vaswani et al, 2017).
 Transformers have several advantages over CNNs, such as encoding the relative position of features (citation needed). Hence, they see more and more use.
 The central building block of the data2vec framework is a student-teacher structure that allows the learning process to occur without supervision.
-To achieve this, inputs serve both as training data, but also as learning targets by being masked.
+To achieve this, inputs serve both as training data and also as learning targets by being masked.
 A key issue to be aware of is model collapse, i.e the model collapsing into a constant representation. Normalization helps prevent that as well as the domination of certain layers with high norm.
 The encoding, normalization and masking strategies are modality-specific.
 However, the learning objective remains the same across all modalities. 
