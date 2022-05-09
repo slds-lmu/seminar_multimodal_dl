@@ -45,13 +45,13 @@ These are just introductory examples and between these two approaches, there are
 These models exhibit in many instances better performance than pure language models but they still struggle on some aspects, for example when they deal with abstract words and sentences.
 
 The fourth part “Text supporting Image Models” describes approaches where natural language is used as an easily available source of supervision for CV models, in contrast to manually labeled datasets.
-An important example for the use of natural language supervision in CV is the CLIP model (Radford, Kim et al., 2021).
+An important example for this is the CLIP model (Radford, Kim et al., 2021).
 Inspired by recent successes in NLP with pre-train methods directly learning from raw text (e. g. GPT-n;  Generative Pre-trained Transformer; Brown et al., 2020), CLIP stands for Contrastive Language-Image Pre-training.
 The new WIT (WebImageText) dataset with 400 million text-image pairs scraped from the internet constitutes its training data.
 It is used for jointly pre-training an image encoder and a text encoder.
-The contrastive goal is the correct prediction which natural language text pertains to which image inside the current batch.
-This leads to a flexible model which at test time uses the learned text encoder as a “zero-shot” classifier on embeddings of the target dataset’s classes.
-This results in a multitude of capabilities, for example optical character recognition, geo-location and action-recognition.
+The contrastive goal is to correctly predict which natural language text pertains to which image inside the current batch.
+This leads to a flexible model, which at test time uses the learned text encoder as a “zero-shot” classifier on embeddings of the target dataset’s classes.
+A multitude of capabilities is learned that way, for example optical character recognition, geo-location and action-recognition.
 Performance-wise CLIP can be competitive with task-specific supervised models, while never seeing an instance of the specific dataset before.
 This suggests an important step towards closing the “robustness gap”, where machine learning models fail to meet the expectations set by their previous performance on ImageNet test-sets, on new datasets.
 
