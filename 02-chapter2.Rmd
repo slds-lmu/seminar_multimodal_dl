@@ -9,16 +9,16 @@ Due to methodological breakthroughs in the fields of Natural Language Processing
 This chapter focuses on discussing images and text as input data.
 The remainder of the chapter is structured as follows:
 
-The first part “Image2Text” discusses how transformer-based architectures improve meaningful captioning for complex images using a new large scale, richly annotated dataset COCO.
+The first part “Image2Text” discusses how transformer-based architectures improve meaningful captioning for complex images using a new large scale, richly annotated dataset COCO.[@mccoco][@cornia2020m2]
 Whether it is seeing a photograph and describing it or parsing a complex scene and describing its context, it is not a difficult task for humans.
 But it is much more complex and challenging for computers.
 We start with focusing on images as input modalities.
-In 2014 Microsoft COCO was developed with a primary goal of advancing the state-of-the-art (SOTA) in object recognition by diving deeper into a broader question of scene understanding.
+In 2014 Microsoft COCO was developed with a primary goal of advancing the state-of-the-art (SOTA) in object recognition by diving deeper into a broader question of scene understanding.[@mccoco]
 COCO stands for Common Objects in Context.
 It addresses three core problems in scene understanding: object detection (non-iconic views), segmentation, and captioning.
 For tasks like machine translation and language understanding in NLP, transformer-based architecture is widely used.
 However, the potential of these applications in the multi-modal context has not been fully covered.
-With the help of the COCO dataset, a transformer-based architecture: Meshed-Memory Transformer for Image Captioning ($M^2$) will be introduced to improve both image encoding and the language generation steps.
+With the help of the COCO dataset, a transformer-based architecture: Meshed-Memory Transformer for Image Captioning ($M^2$) will be introduced to improve both image encoding and the language generation steps.[@cornia2020m2]
 The performance of the ($M^2$) Transformer and different fully-attentive models will be evaluated and compared on the COCO dataset.
 
 Next, in "Text2Image", the idea of incorporating textual input in order to generate visual representations is described.
