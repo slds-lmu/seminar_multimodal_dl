@@ -71,9 +71,9 @@ These models exhibit in many instances better performance than pure language mod
 
 Afterwards, in “Text supporting Image Models”, approaches where natural language is used as supervision for CV models are described.
 Intuitively these models should be more powerful compared to models supervised solely by manually labeled data, simply because there is much more training data available.
-An important example for this is the CLIP model (Radford, Kim et al., 2021) with its new dataset WIT (WebImageText) comprising 400 million text-image pairs scraped from the internet. \
+An important example for this is the CLIP model [@radford2021learning] with its new dataset WIT (WebImageText) comprising 400 million text-image pairs scraped from the internet. \
 Similar to "Text2Image" the recent successes in NLP have inspired new approaches in this field.
-Most importantly pre-train methods, which directly learn from raw text (e. g. GPT-n; Generative Pre-trained Transformer; Brown et al., 2020).
+Most importantly pre-train methods, which directly learn from raw text [e. g. GPT-n\; Generative Pre-trained Transformer\; @brown2020language].
 So, CLIP stands for Contrastive Language-Image Pre-training.
 A transformer-like architecture is used for jointly pre-training a text encoder and an image encoder.
 For this the contrastive goal to correctly predict which natural language text pertains to which image inside a certain batch, is employed.
