@@ -26,7 +26,7 @@ Current advancements in this field have been made possible largely due to recent
 Transformer-like architectures are being used to encode the input into embedding vectors, which are later helpful in guiding the process of image generation.
 The chapter looks into details and discusses two SOTA model architectures by OpenAI, which both condition on text representations.
 Surprisingly, none of them uses a GAN approach - a method which probably has been seen as the go-to idea for image generation over the last years.
-The first model is DALL-E (Ramesh et. al, 2021), which essentially combines Variational Encoder (VAE) with Autoregressive Transformer.
+The first model is DALL-E [@ramesh2021dalle], which essentially combines Variational Encoder (VAE) with Autoregressive Transformer.
 In the first step, VAE is being trained to learn downsized image representations.
 Such embeddings are concatenated with text embeddings into one text-image pair input.
 However, both of them use different dimensionality and vocabulary size.
@@ -37,7 +37,7 @@ Finally, at inference time, the model is able to generate images in the followin
 2. Use trained transformer from step 2 to generate image embedding
 3. Use VAE from step 1 to generate image from image embedding
 
-The next approach to text-to-image generation is a GLIDE model (Nichol et. al, 2021).
+The next approach to text-to-image generation is a GLIDE model [@nichol2021glide].
 GLIDE stands for Guided Language to Image Diffusion for Generation and Editing.
 Its idea is to use Diffusion Models.
 In its core, Diffusion Model is a simple idea – random noise is being added to the image in an iterative fashion, and then model learns how to reconstruct this image.
