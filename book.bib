@@ -7,4 +7,127 @@
   url = {https://www.R-project.org/},
 }
 
+<!-- references for chapter 2 -->
+<!-- references for 2.1 -->
+@inproceedings{cornia2020m2,
+  title={{Meshed-Memory Transformer for Image Captioning}},
+  author={Cornia, Marcella and Stefanini, Matteo and Baraldi, Lorenzo and Cucchiara, Rita},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2020}
+}
 
+@article{bordes2020incorporating,
+  title={Incorporating visual semantics into sentence representations within a grounded space},
+  author={Bordes, Patrick and Zablocki, Eloi and Soulier, Laure and Piwowarski, Benjamin and Gallinari, Patrick},
+  journal={arXiv preprint arXiv:2002.02734},
+  year={2020}
+}
+
+@article{harnad1990symbol,
+  title={The symbol grounding problem},
+  author={Harnad, Stevan},
+  journal={Physica D: Nonlinear Phenomena},
+  volume={42},
+  number={1-3},
+  pages={335--346},
+  year={1990},
+  publisher={Elsevier}
+}
+
+@InProceedings{mccoco,
+author="Lin, Tsung-Yi
+and Maire, Michael
+and Belongie, Serge
+and Hays, James
+and Perona, Pietro
+and Ramanan, Deva
+and Doll{\'a}r, Piotr
+and Zitnick, C. Lawrence",
+editor="Fleet, David
+and Pajdla, Tomas
+and Schiele, Bernt
+and Tuytelaars, Tinne",
+title="Microsoft COCO: Common Objects in Context",
+booktitle="Computer Vision -- ECCV 2014",
+year="2014",
+publisher="Springer International Publishing",
+address="Cham",
+pages="740--755",
+abstract="We present a new dataset with the goal of advancing the state-of-the-art in object recognition by placing the question of object recognition in the context of the broader question of scene understanding. This is achieved by gathering images of complex everyday scenes containing common objects in their natural context. Objects are labeled using per-instance segmentations to aid in precise object localization. Our dataset contains photos of 91 objects types that would be easily recognizable by a 4 year old. With a total of 2.5 million labeled instances in 328k images, the creation of our dataset drew upon extensive crowd worker involvement via novel user interfaces for category detection, instance spotting and instance segmentation. We present a detailed statistical analysis of the dataset in comparison to PASCAL, ImageNet, and SUN. Finally, we provide baseline performance analysis for bounding box and segmentation detection results using a Deformable Parts Model.",
+isbn="978-3-319-10602-1"
+}
+
+@inproceedings{radford2021learning,
+  title={Learning transferable visual models from natural language supervision},
+  author={Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and others},
+  booktitle={International Conference on Machine Learning},
+  pages={8748--8763},
+  year={2021},
+  organization={PMLR}
+}
+
+@inproceedings{silberer2012grounded,
+  title={Grounded models of semantic representation},
+  author={Silberer, Carina and Lapata, Mirella},
+  booktitle={Tsujii J, Henderson J, Pa{\c{s}}ca M, editors. Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning; 2012 Jul 12--14; Jeju Island, Korea. Stroudsburg: ACL; 2012. p. 1423-33.},
+  year={2012},
+  organization={ACL (Association for Computational Linguistics)}
+}
+
+@article{brown2020language,
+  title={Language models are few-shot learners},
+  author={Brown, Tom and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared D and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and others},
+  journal={Advances in neural information processing systems},
+  volume={33},
+  pages={1877--1901},
+  year={2020}
+}
+@article{baevski2022data2vec,
+  title={Data2vec: A general framework for self-supervised learning in speech, vision and language},
+  author={Baevski, Alexei and Hsu, Wei-Ning and Xu, Qiantong and Babu, Arun and Gu, Jiatao and Auli, Michael},
+  journal={arXiv preprint arXiv:2202.03555},
+  year={2022}
+}
+@article{vaswani2017attention,
+  title={Attention is all you need},
+  author={Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  journal={Advances in neural information processing systems},
+  volume={30},
+  year={2017}
+}
+@InProceedings{ramesh2021dalle,
+  title = 	 {Zero-Shot Text-to-Image Generation},
+  author =       {Ramesh, Aditya and Pavlov, Mikhail and Goh, Gabriel and Gray, Scott and Voss, Chelsea and Radford, Alec and Chen, Mark and Sutskever, Ilya},
+  booktitle = 	 {Proceedings of the 38th International Conference on Machine Learning},
+  pages = 	 {8821--8831},
+  year = 	 {2021},
+  editor = 	 {Meila, Marina and Zhang, Tong},
+  volume = 	 {139},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {18--24 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v139/ramesh21a/ramesh21a.pdf},
+  url = 	 {https://proceedings.mlr.press/v139/ramesh21a.html},
+  abstract = 	 {Text-to-image generation has traditionally focused on finding better modeling assumptions for training on a fixed dataset. These assumptions might involve complex architectures, auxiliary losses, or side information such as object part labels or segmentation masks supplied during training. We describe a simple approach for this task based on a transformer that autoregressively models the text and image tokens as a single stream of data. With sufficient data and scale, our approach is competitive with previous domain-specific models when evaluated in a zero-shot fashion.}
+}
+@article{nichol2021glide,
+  author    = {Alex Nichol and
+               Prafulla Dhariwal and
+               Aditya Ramesh and
+               Pranav Shyam and
+               Pamela Mishkin and
+               Bob McGrew and
+               Ilya Sutskever and
+               Mark Chen},
+  title     = {{GLIDE:} Towards Photorealistic Image Generation and Editing with
+               Text-Guided Diffusion Models},
+  journal   = {CoRR},
+  volume    = {abs/2112.10741},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2112.10741},
+  eprinttype = {arXiv},
+  eprint    = {2112.10741},
+  timestamp = {Tue, 04 Jan 2022 15:59:27 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2112-10741.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
