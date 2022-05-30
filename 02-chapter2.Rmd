@@ -1,5 +1,7 @@
 # Chapter 2 Multimodal architectures
+
 *Authors: Luyang Chu, Karol Urbanczyk, Giacomo Loss, Max Schneider, Steffen Jauch-Walser*
+
 *Supervisor: Christian Heumann*
 
 ## Introduction
