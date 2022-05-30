@@ -1,5 +1,6 @@
 fig:ch01-figure01
 fig:ch01-figure01-old
+fig:unnamed-chunk-1
 introduction
 intro-about-the-seminar-topic
 outline-of-the-booklet
@@ -22,8 +23,8 @@ title-5
 title-6
 title-7
 title-8
-chapter-2
-lorem-ipsum-2
+chapter-2-multimodal-architectures
+introduction-1
 title-9
 title-10
 title-11
