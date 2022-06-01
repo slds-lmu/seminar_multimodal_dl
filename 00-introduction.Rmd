@@ -1,11 +1,22 @@
 # Introduction
 
-*Author: *
+*Author: Nadja Sauter*
 
-*Supervisor: *
-
-## Intro About the Seminar Topic
+*Supervisor: Matthias Assenmacher*
 
 
-## Outline of the Booklet
+![A cute monster taking a shower in a bathtub trending on art station (CLIP + Guided Diffuision) from [multimodal.art](https://multimodal.art/)](./figures/00-chapter0/AI_art.png)
+
+
+*	Intro About the Seminar Topic: show “AI Art” -> multimodal deep learning Text2Img (methods: CLIP + Guided Diffuision (see pictrue above) or DALL-E; Glide)  
+*	Different types of multimodal deep learning:  
+    + Text2Img (mentioned before)  
+    + Img2Text (methods: Microsoft Coco; Meshed memory Transformer for Image captioning M2)  
+    + Image supporting Language models  
+    +	…
+*	Detailed methods explained in book  
+*	Outline of the Booklet:  
+    + Fundamentals: NLP + CV  
+    + Specific mutlimoald models  metnioned above  
+
 

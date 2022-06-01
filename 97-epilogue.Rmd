@@ -1,5 +1,11 @@
 # Epilogue
 
-*Author: *
+*Author: Nadja Sauter*
 
-## test
+*Supervisor: Matthias Assenmacher*
+
+-	Summary overview book: Basics how does NLP and CV work + Comments of different multimodal architectures   
+-	Outlook and prospects
+    + E.g. AI arts and NFTs
+    + Outlook Video + Text
+
