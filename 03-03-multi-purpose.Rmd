@@ -1,5 +1,58 @@
 # title
 
-*Author: *
+*Author: Philipp Koch*
 
-*Supervisor: *
+*Supervisor: Rasmus Hvingelby*
+
+Chapter Draft
+
+- Introduction: 
+  - outline the chapter 
+  - Describe the main aspects of the topic 
+  - Describe some models superficially 
+- Taxonomy 
+  - Previous definitions 
+  - Multi-purpose model defined
+    - Multi-task 
+    - Mulit-modal 
+- Previous Work 
+  - Describe previous approaches to multi-task multi-modal models 
+    - [UniT](https://arxiv.org/abs/2102.10772v1)
+    - further work
+  - Shortcomings of these approaches 
+- Recent Work 
+  - [Flamingo](https://www.deepmind.com/blog/tackling-multiple-tasks-with-a-single-visual-language-model) 
+    - Vision based Language model 
+    - Architecture 
+      - [Perceiver-like](https://arxiv.org/abs/2103.03206) 
+      - Image Encoding (ResNet)
+      - Cross Attentions 
+      - Interleaved data structure 
+    - Objective Function 
+    - On which tasks Flamingo excelled 
+    - Criticism, where are the shortcomings 
+  - [Gato](https://www.deepmind.com/publications/a-generalist-agent)
+    - Short excursion to [reinforcement learning](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf) 
+    - Architecture 
+      - Transformer Decoder 
+      - Tokenization of the environment 
+      - Encoding of text and vision 
+      - Predicting the world as an AR-LM-like model 
+    - On which tasks Gato excelled 
+    - Shortcommings (e.g. ATARI Boxing), compared to RL specialist agent 
+    - Really a generalist agent? 
+- Outlook 
+  - Computational Limitations 
+  - Upscaling trend [Gopher 2021](https://www.deepmind.com/blog/language-modelling-at-scale-gopher-ethical-considerations-and-retrieval)
+  - [Google's Pathways](https://blog.google/technology/ai/introducing-pathways-next-generation-ai-architecture/) new architecture 
+    - overcoming hardware limitations 
+  - [Pathnet](https://arxiv.org/abs/1701.08734) architecture from 2017 
+  - pathway proposal 2021 
+  - towards AGI through large sparse models like pathways 
+  - latest implementation [PaLM](https://ai.googleblog.com/2022/04/pathways-language-model-palm-scaling-to.html)
+- Discussion & Ethics 
+  - Trend to more centralized models
+    - Impact on research 
+    - Non solved issues from smaller models
+    - Dominance of Google and OpenAI
+    - Which training data is used and is it biased? [e.g.](https://dl.acm.org/doi/10.1145/3442188.3445922)
