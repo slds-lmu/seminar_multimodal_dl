@@ -17,6 +17,6 @@
 *	Detailed methods explained in book  
 *	Outline of the Booklet:  
     + Fundamentals: NLP + CV  
-    + Specific mutlimoald models  metnioned above  
+    + Specific mutlimoald models mentioned above  
 
 
