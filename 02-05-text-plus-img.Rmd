@@ -2,7 +2,7 @@
 
 *Author: Steffen Jauch-Walser *
 
-*Supervisor: *
+*Supervisor: Daniel *
 
 Data2vec: A general framework for self-supervised Learning
 
@@ -110,4 +110,4 @@ Generally, best accuracy at around 10-12 layers.
 The model performs best when teacher is given full input.
 
 What do the findings mean for the future of the field? 
-The authors succeed in designing a single learning mechanism for different modalities. As a caveat, they still use modality specific encoding and masking strategies, but input data is also quite different. Is it possible to go beyond that? One of the main advances of the framework is the use of contextualized training targets through the use of the teach self-attention mechanism.
+The authors succeed in designing a single learning mechanism for different modalities. As a caveat, they still use modality specific encoding and masking strategies, but input data is also quite different. Is it possible to go beyond that? One of the main advances of the framework is the use of contextualized training targets through the use of the teacher self-attention mechanism.
