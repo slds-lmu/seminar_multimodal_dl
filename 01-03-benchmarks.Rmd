@@ -7,7 +7,7 @@
 Small Intro of my chapter
 \begin{itemize}
   \item Explain that pre-training is huge part why NLP and CV models perform good
-  \item Hint also that combination will be relevant for the rest of the book
+  \item Hint also that combination of both will be rest of the book
 \end{itemize}
 
 
@@ -77,5 +77,8 @@ Intro for pretraining Ideas:
           \item Semantic of produced sentences often not nice
         \end{itemize}
   \end{itemize}
+
+
+Outro: Multimodal architectures Chapter
 
 
