@@ -1,5 +1,58 @@
-# title
+# Chapter 2.4 Text supporting computer vision models
 
-*Author: *
+*Author: Max Schneider*
 
-*Supervisor: *
+*Supervisor: Jann Goschenhofer*
+
+## Intro
+
+* Advancements in NLP [GPT-3\; @brown2020language]
+* Utilize these new approaches for improving CV
+* Great potential of natural language supervision
+  * Avoid manually labeling data
+    * More data more good
+    * 400 Mio [CLIP\; @radford2021learning], 900 Mio [Florence\; @yuan2021florence]
+  * Connect learned representations directly to language
+
+## CLIP
+
+<!-- Intro -->
+* Focus on _task learning_ instead of _representation learning_
+
+### Language, Image, Pre-training, Contrastive
+
+* Insert constrastive objective formula
+* Contrastive training objective
+  + Efficient training
+  + Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities]
+  - No arbitrary captions
+
+### Zero shot
+
+### Semantic concepts
+
+* Which semantic concepts are mirrored in the architecture?
+* Learn a representation _and_ connect it to language (-> NLP)
+* Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
+
+## Florence
+
+<!-- Intro -->
+* Focus shift to finding _foundation model_ as CLIP turned out to be especially useful for that.
+* General trend in this direction, leading to better and better predictions [CoCa\; @yu2022coca].
+* Optimization inside image-label-description space
+* Object detection
+
+<!-- ## ALIGN architecture -->
+
+## Performance
+
+* Later is better
+
+## Resources
+
+One can find the pre-trained CLIP models on [Github](https://github.com/openai/CLIP).
+They even found their way into simple command line tools already.
+For example there is an application named [rclip](https://github.com/yurijmikhalevich/rclip), which can be used for personal image retrieval, wrapping the _ViT-B/32_ CLIP architecture.
+On my (mid-range) laptop I was able to find seemingly good matches for search terms tried out inside a folder with about 100 pictures.
+After an initial caching one request took about ten seconds.
