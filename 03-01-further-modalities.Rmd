@@ -1,5 +1,97 @@
-# title
+# Including Further Modalities
 
-*Author: *
+*Author: Marco Moldovan*
 
-*Supervisor: *
+*Supervisor: Rasmus Hvingelby*
+
+## Motivation
+
+- World is inherently multimodal, images and text are just discrete snapshots while we as humans perceive lots of continuous multimodal signals.
+- We can extend the ideas and intuitions of image-text multimodal learning to include more modalities.
+- Listing research that includes continously more modalities would get out of hand quickly and seems unstructured: If we were to consider all possible learnable permutations of signal types we could go on forever.
+
+## Taxonomy of Multimodal Challenges
+
+- Instead we want to build a taxonomy for multimodal machine learning that is based on challenges instead of modalities.
+- Viewing multimodal learning from the perspective of challenges is more generic and intuitive.
+- Once we understand the challenges we will see that real-world problems and their solutions will arise naturally.
+- The taxonomy will act as a blueprint for approaching multimodal learning challenges. For each category we will introduce some examples that apply a mixture of diverse modalities to a model.
+- We hope that the reader will understand that the different modalities are in priciple interchangable and that he/she will be able to apply the correct framework to their own multimodal problem.
+
+### Multimodal Representation Learning
+
+- Representation learning lies at the base of solving most learning problems today, including for multimodal learning problems.
+- Dense representations are commonly learnt by deep neural networks like we've seen in the previous chapters.
+- If we want to generalize this notion to an arbitrary number of modalities we have to be clearn about the type of function that we want to learn and the kind of Representation we want to project to.
+
+#### Joint Representations
+
+- Different modalities live in the same representation space.
+- Given a multimodal signal one needs to learna model that "fuses" these modalities in order to learn a joint representation of these input signals.
+- Typically modalities are somehow concatenated as an input and are then fed into a model that is constructed such as to learn a joint representation.
+
+#### Coordinated Representation
+
+- Given input signals of different modalities we can learn a class of models that each projects a single modality into its own space.
+- One model will typically receive one modality.
+- For learning joint representations we have to define a training paradigm that will learn to coordinate these different representation spaces by placeing semantically similar representations close to each other while maximizing the distance between semantically different representations.
+- Essentially one learns to align different representation spaces to each other.
+- Contrastive learning is a popular paradigm for learning joint representations.
+
+### Multimodal Translation
+
+- Given a signal in one modality we want to return a semantically equivalent output in a different modality.
+- E.g. give a text input and retrieve a speech segment.
+- E.g. provide a video and return a text description of the video
+- Translation can be retrieval-based or generative. I.e. either return an existing datapoint or sample and synthesize a new one.
+- Clip is classic example (already known)
+- DALL-E is generative translation model
+- NÜWA even more general across modalities
+- VideoCLIP for video retrieval
+- SpeechBERT for text to speech retrieval
+
+### Multimodal Alignment
+
+- Multimodal alignment is the challenge of how exactly to learn coordinated representation spaces.
+- VATT learns coordinated space contrastively. Can even share weights between modalities to serve as one-model-fits-all for multimodal alignment.
+- Alternative: masked multimodal autoencoding with MultiMAE.
+
+### Multimodal Fusion
+
+- Multimodal fusion is the challenge of how to learn a joint representation space.
+- Where in the model does fusion happen? Early, late or hybrid fusion possible. What are the advantages and disadvantages of each approach?
+- Introduce Multimodal Bottleneck Transformer (MBT)
+
+## General Multimodal Architectures
+
+- Introduce architectures that are general enough to be applied to most/any multimodal problem
+- NÜWA 3D Nearby Attention can take text, audio, images and video as input: data has to first be encoded into this format batch size x time x height x width x embedding size. Not necesserally suitable for joint representations but can serve as a general modality-agnostic encoder for coordinated representations. Time dimension can be replaced with channel or depth dimensions if one wants to encode more exotic modalities. Preserves locality in data.
+- Perceiver and Perceiver IO require almost no preprocessing and can read extremely long sequences of data by cross-attending between data and modality specific learnable latent array.
+- Hiearchical Perceiver is follow-up that can preserve locality and compositionality in data (very important).
+
+## Multimodal Training Paradigms
+
+- Present training paradigms of how to train multimodal modal with SSL.
+
+### Modality-Agnostic Uni-Modal SSL
+
+- data2vec is unimodal SSL paradigm but it's completely modality agnostic.
+
+### Generalized Cross-Modal SSL
+
+- Here we introduce methods for true multimodal SSL.
+- Have to seperate into contrastive and non-contrastive methods
+- Generalize as much as possible: are there any approaches that solve alignment and fusion at the same time?
+
+#### Contrastive Methods
+
+- VATT -> look for similar
+
+#### Non-Contrastive Methods
+
+- MultiMAE -> look for similar
+- Can data2vec work with multiple modalities?
+
+## Combining General Architectures and Training Paradigms
+
+- Future research: combining general architectures like Perceiver with contrastive methods like VATT, data2vec or MultiMAE.
