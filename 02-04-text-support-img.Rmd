@@ -9,25 +9,27 @@
 * Advancements in NLP [GPT-3\; @brown2020language]
 * Utilize these new approaches for improving CV
 * Great potential of natural language supervision
-  * Avoid manually labeling data
-    * More data more good
-    * 400 Mio [CLIP\; @radford2021learning], 900 Mio [Florence\; @yuan2021florence]
+  * Avoid manually labeling data, larger datasets: 400 Mio [CLIP\; @radford2021learning], 900 Mio [Florence\; @yuan2021florence]
   * Connect learned representations directly to language
 
 ## CLIP
 
 <!-- Intro -->
-* Focus on _task learning_ instead of _representation learning_
+* Focus on _task learning_ (datasets as proxies to tasks) instead of _representation learning_
 
 ### Language, Image, Pre-training, Contrastive
 
-* Insert constrastive objective formula
+* Insert constrastive objective formula (find original paper)
 * Contrastive training objective
-  + Efficient training
-  + Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities]
-  - No arbitrary captions
+  * Pro: Efficient training
+  * Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities]
+  * Contra: No longer a generative model, e.g. no flexible caption generation
 
 ### Zero shot
+
+* Apply model to unseen data
+* Avoid overfitting bias in performance evaluation (no adaption to specific data-generating distribution possible)
+* Prompt engineering (embed class labels in senctence, e.g. "Picture of a (word)")
 
 ### Semantic concepts
 
@@ -39,15 +41,19 @@
 
 <!-- Intro -->
 * Focus shift to finding _foundation model_ as CLIP turned out to be especially useful for that.
-* General trend in this direction, leading to better and better predictions [CoCa\; @yu2022coca].
+  * Pre-trained core
+  * Flexible addition of modules
+    * _Dynamic Head_ for object detection - citations coming later
+    * _METER_ as a adapter for vision-language (e.g. visual question answering)
+    * Adaptation to video recognition through _CoSwin_
+* General trend in this direction, better and better predictions [CoCa\; @yu2022coca]
 * Optimization inside image-label-description space
-* Object detection
 
-<!-- ## ALIGN architecture -->
+<!-- Object detection vs scene level -->
 
-## Performance
+<!-- Sub-chapter on ALIGN architecture -->
 
-* Later is better
+## Performance comparison
 
 ## Resources
 
