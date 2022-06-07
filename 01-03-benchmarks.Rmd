@@ -1,5 +1,86 @@
-## title
+# Resources and Benchmarks for NLP, CV and multimodal tasks
 
-*Author: *
+*Author: Christopher Marquardt*
 
-*Supervisor: *
+*Supervisor: Prof. Dr. Christian Heumann*
+
+Small Intro of my chapter
+\begin{itemize}
+  \item Explain that pre-training is huge part why NLP and CV models perform good
+  \item Hint also that combination of both will be rest of the book
+\end{itemize}
+
+
+
+Intro for pretraining Ideas:
+\begin{itemize}
+  \item like an athlete. 
+  \item Need some base fitness (=pre-training)
+  \item Same like in reality pre-training differs between models. 
+\end{itemize}
+
+\subsection{Pre-training}
+  \subsubsection{Resources for pre-training}
+    \begin{itemize}
+      \item how does pre-training look for NLP, CV, MML
+      \item State and explain 3-4 of the most used resources (maybe add more)
+      \item (How much effort to clean pre-training data)
+      \item provide resources to find more (papers with code, ...)
+      \item availability and size of pre-training for different modalities
+        \begin{itemize}
+          \item NLP > CV > MML (MML pretty new compared to others)
+          \item Most of them not public (not good; Example JFT-300M)
+          \item What role does size play (logarithmic)
+        \end{itemize}
+      \item How has pre-training changed or has it even changed in modalities
+        \begin{itemize}
+            \item CV: still all train on ImageNet ("Are we done with ImageNet") and poor performance of ObjectNet
+            \item use of noisy data; ?quantity > quality?
+          \end{itemize}
+    \end{itemize}
+    
+  \subsubsection{Use of resources}
+    \begin{itemize}
+      \item How pre-training is used in different modalities
+        \begin{itemize}
+          \item supervised
+          \item self-supervised 
+        \end{itemize}
+        \item State and explain 2 or 3 main used pre-training tasks
+          \begin{itemize}
+            \item masked approaches
+            \item ...
+          \end{itemize}
+      \end{itemize}
+    
+\subsection{Fine-tuning}
+  \begin{itemize}
+    \item why fine-tuning is important
+    \item where and how to fine-tune
+    \item ... 
+  \end{itemize}
+
+\subsection{Benchmarks for modalities}
+  \begin{itemize}
+    \item Importance of benchmarks
+      \begin{itemize}
+        \item also need for new ones (like Psych: Flynn Effect)
+          \begin{itemize}
+            \item do models get better or is it possible that pre-training                         contains already benchmarks (too much crawl; NLP)
+          \end{itemize}
+        \item Hint that models pre-train on different resources but perform on same benchmarks (good or bad)
+        \end{itemize}
+      \item different tasks for benchmarks
+        \begin{itemize}
+          \item state most important ones also give infor to find ohters (example: papers with code)
+          \item Hint that it's most of the time reduction to classification tasks (like is this next sentences)
+          \item Semantic of produced sentences often not nice
+        \end{itemize}
+  \end{itemize}
+
+
+Outro: Multimodal architectures Chapter
+
+
+
+
