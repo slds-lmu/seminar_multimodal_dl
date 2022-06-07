@@ -126,7 +126,7 @@
 
 \title{Multimodal Deep Learning}
 \author{}
-\date{\vspace{-2.5em}2022-05-30}
+\date{\vspace{-2.5em}2022-06-07}
 
 \begin{document}
 \maketitle
@@ -529,36 +529,67 @@ On top of that, working with latent representations of the network itself can be
 As far as the results are concerned, data2vec is effective in all three modalities.
 It sets new SOTA scores on computer vision, speech recognition as well as speech learning benchmarking sets.
 
+\hypertarget{further-topics}{%
+\chapter{Further Topics}\label{further-topics}}
+
+\emph{Authors: Marco Moldovan, Rickmer Schulte, Philipp Koch}
+
+\emph{Supervisor: Rasmus Hvingelby}
+
+So far we have learned about multimodal models for text and 2D images. Text and images can be seen as merely snapshots of the sensory stimulus that we humans perceive constantly. If we view the research field of multimodal deep learning as a means to approach human-level capabilities of perceiving and processing real-world signals then we have to consider lots of other modalities in a trainable model other than textual representation of language or static images. Besides introducing further modalities that are frequently encountered in muli-modal deep learning, the following chapter will also aim to bridge the gap between the two fundamental sources of data, namely structured and unstructured data. Investigating modeling approaches from both classical statistics and more recent deep learning we will examine the strengths and weaknesses of those and will discover that a combination of both may be a promising path for future research. Going from multi modalities to multi task, the last section will then broaden our view of multi-modal deep learning by examining multi purpose modals. Discussing cutting-edge research topics such as the newly developed Pathways, we will discuss current achievements and limitations of the new modeling and hardware approaches that might lead our way towards the ultimate goal of AGI in multi-modal deep learning.
+
+\hypertarget{further-modalities}{%
+\chapter{Further Modalities}\label{further-modalities}}
+
+\emph{Author: Marco Moldovan}
+
+\emph{Supervisor: Rasmus Hvingelby}
+
+\hypertarget{intro}{%
+\section{Intro}\label{intro}}
+
+In this chapter we will build up a taxonomy of different perceivable and interpretable types of signals that we as humans use to navigate the world and we will see how today's state-of-the-art multimodal models are built and trained in order to process more and more modalities simultaneously in order to build more and more complete representations of world through available data. We will build up our taxonomy starting from the two most well-understood modalities - namely text and 2D images - and introduce models that learn relationships between increasingly many modalities at the same time and to map them to a cross-modal representation space in which we can apply distance functions to points in order to represent semantic relatedness between datapoint from these different modalities.
+Given such a learned cross-modal representation space we will look at some of the most important multimodal downstream tasks and applications.
+
+Towards the end of the chapter we will take a closer look at the two main types of model architectures and training paradigms: bi-encoders and ``true'' multimodal cross-encoders. The first kind of model can be seen as an ensemble of unimodal expert models that map into the same representation space while using some form of metric learning to relate representations of different modalities to one another. True multimodal models are essentially agnostic to their input (as long as it is preprocessed and featurized appropriately). We currently see the second kind of architecture as the more promising one for the case of approximating human-level perception. An example of a modality agnostic multimodal model is the Perceiver of which we will introduce a newer, even more efficient variant.
+
+Up until recently each modality required their own specific self-supervised training paradigm: for text a common approach would be MLM while the same training paradigm wasn't as effective for images or video. data2vec introduces a modality-agnostic SSL masked prediction setup which requires careful preprocessing but does not care about the source of the input. We see a model that marries a modality-agnostic model like Perceiver with a modality agnostic training paradigm like data2vec as a very promising path forward.
+Topic 11 will build on this idea of modality-agnostic models by introducing Google's Pathways: a concept for multimodal, multi-task, sparse world models.
+
+\hypertarget{strucutered-unstrucutered-data}{%
+\chapter{Strucutered + Unstrucutered Data}\label{strucutered-unstrucutered-data}}
+
+\emph{Author: Rickmer Schulte}
+
+\emph{Supervisor: Daniel Schalk}
+
+\hypertarget{intro-1}{%
+\section{Intro}\label{intro-1}}
+
+While the previous chapter has extended the range of modalities considered in multi-modal deep learning beyond image and text data, the focus remained on other sorts of unstructured data. This has neglected the broad class of structured data, which has been the basis for research in pre deep learning eras and which has given rise to many fundamental modeling approaches in statistics and classical machine learning. Hence, the following chapter will aim to give an overview of both data sources and outline the respective ways these have been used for modeling purposes as well as more recent attempts to model them jointly.
+
+Generally, structured and unstructured data substantially differ in certain aspects such as dimensionality and interpretability which have led to various modeling approaches that are particularly designed for the special characteristics of the data types, respectively. As shown in previous chapters, deep learning models such as neural networks are known to work well on unstructured data due to their ability to extract latent representation and to learn complex dependencies from unstructured data sources to achieve state-of-the art performance on many classification and prediction tasks. By contrast, classical statistical models are mostly applied to tabular data due the advantage of interpretability inherent to these models, which is commonly of great interest in many research fields. However, as more and more data has become available to researchers today, they often do not only have one sort of data modality at hand but both structured and unstructured data at the same time. Discarding one or the other data modality makes it likely to miss out on valuable insights and potential performance improvements.
+
+Therefore, the following chapter will mainly examine different concepts to model both data types jointly and discuss under which circumstances one or the other is better suited. Methods such as feature engineering to integrate unstructured data via expert knowledge into the classical model framework as well as different fusion strategies to integrate both types of modalities into common deep learning architectures are analyzed and evaluated. Especially the latter will be explored in detail by referring to numerous examples from health care, biology and finance. Finally, recently proposed methods will be discussed, which bring together classical statistical models for structured data and neural networks for unstructured data in order to yield interpretable deep learning models that combine the best of both worlds.
+
+\hypertarget{multi-purpose-models}{%
+\chapter{Multi-purpose Models}\label{multi-purpose-models}}
+
+\emph{Author: Philipp Koch}
+
+\emph{Supervisor: Rasmus Hvingelby}
+
+\hypertarget{intro-2}{%
+\section{Intro}\label{intro-2}}
+
+After we describe further modalities in the previous sections, we will look at truly multipurpose models. Multitask multimodal models have already been proposed, like UniT, which extends the transformer architecture to deal with different modalities and tasks. However, previous multitask multimodal models remain limited in different aspects, which we will describe and discuss further. To become genuinely multipurpose, however, a model must be able to solve different tasks without fine-tuning and must be capable of dealing with different modalities. Thus, it must be able to transfer knowledge in-between tasks but must also be able to allocate capabilities for different modalities.
+
+The recently introduced deep learning architecture Pathways is designed to be multipurpose. Pathways builds on newly designed hardware and software dedicated to addressing the challenges of contemporary deep learning models, which are ever-growing, where GPT-3 might be the most prominent example. We will discuss previous drawbacks and describe how Pathways aims to solve these issues. Besides the hardware aspect, Pathways provides a large neural network constructed as a directed acyclic graph (DAG). The input is passed through the network on different paths. Each node of the network is itself a neural network aimed at solving a specific aspect of a task. Using these different neural networks inside the model allows the model to be multitask and transfer knowledge in-between tasks. Another important aspect of this architecture is the obtained sparsity. When computed, just necessary nodes are computed, resulting in higher overall performance.
+
+Furthermore, the model is intended to absorb different modalities as input, where no implementation has been found. Multimodality is further used hypothetically in the initial blog post. However, the similar model PathNet also achieves multimodality. The only model based on Pathways is the language model (PaLM), which is multilingual and capable of understanding code and solving mathematical tasks. However, the multimodality here remains questionable. Future Pathways-based models might provide more insight if the claim to step further toward artificial general intelligence (AGI) of the authors of Pathways and PathNet is true or not. Eventually, we will discuss the impact of the new Pathways multipurpose model since it might have a large impact on deep learning in the upcoming future. Broader applicable models will become feasible yet also centralize the usage, thus reducing accessibility and subsequently research on these models.
+
 \hypertarget{title-9}{%
 \chapter{title}\label{title-9}}
-
-\emph{Author: }
-
-\emph{Supervisor: }
-
-\hypertarget{title-10}{%
-\chapter{title}\label{title-10}}
-
-\emph{Author: }
-
-\emph{Supervisor: }
-
-\hypertarget{title-11}{%
-\chapter{title}\label{title-11}}
-
-\emph{Author: }
-
-\emph{Supervisor: }
-
-\hypertarget{title-12}{%
-\chapter{title}\label{title-12}}
-
-\emph{Author: }
-
-\emph{Supervisor: }
-
-\hypertarget{title-13}{%
-\chapter{title}\label{title-13}}
 
 \emph{Author: }
 
