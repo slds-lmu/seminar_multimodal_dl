@@ -223,6 +223,125 @@ For details, head over to the \href{https://github.com/slds-lmu/seminar_multimod
 \hypertarget{chapter-1}{%
 \chapter{Chapter 1}\label{chapter-1}}
 
+\emph{Authors: Cem Akkus, Vladana Djakovic, Christopher Benjamin Marquardt}
+
+\emph{Supervisor: Dr.~Matthias Aßenmacher}
+
+Natural Language Processing (NLP) has existed for about 50 years, but it is more relevant than ever. There have been several breakthroughs in this branch of machine learning that is concerned with spoken and written language. For example, learning internal representations of words was one of the greater advances of the last decade. Word embeddings (\citet{Mikolov2013}, \citet{Bojanowski2016}) made it possible and allowed developers to encode words as dense vectors that capture their underlying semantic content. In this way, similar words are embedded close to each other in a lower-dimensional feature space. Another important challenge was solved by Encoder-decoder (also called sequence-to-sequence) architectures \citet{Sutskever2014}, which made it possible to map input sequences to output sequences of different lengths. They are especially useful for complex tasks like machine translation, video captioning or question answering. This approach makes minimal assumptions on the sequence structure and can deal with different word orders and active, as well as passive voice.
+
+A definitely significant state-of-the-art technique is Attention \citet{Bahdanau2014}, which enables models to actively shift their focus -- just like humans do. It allows following one thought at a time while suppressing information irrelevant to the task. As a consequence, it has been shown to significantly improve performance for tasks like machine translation. By giving the decoder access to directly look at the source, the bottleneck is avoided and at the same time, it provides a shortcut to faraway states and thus helps with the vanishing gradient problem. One of the most recent sequence data modeling techniques is Transformers (\citet{vaswani2017attention}), which are solely based on attention and do not have to process the input data sequentially (like RNNs). Therefore, the deep learning model is better in remembering context-induced earlier in long sequences. It is the dominant paradigm in NLP currently and even makes better use of GPUs, because it can perform parallel operations. Transformer architectures like BERT (\citet{Devlin2018}), T5 (\citet{Raffel2019}) or GPT-3 (\citet{brown2020language}) are pre-trained on a large corpus and can be fine-tuned for specific language tasks. They have the capability to generate stories, poems, code and much more. With the help of the aforementioned breakthroughs, deep networks have been successful in retrieving information and finding representations of semantics in the modality text. In the next paragraphs, developments for another modality image are going to be presented.
+
+Computer vision (CV) focuses on replicating parts of the complexity of the human visual system and enabling computers to identify and process objects in images and videos in the same way that humans do. In recent years it has become one of the main and widely applied fields of computer science. However, there are still problems that are current research topics, whose solutions depend on the research's view on the topic. One of the problems is how to optimize deep convolutional neural networks for image classification. The accuracy of classification depends on width, depth and image resolution. One way to address the degradation of training accuracy is by introducing a deep residual learning framework \citep{ResNet}. On the other hand, another less common method is to scale up ConvNets, to achieve better accuracy is by scaling up image resolution. Based on this observation, there was proposed a simple yet effective compound scaling method, called EfficientNets \citep{EfficientNet}.
+
+Another state-of-the-art trend in computer vision is learning effective visual representations without human supervision. Discriminative approaches based on contrastive learning in the latent space have recently shown great promise, achieving state-of-the-art results, but the simple framework for contrastive learning of visual representations, which is called SimCLR, outperforms previous work \citep{SimCLR}. However, another research proposes as an alternative a simple ``swapped'' prediction problem where we predict the code of a view from the representation of another view. Where features are learned by Swapping Assignments between multiple Views of the same image (SwAV) \citep{SwAV}.
+Further recent contrastive methods are trained by reducing the distance between representations of different augmented views of the same image (`positive pairs') and increasing the distance between representations of augmented views from different images (`negative pairs'). Bootstrap Your Own Latent (BYOL) is a new algorithm for self-supervised learning of image representatios \citep{BYOL}.
+
+Self-attention-based architectures, in particular, Transformers have become the model of choice in natural language processing (NLP). Inspired by NLP successes, multiple works try combining CNN-like architectures with self-attention, some replacing the convolutions entirely. The latter models, while theoretically efficient, have not yet been scaled effectively on modern hardware accelerators due to the use of specialized attention patterns. Inspired by the Transformer scaling successes in NLP, one of the experiments is applying a standard Transformer directly to the image \citep{ImageT}. Due to the widespread application of computer vision, these problems differ and are constantly being at the center of attention of more and more research.
+
+With the rapid development in NLP and CV in recent years, it was just a question of time to merge both modalities to tackle multi-modal tasks. The release of DALL-E 2 just hints at what one can expect from this merge in the future. DALL-E 2 is able to create photorealistic images or even art from any given text input. So it takes the information of one modality and turns it into another modality. It needs multi-modal datasets to make this possible, which are still relatively rare. This shows the importance of available data and the ability to use it even more. Nevertheless, all modalities are in need of huge datasets to pre-train their models. It's common to pre-train a model and fine-tune it afterwards for a specific task on another dataset. For example, every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset. The cardinality of the datasets used for CV is immense, but the datasets used for NLP are of a completely different magnitude. BERT uses the English Wikipedia and the Bookscorpus to pre-train the model. The latter consists of almost 1 billion words and 74 million sentences. The pre-training of GPT-3 is composed of five huge corpora: CommonCrawl, Books1 and Books2, Wikipedia and WebText2. Unlike language model pre-training that can leverage tremendous natural language data, vision-language tasks require high-quality image descriptions that are hard to obtain for free. Widely used pre-training datasets for VL-PTM are Microsoft Common Objects in Context (COCO), Visual Genome (VG), Conceptual Captions (CC), Flickr30k, LAION-400M and LAION-5B, which is now the biggest openly accessible image-text dataset.
+
+Besides the importance of pre-training data, there must also be a way to test or compare the different models. A reasonable approach is to compare the performance on specific tasks, which is called benchmarking. A nice feature of benchmarks is that they allow us to compare the models to a human baseline. Different metrics are used to compare the performance of the models. Accuracy is widely used, but there are also some others. For CV the most common benchmark datasets are ImageNet, ImageNetReaL, CIFAR-10(0), OXFORD-IIIT PET, OXFORD Flower 102, COCO and Visual Task Adaptation Benchmark (VTAB). The most common benchmarks for NLP are General Language Understanding Evaluation (GLUE), SuperGLUE, SQuAD 1.1, SQuAD 2.0, SWAG, RACE, ReCoRD, and CoNLL-2003. VTAB, GLUE and SuperGLUE also provide a public leader board. Cross-modal tasks such as Visual Question Answering (VQA), Visual Commonsense Reasoning (VCR), Natural Language Visual Reasoning (NLVR), Flickr30K, COCO and Visual Entailment are common benchmarks for VL-PTM.
+
+\hypertarget{title}{%
+\section{title}\label{title}}
+
+\emph{Author: }
+
+\emph{Supervisor: }
+
+\hypertarget{title-1}{%
+\section{title}\label{title-1}}
+
+\emph{Author: }
+
+\emph{Supervisor: }
+
+\hypertarget{resources-and-benchmarks-for-nlp-cv-and-multimodal-tasks}{%
+\chapter{Resources and Benchmarks for NLP, CV and multimodal tasks}\label{resources-and-benchmarks-for-nlp-cv-and-multimodal-tasks}}
+
+\emph{Author: Christopher Marquardt}
+
+\emph{Supervisor: Prof.~Dr.~Christian Heumann}
+
+Small Intro of my chapter
+
+\begin{itemize}
+  \item Explain that pre-training is huge part why NLP and CV models perform good
+  \item Hint also that combination of both will be rest of the book
+\end{itemize}
+
+Intro for pretraining Ideas:
+
+\begin{itemize}
+  \item like an athlete. 
+  \item Need some base fitness (=pre-training)
+  \item Same like in reality pre-training differs between models. 
+\end{itemize}
+
+\subsection{Pre-training}
+  \subsubsection{Resources for pre-training}
+    \begin{itemize}
+      \item how does pre-training look for NLP, CV, MML
+      \item State and explain 3-4 of the most used resources (maybe add more)
+      \item (How much effort to clean pre-training data)
+      \item provide resources to find more (papers with code, ...)
+      \item availability and size of pre-training for different modalities
+        \begin{itemize}
+          \item NLP > CV > MML (MML pretty new compared to others)
+          \item Most of them not public (not good; Example JFT-300M)
+          \item What role does size play (logarithmic)
+        \end{itemize}
+      \item How has pre-training changed or has it even changed in modalities
+        \begin{itemize}
+            \item CV: still all train on ImageNet ("Are we done with ImageNet") and poor performance of ObjectNet
+            \item use of noisy data; ?quantity > quality?
+          \end{itemize}
+    \end{itemize}
+
+\subsubsection{Use of resources}
+    \begin{itemize}
+      \item How pre-training is used in different modalities
+        \begin{itemize}
+          \item supervised
+          \item self-supervised 
+        \end{itemize}
+        \item State and explain 2 or 3 main used pre-training tasks
+          \begin{itemize}
+            \item masked approaches
+            \item ...
+          \end{itemize}
+      \end{itemize}
+
+\subsection{Fine-tuning}
+  \begin{itemize}
+    \item why fine-tuning is important
+    \item where and how to fine-tune
+    \item ... 
+  \end{itemize}
+
+\subsection{Benchmarks for modalities}
+  \begin{itemize}
+    \item Importance of benchmarks
+      \begin{itemize}
+        \item also need for new ones (like Psych: Flynn Effect)
+          \begin{itemize}
+            \item do models get better or is it possible that pre-training                         contains already benchmarks (too much crawl; NLP)
+          \end{itemize}
+        \item Hint that models pre-train on different resources but perform on same benchmarks (good or bad)
+        \end{itemize}
+      \item different tasks for benchmarks
+        \begin{itemize}
+          \item state most important ones also give infor to find ohters (example: papers with code)
+          \item Hint that it's most of the time reduction to classification tasks (like is this next sentences)
+          \item Semantic of produced sentences often not nice
+        \end{itemize}
+  \end{itemize}
+
+Outro: Multimodal architectures Chapter
+
+\hypertarget{chapter-1-1}{%
+\chapter{Chapter 1}\label{chapter-1-1}}
+
 \emph{Authors: Author 1, Author 2}
 
 \emph{Supervisor: Supervisor}
@@ -243,7 +362,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 }
 
-\caption{This is the caption of the figure!}\label{fig:ch01-figure01}
+\caption{This is the caption of the figure!}\label{fig:ch01-figure01-old}
 \end{figure}
 
 
@@ -282,88 +401,12 @@ Speciesvirginica & -1.0235 & 0.3337 & -3.067 & 0.0026\\
 \hline
 \end{tabular}
 
-\hypertarget{title}{%
-\section{title}\label{title}}
-
-\emph{Author: }
-
-\emph{Supervisor: }
-
-\hypertarget{title-1}{%
-\section{title}\label{title-1}}
-
-\emph{Author: }
-
-\emph{Supervisor: }
-
 \hypertarget{title-2}{%
-\section{title}\label{title-2}}
+\chapter{title}\label{title-2}}
 
 \emph{Author: }
 
 \emph{Supervisor: }
-
-\hypertarget{chapter-1-1}{%
-\chapter{Chapter 1}\label{chapter-1-1}}
-
-\emph{Authors: Author 1, Author 2}
-
-\emph{Supervisor: Supervisor}
-
-\hypertarget{lorem-ipsum-1}{%
-\section{Lorem Ipsum}\label{lorem-ipsum-1}}
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-\citet{rlang}
-
-\hypertarget{using-figures-1}{%
-\section{Using Figures}\label{using-figures-1}}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{figures/01-chapter1/ch01-figure01} 
-
-}
-
-\caption{This is the caption of the figure!}\label{fig:ch01-figure01-old}
-\end{figure}
-
-This is the caption of the figure! This is the caption of the figure!
-
-Referencing can be done by using the chunk label e.g.~\texttt{\textbackslash{}@ref(fig:ch01-figure01)} for \ref{fig:ch01-figure01}.
-
-\textbf{NOTE!!!} Do not use underscores in chunk labels! This will crash the compilation \ldots{}
-
-\hypertarget{using-tex-1}{%
-\section{Using Tex}\label{using-tex-1}}
-
-HTML rendering uses MathJax while pdf rendering uses LaTeX:
-
-\[
-f(x) = x^2
-\]
-
-\hypertarget{using-stored-results-1}{%
-\section{Using Stored Results}\label{using-stored-results-1}}
-
-\begin{tabular}{l|r|r|r|r}
-\hline
-  & Estimate & Std. Error & t value & Pr(>|t|)\\
-\hline
-(Intercept) & 2.1713 & 0.2798 & 7.760 & 0.0000\\
-\hline
-Sepal.Width & 0.4959 & 0.0861 & 5.761 & 0.0000\\
-\hline
-Petal.Length & 0.8292 & 0.0685 & 12.101 & 0.0000\\
-\hline
-Petal.Width & -0.3152 & 0.1512 & -2.084 & 0.0389\\
-\hline
-Speciesversicolor & -0.7236 & 0.2402 & -3.013 & 0.0031\\
-\hline
-Speciesvirginica & -1.0235 & 0.3337 & -3.067 & 0.0026\\
-\hline
-\end{tabular}
 
 \hypertarget{title-3}{%
 \chapter{title}\label{title-3}}
@@ -395,13 +438,6 @@ Speciesvirginica & -1.0235 & 0.3337 & -3.067 & 0.0026\\
 
 \hypertarget{title-7}{%
 \chapter{title}\label{title-7}}
-
-\emph{Author: }
-
-\emph{Supervisor: }
-
-\hypertarget{title-8}{%
-\chapter{title}\label{title-8}}
 
 \emph{Author: }
 
@@ -588,8 +624,8 @@ The recently introduced deep learning architecture Pathways is designed to be mu
 
 Furthermore, the model is intended to absorb different modalities as input, where no implementation has been found. Multimodality is further used hypothetically in the initial blog post. However, the similar model PathNet also achieves multimodality. The only model based on Pathways is the language model (PaLM), which is multilingual and capable of understanding code and solving mathematical tasks. However, the multimodality here remains questionable. Future Pathways-based models might provide more insight if the claim to step further toward artificial general intelligence (AGI) of the authors of Pathways and PathNet is true or not. Eventually, we will discuss the impact of the new Pathways multipurpose model since it might have a large impact on deep learning in the upcoming future. Broader applicable models will become feasible yet also centralize the usage, thus reducing accessibility and subsequently research on these models.
 
-\hypertarget{title-9}{%
-\chapter{title}\label{title-9}}
+\hypertarget{title-8}{%
+\chapter{title}\label{title-8}}
 
 \emph{Author: }
 
