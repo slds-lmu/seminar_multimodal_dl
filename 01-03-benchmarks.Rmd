@@ -4,25 +4,39 @@
 
 *Supervisor: Prof. Dr. Christian Heumann*
 
-Small Intro of my chapter
-\begin{itemize}
-  \item Explain that pre-training is huge part why NLP and CV models perform good
-  \item Hint also that combination of both will be rest of the book
-\end{itemize}
+When we see athletes perform in their sports we only see the results of their hard work prior or till to the event. Most of the time they casually talk about their off-season, but everybody knows the results are made in the off-season. 
+
+Same goes for the models we will see in the later chapters. Most of the time we are just interested in our results, but why and how does the model come to these results? It has to learn to some key fundamentals of the modality to achieve these results. But how do we get them to perform better? We can build better architectures and/or use more and new data. New data by hand is easy to get but this new data results in a new problem. New data has to be carefully labeled by humans, which can be very expensive by the amount of data. Models which learn from labeled data use the supervised learning strategy. This learning strategy is a bottleneck for future progress.
+
+But the need for labeling the data isn't the only problem. Let's visit the athlete analogy again. Imagine a professional football player has to participate in a professional ski race. He will not be able to compete with the others, because they are trained only to do ski races. Here we see the other problem. Models which use supervised learning have shown to perform very well on the task they were trained to do. This means models which learn on carefully labeled data only perform very well on this specific task, but poor on others. Also it's not possible to label everything in the world. 
+
+So the goal is to generate more generalist models which can perform well on different tasks without the need of huge labeled data. Humans are able to perform well on different tasks in a short amount of time. For example humans only need a small amount of hours to learn how to drive a car, even without supervision. On the other hand fully automated driving AI need thousand of hours of data to drive a car. Why do humans learn so fast compared to machines?
+Humans don't rely on labeled data, because most of the time humans learn by observation. By this humans generate a basic knowledge of how the world works, which also called common sense. 
+
+Meta AI (cite webpage) believes that self-supervised learning is one of the most promising ways to generate background knowledge and some sort of common sense in AI systems. Self-supervised learning uses a supervised learning algorithm, but doesn't need an external supervisor. We will see later how the different modalities use this approach, as is varies between the modalities.
+
+
+
+The following chapter will inspect on the one hand pre-training resources and the use of them and also the benchmarks which are used for NLP, CV and ,the combination of both, multi-modal learning.
 
 
 
 Intro for pretraining Ideas:
 \begin{itemize}
   \item like an athlete. 
-  \item Need some base fitness (=pre-training)
-  \item Same like in reality pre-training differs between models. 
+  \item Need some base fitness (=pre-training) (DONE)
+  \item Same like in reality pre-training differs between models. (MISSING)
 \end{itemize}
 
 \subsection{Pre-training}
   \subsubsection{Resources for pre-training}
     \begin{itemize}
       \item how does pre-training look for NLP, CV, MML
+        \begin{itemize}
+        \item How has pre-training changed or has it even changed in modalities
+        \item CV: still all train on ImageNet ("Are we done with ImageNet") and poor performance of ObjectNet
+            \item use of noisy data; ?quantity > quality?
+        \end{itemize}
       \item State and explain 3-4 of the most used resources (maybe add more)
       \item (How much effort to clean pre-training data)
       \item provide resources to find more (papers with code, ...)
@@ -32,11 +46,6 @@ Intro for pretraining Ideas:
           \item Most of them not public (not good; Example JFT-300M)
           \item What role does size play (logarithmic)
         \end{itemize}
-      \item How has pre-training changed or has it even changed in modalities
-        \begin{itemize}
-            \item CV: still all train on ImageNet ("Are we done with ImageNet") and poor performance of ObjectNet
-            \item use of noisy data; ?quantity > quality?
-          \end{itemize}
     \end{itemize}
     
   \subsubsection{Use of resources}
