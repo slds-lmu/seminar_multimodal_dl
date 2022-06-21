@@ -30,40 +30,50 @@ As one might expect NLP models pre-train on text, CV models pre-train on images 
 
 Even if the datasets might be completely different, the procedure to get the data is the same for all of them, because the data is downloaded from the internet. This can lead to a problem, since by using this method the resulting dataset might be noisy. One approach for the MML models is to use comman crawl and extract the image plus the alt of a image. The alt is an alternate text for an image, if the image cannot be displayed or for visual impaired people. This seems like a reasonable approach, but the alt is often now very informative about what's in the image. (maybe add example)
 
-The next difference between the modalities is the cardinality of the pre-training data. It's easy to see that text is by far the most easy to get from the internet. This results in huge high-quality massive text data. Some magnitudes smaller are the datasets for CV. Since MML is pretty new compared to the other modalities it still relatively small but growing fast. A small downer is that the datasets are mostly not public available. The big companies like to keep their models and used datasets privat, but there are also real open AI competitors like LAION in the field. This hinders the reproducibility. 
+The next difference between the modalities is the cardinality of the pre-training data. It's easy to see that text is by far the most easy to get from the internet. This results in huge high-quality massive text data. Some magnitudes smaller are the datasets for CV. Since MML is pretty new compared to the other modalities it still relatively small but growing fast. A small downer is that the datasets are mostly not public available. The big companies like to keep their models and used datasets private, which hinders the reproducibility, but there are also real open AI competitors like LAION in the field. 
+
+NLP:
+\begin{itemize}
+  \item the Pile
+  \item BooksCorpus
+\end{itemize}
+
+CV
+\begin{itemize}
+  \item ImageNet
+  \item BooksCorpus
+\end{itemize}
 
 
+MMl
+\begin{itemize}
+  \item LAION
+  \item COCA
+  \item COCO
+\end{itemize}
 
-\subsection{Pre-training}
-  \subsubsection{Resources for pre-training}
-    \begin{itemize}
-      \item  (Short intro sentence) how do datasets for pre-training look for NLP, CV, MML
-        \begin{itemize}
-          \item NLP: text (DONE)
-          \item CV: images (DONE)
-          \item MML: text image pairs (DONE)
-        \end{itemize}
-        \item how do they get the datasets? Comman crawl and problems (DONE)
-        \item availability and size of pre-training for different modalities (DONE)
-          \begin{itemize}
-            \item NLP > CV > MML (MML pretty new compared to others)
-            \item Most of them not public (not good; Example JFT-300M)
-          \end{itemize}
-      \item State and explain 3-4 of the most used resources (maybe add more)
-      \item (How much effort to clean pre-training data) BLIP
-      \item provide resources to find more (papers with code, ...)
-    \end{itemize}
+   \begin{itemize}
+    \item State and explain 3-4 of the most used resources (maybe add more)
+    \item provide resources to find more (papers with code, ...)
+  \end{itemize}
     
   \subsubsection{Use of resources}
     \begin{itemize}
       \item How pre-training is used in the modalities
+      \item How has pre-training changed or has it even changed in modalities
         \begin{itemize}
-          \item supervised
-          \item self-supervised 
+          \item supervised; just tell not used anymore and skip to self-supervised
+          \item self-supervised; cite that SSL is more similiar tp the learning of a human then supervised
+          \item BERT, GPT-3 use MLM, NSP; NSP not really needed(deBERTa or RoBERTa)
+          \item easy in NLP but not easy in CV, 
+          \item Solution space in NLP is finite in CV not (The dark matter of intelligence blog)
+          \item contrastive loss => need for hard negatives (bad)
+          \item BYOL approach, gets rid of hard negatives => good
+          \item Self-distillation (student, teacher model)
+          \item augmentation used to mimic MLM
         \end{itemize}
         \item bla
          \begin{itemize}
-        \item How has pre-training changed or has it even changed in modalities
         \item CV: still all train on ImageNet ("Are we done with ImageNet") and poor performance of ObjectNet
             \item use of noisy data; ?quantity > quality?
         \end{itemize}
