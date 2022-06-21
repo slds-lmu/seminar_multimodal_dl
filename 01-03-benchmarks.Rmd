@@ -1,3 +1,7 @@
+---
+output:
+  pdf_document: default
+---
 # Resources and Benchmarks for NLP, CV and multimodal tasks
 
 *Author: Christopher Marquardt*
@@ -6,54 +10,62 @@
 
 When we see athletes perform in their sports we only see the results of their hard work prior or till to the event. Most of the time they casually talk about their off-season, but everybody knows the results are made in the off-season. 
 
-Same goes for the models we will see in the later chapters. Most of the time we are just interested in our results, but why and how does the model come to these results? It has to learn to some key fundamentals of the modality to achieve these results. But how do we get them to perform better? We can build better architectures and/or use more and new data. New data by hand is easy to get but this new data results in a new problem. New data has to be carefully labeled by humans, which can be very expensive by the amount of data. Models which learn from labeled data use the supervised learning strategy. This learning strategy is a bottleneck for future progress.
+Same goes for the models we will see in the later chapters. Most of the time we are just interested in our results, but why and how does the model come to these results? It has to learn to some key fundamentals of the modality to achieve these results. But how do we get them to perform in such a way or even better? We can build better architectures and/or use more and new data. New data by hand is easy to get but this new data results in a new problem. New data has to be carefully labeled by humans, which can be very expensive by the amount of data. Models which learn from labeled data use the supervised learning strategy. This learning strategy is a bottleneck for future progress.
 
 But the need for labeling the data isn't the only problem. Let's visit the athlete analogy again. Imagine a professional football player has to participate in a professional ski race. He will not be able to compete with the others, because they are trained only to do ski races. Here we see the other problem. Models which use supervised learning have shown to perform very well on the task they were trained to do. This means models which learn on carefully labeled data only perform very well on this specific task, but poor on others. Also it's not possible to label everything in the world. 
 
 So the goal is to generate more generalist models which can perform well on different tasks without the need of huge labeled data. Humans are able to perform well on different tasks in a short amount of time. For example humans only need a small amount of hours to learn how to drive a car, even without supervision. On the other hand fully automated driving AI need thousand of hours of data to drive a car. Why do humans learn so fast compared to machines?
-Humans don't rely on labeled data, because most of the time humans learn by observation. By this humans generate a basic knowledge of how the world works, which also called common sense. 
+Humans don't rely on labeled data, because most of the time humans learn by observation. By this humans generate a basic knowledge of how the world works, which also called common sense. This enables us to learn so much faster compared to machines.
+Meta AI (cite webpage) believes that self-supervised learning is one of the most promising ways to generate background knowledge and some sort of common sense in AI systems. By Self-supervised learning one means a supervised learning algorithm, but it doesn't need an external supervisor. We will see later how the different modalities use this approach, as it varies between the modalities.
 
-Meta AI (cite webpage) believes that self-supervised learning is one of the most promising ways to generate background knowledge and some sort of common sense in AI systems. Self-supervised learning uses a supervised learning algorithm, but doesn't need an external supervisor. We will see later how the different modalities use this approach, as is varies between the modalities.
+Hier fehlt noch der Übergang
+
+The following chapter will inspect on the one hand pre-training resources and the use of them and on the other hand also the benchmarks which are used for NLP, CV and ,the combination of both, multi-modal learning.
+
+\subsection{Pre-training}
+  \subsubsection{Resources for pre-training}
+
+After pointing out that pre-training is very important one might ask how do the different modalities pre-train and how do the datasets look? At first we will inspect the last one and focus afterwards on the use of the resources.
+As one might expect NLP models pre-train on text, CV models pre-train on images and MML models pre-train on text image pairs, which can somehow be seen as a combination of NLP and CV. But CV models mostly use labeled data like a picture of a dog with the corresponding label "dog". MML datasets can contain several sentences of text which correspond to the image.
+
+Even if the datasets might be completely different, the procedure to get the data is the same for all of them, because the data is downloaded from the internet. This can lead to a problem, since by using this method the resulting dataset might be noisy. One approach for the MML models is to use comman crawl and extract the image plus the alt of a image. The alt is an alternate text for an image, if the image cannot be displayed or for visual impaired people. This seems like a reasonable approach, but the alt is often now very informative about what's in the image. (maybe add example)
+
+The next difference between the modalities is the cardinality of the pre-training data. It's easy to see that text is by far the most easy to get from the internet. This results in huge high-quality massive text data. Some magnitudes smaller are the datasets for CV. Since MML is pretty new compared to the other modalities it still relatively small but growing fast. A small downer is that the datasets are mostly not public available. The big companies like to keep their models and used datasets privat, but there are also real open AI competitors like LAION in the field. This hinders the reproducibility. 
 
 
-
-The following chapter will inspect on the one hand pre-training resources and the use of them and also the benchmarks which are used for NLP, CV and ,the combination of both, multi-modal learning.
-
-
-
-Intro for pretraining Ideas:
-\begin{itemize}
-  \item like an athlete. 
-  \item Need some base fitness (=pre-training) (DONE)
-  \item Same like in reality pre-training differs between models. (MISSING)
-\end{itemize}
 
 \subsection{Pre-training}
   \subsubsection{Resources for pre-training}
     \begin{itemize}
-      \item how does pre-training look for NLP, CV, MML
+      \item  (Short intro sentence) how do datasets for pre-training look for NLP, CV, MML
         \begin{itemize}
-        \item How has pre-training changed or has it even changed in modalities
-        \item CV: still all train on ImageNet ("Are we done with ImageNet") and poor performance of ObjectNet
-            \item use of noisy data; ?quantity > quality?
+          \item NLP: text (DONE)
+          \item CV: images (DONE)
+          \item MML: text image pairs (DONE)
         \end{itemize}
+        \item how do they get the datasets? Comman crawl and problems (DONE)
+        \item availability and size of pre-training for different modalities (DONE)
+          \begin{itemize}
+            \item NLP > CV > MML (MML pretty new compared to others)
+            \item Most of them not public (not good; Example JFT-300M)
+          \end{itemize}
       \item State and explain 3-4 of the most used resources (maybe add more)
-      \item (How much effort to clean pre-training data)
+      \item (How much effort to clean pre-training data) BLIP
       \item provide resources to find more (papers with code, ...)
-      \item availability and size of pre-training for different modalities
-        \begin{itemize}
-          \item NLP > CV > MML (MML pretty new compared to others)
-          \item Most of them not public (not good; Example JFT-300M)
-          \item What role does size play (logarithmic)
-        \end{itemize}
     \end{itemize}
     
   \subsubsection{Use of resources}
     \begin{itemize}
-      \item How pre-training is used in different modalities
+      \item How pre-training is used in the modalities
         \begin{itemize}
           \item supervised
           \item self-supervised 
+        \end{itemize}
+        \item bla
+         \begin{itemize}
+        \item How has pre-training changed or has it even changed in modalities
+        \item CV: still all train on ImageNet ("Are we done with ImageNet") and poor performance of ObjectNet
+            \item use of noisy data; ?quantity > quality?
         \end{itemize}
         \item State and explain 2 or 3 main used pre-training tasks
           \begin{itemize}
@@ -66,6 +78,7 @@ Intro for pretraining Ideas:
   \begin{itemize}
     \item why fine-tuning is important
     \item where and how to fine-tune
+    \item use labeled data for down-stream tasks
     \item ... 
   \end{itemize}
 
