@@ -23,31 +23,42 @@ Hier fehlt noch der Übergang
 The following chapter will inspect on the one hand pre-training resources and the use of them and on the other hand also the benchmarks which are used for NLP, CV and ,the combination of both, multi-modal learning.
 
 \subsection{Pre-training}
-  \subsubsection{Resources for pre-training}
-
+  
 After pointing out that pre-training is very important one might ask how do the different modalities pre-train and how do the datasets look? At first we will inspect the last one and focus afterwards on the use of the resources.
 As one might expect NLP models pre-train on text, CV models pre-train on images and MML models pre-train on text image pairs, which can somehow be seen as a combination of NLP and CV. But CV models mostly use labeled data like a picture of a dog with the corresponding label "dog". MML datasets can contain several sentences of text which correspond to the image.
 
 Even if the datasets might be completely different, the procedure to get the data is the same for all of them, because the data is downloaded from the internet. This can lead to a problem, since by using this method the resulting dataset might be noisy. One approach for the MML models is to use comman crawl and extract the image plus the alt of a image. The alt is an alternate text for an image, if the image cannot be displayed or for visual impaired people. This seems like a reasonable approach, but the alt is often now very informative about what's in the image. (maybe add example)
 
 The next difference between the modalities is the cardinality of the pre-training data. It's easy to see that text is by far the most easy to get from the internet. This results in huge high-quality massive text data. Some magnitudes smaller are the datasets for CV. Since MML is pretty new compared to the other modalities it still relatively small but growing fast. A small downer is that the datasets are mostly not public available. The big companies like to keep their models and used datasets private, which hinders the reproducibility, but there are also real open AI competitors like LAION in the field. 
+The next chapter will provide some of the most used pre-training datasets.
+
+\subsubsection{Resources for pre-training}
+
+Absatz Common Crawl
+As already mentioned, extracting text from the internet is rather easy. More precisely there is a non-profit organization, called [Common Crawl](https://commoncrawl.org), which does exactly this. They provide copies of the internet to researchers, companies and individuals at no cost for the purpose of research and analysis. The Common Crawl corpus contains petabytes of data collected since 2008. It contains raw web page data, extracted metadata and text extractions. For example GPT-3 uses a filtered version of Common Crawl, which consists of 410 billion tokens.
+But recent work (@rosset2020turing) showed that diversity in training dataset improves general cross-domain knowledge and downstream generalization capability for language models. The Pile (@gao2020pile) was introduced to tackle exactly these results. The Pile contains 22 datasets, including both established natural language processing datasets, but also several newly introduced ones.
+
+
+
 
 NLP:
 \begin{itemize}
+  \item Common Crawl
   \item the Pile
   \item BooksCorpus
 \end{itemize}
 
 CV
 \begin{itemize}
-  \item ImageNet
-  \item BooksCorpus
+  \item ImageNet 1k 
+  \item ImageNet 21k 
+  \item JFT-300M
 \end{itemize}
 
 
 MMl
 \begin{itemize}
-  \item LAION
+  \item LAION 400M & 5B
   \item COCA
   \item COCO
 \end{itemize}
@@ -62,9 +73,9 @@ MMl
       \item How pre-training is used in the modalities
       \item How has pre-training changed or has it even changed in modalities
         \begin{itemize}
-          \item supervised; just tell not used anymore and skip to self-supervised
-          \item self-supervised; cite that SSL is more similiar tp the learning of a human then supervised
-          \item BERT, GPT-3 use MLM, NSP; NSP not really needed(deBERTa or RoBERTa)
+          \item supervised; just tell: not used anymore and skip to self-supervised
+          \item self-supervised; cite that SSL is more similiar tp the learning of a human then supervised (Yann le , yannic kilcher interview)
+          \item BERT, GPT-3 use MLM, NSP; NSP not really needed (deBERTa or RoBERTa)
           \item easy in NLP but not easy in CV, 
           \item Solution space in NLP is finite in CV not (The dark matter of intelligence blog)
           \item contrastive loss => need for hard negatives (bad)
