@@ -27,44 +27,42 @@ The following chapter will inspect on the one hand pre-training resources and th
 After pointing out that pre-training is very important one might ask how do the different modalities pre-train and how do the datasets look? At first we will inspect the last one and focus afterwards on the use of the resources.
 As one might expect NLP models pre-train on text, CV models pre-train on images and MML models pre-train on text image pairs, which can somehow be seen as a combination of NLP and CV. But CV models mostly use labeled data like a picture of a dog with the corresponding label "dog". MML datasets can contain several sentences of text which correspond to the image.
 
-Even if the datasets might be completely different, the procedure to get the data is the same for all of them, because the data is downloaded from the internet. This can lead to a problem, since by using this method the resulting dataset might be noisy. One approach for the MML models is to use comman crawl and extract the image plus the alt of a image. The alt is an alternate text for an image, if the image cannot be displayed or for visual impaired people. This seems like a reasonable approach, but the alt is often now very informative about what's in the image. (maybe add example)
+Even if the datasets might be completely different, the procedure to get the data is the same for all of them, because the data is downloaded from the internet. This can lead to a problem, since by using this method the resulting dataset might be noisy. One approach for the MML models is to use common crawl and extract the image plus the alt of a image. The alt is an alternate text for an image, if the image cannot be displayed or for visual impaired people. This seems like a reasonable approach, but the alt is often not very informative about what's in the image. (maybe add example)
 
-The next difference between the modalities is the cardinality of the pre-training data. It's easy to see that text is by far the most easy to get from the internet. This results in huge high-quality massive text data. Some magnitudes smaller are the datasets for CV. Since MML is pretty new compared to the other modalities it still relatively small but growing fast. A small downer is that the datasets are mostly not public available. The big companies like to keep their models and used datasets private, which hinders the reproducibility, but there are also real open AI competitors like LAION in the field. 
+The next difference between the modalities is the cardinality of the pre-training data. It's easy to see that text is by far the most easy to get from the internet. This results in huge high-quality massive text data. Some magnitudes smaller are the datasets for CV. Since MML is pretty new compared to the other modalities it still relatively small but growing fast. A small downer is that some of the datasets are not public available. The big companies like to keep their models and used datasets private, which hinders the reproducibility, but there are also real open AI competitors like LAION in the field. 
 The next chapter will provide some of the most used pre-training datasets.
 
 \subsubsection{Resources for pre-training}
 
-Absatz Common Crawl
-As already mentioned, extracting text from the internet is rather easy. More precisely there is a non-profit organization, called [Common Crawl](https://commoncrawl.org), which does exactly this. They provide copies of the internet to researchers, companies and individuals at no cost for the purpose of research and analysis. The Common Crawl corpus contains petabytes of data collected since 2008. It contains raw web page data, extracted metadata and text extractions. For example GPT-3 uses a filtered version of Common Crawl, which consists of 410 billion tokens.
-But recent work (@rosset2020turing) showed that diversity in training dataset improves general cross-domain knowledge and downstream generalization capability for language models. The Pile (@gao2020pile) was introduced to tackle exactly these results. The Pile contains 22 datasets, including both established natural language processing datasets, but also several newly introduced ones.
+The first modality will be NLP, then CV and at last MML. Only three datasets per modality will be provided, but resources for more will be at the end of the chapter.
+As already mentioned, extracting text from the internet is rather easy. More precisely there is a non-profit organization, called [Common Crawl](https://commoncrawl.org), which does exactly this. They provide copies of the internet to researchers, companies and individuals at no cost for the purpose of research and analysis. The Common Crawl corpus contains petabytes of data collected since 2008. It contains raw web page data, extracted metadata and text extractions. The advantages of Common Crawl come along with their disadvantages. The text is from diverse domains but with varying quality of data. To handle the raw nature of the datasets one often has to use a well-designed extraction and filter to use the datasets appropriately [@gao2020pile]. For example GPT-3 uses a filtered version of Common Crawl, which consists of 410 billion tokens [@brown2020language].
+But recent work [@rosset2020turing] showed that diversity in training dataset improves general cross-domain knowledge and downstream generalization capability for language models. The Pile [@gao2020pile] was introduced to address exactly these results. The Pile contains $22$ sub-datasets, including established NLP datasets, but also several newly introduced ones. The size of the $22$ sub-datasets, which can be categorized into 5 categories, pile up to around $825$ GB of data.
+The following treemap shows the distribution of the dataset.
 
+```{r pile treemap, echo=FALSE}
+htmltools::includeHTML("data/01-chapter1/CompositionPile.html")
+# Plot passt leider noch nciht ganz. Aus einem Grund kommt eine Category nicht obwohl sie im .html sonst gezeigt wird
+# label
+```
 
+A more detailed description of the Pile can be found in the corresponding paper [@gao2020pile].
+The last dataset for NLP is the BooksCorpus dataset [@zhu2015aligning]. The BooksCorpus uses books from yet unplished authors from the web. Only books with more than 20k words were included to filter out shorter, noisier stories.
+This results in around 11k books from 16 different genres. So more than 74 million sentences can be used in pre-training.
 
+The next inspected modality is CV. Almost every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset. ImageNet uses the hierarchical structure of WordNet [@fellbaum2010wordnet]. At the release of ImageNet-1k the amount of classes was unheard at this time point. Datasets like CIFAR-10 [@krizhevsky2009learning] and CIFAR-100 [@krizhevsky2009learning] had 10 and 100 classes, but ImageNet1k had 1000 different classes and this was not the only major improvement. They also increased the resolution from $32 \times 32$ to $256 \times 256$.  In all, there are roughly 1.2 million training images, 50,000 validation images, and 150,000 testing images. The ImageNet-1k dataset is a subset of the ImageNet dataset [@deng2009imagenet]. The full ImageNet dataset is also called ImageNet-21k. It consists of more than 14 million images, divided in almost 22k classes. Because of this some paper described it as ImageNet-22k. Those two dataset do not only differ by the amount of classes, but also by the type of labels. The labels of ImageNet-21k are not mutually exclusive. Because of this the pre-training wiht ImageNet-1k is far more popular. Also the ImageNet-21k dataset lacks an official train-validation split., which is just another reason why ImageNet-1k is more popular. The raw dataset ImageNet-21k is around 1.3 terabyte (TB). It's also nice, that the the dataset of ImageNet are open available. The next dataset is in contrast to this, because it's no available.
 
-NLP:
-\begin{itemize}
-  \item Common Crawl
-  \item the Pile
-  \item BooksCorpus
-\end{itemize}
+The Joint-Foto-Tree (JFT) 300M is one of the follow up version of the JFT dataset [@hinton2015distilling]. Given the name it consists of 300 million images and on average each image has 1.26 labels. The whole datasets has around 375 million labels. These labels can be divided into 18291 classes. These categories form a rich hierarchy with the maximum depth of hierarchy being 12 and maximum number of child for parent node being 2876 [@sun2017revisiting]. For example there are labels for 1165 types of animals and 5720 types of vehicles. The work states that approximately 20% of the labels in this dataset are noisy [@sun2017revisiting], because the labels are generated automatically. It also provides the fact, that the distribution is heavily long-tailed, which means that some of the classes have less than 100 images. There is also an extendend version of the JFT dataset. It's called Ensamble Foto Tree (EFT) and consists of 100k classes, but it's rarely used in practice because of the intolerable large model size and the slow training speed.
 
-CV
-\begin{itemize}
-  \item ImageNet 1k 
-  \item ImageNet 21k 
-  \item JFT-300M
-\end{itemize}
 
 
 MMl
 \begin{itemize}
   \item LAION 400M & 5B
-  \item COCA
+  \item CC
   \item COCO
 \end{itemize}
 
    \begin{itemize}
-    \item State and explain 3-4 of the most used resources (maybe add more)
     \item provide resources to find more (papers with code, ...)
   \end{itemize}
     
