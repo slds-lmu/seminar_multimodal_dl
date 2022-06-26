@@ -16,7 +16,7 @@ But the need for labeling the data isn't the only problem. Let's visit the athle
 
 So the goal is to generate more generalist models which can perform ll on different tasks without the need of huge labeled data. Humans are able to perform ll on different tasks in a short amount of time. For example humans only need a small amount of hours to learn how to drive a car, even without supervision. On the other hand fully automated driving AI need thousand of hours of data to drive a car. Why do humans learn so fast compared to machines?
 Humans don't rely on labeled data, because most of the time humans learn by observation. By this humans generate a basic knowledge of how the world works, which also called common sense. This enables us to learn so much faster compared to machines.
-Meta AI (cite bpage) believes that self-supervised learning is one of the most promising ways to generate background knowledge and some sort of common sense in AI systems. By Self-supervised learning one means a supervised learning algorithm, but it doesn't need an external supervisor.  will see later how the different modalities use this approach, as it varies beten the modalities.
+Meta AI (cite bpage) believes that self-supervised learning is one of the most promising ways to generate background knowledge and some sort of common sense in AI systems. By self-supervised learning one means a supervised learning algorithm, but it doesn't need an external supervisor. Self-supervised pre-training differs between the modalities, which there is not one-way to go.
 
 Hier fehlt noch der Übergang
 
@@ -53,37 +53,37 @@ The next inspected modality is CV. Almost every state-of-the-art CV model uses a
 
 The Joint-Foto-Tree (JFT) 300M is one of the follow up version of the JFT dataset [@hinton2015distilling]. Given the name it consists of 300 million images and on average each image has 1.26 labels. The whole datasets has around 375 million labels. These labels can be divided into 18291 classes. These categories form a rich hierarchy with the maximum depth of hierarchy being 12 and maximum number of child for parent node being 2876 [@sun2017revisiting]. For example there are labels for 1165 types of animals and 5720 types of vehicles. The work states that approximately 20% of the labels in this dataset are noisy [@sun2017revisiting], because the labels are generated automatically. It also provides the fact, that the distribution is heavily long-tailed, which means that some of the classes have less than 100 images. There is also an extendend version of the JFT dataset. It's called Ensamble Foto Tree (EFT) and consists of 100k classes, but it's rarely used in practice because of the intolerable large model size and the slow training speed.
 
-The Pile is an attempt to mimic the dataset used for GPT-3 and LAION wants to achieve the same. LAION-400M [@schuhmann2021laion] consists of 400 million image-text pairs. These 400 million image-text pairs were filtered with CLIP. The dataset also contains the CLIP embedding and kNN indices. @schuhmann2021laion describes the procedure to create the dataset in an open manner. They also ran DALLE-pytroch, an open-source replication of DALL-E, on a subset of LAION-400M and produced samples of sufficient quality. This opens the road for large-scale training and research of language-vision models, which was previously not possible.
+The Pile is an attempt to mimic the dataset used for GPT-3 and LAION wants to achieve the same. LAION-400M [@schuhmann2021laion] consists of 400 million image-text pairs. They used Common Crwal and parsed out all HTML IMG tags containing an alt-text attribute. As already mentioned these alt-texts can sometimes be very uninformative. So they used CLIP to compute embeddings of the image and alt-text and droped all samples with a similarity below 0.3. The dataset also contains the CLIP embedding and kNN indices. @schuhmann2021laion describes the procedure to create the dataset in an open manner. 
+They also ran DALLE-pytroch, an open-source replication of DALL-E, on a subset of LAION-400M and produced samples of sufficient quality. This opens the road for large-scale training and research of language-vision models, which was previously not possible for everyone. LAION-400M is also known as crawling\@home (C\@H), because they started as a small group and used only their own computers at the beginning. End of March 2022 the team on LAION released a $14 \times$ bigger than LAION-400M dataset called LAION-5B. It consists of 5.85 billion CLIP-filtered image-text pairs. A paper about the dataset is right now in progress, but it's already available to download if you have enough space. The size of the dataset is about 240 TB in 384 or 80 TB in 224. Due to the nature of the extraction 2,3B contain English language, 2,2B samples from 100+ other languages and they also provide a [search demo](https://rom1504.github.io/clip-retrieval/?back=https%3A%2F%2Fknn5.laion.ai&index=laion5B&useMclip=false). LAION-5B is the biggest openly accessible image-text dataset.
+Alt-text might add too much noise to the dataset so Microsoft decided to employed a novel pipeline for gathering data with extensive use of Amazon Mechanical Turk. Their goal was to create a non-iconic image collection.
+Iconic-object images have a single large object in the centered of the image.
+By this they provide high quality object instances, but they also lack information of contextual important and non-canonical viewpoints [@lin2014microsoft]. Recent work showed that non-iconic images are better at generalizing [@torralba2011unbiased]. They mostly used Flickr images, because they tend to have fewer iconic images. This results in a collection of 328,000 images. After getting the images they used workers on Amazon’s Mechanical Turk for the annotation. The workers got a list with 91 categories and 11 super-categories. At first a worker had to decide if a super-category (e.g. animal) was present or not. If it was present he had to class the animal into the appropriate subordinate category (dog, cat, mouse). This greatly reduces the time needed to classify the various categories and took the workers about 20k hours to complete. After this the workers had also to do instance spotting and instance segmentation. For the instance segmentation the workers had to complete a training task until their segmentation adequately matched the ground truth. Only 1 in 3 workers passed this training stage. At the end they added five written captions to each image in the dataset, which the called Microsoft Common Objects in Context (COCO). At the end they utilizided more than 70,000 worker hours to collect a amount of annotated object instances, which were gathered to drive the advancement of object detection and segmentation algorithms. The amount of image-text pairs compared to LAION-400M or LAION-5B seems incomparable, but one has to keep in mind, that the text in the COCO dataset is gathered in a high quality manner and was created in 2014. The dataset is still used, because of the high quality.
 
+Localized Narratives choose a new form of connecting vision and language in multi-modal image annotations [@pont2020connecting]. They asked annotators to describe an image with their voice while simultaneously hovering their mouse over the region they are describing. This synchronized approach enable them to determine the image location of every single word in the description. Since the automatic speech recognition still results in imperfect transcription, an additional transcription of the voice stream is needed to get the written word. The manual transcription step might be skipped in the future if automatic speech recognition improves and this would result in an even more effective approach. They collected Localized Narratives for, the earlier introduced, COCO [@lin2014microsoft] dataset, ADE20K [@zhou2017scene], Flickr30k & 32k datasets [@young2014image] and 671k images of Open Images[@kuznetsova2020open]. Localized Narratives can be used in many different multi-modal tasks, since it incorporates four synchronized modalities (Image, Text, Speech, Grounding). Another difference is that the captions are longer than in most previous datasets [@krishna2017visual; @kuznetsova2020open; @lin2014microsoft]. Models like Imagen [@saharia2022photorealistic] and Parti [@unknown] use long prompts. Beside to that the 849k images with Localized Narratives are publicly available [@LocNarWeb]. 
+These datasets were just some of the more used dataset. Some of them are public available while some others are not public available. Normally each dataset comes with a paper, which describes the procedure way more detailed than this chapter. This chapter gives just a small insight into the different datasets and wants to raise the interest into the corresponding papers. [Papers with code](https://paperswithcode.com/) deliver research papers with code implementations by the authors or community. One can get information about the State-of-the-Art for every modality and even more. They also provide available datasets for all possible tasks.
+Frankly it's a bit odd to compare different models when they train mostly on different dataset and also use different pre-training tasks. The next chapter will show how the resources are used in the different modalities.
 
-MMl
-\begin{itemize}
-  \item LAION 400M & 5B
-  \item CC
-  \item COCO
-\end{itemize}
+\subsubsection{Use of resources}
+Yann LeCun and Ishan Misra suggest in their [blogpost](https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/) that supervised pre-training is gone and the future will be self-supervised pre-training [@darkMatter]. Meta AI wants to create a background knowledge in the models that can approximate the common sense of us humans. This suggestion is even more reasonable, because recent work [@unsupBrain] also showed that a self-supervised or a unsupervised pre-training approach is biologically more plausible than supervised methods.
+This why neuroscientists are taking interest in unsupervised and self-supervised deep neural networks in order to explain how the brain works [@zhuang2021unsupervised].
+Self-supervised learning is also called predictive learning. This comes by the nature of the process. The general technique of self-supervised learning is to predict any unobserved or hidden part (or property) of the input from any observed or unhidden part of the input [@darkMatter]. Models like BERT and GPT-3 both use masked language modeling (MLM) as a pre-training task. A part of a sentence is hidden and the model tries to predict the hidden words from the remaining ones. Another task which is used by BERT is  next sentence prediction (NSP). BERT tries to predict, if a sentence belongs to another sentence. One might see this as a downer, because the model reduces it just a binary classification problem. So there is not that much to learn compared to the MLM task and it's exactly like this RoBERTa, a robuster version of BERT, does not need the NSP task anymore. Predicting missing parts of the input is one of the more standard tasks for SSL pre-training. These missing parts tasks are easy to implement in NLP compared to CV. In NLP the solution space is finite, because one calculates a distribution from, a before specified, dictionary. In CV the solution space is infinite so it's not easy to implement it. Is is more difficult to represent uncertainty in the prediction for images than it is for words [@darkMatter].
 
-   \begin{itemize}
-    \item provide resources to find more (papers with code, ...)
-  \end{itemize}
-    
-  \subsubsection{Use of resources}
-    \begin{itemize}
-      \item How pre-training is used in the modalities
-      \item How has pre-training changed or has it even changed in modalities
-        \begin{itemize}
-          \item supervised; just tell: not used anymore and skip to self-supervised
-          \item self-supervised; cite that SSL is more similiar tp the learning of a human then supervised (Yann le , yannic kilcher interview)
-          \item BERT, GPT-3 use MLM, NSP; NSP not really needed (deBERTa or RoBERTa)
-          \item easy in NLP but not easy in CV, 
-          \item Solution space in NLP is finite in CV not (The dark matter of intelligence blog)
-          \item contrastive loss => need for hard negatives (bad)
-          \item BYOL approach, gets rid of hard negatives => good
-          \item Self-distillation (student, teacher model)
-          \item augmentation used to mimic MLM
-        \end{itemize}
-        \item bla
-         \begin{itemize}
+  \begin{itemize}
+    \item How pre-training is used in the modalities (DONE)
+    \item How has pre-training changed or has it even changed in modalities (DONE)
+      \begin{itemize}
+        \item supervised; just tell: not used anymore and skip to self-supervised (DONE)
+        \item self-supervised; cite that SSL is more similiar tp the learning of a human then supervised (Yann le , yannic kilcher interview) (DONE)
+        \item BERT, GPT-3 use MLM, NSP; NSP not really needed (deBERTa or RoBERTa)
+        \item easy in NLP but not easy in CV, 
+        \item Solution space in NLP is finite in CV not (The dark matter of intelligence blog)
+        \item contrastive loss => need for hard negatives (bad)
+        \item BYOL approach, gets rid of hard negatives => good
+        \item Self-distillation (student, teacher model)
+        \item augmentation used to mimic MLM
+      \end{itemize}
+      \item bla
+       \begin{itemize}
         \item CV: still all train on ImageNet ("Are  done with ImageNet") and poor performance of ObjectNet
             \item use of noisy data; ?quantity > quality?
         \end{itemize}
