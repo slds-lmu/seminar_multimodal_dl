@@ -3,7 +3,7 @@ bibliography: generativeArtsBib.bib
 ---
 
 # Generative Art
-*Author: Nadja Sauter*
+*Author: Nadja Sauter*  
 *Supervisor: Jann Goschenhofer*
 
 It is impressive what computers are able to do nowadays. With the help of artificial intelligence (AI) computers learned how to read, see, hear and in this way interact with humans. For instance, on many websites instead of talking to a person you text with a chatbot. Or in many homes, you tell Apple Siri or Amazon Alexa to put on the lights or to stop playing the music. Computers even learned to create pictures only based on a text prompt with methods mentioned in early chapters. This new ability is also used in arts, called ‘generative art’ or ‘computer art’. This new field comprises all artwork where the human artist cedes control to an autonomous system [@galanter2016generative]. In this way everyone can easily create pictures even if you are not artistically talented as the computer does the work for you. In some way, the computer is becoming the artist with some sort of creativity, a distinct human ability. In this chapter we want to give an overview about how computers became better and better in generating images based on text prompts and how this is used in the art scene.
@@ -30,8 +30,42 @@ Furthermore, the architecture of Generative Adversarial Networks (GANs) first in
 </center>
 
 
-Nevertheless, it was almost not possible to control the output of these early forms of AI art. There was no option to make specifications of how the results should look like. For instance, you always get a human face with the earlier mentioned StyleGAN application, but you cannot specify to generate a blond girl. This is also known as the artist-critic paradigm [@morris_2022]: The computer as artist generates a picture based on what the Neural Network learned in the training phase. However, you also need a critic that tells the computer if the output satisfies the concrete idea of the human artist. For this reason multimodal deep learning models emerged as you can control the output with help of text prompting. In this way you can check if the generated picture matches the initial text prompt. A new class of models for generating pictures evolved. 
+Nevertheless, it was almost not possible to control the output of these early forms of AI art. There was no option to make specifications of how the results should look like in detail. For instance, you always get a human face with the earlier mentioned StyleGAN application, but you cannot specify to generate a blond girl. This is also known as the artist-critic paradigm [@morris_2022]: The computer as artist generates a picture based on what the Neural Network learned in the training phase. However, you also need a critic that tells the computer if the output satisfies the concrete idea of the human artist. For this reason multimodal deep learning models emerged as you can control the output with help of text prompting. In this way you can check if the generated picture matches the initial text prompt. A new class of models for generating pictures evolved. 
 
-TBD
-This idea was used by OpenAI for their models DALL-E and CLIP which were released in January 2021. Both architectures are critics for multimodal models. Only a few days after their release, Ryan Murdock combined CLIP with the already existing artist Neural Net “BigGAN” in his “The Big Sleeep” software. Furthermore, in March 2021 Or Patashnik et. al. developed StyleCLIP, a combination of StyleGAN (artist) and CLIP (critic) to specifically edit parts of images via text instructions. In the following month Katherine Corwson combined CLIP with the existing VQGAN algorithm. She also hooked up CLIP with guided diffusion models as artists. This was further investigated by OpenAI which published a paper in May 2021 about guided diffusion models and another paper in December 2021 about GLIDE, a model with CLIP or classifier-free guidance as critics and diffusion models as artists. 
+This idea was used by OpenAI for their models DALL-E and CLIP which were released in January 2021. Both architectures are critics for multimodal models. Only a few days after the release, Ryan Murdock combined CLIP (critic) with the already existing Neural Net “BigGAN”(artist) in his “The Big Sleeep” software. Furthermore, @StyleGAN developed StyleCLIP, a combination of StyleGAN (artist) and CLIP (critic) to specifically edit parts of images via text instructions. In the following month Katherine Corwson combined CLIP with the existing VQGAN algorithm. She also hooked up CLIP with guided diffusion models as artists. This was further investigated by OpenAI which published a paper [@DiffusionModels] in May 2021 about guided diffusion models and another paper [@GLIDE] in December 2021 about GLIDE, a model with CLIP or classifier-free guidance as critics and diffusion models as artists. 
+
+
+## How to use models?
+A lot of different notebooks are publicly available to apply the different pre-trained models. In general, all notebooks work pretty similar: When you run a notebook, you can enter a text prompt and the computer generates a picture based on your instruction. Really easy and no coding knowledge required! Moreover, there are also some API-applications, thus, no programming at all. Using these models, it is more important how you write your text prompt. There are special ways how you can influence the output, also known as prompt engineering. For instance, you can add “in the style of Van Gogh” to change the style. Besides, a special trick is to append “unreal engine” which makes picture more realistic and higher in quality. That seems strange and surprinsing, but the models were trained on data from the internet including pictures of the software company Epic Games that has a popular 3D video game engine called Unreal Engine. This is one of the most popular prompting tricks, but of course there a many other approaches which are investigated by different researches. 
+Nevertheless, OpenAI has never released DALL-E. There is only an open-source version called ruDALL-E [@ruDALLE] that was trained on Russian language data. Besides, PyTorch offers a replication of the DALL-E code [@DALLEpytorch] but no trained model. CLIP was released without publishing the used training data. However, there exists another data set with CLIP embeddings called LAION-400m [@LAION]. In the following, we used different publicly available notebookes to try out the different models [CLIP + BigGAN](https://colab.research.google.com/drive/1NCceX2mbiKOSlAd_o7IU7nA9UskKN5WR?usp=sharing), 
+[CLIP + VQGAN](https://colab.research.google.com/drive/1ZAus_gn2RhTZWzOWUpPERNC0Q8OhZRTZ#scrollTo=FhhdWrSxQhwg), 
+[CLIP + Guided Diffusion](https://colab.research.google.com/drive/12a_Wrfi2_gwwAuN3VvMTwVMz9TfqctNj#scrollTo=X5gODNAMEUCR), 
+[GLIDE](https://colab.research.google.com/github/openai/glide-text2im/blob/main/notebooks/text2im.ipynb)
+with the text prompt "a fall landscape with a small cottage next to a lake". Some of the notebooks run on lower resolution due to computational limitations and also some models are downsized by the publisher. So better results are possible with higher computational power and other implementations of the models.
+
+
+<center>
+![Comparison different models](./figures/03-chapter3/fall_landscape.png)
+</center>
+
+
+
+
+## Different tasks and Modalities
+So far, we concentrated on the two modalities text and image. Combining both of them, you can tackle different tasks with the models mentioned above. In general, you can generate images based on a text prompt. Therefore, you can start from noise or you can chose a real image as starting point. Besides, you can edit, extend, crop and search images. It is even possible to combine the digital world with the reality, known as augmented art. Here, with a electronic device you can extend the recorded reality on camera with visual effects. It is also possible to combine other modalities as well. For instance, @WZRD accompanies your video with suitable audio. Or you can also create little videos with text prompting. It is even imaginable to create sculptures with 3D-printers [@3D]. 
+
+
+
+## Discussion and prospects
+In the last years methods of generating images with text prompting tremendously improved and a new field in arts arised. It is impressive how these models are able to generate images based on a short text instruction. This is quite impressive as AI achieved some kind of creativity. It is up for discussion if the computer is becoming the artist in generative art and in this way replacing the human artist. However, there is still no direct loss function that can calculate how aesthetically pleasing a picture is [@mcateer2021clippe]. This is probably also quite subjective and cannnot be answered for everyone in the same way. Most of the time the human artist still picks the best outcome. Thus, the computer generates multiple pictures and the human picks the artwork. However, the better AI becomes, the less the human is needed for this process. 
+
+Furthermore, as the output becomes more and more realistic, there is the risk that the methods are abused to create fake content and spread misleading information [@misconduct]. There are some impressive deepfakes in the internet that look totally realistic, but are completely made-up. For this reason, some researcher like Open-AI also do not release all their models (e.g. DALL-E) or downstreamed models (e.g. CLIP). On the other hand, from a scientific point of view it is important to get access to such models and the training data to continue research. 
+
+Moreover, similarly to most Deep Learning algorithms, these models are affected by biases of the input data. For instance, @bias points out that CLIP text embeddings associate a human being more with a man than a woman. In this way it might be likelier that our models generate a man with the text prompt "human being" than a woman. This effect needs to be further investigated and should be removed. 
+
+Another interesting field related to Generative Art are Non Fungible Tokens (NFT). These are digital artwork with a unique digital signature making them unique. The digital artwork is bought and sold online, often by cryptocurrency why they are also often called Cryptoart.  
+
+
+
+
 
