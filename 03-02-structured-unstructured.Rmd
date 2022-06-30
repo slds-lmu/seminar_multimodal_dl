@@ -1,5 +1,13 @@
-# title
+# Strucutered + Unstrucutered Data
 
-*Author: *
+*Author: Rickmer Schulte*
 
-*Supervisor: *
+*Supervisor: Daniel Schalk*
+
+## Intro
+
+While the previous chapter has extended the range of modalities considered in multi-modal deep learning beyond image and text data, the focus remained on other sorts of unstructured data. This has neglected the broad class of structured data, which has been the basis for research in pre deep learning eras and which has given rise to many fundamental modeling approaches in statistics and classical machine learning. Hence, the following chapter will aim to give an overview of both data sources and outline the respective ways these have been used for modeling purposes as well as more recent attempts to model them jointly. 
+ 
+Generally, structured and unstructured data substantially differ in certain aspects such as dimensionality and interpretability which have led to various modeling approaches that are particularly designed for the special characteristics of the data types, respectively. As shown in previous chapters, deep learning models such as neural networks are known to work well on unstructured data due to their ability to extract latent representation and to learn complex dependencies from unstructured data sources to achieve state-of-the art performance on many classification and prediction tasks. By contrast, classical statistical models are mostly applied to tabular data due the advantage of interpretability inherent to these models, which is commonly of great interest in many research fields. However, as more and more data has become available to researchers today, they often do not only have one sort of data modality at hand but both structured and unstructured data at the same time. Discarding one or the other data modality makes it likely to miss out on valuable insights and potential performance improvements.
+ 
+Therefore, the following chapter will mainly examine different concepts to model both data types jointly and discuss under which circumstances one or the other is better suited. Methods such as feature engineering to integrate unstructured data via expert knowledge into the classical model framework as well as different fusion strategies to integrate both types of modalities into common deep learning architectures are analyzed and evaluated. Especially the latter will be explored in detail by referring to numerous examples from health care, biology and finance. Finally, recently proposed methods will be discussed, which bring together classical statistical models for structured data and neural networks for unstructured data in order to yield interpretable deep learning models that combine the best of both worlds.
