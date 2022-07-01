@@ -64,17 +64,26 @@ These datasets were just some of the more used dataset. Some of them are public 
 Frankly it's a bit odd to compare different models when they train mostly on different dataset and also use different pre-training tasks. The next chapter will show how the resources are used in the different modalities.
 
 \subsubsection{Use of resources}
-Yann LeCun and Ishan Misra suggest in their [blogpost](https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/) that supervised pre-training is gone and the future will be self-supervised pre-training [@darkMatter]. Meta AI wants to create a background knowledge in the models that can approximate the common sense of us humans. This suggestion is even more reasonable, because recent work [@unsupBrain] also showed that a self-supervised or a unsupervised pre-training approach is biologically more plausible than supervised methods.
+Yann LeCun and Ishan Misra suggest in their [blogpost](https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/) that supervised pre-training is gone and the future will be self-supervised pre-training [@darkMatter]. Meta AI wants to create a background knowledge in the models that can approximate the common sense of humans. This suggestion is even more reasonable, because recent work [@unsupBrain] also showed that a self-supervised or a unsupervised pre-training approach is biologically more plausible than supervised methods.
 This why neuroscientists are taking interest in unsupervised and self-supervised deep neural networks in order to explain how the brain works [@zhuang2021unsupervised].
 Self-supervised learning (SSL) is also called predictive learning. This comes by the nature of the process. The general technique of self-supervised learning is to predict any unobserved or hidden part (or property) of the input from any observed or unhidden part of the input [@darkMatter]. Models like BERT and GPT-3 both use masked language modeling (MLM) as a pre-training task. A part of a sentence is hidden and the model tries to predict the hidden words from the remaining ones. Predicting missing parts of the input is one of the more standard tasks for SSL pre-training. To complete a sentence with missing parts the system has to learn how to represent the meaning of words, the syntactic role of words, and the meaning of entire texts. 
-Another task which is used by BERT is next sentence prediction (NSP). BERT tries to predict, if a sentence belongs to another sentence. One might see this as a downer, because the model reduces it just a binary classification problem. So one might think there is not much to learn compared to the MLM task and it's exactly like this. RoBERTa, a robuster version of BERT, showed that it does not need the NSP task [@liu2019roberta]. It even outperformed the other approach were both tasks were used. These missing parts tasks are easy to implement in NLP compared to CV. In NLP the solution space is finite, because one calculates a distribution from, a before specified, dictionary. In CV the solution space is infinite and so it is not possible to explicitly represent all the possible frames and associate a prediction score to them [@darkMatter]. 
+Another task which is used by BERT is next sentence prediction (NSP). BERT tries to predict, if a sentence belongs to another sentence. One might see this as a downer, because the model reduces it just a binary classification problem. So one might think there is not much to learn compared to the MLM task and it's exactly like this. RoBERTa, a robuster version of BERT, showed that it does not need the NSP task [@liu2019roberta]. A version of the MLM even outperformed the approach were both tasks (MLM & NSP) were used. These missing parts tasks are easy to implement in NLP compared to CV. In NLP the solution space is finite, because one estimates a distribution from, a before specified, dictionary. In CV the solution space is infinite and so it is not possible to explicitly represent all the possible frames and associate a prediction score to them [@darkMatter]. 
 Meta AI proposed an unified view of self-supervised method. They say an energy-based model (EBM) is a system that, given two inputs, x and y, tells us how incompatible they are with each other [@darkMatter]. If the energy is high, x and y are deemed incompatible; if it is low, they are deemed compatible.
 
 Maybe picture of energy function
 
-The idea sounds simple but it is difficult to achieve this. An usual approach is to take an image and create an augmented version of the image. By this approach the energy has to be low, because it's from save picture. For example one can gray scale the image. By this we say the model the color does not matter. @bromley1993signature proposed this approach under the name Siamese networks. The difficulty is to make sure that the networks produce high energy, i.e. different embedding vectors, when x and y are different images. The problem is that these Siamese networks tend to collapse. When a collapse occurs, the energy is not higher for nonmatching x and y than it is for matching x and y. So the networks ignore their input and produce the same embeddings. 
-This lead to so called contrastive methods. The method used to train NLP systems by masking or substituting some input words belongs to the category of contrastive methods. Contrastive methods are based on the simple idea of constructing pairs of x and y that are not compatible, and adjusting the parameters of the model so that the corresponding output energy is large. The problem is that they are very inefficient to train. For a contrastive methods one needs so called hard negatives. These are images that are similiar to our image x but different enough to produce a high energy. This is a major issue of contrastive methods.
-So a nice solution is to get ride of the hard negatives and BYOL is one approach which acchieved exactly this.
+The idea sounds simple but it is difficult to achieve this. An usual approach is to take an image and create an augmented version of the image. By this approach the energy has to be low, because it's from save picture. For example one can gray scale the image. By this we say the model the color does not matter. @bromley1993signature proposed this kind of approach under the name Siamese networks. The difficulty is to make sure that the networks produce high energy, i.e. different embedding vectors, when x and y are different images. The problem is that these Siamese networks tend to collapse. When a collapse occurs, the energy is not higher for nonmatching x and y than it is for matching x and y. So the networks ignore their input and produce the same embeddings. 
+This lead to so called contrastive methods. The method used to train NLP systems by masking or substituting some input words belongs to the category of contrastive methods. Contrastive methods are based on the simple idea of constructing pairs of x and y that are not compatible, and adjusting the parameters of the model so that the corresponding output energy is large. The problem is that they are very inefficient to train. For a contrastive methods one needs so called hard negatives. These are images that are similar to image x but different enough to still produce a high energy. This is a major issue of contrastive methods. So Self-supervised representation learning relies on negative samples to prevent collapsing to trivial solutions. 
+So the best idea is to get rid of the hard negatives and BYOL [@grill2020bootstrap] is one approach that achieved exactly this.
+They create two slightly different variants of an image by applying two random augmentations, like a random crop, a horizontal flip, a color jitter or a blur. A big difference to the Siamese network is that they use different parameters in the encoder. They use so called online and target parameters. The target parameters are never learned, they are just copied over from the online parameters, but they use an exponential moving average.So it's some kind of a lagged version of the online parameters. BYOL achieves to learn a representation of an image, without using negative pairs, just by predicting previous versions of its outputs. Still they say, that BYOL remains dependent on existing sets of augmentations and these augmentations require human intention and automating the search for these augmentations would be an important next step, if this is even possible [@grill2020bootstrap].
+@he2022masked recently came very close to the MLM pre-training used in BERT with their masked autoencoder (MAE). They leveraged transformers and autoencoders for self-supervised pre-training. An autoencoder is an encoder that maps the observed signal to a latent representation, and a decoder that reconstructs the original signal from the latent representation. The MAE is a form of denoising autoencoding exactly like the MLM. Their approach is to divide an image into, for example, 16 $\times$ 16 patches. Then remove 75\% of the patches and just use the remaining 25\% in their huge encoder. Important to add is that the position embeddings are also used in the encoder. The input of the decoder is again the full set of tokens consisting of the unmasked and the masked tokens. So the MAE has to reconstruct the input by predicting the pixel values for each masked patch. They even outperformed methods like DINO [@caron2021emerging] on ImageNet-1k. Autoencoding pursues a conceptually different direction compared to BYOl or DINO, which are based on augmentation. Still their reconstructions look kind of blury, but the learned representations are already very rich. Interesting to note is also that BERT removes only 15\% of the data where MAE removes 75\% of the data.
+
+
+
+
+
+
+
 
 
   \begin{itemize}
@@ -86,21 +95,16 @@ So a nice solution is to get ride of the hard negatives and BYOL is one approach
         \item BERT, GPT-3 use MLM, NSP; NSP not really needed (deBERTa or RoBERTa) (DONE)
         \item easy in NLP but not easy in CV, (DONE)
         \item Solution space in NLP is finite in CV not (The dark matter of intelligence blog) (DONE)
-        \item contrastive loss => need for hard negatives (bad)
-        \item augmentation used to mimic MLM
-        \item augmentation relies on human intention
-        \item BYOL approach, gets rid of hard negatives => good (non-constrasitve loss)
+        \item contrastive loss => need for hard negatives (bad) (DONE)
+        \item augmentation used to mimic MLM (DONE)
+        \item augmentation relies on human intention (DONE)
+        \item BYOL approach, gets rid of hard negatives => good (DONE) (non-constrasitve loss)
       \end{itemize}
-      \item bla
-       \begin{itemize}
-        \item CV: still all train on ImageNet ("Are  done with ImageNet") and poor performance of ObjectNet
-            \item use of noisy data; ?quantity > quality?
+      \item MML self-supervised learning
+        \begin{itemize}
+          \item BLIP
+          \item CoCa
         \end{itemize}
-        \item State and explain 2 or 3 main used pre-training tasks
-          \begin{itemize}
-            \item masked approaches
-            \item ...
-          \end{itemize}
       \end{itemize}
     
 \subsection{Fine-tuning aka. transfer learning}
