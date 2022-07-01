@@ -78,9 +78,9 @@ Self-supervised learning is also called predictive learning. This comes by the n
         \item easy in NLP but not easy in CV, 
         \item Solution space in NLP is finite in CV not (The dark matter of intelligence blog)
         \item contrastive loss => need for hard negatives (bad)
-        \item BYOL approach, gets rid of hard negatives => good
-        \item Self-distillation (student, teacher model)
         \item augmentation used to mimic MLM
+        \item augmentation relies on human intention
+        \item BYOL approach, gets rid of hard negatives => good (non-constrasitve loss)
       \end{itemize}
       \item bla
        \begin{itemize}
@@ -114,9 +114,27 @@ Self-supervised learning is also called predictive learning. This comes by the n
         \end{itemize}
       \item different tasks for benchmarks
         \begin{itemize}
-          \item state most important ones also give infor to find ohters (example: papers with code)
-          \item Hint that it's most of the time reduction to classification tasks (like is this next sentences)
+          \item NLP:
+          \begin{itemize}
+            \item GLUE & SuperGLUE
+            \item SQuAD
+            \item BIG-Bench
+          \end{itemize}
+          \item CV: 
+          \begin{itemize}
+            \item ImageNet
+            \item VTAB
+            \item COCO
+          \end{itemize}
+          \item MML: 
+          \begin{itemize}
+            \item VCR
+            \item VQA
+            \item NLVR
+          \end{itemize}
+          \item Hint that it's most of the time reduction to classification tasks (like is this next sentences) (not sure if still true, maybe mainly CV)
           \item Semantic of produced sentences often not nice
+          \item MML wrong spelling => increase of parameters gets rid of wrong spelling (example: PARTI)
         \end{itemize}
   \end{itemize}
 
