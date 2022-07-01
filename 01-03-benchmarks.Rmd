@@ -66,7 +66,16 @@ Frankly it's a bit odd to compare different models when they train mostly on dif
 \subsubsection{Use of resources}
 Yann LeCun and Ishan Misra suggest in their [blogpost](https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/) that supervised pre-training is gone and the future will be self-supervised pre-training [@darkMatter]. Meta AI wants to create a background knowledge in the models that can approximate the common sense of us humans. This suggestion is even more reasonable, because recent work [@unsupBrain] also showed that a self-supervised or a unsupervised pre-training approach is biologically more plausible than supervised methods.
 This why neuroscientists are taking interest in unsupervised and self-supervised deep neural networks in order to explain how the brain works [@zhuang2021unsupervised].
-Self-supervised learning is also called predictive learning. This comes by the nature of the process. The general technique of self-supervised learning is to predict any unobserved or hidden part (or property) of the input from any observed or unhidden part of the input [@darkMatter]. Models like BERT and GPT-3 both use masked language modeling (MLM) as a pre-training task. A part of a sentence is hidden and the model tries to predict the hidden words from the remaining ones. Another task which is used by BERT is  next sentence prediction (NSP). BERT tries to predict, if a sentence belongs to another sentence. One might see this as a downer, because the model reduces it just a binary classification problem. So there is not that much to learn compared to the MLM task and it's exactly like this RoBERTa, a robuster version of BERT, does not need the NSP task anymore. Predicting missing parts of the input is one of the more standard tasks for SSL pre-training. These missing parts tasks are easy to implement in NLP compared to CV. In NLP the solution space is finite, because one calculates a distribution from, a before specified, dictionary. In CV the solution space is infinite so it's not easy to implement it. Is is more difficult to represent uncertainty in the prediction for images than it is for words [@darkMatter].
+Self-supervised learning (SSL) is also called predictive learning. This comes by the nature of the process. The general technique of self-supervised learning is to predict any unobserved or hidden part (or property) of the input from any observed or unhidden part of the input [@darkMatter]. Models like BERT and GPT-3 both use masked language modeling (MLM) as a pre-training task. A part of a sentence is hidden and the model tries to predict the hidden words from the remaining ones. Predicting missing parts of the input is one of the more standard tasks for SSL pre-training. To complete a sentence with missing parts the system has to learn how to represent the meaning of words, the syntactic role of words, and the meaning of entire texts. 
+Another task which is used by BERT is next sentence prediction (NSP). BERT tries to predict, if a sentence belongs to another sentence. One might see this as a downer, because the model reduces it just a binary classification problem. So one might think there is not much to learn compared to the MLM task and it's exactly like this. RoBERTa, a robuster version of BERT, showed that it does not need the NSP task [@liu2019roberta]. It even outperformed the other approach were both tasks were used. These missing parts tasks are easy to implement in NLP compared to CV. In NLP the solution space is finite, because one calculates a distribution from, a before specified, dictionary. In CV the solution space is infinite and so it is not possible to explicitly represent all the possible frames and associate a prediction score to them [@darkMatter]. 
+Meta AI proposed an unified view of self-supervised method. They say an energy-based model (EBM) is a system that, given two inputs, x and y, tells us how incompatible they are with each other [@darkMatter]. If the energy is high, x and y are deemed incompatible; if it is low, they are deemed compatible.
+
+Maybe picture of energy function
+
+The idea sounds simple but it is difficult to achieve this. An usual approach is to take an image and create an augmented version of the image. By this approach the energy has to be low, because it's from save picture. For example one can gray scale the image. By this we say the model the color does not matter. @bromley1993signature proposed this approach under the name Siamese networks. The difficulty is to make sure that the networks produce high energy, i.e. different embedding vectors, when x and y are different images. The problem is that these Siamese networks tend to collapse. When a collapse occurs, the energy is not higher for nonmatching x and y than it is for matching x and y. So the networks ignore their input and produce the same embeddings. 
+This lead to so called contrastive methods. The method used to train NLP systems by masking or substituting some input words belongs to the category of contrastive methods. Contrastive methods are based on the simple idea of constructing pairs of x and y that are not compatible, and adjusting the parameters of the model so that the corresponding output energy is large. The problem is that they are very inefficient to train. For a contrastive methods one needs so called hard negatives. These are images that are similiar to our image x but different enough to produce a high energy. This is a major issue of contrastive methods.
+So a nice solution is to get ride of the hard negatives and BYOL is one approach which acchieved exactly this.
+
 
   \begin{itemize}
     \item How pre-training is used in the modalities (DONE)
@@ -74,9 +83,9 @@ Self-supervised learning is also called predictive learning. This comes by the n
       \begin{itemize}
         \item supervised; just tell: not used anymore and skip to self-supervised (DONE)
         \item self-supervised; cite that SSL is more similiar tp the learning of a human then supervised (Yann le , yannic kilcher interview) (DONE)
-        \item BERT, GPT-3 use MLM, NSP; NSP not really needed (deBERTa or RoBERTa)
-        \item easy in NLP but not easy in CV, 
-        \item Solution space in NLP is finite in CV not (The dark matter of intelligence blog)
+        \item BERT, GPT-3 use MLM, NSP; NSP not really needed (deBERTa or RoBERTa) (DONE)
+        \item easy in NLP but not easy in CV, (DONE)
+        \item Solution space in NLP is finite in CV not (The dark matter of intelligence blog) (DONE)
         \item contrastive loss => need for hard negatives (bad)
         \item augmentation used to mimic MLM
         \item augmentation relies on human intention
@@ -94,7 +103,7 @@ Self-supervised learning is also called predictive learning. This comes by the n
           \end{itemize}
       \end{itemize}
     
-\subsection{Fine-tuning}
+\subsection{Fine-tuning aka. transfer learning}
   \begin{itemize}
     \item why fine-tuning is important
     \item where and how to fine-tune
