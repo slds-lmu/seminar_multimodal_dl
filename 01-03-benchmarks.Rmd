@@ -78,12 +78,10 @@ So the best idea is to get rid of the hard negatives and BYOL [@grill2020bootstr
 They create two slightly different variants of an image by applying two random augmentations, like a random crop, a horizontal flip, a color jitter or a blur. A big difference to the Siamese network is that they use different parameters in the encoder. They use so called online and target parameters. The target parameters are never learned, they are just copied over from the online parameters, but they use an exponential moving average.So it's some kind of a lagged version of the online parameters. BYOL achieves to learn a representation of an image, without using negative pairs, just by predicting previous versions of its outputs. Still they say, that BYOL remains dependent on existing sets of augmentations and these augmentations require human intention and automating the search for these augmentations would be an important next step, if this is even possible [@grill2020bootstrap].
 @he2022masked recently came very close to the MLM pre-training used in BERT with their masked autoencoder (MAE). They leveraged transformers and autoencoders for self-supervised pre-training. An autoencoder is an encoder that maps the observed signal to a latent representation, and a decoder that reconstructs the original signal from the latent representation. The MAE is a form of denoising autoencoding exactly like the MLM. Their approach is to divide an image into, for example, 16 $\times$ 16 patches. Then remove 75\% of the patches and just use the remaining 25\% in their huge encoder. Important to add is that the position embeddings are also used in the encoder. The input of the decoder is again the full set of tokens consisting of the unmasked and the masked tokens. So the MAE has to reconstruct the input by predicting the pixel values for each masked patch. They even outperformed methods like DINO [@caron2021emerging] on ImageNet-1k. Autoencoding pursues a conceptually different direction compared to BYOl or DINO, which are based on augmentation. Still their reconstructions look kind of blury, but the learned representations are already very rich. Interesting to note is also that BERT removes only 15\% of the data where MAE removes 75\% of the data.
 At last some of the most used pre-training task for vision-language foundation models are shown. Dual encoder models like CLIP [@radford2021learning] and ALIGN [@jia2021scaling] demonstrated in the past that contrastive objectives on noisy image-text pairs can lead to strong image and text representations. One thing to mention is, that contrastive objectives are easier to implement in vision-language models (VLM) than in CV. This comes from the fact that VLM use image-text pairs. As a dual encoder CLIP encodes the image and text. This is done for all the images used in a mini-batch. By construction the text which corresponds to the image or vice versa achieves the highest similarity and the other texts will have a low similarity. So we already have some hard negatives and don't have to search for some.
-
-SSL leads to good zero-shot results [align paper, clip paper, parti paper, imagen paper], because through SSL the models learn a good representation of the given input. Zero-shot learning (ZSL) is a problem in machine learning, where during test time, a learner observes samples from classes not observed during training when the learner needs to predict sample class. This shows that the models can achieve good results even without fine-tuning, but fine-tuned models achieve even better results. The fine-tuning procedure naturally depends on the specific down-task. For example for image classification it is possible to freeze the learned visual features and only train a classification head or fine-tune all layers. This chapter gives just give an example of fine-tuning as these fine-tuning procedures differ very much depending on the modality.
-
+Through the SSL the models learn a good representation of the given input. It has been shown that SSL leads to good zero-shot results [align paper, clip paper, parti paper, imagen paper], because of the good representation. Zero-shot learning (ZSL) is a problem in machine learning, where during test time, a learner observes samples from classes not observed during training when the learner needs to predict sample class. This shows that the models can achieve good results even without fine-tuning, but fine-tuned models achieve even better results. This chapter gives just give an example of fine-tuning as these fine-tuning procedures differ very much depending on the modality. Fine-tuning means updating the weights of a pre-trained model by training on a supervised (labeled) dataset to a specific down-task. A huge amount of data is needed to pre-train a model. Typically thousands or even hundreds of thousands of examples are needed [gpt3 zitat]. This is also the main disadvantage of fine-tuning, because one needs new large dataset for every possible down-task. This hinders also the potential for generalization out-of-distribution. Additionaly fine-tuning procedures naturally depend on the specific down-task. For example for image classification it is possible to freeze the learned visual features and only train a classification head or fine-tune all layers. 
 
 
-After pre-training and also fine-tuning the models there is a need to compare the models. This need lead to the create of dataset for test purpose often called benchmarks. 
+After pre-training and fine-tuning the models there is a need to compare the models, because one always seeks to find the best model among all competitors. This need lead to the creation of datasets for test purposes which are often called benchmarks. As models got better over time, because of bigger datasets or better pre-training, it's important to create and use new benchmarks. A common approach is to use some of the datasets which were used to train the models. To make this possible the pre-training datasets are often divided into training, test and validation sets. It's clear that the models must not be tested on the training data. (Hier vielleicht noch Flynn Effekt unterbringen). Some of the already mentioned datasets like COCO are often used for CV or VLM. Like already mentioned every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset and these models are also benchmarked on the validation sets of the dataset.
 
 
   \begin{itemize}
@@ -100,28 +98,28 @@ After pre-training and also fine-tuning the models there is a need to compare th
         \item augmentation relies on human intention (DONE)
         \item BYOL approach, gets rid of hard negatives => good (DONE) (non-constrasitve loss)
       \end{itemize}
-      \item MML self-supervised learning
+      \item MML self-supervised learning (DONE)
         \begin{itemize}
-          \item BLIP
-          \item CoCa
+          \item CLIP, ALIGN (DONE)
+          \item CoCa, BLIP (?)
         \end{itemize}
       \end{itemize}
     
 \subsection{Fine-tuning aka. transfer learning}
   \begin{itemize}
-    \item why fine-tuning is important
-    \item where and how to fine-tune
-    \item use labeled data for down-stream tasks
+    \item why fine-tuning is important (DONE)
+    \item where and how to fine-tune (halb DONE)
+    \item use labeled data for down-stream tasks 
     \item ... 
   \end{itemize}
 
 \subsection{Benchmarks for modalities}
   \begin{itemize}
-    \item Importance of benchmarks
+    \item Importance of benchmarks (DONE)
       \begin{itemize}
-        \item also need for new ones (like Psych: Flynn Effect)
+        \item also need for new ones (like Psych: Flynn Effect) (DONE)
           \begin{itemize}
-            \item do models get better or is it possible that pre-training                         contains already benchmarks (too much crawl; NLP)
+            \item do models get better or is it possible that pre-training                         contains already benchmarks (too much crawl; NLP) 
           \end{itemize}
         \item Hint that models pre-train on different resources but perform on same benchmarks (good or bad)
         \end{itemize}
