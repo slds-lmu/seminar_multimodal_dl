@@ -86,8 +86,13 @@ For the Similarity and Paraphrase Tasks the Microsoft Research Paraphrase Corpus
 Lastly The Multi-Genre Natural Language Inference Corpus (MNLI), the Stanford Question Answering Dataset (QNLI), The Recognizing Textual Entailment (RTE) dataset and the Winograd Schema Challenge (WNLI) are used in the Inference Tasks. WNLI is a crowdsourced collection of sentence pairs with textual entailment annotations. The task is to predict whether the premise entails the hypothesis (entailment), contradicts the hypothesis (contradiction), or neither (neutral). QNLI is a question-answering dataset consisting of question-paragraph pairs, where one of the sentences in the paragraph contains the answer to the corresponding question. The task is to determine whether the context sentence contains the answer to the question. RTE comes from a series of annual textual entailment challenges. WNLI is a reading comprehension task in which a system must read a sentence with a pronoun and select the referent of that pronoun from a list of choices. In table BLA is a short summary of all GLUE tasks.
 ![taken from https://mccormickml.com](figures/01-chapter1/glue_table_condensed.png)
 A nice topping is that GLUE also provides a leader board with a human benchmark. So the models can compete against each other and a human benchmark. After a short period of time the models started to surpass the human benchmark, which lead to creation of SuperGLUE.
+SuperGLUE consists of a public leaderboard built around eight language understanding tasks, drawing on existing data, accompanied by a single-number performance metric, and an analysis toolkit. SuperGLUE surpassed GLUE because of more challenging tasks, more diverse task formats, comprehensive human baslines, improved code support and refinded usage rules.
+The following figure gives a summary of the SuperGLUE tasks.
+
+![taken from https://mccormickml.com](figures/01-chapter1/SuperGLUE.png)
 
 
+Subchapter abschließen mit NLU benachmarks broken paper. Most of the time binary classification and no real understanding needed.
 
 
   \begin{itemize}
