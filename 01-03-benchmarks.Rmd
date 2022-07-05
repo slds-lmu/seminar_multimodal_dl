@@ -87,12 +87,33 @@ Lastly The Multi-Genre Natural Language Inference Corpus (MNLI), the Stanford Qu
 ![taken from https://mccormickml.com](figures/01-chapter1/glue_table_condensed.png)
 A nice topping is that GLUE also provides a leader board with a human benchmark. So the models can compete against each other and a human benchmark. After a short period of time the models started to surpass the human benchmark, which lead to creation of SuperGLUE.
 SuperGLUE consists of a public leaderboard built around eight language understanding tasks, drawing on existing data, accompanied by a single-number performance metric, and an analysis toolkit. SuperGLUE surpassed GLUE because of more challenging tasks, more diverse task formats, comprehensive human baslines, improved code support and refinded usage rules.
-The following figure gives a summary of the SuperGLUE tasks.
+The following figure gives a short summary of the SuperGLUE tasks.
 
 ![taken from https://mccormickml.com](figures/01-chapter1/SuperGLUE.png)
 
+These are more or less reduced to a classification problem and we will focus on the later, but it's also of interest to check if the models understand what they are reading. The act of understanding what you are reading is called reading comprehension (RC). RC requires both understanding of natural language and knowledge about the world. @rajpurkar2016squad introduced the Stanford Question Answering Dataset (SQuAD), a large reading comprehension dataset on Wikipedia articles with human annotated question-answer pairs. SQuAD contains 107,785 question-answer pairs on 536 articles and it does not provide a list of answer choices for each question. The model must select the answer from all possible spans in the passage, thus needing to cope with a fairly large number of candidates. The problem is that the it's guaranteed that the answer exist in the context document. To address this weakness @rajpurkar2018know presented SQuAD 2.0, the latest version of SQuAD. SQuAD 2.0 combines existing SQuAD data with over 50,000 unanswerable questions written adversarially by crowdworkers to look similar to answerable ones. @rajpurkar2018know contribution to NLP is not that they provide a deeper glimpse into the workings of QA systems, they also facilitated the creation of more non-English datasets. Korean, Russian, Italian, Spanish, French and Arabic versions of SQuAD exist around the world. XQuAD, MLQA and TyDi are multilingual question-answering datasets. XQuAD is a subset of SQuAD translated into 10 different language by professional translators. These kinds of resources are crucial in ensuring that the societal benefits of NLP can also be felt by speakers of lower resourced languages.
+The mentioned ones are rather old compared to Beyond the Imitation Game Benchmark (BIG-bench) [@srivastava2022beyond]. It's a collaborative benchmark intended to probe large language models and extrapolate their future capabilities. BIG-bench already contains more than 200 tasks. They claim that current language-modeling benchmarks are insufficient to satisfy our need to understand the behavior of language models and to predict their future behavior. They mainly provide three reasons for that. One of them is the short useful lifespans. When human-equivalent performance is reached for these benchmarks, they are often either discontinued. One might call this “challenge-solve-and-replace” evaluation dynamic (Zitat). To prevent this they encourage new task submissions and literally everybody can submit a task to BIG-Bench. So they call BIG-bench a living benchmark. The review of the tasks is based on ten criteria. It includes for example "Justification". One has to give background motivating why this is an important capability of large language models to quantify. With the inclusion of small tasks they want to improve the diversity of topics covered and enable domain experts to contribute tasks without the difficulties of distributed human labeling. The another reason for the insufficients is because the others benachmarks are narrowly targeted, and because their targets are often ones that language models are already known to perform. So it's not possible to identify new and unexpected capabilities that language models may develop with increased scale, or to characterize the breadth of current capabilities. Finally, many current benchmarks use data collected through human labeling that is not performed by experts or by the task authors. Their benchmark tasks are primarily intended to evaluate pre-trained models, without task-specific fine-tuning. By focusing on such tasks in the zero- and few-shot evaluation setting, it becomes possible to provide meaningful scores for even those tasks with a very small number of examples.The "everybody can submit" strategy also leads to inclusion a variety of tasks covering non-English languages. Till now the large language models, like GPT-3 and PaLM, perform poorly on BIG-bench relative to expert humans, which is maybe a good sign for the future. But superhuman performance on SuperGLUE benchmark was achieved less than 18 months after it was produced (Zitat BIG-Bench). Hier noch Beispiele so wie oben.
+Problem is that @bowman2021will claim that the evaluation for many natural language understanding (NLU) tasks is broken. The claim that unreliable and biased systems score so highly on standard benchmarks that there is little room for researchers who develop better systems to demonstrate their improvements. 
+They provide four criteria to handle this:
 
-Subchapter abschließen mit NLU benachmarks broken paper. Most of the time binary classification and no real understanding needed.
+\begin{enumerate}
+ \item Good performance on the benchmark should imply robust in-domain performance on the task
+ \item Benchmark examples should be accurately and unambiguously annotated
+ \item Benchmarks should offer adequate statistical power
+ \item Benchmarks should reveal plausibly harmful social biases in systems, and should not incentivize the creation of biased systems
+ \end{enumerate}
+
+Building new benchmarks that improve upon these four axes is likely to be quite difficult.
+
+CV models try to answer visual tasks. A visual task is a task which can be solved only by visual input. Often visual task can be solved as a binary classification problem, which is called image classification, but there are also numerous other applications for CV. This chapter will focus on image classification, semantic segmentation and object detection with their usual benchmarks datasets. 
+
+Object classification done on ImageNet datasets
+Interesting paper with ImageNet V1 and V2 erwähnen
+COCO für Semnatic Segmentation und Object detection 
+
+
+
+Subchapter of NLU Benchmarks abschließen mit NLU benachmarks broken paper. Most of the time binary classification and no real understanding needed.
 
 
   \begin{itemize}
@@ -144,8 +165,8 @@ Subchapter abschließen mit NLU benachmarks broken paper. Most of the time binar
           \item CV: 
           \begin{itemize}
             \item ImageNet
-            \item VTAB
-            \item COCO
+            \item ObjectNet als Kontrast zu ImageNet
+            \item COCO für Segmentation und Detection (DINO nochmal lesen)
           \end{itemize}
           \item MML: 
           \begin{itemize}
