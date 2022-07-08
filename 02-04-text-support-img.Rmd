@@ -6,40 +6,86 @@
 
 ## Intro
 
-* Advancements in NLP [GPT-3\; @brown2020language]
-* Utilize these new approaches for improving CV
-* Great potential of natural language supervision
-  * Avoid manually labeling data, larger datasets: 400 Mio [CLIP\; @radford2021learning], 900 Mio [Florence\; @yuan2021florence]
-  * Connect learned representations directly to language
+The text supported CV architectures presented in this chapter follow the spirit of <!-- ref to other chapter mentioning NLP progress -->.
+This means, they stem from a line of research which takes a lot of inspiration from preceding advancements in NLP.
+The aim is the incorporation of respective new findings into CV in order to improve the SOTA in this field, which has to main aspects:
+
+1. Researchers try to translate architectural concepts firstly used in NLP to the CV scenario, e.g., the vision transformer <!-- ref -->.
+1. They leverage the power of these NLP models as building blocks inside bigger models, where they are used as text encoders for models where natural language is used as a very compelling source of supervision.
+
+This chapter is dedicated mainly to the second.
+It has subchapters on the recent and relevant CV models CLIP, Florence, ALIGN, ... and discusses some of their core concepts related to natural language supervision.
+
+Tapping into this newly discovered potential lying in transformer based architectures [@vaswani2017attention], impressively demonstrated by models like GPT-3 [GPT-3\; @brown2020language], the architectures all employ transformer based language encoders and some excel even more using vision transformers for their vision encoding [CLIP\; @radford2021learning]. \
+Another aspect transferred from NLP to CV is the search for foundation models <!-- ref to foundation model paper -->
+Models like BERT and GPT-3 had a big impact in NLP in another aspect except showing off the power of new architectures:
+Other architectures build on them as a foundation.
+The new wave of CV models (CLIP, ALIGN, Wu Dao 2.0, Florence) shows a large potential to serve as CV counterparts for NLP foundation models. <!-- ref Florence paper, ref models using CLIP as image encoder -->
+
+## Concepts
+
+### Scaling sample size
+
+<!-- Reference to bitter pill to swallow: More compute beats complex architecture. -->
+Avoiding manually labeling data allows for way larger datasets, with 400 Mio and 900 Mio observation for CLIP [@radford2021learning] and Florence [Florence\; @yuan2021florence], respectively.
+
+* Open AI is all about scaling models. Scaling view explains a lot of choices
+* Scaling of sample size using internet data
+  * Readily available
+  * Super scalable
+  * Noisy
+  * Biased
+
+### Contrastive loss
+
+* Ref to CLIP inspiration from medical field with contrastive objective formula
+* Pro: Efficient training
+* Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities] <!-- ref to zero shot chapter -->
+* Contra: No longer a generative model, e.g. no flexible caption generation
+
+### Zero shooting and foundation models
+
+_Zero shooting_ is a paradigm coming from NLP research.
+It means the previously fitted model is applied to a new, unseen dataset.
+In a way each dataset can be seen as a different task and used to evaluate the models ability to perform it.
+<!-- TODO: Name some datasets and their associated tasks. -->
+This is done in order to avoid a bias in performance evaluation, where the model overfitted on the specific data-generating distribution.
+<!-- TODO: Look up perfomance gain. -->
+This is possible due to the flexible text encoding of CLIP.
+<!-- TODO: Explain this better. -->
+The model can readily function as a classifier by:
+
+  1. Encoding all class labels.
+  1. Predicting for an image, which encoded class label is most likely to come with it.
+
+But in order to enhance performance by a margin of %d percent the prompts are engineered further.
+They embed the class labels in sentence, e.g. "Picture of a (word)", which seemingly was necessary for the model to make full use of its learned parameters.
+
+### Connecting image representations to language
+
+* Semantic concepts
+* Learn a representation _and_ connect it to language (-> NLP)
+* Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
 
 ## CLIP
 
 <!-- Intro -->
 * Focus on _task learning_ (datasets as proxies to tasks) instead of _representation learning_
+* Contrastive, Language, Image, Pre-training
 
-### Language, Image, Pre-training, Contrastive
+### Architecture
 
-* Insert constrastive objective formula (find original paper)
-* Contrastive training objective
-  * Pro: Efficient training
-  * Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities]
-  * Contra: No longer a generative model, e.g. no flexible caption generation
+* Original transformer with modifications used for GTP family as a text encoder
+* ResNet or vision transformer as a image encoder.
+  * Vision transformer: much less compute
 
-### Zero shot
-
-* Apply model to unseen data
-* Avoid overfitting bias in performance evaluation (no adaption to specific data-generating distribution possible)
-* Prompt engineering (embed class labels in senctence, e.g. "Picture of a (word)")
-
-### Semantic concepts
-
-* Which semantic concepts are mirrored in the architecture?
-* Learn a representation _and_ connect it to language (-> NLP)
-* Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
+## ALIGN
 
 ## Florence
 
 <!-- Intro -->
+<!-- Object detection vs scene level -->
+* More fine-grained, dynamic, multimodal representations
 * Focus shift to finding _foundation model_ as CLIP turned out to be especially useful for that.
   * Pre-trained core
   * Flexible addition of modules
@@ -48,12 +94,16 @@
     * Adaptation to video recognition through _CoSwin_
 * General trend in this direction, better and better predictions [CoCa\; @yu2022coca]
 * Optimization inside image-label-description space
+* Encoders
+  * Uses CLIP pendant as the language encoder
+  * Swin transformer as the image encoder
+  * CoSwin for embedding
 
-<!-- Object detection vs scene level -->
-
-<!-- Sub-chapter on ALIGN architecture -->
+### Architecture
 
 ## Performance comparison
+
+* As all of these models are orders of magnitudes too large for performing a benchmark, findings reported inside the papers are believed here
 
 ## Resources
 
