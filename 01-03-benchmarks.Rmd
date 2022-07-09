@@ -20,23 +20,21 @@ Meta AI (cite bpage) believes that self-supervised learning is one of the most p
 
 Hier fehlt noch der Übergang
 
-The following chapter will inspect on the one hand pre-training resources and the use of them and on the other hand also the benchmarks which are used for NLP, CV and ,the combination of both, multi-modal learning.
+The following chapter will inspect on the one hand pre-training resources and the use of them and on the other hand also the benchmarks which are used for NLP, CV and ,the combination of both, vision language pre-trained models (VL-PTM).
 
 \subsection{Pre-training}
   
-After pointing out that pre-training is very important one might ask how do the different modalities pre-train and how do the datasets look? At first  will inspect the last one and focus afterwards on the use of the resources.
-As one might expect NLP models pre-train on text, CV models pre-train on images and MML models pre-train on text image pairs, which can somehow be seen as a combination of NLP and CV. But CV models mostly use labeled data like a picture of a dog with the corresponding label "dog". MML datasets can contain several sentences of text which correspond to the image.
-
-Even if the datasets might be completely different, the procedure to get the data is the same for all of them, because the data is downloaded from the internet. This can lead to a problem, since by using this method the resulting dataset might be noisy. One approach for the MML models is to use common crawl and extract the image plus the alt of a image. The alt is an alternate text for an image, if the image cannot be displayed or for visual impaired people. This seems like a reasonable approach, but the alt is often not very informative about what's in the image. (maybe add example)
-
-The next difference beten the modalities is the cardinality of the pre-training data. It's easy to see that text is by far the most easy to get from the internet. This results in huge high-quality massive text data. Some magnitudes smaller are the datasets for CV. Since MML is pretty new compared to the other modalities it still relatively small but growing fast. A small downer is that some of the datasets are not public available. The big companies like to keep their models and used datasets private, which hinders the reproducibility, but there are also real open AI competitors like LAION in the field. 
+After pointing out that pre-training is very important one might ask how do the different modalities pre-train and how do the datasets look? At first we will inspect the last one and focus afterwards on the use of the resources.
+As one might expect NLP models pre-train on text, CV models pre-train on images and MML models pre-train on text image pairs, which can somehow be seen as a combination of NLP and CV. But CV models mostly used labeled data like a picture of a dog with the corresponding single label "dog". MML datasets can contain several sentences of text which correspond to the given image.
+Even if the datasets might be completely different, the procedure to get the data is the same for all of them, because the data is crafted from the internet. This can lead to a problem, since by using this method the resulting dataset might be noisy. One approach for the VL-PTM is to use common crawl and extract the image plus the alt of a image. The alt is an alternate text for an image, if the image cannot be displayed or for visual impaired people. This seems like a reasonable approach, but the alt is often not very informative about what's in the image. (maybe add example)
+Another difference between the modalities is the cardinality of the pre-training data. It's easy to realize that text is by far easiest to crawl from the internet. This results in huge high-quality massive text data. Some magnitudes smaller are the datasets for CV. Since MML is pretty new compared to the other modalities it still relatively small but growing fast. A small downer is that some of the datasets are not public available. The big companies like to keep their models and used datasets private, which hinders the reproducibility, but there are also real open AI competitors like LAION in the field. 
 The next chapter will provide some of the most used pre-training datasets.
 
 \subsubsection{Resources for pre-training}
 
-The first modality will be NLP, then CV and at last MML. Only three datasets per modality will be provided, but resources for more will be at the end of the chapter.
-As already mentioned, extracting text from the internet is rather easy. More precisely there is a non-profit organization, called [Common Crawl](https://commoncrawl.org), which does exactly this. They provide copies of the internet to researchers, companies and individuals at no cost for the purpose of research and analysis. The Common Crawl corpus contains petabytes of data collected since 2008. It contains raw b page data, extracted metadata and text extractions. The advantages of Common Crawl come along with their disadvantages. The text is from diverse domains but with varying quality of data. To handle the raw nature of the datasets one often has to use a ll-designed extraction and filter to use the datasets appropriately [@gao2020pile]. For example GPT-3 uses a filtered version of Common Crawl, which consists of 410 billion tokens [@brown2020language].
-But recent work [@rosset2020turing] shod that diversity in training dataset improves general cross-domain knowledge and downstream generalization capability for language models. The Pile [@gao2020pile] was introduced to address exactly these results. The Pile contains $22$ sub-datasets, including established NLP datasets, but also several newly introduced ones. The size of the $22$ sub-datasets, which can be categorized into 5 categories, pile up to around $825$ GB of data.
+The first modality will be NLP, then CV and at last VL. Three datasets per modality will be provided, but resources for more will be at the end of the chapter.
+As already mentioned, extracting text from the internet is rather easy. More precisely there is a non-profit organization, called [Common Crawl](https://commoncrawl.org), which does exactly this. They provide copies of the internet to researchers, companies and individuals at no cost for the purpose of research and analysis. The Common Crawl corpus contains petabytes of data collected since 2008. It contains raw web page data, extracted metadata and text extractions. The advantages of Common Crawl come along with their disadvantages. The text is from diverse domains but with varying quality of data. To handle the raw nature of the datasets one often has to use a well-designed extraction and filter to use the datasets appropriately [@gao2020pile]. For example GPT-3 [Quelle GPT-3] uses a filtered version of Common Crawl, which consists of 410 billion tokens [@brown2020language].
+But recent work [@rosset2020turing] showed that diversity in training datasets improves general cross-domain knowledge and downstream generalization capability for language models. The Pile [@gao2020pile] was introduced to address exactly these results. The Pile contains $22$ sub-datasets, including established NLP datasets, but also several newly introduced ones. The size of the $22$ sub-datasets, which can be categorized roughly into 5 categories, pile up to around $825$ GB of data.
 The following treemap shows the distribution of the dataset.
 
 ```{r pile treemap, echo=FALSE}
@@ -45,15 +43,17 @@ htmltools::includeHTML("data/01-chapter1/CompositionPile.html")
 # label
 ```
 
+Contains multilingaul datasets like EUPArk
+Describe puprose of sub-datasets a little bit more
 A more detailed description of the Pile can be found in the corresponding paper [@gao2020pile].
-The last dataset for NLP is the BooksCorpus dataset [@zhu2015aligning]. The BooksCorpus uses books from yet unplished authors from the b. Only books with more than 20k words re included to filter out shorter, noisier stories.
+The last dataset for NLP is the BooksCorpus dataset [@zhu2015aligning]. The BooksCorpus uses books from yet unplished authors from the web. Only books with more than 20k words were included to filter out shorter, noisier stories.
 This results in around 11k books from 16 different genres. So more than 74 million sentences can be used in pre-training.
 
 The next inspected modality is CV. Almost every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset. ImageNet uses the hierarchical structure of WordNet [@fellbaum2010wordnet]. At the release of ImageNet-1k the amount of classes was unheard at this time point. Datasets like CIFAR-10 [@krizhevsky2009learning] and CIFAR-100 [@krizhevsky2009learning] had 10 and 100 classes, but ImageNet1k had 1000 different classes and this was not the only major improvement. They also increased the resolution from $32 \times 32$ to $256 \times 256$.  In all, there are roughly 1.2 million training images, 50,000 validation images, and 150,000 testing images. The ImageNet-1k dataset is a subset of the ImageNet dataset [@deng2009imagenet]. The full ImageNet dataset is also called ImageNet-21k. It consists of more than 14 million images, divided in almost 22k classes. Because of this some paper described it as ImageNet-22k. Those two dataset do not only differ by the amount of classes, but also by the type of labels. The labels of ImageNet-21k are not mutually exclusive. Because of this the pre-training wiht ImageNet-1k is far more popular. Also the ImageNet-21k dataset lacks an official train-validation split., which is just another reason why ImageNet-1k is more popular. The raw dataset ImageNet-21k is around 1.3 terabyte (TB). It's also nice, that the the dataset of ImageNet are open available. The next dataset is in contrast to this, because it's no available.
 
 The Joint-Foto-Tree (JFT) 300M is one of the follow up version of the JFT dataset [@hinton2015distilling]. Given the name it consists of 300 million images and on average each image has 1.26 labels. The whole datasets has around 375 million labels. These labels can be divided into 18291 classes. These categories form a rich hierarchy with the maximum depth of hierarchy being 12 and maximum number of child for parent node being 2876 [@sun2017revisiting]. For example there are labels for 1165 types of animals and 5720 types of vehicles. The work states that approximately 20% of the labels in this dataset are noisy [@sun2017revisiting], because the labels are generated automatically. It also provides the fact, that the distribution is heavily long-tailed, which means that some of the classes have less than 100 images. There is also an extendend version of the JFT dataset. It's called Ensamble Foto Tree (EFT) and consists of 100k classes, but it's rarely used in practice because of the intolerable large model size and the slow training speed.
 
-The Pile is an attempt to mimic the dataset used for GPT-3 and LAION wants to achieve the same. LAION-400M [@schuhmann2021laion] consists of 400 million image-text pairs. They used Common Crwal and parsed out all HTML IMG tags containing an alt-text attribute. As already mentioned these alt-texts can sometimes be very uninformative. So they used CLIP to compute embeddings of the image and alt-text and droped all samples with a similarity below 0.3. The dataset also contains the CLIP embedding and kNN indices. @schuhmann2021laion describes the procedure to create the dataset in an open manner. 
+The Pile is an attempt to mimic the dataset used for GPT-3 and LAION wants to achieve the same. LAION-400M [@schuhmann2021laion] consists of 400 million image-text pairs. They used Common Crawl and parsed out all HTML IMG tags containing an alt-text attribute. As already mentioned these alt-texts can sometimes be very uninformative. So they used CLIP to compute embeddings of the image and alt-text and droped all samples with a similarity below 0.3. The dataset also contains the CLIP embedding and kNN indices. @schuhmann2021laion describes the procedure to create the dataset in an open manner. 
 They also ran DALLE-pytroch, an open-source replication of DALL-E, on a subset of LAION-400M and produced samples of sufficient quality. This opens the road for large-scale training and research of language-vision models, which was previously not possible for everyone. LAION-400M is also known as crawling\@home (C\@H), because they started as a small group and used only their own computers at the beginning. End of March 2022 the team on LAION released a $14 \times$ bigger than LAION-400M dataset called LAION-5B. It consists of 5.85 billion CLIP-filtered image-text pairs. A paper about the dataset is right now in progress, but it's already available to download if you have enough space. The size of the dataset is about 240 TB in 384 or 80 TB in 224. Due to the nature of the extraction 2,3B contain English language, 2,2B samples from 100+ other languages and they also provide a [search demo](https://rom1504.github.io/clip-retrieval/?back=https%3A%2F%2Fknn5.laion.ai&index=laion5B&useMclip=false). LAION-5B is the biggest openly accessible image-text dataset.
 Alt-text might add too much noise to the dataset so Microsoft decided to employed a novel pipeline for gathering data with extensive use of Amazon Mechanical Turk. Their goal was to create a non-iconic image collection.
 Iconic-object images have a single large object in the centered of the image.
@@ -64,8 +64,7 @@ These datasets were just some of the more used dataset. Some of them are public 
 Frankly it's a bit odd to compare different models when they train mostly on different dataset and also use different pre-training tasks. The next chapter will show how the resources are used in the different modalities.
 
 \subsubsection{Use of resources}
-Yann LeCun and Ishan Misra suggest in their [blogpost](https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/) that supervised pre-training is gone and the future will be self-supervised pre-training [@darkMatter]. Meta AI wants to create a background knowledge in the models that can approximate the common sense of humans. This suggestion is even more reasonable, because recent work [@unsupBrain] also showed that a self-supervised or a unsupervised pre-training approach is biologically more plausible than supervised methods.
-This why neuroscientists are taking interest in unsupervised and self-supervised deep neural networks in order to explain how the brain works [@zhuang2021unsupervised].
+Yann LeCun and Ishan Misra suggest in their [blogpost](https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/) that supervised pre-training is gone because of the already mentioned reasons and the future will be self-supervised pre-training [@darkMatter]. Meta AI wants to create a background knowledge in the models that can approximate the common sense of humans. This suggestion is even more reasonable, because recent work [@unsupBrain] also showed that a self-supervised or a unsupervised pre-training approach is biologically more plausible than supervised methods. This why neuroscientists are taking interest in unsupervised and self-supervised deep neural networks in order to explain how the brain works [@zhuang2021unsupervised].
 Self-supervised learning (SSL) is also called predictive learning. This comes by the nature of the process. The general technique of self-supervised learning is to predict any unobserved or hidden part (or property) of the input from any observed or unhidden part of the input [@darkMatter]. Models like BERT and GPT-3 both use masked language modeling (MLM) as a pre-training task. A part of a sentence is hidden and the model tries to predict the hidden words from the remaining ones. Predicting missing parts of the input is one of the more standard tasks for SSL pre-training. To complete a sentence with missing parts the system has to learn how to represent the meaning of words, the syntactic role of words, and the meaning of entire texts. 
 Another task which is used by BERT is next sentence prediction (NSP). BERT tries to predict, if a sentence belongs to another sentence. One might see this as a downer, because the model reduces it just a binary classification problem. So one might think there is not much to learn compared to the MLM task and it's exactly like this. RoBERTa, a robuster version of BERT, showed that it does not need the NSP task [@liu2019roberta]. A version of the MLM even outperformed the approach were both tasks (MLM & NSP) were used. These missing parts tasks are easy to implement in NLP compared to CV. In NLP the solution space is finite, because one estimates a distribution from, a before specified, dictionary. In CV the solution space is infinite and so it is not possible to explicitly represent all the possible frames and associate a prediction score to them [@darkMatter]. 
 Meta AI proposed an unified view of self-supervised method. They say an energy-based model (EBM) is a system that, given two inputs, x and y, tells us how incompatible they are with each other [@darkMatter]. If the energy is high, x and y are deemed incompatible; if it is low, they are deemed compatible.
@@ -76,9 +75,10 @@ So the best idea is to get rid of the hard negatives and BYOL [@grill2020bootstr
 They create two slightly different variants of an image by applying two random augmentations, like a random crop, a horizontal flip, a color jitter or a blur. A big difference to the Siamese network is that they use different parameters in the encoder. They use so called online and target parameters. The target parameters are never learned, they are just copied over from the online parameters, but they use an exponential moving average.So it's some kind of a lagged version of the online parameters. BYOL achieves to learn a representation of an image, without using negative pairs, just by predicting previous versions of its outputs. Still they say, that BYOL remains dependent on existing sets of augmentations and these augmentations require human intention and automating the search for these augmentations would be an important next step, if this is even possible [@grill2020bootstrap].
 @he2022masked recently came very close to the MLM pre-training used in BERT with their masked autoencoder (MAE). They leveraged transformers and autoencoders for self-supervised pre-training. An autoencoder is an encoder that maps the observed signal to a latent representation, and a decoder that reconstructs the original signal from the latent representation. The MAE is a form of denoising autoencoding exactly like the MLM. Their approach is to divide an image into, for example, 16 $\times$ 16 patches. Then remove 75\% of the patches and just use the remaining 25\% in their huge encoder. Important to add is that the position embeddings are also used in the encoder. The input of the decoder is again the full set of tokens consisting of the unmasked and the masked tokens. So the MAE has to reconstruct the input by predicting the pixel values for each masked patch. They even outperformed methods like DINO [@caron2021emerging] on ImageNet-1k. Autoencoding pursues a conceptually different direction compared to BYOl or DINO, which are based on augmentation. Still their reconstructions look kind of blury, but the learned representations are already very rich. Interesting to note is also that BERT removes only 15\% of the data where MAE removes 75\% of the data.
 At last some of the most used pre-training task for vision-language foundation models are shown. Dual encoder models like CLIP [@radford2021learning] and ALIGN [@jia2021scaling] demonstrated in the past that contrastive objectives on noisy image-text pairs can lead to strong image and text representations. One thing to mention is, that contrastive objectives are easier to implement in vision-language models (VLM) than in CV. This comes from the fact that VLM use image-text pairs. As a dual encoder CLIP encodes the image and text. This is done for all the images used in a mini-batch. By construction the text which corresponds to the image or vice versa achieves the highest similarity and the other texts will have a low similarity. So we already have some hard negatives and don't have to search for some.
-Through the SSL the models learn a good representation of the given input. It has been shown that SSL leads to good zero-shot results [align paper, clip paper, parti paper, imagen paper], because of the good representation. Zero-shot learning (ZSL) is a problem in machine learning, where during test time, a learner observes samples from classes not observed during training when the learner needs to predict sample class. This shows that the models can achieve good results even without fine-tuning, but fine-tuned models achieve even better results. This chapter gives just give an example of fine-tuning as these fine-tuning procedures differ very much depending on the modality and will be reported in the latter chapters. Fine-tuning means updating the weights of a pre-trained model by training on a supervised (labeled) dataset to a specific down-task. A huge amount of data is needed to pre-train a model. Typically thousands or even hundreds of thousands of examples are needed [gpt3 zitat]. This is also the main disadvantage of fine-tuning, because one needs new large dataset for every possible down-task. This hinders also the potential for generalization of out-of-distribution. For example: Image classification can freeze the learned visual features and only train a classification head or fine-tune all layers. 
+Through the SSL the models learn a good representation of the given input. It has been shown that SSL leads to good zero-shot results [align paper, clip paper, parti paper, imagen paper], because of the good representations. Zero-shot learning (ZSL) is a problem in machine learning, where during test time, a learner observes samples from classes not observed during training when the learner needs to predict sample class. This shows that the models can achieve good results even without fine-tuning, but fine-tuned models achieve even better results. 
+This following chapter gives just an example of fine-tuning as these fine-tuning procedures differ very much depending on the modality and will be reported in the latter chapters. Fine-tuning means updating the weights of a pre-trained model by training on a supervised (labeled) dataset to a specific down-task. A huge amount of data is needed to pre-train a model. Typically thousands or even hundreds of thousands of examples are needed [gpt3 zitat]. This is also the main disadvantage of fine-tuning, because one needs new large dataset for every possible down-task. This hinders  the potential for generalization of out-of-distribution. Fine-tuning an image classifier can be to train only a classification head and freeze the learned visual features and or fine-tune all layers. 
 
-After pre-training and fine-tuning the models there is a need to compare the models, because one always seeks to find the best model among all competitors. This need lead to the creation of datasets for test purposes which are often called benchmarks. As models got better over time, because of bigger datasets or better pre-training, it's important to create and use new benchmarks. A common approach is to use some of the datasets which were used to train the models. To make this possible the pre-training datasets are often divided into training, test and validation sets. It's clear that the models must not be tested on the training data. Some of the already mentioned datasets like COCO are often used for CV or VLM. Like already mentioned every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset and afterwards benchmarked on the validation sets of the dataset. Pre-training on large internet datasets may lead to the unintentional overlap of pre-training and down-tasks. Because of this many studies [@radford2021learning, @parti, @brown2020language] conducted a de-deplication analysis. CLIP analysis resulted in a median overlap of 2.2\% and an average overlap of 3.2\%, but they also observed that the overall accuracy is on rarely shifted by more than 0.1\% [@radford2021learning]. @mahajan2018exploring, @kolesnikov2019large also came to the similar results. Still it's important to analyse and keep in mind. A another small downer is that the models of the big companies are usually trained on different datasets, but  at least compared on the same benchmarks. So the comparison seems a bit odd and because of this the better performance of the models might come from the different used datasets. The benchmarks on which the models of the different modalites are tested will be shown now. At first three benchmarks per modality will be presented, but resources for more are at the end of the chapter.
+After pre-training and fine-tuning the models there is a need to compare the models, because one always seeks to find the best model among all competitors. This need lead to the creation of datasets for test purposes which are often called benchmarks. As models got better over time, because of bigger datasets or better pre-training, it's important to create and use new benchmarks. A common approach is to use some of the datasets which were used to train the models. To make this possible the pre-training datasets are often divided into training, test and validation sets. It's clear that the models must not be tested on the training data. Some of the already mentioned datasets like COCO are often used for CV or VLM. Like already mentioned almost every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset and afterwards benchmarked on the validation sets of the dataset. Pre-training on large internet datasets may lead to the unintentional overlap of pre-training and down-tasks. Because of this many studies [@radford2021learning, @parti, @brown2020language] conducted a de-duplication analysis. CLIP analysis resulted in a median overlap of 2.2\% and an average overlap of 3.2\%, but they also observed that the overall accuracy is on rarely shifted by more than 0.1\% [@radford2021learning]. @mahajan2018exploring, @kolesnikov2019large also came to the similar results. Still it's important to analyse and keep in mind. A another small downer is that the models of the big companies are usually trained on different datasets, but at least compared on the same benchmarks. So the comparison seems a bit odd and because of this the better performance of the models might come from the different used datasets. The benchmarks on which the models of the different modalites are tested will be shown now. At first three benchmarks per modality will be presented, but resources for more are at the end of the chapter.
 
 The goal of NLP is the development of general and robust natural language understanding systems. Through SSL models gain a good “understanding” of language in general. General Language Understanding Evaluation (GLUE) is a benchmark for NLP. It's a collection of nine different task datasets. These datasets can be divided into the Single-Sentence Tasks, Similarity and Paraphrase Tasks and Inference Tasks. 
 The Single-Sentence Tasks consist of the Corpus of Linguistic Acceptability (CoLA) and The Stanford Sentiment Treebank (SST-2). Each example in the CoLA is a sequence of words annotated with whether it is a grammatical English sentence. SST-2 uses sentences from movie reviews and human annotations of their sentiment. The task is to predict the sentiment of a given sentence. 
@@ -93,7 +93,7 @@ The following figure gives a short summary of the SuperGLUE tasks.
 
 These are more or less reduced to a classification problem and we will focus on the later, but it's also of interest to check if the models understand what they are reading. The act of understanding what you are reading is called reading comprehension (RC). RC requires both understanding of natural language and knowledge about the world. @rajpurkar2016squad introduced the Stanford Question Answering Dataset (SQuAD), a large reading comprehension dataset on Wikipedia articles with human annotated question-answer pairs. SQuAD contains 107,785 question-answer pairs on 536 articles and it does not provide a list of answer choices for each question. The model must select the answer from all possible spans in the passage, thus needing to cope with a fairly large number of candidates. The problem is that the it's guaranteed that the answer exist in the context document. To address this weakness @rajpurkar2018know presented SQuAD 2.0, the latest version of SQuAD. SQuAD 2.0 combines existing SQuAD data with over 50,000 unanswerable questions written adversarially by crowdworkers to look similar to answerable ones. @rajpurkar2018know contribution to NLP is not that they provide a deeper glimpse into the workings of QA systems, they also facilitated the creation of more non-English datasets. Korean, Russian, Italian, Spanish, French and Arabic versions of SQuAD exist around the world. XQuAD, MLQA and TyDi are multilingual question-answering datasets. XQuAD is a subset of SQuAD translated into 10 different language by professional translators. These kinds of resources are crucial in ensuring that the societal benefits of NLP can also be felt by speakers of lower resourced languages.
 The mentioned ones are rather old compared to Beyond the Imitation Game Benchmark (BIG-bench) [@srivastava2022beyond]. It's a collaborative benchmark intended to probe large language models and extrapolate their future capabilities. BIG-bench already contains more than 200 tasks. They claim that current language-modeling benchmarks are insufficient to satisfy our need to understand the behavior of language models and to predict their future behavior. They mainly provide three reasons for that. One of them is the short useful lifespans. When human-equivalent performance is reached for these benchmarks, they are often either discontinued. One might call this “challenge-solve-and-replace” evaluation dynamic (Zitat). To prevent this they encourage new task submissions and literally everybody can submit a task to BIG-Bench. So they call BIG-bench a living benchmark. The review of the tasks is based on ten criteria. It includes for example "Justification". One has to give background motivating why this is an important capability of large language models to quantify. With the inclusion of small tasks they want to improve the diversity of topics covered and enable domain experts to contribute tasks without the difficulties of distributed human labeling. The another reason for the insufficients is because the others benachmarks are narrowly targeted, and because their targets are often ones that language models are already known to perform. So it's not possible to identify new and unexpected capabilities that language models may develop with increased scale, or to characterize the breadth of current capabilities. Finally, many current benchmarks use data collected through human labeling that is not performed by experts or by the task authors. Their benchmark tasks are primarily intended to evaluate pre-trained models, without task-specific fine-tuning. By focusing on such tasks in the zero- and few-shot evaluation setting, it becomes possible to provide meaningful scores for even those tasks with a very small number of examples.The "everybody can submit" strategy also leads to inclusion a variety of tasks covering non-English languages. Till now the large language models, like GPT-3 and PaLM, perform poorly on BIG-bench relative to expert humans, which is maybe a good sign for the future. But superhuman performance on SuperGLUE benchmark was achieved less than 18 months after it was produced (Zitat BIG-Bench). Hier noch Beispiele so wie oben.
-Problem is that @bowman2021will claim that the evaluation for many natural language understanding (NLU) tasks is broken. The claim that unreliable and biased systems score so highly on standard benchmarks that there is little room for researchers who develop better systems to demonstrate their improvements. 
+Problematic is that @bowman2021will claim that the evaluation for many natural language understanding (NLU) tasks is broken. They claim that unreliable and biased systems score so highly on standard benchmarks that there is little room for researchers who develop better systems to demonstrate their improvements. 
 They provide four criteria to handle this:
 
  1. Good performance on the benchmark should imply robust in-domain performance on the task
@@ -101,11 +101,12 @@ They provide four criteria to handle this:
  3. Benchmarks should offer adequate statistical power
  4. Benchmarks should reveal plausibly harmful social biases in systems, and should not incentivize the creation of biased systems
  
-
 Building new benchmarks that improve upon these four axes is likely to be quite difficult.
 
+Add translation benchmark
+
 CV models try to answer visual tasks. A visual task is a task which can be solved only by visual input. Often visual task can be solved as a binary classification problem, which is called image classification, but there are also numerous other applications for CV. This chapter will focus on image classification, semantic segmentation and object detection with their usual benchmarks datasets.
-It's not only common to pre-train your model on ImageNet datasets it's also common to benchmark the models on them. There are many different variants of ImageNet. There is ImageNet-R, a version with non-natural images such as art, cartoons and sketches, or ImageNet-A, which is a a more challenging version because they use adversarial images [@goodfellow2014explaining], or ImageNet-V2 [@recht2019imagenet]. The last was created to check wether there is an overfitting on the classic pre-training ImageNet dataset. They followed the creation process of the original dataset and tested to what extent current classification models generalize to new data. @recht2019imagenet found accuracy drops for all models and suggested that these drops are not caused by adaptivity, but by the models’ inability to generalize to slightly “harder” images than those found in the original test sets. The goal of image classification is to classify the image by assigning a label. Typically, Image Classification refers to images in which only one object appears. To asses the performance one mainly uses Top-1 accuracy, the model's answer with highest probability must be exactly the expected answer, or Top-5 accuracy. Top-5 accuracy means that any of five highest probability answers must match the expected answer. @beyer2020we tried to answer the question "Are we done with ImageNet?". Many images in the ImageNet dataset contain a clear view on a single object of interest: for these, a single label is an appropriate description of their content. However many other images contain multiple, similarly prominent objects, limiting the relevance of a single label [@beyer2020we]. In these cases, the ImageNet label is just one of many equally valid descriptions of the image and as a result an image classifier can be  penalized for producing a correct description that happens to not coincide with that chosen by the ImageNet label. In short a single label per image is not sufficient in many cases. They concluded yes and no. The shortcomings of ImageNet labels and their accuracy were identified and they provided a new ImageNet validation set ReaL [@beyer2020we] ("Reassessed Labels") and also a new metric, called ReaL accuracy [@beyer2020we]. The ReaL accuracy measures the precision of the model’s top-1 prediction, which is deemed correct if it is included in the set of labels. these findings suggested that although the original set of labels may be nearing the end of their useful life, ImageNet and its ReaL labels can readily benchmark progress in visual recognition for the foreseeable future.
+It's not only common to pre-train your model on ImageNet datasets it's also common to benchmark the models on them. There are many different variants of ImageNet. There is ImageNet-R, a version with non-natural images such as art, cartoons and sketches, or ImageNet-A, which is a a more challenging version because they use adversarial images [@goodfellow2014explaining], or ImageNet-V2 [@recht2019imagenet]. The last was created to check whether there is an over-fitting on the classic pre-training ImageNet dataset. They followed the creation process of the original dataset and tested to what extent current classification models generalize to new data. @recht2019imagenet found accuracy drops for all models and suggested that these drops are not caused by adaptivity, but by the models’ inability to generalize to slightly “harder” images than those found in the original test sets. The goal of image classification is to classify the image by assigning a label. Typically, Image Classification refers to images in which only one object appears. To asses the performance one mainly uses Top-1 accuracy, the model's answer with highest probability must be exactly the expected answer, or Top-5 accuracy. Top-5 accuracy means that any of five highest probability answers must match the expected answer. @beyer2020we tried to answer the question "Are we done with ImageNet?". Many images in the ImageNet dataset contain a clear view on a single object of interest: for these, a single label is an appropriate description of their content. However many other images contain multiple, similarly prominent objects, limiting the relevance of a single label [@beyer2020we]. In these cases, the ImageNet label is just one of many equally valid descriptions of the image and as a result an image classifier can be  penalized for producing a correct description that happens to not coincide with that chosen by the ImageNet label. In short a single label per image is not sufficient in many cases. They concluded yes and no. The shortcomings of ImageNet labels and their accuracy were identified and they provided a new ImageNet validation set ReaL [@beyer2020we] ("Reassessed Labels") and also a new metric, called ReaL accuracy [@beyer2020we]. The ReaL accuracy measures the precision of the model’s top-1 prediction, which is deemed correct if it is included in the set of labels. these findings suggested that although the original set of labels may be nearing the end of their useful life, ImageNet and its ReaL labels can readily benchmark progress in visual recognition for the foreseeable future.
 An addition of a localization tasks to the classification tasks results into  object detection. It is used to analyze more realistic cases, like mentioned above, in which multiple objects may or may not exist in an image. The location of an object is typically represented by a bounding box. In the recent years, the Microsoft COCO dataset has become the standard to evaluate object detection algorithms, but it's also possible to use a ImageNet dataset. The primary challenge metric is called mean Average Precision (mAP) at Intersection over Union (IoU) $=$.50:.05:.95. The IoU is the intersection of the predicted and ground truth boxes divided by the union of the predicted and ground truth boxes. IoU, also called Jaccard Index, values range from 0 to 1. Where 0 means no overlap and 1 means perfect overlap. But how is precision captured in the context of object detection? Precision is known as the ratio of $True~Positive/(True~Positive+False~Positive)$. With the help of the IoU threshold, it's possible to decide whether the prediction is True Positive(TP), False Positive(FP), or False Negative(FN). The example below shows predictions with IoU threshold ɑ set at 0.5.
 
 ![taken from https://learnopencv.com](figures/01-chapter1/4-birds-prediction-types-1.webp)
@@ -118,76 +119,76 @@ A example is shown down below.
 ![taken from https://learnopencv.com](figures/01-chapter1/5-segmentation-iou.webp)
 
 
+## Rough Sketch of my Chapter
+
+Small Intro of my chapter
+
+- Explain that pre-training is huge part why NLP and CV models perform good
+- Hint also that combination will be relevant for the rest of the book
+
+Intro for pretraining (Ideas):
+
+- like an athlete.
+- Need some base fitness (=pre-training)
+- Same like in reality pre-training differs between models
+
+### Pre-training
+#### Resources for pre-training
+
+- how does pre-training look for NLP, CV, MML
+- Hint availability and size of pre-training for different modalities
+- State and explain 3 of the most used resources (maybe add more); Provide source for more
+
+#### Use of Resources 
+
+ - How has pre-training changed 
+ - supervised to self-supervised learning (Yann LeCun and Ishan Misra Blogpost dark matter
+ - neuroscientist paper (SSL more similar to brain)
+ - Predicting missing parts comman task in SSL
+   - BERT, GPT-3 use MLM, NSP; NSP not really needed (deBERTa or RoBERTa)
+   - easy in NLP, impossible in CV (fininte vs infinite solution space)
+ - contrastive loss => need for hard negatives (bad) 
+ - augmentation used to mimic MLM 
+ - augmentation relies on human intention
+ - BYOL approach, gets rid of hard negatives $\Rightarrow$ good (non-constrasitve loss)
+ - masked autoencoder (MAE) gets rid of augmentation 
+ - Pre-Training of CLIP, ALIGN
+  - contrastive objectives are easier to implement in vision-language models (VLM) than in CV. Hard negatives already available
 
 
+#### Fine-tuning aka. transfer learning
+    - why fine-tuning is nice but also expensive 
+      - use labeled data for down-stream tasks
+    - Give an example how to fine-tune andtell different for each modality and latter reported
 
 
+#### Benchmarks for modalities
+ 
+- Importance of benchmarks and also need for new ones (like Psych: Flynn Effect) 
+  - do models get better or is it possible that pre-training                         contains already benchmarks (too much crawl; NLP) Compare pre-training and benchmark)
+- Hint that models pre-train on different resources but perform on same benchmarks (good or bad) 
+- different tasks for benchmarks
+  - NLP: Lanuguage modeling, QA, Machine Translation
+    - GLUE & SuperGLUE
+    - SQuAD
+    - BIG-Bench
+    - Machine Translation
+  - CV: Image Classification, Object Detection, Image Segmentation
+    - ImageNet (maybe noch ObjectNet als Kontrast zu ImageNet)
+    - COCO Object Detection instance segmentation, panoptic segmentation
+    - ADE20K semantic segmentation
+  - MML: Image Captioning (image2text), Text2Image (generative models) 
+    - PartiPromts (Text2Image)
+    - COCO (Image Captioning)
+    - VCR
+    - VQA
+    - NLVR
 
 
+Hint that it's most of the time reduction to classification tasks (like is this next sentences) (mainly problem for NLP, Image Classification)
 
-  \begin{itemize}
-    \item How pre-training is used in the modalities (DONE)
-    \item How has pre-training changed or has it even changed in modalities (DONE)
-      \begin{itemize}
-        \item supervised; just tell: not used anymore and skip to self-supervised (DONE)
-        \item self-supervised; cite that SSL is more similiar tp the learning of a human then supervised (Yann le , yannic kilcher interview) (DONE)
-        \item BERT, GPT-3 use MLM, NSP; NSP not really needed (deBERTa or RoBERTa) (DONE)
-        \item easy in NLP but not easy in CV, (DONE)
-        \item Solution space in NLP is finite in CV not (The dark matter of intelligence blog) (DONE)
-        \item contrastive loss => need for hard negatives (bad) (DONE)
-        \item augmentation used to mimic MLM (DONE)
-        \item augmentation relies on human intention (DONE)
-        \item BYOL approach, gets rid of hard negatives => good (DONE) (non-constrasitve loss)
-      \end{itemize}
-      \item MML self-supervised learning (DONE)
-        \begin{itemize}
-          \item CLIP, ALIGN (DONE)
-          \item CoCa, BLIP (?)
-        \end{itemize}
-      \end{itemize}
-    
-\subsection{Fine-tuning aka. transfer learning}
-  \begin{itemize}
-    \item why fine-tuning is important (DONE)
-    \item where and how to fine-tune (halb DONE); just tell different for each modality and latter reported
-    \item use labeled data for down-stream tasks  (DONE)
-  \end{itemize}
-
-\subsection{Benchmarks for modalities}
-  \begin{itemize}
-    \item Importance of benchmarks (DONE)
-      \begin{itemize}
-        \item also need for new ones (like Psych: Flynn Effect) (DONE)
-          \begin{itemize}
-            \item do models get better or is it possible that pre-training                         contains already benchmarks (too much crawl; NLP) (DONE)
-          \end{itemize}
-        \item Hint that models pre-train on different resources but perform on same benchmarks (good or bad) (DONE)
-        \end{itemize}
-      \item different tasks for benchmarks
-        \begin{itemize}
-          \item NLP:
-          \begin{itemize}
-            \item GLUE & SuperGLUE
-            \item SQuAD
-            \item BIG-Bench
-          \end{itemize}
-          \item CV: 
-          \begin{itemize}
-            \item ImageNet
-            \item ObjectNet als Kontrast zu ImageNet
-            \item COCO für Segmentation und Detection (DINO nochmal lesen)
-          \end{itemize}
-          \item MML: 
-          \begin{itemize}
-            \item VCR
-            \item VQA
-            \item NLVR
-          \end{itemize}
-          \item Hint that it's most of the time reduction to classification tasks (like is this next sentences) (not sure if still true, maybe mainly NLP)
-          \item Semantic of produced sentences often not nice
-          \item MML wrong spelling => increase of parameters gets rid of wrong spelling (example: PARTI)
-        \end{itemize}
-  \end{itemize}
+Semantic of produced sentences often not nice
+MML wrong spelling => increase of parameters gets rid of wrong spelling (example: PARTI)
 
 
 Outro: Multimodal architectures Chapter
