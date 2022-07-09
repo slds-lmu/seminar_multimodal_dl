@@ -96,24 +96,29 @@ The mentioned ones are rather old compared to Beyond the Imitation Game Benchmar
 Problem is that @bowman2021will claim that the evaluation for many natural language understanding (NLU) tasks is broken. The claim that unreliable and biased systems score so highly on standard benchmarks that there is little room for researchers who develop better systems to demonstrate their improvements. 
 They provide four criteria to handle this:
 
-\begin{enumerate}
- \item Good performance on the benchmark should imply robust in-domain performance on the task
- \item Benchmark examples should be accurately and unambiguously annotated
- \item Benchmarks should offer adequate statistical power
- \item Benchmarks should reveal plausibly harmful social biases in systems, and should not incentivize the creation of biased systems
- \end{enumerate}
+ 1. Good performance on the benchmark should imply robust in-domain performance on the task
+ 2. Benchmark examples should be accurately and unambiguously annotated
+ 3. Benchmarks should offer adequate statistical power
+ 4. Benchmarks should reveal plausibly harmful social biases in systems, and should not incentivize the creation of biased systems
+ 
 
 Building new benchmarks that improve upon these four axes is likely to be quite difficult.
 
-CV models try to answer visual tasks. A visual task is a task which can be solved only by visual input. Often visual task can be solved as a binary classification problem, which is called image classification, but there are also numerous other applications for CV. This chapter will focus on image classification, semantic segmentation and object detection with their usual benchmarks datasets. 
+CV models try to answer visual tasks. A visual task is a task which can be solved only by visual input. Often visual task can be solved as a binary classification problem, which is called image classification, but there are also numerous other applications for CV. This chapter will focus on image classification, semantic segmentation and object detection with their usual benchmarks datasets.
+It's not only common to pre-train your model on ImageNet datasets it's also common to benchmark the models on them. There are many different variants of ImageNet. There is ImageNet-R, a version with non-natural images such as art, cartoons and sketches, or ImageNet-A, which is a a more challenging version because they use adversarial images [@goodfellow2014explaining], or ImageNet-V2 [@recht2019imagenet]. The last was created to check wether there is an overfitting on the classic pre-training ImageNet dataset. They followed the creation process of the original dataset and tested to what extent current classification models generalize to new data. @recht2019imagenet found accuracy drops for all models and suggested that these drops are not caused by adaptivity, but by the models’ inability to generalize to slightly “harder” images than those found in the original test sets. The goal of image classification is to classify the image by assigning a label. Typically, Image Classification refers to images in which only one object appears. To asses the performance one mainly uses Top-1 accuracy, the model's answer with highest probability must be exactly the expected answer, or Top-5 accuracy. Top-5 accuracy means that any of five highest probability answers must match the expected answer. @beyer2020we tried to answer the question "Are we done with ImageNet?". Many images in the ImageNet dataset contain a clear view on a single object of interest: for these, a single label is an appropriate description of their content. However many other images contain multiple, similarly prominent objects, limiting the relevance of a single label [@beyer2020we]. In these cases, the ImageNet label is just one of many equally valid descriptions of the image and as a result an image classifier can be  penalized for producing a correct description that happens to not coincide with that chosen by the ImageNet label. In short a single label per image is not sufficient in many cases. They concluded yes and no. The shortcomings of ImageNet labels and their accuracy were identified and they provided a new ImageNet validation set ReaL [@beyer2020we] ("Reassessed Labels") and also a new metric, called ReaL accuracy [@beyer2020we]. The ReaL accuracy measures the precision of the model’s top-1 prediction, which is deemed correct if it is included in the set of labels. these findings suggested that although the original set of labels may be nearing the end of their useful life, ImageNet and its ReaL labels can readily benchmark progress in visual recognition for the foreseeable future.
+An addition of a localization tasks to the classification tasks results into  object detection. It is used to analyze more realistic cases, like mentioned above, in which multiple objects may or may not exist in an image. The location of an object is typically represented by a bounding box. In the recent years, the Microsoft COCO dataset has become the standard to evaluate object detection algorithms. The primary challenge metric is called mean Average Precision (mAP) at Intersection over Union (IoU) $=$.50:.05:.95. The IoU is the intersection of the predicted and ground truth boxes divided by the union of the predicted and ground truth boxes. IoU, also called Jaccard Index, values range from 0 to 1. Where 0 means no overlap and 1 means perfect overlap. But how is precision captured in the context of object detection? Precision is known as the ratio of $True~Positive/(True~Positive+False~Positive)$. With the help of the IoU threshold, it's possible to decide whether the prediction is True Positive(TP), False Positive(FP), or False Negative(FN). The .50:.05:.95 means that one uses 10 IoU thresholds of $\{0.50, 0.55, 0.60, \dots ,0.95\}$. COCO uses this as primary metric, because it rewards detectors with better localization.
 
-Object classification done on ImageNet datasets
-Interesting paper with ImageNet V1 and V2 erwähnen
-COCO für Semnatic Segmentation und Object detection 
+The example below shows predictions with IoU threshold ɑ set at 0.5.
 
 
 
-Subchapter of NLU Benchmarks abschließen mit NLU benachmarks broken paper. Most of the time binary classification and no real understanding needed.
+COCO für  Object detection 
+Semantic Segmentation 
+
+
+
+
+
 
 
   \begin{itemize}
