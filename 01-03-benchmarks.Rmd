@@ -16,15 +16,15 @@ But the need for labeling the data isn't the only problem. Let's visit the athle
 
 So the goal is to generate more generalist models which can perform well on different tasks without the need of huge labeled data. Humans are able to perform well on different tasks in a short amount of time. For example humans only need a small amount of hours to learn how to drive a car, even without supervision. On the other hand fully automated driving AI need thousand of hours of data to drive a car. Why do humans learn so fast compared to machines?
 Humans don't rely on labeled data, because most of the time humans learn by observation. By this humans generate a basic knowledge of how the world works, which also called common sense. This enables us to learn so much faster compared to machines.
-Meta AI (cite blogpost) believes that self-supervised learning is one of the most promising ways to generate background knowledge and some sort of common sense in AI systems. By self-supervised learning one means a supervised learning algorithm, but it doesn't need an external supervisor. Self-supervised pre-training differs between the modalities, which means there is not an approach which works in all modalities.
+Meta AI (cite blogpost) believes that self-supervised learning is one of the most promising ways to generate background knowledge and some sort of common sense in AI systems. By self-supervised learning one means a supervised learning algorithm, but it doesn't need an external supervisor, like labels. Self-supervised pre-training differs between the modalities, which means there is not an approach which works in all modalities.
 The following chapter will inspect on the one hand pre-training resources and the use of them and on the other hand also the benchmarks which are used for NLP, CV and ,the combination of both, vision language pre-trained models (VL-PTM).
 
 ## Pre-training
   
 After pointing out that pre-training is very important one might ask how do the different modalities pre-train and how do the datasets look? At first we will inspect the last one and focus afterwards on the use of the resources.
 As one might expect NLP models pre-train on text, CV models pre-train on images and MML models pre-train on text image pairs, which can somehow be seen as a combination of NLP and CV. But CV models mostly used labeled data like a picture of a dog with the corresponding single label "dog". MML datasets can contain several sentences of text which correspond to the given image.
-Even if the datasets might be completely different, the procedure to get the data is the same for all of them, because the data is crafted from the internet. This can lead to a problem, since by using this method the resulting dataset might be noisy. One approach for the VL-PTM is to use common crawl and extract the image plus the alt of a image. The alt is an alternate text for an image, if the image cannot be displayed or for visual impaired people. This seems like a reasonable approach, but the alt is often not very informative about what's in the image. (maybe add example)
-Another difference between the modalities is the cardinality of the pre-training data. It's easy to realize that text is by far easiest to crawl from the internet. This results in huge high-quality massive text data. Some magnitudes smaller are the datasets for CV. Since MML is pretty new compared to the other modalities it still relatively small but growing fast. A small downer is that some of the datasets are not public available. The big companies like to keep their models and used datasets private, which hinders the reproducibility, but there are also real open AI competitors like LAION in the field. 
+Even if the datasets might be completely different, the procedure to get the data is the same for all of them, because the data is crafted from the internet. This can lead to a problem, since by using this method the resulting dataset might be noisy. One approach for the VL-PTM is to use common crawl and extract the image plus the alt of an image. The alt is an alternate text for an image, if the image cannot be displayed or for visual impaired people. This seems like a reasonable approach, but the alt is often not very informative about what's in the image. (maybe add example)
+Another difference between the modalities is the cardinality of the pre-training data. It's easy to realize that text is by far the easiest to crawl from the internet. This results in huge high-quality massive text data. Some magnitudes smaller are the datasets for CV. Since MML is pretty new compared to the other modalities it still relatively small but growing fast. A small downer is that some of the datasets are not public available. The big companies like to keep their models and used datasets private, which hinders the reproducibility, but there are also real open AI competitors like LAION in the field. 
 The next chapter will provide some of the most used pre-training datasets.
 
 ### Resources for pre-training
@@ -40,8 +40,12 @@ htmltools::includeHTML("data/01-chapter1/CompositionPile.html")
 # label
 ```
 
-Contains multilingaul datasets like EUPArk
+Contains multilingaul datasets like EUPArl
 Describe puprose of sub-datasets a little bit more
+
+While only 13% of the world’s population speaks English, the vast majority of NLP research is done on English. They focused predominantly on English, but did not explicitly filtered out other languages when collecting our the data. This leads to the fact that roughly 95\% of the Pile is English. EuroParl is a multilingual parallel corpus introduced for machine translaton
+
+
 A more detailed description of the Pile can be found in the corresponding paper [@gao2020pile].
 The last dataset for NLP is the BooksCorpus dataset [@zhu2015aligning]. The BooksCorpus uses books from yet unplished authors from the web. Only books with more than 20k words were included to filter out shorter, noisier stories.
 This results in around 11k books from 16 different genres. So more than 74 million sentences can be used in pre-training.
@@ -149,11 +153,11 @@ Intro for pretraining (Ideas):
 #### Use of Resources 
 
  - How has pre-training changed 
- - supervised to self-supervised learning (Yann LeCun and Ishan Misra Blogpost dark matter
+ - supervised to self-supervised learning (Yann LeCun and Ishan Misra Blogpost dark matter)
  - neuroscientist paper (SSL more similar to brain)
- - Predicting missing parts comman task in SSL
+ - Predicting missing parts comman task in SSL (not sure about this part. maybe too detailed)
    - BERT, GPT-3 use MLM, NSP; NSP not really needed (deBERTa or RoBERTa)
-   - easy in NLP, impossible in CV (fininte vs infinite solution space)
+   - easy in NLP, impossible in CV (finite vs infinite solution space)
  - contrastive loss => need for hard negatives (bad) 
  - augmentation used to mimic MLM 
  - augmentation relies on human intention
@@ -176,18 +180,18 @@ Intro for pretraining (Ideas):
 - Hint that models pre-train on different resources but perform on same benchmarks (good or bad) 
 - different tasks for benchmarks
   - NLP: Lanuguage modeling, QA, Machine Translation
-    - GLUE & SuperGLUE
-    - SQuAD
-    - BIG-Bench
+    - GLUE & SuperGLUE (Lanuguage modeling)
+    - SQuAD (QA)
+    - BIG-Bench (different types)
     - Machine Translation
   - CV: Image Classification, Object Detection, Image Segmentation
     - ImageNet (maybe noch ObjectNet als Kontrast zu ImageNet)
     - COCO Object Detection instance segmentation, panoptic segmentation
     - ADE20K semantic segmentation
   - MML: Image Captioning (image2text), Text2Image (generative models) 
-    - PartiPromts (Text2Image)
+    - PartiPromts (Text2Image), DrawBench (Imagen) ($=$Text2Image)
     - COCO (Image Captioning)
-    - VCR
+    - VCR 
     - VQA
     - NLVR
 
