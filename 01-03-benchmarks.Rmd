@@ -120,7 +120,8 @@ A example is shown down below.
 ![taken from https://learnopencv.com](figures/01-chapter1/5-segmentation-iou.webp)
 ### Benchmarks MM
 
-Lorem Ipsum
+Hier noch Benchmarks added die testen ob überhaupt cross-modal genutzt wurde
+
 
 ## Rough Sketch of my Chapter
 
@@ -135,14 +136,13 @@ Intro for pretraining (Ideas):
 - Need some base fitness (=pre-training)
 - Same like in reality pre-training differs between models
 
-### Pre-training
-#### Resources for pre-training
+### Dataset
 
 - how does pre-training look for NLP, CV, MML
 - Hint availability and size of pre-training for different modalities
 - State and explain 3 of the most used resources (maybe add more); Provide source for more
 
-#### Use of Resources 
+### Pre-Training Tasks
 
  - How has pre-training changed 
  - supervised to self-supervised learning (Yann LeCun and Ishan Misra Blogpost dark matter
@@ -165,7 +165,7 @@ Intro for pretraining (Ideas):
   - Give an example how to fine-tune and tell different for each modality and can be found in other chapters 
 
 
-#### Benchmarks for modalities
+#### Benchmarks and model comparision
  
 - Importance of benchmarks and also need for new ones (like Psych: Flynn Effect) 
   - do models get better or is it possible that pre-training                         contains already benchmarks (too much crawl; NLP) Compare pre-training and benchmark)
