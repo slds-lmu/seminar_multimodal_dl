@@ -33,14 +33,7 @@ htmltools::includeHTML("data/01-chapter1/CompositionPile.html")
 # label
 ```
 
-While only 13% of the world’s population speaks English, the vast majority of NLP research is done on English. They focused predominantly on English, but did not explicitly filtered out other languages when collecting our the data. This leads to the fact that roughly 95\% of the Pile is English. EuroParl is a multilingual parallel corpus introduced for machine translaton
-Contains multilingaul datasets like EUPArk
-
-
-
-arxiv papers written in Tex model learns how to tex
-Describe puprose of sub-datasets a little bit more
-A more detailed description of the Pile can be found in the corresponding paper [@gao2020pile].
+While only 13% of the world’s population speaks English, the vast majority of NLP research is done on English. @gao2020pile followed this trend, but did not explicitly filtered out other languages when collecting our the data. This leads to the fact that roughly 95\% of the Pile is English. Also EuroParl [@koehn2005europarl], a multilingual parallel corpus introduced for machine translation, is included in the Pile. To train GPT-2 Open AI collected data from WebText. WebText is an internet dataset created by scraping URLs extracted from Reddit submissions with a minimum score of 3 as a proxy for quality, but sadly it was never released to the public. Independent researchers reproduced the pipeline and released the resulting dataset, called OpenWebTextCorpus [@Gokaslan2019OpenWeb] (OWT). OpenWebText2 is an enhanced version of the original OWT Corpus covering all Reddit submissions from 2005 up until April 2020. It covers content from multiple languages, document metadata, multiple dataset versions, and open source replication code. They also explicitly included a dataset of mathematical problems (DeepMind Mathematics) to improve the mathematical ability of language models trained on the Pile. The last example will be arXiv. ArXiv was in included in the hopes that it will be a source of high quality text and math knowledge, and benefit potential downstream applications to research in these areas and also because arXiv papers are written in LaTeX. Training a language model to be able to generate papers written in LaTeX could be a huge boon to the research community. These were only four of the 22 included datasets. A more detailed description of the sub-dataset and their reasons why these were included can be found in the corresponding paper [@gao2020pile].
 The last dataset for NLP is the BooksCorpus dataset [@zhu2015aligning]. The BooksCorpus uses books from yet unplished authors from the web. Only books with more than 20k words were included to filter out shorter, noisier stories.
 This results in around 11k books from 16 different genres. So more than 74 million sentences can be used in pre-training.
 
