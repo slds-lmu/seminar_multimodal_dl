@@ -116,10 +116,26 @@ Image segmentation can be splitted into various tasks including instance segment
 A example is shown down below.
 
 ![taken from https://learnopencv.com](figures/01-chapter1/5-segmentation-iou.webp)
-### Benchmarks MM
 
-Hier noch Benchmarks added 
+Visual understanding goes well beyond object recognition or semantic segmentation. With one glance at an image, a human can effortlessly imagine the world beyond the pixels. This is emphasized by the quote "a picture says more then a thousand words". High-order of cognition and commonsense reasoning about the world is required to infer people’s actions, goals, and mental states. To answer visual understanding tasks a models needs to leverage more than on modality.
+
+### Benchmarks Multi-Modal
+Visual understanding tasks require seamless integration between recognition and cognition and this task can be formalize as Visual Commonsense Reasoning (VCR). @zellers2019recognition introduce a new dataset called VCR. It consists of 290k multiple choice QA problems derived from 110k movie scenes. The key recipe for generating non-trivial and high-quality problems at scale is Adversarial Matching. This matching transforms rich annotations into multiple choice questions with minimal bias.
+
+
+VCR
+VQA  (1.0&2.0)
+GQA
+
+Generative models (Results are cherry picked)
+PartiPrompts P2 (generative models) shows how concept "growing a cherry tree"
+Drawbench (generative models) same concept as P2
+
 Außerdem noch Benchmarks die testen ob überhaupt cross-modal genutzt wurde
+VALSE (Zero Shot Only)
+Foil iT
+EMAP
+
 
 
 
