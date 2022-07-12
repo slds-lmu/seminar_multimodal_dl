@@ -120,8 +120,8 @@ A example is shown down below.
 Visual understanding goes well beyond object recognition or semantic segmentation. With one glance at an image, a human can effortlessly imagine the world beyond the pixels. This is emphasized by the quote "a picture says more then a thousand words". High-order of cognition and commonsense reasoning about the world is required to infer people’s actions, goals, and mental states. To answer visual understanding tasks a models needs to leverage more than on modality.
 
 ### Benchmarks Multi-Modal
-Visual understanding tasks require seamless integration between recognition and cognition and this task can be formalize as Visual Commonsense Reasoning (VCR). @zellers2019recognition introduce a new dataset called VCR. It consists of 290k multiple choice QA problems derived from 110k movie scenes. The key recipe for generating non-trivial and high-quality problems at scale is Adversarial Matching. This matching transforms rich annotations into multiple choice questions with minimal bias. The underlying scenes come from the Large Scale Movie Description Challenge and YouTube movie clips and they searched for interesting an diverse situations to ensure this they trained and applied an "interestingnes filter". The most interesting images were passed to Workers of Amazon Mechanical Turk. Additional context in form of video caption was given to the worker. After reading this they had to propose one to three questions about the image. For each question, they had to provide a reasonable answer and a rationale. This results is an underlying dataset with high agreement and diversity of reasoning.  Almost every answer and rationale is unique. To make these cognition-level questions simple to ask, and to avoid the clunkiness of referring expressions, VCR’s language integrates object tags ([person2]) and explicitly excludes referring expressions (‘the woman on the right.’). These object tags are detected from Mask-RCNN. The following types of questions are in the benchmarks: 38\% Explanation ('Why is [person11] wearing sunglasses inside?'), 24\% Activity ('What are [person1] and person[2] doing?"), 13\% Temporal ("What will [person6] do after unpacking the groceries?"), 8\% Mental, 7\% Role, 5\% Scene, 5\% Hypothetical. Experimental results show
-that while humans find VCR easy (over 90% accuracy), state-of-the-art vision models struggle (∼45%). So from cognition-level visual understanding, VCR is far from solved.
+Visual understanding tasks require seamless integration between recognition and cognition and this task can be formalize as Visual Commonsense Reasoning (VCR). @zellers2019recognition introduce a new dataset called VCR. It consists of 290k multiple choice QA problems derived from 110k movie scenes. The key recipe for generating non-trivial and high-quality problems at scale is Adversarial Matching. Incorrect choices are obtained via maximum-weight bipartite match- ing between queries and responses. This matching transforms rich annotations into multiple choice questions with minimal bias. VCR casted as a four-way multiple choice task. The underlying scenes come from the Large Scale Movie Description Challenge and YouTube movie clips and they searched for interesting an diverse situations to ensure this they trained and applied an "interestingnes filter". The most interesting images were passed to Workers of Amazon Mechanical Turk. Additional context in form of video caption was given to the worker. After reading this they had to propose one to three questions about the image. For each question, they had to provide a reasonable answer and a rationale. This results is an underlying dataset with high agreement and diversity of reasoning.  Almost every answer and rationale is unique. To make these cognition-level questions simple to ask, and to avoid the clunkiness of referring expressions, VCR’s language integrates object tags ([person2]) and explicitly excludes referring expressions (‘the woman on the right.’). These object tags are detected from Mask-RCNN. The following types of questions are in the benchmarks: 38\% Explanation ('Why is [person11] wearing sunglasses inside?'), 24\% Activity ('What are [person1] and person[2] doing?"), 13\% Temporal ("What will [person6] do after unpacking the groceries?"), 8\% Mental, 7\% Role, 5\% Scene, 5\% Hypothetical. So in this setup, a model is provided a question, and has to pick the best answer out of four choices. Only one of the four is correct. If the model answered correctly a new question, along with the correct answer, is provided. Now the model has to justify it by picking the best rationale out of four choices. The first part is called Question Answering ($Q\rightarrow A$) and the second part Answer Justification ($QA\rightarrow R$). They combine both parts into a $Q\rightarrow AR$ metric, in which a model only gets a question right if it answers correctly and picks the right rationale. If it gets either the answer or the rationale wrong, the entire prediction will be wrong. Models are evaluated in terms of accuracy. The results at the release were that humans find VCR easy (over 90% accuracy), and state-of-the-art vision models struggle (∼45%). At the moment of writing, the best model achieves 85.5 in ($Q\rightarrow A$), 87.5 in ($QA\rightarrow R$) and 74.9 in $Q\rightarrow AR$. So the models are closing the gap but VCR is still far from solved.
+An "simpler" approach to evaluate vision-language models is to ask questions without reasoning about an image.
 
 
 VCR
@@ -165,7 +165,6 @@ Intro for pretraining (Ideas):
  - supervised to self-supervised learning (Yann LeCun and Ishan Misra Blogpost dark matter
  - neuroscientist paper (SSL more similar to brain)
  - Predicting missing parts comman task in SSL
-   - BERT, GPT-3 use MLM, NSP; NSP not really needed (deBERTa or RoBERTa)
    - easy in NLP, impossible in CV (fininte vs infinite solution space)
  - contrastive loss => need for hard negatives (bad) 
  - augmentation used to mimic MLM 
@@ -198,11 +197,14 @@ Intro for pretraining (Ideas):
     - COCO Object Detection instance segmentation, panoptic segmentation
     - ADE20K semantic segmentation
   - MML: Image Captioning (image2text), Text2Image (generative models) 
-    - PartiPromts (Text2Image)
-    - COCO (Image Captioning)
+    - PartiPromts (Text2Image) (growing cherry tree)
+    - DrawBench (Text2Image)
     - VCR
     - VQA
-    - NLVR
+    - GQA
+    - VALSE
+    - Foil it
+    - EMPA
 
 
 Hint that it's most of the time reduction to classification tasks (like is this next sentences) (mainly problem for NLP, Image Classification)
