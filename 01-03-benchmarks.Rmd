@@ -1,6 +1,5 @@
 ---
 output:
-  pdf_document: default
   html_document: default
 ---
 
@@ -39,7 +38,7 @@ The Pile [@gao2020pile] was introduced to address exactly these results. The Pil
 The following treemap shows the distribution of the dataset.
 
 ```{r pile treemap, echo=FALSE}
-#htmltools::includeHTML("data/01-chapter1/CompositionPile.html")
+htmltools::includeHTML("data/01-chapter1/")
 # Plot passt leider noch nciht ganz. Aus einem Grund kommt eine Category nicht obwohl sie im .html sonst gezeigt wird
 # label
 ```
