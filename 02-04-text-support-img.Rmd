@@ -27,17 +27,21 @@ They show a large potential to be the CV counterparts to NLP foundation models. 
 ### Scaling sample size
 
 <!-- Reference to bitter pill to swallow: More compute beats complex architecture. -->
-Avoiding manually labeling data allows for way larger datasets, with 400 Mio and 900 Mio observation for CLIP [@radford2021learning] and Florence [Florence\; @yuan2021florence], respectively. 1800 Mio for ALIGN
+Arguably the most important aspect of these models is scale. <!-- ref to bitter pill to swallow -->
+Making use of their available resources and the aggressive parallelization capabilities of transformer architectures, sample sizes range from 400 million [CLIP\; @radford2021learning] over 900 million [Florence\; @yuan2021florence] to 1.8 billion [ALIGN\;].
+The datasets are obtained through web-scraping and, because of the use of natural language supervision, cost and labor intensive manual labeling is completely avoided.
+But this readily available web-scale data comes with some drawbacks.
+Because of its noisy nature, some form of pre-processing is needed, e.g., filtering for language, excluding graphic content and images with non-informative captions.
+<!-- TODO: ALIGN doesn't filter this strongly -->
 
-* Open AI is all about scaling models. Scaling view explains a lot of choices
-* Scaling of sample size using internet data
-  * Readily available
-  * Super scalable
-  * Noisy
-  * Biased
+* Social biases are reproduced.
+
+<!-- TODO: Other chapters discussing web-scale data? -->
 
 ### Contrastive loss
 
+The maximizing scale approach explains a lot of further design choices.
+The so called contrastive loss turned out to be very suitable for that.
 * Ref to CLIP inspiration from medical field with contrastive objective formula
 * Pro: Efficient training <!-- citation e.g., ALIGN -->
 * Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities] <!-- ref to zero shot chapter -->
@@ -67,6 +71,8 @@ They embed the class labels in sentence, e.g., "Picture of a (word)", which seem
 * Semantic concepts
 * Learn a representation _and_ connect it to language (-> NLP)
 * Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
+
+<!-- TODO: What happens with similar pictures with similar captions? Their distance is maximized too? -->
 
 ## CLIP
 
