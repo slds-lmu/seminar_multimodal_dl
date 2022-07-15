@@ -123,6 +123,7 @@ They embed the class labels in sentence, e.g., "Picture of a (word)", which seem
 ## Performance comparison
 
 * As all of these models are orders of magnitudes too large for performing a benchmark, findings reported inside the papers are believed here
+<!-- TODO: Other comparisons -->
 
 ## Resources
 
@@ -131,3 +132,11 @@ They even found their way into simple command line tools already.
 For example there is an application named [rclip](https://github.com/yurijmikhalevich/rclip), which can be used for personal image retrieval, wrapping the _ViT-B/32_ CLIP architecture.
 On my (mid-range) laptop I was able to find seemingly good matches for search terms tried out inside a folder with about 100 pictures.
 After an initial caching one request took about ten seconds.
+<!-- TODO: Look up if data if available -->
+
+## Outlook
+
+CLIP as buildingblock
+CLASP
+LAION dataset
+TODO: CLIP as module
