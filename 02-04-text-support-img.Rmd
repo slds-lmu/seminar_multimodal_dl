@@ -14,34 +14,39 @@ The aim is the incorporation of respective new findings into CV in order to impr
 1. They leverage the power of these NLP models as building blocks inside bigger models, where they are used as text encoders for models where natural language is used as a very compelling source of supervision.
 
 This chapter is dedicated mainly to the second.
-It has subchapters on the recent and relevant CV models CLIP, Florence, ALIGN, ... and discusses some of their core concepts related to natural language supervision.
-
-Tapping into this newly discovered potential lying in transformer based architectures [@vaswani2017attention], impressively demonstrated by models like GPT-3 [GPT-3\; @brown2020language], the architectures all employ transformer based language encoders and some excel even more using vision transformers for their vision encoding [CLIP\; @radford2021learning]. \
-Another aspect transferred from NLP to CV is the search for foundation models <!-- ref to foundation model paper -->
-Models like BERT and GPT-3 had a big impact in NLP in another aspect except showing off the power of new architectures:
-Other architectures build on them as a foundation.
-The new wave of CV models (CLIP, ALIGN, Wu Dao 2.0, Florence) shows a large potential to serve as CV counterparts for NLP foundation models. <!-- ref Florence paper, ref models using CLIP as image encoder -->
+It has subchapters on the recent and relevant CV models CLIP, ALIGN, Florence, ... and discusses some of their core concepts related to natural language supervision. <!-- ref for all papers --> \
+For example, all the architectures employ some form of transformer-based language encoder [@vaswani2017attention] and CLIP excels even more when using a vision transformer as its image encoder. <!-- ref vision transformer -->
+They confirm that the potential, impressively demonstrated by models like GPT-3 [@brown2020language], of this relatively recent architecture type is relevant for CV. \
+But language models like BERT <!-- ref BERT --> and GPT-3 have a big impact on another aspect of their field:
+They become to serve as so called foundation models, future architectures use them as building blocks. <!-- ref to foundation model paper, ref to DALLE oder so -->
+A trend which is observable for this new wave of CV models, too.
+They show a large potential to be the CV counterparts to NLP foundation models. <!-- ref Florence paper, ref models using CLIP as image encoder -->
 
 ## Concepts
 
 ### Scaling sample size
 
 <!-- Reference to bitter pill to swallow: More compute beats complex architecture. -->
-Avoiding manually labeling data allows for way larger datasets, with 400 Mio and 900 Mio observation for CLIP [@radford2021learning] and Florence [Florence\; @yuan2021florence], respectively.
+Arguably the most important aspect of these models is scale. <!-- ref to bitter pill to swallow -->
+Making use of their available resources and the aggressive parallelization capabilities of transformer architectures, sample sizes range from 400 million [CLIP\; @radford2021learning] over 900 million [Florence\; @yuan2021florence] to 1.8 billion [ALIGN\;].
+The datasets are obtained through web-scraping and, because of the use of natural language supervision, cost and labor intensive manual labeling is completely avoided.
+But this readily available web-scale data comes with some drawbacks.
+Because of its noisy nature, some form of pre-processing is needed, e.g., filtering for language, excluding graphic content and images with non-informative captions.
+<!-- TODO: ALIGN doesn't filter this strongly -->
 
-* Open AI is all about scaling models. Scaling view explains a lot of choices
-* Scaling of sample size using internet data
-  * Readily available
-  * Super scalable
-  * Noisy
-  * Biased
+* Social biases are reproduced.
+
+<!-- TODO: Other chapters discussing web-scale data? -->
 
 ### Contrastive loss
 
+The maximizing scale approach explains a lot of further design choices.
+The so called contrastive loss turned out to be very suitable for that.
 * Ref to CLIP inspiration from medical field with contrastive objective formula
-* Pro: Efficient training
+* Pro: Efficient training <!-- citation e.g., ALIGN -->
 * Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities] <!-- ref to zero shot chapter -->
-* Contra: No longer a generative model, e.g. no flexible caption generation
+* Contra: No longer a generative model, e.g., no flexible caption generation
+* Extra paper - but also in ALIGN?
 
 ### Zero shooting and foundation models
 
@@ -59,13 +64,15 @@ The model can readily function as a classifier by:
   1. Predicting for an image, which encoded class label is most likely to come with it.
 
 But in order to enhance performance by a margin of %d percent the prompts are engineered further.
-They embed the class labels in sentence, e.g. "Picture of a (word)", which seemingly was necessary for the model to make full use of its learned parameters.
+They embed the class labels in sentence, e.g., "Picture of a (word)", which seemingly was necessary for the model to make full use of its learned parameters.
 
 ### Connecting image representations to language
 
 * Semantic concepts
 * Learn a representation _and_ connect it to language (-> NLP)
 * Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
+
+<!-- TODO: What happens with similar pictures with similar captions? Their distance is maximized too? -->
 
 ## CLIP
 
@@ -75,11 +82,23 @@ They embed the class labels in sentence, e.g. "Picture of a (word)", which seemi
 
 ### Architecture
 
-* Original transformer with modifications used for GTP family as a text encoder
+* Original transformer with modifications used for GPT family as a text encoder
 * ResNet or vision transformer as a image encoder.
   * Vision transformer: much less compute
+* High parallelization capabilities (transformer)
+* Can CLIP be seen as a step closer to human-like AI?
+  * No: performance drop from zero- to one-shot setting
+  * No: contrastive objective?
+  * Yes: visual representations connected to natural language
 
 ## ALIGN
+
+<!-- Intro -->
+* Over one billion image alt-text pairs
+* Name comes from alignment of visual and language representations trough the beloved and known contrastive loss or, very intuitively, "A Large-scale ImaGe and Noisy-text embedding"
+* Dual encoder architecture
+* Image + text image retrieval (e.g., Image of Eiffel tower + "snow" -> snowy Eiffel tower)
+* Key difference to CLIP: training data. ALIGN does not filter that strongly, "dataset doesn't require expert knowledge to curate"
 
 ## Florence
 
@@ -90,7 +109,7 @@ They embed the class labels in sentence, e.g. "Picture of a (word)", which seemi
   * Pre-trained core
   * Flexible addition of modules
     * _Dynamic Head_ for object detection - citations coming later
-    * _METER_ as a adapter for vision-language (e.g. visual question answering)
+    * _METER_ as a adapter for vision-language (e.g., visual question answering)
     * Adaptation to video recognition through _CoSwin_
 * General trend in this direction, better and better predictions [CoCa\; @yu2022coca]
 * Optimization inside image-label-description space
@@ -104,6 +123,7 @@ They embed the class labels in sentence, e.g. "Picture of a (word)", which seemi
 ## Performance comparison
 
 * As all of these models are orders of magnitudes too large for performing a benchmark, findings reported inside the papers are believed here
+<!-- TODO: Other comparisons -->
 
 ## Resources
 
@@ -112,3 +132,11 @@ They even found their way into simple command line tools already.
 For example there is an application named [rclip](https://github.com/yurijmikhalevich/rclip), which can be used for personal image retrieval, wrapping the _ViT-B/32_ CLIP architecture.
 On my (mid-range) laptop I was able to find seemingly good matches for search terms tried out inside a folder with about 100 pictures.
 After an initial caching one request took about ten seconds.
+<!-- TODO: Look up if data if available -->
+
+## Outlook
+
+CLIP as buildingblock
+CLASP
+LAION dataset
+TODO: CLIP as module
