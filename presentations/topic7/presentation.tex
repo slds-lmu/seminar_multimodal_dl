@@ -2,10 +2,10 @@
 \documentclass[xcolor=dvipsnames]{beamer}
 
 % meta data
-\title[Additive Distributional Regression]{Bachelor's Thesis}
-\subtitle{Neural Structured Additive Distributional Regression}
-\author[Maximilian Schneider]{Author: Maximilian Schneider\\
-        Supervisor: Dr. David Rügamer}
+\title[Text supporting CV models]{Seminar: Multimodal Deep Learning}
+\subtitle{Topic 7: Text supporting CV models}
+\author[Max Schneider]{Author: Maximilian Schneider\\
+        Supervisor: Jann Goschenhofer}
 \institute[]{Department Of Statistics\\
              Ludwig-Maximilians-Universität\\
              \vspace{0.5cm}
@@ -67,6 +67,9 @@
 \DeclareAcronym{MSE}{short = MSE, long = mean squared error}
 \DeclareAcronym{IMSE}{short = IMSE, long = integrated mean squared error}
 \DeclareAcronym{NN}{short = NN, long = artificial neural network}
+
+% this presentation
+\DeclareAcronym{CV}{short = CV, long = computer vision}
 \DeclareAcronym{WRT}{short = w.r.t., long = with respect to}
 
 \begin{document}
@@ -75,38 +78,8 @@
 \end{frame}
 
 \section{Introduction}
-%\begin{frame}{Introduction to GAMLSS}
-%  \begin{itemize}
-%    \item Original name: \ac{GAMLSS} \parencite{rigbyGAMLSS}
-%    \item Extension of \acl{GLM}s (\acs{GLM}) and \acl{GAM}s (\acs{GAM})
-%    \item Specification of linear predictors for all parameters of the conditional distribution of the response, often location, scale and shape
-%    \item Possible usage of distributions beyond the exponential family
-%    \item Alias: distributional regression
-%    \item A good balance between interpretability and flexibility
-%  \end{itemize}
-%\end{frame}
 
-\begin{frame}{Introduction: Exemplary underlying \textit{data generating process}}
-  % \begin{figure}
-  %   \centering
-  %   \includegraphics[width=0.6\linewidth]{Figures/gamlss-example}
-  % \end{figure}
-\end{frame}
-
-\begin{frame}{Introduction: Model estimation}
-  \begin{itemize}
-    \item Two types of model parameters\footnote{not to be confused with \textit{distributional} parameters}:
-    \begin{itemize}
-      \item Model coefficients: $\bm{\beta}$
-      \item Smoothing parameters pertaining to splines, regulating flexibility: $\bm{\lambda}$
-    \end{itemize}
-    \item Comparison of three methods
-    \begin{itemize}
-      \item Two variants of the \ac{GFS} \parencite{wood2017efs}
-      \item Optimization using an \ac{NN} and \textit{Adam}~\parencite{kingma2014adam}
-    \end{itemize}
-    \item GFS outperforms the other method except for settings where the number of coefficients is close to the number of observations.
-  \end{itemize}
+\begin{frame}{Introduction: ...}
 \end{frame}
 
 \section{Generalized Additive Models for Location, Scale and Shape}
@@ -116,380 +89,77 @@
 \end{frame}
 
 \begin{frame}{Notation}
-  \begin{itemize}
-    \item Bold lower-case symbols (e. g. $\bm{\phi}_i$): vectors
-    \item Bold upper-case symbols (e. g. $\bm{X}$): matrices
-    \item Regular symbols (e. g. $\phi_{di}$):
-    \begin{itemize}
-      \item Scalars
-      \item or (accompanied by $(\cdot)$): functions
-    \end{itemize}
-    \item In some contexts:
-    \begin{itemize}
-      \item Regular upper-case symbols (e. g. $Y_i$): random variables
-      \item Corresponding $y_i$: realizations
-    \end{itemize}
-    \item \enquote{Hats} (e. g. $\hat{\bm{\beta}}$): estimates
-  \end{itemize}
 \end{frame}
 
 \subsection{Model framework}
 \begin{frame}{Model framework}
-  A \ac{GAMLSS} \footnote{Building on the notation of \textcite{aeberhard2021robust}} is defined via
-  \begin{equation}
-  \begin{split}
-    Y_i \sim D(\bm{\phi}_i),\; i &= 1, \dots, n,\; d = 1, \dots , \mathrm{dim}(\bm{\phi}_i) \\
-    g_d(\phi_{di}) = \eta_{di} &= \beta_{d0} + \displaystyle \sum_{k = 1}^{K_d} s_{dk}(x_{dki}).
-  \end{split}
-  \end{equation}
-  \begin{equation*}
-    \left(\mathrm{dim}(\bm{\phi}_i) = \mathrm{dim}(\bm{\phi}_j)\, \forall i,j \right)
-  \end{equation*}
-  Typically $D$ is parameterized in a way that $\bm{\phi}_i \equiv (\mu_i, \sigma_i, \nu_i)$; $\mu_i$ being location, $\sigma_i$ scale and $\nu_i$ shape.
 \end{frame}
 
 \subsection{Splines}
-\begin{comment}
-\begin{frame}{Splines}
-  Smooth effects are approximated using natural cubic splines, which are represented through reduced rank cubic regression spline bases \parencite[p. 201]{wood2017generalized} in the simulation
-  \begin{equation}
-    s_{dk}(x_{dki}) \approx \displaystyle \sum_{j = 1}^{J_{dk}} b_{dkj}(x_{dki})\beta_{dkj}.
-    \label{eq:basis-expansion}
-  \end{equation}
-\end{frame}
-
-\begin{frame}
-  \begin{figure}[ht]
-\centering
-\begin{subfigure}{0.33\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{Figures/spline_basis_cr_function}
-    \caption{One basis function}
-    \label{fig:splines_cr_fct}
-\end{subfigure}%
-\begin{subfigure}{0.33\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{Figures/spline_basis_cr_unrestricted}
-    \caption{Unrestricted spline basis}
-    \label{fig:splines_cr_unres_basis}
-\end{subfigure}
-\begin{subfigure}{0.33\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{Figures/spline_basis_cr_restricted}
-    \caption{Restricted spline basis}
-    \label{fig:splines_cr_res_basis}
-\end{subfigure}%
-\begin{subfigure}{0.33\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{Figures/spline_basis_cr_fitted}
-    \caption{Fit}
-    \label{fig:splines_cr_fit}
-\end{subfigure}
-\caption{Steps of fitting a cubic regression spline.}
-    \label{fig:splines_cr}
-\end{figure}
-\end{frame}
-\end{comment}
-
 \begin{frame}{Smoothing parameters}
-Prevention of overfitting via penalization of the functions wigglyness, measured as its second derivative, rewritten as a quadratic penalty
-  \begin{equation}
-    \lambda_k \displaystyle \int_{x_1}^{x_{J_k}} \hat{s}_k^{''}(x)^2 \ dx =
-    \lambda_k \hat{\bm{\beta}}_k^\top \bm{\mathcal{S}}_k \hat{\bm{\beta}}_k
-  \end{equation}
-
-Including more terms/splines the penalty can be expressed as
-  \begin{equation}
-    \hat{\bm{\beta}}^\top \text{\textbf{S}}_{\bm{\lambda}} \hat{\bm{\beta}}.
-    \label{eq:quadratic-pen}
-  \end{equation}
-
-Containing e. g.
-  \begin{equation}
-    \hat{\bm{\beta}}^\top \text{\textbf{S}}_{\bm{\lambda}} \hat{\bm{\beta}} =
-    \left(
-    \begin{array}{c}
-      \hat{\beta}_0      \\
-      \hat{\bm{\beta}}_1 \\
-      \hat{\bm{\beta}}_2 \\
-    \end{array}
-    \right)^\top
-    \left(
-    \begin{array}{ccc}
-      0      & \bm{0}                       & \bm{0}                       \\
-      \bm{0} & \lambda_1 \bm{\mathcal{S}}_1 & \bm{0}                       \\
-      \bm{0} & \bm{0}                       & \lambda_2 \bm{\mathcal{S}}_2 \\
-    \end{array}
-    \right)
-    \left(
-    \begin{array}{c}
-      \hat{\beta}_0      \\
-      \hat{\bm{\beta}}_1 \\
-      \hat{\bm{\beta}}_2 \\
-    \end{array}
-    \right).
-  \end{equation}
 \end{frame}
 
 \subsection{Model estimation}
 \begin{frame}{Objective function}
-  Estimation approaches compared in this thesis are based on penalized maximum likelihood, with corresponding objective function
-  \begin{equation}
-    \begin{split}
-      \ell_{\bm{\lambda}}(\bm{\beta}) = \displaystyle \sum_{i = 1}^n \ell_{\bm{\lambda}}(\bm{\beta})_i &=
-      \sum_{i = 1}^n \ell(\bm{\beta})_i - \frac{1}{2} \bm{\beta}^\top \text{\textbf{S}}_{\bm{\lambda}} \bm{\beta} \\ &=
-      \sum_{i = 1}^n \log f(y_i | \bm{\beta}) - \frac{1}{2} \bm{\beta}^\top \text{\textbf{S}}_{\bm{\lambda}} \bm{\beta}.
-    \end{split}
-    \label{eq:log-lik-pen}
-  \end{equation}
 \end{frame}
 
 \begin{frame}{Newton's method}
-  Optimization of (\ref{eq:log-lik-pen}) for $\bm{\beta}$ given $\hat{\bm{\lambda}}$ via Newton's method
-  \begin{equation}
-    \bm{\beta}^* = \hat{\bm{\beta}} + \bm{\mathcal{H}}_{\hat{\bm{\lambda}}}^{-1} \bm{\mathcal{G}}_{\hat{\bm{\lambda}}},
-    \label{eq:newtons_method}
-  \end{equation}
-
-  where $\bm{\mathcal{G}}_{\bm{\lambda}} = \partial \ell_{\bm{\lambda}} / \partial \bm{\beta} |_{\bm{\beta} = \hat{\bm{\beta}}}$ is the gradient vector\footnote{Following the notation of \textcite{wood2016newton}} and $\bm{\mathcal{H}}_{\bm{\lambda}} = -(\partial^2 \ell_{\bm{\lambda}} / \partial \bm{\beta} \partial \bm{\beta}^\top |_{\bm{\beta} = \hat{\bm{\beta}}})$ is the negative Hessian matrix of $\ell_{\bm{\lambda}}(\cdot)$.
 \end{frame}
 
 \begin{frame}{Trust region algorithm}
-  Optimization of (\ref{eq:log-lik-pen}) for $\bm{\beta}$ given $\hat{\bm{\lambda}}$ via the trust region algorithm\footnote{Following \textcite{aeberhard2021robust}}
-  \begin{equation}
-    \bm{\beta}^* = \hat{\bm{\beta}} + \underset{\bm{e}: \|\bm{e}\| \le \Delta}{\mathrm{arg\,max}} \;
-    \left\{
-    \ell_{\hat{\bm{\lambda}}}(\hat{\bm{\beta}}) + \bm{e}^\top \bm{\mathcal{G}}_{\hat{\bm{\lambda}}} - \frac{1}{2} \bm{e}^\top \bm{\mathcal{H}}_{\hat{\bm{\lambda}}} \bm{e}
-    \right\},
-    \label{eq:trust_region}
-  \end{equation}
-
-  where $\Delta$ denotes the current radius of a sphere with center $\hat{\bm{\beta}}$.
 \end{frame}
 
 \begin{frame}{Generalized Fellner-Schall method}
-  Based on \ac{LAML}, which is optimized to obtain an estimate for $\bm{\lambda}$, one can derive the update formula
-  \begin{equation}
-    \lambda^*_k =
-    \frac{\mathrm{tr}(\text{\textbf{S}}_{\hat{\bm{\lambda}}}^- \,
-    \frac{\partial \text{\textbf{S}}_{\bm{\lambda}}}{\partial \lambda_k}\big{|}_{\bm{\lambda} = \hat{\bm{\lambda}}})
-    - \mathrm{tr}(\bm{\mathcal{H}}_{\hat{\bm{\lambda}}}^{-1} \,
-    \frac{\partial \text{\textbf{S}}_{\bm{\lambda}}}{\partial \lambda_k}\big{|}_{\bm{\lambda} = \hat{\bm{\lambda}}})}
-    {\hat{\bm{\beta}}^\top \,
-    (\frac{\partial \text{\textbf{S}}_{\bm{\lambda}}}{\partial \lambda_k}\big{|}_{\bm{\lambda} = \hat{\bm{\lambda}}}) \,
-    \hat{\bm{\beta}}}
-    \hat{\lambda}_k,
-  \end{equation}
-
-  which maintains the statistical consistency of reduced rank splines like the ones employed in this thesis given that $K = O(n^\alpha)$, where $\alpha < 1/3$ \parencite{wood2016newton}. \\
 \end{frame}
 
 \begin{frame}{Estimation using an artificial neural network}
-  At step $m$ all model parameters, written as one vector $\bm{\theta}$, are updated by\footnote{Note that Adam minimizes functions, e. g. $-\ell_{\bm{\lambda}}(\bm{\beta})$.}
-  \begin{equation}
-    \bm{\theta}^* = \hat{\bm{\theta}} - \alpha\, \bm{v}_m^{'*} / (\sqrt{\bm{w}_m^{'*}} + 10^{-7}),
-  \end{equation}
-
-  where $\bm{\mathcal{G}} = \partial -\ell_{\bm{\lambda}} / \partial \bm{\theta} |_{\bm{\theta} = \hat{\bm{\theta}}}$, $\bm{v}_m^* = 0.9\, \hat{\bm{v}}_m - 0.1\, \bm{\mathcal{G}}$, with a bias corrected version $\bm{v}_m^{'*} = \bm{v}_m^* / (1 - 0.9^m)$, $\bm{w}_m^* = 0.999\, \hat{\bm{w}}_m - 0.001\, \bm{\mathcal{G}}^2$, with $\bm{w}_m^{'*} = \bm{w}_m^* / (1 - 0.999^m)$ and $\alpha$ is the step size\footnote{Note that some tunable hyperparametes already have been replaced by the values used for model fitting in this thesis.}. \\
-  \begin{itemize}
-    \item $\ell_{\bm{\lambda}}(\bm{\beta})$ is only evaluated at random subsets of $\bm{y}$.
-    \item Implicit regularization
-    \item Expectation ${\hat{\bm{\lambda}} = \bm{0}}$
-    \item Early stopping using 10\% of data $\Rightarrow$ Explicit regularization through $\bm{\lambda}$ if stopping occurs early enough
-  \end{itemize}
 \end{frame}
 
 \section{Simulation study}
 \begin{frame}{Data simulation}
-  % \begin{figure}[ht]
-  %   \centering
-  %   \includegraphics[width=0.8\linewidth]{Figures/data-simulation}
-  %   \caption{Flowchart for the data simulation}
-  %   \label{fig:flow-chart}
-  % \end{figure}
 \end{frame}
 
 \begin{frame}{Effects on linear predictors}
-  % \begin{figure}[ht]
-  %   \centering
-  %   \includegraphics[width=0.8\linewidth]{Figures/effects-of-x}
-  %   \caption{Possible effects on linear predictors and $f_5(\cdot)$. The functions are centered around 0 and act on $x$ between -2 and 2. Therefore $\max |f(x)| \le 1$.}
-  %   \label{fig:effects}
-  % \end{figure}
 \end{frame}
 
 \begin{frame}{Exemplary data generating process}
-  Gamma distribution, p~=~5, $p_1 = 2$, $p_2 = 4$, n = 100
-\begin{equation}
-  \begin{split}
-    Y_i       &\sim \text{GA}(\exp(\eta_{1i}), \exp(\eta_{2i})),\; i = 1, \dots, 100 \\
-    \eta_{1i} &= f_3(x_{2i}) + f_1(x_{5i}) \\
-    \eta_{2i} &= f_4(x_{5i}) + f_1(x_{1i}) + f_2(x_{3i}) + f_2(x_{2i}) + c,
-  \end{split}
-\end{equation}
-
-  The packages in turn estimate this specification:
-\begin{equation}
-  \begin{split}
-    Y_i &\sim \text{GA}(g_1^{-1}(\eta_{1i}), g_2^{-1}(\eta_{2i})),\; i = 1, \dots, 100 \\
-    g_1(\mu_{i}) &= \eta_{1i} = \beta_{10} + s_{11}(x_{2i}) + s_{12}(x_{5i}) \\
-    g_2(\sigma_{i}) &= \eta_{2i} = \beta_{20} + s_{21}(x_{5i}) + s_{22}(x_{1i}) + s_{23}(x_{3i}) + s_{24}(x_{2i}),
-  \end{split}
-\end{equation}
-
-where $J_{dk} = 10\; \forall d, k$ and $g_d(\cdot)$ are the employed links\footnote{Note that linear effects are specified as smooth terms too.}.
 \end{frame}
 
 \begin{frame}{Signal-to-noise ratio}
-  The \ac{SNR} is defined for this thesis as
-  \begin{equation}
-    \text{SNR} = \frac{\mathbb{V}( \mathbb{E}( \bm{Y} | \bm{X} ) )}{ \mathbb{V}( \bm{y} - \mathbb{E}( \bm{Y} | \bm{X} ) )},
-  \end{equation}
-
-  where $\bm{Y}$ is a vector of i.i.d. response random variables and $\bm{X}$ denotes the model matrix. \\
-  Inverse transform sampling \parencite[see e. g.][]{random-number-generation}:
-  \begin{enumerate}
-    \item Draw observations $u_i$ of $U_i \overset{i.i.d.}{\sim} \text{Unif}[0, 1]$
-    \item Transform $\bm{u}$ into $\bm{y}$ using respective quantile function $q(\cdot)$
-  \end{enumerate}
-  \begin{equation}
-  \bm{y} = q(\bm{u} | g_1^{-1}(\bm{\eta}_1), g_2^{-1}(\bm{\eta}_2 + c)),
-  \end{equation}
-
-  where the \ac{SNR} is controlled through $c$.
 \end{frame}
 
 \section{Summary of performances}
 \subsection{Integrated mean squared error}
 \begin{frame}{Integrated mean squared error}
-  % \begin{figure}[ht]
-  %   \centering
-  %   \includegraphics[width=0.8\linewidth]{Figures/fitted_terms}
-  %   \caption{\Ac{IMSE} visualization.}
-  %   \label{fig:terms}
-  % \end{figure}
 \end{frame}
 
 \begin{frame}{Integrated mean squared error}
-  \begin{table}[ht]
-  \centering
-  \resizebox{\textwidth}{!}{
-  \begin{tabular}{lrrrrrr}
-    \hline
-    Package & Minimum & 1st Quartil & Median & Mean & 3rd Quartil & Maximum \\
-    \hline
-    DR   & 0.001 & 0.007 & 0.024 & 0.062  & 0.099 & 0.725                   \\
-    GJRM & 0.000 & 0.003 & 0.009 & 0.579  & 0.037 & 47.436                  \\
-    mgcv & 0.000 & 0.003 & 0.007 & 8.997  & 0.030 & 5925.334                \\
-    \hline
-    DR   & 0.003 & 0.073 & 0.123 & 0.135  & 0.182 & 0.752                   \\
-    GJRM & 0.000 & 0.003 & 0.009 & 0.720  & 0.041 & 939.321                 \\
-    mgcv & 0.000 & 0.003 & 0.009 & 0.186  & 0.033 & 90.577                  \\
-    \hline
-    DR   & 0.001 & 0.010 & 0.048 & 2.314  & 0.126 & 1569.680                \\
-    GJRM & 0.000 & 0.003 & 0.010 & 0.434  & 0.045 & 165.361                 \\
-    mgcv & 0.000 & 0.000 & 0.010 & 52.100 & 0.070 & 82731.930               \\
-    \hline
-  \end{tabular}}
-  \caption{Summary mean \ac{IMSE}. (i) Normal, (ii) Gamma, (iii) Gumbel}
-  \label{tab:imse}
-\end{table}
 \end{frame}
 
 \begin{frame}{Integrated mean squared error}
-  % \begin{figure}
-  % \centering
-  % \includegraphics[width=\linewidth]{Figures/terms_mimse}
-  % \caption{Boxplots for the \enquote{mean \ac{IMSE}} by n, p and family. The y-axis is fixed.}
-  % \label{fig:family_n_p_imse}
-  % \end{figure}
 \end{frame}
 
 \begin{frame}{Integrated mean squared error}
-  % \begin{figure}
-  % \centering
-  % \includegraphics[width=\linewidth]{Figures/terms_mimse_s2n}
-  % \caption{Boxplots for the \enquote{mean \ac{IMSE}} by n, SNR and family. The y-axis is fixed.}
-  % \label{fig:family_n_p_imse}
-  % \end{figure}
 \end{frame}
 
 \subsection{Log-likelihood}
 \begin{frame}{Log-likelihood}
-  % \begin{figure}[ht]
-  %   \centering
-  %   \includegraphics[width=0.8\linewidth]{Figures/log-lik}
-  %   \caption{Log-likelihood estimates against true log-likelihood. Some values are not displayed for plotting reasons.}
-  %   \label{fig:log-lik}
-  % \end{figure}
 \end{frame}
 
 \begin{frame}{Log-likelihood}
-  \begin{table}[ht]
-  \centering
-  \resizebox{\textwidth}{!}{
-  \begin{tabular}{lrrrrrr}
-    Package & Minimum & 1st Quartil & Median & Mean & 3rd Quartil & Maximum        \\
-    \hline
-    DR   & 0.052 & 0.170 & 0.298 & 0.417              & 0.509 & 6.299              \\
-    GJRM & 0.000 & 0.000 & 0.000 & 15211.000          & 0.000 & $2.333 \cdot 10^7$ \\
-    mgcv & 0.013 & 0.067 & 0.111 & 23.691             & 0.210 & 19587.182          \\
-    \hline
-    DR   & 0.079 & 0.392 & 0.568 & 0.714              & 0.856 & 10.217             \\
-    GJRM & 0.009 & 0.071 & 0.127 & 5.762              & 0.251 & 2475.874           \\
-    mgcv & 0.009 & 0.072 & 0.122 & 0.193              & 0.220 & 8.151              \\
-    \hline
-    DR   & 0.164 & 0.393 & 0.522 & $\infty$           & 0.797 & $\infty$           \\
-    GJRM & 0.000 & 0.000 & 0.000 & $7.721 \cdot 10^5$ & 0.000 & $1.444 \cdot 10^9$ \\
-    mgcv & 0.018 & 0.099 & 0.163 & $\infty$           & 0.336 & $\infty$           \\
-  \end{tabular}}
-  \caption{Summary log-lik. (i) Normal, (ii) Gamma, (iii) Gumbel}
-  \label{tab:log-lik}
-  \end{table}
 \end{frame}
 
 \begin{frame}
-  % \begin{figure}
-  %   \centering
-  %   \includegraphics[width=\linewidth]{Figures/loglik_mad}
-  %   \caption{Boxplots for the log-likelihood measure by n, p and family. y-Axis is fixed.}
-  %   \label{fig:family_n_p_loglik}
-  % \end{figure}
 \end{frame}
 
 \begin{frame}
-  % \begin{figure}
-  %   \centering
-  %   \includegraphics[width=\linewidth]{Figures/loglik_mad_s2n}
-  %   \caption{Boxplots for the log-likelihood measure by n, SNR and family. y-Axis is fixed.}
-  %   \label{fig:family_n_p_loglik}
-  % \end{figure}
 \end{frame}
 
 \begin{frame}{Experiences with \texttt{deepregression}}
-  \begin{itemize}
-    \item Good performance using the Adam optimizer and a step size of $\alpha = 0.01$
-    \item Early stopping often at around 100 evolutions
-    \item Some $\hat{\bm{\lambda}} \neq \bm{0}$, maybe due to early stopping
-    \item Some degree of overfitting observable using plots like the figure for the \ac{IMSE}
-    \item Maybe test optimizing the improper joint density on which \ac{GFS} is based, instead of $\ell_{\bm{\lambda}}(\bm{\beta})$
-    \item Batch-sizes: $\mathrm{round}(\sqrt{10\, \text{n}})$
-  \end{itemize}
 \end{frame}
 
 \section{Outlook}
 \begin{frame}{Outlook}
-  \begin{itemize}
-    \item Training the \ac{NN} with a constant batch size
-    \item Change generation of the structure of the relationship between the response and its covariates % TODO: Just give a large number and let the stochastic nature handle tthe rest
-    \item More grid search-like approach for settings of special interest, e. g. ones with extreme errors
-    \item Extension of possible smooth effects to include more difficult ones (e.~g. $f_5(\cdot)$)
-    \item Test other spline base types, e. g. P-splines are readily available
-    \item Specify the packages to estimate effects for all available covariates and check if variables independent of $\bm{Y}$ get estimates $\hat{s}(\cdot) \equiv 0$ % TODO: (e. g. when p = 5, $p_1 = 2$ and $p_2 = 4$)
-    \item Planned implementation of \ac{GFS} in \texttt{deepregression} $\Rightarrow$ code suitable for beta-testing
-    \item Estimation in an \ac{NN} was revealed to be superior in cases where the assumptions of \ac{GFS} are too restrictive.
-    % TODO: When some bugs or problematic hyperparameter-settings are fixed, it may be worthwhile experimenting with different ways of fitting, especially early stopping and batch-sizes.
-  \end{itemize}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Bibliography}
