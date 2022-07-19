@@ -10,42 +10,42 @@ output:
 *Supervisor: Christian Heumann
 
 ## 2.1.1 Microsoft COCO: Common Objects in Context
-(numbers like 1 or 2.1 are just outline or keypoint for subparagraph)
-1.large datasetscomputer vision research, .How does these Datasets come from : MC COCO, ImageNet (key point is COCO others ImageNet little, references not finished )
 <br>
 Understanding of visual scenes plays an important role in computer vision research (CV)
 Many tasks are included in it, such as image classification, object detection, object localization and semantic scene labeling.
-Through the computer vision research history,Image Datasets have played a critical role. They are not only essential for training and evaluating new algorithms, but also lead the research to new challenging directions.[@mccoco] In the early year, researchers developed Datasets[345] which enabled the direct comparison of hundreds of image recognition algorithms, that was the early evolution in object recognition. Recent years ImageNet dataset [1] which contains millions of images has enabled breakthroughs in both object classification and detection research using new deep learning algorithms. 
+Through the computer vision research history, Image Datasets have played a critical role. They are not only essential for training and evaluating new algorithms, but also lead the research to new challenging directions.[@mccoco] In the early year, researchers developed Datasets[345] which enabled the direct comparison of hundreds of image recognition algorithms, that was the early evolution in object recognition. Recent years, ImageNet dataset [1] which contains millions of images has enabled breakthroughs in both object classification and detection research using new deep learning algorithms. 
 With the goal of advancing the state-of-art in object recognition especially scene understanding, a new large scale data called Microsoft COCO was published in 2014. MS COCO focuses on three core problems in scene understanding: detecting non-iconic views, detecting the semantic relationships between objects and precise localization of image objects.[@mccoco]
 MS COCO Dataset contains 91 common object categories with a total of 328,000 images as well as 2,500,000 labeled instances. All these images could be recognized by a 4 year old child.82 categories include more than 5000 labeled The labeled instances which may support the detection of relationships between objects is much larger per image in COCO (7.7) than in ImageNet(3.0)[@mccoco]. In order to provide precise localization of object instances, only "Thing" categories like car, table, dog will be included. objects which do not have clear boundaries like sky, sea, grass, will not be included. In current object recognition research, algorithms perform well on images with iconic views. These images always contains the single object category in the center of the image. To accomplish the goal of detecting the contextual relationships between objects, more complex images with multiple objects or natural images which comes from our daily life are gathered for the Dataset.
 <br>
 <br>
 
-2.Image collection and annotation
+2.Image collection and annotation 2.1 categories2.2 non-iconic2.3 annotation
 COCO is a large-scale richly annotated Datatset, the progress of building consists of two phases:Data collection and image annotation.
 <br>
-2.1 categories
-In order to select representative object categories for Images in COCO, researchers collected several categories from different dataset like PASCAL VOC and other sources. All these object categories can be recognized by children between 4 to 8. The quality of the object categories were ensured by co-authors.Co-authors scale the categories from 1 to 5 depending on their common occurrence, practical applications and diversity from other categories [@mccoco]
+In order to select representative object categories for Images in COCO, researchers collected several categories from different dataset like PASCAL VOC and other sources. All these object categories can be recognized by children between 4 to 8. The quality of the object categories were ensured by co-authors.Co-authors scale the categories from 1 to 5 depending on their common occurrence, practical applications and diversity from other categories [@mccoco].Thwe final number pf the list is 91, which includes all the categories from PASCAL VOC
 <br>
-2.2 non-iconic
-With the help of representative object categories, COCO want to collect a dataset which a majority of these images are non-iconic.
+
+With the help of representative object categories, COCO want to collect a dataset which a majority of these images are non-iconic. Images are roughly divided into three types:iconic-object images, iconic-scene images and non-iconic images[@mccoco] (Images needs to be added)
 Images are collected through two strategies, firstly images from Flickr which contains photos uploaded by amateur photographer with keywords are collected. Secondly, Searching for pairwise combination of object categories like "dog + car" are used by researchers to gather more non-iconic images and images with rich contextual relationships.
 <br>
-2.3 annotation
 Due to the the scale of the dataset and the high cost of the annotation process, the  design of a high quality annotation pipeline with efficient cost is a difficult task.
 The annotation pipeline for COCO is splitted into three primary tasks: 1. category labeling, 2.instance spotting, and 3. instance segmenting.
 ```{r, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Left, [@mccoco]" }
 knitr::include_graphics("/Users/luyangchu/Downloads/seminar sose2022/multimoddl/seminar_multimodal_dl/figures/02-chapter2/2.1 annotation pipeline.png")
 ```
 <br>
-1. category labeling: determine object categories in each images on the user interface of , using hierarchical approach, dividing 91 catefories in to 11 super-categories(20k worker hours expensive)
-2. label all instance of the object categories in images 10k hours
-3. segmenting each object instances 
-in detail  segment an object instance specified by a worker in the previous stage
-to ensure good quality an explicit verification step on each segmented instance was performed
+As we can see in the Image(), object categories in each image will be determined in the first step. Due to the large number of Datasets and categories, they used a hierarchical approach instead of doing binary classification for each category. All the 91 categories have divided into 11 super-categories.The worker will examine the existence of a single instance for a given super-category. This hierarchical approach has helped to reduce the time for labeling. However, the first phase still took ∼20k worker hours to complete.
+In the next step, all instances of the object categories in an image were labeled, at most 10 instances of a given category per image will be labeled by each worker. Each image was labeled by 8 workers for a total of ∼10k worker hours.
+In the final segmenting stage, each object instance is segmented, the segmentations for other instances and the specification of the object instance by a worker in the previous stage will also shown to the worker.
+( all workers are required to complete a training task for each object category. The training task required workers to segment an object instance. )
+To ensure good quality an explicit verification step on each segmented instance was performed.
+(high cost of time and money .......)
 <br>
 <br>
 3.datasets ---> further development, the pro cons 
+In recent years, researchers have developed several pre-trained datasets and benchmarks which helped the developemnt of Algorithms for CV.(from .... simple ones?)
+Each of these datasets varies significantly in size, list of labeled categories and types of images. 
+ImageNet containing millions of images has enabled breakthroughs in both object classification and detection research using a new class of deep learning algorithms.ImageNet was created to capture a large number of object categories, many of which are fine-grained. SUN focuses on labeling scene types and the objects that commonly occur in them. Finally, PASCAL VOC’s primary application is object detection in natural images. MS COCO is designed for the detection and segmentation of objects occurring in their natural context. [@mccoco]
 3.1.comparison with other datasets like ImageNet Pascal and SUN using the Fig from [@mccoco]
 <br>
 ```{r, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Left, [@mccoco]" }
@@ -67,10 +67,12 @@ typical vision datasets are labor intensive and costly to create
 teaching only a narrow set of visual concepts; 
 standard vision models are good at one task and one task only, and require significant effort to adapt to a new task; 
 models that perform well on benchmarks have disappointingly poor performance on stress tests
+
 ## 2.1.2 Meshed-Memory Transformer for Image Captioning ($M^2$)
 1. what is $m^2$ intro, the goal of it.
 Transformer-based architectures not only for language understanding. 
 Exploring their applicability to multi-modal contexts like image captioning[@cornia2020m2]
+
 Image captioning: describe visual content of an image in human language.
 Understand and model the relationships between visual and textual elements
 Generate a sequence of output words. 
