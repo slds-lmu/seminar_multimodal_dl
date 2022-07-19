@@ -1,5 +1,85 @@
-# title
+# title: Images supporting language models
 
-*Author: *
+*Author: Giacomo Loss
 
-*Supervisor: *
+*Supervisor: Matthias Assenmacher
+
+## Words in (non-symbolic) contexts
+
+Imagine you were alone in a foreign country, you could not speak the language and the only resource you had were a dictionary in the foreign language. You see a word written on a sign but you cannot understand its meaning. What could you do? One idea would be do open the dictionary and look the word up. The problem is that the word is defined by using other words in the foreign language. As a second step you would thus look these new words up and continue like that in further steps to the "infinity and beyond" (cit. Buzz Lightyear). But even after looking every single word in the dictionary up, you would still not be able to understand the meaning of the word written on the sign. If on that sign, next to the unknown word, something else were instead depicted, for example an image of a fork and a knife, you might speculate that the word indicates something which has to do with food, like a restaurant. And this without explicitly knowing the meaning of the word. This example is inspired by the work of Stevan Harnad, which formulated at the beginning of the 90's the so called *Symbol Grounding Problem* (@harnad1990symbol). It asserts that it is not possible to understand the meaning (semantics) of a word by just looking at other words because words are essentially meaningless symbols. It is possible to understand the meaning only if the word is put in a context, a perceptual space, other than that of written language: the word must be *grounded* in non-symbolic representations, like images, for example. Over the past 10 years there has been a whopping development of distributional semantic models (DSMs, henceforth), especially after the Word2vec (@mikolov2013efficient) revolution. These family of models assume that the meaning of words and sentences can be inferred by the "distribution" of those words and sentences within a text corpus (the *Distributional Hypothesis* formulated by @harris1954distributional). But the *Symbol Grounding Problem* mentioned earlier suggests that DSMs do not resemble the way words are learned by humans, which is in multimodal perceptual contexts. For these reasons, models have been developed with the goal to integrate further modalities (like visual ones) in pure language models, assuming that grounding words and sentences in other perceptual contexts should lead to a better understanding of their semantics and as a result, to better performance in pure language tasks.
+<br>
+The focus of this chapter are models which empower pure language models with visual modalities in form of images. In particular, models which focus on the semantics of single words or of sentences as a whole are taken into consideration. These models are then tested on well-established pure natural languages tasks and their related benchmarks (see Chapter XX for further references on benchmarks).
+
+<br>
+
+Typical tasks for the (intrinsic) evaluation of models at the word-level are:
+
+-   Relatedness: "apple" is related to "food"
+-   Visual similarity: "donkeys" look like "horses"
+-   Semantic similarity: lemons are similar to oranges (they are both food, acid and used to produce juices) <br>
+
+Tasks related to the evaluation of sentences are among others (based on classification presented in @wang2018glue):
+
+-   Single sentence tasks: sentiment analysis, for example
+-   Similarity and paraphrase: test if a pair of sentences are semantically equivalent
+-   Inference/textual entailment: recognize if sentence B follows from sentence A. For example the sentence "Peter just graduated from high-school" and "Peter can study at university" are entailed since high-school graduation is prerequisite for university enrollment
+
+<br>
+
+The chapter describes the evolution of the integration of images as visual modalities into pure language models: from simple concatenation of textual and visual modalities, to the projection of visual elements in a common grounded space and more recently the use of transformers to distill visual information for pure language models.
+It is no surprise that the applications of this family of models is not confined solely on word and sentence evaluation tasks and include also tasks such as machine translation and dialogue generation; although not the main focus of this chapter, they will be briefly addressed at the end.
+
+<br>
+
+## Adam and Eve: sequential multimodal embedding
+
+How can an image represents semantic information of a word? The only language machines can understand are numbers. This is why, no matter if we are dealing with textual or image representations of words, a numerical encoding is needed. This comes usually in the form of vector embeddings. Once numerical representations of text and related images are available, the question is how to fuse them and obtain a multimodal representation of a certain word (or sentence). One intuitive idea would be to *concatenate* the textual and visual modalities. Let $V_{text}$ be the textual (vectorial) representation of a word and let $V_{img}$ be its visual (vectorial) representation, a fused representation of a certain word $F$ might take the following simplified form: $$F=\gamma(V_{text})\bigoplus(1-\gamma)V_{img}$$ where $\gamma$ is a tuning parameter which controls the relative contribution of both modalities to the final fused representation. @bruni2014multimodal propose a model where a the meaning of a target word is represented as a semantic vector and all vectors are collected in a "text-based semantic matrix". Embeddings are computed based on (transformed) co-occurrence counts of words in a predefined window. The starting point for the construction of the "image-based semantic matrix" is a dataset of labeled images. Firstly low-level features called "local descriptors", which incorporate geometric information of specific areas of a certain picture are extracted and then this descriptors are assigned to cluster of "visual words" (see for example @bosch2007image for more details on this technique, called "beg-of-visual-words"). After that, co-occurrence counts of each word label are obtained by summing up visual words occurrences across all images and word labels. The two matrices are then combined and and singular value decomposition is used to project textual and visual inputs on a lower dimensionality space and find multimodal latent factors (whose number is a hyperparameter). In the end, a similarity of words estimation is performed by using cosine similarity[^1]. In this first (historically motivated) example, the vector representation of images is obtained with non-trivial features engineering. But in recent years, the use of neural networks has made an "automatic features selection" possible. This is what for example @kiela2014learning are doing, extracting visual features from the first seven layers of a convolutional neural network (proposed by @krizhevsky2012imagenet) trained on 1.6 million images from the ImageNet database (@deng2009imagenet), which produces scores for 1,512 object categories. The linguistic part of the model relies on the Skip-gram model by @mikolov2013efficient and consists of 100-dimensional vector representations. The multimodal representation is again obtained by concatenation of both modalities. Another notable example of concatenation/sequential combination of textual and visual modalities is the work of @silberer2014learning: textual and visual modalities are represented by separate vectors of textual and visual attributes. During training, these textual and visual inputs vectors are separately fed to denoising (unimodal) autoencoders, whose training objective is the reconstruction of a certain corrupted input - e.g. through masking noise - from a latent representation. Their outputs are then jointly fed to a bimodal autoencoder to be mapped to a multimodal space, on which a softmax layer (classification layer) is added, which then allows the architecture to be fine-tuned for different tasks. The loss function is as follows:
+
+$$L=\frac{1}{n}\sum_{i=1}^{n}\left(\delta_{r}L_{r}(x^i,\hat{x}^i)+\delta_{c}L_{c}(t^i,\hat{t}^i)+\lambda R \right)$$
+
+where $x^i$ is an input vector and $\hat{x}^i$ its reconstruction, $t^i$ is the correct object label associated with input vector $x^i$ and $\hat{t}^i$ the predicted label, $L_{r}$ and $L_{c}$ are entropy loss functions, $\delta_{r}$ and $\delta_{c}$ controls the partial objective functions (reconstruction and classification error respectively) and $R$ is a regularization term. Depending on how the hyperparameters are set, the model can be reduced for example to a simple object classification algorithm (setting $\delta_{r}$ to zero[^2]).
+
+[^1]: Cosine similarity between vectors $a$ and $b$ is defined as $cos(a,b)=\frac{a \cdot b}{||a|| \cdot ||b||}$
+
+[^2]: For sake of completeness, in order to obtain a plain object classification model, another hyperparameter, namely $v$, the corruption parameter for the textual modality should be set to one.
+
+## The grounded space and the power of imagination
+
+The aforementioned models assume implicitly a one-to-one correspondence between text and images: a visual representation is extracted only from words which are associated to a concrete image. This is a limitation, for two partially overlapping reason. One one hand, how can we depict words for which no image is available in our training set? Is it possible to *imagine* visual representations purely from linguistic ones? On the other hand, could we hypothetically find a visual representation for each word? This might be true for concrete words but when it comes to abstract ones, it is not always possible to find suitable visual representations, or said in other terms, many words are not visually grounded: for example, according to summary statistics reported in @tan2020vokenization, only 28% of terms in English Wikipedia are visually grounded. For this reasons, researches have addressed the question: could we map textual and visual elements elements to a grounded space and have models able to generalize images and words other than those in the training set? Well, the answer is yes!
+
+<br>
+
+@lazaridou2015combining propose a multimodal Skip-gram architecture where the objective function of a Skip-gram is "augmented" with an additional linguistic objective: $$\frac{1}{T}\sum_{t=1}^{T}\left(\mathcal{L}_{ling}(w_{t})+\mathcal{L}_{vision}(w_{t})\right)$$
+
+where $\mathcal{L}_{ling}$ is the Skip-gram loss function and $\mathcal{L}_{vision}$ is the additional visual loss for the target word $w_{t}$. In particular, $\mathcal{L}_{vision}$ has the following form of a max-margin framework, whose goal is to make the (vectorial) linguistic representation of a certain word more similar to its visual representation: $$^\mathcal{L}_{vision}(w_{t})=-\sum_{w^{'}\sim P_{n}(w)}\left(max(0,\gamma-cos(z_{w_{t}},v_{w_{t}})+cos(z_{w_{t}},v_{w^{'}})\right)$$
+
+where $v_{w^{'}}$ is a visual representation of a randomly chosen word $w^{'}$ used as negative sample, $v_{w_{t}}$ is the corresponding visual vector and $z_{w_{t}}$ is the target multimodal word representation which has to be learned by the model and it is nothing more than a linear transformation of a word representation $u_{w_{t}}$: $z_{w_{t}}=M^{u\rightarrow v}u_{w_{t}}$ and $M^{u\rightarrow v}$ is a cross-modal mapping matrix from linguistic inputs to a visual representation. It is important to remark that during training, for words which do not have associated images, $\mathcal{L}_{vision}$ gets the set to zero. When this cross-modal mapping matrix is estimated, it is then possible to find a visual representation for new words, which do not have a related image in the training set: the model allows to *imagine* new words. This is what is meant with grounded space: a perceptual (visual, in this case) space where a word is *grounded*, put in context.
+
+<br>
+
+```{r, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="From @lazaridou2015combining. The linguistic embedding of the word 'cat' is mapped to a visual space, such that the similarity of vector representations of words and associated images is maximized", }
+knitr::include_graphics("img_lazaridou2015combining01.png")
+```
+
+<br>
+
+Similar instances of a cross-modal mapping can be found for example in @kottur2016visual (a multimodal extension of the CBOW model specification of word2vec) and in @collell2017imagined where visual features are obtained from the forward pass of CNN pre-trained on ImageNet (@russakovsky2015imagenet) and a mapping $f:\mathcal{L} \rightarrow \mathcal{V}$ from textual space $\mathcal{L}$ to a visual space $\mathcal{V}$ is obtained as a result of the training process. Also in this case, it is possible to generate from the linguistic embedding of word $w$, $l_{w}$, not necessarily present in the training set, a visual representation $f(l_{w})$. In particular, they propose two specifications of the mapping function: a simple linear mapping and neural network with a single hidden layer. Last but not list, @hill2014learning recognize that concrete nouns are more likely to have a visual representation and so they map a set of concrete words (CSLB, @devereux2014centre) to "bags of perceptual/visual features" and every time one of these words is encountered during training, the Skip-gram model they are using stop training on that sentence and instead continues the training on a newly created "pseudo-sentence" which takes into consideration the aforementioned bag of perceptual features. This list is unfortunately not exhaustive and there are other models with similar ideas, for example @ailem2018probabilistic or @kiros2018illustrative. <br> The aforementioned papers and related models focus on the modeling of semantic of words and are tested on word-level tasks such as relatedness and or semantic and visual similarity. Nonetheless, as mentioned in the introduction, there are models designed to address tasks at sentence-level, such as sentiment analysis or sentence entailment. @kiela2017learning employ a bidirectional Long Short-Term Memory (LSTM, @hochreiter1997long) architecture to model sentence representations, in order to gain information from the text in both directions. The goal is again encode a sentence and ground in an image. Textual embeddings are obtained with GloVe (@pennington2014glove) and they are then  projected on a grounded space with a linear mapping. This grounded word vector serves as input for the bidirectional LSTM, which is trained together with the linear mapping. Their model is versatile and depending on the loss function specification, it can not only propose alternative captions to an image (which is a way to frame sentence equivalence tasks) but also predict captions from images or perform both tasks at the same time. This last point highlights an important characteristic of many of the models discussed in this chapter: even though the focus is on empowerment of pure language models with the addition of visual elements, some of the models discussed in this chapter can be used for purposes other than pure language tasks. The control over which task is performed is usually exercised by either specifying different loss functions (as in the last model described) or setting properly certain hyperparameters (such as in the previously described model by @silberer2014learning).       
+<br>
+
+## The Transformers Revolution
+- why are transformers game changers in NLP: more than one embedding per word
+- Universal tendencies: focus on downstream tasks and transfer learning
+- Vokenization: how to visually supervise text
+- Imagination: what about imagined representations instead of just real images to support NLP tasks
+
+## Evaluation before transformers
+Semantic, visual similarity and relatedness: pros&cons of human similarity ratings
+Problems representing abstract words
+
+## Evaluation before transformers
+Focus on downstream tasks: more objective
+Visually augmented word embeddings perform worse than pure language models (e.g. BERT). Universal models are not yet powerful enough
+Few-shot learning. How to deal with low resources
+
+## Whatabout the future? 
+Possible applications: machine translation, dialogue generation
