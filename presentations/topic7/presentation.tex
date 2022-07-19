@@ -21,6 +21,7 @@
 \setbeamertemplate{subsection in toc}{\hspace*{2em}\textcolor{OliveGreen}{\inserttocsectionnumber.\inserttocsubsectionnumber}~\inserttocsubsection\par}  % numbered table of contents
 \setbeamercovered{transparent}
 \usefonttheme[onlymath]{serif}  % better math font
+\setbeamertemplate{caption}[numbered]
 
 % packages ---------------------------------------------------------------
 % text encoding
@@ -96,7 +97,7 @@
   \tableofcontents[sections={3-6}]
 \end{frame}
 
-\subsection{Web-scale data}
+\subsection{Web-scale data} %---------------------------------------------
 \begin{frame}{Concepts: Web-scale data}
   \begin{itemize}
     \item Possible through natural language supervision
@@ -112,51 +113,97 @@
   \end{itemize}
 \end{frame}
 
-\subsection{Contrastive objective}
+\subsection{Contrastive objective} %--------------------------------------
 \begin{frame}{Concepts: Contrastive objective}
-  \begin{itemize}
-    \item Data efficient
-    % Formula here
-  \end{itemize}
+  \begin{equation}
+    \ell^{V1, V2} = - \underset{\{v_1^1, v_2^1, \ldots, v_2^{k+1}\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_1^1,v_2^1\})}{h_\theta(\{v_1^1,v_2^1\}) + \sum_{j=2}^{k+1} h_\theta(\{v_1^1, v_2^j\})} \right)
+  \end{equation}
+
+  \vspace{1cm}
+
+  \begin{figure}[ht]
+    \begin{minipage}{0.67\textwidth}
+      \centering
+      \includegraphics[width=0.9\linewidth]{../../figures/02-04-text-support-img/data-efficiency}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+      \caption{Data efficiency of contrastive objective \parencite{radford2021learning}}
+    \end{minipage}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Concepts: Contrastive objective}
   \begin{figure}[ht]
     \centering
-    % One picture for visualization of contrastive loss (matrix stuff)
-    \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=0.7\linewidth]{../../figures/02-04-text-support-img/contrastive-pre-training}
+    \caption{Visualization of contrastive objective \parencite{openai2021clipblog}}
+  \end{figure}
+
+  Drawback: Not as flexible as predictive objective, no image captioning
+\end{frame}
+
+\subsection{Zero shooting and foundation models} %------------------------
+\begin{frame}{Concepts: Zero shooting and foundation models}
+  \begin{itemize}
+    \item Zero shooting
+    \begin{itemize}
+      \item Paradigm from NLP research
+      \item Definition: Apply pre-trained model to new, unseen datasets
+      \item No deceivement through overfitting
+    \end{itemize}
+    \item Foundation model: Model can be reused, e.g., CLIP is used inside DALL$\cdot$E 2 \parencite{ramesh2022hierarchical} to embed images
+  \end{itemize}
+
+  \begin{figure}[ht]
+    \begin{minipage}{0.67\textwidth}
       \centering
-      \includegraphics[width=\linewidth]{Figures/spline_basis_cr_function}
-      \caption{One basis function}
-      \label{fig:splines_cr_fct}
-    \end{subfigure}%
-    % One picutre for visualization of effectiveness
-    \begin{subfigure}{0.45\textwidth}
-      \centering
-      \includegraphics[width=\linewidth]{Figures/spline_basis_cr_unrestricted}
-      \caption{Unrestricted spline basis}
-      \label{fig:splines_cr_unres_basis}
-    \end{subfigure}
-    \caption{Steps of fitting a cubic regression spline.}
-    \label{fig:splines_cr}
+      \includegraphics[width=0.9\linewidth]{../../figures/02-04-text-support-img/zero-shooting}
+    \end{minipage}
+    \begin{minipage}[c]{0.3\textwidth}
+      \caption{Visualization of zero-shot application \parencite{radford2021learning}}
+    \end{minipage}
   \end{figure}
 \end{frame}
 
-\subsection{Zero shooting and foundation models}
 \subsection{Connecting image representations to language}
+\begin{frame}{Concepts: Connecting image representations to language}
+  \begin{itemize}
+    \item Learned representations are directly connected to natural language
+    \item Direct specification of visual concepts possible through prompt engineering, e.g., \enquote{picture of ...}, \enquote{macro of ...} or \enquote{drawing of ...}
+  \end{itemize}
+\end{frame}
 
 \section{Architectures} %-------------------------------------------------
 
 \subsection{CLIP}
+\begin{frame}{CLIP}
+  
+\end{frame}
 
 % Also the chosen transformer using architectures allow for large sample sizes, agressive parallelization
 
 \subsection{ALIGN}
+\begin{frame}{ALIGN}
+  
+\end{frame}
+
 \subsection{Florence}
+\begin{frame}{Florence}
+  
+\end{frame}
+
 
 \section{Performance comparison} %----------------------------------------
+\begin{frame}{Performance comparison}
+  
+\end{frame}
 
 \section{Resources} %-----------------------------------------------------
+\begin{frame}{Resources}
+  \begin{itemize}
+    \item rclip
+  \end{itemize}
+\end{frame}
 
 \section{Sources} %-------------------------------------------------------
 \begin{frame}[allowframebreaks]{Sources}

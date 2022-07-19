@@ -72,8 +72,6 @@ They embed the class labels in sentence, e.g., "Picture of a (word)", which seem
 * Learn a representation _and_ connect it to language (-> NLP)
 * Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
 
-<!-- TODO: What happens with similar pictures with similar captions? Their distance is maximized too? -->
-
 ## CLIP
 
 <!-- Intro -->
