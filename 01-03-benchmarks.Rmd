@@ -1,8 +1,3 @@
----
-output:
-  html_document: default
----
-
 # Resources and Benchmarks for NLP, CV and multimodal tasks
 
 *Author: Christopher Marquardt*
@@ -38,9 +33,8 @@ Recent work [@rosset2020turing] showed that diversity in training datasets impro
 The following treemap shows the distribution of the dataset.
 
 ```{r pile treemap, echo=FALSE}
-htmltools::includeHTML("data/01-chapter1/CompositionPile.html")
+#htmltools::includeHTML("data/01-chapter1/CompositionPile.html")
 # Plot passt leider noch nciht ganz. Aus einem Grund kommt eine Category nicht obwohl sie im .html sonst gezeigt wird
-# label
 ```
 
 While only 13% of the world’s population speaks English, the vast majority of NLP research is done on English. @gao2020pile followed this trend, but did not explicitly filtered out other languages when collecting our the data. This leads to the fact that roughly 95\% of the Pile is English. Also EuroParl [@koehn2005europarl], a multilingual parallel corpus introduced for machine translation, is included in the Pile. To train GPT-2 Open AI collected data from WebText. WebText is an internet dataset created by scraping URLs extracted from Reddit submissions with a minimum score for quality, but sadly it was never released to the public. Independent researchers reproduced the pipeline and released the resulting dataset, called OpenWebTextCorpus [@Gokaslan2019OpenWeb] (OWT). 
@@ -154,7 +148,7 @@ This splitting results in so called held-out data, but @rajpurkar2018know showed
 
 Something to consider is also that pre-training on large internet datasets may lead to the unintentional overlap of pre-training and down-tasks. Because of this studies [@radford2021learning, @parti, @brown2020language] conducted a de-duplication analysis. CLIP analysis resulted in a median overlap of 2.2\% and an average overlap of 3.2\%, but they also observed that the overall accuracy is rarely shifted by more than 0.1\% [@radford2021learning]. @mahajan2018exploring, @kolesnikov2019large also came to the similar results. This is something one always has to keep in mind.
 
-Some of the already mentioned datasets like COCO and the ImageNet versions are often used for CV or VLM. Almost every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset and benchmarked on the validation sets of the dataset. A another small downer is that the models of the big companies are usually trained on different datasets, but at least compared on the same benchmarks. So the comparison seems a bit odd. Maybe the better performance of the models came from the different used datasets. 
+Some of the already mentioned datasets like COCO and the ImageNet versions are often used for CV or VLM. Almost every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset and benchmarked on the validation sets of the dataset. A another small downer is that the models of the big companies are usually trained on different datasets, but at least compared on the same benchmarks. So the comparison seems a bit odd. Maybe the better performance of the models comes from the different used datasets. 
 
 ### Benchmarks NLP
 
@@ -210,11 +204,9 @@ They provide four criteria to handle this:
 Building new benchmarks that improve upon these four axes is likely to be quite difficult.
 
 #### CheckList
-Inspired by principles of behavioral testing in software engineering, @ribeiro2020beyond introduced CheckList, a task-agnostic methodology for testing NLP models. CheckList includes a matrix of general linguistic capabilities and test types that facilitate comprehensive test ideation, as well as a software tool to generate a large and diverse number of test cases quickly. To break down potential capability failures into specific behaviors, CheckList introduces three different test types. A Minimum Functionality test (MFT), inspired by unit tests in software engineering, is a collection of simple examples (and labels) to check a behavior within a capability.  An Invariance test (INV) is when we apply label-preserving perturbations to inputs and expect the model prediction to remain the same. A Directional Expectation test (DIR) is similar, except that the label is expected to change in a certain way.
+Inspired by principles of behavioral testing in software engineering, @ribeiro2020beyond introduced CheckList, a model-agnostic and task-agnostic methodology for testing NLP models. CheckList includes a matrix of general linguistic capabilities and test types that facilitate comprehensive test ideation, as well as a software tool to generate a large and diverse number of test cases quickly. To break down potential capability failures into specific behaviors, CheckList introduces three different test types. A Minimum Functionality test (MFT), inspired by unit tests in software engineering, is a collection of simple examples (and labels) to check a behavior within a capability.  An Invariance test (INV) is when we apply label-preserving perturbations to inputs and expect the model prediction to remain the same. A Directional Expectation test (DIR) is similar, except that the label is expected to change in a certain way.
 
 Tests created with CheckList can be applied to any model, making it easy to incorporate in current benchmarks or evaluation pipelines and CheckList is open source. Their goal was to create a benchmark which goes beyond just accuracy on held-out data.
-
-
 
 
 ### Benchmarks CV
@@ -289,10 +281,12 @@ Current benchmarks give a good perspective on model performance on a wide range 
 The models are evaluated on three different tasks. The first one is Correct vs. foil classification. Given an image and a caption, the model is asked to mark whether the caption is correct or wrong. The aim is to understand whether LaVi models can spot mismatches between their coarse representations of language and visual input. The second task is Foil word detection. Given an image and a foil caption, the model has to detect the foil word. The aim is to evaluate the understanding of the system at the word level. The last task Foil word correction. Given an image, a foil caption and the foil word, the model has to detect the foil and provide its correction. The aim is to check whether the system’s visual representation is fine-grained enough to be able to extract the information necessary to correct the error. Their hypothesis is that systems which, like humans, deeply integrate the language and vision modalities, should spot foil captions quite easily.
 
 #### VALSE
-Vision And Language Structured Evaluation (VALSE) builds on the same idea. This benchmark aims to gauge the sensitivity of pre-trained V&L models to foiled instances. They coverd a wide spectrum of basic linguistic phenomena affecting the linguistic and visual modalities: existence, plurality, counting, spatial relations, actions, and entity coreference. To generate the foils they first use strong language models to propose foil and second they use natural language inference to filter out captions that still can describe the image. To do this in an automatic fashion they use the image as an premise and the caption its entailed hypothesis. Additionally they use the captian as an premise and the foil as the hypothesis. If an NLI model predicts the foil to be neutral or a contradiction with respect to the caption, they see this as an indicator for a good foil. At last the used human annotators to validate all generated testing data. Mainly the MS-COCO dataset is used. VALSE is as a task-independent, zero-shot benchmark to assess the extent to which models learn to ground specific linguistic phenomena as a consequence of their pretraining. 
+Vision And Language Structured Evaluation (VALSE) [@parcalabescu-etal-2022-valse] builds on the same idea. This benchmark aims to gauge the sensitivity of pre-trained V&L models to foiled instances. They coverd a wide spectrum of basic linguistic phenomena affecting the linguistic and visual modalities: existence, plurality, counting, spatial relations, actions, and entity coreference. To generate the foils they first use strong language models to propose foil and second they use natural language inference to filter out captions that still can describe the image. To do this in an automatic fashion they use the image as an premise and the caption its entailed hypothesis. Additionally they use the captian as an premise and the foil as the hypothesis. If an NLI model predicts the foil to be neutral or a contradiction with respect to the caption, they see this as an indicator for a good foil. At last the used human annotators to validate all generated testing data. Mainly the MS-COCO dataset is used. VALSE is as a task-independent, zero-shot benchmark to assess the extent to which models learn to ground specific linguistic phenomena as a consequence of their pretraining. 
 
 Outro: Multimodal architectures Chapter
 image2text, text2image, img-support-text, text-support-img, text-plus-img
+
+
 
 ## Rough Sketch of my Chapter
 
