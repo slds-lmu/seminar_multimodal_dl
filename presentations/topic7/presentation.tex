@@ -1,7 +1,7 @@
-%%%%% preamble
+% preamble ---------------------------------------------------------------
 \documentclass[xcolor=dvipsnames]{beamer}
 
-% meta data
+% meta data --------------------------------------------------------------
 \title[Text supporting CV models]{Seminar: Multimodal Deep Learning}
 \subtitle{Topic 7: Text supporting CV models}
 \author[Max Schneider]{Author: Maximilian Schneider\\
@@ -22,6 +22,7 @@
 \setbeamercovered{transparent}
 \usefonttheme[onlymath]{serif}  % better math font
 
+% packages ---------------------------------------------------------------
 % text encoding
 \usepackage[utf8]{inputenc}
 
@@ -34,9 +35,14 @@
 % language, line breaks
 \usepackage[english]{babel}
 
+% date format
+\usepackage[datesep=.]{datetime2}
+\DTMsetdatestyle{ddmmyyyy}
+
 % bibliography
 \usepackage[style=authoryear, backend=biber, sorting=nty, uniquename=false]{biblatex}
-\addbibresource{sources.bib}
+\addbibresource{../../book.bib}
+% \addbibresource{sources.bib}
 \renewcommand*{\bibsetup}{%
   \interlinepenalty=10000\relax % default is 5000
   \widowpenalty=10000\relax
@@ -54,115 +60,107 @@
 % math symbols
 \usepackage{amsmath, amssymb, bm}
 
-% acronyms
-\usepackage{acro}
-\DeclareAcronym{LM}{short = LM, long = linear model}
-\DeclareAcronym{GLM}{short = GLM, long = generalized linear model}
-\DeclareAcronym{GAM}{short = GAM, long = generalized additive model}
-\DeclareAcronym{GAMLSS}{short = GAMLSS, long = {generalized additive model for location, scale and shape}}
-\DeclareAcronym{LAML}{short = LAML, long = Laplace approximate marginal likelihood}
-\DeclareAcronym{GFS}{short = GFS, long = generalized Fellner-Schall method}
-\DeclareAcronym{PDF}{short = PDF, long = probability density function}
-\DeclareAcronym{SNR}{short = SNR, long = signal-to-noise ratio}
-\DeclareAcronym{MSE}{short = MSE, long = mean squared error}
-\DeclareAcronym{IMSE}{short = IMSE, long = integrated mean squared error}
-\DeclareAcronym{NN}{short = NN, long = artificial neural network}
+\begin{document} %--------------------------------------------------------
 
-% this presentation
-\DeclareAcronym{CV}{short = CV, long = computer vision}
-\DeclareAcronym{WRT}{short = w.r.t., long = with respect to}
-
-\begin{document}
+{
+\setbeamertemplate{footline}{}
 \begin{frame}
   \titlepage
 \end{frame}
+}
+\addtocounter{framenumber}{-1}
 
-\section{Introduction}
+\section{Introduction} %--------------------------------------------------
 
-\begin{frame}{Introduction: ...}
+\begin{frame}{Introduction: Scale}
+  \blockquote{
+    The biggest lesson that can be read from 70 years of AI research is that general methods that leverage computation are ultimately the most effective, and by a large margin.
+    \ldots
+    Most AI research has been conducted as if the computation available to the agent were constant (in which case leveraging human knowledge would be one of the only ways to improve performance) but, over a slightly longer time than a typical research project, massively more computation inevitably becomes available.
+    Seeking an improvement that makes a difference in the shorter term, researchers seek to leverage their human knowledge of the domain, but the only thing that matters in the long run is the leveraging of computation.
+    \ldots
+  }
 \end{frame}
 
-\section{Generalized Additive Models for Location, Scale and Shape}
+\begin{frame}{Introduction: Scale}
+  \blockquote[\cite{sutton2019bitterlesson}]{
+    \ldots
+    One thing that should be learned from the bitter lesson is the great power of general purpose methods, of methods that continue to scale with increased computation even as the available computation becomes very great.
+    The two methods that seem to scale arbitrarily in this way are search and learning.
+  }
+\end{frame}
+
+\section{Concepts} %------------------------------------------------------
 \begin{frame}{Contents}
-\tableofcontents[sections={1-2}, currentsection]
-\tableofcontents[sections={3-6}]
+  \tableofcontents[sections={1-2}, currentsection]
+  \tableofcontents[sections={3-6}]
 \end{frame}
 
-\begin{frame}{Notation}
+\subsection{Web-scale data}
+\begin{frame}{Concepts: Web-scale data}
+  \begin{itemize}
+    \item Possible through natural language supervision
+    \item No labor intensive manual labeling
+    \item Large datasets
+      \begin{itemize}
+        \item 400 million \parencite[CLIP;][]{radford2021learning}
+        \item 900 million \parencite[Florence;][]{yuan2021florence}
+        \item 1.8 billion \parencite[ALIGN;][]{jia2021scaling}
+      \end{itemize}
+    \item Pre-processing needed, resulting in arbitrary choices
+    \item Social biases are reproduced
+  \end{itemize}
 \end{frame}
 
-\subsection{Model framework}
-\begin{frame}{Model framework}
+\subsection{Contrastive objective}
+\begin{frame}{Concepts: Contrastive objective}
+  \begin{itemize}
+    \item Data efficient
+    % Formula here
+  \end{itemize}
 \end{frame}
 
-\subsection{Splines}
-\begin{frame}{Smoothing parameters}
+\begin{frame}{Concepts: Contrastive objective}
+  \begin{figure}[ht]
+    \centering
+    % One picture for visualization of contrastive loss (matrix stuff)
+    \begin{subfigure}{0.45\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{Figures/spline_basis_cr_function}
+      \caption{One basis function}
+      \label{fig:splines_cr_fct}
+    \end{subfigure}%
+    % One picutre for visualization of effectiveness
+    \begin{subfigure}{0.45\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{Figures/spline_basis_cr_unrestricted}
+      \caption{Unrestricted spline basis}
+      \label{fig:splines_cr_unres_basis}
+    \end{subfigure}
+    \caption{Steps of fitting a cubic regression spline.}
+    \label{fig:splines_cr}
+  \end{figure}
 \end{frame}
 
-\subsection{Model estimation}
-\begin{frame}{Objective function}
-\end{frame}
+\subsection{Zero shooting and foundation models}
+\subsection{Connecting image representations to language}
 
-\begin{frame}{Newton's method}
-\end{frame}
+\section{Architectures} %-------------------------------------------------
 
-\begin{frame}{Trust region algorithm}
-\end{frame}
+\subsection{CLIP}
 
-\begin{frame}{Generalized Fellner-Schall method}
-\end{frame}
+% Also the chosen transformer using architectures allow for large sample sizes, agressive parallelization
 
-\begin{frame}{Estimation using an artificial neural network}
-\end{frame}
+\subsection{ALIGN}
+\subsection{Florence}
 
-\section{Simulation study}
-\begin{frame}{Data simulation}
-\end{frame}
+\section{Performance comparison} %----------------------------------------
 
-\begin{frame}{Effects on linear predictors}
-\end{frame}
+\section{Resources} %-----------------------------------------------------
 
-\begin{frame}{Exemplary data generating process}
-\end{frame}
-
-\begin{frame}{Signal-to-noise ratio}
-\end{frame}
-
-\section{Summary of performances}
-\subsection{Integrated mean squared error}
-\begin{frame}{Integrated mean squared error}
-\end{frame}
-
-\begin{frame}{Integrated mean squared error}
-\end{frame}
-
-\begin{frame}{Integrated mean squared error}
-\end{frame}
-
-\begin{frame}{Integrated mean squared error}
-\end{frame}
-
-\subsection{Log-likelihood}
-\begin{frame}{Log-likelihood}
-\end{frame}
-
-\begin{frame}{Log-likelihood}
-\end{frame}
-
-\begin{frame}
-\end{frame}
-
-\begin{frame}
-\end{frame}
-
-\begin{frame}{Experiences with \texttt{deepregression}}
-\end{frame}
-
-\section{Outlook}
-\begin{frame}{Outlook}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Bibliography}
+\section{Sources} %-------------------------------------------------------
+\begin{frame}[allowframebreaks]{Sources}
   \printbibliography[heading=bibnumbered, title = Bibliography]
 \end{frame}
-\end{document}
+
+\end{document} %----------------------------------------------------------

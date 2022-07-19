@@ -28,7 +28,7 @@ They show a large potential to be the CV counterparts to NLP foundation models. 
 
 <!-- Reference to bitter pill to swallow: More compute beats complex architecture. -->
 Arguably the most important aspect of these models is scale. <!-- ref to bitter pill to swallow -->
-Making use of their available resources and the aggressive parallelization capabilities of transformer architectures, sample sizes range from 400 million [CLIP\; @radford2021learning] over 900 million [Florence\; @yuan2021florence] to 1.8 billion [ALIGN\;].
+Making use of their available resources and the aggressive parallelization capabilities of transformer architectures, sample sizes range from 400 million [CLIP\; @radford2021learning] over 900 million [Florence\; @yuan2021florence] to 1.8 billion [ALIGN\; @jia2021scaling].
 The datasets are obtained through web-scraping and, because of the use of natural language supervision, cost and labor intensive manual labeling is completely avoided.
 But this readily available web-scale data comes with some drawbacks.
 Because of its noisy nature, some form of pre-processing is needed, e.g., filtering for language, excluding graphic content and images with non-informative captions.
