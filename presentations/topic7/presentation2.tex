@@ -103,7 +103,7 @@
 \subsection{Web-scale data} %---------------------------------------------
 \begin{frame}{Concepts: Web-scale data}
   \begin{itemize}
-    \item Internet full of naturally occurring image-text pairs
+    \item Possible through natural language supervision
     \item No labor intensive manual labeling
     \item Large datasets
       \begin{itemize}
@@ -119,7 +119,7 @@
 \subsection{Contrastive objective} %--------------------------------------
 \begin{frame}{Concepts: Contrastive objective}
   \begin{equation}
-    \ell_1^{V1, V2} = - \underset{\{v_1^1, v_2^1, \ldots, v_2^N\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_1^1,v_2^1\})}{h_\theta(\{v_1^1,v_2^1\}) + \sum_{k=2}^N h_\theta(\{v_1^1, v_2^k\})} \right)
+    \ell^{V1, V2} = - \underset{\{v_1^1, v_2^1, \ldots, v_2^{k+1}\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_1^1,v_2^1\})}{h_\theta(\{v_1^1,v_2^1\}) + \sum_{j=2}^{k+1} h_\theta(\{v_1^1, v_2^j\})} \right)
   \end{equation}
 
   \vspace{1cm}
@@ -127,146 +127,72 @@
   \begin{figure}[ht]
     \begin{minipage}{0.67\textwidth}
       \centering
-      \includegraphics[width=0.9\linewidth]{../../figures/02-04-text-support-img/contrastive-pre-training}
+      \includegraphics[width=0.9\linewidth]{../../figures/02-04-text-support-img/data-efficiency}
     \end{minipage}
     \begin{minipage}[c]{0.3\textwidth}
-      \caption{Visualization of contrastive objective \parencite{openai2021clipblog}}
+      \caption{Data efficiency of contrastive objective \parencite{radford2021learning}}
     \end{minipage}
   \end{figure}
 \end{frame}
 
 \begin{frame}{Concepts: Contrastive objective}
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-      \begin{figure}[ht]
-        \centering
-        \includegraphics[width=0.9\linewidth]{../../figures/02-04-text-support-img/tian-predictive-vs-contrastive}
-        \caption{Predictive Learning vs Contrastive Learning: Contrastive Loss measured in representation space \parencite{tian2020contrastive}}
-      \end{figure}
-    \end{column}
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../../figures/02-04-text-support-img/contrastive-pre-training}
+    \caption{Visualization of contrastive objective \parencite{openai2021clipblog}}
+  \end{figure}
 
-    \begin{column}{0.5\textwidth}
-      \begin{figure}[ht]
-        \centering
-        \includegraphics[width=0.9\linewidth]{../../figures/02-04-text-support-img/data-efficiency}
-        \caption{Data efficiency of contrastive objective \parencite{radford2021learning}}
-      \end{figure}
-    \end{column}
-  \end{columns}
+  Drawback: Not as flexible as predictive objective, no image captioning
 \end{frame}
 
 \subsection{Zero shooting and foundation models} %------------------------
 \begin{frame}{Concepts: Zero shooting and foundation models}
   \begin{itemize}
-    \item Paradigms from NLP
-    \item Zero shooting: Apply pre-trained model to new, unseen datasets; no deceivement through overfitting
+    \item Zero shooting
+    \begin{itemize}
+      \item Paradigm from NLP research
+      \item Definition: Apply pre-trained model to new, unseen datasets
+      \item No deceivement through overfitting
+    \end{itemize}
+    \item Foundation model: Model can be reused, e.g., CLIP is used inside DALL$\cdot$E 2 \parencite{ramesh2022hierarchical} to embed images
   \end{itemize}
 
   \begin{figure}[ht]
     \begin{minipage}{0.67\textwidth}
       \centering
-      \includegraphics[width=0.8\linewidth]{../../figures/02-04-text-support-img/zero-shooting}
+      \includegraphics[width=0.9\linewidth]{../../figures/02-04-text-support-img/zero-shooting}
     \end{minipage}
     \begin{minipage}[c]{0.3\textwidth}
       \caption{Visualization of zero-shot application \parencite{radford2021learning}}
     \end{minipage}
   \end{figure}
-
-  \begin{itemize}
-    \item Foundation model: Reusing models, e.g., CLIP inside DALL$\cdot$E 2 to embed images \parencite{ramesh2022hierarchical} or as a filter for creating LAION-400M \parencite{schuhmann2022laion}
-  \end{itemize}
 \end{frame}
 
 \subsection{Connecting image representations to language}
 \begin{frame}{Concepts: Connecting image representations to language}
   \begin{itemize}
-    \item Learned image representations are directly connected to natural language representations
+    \item Learned representations are directly connected to natural language
     \item Direct specification of visual concepts possible through prompt engineering, e.g., \enquote{picture of ...}, \enquote{macro of ...} or \enquote{drawing of ...}
   \end{itemize}
 \end{frame}
 
 \section{Architectures} %-------------------------------------------------
-\begin{frame}{Contents}
-  \tableofcontents[sections={1-3}, currentsection]
-  \tableofcontents[sections={4-6}]
+
+\subsection{CLIP}
+\begin{frame}{CLIP}
+  
 \end{frame}
 
+% Also the chosen transformer using architectures allow for large sample sizes, aggressive parallelization
 
-\subsection{CLIP} %-------------------------------------------------------
-\begin{frame}{CLIP \parencite{radford2021learning}: Architecture}
-  \begin{itemize}
-    \item Jointly trained image encoder and text encoder from scratch
-    \item Maximization of cosine similarity
-    \item Image encoder: Some versions with modified ResNets, some versions with Vision Transformers \parencite[ViT;][]{ImageT}
-    \item Text encoder: Transformer
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{CLIP: Loss}
-  Recap: general formulation of contrastive loss
-
-  \begin{equation}
-    \ell_1^{V1, V2} = - \underset{\{v_1^1, v_2^1, \ldots, v_2^N\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_1^1,v_2^1\})}{h_\theta(\{v_1^1,v_2^1\}) + \sum_{k=2}^N h_\theta(\{v_1^1, v_2^k\})} \right)
-  \end{equation}
-
-  Application in CLIP:
-  \begin{equation}
-    \ell_i^{v_1 \rightarrow v_2} = - \log \frac{\exp(\langle v_1^i, v_2^i \rangle / \tau)}{\sum_{k=1}^{N} \exp(\langle v_1^i, v_2^k \rangle / \tau)},
-  \end{equation}
-
-  % \begin{equation}
-  %   \ell_i^{v_2 \rightarrow v_1} = - \log \frac{\exp(\langle v_2^i, v_1^i \rangle) / \tau}{\sum_{k=1}^{N} \exp(\langle v_2^i, v_1^k \rangle) / \tau},
-  % \end{equation}
-
-  where $\langle v_1^i, v_2^i \rangle$ represents the cosine similarity, i.e., $v_1^{i \top} v_2^i / \|v_1^i\| \|v_2^i\|$; and $\tau \in \mathbb{R}^+$ represents a temperature parameter, which is directly learned during training \parencite{zhang2020contrastive}.
-  This can be viewed as a symmetric cross entropy loss over the cosine similarity of the embeddings \parencite{radford2021learning}.
-\end{frame}
-
-\begin{frame}{CLIP: Performance}
-  \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.7\linewidth]{../../figures/02-04-text-support-img/performance-clip}
-    \caption{Robustness of zero-shot CLIP to distribution shifts \parencite{radford2021learning}}
-  \end{figure}
-\end{frame}
-
-\subsection{ALIGN} %------------------------------------------------------
-\begin{frame}{ALIGN \parencite{jia2021scaling}}
-  \begin{itemize}
-    \item Key difference to CLIP: What if we just ignore noise? (400 million image-text pairs $\rightarrow$ 1.8 billion image-text pairs)
-    \item Image encoder: EfficientNet (EfficientNet-L2)
-    \item Text encoder: BERT (BERT-Large)  % which is basically a transformer
-    \item Trained from scratch
-    \item 800 million parameters \parencite{alford2021alignparams}
-    \item Name: alignment of visual and language representations trough contrastive loss or. Intuitively, "\textbf{A} \textbf{L}arge-scale \textbf{I}ma\textbf{G}e and \textbf{N}oisy-text embedding"
-  \end{itemize}
-\end{frame}
-
+\subsection{ALIGN}
 \begin{frame}{ALIGN}
-  \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.7\linewidth]{../../figures/02-04-text-support-img/align-word-and-image-addition}
-    \caption{Addition of word and image embedding}
-  \end{figure}
+  
 \end{frame}
 
-\subsection{Florence} %---------------------------------------------------
-\begin{frame}{Florence \parencite{yuan2021florence}}
-  \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.7\linewidth]{../../figures/02-04-text-support-img/florence-dimensions}
-    \caption{Florence approach to foundation models: A general purpose vision system for all these tasks.}
-  \end{figure}
-\end{frame}
-
+\subsection{Florence}
 \begin{frame}{Florence}
-  \begin{itemize}
-    \item Image encoder: hierarchical Vision Transformer (CoSwin Transformer)
-    \item Text encoder: Transformer similar to CLIP
-    \item Trained from scratch
-    \item 893 million parameters \parencite{alford2021alignparams}
-    \item Name: alignment of visual and language representations trough contrastive loss or. Intuitively, "\textbf{A} \textbf{L}arge-scale \textbf{I}ma\textbf{G}e and \textbf{N}oisy-text embedding"
-  \end{itemize}
+  
 \end{frame}
 
 
@@ -291,38 +217,14 @@
       \hline
     \end{tabular}
     }
-    \caption{Zero-shot image and text retrieval \parencite{yuan2021florence}}
-  \end{table}
-\end{frame}
-
-\begin{frame}{Performance comparison}
-  \begin{table}[ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{l|rrrr}
-      \hline
-               & ImageNet      & ImageNet-R    & ImageNet-A    & ImageNet-V2   \\
-      \hline
-      CLIP     & 76.2          & 88.9          & \textbf{77.2} & \textbf{70.1} \\
-      ALIGN    & 76.4          & \textbf{92.2} & 75.8          & \textbf{70.1} \\
-      Florence & \textbf{83.7} &               &               &               \\
-      \hline
-    \end{tabular}
-    }
-    \caption{Top-1 Accuracy of zero-shot transfer of ALIGN to image classification on ImageNet and its variants.}
+    \caption{Zero-shot retrieval}
   \end{table}
 \end{frame}
 
 \section{Resources} %-----------------------------------------------------
 \begin{frame}{Resources}
   \begin{itemize}
-    \item Pre-trained CLIP models on Github: \url{https://github.com/openai/CLIP}
-    \item Command line image retrieval: rclip, \url{https://github.com/yurijmikhalevich/rclip}
-    \begin{itemize}
-      \item Wraps \textit{Vit-B/32 CLIP}
-    \end{itemize}
-  \item CLIP dataset not available $\rightarrow$ Open dataset LAION-400M \parencite{schuhmann2022laion}
-  \item Florence code and model weights are not open source \parencite{solawetz2021florenceopen}
+    \item rclip
   \end{itemize}
 \end{frame}
 
