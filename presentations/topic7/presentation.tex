@@ -16,7 +16,7 @@
 % theme
 \usetheme{Madrid}
 \usecolortheme{dove}
-\beamertemplatenavigationsymbolsempty  % no navigations symbols
+\beamertemplatenavigationsymbolsempty  % no navigation symbols
 \setbeamertemplate{section in toc}{\hspace*{1em}\textcolor{OliveGreen}{\inserttocsectionnumber}~\inserttocsection\par}
 \setbeamertemplate{subsection in toc}{\hspace*{2em}\textcolor{OliveGreen}{\inserttocsectionnumber.\inserttocsubsectionnumber}~\inserttocsubsection\par}  % numbered table of contents
 \setbeamercovered{transparent}
@@ -60,6 +60,10 @@
 
 % one table cell over multiple columns
 \usepackage{multicol}
+
+% rotate long table headers
+\usepackage{booktabs}
+\newcommand*\rot{\rotatebox{90}}
 
 % math symbols
 \usepackage{amsmath, amssymb, bm}
@@ -196,9 +200,13 @@
 \begin{frame}{CLIP \parencite{radford2021learning}: Architecture}
   \begin{itemize}
     \item Jointly trained image encoder and text encoder from scratch
-    \item Maximization of cosine similarity
     \item Image encoder: Some versions with modified ResNets, some versions with Vision Transformers \parencite[ViT;][]{ImageT}
-    \item Text encoder: Transformer
+    \begin{itemize}
+      \item ResNet-50, ResNet-101, 3 which follow EfficientNet-style model scaling RN50x4, RN50x16, RN50x64
+      \item Vision Transformers: ViT-B/32, ViT-B/16, ViT-L/14, \textit{ViT-L/14@336px}
+    \end{itemize}
+    \item Text encoder: Transformer with modifications
+    \item Maximization of cosine similarity of image embedding and text embedding
   \end{itemize}
 \end{frame}
 
@@ -233,7 +241,7 @@
 \subsection{ALIGN} %------------------------------------------------------
 \begin{frame}{ALIGN \parencite{jia2021scaling}}
   \begin{itemize}
-    \item Key difference to CLIP: What if we just ignore noise? (400 million image-text pairs $\rightarrow$ 1.8 billion image-text pairs)
+    \item Key difference to CLIP: Less (costly) data curation (400 million image-text pairs $\rightarrow$ 1.8 billion image-text pairs)
     \item Image encoder: EfficientNet (EfficientNet-L2)
     \item Text encoder: BERT (BERT-Large)  % which is basically a transformer
     \item Trained from scratch
@@ -242,7 +250,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{ALIGN}
+\begin{frame}{ALIGN \parencite{jia2021scaling}}
   \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\linewidth]{../../figures/02-04-text-support-img/align-word-and-image-addition}
@@ -255,22 +263,50 @@
   \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\linewidth]{../../figures/02-04-text-support-img/florence-dimensions}
-    \caption{Florence approach to foundation models: A general purpose vision system for all these tasks.}
+    \caption{Florence' approach to foundation models: A general purpose vision system for all these tasks.}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Florence}
+\begin{frame}{Florence \parencite{yuan2021florence}}
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\linewidth]{../../figures/02-04-text-support-img/florence-architecture}
+    \caption{Modular architecture of florence}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Florence \parencite{yuan2021florence}}
   \begin{itemize}
     \item Image encoder: hierarchical Vision Transformer (CoSwin Transformer)
     \item Text encoder: Transformer similar to CLIP
     \item Trained from scratch
     \item 893 million parameters \parencite{alford2021alignparams}
-    \item Name: alignment of visual and language representations trough contrastive loss or. Intuitively, "\textbf{A} \textbf{L}arge-scale \textbf{I}ma\textbf{G}e and \textbf{N}oisy-text embedding"
+    \item 900 million image-text pairs
+    \item Name: the origin of the trail for exploring vision foundation models, as well as the birthplace of Renaissance
+    \item Loss: unified image-text contrastive learning in image-label-description space $\rightarrow$ All image-text pairs with the same label y are regarded as positive instances.
   \end{itemize}
 \end{frame}
 
 
 \section{Performance comparison} %----------------------------------------
+\begin{frame}{Performance comparison}
+  \begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|rrrr}
+      \hline
+               & ImageNet      & ImageNet-R    & ImageNet-A    & ImageNet-V2   \\
+      \hline
+      CLIP     & 76.2          & 88.9          & \textbf{77.2} & \textbf{70.1} \\
+      ALIGN    & 76.4          & \textbf{92.2} & 75.8          & \textbf{70.1} \\
+      Florence & \textbf{83.7} &               &               &               \\
+      \hline
+    \end{tabular}
+    }
+    \caption{Top-1 Accuracy of zero-shot transfer of ALIGN to image classification on ImageNet and its variants.}
+  \end{table}
+\end{frame}
+
 \begin{frame}{Performance comparison}
   \begin{table}[ht]
     \centering
@@ -299,17 +335,19 @@
   \begin{table}[ht]
     \centering
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{l|rrrr}
+    \begin{tabular}{l|rrrrrrrrrrrrr}
       \hline
-               & ImageNet      & ImageNet-R    & ImageNet-A    & ImageNet-V2   \\
+                    & \rot{Food101} & \rot{CIFAR10} & \rot{CIFAR100} & \rot{SUN397} & \rot{Stanford Cars} & \rot{FGCV Aircraft} & \rot{VOC2007} & \rot{DTD}  & \rot{Oxford Pets} & \rot{Caltech101} & \rot{Flowers102} & \rot{ImageNet} \\
       \hline
-      CLIP     & 76.2          & 88.9          & \textbf{77.2} & \textbf{70.1} \\
-      ALIGN    & 76.4          & \textbf{92.2} & 75.8          & \textbf{70.1} \\
-      Florence & \textbf{83.7} &               &               &               \\
+CLIP                & 93.8    & 95.7    & 77.5     & 68.4   & 78.8          & 37.2          & 84.3    & 55.7 & 93.5        & 92.8       & 78.3       & 76.2 \\
+Florence            & 95.1    & 94.6    & 77.6     & 77.0   & 93.2          & 55.5          & 85.5    & 66.4 & 95.9        & 94.7       & 86.2       & 83.7 \\
+CLIP (fine tuned)   & 95.9    & \textbf{97.9}    & \textbf{87.4}     & 82.2   & 91.5          & 71.6          & 89.9    & 83.0 & 95.1        & 96.0       & 99.2       & 85.4 \\
+ALIGN (fine tuned)  & 95.9    &         &          &        & \textbf{96.1}          &               &         &      & \textbf{96.2}        &            &            & 88.6 \\
+Florence (fine tuned) & \textbf{96.2}    & 97.6    & 87.1     & \textbf{84.2}   & 95.7          & \textbf{83.9}          & \textbf{90.5}    & \textbf{86.0} & 96.4        & \textbf{96.6}       & \textbf{99.7}       & \textbf{90.1} \\
       \hline
     \end{tabular}
     }
-    \caption{Top-1 Accuracy of zero-shot transfer of ALIGN to image classification on ImageNet and its variants.}
+    \caption{Top-1 Accuracy of CLIP, Florence and ALIGN on various datasets.}
   \end{table}
 \end{frame}
 
