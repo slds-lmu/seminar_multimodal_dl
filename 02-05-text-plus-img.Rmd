@@ -4,11 +4,18 @@
 
 *Supervisor: Daniel *
 
-Data2vec: A general framework for self-supervised Learning
+# Todo 
+communicate with marco about perceiver and data2vec
+communicate about who does attention how detailled
 
-There have been many advances made in machine learning over the past years. However, there are two caveats. One model follows the next in short sequence. The overabundance of different models makes it hard to keep track. More importantly, however, it is often unclear whether advances in a particular field, for example with a specific type of input data, will carry over to another setting. On top of that, any model that requires labelled data inherently suffers from capacity constraints. Typically, models are trained on a handful of well-known data sets which have been created with great effort. How would a perfect model look like? Ideally, we would want to find that one general model to rule them all, a model structure that works with different inputs, little oversight and continuously adapts itself similar to the human brain. \
+# challenges in AI
+There have been many advances made in machine learning over the past years. However, there are two caveats. One model follows the next in short sequence. The overabundance of different models makes it hard to keep track. More importantly, however, it is often unclear whether advances in a particular field, for example with a specific type of input data, will carry over to another setting. On top of that, any model that requires labelled data inherently suffers from capacity constraints. Typically, models are trained on a handful of well-known data sets which have been created with great effort. How would a perfect model look like? Ideally, we would want to find that one general model to rule them all, a model structure that works with different inputs, little oversight and readily adapts to new tasks, similar as the human brain. \
   Although the human brain has been used as an inspiration for neural networks, mimicking brain structures is not the aim of machine learning nor should it be. Human learning is nevertheless useful in defining potential goals. There is more to machine learning than simply finding better predictions. Making models interpretable, making models independent of human capacity constraints, making models which work across different modalities and with potentially unknown inputs and creating model structures that are reusable as well as understandable are valuable aims, too. \
-  In their paper, data2vec (citation), data scientists at Meta, formerly facebook, developed an architecture that addresses some of those goals. Their algorithmic structure is able to work with either text, image or speech. On top of that, the model is self supervised with a teacher-student relationship which reduces the need  for human labelling. It is not a universal model in the sense that it works with any input, nor is it even a general model in the sense that the algorithm is exactly the same for each modality. However, the overall model structure remains the same for either text, speech or image input data, while only the specific encoding, normalization and masking strategies are modality-specific. In that regard, it is a step towards a more general way of dealing with different modalities and it is very effective at doing so given the benchmark results on typical data sets. 
+Nevertheless, the main challanges in machine learning currently evolved around data. The rise of transformer models (@vaswani2017attention) highlights how impactful the computational power to handle more data can be. Being parrallizable, they outperform sequential neural networks not through complexity, but through the combination of simplicity and the capability  to handle vast amounts of data. \
+
+  
+  # data2vec
+  In their paper, data2vec (@baevski2022data2vec), data scientists at Meta, formerly facebook, developed an architecture that addresses some of those goals. Their algorithmic structure is able to work with either text, image or speech. On top of that, the model is self supervised with a teacher-student relationship which reduces the need  for human labelling. It is not a universal model in the sense that it works with any input, nor is it even a general model in the sense that the algorithm is exactly the same for each modality. However, the overall model structure remains the same for either text, speech or image input data, while only the specific encoding, normalization and masking strategies are modality-specific. In that regard, it is a step towards a more general way of dealing with different modalities and it is very effective at doing so given the benchmark results on typical data sets. 
 
 — add benchmarks here?
 
@@ -111,3 +118,33 @@ The model performs best when teacher is given full input.
 
 What do the findings mean for the future of the field? 
 The authors succeed in designing a single learning mechanism for different modalities. As a caveat, they still use modality specific encoding and masking strategies, but input data is also quite different. Is it possible to go beyond that? One of the main advances of the framework is the use of contextualized training targets through the use of the teacher self-attention mechanism.
+
+
+
+# vilbert
+# flamingo @alayrac2022flamingo
+Not only obtaining labelled data, but also training time itself is prohibitively costly for many real world scenarios. It is incrediblly valuable
+if a model needs little training time. In the quest for more general AI models, that also corrsponds to the adaptability to new tasks. While researchers have
+used pre-trained models in conjunction with fine-tuning in order to adapt models to new tasks, that approach still requires substantial retraining. Another
+approach is 'few shot learning'. After pre-training a model, it has to adapt to a new task simply through being given a couple of prompting examples.
+One such model is Deepmind's Flamingo. \
+-picture- \
+Flamingo combines a vision model and large language model through a several achitectural advances. Rather than finetuning those models with a 
+combined 80 billion parameters, the initial models are frozen after pretraining and connected through a perceiver resampler component as well as gateed
+cross attention layers. Both those components are trainable and during training transform the model from an initial large language model into a fully
+functioning visual language model with great expressive capabilities. Freezing the models severly cuts down on the required amount of training and also 
+ensures that the models always retain their full capabilities. \
+However, bridging pre-trained vision-only and language-only is not the only innovation in the flamingo architecture. The model can also handle arbitrary
+sequences of interleaved text and images, scraped from the web. Based on data from 43 million websites, the researches create three different data sets
+(interleaved data, text-image pairs and video-image pairs). They specifically avoid typical machine learning data sets and leverage the contextualization of
+web data, similar to data2vec. \
+Formally, Flamingo models the probablity of text y interleaved with a sequence of videos or images. 
+\
+equation
+\
+The perceiver resampler connects the vision encoder and the language model. Cleverly, it resamples a variable size of input tokens into a fixed amount of visual outputs. This resampling significantly reduces computational complexity, especially of the vision-text cross attention. As learnable component, it contains a predefined number of latent queries. The number of output tokens is equal to the number of learned queries. 
+
+\
+The other important trainable compontent are gated cross attention layers. They can be inserted at variable depths into the frozen language model and define the complexity of the final model. They attend the visual inputs with a specific masking system. 
+The gating mechanism ensures that the first pass through the model corresponds to the original model. The amount of cross attention layers also lets
+the researcher choose the ratio between old (frozen) and new paramters. 
