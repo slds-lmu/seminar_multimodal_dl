@@ -32,10 +32,7 @@ As already mentioned, extracting text from the internet is rather easy. More pre
 Recent work [@rosset2020turing] showed that diversity in training datasets improves general cross-domain knowledge and downstream generalization capability for language models. The Pile [@gao2020pile] was introduced to address exactly these results. The Pile contains $22$ sub-datasets, including established NLP datasets, but also several newly introduced ones. The size of the $22$ sub-datasets, which can be categorized roughly into 5 categories, pile up to around $825$ GB of data.
 The following treemap shows the distribution of the dataset.
 
-```{r pile treemap, echo=FALSE}
-htmltools::includeHTML("data/01-chapter1/CompositionPile.html")
-# Plot passt leider noch nciht ganz. Aus einem Grund kommt eine Category nicht obwohl sie im .html sonst gezeigt wird
-```
+
 
 While only 13% of the world’s population speaks English, the vast majority of NLP research is done on English. @gao2020pile followed this trend, but did not explicitly filtered out other languages when collecting our the data. This leads to the fact that roughly 95\% of the Pile is English. Also EuroParl [@koehn2005europarl], a multilingual parallel corpus introduced for machine translation, is included in the Pile. To train GPT-2 Open AI collected data from WebText. WebText is an internet dataset created by scraping URLs extracted from Reddit submissions with a minimum score for quality, but sadly it was never released to the public. Independent researchers reproduced the pipeline and released the resulting dataset, called OpenWebTextCorpus [@Gokaslan2019OpenWeb] (OWT). 
 
