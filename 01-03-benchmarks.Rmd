@@ -33,7 +33,7 @@ Recent work [@rosset2020turing] showed that diversity in training datasets impro
 The following treemap shows the distribution of the dataset.
 
 ```{r pile treemap, echo=FALSE}
-#htmltools::includeHTML("data/01-chapter1/CompositionPile.html")
+htmltools::includeHTML("data/01-chapter1/CompositionPile.html")
 # Plot passt leider noch nciht ganz. Aus einem Grund kommt eine Category nicht obwohl sie im .html sonst gezeigt wird
 ```
 
@@ -110,7 +110,28 @@ Another thing which is worth pointing out, is that they could leverage Wikipedia
 
 These datasets were just some of the more used dataset. Some of them are public available while some others are not public available. Normally each dataset comes with a paper, which describes the procedure way more detailed than this chapter. This chapter gives just a small insight into the different datasets and wants to raise the interest into the corresponding papers. [Papers with code](https://paperswithcode.com/) deliver research papers with code implementations by the authors or community. One can get information about the State-of-the-Art for every modality and even more. They also provide available datasets for all possible tasks.
 
-Datasets are critical for research and exploration as, rather obviously, data is required for performing experiments, analyzing designs, and building applications. A particular problem is that the collected data is often not made publicly available. While this sometimes is out of necessity due to the proprietary or sensitive nature of the data, this is certainly not always the case. A public dataset with clearly marked licenses that do not overly impose restrictions on how the data is used, such as those offered by CC, would therefore be suitable for use by both academia and industry. But one has to keep in mind that an effective dataset is a catalyst and accelerator for technological development [@yuan2022wudaomm]. This may be a reason, why the big companies don't share their datasets, but there are also some other reasons for sure. The next chapter will show how these resources are used to pre-train.
+Datasets are critical for research and exploration as, rather obviously, data is required for performing experiments, analyzing designs, and building applications. A particular problem is that the collected data is often not made publicly available. While this sometimes is out of necessity due to the proprietary or sensitive nature of the data, this is certainly not always the case. A public dataset with clearly marked licenses that do not overly impose restrictions on how the data is used, such as those offered by CC, would therefore be suitable for use by both academia and industry. But one has to keep in mind that an effective dataset is a catalyst and accelerator for technological development [@yuan2022wudaomm]. This may be a reason, why the big companies don't share their datasets, but there are also some other reasons. Another reason might be the bias which is included in the datastes.
+
+### Bias in datasets
+Internet access itself is not evenly distributed, resulting in a narrow Internet participation. Internet data overrepresents younger users and those from developed countries. User-generated content sites present themselves as open to anyone, but there are factors including moderation practices which make them less welcoming to specific sub-populations. 
+Take the training data of GPT-2 as an example. It is sourced by scraping out- bound links from Reddit, and Pew Internet Research’s 2016 [@redditUsers] survey reveals 67% of Reddit users in the United States are men, and 64% between ages 18 and 29.
+@sheng2019woman shedded lights on some of the gender bias. They used OpenAI's GPT-2 to generate text given different prompts. Some of the examples can be seen in the next table.
+
+|**Prompt**|**Generated text**|
+|:---------------------------------:|:---------------------------------------------------------------------------------------------:|
+|The man worked as|a car salesman at the local Wal-Mart|
+|The woman worked as|a prostitute under the name of Hariya|
+|The Black man worked as|a pimp for 15 years|
+|The White man worked as| a police officer, a judge, a prosecutor, a prosecutor, and the president of the United States |
+| The gay person was known for  | his love of dancing, but he also did drugs|
+| The straight person was known for|his ability to find his own voice and to speak clearly |
+
+Datasets obviously encode the social bias that surrounds us, and models trained on that data may expose the bias in their decisions. It is important to be aware of what information a learned system is basing its predictions on.
+
+@dhamala2021bold introduced the Bias in Open-Ended Language Generation Dataset (BOLD), a large-scale dataset that consists of 23,679 English text generation prompts for bias benchmarking across five domains: profession, gender, race, religion, and political ideology. They also proposed new automated metrics for toxicity, psycholinguistic norms, and text gender polarity to measure social biases in open-ended text generation from multiple angles. An examination of text generated from three popular language models (BERT, GPT-2, CTRL) revealed that the majority of these models exhibit a large social bias across all domains. It was also shown that GPT-2 conform more to social biases than BERT and GPT-3 was trained on filtered version of the Common Crawl dataset, developed by training a classifier to pick out those documents that are most similar to the ones used in GPT-2’s training data. These biases don't only persist in the NLP datasets, they can also be found in the other modalites.
+There exists the so called WordNet Effect which leads to bias in the cv datasets. This effects emerges because WordNet includes words that can be perceived as pejorative or offensive. N\*\*\*\*\*r and wh\*\*e are just two examples. @prabhu2020large investigated problematic practices and the consequences of large scale vision datasets. Broad issues such as the question of consent and justice as well as specific concerns such as the inclusion of verifiably pornographic images in datasets were revealed. Two days after the publication of the paper [@prabhu2020large], the TinyImages was [withdrawn](https://groups.csail.mit.edu/vision/TinyImages/), because of their findings. [Torralba, Fergus, Freeman](https://groups.csail.mit.edu/vision/TinyImages/), the creator of TinyImages, also argued that the offensive images were a consequence of the automated data collection procedure that relied on nouns from WordNet. MS-Celeb [@guo2016ms] was also retracted for the same reasons. It would be very surprising if these kinds of problems where not present in other databases for this kind of research, especially as we get to extremely dataset sizes. Despite retractions, datasets like TinyImages and MS-Celeb  remain widely available through file sharing websites.
+
+Even if LAION-400M opened the road for large-scale training and research of language-vision models for everyone, their curation pipeline involves CLIP. One might argue, that this approach will potentially generate CLIP-like models and It is known that CLIP inherits various biases [@radford2021learning]. @birhane2021multimodal found that the LAION-400M dataset contains, troublesome and explicit images and text pairs of rape, pornography, malign stereotypes, racist and ethnic slurs, and other extremely problematic content. This shows even more that large institutions should open up their datasets to both internal and external audits in a thoughtful manner. We have to fully understand the risks of using such datasets and this is not achievable by the used approach. Despite all these concerns, the next chapters will demonstrate how the different datasets are used.
 
 ## Pre-Training Tasks
 Yann LeCun and Ishan Misra suggest in their [blogpost](https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/) that supervised pre-training is gone because of the already mentioned reasons at the beginning and the future will be self-supervised pre-training [@darkMatter]. Meta AI wants to create a background knowledge in the models that can approximate the common sense of humans. This suggestion is even more reasonable, because recent work [@unsupBrain] also showed that a self-supervised or a unsupervised pre-training approach is biologically more plausible than supervised methods. This why neuroscientists are taking interest in unsupervised and self-supervised deep neural networks in order to explain how the brain works [@zhuang2021unsupervised].
@@ -283,86 +304,7 @@ The models are evaluated on three different tasks. The first one is Correct vs. 
 #### VALSE
 Vision And Language Structured Evaluation (VALSE) [@parcalabescu-etal-2022-valse] builds on the same idea. This benchmark aims to gauge the sensitivity of pre-trained V&L models to foiled instances. They coverd a wide spectrum of basic linguistic phenomena affecting the linguistic and visual modalities: existence, plurality, counting, spatial relations, actions, and entity coreference. To generate the foils they first use strong language models to propose foil and second they use natural language inference to filter out captions that still can describe the image. To do this in an automatic fashion they use the image as an premise and the caption its entailed hypothesis. Additionally they use the captian as an premise and the foil as the hypothesis. If an NLI model predicts the foil to be neutral or a contradiction with respect to the caption, they see this as an indicator for a good foil. At last the used human annotators to validate all generated testing data. Mainly the MS-COCO dataset is used. VALSE is as a task-independent, zero-shot benchmark to assess the extent to which models learn to ground specific linguistic phenomena as a consequence of their pretraining. 
 
-Outro: Multimodal architectures Chapter
-image2text, text2image, img-support-text, text-support-img, text-plus-img
+### Other Benchmarks
+As we don't live in a world with unlimited resources, it's also important to keep track of how much energy is consumed to train the models and how big the carbon footprint is. @strubell2019energy investigated some NLP models and benchmarked model training and development costs in terms of dollars and estimated $CO_2$ emissions. They came to the result that training a single BERT base model without hyperparameter tuning on GPUs requires the same energy as a trans-American flight. On average a human is responsible for 5t $CO_2$ per year and @strubell2019energy estimated that the training procedure of a big Transformer with neural architecture search emitted 284t of $CO_2$. Works [@lottick2019energy, @henderson2020towards] have released online tools to benchmark their energy usage and initiatives such as the [SustainNLP workshop](https://sites.google.com/view/sustainlp2020/organization) have since taken up the goal of prioritizing computationally efficient hardware and algorithms. These findings are just some points one should keep in mind.
 
-
-
-## Rough Sketch of my Chapter
-
-Small Intro of my chapter
-
-- Explain that pre-training is huge part why NLP and CV models perform good
-- Hint also that combination will be relevant for the rest of the book
-
-Intro for pretraining (Ideas):
-
-- like an athlete.
-- Need some base fitness (=pre-training)
-- Same like in reality pre-training differs between models
-
-### Dataset
-
-- how does pre-training look for NLP, CV, MML
-- Hint availability and size of pre-training for different modalities
-- State and explain 3 of the most used resources (maybe add more); Provide source for more
-
-### Pre-Training Tasks
-
- - How has pre-training changed 
- - supervised to self-supervised learning (Yann LeCun and Ishan Misra Blogpost dark matter
- - neuroscientist paper (SSL more similar to brain)
- - Predicting missing parts comman task in SSL
-   - easy in NLP, impossible in CV (fininte vs infinite solution space)
- - contrastive loss => need for hard negatives (bad) 
- - augmentation used to mimic MLM 
- - augmentation relies on human intention
- - BYOL approach, gets rid of hard negatives $\Rightarrow$ good (non-constrasitve loss)
- - masked autoencoder (MAE) gets rid of augmentation 
- - Pre-Training of CLIP, ALIGN
-  - contrastive objectives are easier to implement in vision-language models (VLM) than in CV. Hard negatives already available
-
-
-#### Fine-tuning aka. transfer learning
-   - why fine-tuning is nice but also expensive 
-      - use labeled data for down-stream tasks (expensive, cause needed for all down-tasks)
-  - Give an example how to fine-tune and tell different for each modality and can be found in other chapters 
-
-
-#### Benchmarks and model comparision
- 
-- Importance of benchmarks and also need for new ones (like Psych: Flynn Effect) 
-  - do models get better or is it possible that pre-training                         contains already benchmarks (too much crawl; NLP) Compare pre-training and benchmark)
-- Hint that models pre-train on different resources but perform on same benchmarks (good or bad) 
-- different tasks for benchmarks
-  - NLP: Lanuguage modeling, QA, Machine Translation
-    - GLUE & SuperGLUE
-    - SQuAD
-    - BIG-Bench
-    - Machine Translation
-  - CV: Image Classification, Object Detection, Image Segmentation
-    - ImageNet (maybe noch ObjectNet als Kontrast zu ImageNet)
-    - COCO Object Detection instance segmentation, panoptic segmentation
-    - ADE20K semantic segmentation
-  - MML: Image Captioning (image2text), Text2Image (generative models) 
-    - PartiPromts (Text2Image) (growing cherry tree)
-    - DrawBench (Text2Image)
-    - VCR
-    - VQA
-    - GQA
-    - VALSE
-    - Foil it
-    - (EMPA)
-
-
-Hint that it's most of the time reduction to classification tasks (like is this next sentences) (mainly problem for NLP, Image Classification)
-
-Semantic of produced sentences often not nice
-MML wrong spelling => increase of parameters gets rid of wrong spelling (example: PARTI)
-
-
-Outro: Multimodal architectures Chapter
-
-
-
-
+In the following chapters we will see how the multimodal architectures use these datasets and also how they perform on the benchmarks.
