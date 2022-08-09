@@ -1,5 +1,93 @@
-# title
+*Author:* Karol Urbańczyk  
+*Supervisor:* Jann Goschenhofer
 
-*Author: *
+# Text-2-image
 
-*Supervisor: *
+* introduce the concept in few sentences
+* choice of recent break-throughs is subjective, many important ones not mentioned (GAWWN, LAFITE, Make-a-Scene, probably many others)
+
+Intention of this chapter is to grasp how the field of text-2-image modelling has been changing over the recent years. We will start with basic concepts that has been around since 2014 and end with the state-of-the-art approaches, as of August 2022. Since the field is developing in a rapid pace, with break-through models being announced every quarter, we are aware this chapter might soon not be fully covering the field. However, we must notice that cutting edge capabilities of these models tend to come from the scale and software engineering tricks. Therefore, we believe that focusing on the core concepts should make this chapter have a universal character.
+
+
+## Seeking objectivity
+* Objectivity in comparing generated images is very hard to grasp
+* However, there are some most common datasets and measures that are being used
+* This subchapter will quickly present them
+
+### Datasets
+* COCO
+* CUB
+* Oxford 102
+
+### Measures
+* FID (Frechet Inception Distance)
+* IS (Inception Score)
+* Human evaluations - photorealism / caption similarity
+
+
+## Generative Adversarial Networks
+* quick intro focusing on why it is crucial to start from GANs
+
+### Vanilla GAN for Image Generation
+* intro of GAN
+
+### Conditioning on Text
+* how to encode the text and use it in the generation process
+* show some results
+
+### Stacking generators
+* intro of StackGAN, show some results
+
+### Is attention all you need?
+* intro of AttGAN, show some results
+
+### Variational Autoencoder
+* Introducing the concept of VAE
+* How is it helpful in generating images
+
+## Dall-E starting post-GAN era
+* Intro: OpenAI, dataset used, not public, etc
+* VQ-VAE and dVAE
+* Details how it's working. Combining Transformer with VQ-VAE. Training vs inference
+* Results and image examples
+
+## GLIDE
+* Intro
+* Diffusion concept
+* details how GLIDE is working
+* results / scores
+* Limitations / strengths & weaknesses
+
+## Dall-E 2
+* Intro (mention PR move)
+* details how it is working
+* results / scores
+* Limitations / strengths & weaknesses
+
+## Imagen
+* Intro
+* details how it is working
+* results / scores
+* Limitations / strengths & weaknesses
+
+## Parti
+* Intro
+* details how it is working
+* results / scores
+* Limitations / strengths & weaknesses
+
+## Open-Source Community
+* Although most of the recent work comes from OpenAI and Google, there are very interesting directions taken by the open community
+* Mentioning the models and quickly what is happening. VQGAN+CLIP, Latent Diffusion models for sure
+* Maybe some links for the reader to play with?
+
+## Discussion
+Mention the following points and why they matter
+
+* potential business use cases
+* open vs closed-source (mention dall-e mini)
+* copyrights
+* biases
+
+
+
