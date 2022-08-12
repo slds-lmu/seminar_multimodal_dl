@@ -4,7 +4,7 @@
 
 *Supervisor: Jann Goschenhofer*
 
-## Intro
+## Introduction
 
 The text supported CV architectures presented in this chapter follow the spirit of <!-- ref to other chapter mentioning NLP progress -->.
 This means, they stem from a line of research which takes a lot of inspiration from preceding advancements in NLP.
@@ -24,7 +24,7 @@ They show a large potential to be the CV counterparts to NLP foundation models. 
 
 ## Concepts
 
-### Scaling sample size
+### Web-scale data
 
 <!-- Reference to bitter pill to swallow: More compute beats complex architecture. -->
 Arguably the most important aspect of these models is scale. <!-- ref to bitter pill to swallow -->
@@ -38,7 +38,7 @@ Because of its noisy nature, some form of pre-processing is needed, e.g., filter
 
 <!-- TODO: Other chapters discussing web-scale data? -->
 
-### Contrastive loss
+### Contrastive objective
 
 The maximizing scale approach explains a lot of further design choices.
 The so called contrastive loss turned out to be very suitable for that.
@@ -72,13 +72,15 @@ They embed the class labels in sentence, e.g., "Picture of a (word)", which seem
 * Learn a representation _and_ connect it to language (-> NLP)
 * Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
 
-## CLIP
+## Architectures
+
+### CLIP
 
 <!-- Intro -->
 * Focus on _task learning_ (datasets as proxies to tasks) instead of _representation learning_
 * Contrastive, Language, Image, Pre-training
 
-### Architecture
+Architecture
 
 * Original transformer with modifications used for GPT family as a text encoder
 * ResNet or vision transformer as a image encoder.
@@ -89,7 +91,7 @@ They embed the class labels in sentence, e.g., "Picture of a (word)", which seem
   * No: contrastive objective?
   * Yes: visual representations connected to natural language
 
-## ALIGN
+### ALIGN
 
 <!-- Intro -->
 * Over one billion image alt-text pairs
@@ -98,7 +100,7 @@ They embed the class labels in sentence, e.g., "Picture of a (word)", which seem
 * Image + text image retrieval (e.g., Image of Eiffel tower + "snow" -> snowy Eiffel tower)
 * Key difference to CLIP: training data. ALIGN does not filter that strongly, "dataset doesn't require expert knowledge to curate"
 
-## Florence
+### Florence
 
 <!-- Intro -->
 <!-- Object detection vs scene level -->
@@ -115,8 +117,6 @@ They embed the class labels in sentence, e.g., "Picture of a (word)", which seem
   * Uses CLIP pendant as the language encoder
   * Swin transformer as the image encoder
   * CoSwin for embedding
-
-### Architecture
 
 ## Performance comparison
 
