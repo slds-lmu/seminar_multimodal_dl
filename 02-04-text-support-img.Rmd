@@ -6,36 +6,36 @@
 
 ## Introduction
 
-The text supported CV architectures presented in this chapter follow the spirit of <!-- ref to other chapter mentioning NLP progress -->.
-This means, they stem from a line of research which takes a lot of inspiration from preceding advancements in NLP.
-The aim is the incorporation of respective new findings into CV in order to improve the SOTA in this field, which has to main aspects:
+> "The biggest lesson that can be read from 70 years of AI research is that general methods that leverage computation are ultimately the most effective, and by a large margin.
+> [\ldots] Most AI research has been conducted as if the computation available to the agent were constant (in which case leveraging human knowledge would be one of the only ways to improve performance) but, over a slightly longer time than a typical research project, massively more computation inevitably becomes available.
+> Seeking an improvement that makes a difference in the shorter term, researchers seek to leverage their human knowledge of the domain, but the only thing that matters in the long run is the leveraging of computation.
+> [\ldots] One thing that should be learned from the bitter lesson is the great power of general purpose methods, of methods that continue to scale with increased computation even as the available computation becomes very great."
+>
+> --- @sutton2019bitterlesson
 
-1. Researchers try to translate architectural concepts firstly used in NLP to the CV scenario, e.g., the vision transformer <!-- ref -->.
-1. They leverage the power of these NLP models as building blocks inside bigger models, where they are used as text encoders for models where natural language is used as a very compelling source of supervision.
-
-This chapter is dedicated mainly to the second.
-It has subchapters on the recent and relevant CV models CLIP, ALIGN, Florence, ... and discusses some of their core concepts related to natural language supervision. <!-- ref for all papers --> \
-For example, all the architectures employ some form of transformer-based language encoder [@vaswani2017attention] and CLIP excels even more when using a vision transformer as its image encoder. <!-- ref vision transformer -->
-They confirm that the potential, impressively demonstrated by models like GPT-3 [@brown2020language], of this relatively recent architecture type is relevant for CV. \
-But language models like BERT <!-- ref BERT --> and GPT-3 have a big impact on another aspect of their field:
-They become to serve as so called foundation models, future architectures use them as building blocks. <!-- ref to foundation model paper, ref to DALLE oder so -->
-A trend which is observable for this new wave of CV models, too.
-They show a large potential to be the CV counterparts to NLP foundation models. <!-- ref Florence paper, ref models using CLIP as image encoder -->
+Most model choices presented in this chapter seem be directly inspired from this insight.
+Each model can be seen as an attempt of its corresponding company to employ their available resources on the largest possible scale, with a particular focus on the size of the dataset.
+This largely becomes feasible through the implementation of recent natural language processing (NLP) findings <!-- TODO: reference to Cem --> in the field of computer vision (CV). \
+On the one hand, translations of architectural concepts firstly discovered in NLP are tried out for CV [see, e.g., the vision transformer\; @ImageT]. <!-- TODO: reference to Vladana -->
+On the other hand, the power of these new NLP models, mostly of the transformer [@vaswani2017attention], is leveraged as text encoder building blocks inside bigger models, giving this chapter its name.
+It has subchapters on the recent and relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@solawetz2021florenceopen] and discusses some of their core concepts.
+Their accuracy confirms the potential, hinted at by the impressive GPT-3 [@brown2020language], of improving scale using NLP concepts for CV.
 
 ## Concepts
 
 ### Web-scale data
 
-<!-- Reference to bitter pill to swallow: More compute beats complex architecture. -->
-Arguably the most important aspect of these models is scale. <!-- ref to bitter pill to swallow -->
-Making use of their available resources and the aggressive parallelization capabilities of transformer architectures, sample sizes range from 400 million [CLIP\; @radford2021learning] over 900 million [Florence\; @yuan2021florence] to 1.8 billion [ALIGN\; @jia2021scaling].
+The internet is full of naturally occurring image-text pair.
+The idea to make use of the supervision contained in their co-occurrence.
+Making use of their available resources and the aggressive parallelization capabilities of transformer architectures, dataset sizes of models presented here range from 400 million [CLIP\; @radford2021learning] over 900 million [Florence\; @yuan2021florence] to 1.8 billion [ALIGN\; @jia2021scaling].
 The datasets are obtained through web-scraping and, because of the use of natural language supervision, cost and labor intensive manual labeling is completely avoided.
 But this readily available web-scale data comes with some drawbacks.
 Because of its noisy nature, some form of pre-processing is needed, e.g., filtering for language, excluding graphic content and images with non-informative captions.
+Mitigate overfitting.
+Social biases are reproduced.
+Still some degree of dataset curation necessitating arbitrary choices.
+
 <!-- TODO: ALIGN doesn't filter this strongly -->
-
-* Social biases are reproduced.
-
 <!-- TODO: Other chapters discussing web-scale data? -->
 
 ### Contrastive objective
@@ -49,6 +49,11 @@ The so called contrastive loss turned out to be very suitable for that.
 * Extra paper - but also in ALIGN?
 
 ### Zero shooting and foundation models
+
+<!-- But language models like BERT and GPT-3 have a big impact on another aspect of their field:
+They become to serve as so called foundation models, future architectures use them as building blocks. (ref to foundation model paper, ref to DALLE oder so)
+A trend which is observable for this new wave of CV models, too.
+They show a large potential to be the CV counterparts to NLP foundation models. (ref Florence paper, ref models using CLIP as image encoder) -->
 
 _Zero shooting_ is a paradigm coming from NLP research.
 It means the previously fitted model is applied to a new, unseen dataset.
