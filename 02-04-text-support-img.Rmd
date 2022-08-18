@@ -1,10 +1,12 @@
-# Chapter 2.4 Text supporting computer vision models
+## Text supporting computer vision models
+
+*Chapter 2.4 / Topic 7*
 
 *Author: Max Schneider*
 
 *Supervisor: Jann Goschenhofer*
 
-## Introduction
+### Introduction
 
 > "The biggest lesson that can be read from 70 years of AI research is that general methods that leverage computation are ultimately the most effective, and by a large margin.
 > [\ldots] Most AI research has been conducted as if the computation available to the agent were constant (in which case leveraging human knowledge would be one of the only ways to improve performance) but, over a slightly longer time than a typical research project, massively more computation inevitably becomes available.
@@ -21,44 +23,53 @@ On the other hand, the power of these new NLP models, mostly of the transformer 
 It has subchapters on the recent and relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@solawetz2021florenceopen] and discusses some of their core concepts.
 Their accuracy confirms the potential, hinted at by the impressive GPT-3 [@brown2020language], of improving scale using NLP concepts for CV.
 
-## Concepts
+### Concepts
 
-### Web-scale data
+#### Web-scale data
 
-The fuel for all other scaling is sample size.
-Without enough datapoints especially deep neural networks are likely to overfit without extra care.
-But preparing the model architecture for overfitting using expert knowledge could lead to a violation of the introductory quote.
-"Micromanaging" a model a model could hinder its scaling.
-A different solution --- based on scale --- is simply to increase the sample size, which is the approach ALIGN [@jia2021scaling] is taking explicitly and, e.g., is what CLIP is considering when making simplifications to its underlying architecture [@radford2021learning].
-The immense numbers of observations
+A core problem bugging researchers is the lack of robustness of previous state-of-the-art CV models to distribution shifts, i.e., when a pre-trained model with good accuracy on the original dataset fails to generalize to new datasets with the same categories.
+E.g., a ResNet101, trained on ImageNet to 76.2% accuracy, turns out to only have 32.6% accuracy when tested on ObjectNet [@radford2021learning].
+This suggests that perhaps the model did not learn correct latent representations, but overfit to the specific data-generating process. \
+One way to tackle this would be to make changes to the architecture and extend it in order to achieve better robustness.
+But these kind of adaptations, using expert knowledge, seem to repeat the mistake pointed out by @sutton2019bitterlesson; "micromanaging" a model is likely to hinder its scaling.
+<!-- E.g., introducing long short term memory to recurrent neural networks (RNN) improved them in the short term, but made them more computationally expensive, while not solving their core problem of poor parallelization, which resulted in it being outcompeted by the heavily parallelizable transformer architecture. | Is this really true?-->
+
+A different solution, based on scale, would be to increase the sample size, which is the approach explicitly taken by @jia2021scaling and, e.g., what @radford2021learning consider when making simplifications to their underlying architecture.
+The large numbers of observations
 
 * 400 million [CLIP\; @radford2021learning]
 * 900 million [Florence\; @yuan2021florence]
 * 1.8 billion [ALIGN\; @jia2021scaling]
 
-are achieved by tapping into the vast, readily available, numbers of image-text pairs produced and stored online.
-The idea is to make use of the supervision contained in their co-occurrence.
-Making use of their available resources and the aggressive parallelization capabilities of transformer architectures.
-Cost and labor intensive manual labeling is completely avoided.
-But this readily available web-scale data comes with some drawbacks.
-Because of its extremely noisy nature, some form of pre-processing is needed, e.g., filtering for language, excluding graphic content and images with non-informative captions.
-Still some degree of dataset curation necessitating arbitrary choices.
-Social biases are reproduced.
+are achieved by tapping into the vast amount of image-text pairs produced and readily available on the internet.
+Thus, error prone, cost and labor intensive (difficult to scale), manual labeling is avoided. \
+But these web data have some<!-- kind of heavy --> drawbacks.
+Because of their extremely noisy nature, some form of pre-processing is needed, e.g., filtering for English language, excluding graphic content and images with non-informative alt-texts.
+I.e., still some degree of dataset curation is involved, necessitating arbitrary choices. \
+Also the social biases inherent to the internet are reproduced and while the approach improves data efficiency somewhat (see subsection \@ref(contrObj)), the poor performance of deep learning in this area is not substantially enhanced and mainly just compensated for with its super scalable source of supervision [@radford2021learning].
 
-<!-- TODO: ALIGN doesn't filter this strongly -->
 <!-- TODO: Other chapters discussing web-scale data? -->
 
-### Contrastive objective
+#### Contrastive objective {#contrObj}
+
+The information contained in the co-occurrence of the image with its alt-text is made available through the framework of natural language supervision.
+The architectures use two jointly trained sub-networks to encode the image and the text, respectively.
+The vector encodings are then aligned in the latent representation space by minimizing a variant of the contrastive objective function \@ref(eq:contrLoss) [@tian2020contrastive].
+
+\begin{equation}
+  \ell_1^{V1, V2} = - \underset{\{v_1^1, v_2^1, \ldots, v_2^N\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_1^1,v_2^1\})}{h_\theta(\{v_1^1,v_2^1\}) + \sum_{k=2}^N h_\theta(\{v_1^1, v_2^k\})} \right)
+  (\#eq:contrLoss)
+\end{equation}
 
 The maximizing scale approach explains a lot of further design choices.
 The so called contrastive loss turned out to be very suitable for that.
+
 * Ref to CLIP inspiration from medical field with contrastive objective formula
 * Pro: Efficient training <!-- citation e.g., ALIGN -->
 * Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities] <!-- ref to zero shot chapter -->
 * Contra: No longer a generative model, e.g., no flexible caption generation
-* Extra paper - but also in ALIGN?
 
-### Zero shooting and foundation models
+#### Zero shooting and foundation models
 
 <!-- But language models like BERT and GPT-3 have a big impact on another aspect of their field:
 They become to serve as so called foundation models, future architectures use them as building blocks. (ref to foundation model paper, ref to DALLE oder so)
@@ -81,16 +92,17 @@ The model can readily function as a classifier by:
 But in order to enhance performance by a margin of %d percent the prompts are engineered further.
 They embed the class labels in sentence, e.g., "Picture of a (word)", which seemingly was necessary for the model to make full use of its learned parameters.
 
-### Connecting image representations to language
+#### Connecting image representations to language
 
 * Semantic concepts
 * Learn a representation _and_ connect it to language (-> NLP)
 * Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
 
-## Architectures
+### Architectures
 
-### CLIP
+#### CLIP
 
+<!-- Making use of their available resources and the aggressive parallelization capabilities of transformer architectures. -->
 <!-- Intro -->
 * Focus on _task learning_ (datasets as proxies to tasks) instead of _representation learning_
 * Contrastive, Language, Image, Pre-training
@@ -106,7 +118,7 @@ Architecture
   * No: contrastive objective?
   * Yes: visual representations connected to natural language
 
-### ALIGN
+#### ALIGN
 
 <!-- Intro -->
 * Over one billion image alt-text pairs
@@ -115,7 +127,9 @@ Architecture
 * Image + text image retrieval (e.g., Image of Eiffel tower + "snow" -> snowy Eiffel tower)
 * Key difference to CLIP: training data. ALIGN does not filter that strongly, "dataset doesn't require expert knowledge to curate"
 
-### Florence
+<!-- TODO: ALIGN doesn't filter data as strongly -->
+
+#### Florence
 
 <!-- Intro -->
 <!-- Object detection vs scene level -->
@@ -133,12 +147,12 @@ Architecture
   * Swin transformer as the image encoder
   * CoSwin for embedding
 
-## Performance comparison
+### Performance comparison
 
 * As all of these models are orders of magnitudes too large for performing a benchmark, findings reported inside the papers are believed here
 <!-- TODO: Other comparisons -->
 
-## Resources
+### Resources
 
 One can find the pre-trained CLIP models on [Github](https://github.com/openai/CLIP).
 They even found their way into simple command line tools already.
@@ -147,7 +161,7 @@ On my (mid-range) laptop I was able to find seemingly good matches for search te
 After an initial caching one request took about ten seconds.
 <!-- TODO: Look up if data if available -->
 
-## Outlook
+### Outlook
 
 CLIP as building block
 CLASP
