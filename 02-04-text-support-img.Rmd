@@ -54,20 +54,29 @@ Also the social biases inherent to the internet are reproduced and while the app
 
 The information contained in the co-occurrence of the image with its alt-text is made available through the framework of natural language supervision.
 The architectures use two jointly trained sub-networks to encode the image and the text, respectively.
-The vector encodings are then aligned in the latent representation space by minimizing a variant of the contrastive objective function \@ref(eq:contrLoss) [@tian2020contrastive].
+The vector encodings are then aligned in the latent representation space by minimizing a variant of the contrastive objective loss function \@ref(eq:contrLoss) [@tian2020contrastive].
 
 \begin{equation}
-  \ell_1^{V1, V2} = - \underset{\{v_1^1, v_2^1, \ldots, v_2^N\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_1^1,v_2^1\})}{h_\theta(\{v_1^1,v_2^1\}) + \sum_{k=2}^N h_\theta(\{v_1^1, v_2^k\})} \right)
+  \ell_1^{V_\text{img}, V_\text{txt}} = - \underset{\{v_\text{img}^1, v_\text{txt}^1, \ldots, v_\text{txt}^N\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_\text{img}^1,v_\text{txt}^1\})}{h_\theta(\{v_\text{img}^1,v_\text{txt}^1\}) + \sum_{k=2}^N h_\theta(\{v_\text{img}^1, v_\text{txt}^k\})} \right)
   (\#eq:contrLoss)
 \end{equation}
 
-The maximizing scale approach explains a lot of further design choices.
-The so called contrastive loss turned out to be very suitable for that.
+$\ell_1^{V_\text{img}, V_\text{txt}}$ is the loss for the first image-text pair, $v_\text{img}^1$ and $v_\text{txt}^1$ are the respective latent representations and $h_\theta(\cdot)$ is a similarity measure. \
+Figure \@ref(fig:contr-viz) further visualizes the concept.
+It can be seen, how the images and the texts are encoded by their respective sub-networks, resulting in a matrix with elements $h_\theta(\{v_\text{img}^i,v_\text{txt}^j\})$.
+Loosely speaking, the contrastive objective is to get the diagonal elements to, e.g., 1 and the rest to 0.
+
+```{r contr-viz, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:contr-viz)'}
+knitr::include_graphics('figures/02-04-text-support-img/contrastive-pre-training.png')
+```
+(ref:contr-viz) Visualization of a contrastive objective [@radford2021learning].
+
+<!-- CONTINUE: training in latent space vs target space -->
 
 * Ref to CLIP inspiration from medical field with contrastive objective formula
 * Pro: Efficient training <!-- citation e.g., ALIGN -->
 * Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities] <!-- ref to zero shot chapter -->
-* Contra: No longer a generative model, e.g., no flexible caption generation
+* Contra: No longer a generative model, e.g., no flexible caption generation, see CLIP Limitations
 
 #### Zero shooting and foundation models
 
