@@ -1,5 +1,44 @@
 # title
 
-*Author: *
+*Author: *Karol Urbanczyk
 
-*Supervisor: *
+*Supervisor: *Jann Goschenhofer
+
+
+Introduction / motivation:
+•	The general idea that different architectures share is to map text to a latent space, from which the image can be generated.
+•	Recent advancements, which are originally associated with NLP use cases, are playing key role in many of SOTA models.
+•	However, although these models  may be sharing some of the well-known concepts, we will show how drastically different approaches they can take in generating images and then try to compare their results.
+•	Short description what is going to be covered in the chapter – DallE’s approach and diffusion models represented by GLIDE
+Dall-E:
+•	Previous work:
+o	Historically, GANs were used as a go-to architecture for generating images from text
+o	The idea of using attention in generating images appeared already some time ago: https://arxiv.org/pdf/1711.10485.pdf
+o	In this context, DALL-E is another step forward. It makes use of attention together with some concepts typical for GANs, to improve the results. https://arxiv.org/pdf/2102.12092.pdf
+•	Model architecture:
+o	Variational Autoencoder explained
+o	Autoregressive Transformer explained
+o	DALL-E architecture combined from 2 of the above
+•	Training Process explanation
+•	Behaviour at inference time
+•	Results and discussion:
+o	Examples of images generated with Dall-E
+o	What is does good (very diverse, capturing a lot of different contexts), what it does bad (photorealism)
+•	DALL-E 2 as a successor – shortly explain what it does differently (architecture), why it allows also for image editing and why it improves on photorealism. https://cdn.openai.com/papers/dall-e-2.pdf
+
+Glide:
+•	Previous work:
+o	Idea of diffusion models, which comes from thermodynamics: https://arxiv.org/abs/1503.03585
+o	Diffusion models used for image synthesis (DDPM): https://arxiv.org/pdf/2006.11239.pdf
+o	Previous attempt from OpenAI on image synthesis: https://arxiv.org/pdf/2105.05233.pdf
+o	OpenAI’s improved DDPM: https://arxiv.org/pdf/2102.09672.pdf
+•	Model architecture:
+o	Guided diffusion in GLIDE. Usage of the text (again, transformer attending to text tokens) https://arxiv.org/pdf/2112.10741.pdf
+o	Comparison to previous attempts (generating image from class labels in the past, now capable of generating with a guidance of text prompt).
+•	Comparison of training and inference time:
+o	Additional model used at inference time to help the model stick to text prompt better (in this case: CLIP) https://cdn.openai.com/papers/Learning_Transferable_Visual_Models_From_Natural_Language_Supervision.pdf
+o	Another approach is called “Classifier-free guidance”. No model is being used, but a trick to produce 2 different images, with and without text guidance, and then add the scaled difference.
+•	Results and discussion:
+o	Examples of images generated with GLIDE
+o	What is does good (photorealism), what it does bad (slow at inference time)
+Conclusions & discussion (ethics?)
