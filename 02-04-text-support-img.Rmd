@@ -6,54 +6,122 @@
 
 ## Intro
 
-* Advancements in NLP [GPT-3\; @brown2020language]
-* Utilize these new approaches for improving CV
-* Great potential of natural language supervision
-  * Avoid manually labeling data, larger datasets: 400 Mio [CLIP\; @radford2021learning], 900 Mio [Florence\; @yuan2021florence]
-  * Connect learned representations directly to language
+The text supported CV architectures presented in this chapter follow the spirit of <!-- ref to other chapter mentioning NLP progress -->.
+This means, they stem from a line of research which takes a lot of inspiration from preceding advancements in NLP.
+The aim is the incorporation of respective new findings into CV in order to improve the SOTA in this field, which has to main aspects:
+
+1. Researchers try to translate architectural concepts firstly used in NLP to the CV scenario, e.g., the vision transformer <!-- ref -->.
+1. They leverage the power of these NLP models as building blocks inside bigger models, where they are used as text encoders for models where natural language is used as a very compelling source of supervision.
+
+This chapter is dedicated mainly to the second.
+It has subchapters on the recent and relevant CV models CLIP, ALIGN, Florence, ... and discusses some of their core concepts related to natural language supervision. <!-- ref for all papers --> \
+For example, all the architectures employ some form of transformer-based language encoder [@vaswani2017attention] and CLIP excels even more when using a vision transformer as its image encoder. <!-- ref vision transformer -->
+They confirm that the potential, impressively demonstrated by models like GPT-3 [@brown2020language], of this relatively recent architecture type is relevant for CV. \
+But language models like BERT <!-- ref BERT --> and GPT-3 have a big impact on another aspect of their field:
+They become to serve as so called foundation models, future architectures use them as building blocks. <!-- ref to foundation model paper, ref to DALLE oder so -->
+A trend which is observable for this new wave of CV models, too.
+They show a large potential to be the CV counterparts to NLP foundation models. <!-- ref Florence paper, ref models using CLIP as image encoder -->
+
+## Concepts
+
+### Scaling sample size
+
+<!-- Reference to bitter pill to swallow: More compute beats complex architecture. -->
+Arguably the most important aspect of these models is scale. <!-- ref to bitter pill to swallow -->
+Making use of their available resources and the aggressive parallelization capabilities of transformer architectures, sample sizes range from 400 million [CLIP\; @radford2021learning] over 900 million [Florence\; @yuan2021florence] to 1.8 billion [ALIGN\; @jia2021scaling].
+The datasets are obtained through web-scraping and, because of the use of natural language supervision, cost and labor intensive manual labeling is completely avoided.
+But this readily available web-scale data comes with some drawbacks.
+Because of its noisy nature, some form of pre-processing is needed, e.g., filtering for language, excluding graphic content and images with non-informative captions.
+<!-- TODO: ALIGN doesn't filter this strongly -->
+
+* Social biases are reproduced.
+
+<!-- TODO: Other chapters discussing web-scale data? -->
+
+### Contrastive loss
+
+The maximizing scale approach explains a lot of further design choices.
+The so called contrastive loss turned out to be very suitable for that.
+* Ref to CLIP inspiration from medical field with contrastive objective formula
+* Pro: Efficient training <!-- citation e.g., ALIGN -->
+* Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities] <!-- ref to zero shot chapter -->
+* Contra: No longer a generative model, e.g., no flexible caption generation
+* Extra paper - but also in ALIGN?
+
+### Zero shooting and foundation models
+
+_Zero shooting_ is a paradigm coming from NLP research.
+It means the previously fitted model is applied to a new, unseen dataset.
+In a way each dataset can be seen as a different task and used to evaluate the models ability to perform it.
+<!-- TODO: Name some datasets and their associated tasks. -->
+This is done in order to avoid a bias in performance evaluation, where the model overfitted on the specific data-generating distribution.
+<!-- TODO: Look up perfomance gain. -->
+This is possible due to the flexible text encoding of CLIP.
+<!-- TODO: Explain this better. -->
+The model can readily function as a classifier by:
+
+  1. Encoding all class labels.
+  1. Predicting for an image, which encoded class label is most likely to come with it.
+
+But in order to enhance performance by a margin of %d percent the prompts are engineered further.
+They embed the class labels in sentence, e.g., "Picture of a (word)", which seemingly was necessary for the model to make full use of its learned parameters.
+
+### Connecting image representations to language
+
+* Semantic concepts
+* Learn a representation _and_ connect it to language (-> NLP)
+* Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
 
 ## CLIP
 
 <!-- Intro -->
 * Focus on _task learning_ (datasets as proxies to tasks) instead of _representation learning_
+* Contrastive, Language, Image, Pre-training
 
-### Language, Image, Pre-training, Contrastive
+### Architecture
 
-* Insert constrastive objective formula (find original paper)
-* Contrastive training objective
-  * Pro: Efficient training
-  * Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities]
-  * Contra: No longer a generative model, e.g. no flexible caption generation
+* Original transformer with modifications used for GPT family as a text encoder
+* ResNet or vision transformer as a image encoder.
+  * Vision transformer: much less compute
+* High parallelization capabilities (transformer)
+* Can CLIP be seen as a step closer to human-like AI?
+  * No: performance drop from zero- to one-shot setting
+  * No: contrastive objective?
+  * Yes: visual representations connected to natural language
 
-### Zero shot
+## ALIGN
 
-* Apply model to unseen data
-* Avoid overfitting bias in performance evaluation (no adaption to specific data-generating distribution possible)
-* Prompt engineering (embed class labels in senctence, e.g. "Picture of a (word)")
-
-### Semantic concepts
-
-* Which semantic concepts are mirrored in the architecture?
-* Learn a representation _and_ connect it to language (-> NLP)
-* Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
+<!-- Intro -->
+* Over one billion image alt-text pairs
+* Name comes from alignment of visual and language representations trough the beloved and known contrastive loss or, very intuitively, "A Large-scale ImaGe and Noisy-text embedding"
+* Dual encoder architecture
+* Image + text image retrieval (e.g., Image of Eiffel tower + "snow" -> snowy Eiffel tower)
+* Key difference to CLIP: training data. ALIGN does not filter that strongly, "dataset doesn't require expert knowledge to curate"
 
 ## Florence
 
 <!-- Intro -->
+<!-- Object detection vs scene level -->
+* More fine-grained, dynamic, multimodal representations
 * Focus shift to finding _foundation model_ as CLIP turned out to be especially useful for that.
   * Pre-trained core
   * Flexible addition of modules
     * _Dynamic Head_ for object detection - citations coming later
-    * _METER_ as a adapter for vision-language (e.g. visual question answering)
+    * _METER_ as a adapter for vision-language (e.g., visual question answering)
     * Adaptation to video recognition through _CoSwin_
 * General trend in this direction, better and better predictions [CoCa\; @yu2022coca]
 * Optimization inside image-label-description space
+* Encoders
+  * Uses CLIP pendant as the language encoder
+  * Swin transformer as the image encoder
+  * CoSwin for embedding
 
-<!-- Object detection vs scene level -->
-
-<!-- Sub-chapter on ALIGN architecture -->
+### Architecture
 
 ## Performance comparison
+
+* As all of these models are orders of magnitudes too large for performing a benchmark, findings reported inside the papers are believed here
+<!-- TODO: Other comparisons -->
 
 ## Resources
 
@@ -62,3 +130,11 @@ They even found their way into simple command line tools already.
 For example there is an application named [rclip](https://github.com/yurijmikhalevich/rclip), which can be used for personal image retrieval, wrapping the _ViT-B/32_ CLIP architecture.
 On my (mid-range) laptop I was able to find seemingly good matches for search terms tried out inside a folder with about 100 pictures.
 After an initial caching one request took about ten seconds.
+<!-- TODO: Look up if data if available -->
+
+## Outlook
+
+CLIP as buildingblock
+CLASP
+LAION dataset
+TODO: CLIP as module
