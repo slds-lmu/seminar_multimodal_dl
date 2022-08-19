@@ -1,5 +1,197 @@
-# title
+# Strucutered + Unstrucutered Data
 
-*Author: *
+*Author: Rickmer Schulte*
 
-*Supervisor: *
+*Supervisor: Daniel Schalk*
+
+## Intro
+
+While the previous chapter has extended the range of modalities considered in multimodal deep learning beyond image and text data, the focus remained on other sorts of unstructured data. This has neglected the broad class of structured data, which has been the basis for research in pre deep learning eras and which has given rise to many fundamental modeling approaches in statistics and classical machine learning. Hence, the following chapter will aim to give an overview of both data sources and outline the respective ways these have been used for modeling purposes as well as more recent attempts to model them jointly. 
+
+Generally, structured and unstructured data substantially differ in certain aspects such as dimensionality and interpretability which have led to various modeling approaches that are particularly designed for the special characteristics of the data types, respectively. As shown in previous chapters, deep learning models such as neural networks are known to work well on unstructured data due to their ability to extract latent representation and to learn complex dependencies from unstructured data sources to achieve state-of-the art performance on many classification and prediction tasks. By contrast, classical statistical models are mostly applied to tabular data due the advantage of interpretability inherent to these models, which is commonly of great interest in many research fields. However, as more and more data has become available to researchers today, they often do not only have one sort of data modality at hand but both structured and unstructured data at the same time. Discarding one or the other data modality makes it likely to miss out on valuable insights and potential performance improvements.
+
+Therefore, the following chapter will mainly investigate different proposed methods to model both data types jointly and examine similarities and differences between those. Besides classical methods such as feature engineering to integrate unstructured data via expert knowledge into the classical model framework, end-to-end learning techniques as well as different fusion procedures to integrate both types of modalities into common deep learning architectures are analyzed and evaluated. Especially the latter will be explored in detail by referring to numerous examples from survival analysis, finance and economics. 
+Finally, the chapter will conclude with a critical assessment of recent research for combining structured and unstructured data in multimodal DL, highlighting lacking steps that are required by following research as well as giving an outlook on future developments in the field.
+
+
+## Taxonomy: Structured vs. Unstructured Data
+
+In order to have a clear setup for the remaining chapter, we will start off with a brief taxonomy of data types that will be encountered. Structured data, normally stored in some tabular form, has been the main research object in classical scientific fields. Whenever there was unstructured data involved, this was normally transformed into a structured form in a informed manner. Typically, this was done via expert-knowledge or data reduction techniques such as PCA prior to further statistical analysis. However, DL has enabled unsupervised extraction of features from unstructured data and thus to incorporate this kind of data in the models directly. Classical examples of unstructured data are image, text, video, and audio data as shown in Figure 1. Of these, the use of image and textual data together with tabular data will be examined along various examples later in the chapter. While the previous data types allowed for a clear distinction, lines can become increasingly blurred. For example, the record of few selected biomarkers or genes from patients would be regarded as structured data and normally be analyzed with classical statistical models. On the contrary, having the records of multiple thousand biomarkers or genes would rather be regarded as unstructured data and usually be analyzed via DL techniques. Thus, the distinction between structured and unstructured data does not only follow along the line of dimensionality but also concerns regarding the interpretability of single features within the data. 
+
+<Figure1: Structured vs. Unstructured Data >
+
+
+## Fusion Strategies
+
+After we have classified the different data types that we will be dealing with, we will now proceed with fusion strategies that are used to merge data modalities into a single model. While there are potentially many ways to fuse data modalities, a distinction between three different strategies, namely early, joint and late fusion has been made in the literature. Here we follow along the taxonomy laid out by Huang et al. (2020) with a few generalizations as this is sufficient in our context. 
+
+Early fusion refers to the procedure of merging data modalities into a feature vector prior to feeding it into the model. The data that is being fused can be raw or preprocessed data. The step of preprocessing usually involves dimensionality reduction to algin dimensions of the model input data. This can be done by training a separate DNN, using data driven transformations such as PCA or directly via expert knowledge. Besides using domain expertise to feed only regions of interest of e.g an image to the model, sampling from these regions is another common approach to further decrease dimensionality.
+
+Joint fusion offers the flexibility to merge the modalities at different depths of the model and thereby can learn feature representations from the input data (within the model) before fusing the different modalities into a common layer. Thus, the important difference to early fusion is that latent feature representation learning is not separated from the subsequent model and hence the loss can be backpropagated to the process of extracting features from raw data. This process is also called end-to-end learning. Depending on the task, CNNs or LSTMs are usually acquired to learn latent feature representations. As depicted in Figure 2, learning feature representations do not have to be applied to all modalities and is often not done for structured data. A further distinction can be made between models that facilitate another FCNN or a classical statistical model (linear, logistic, GAM, etc.) as model head. While the former can be desirable to capture possible interactions between modalities, the latter is frequently used as it preserves interpretability.
+
+Late fusion or sometimes also called decision level fusion is the procedure of fusing the predictions of multiple models that have been trained on each modality separately. The idea comes from ensemble classifiers, where each model is assumed to inform the final prediction separately. Outcomes from the models can be aggregated in various ways such as averaging or majority voting.
+
+While numerous examples from various fields for both early and joint fusion will be discussed in this chapter, late fusion has not been applied in many publications due to its separate training modes and thus is not further investigated here.
+
+<Figure2: Data modality fusion strategies>
+
+## Applications of Multimodal DL 
+
+The following section will discuss various examples of multimodal DL by referring to different publications and their proposed methods. The publications come from very different scientific fields and methods are target for their respective use case. Hence, allowing the user to follow along the development of methods as well as the progress in the field of multimodal DL (Struc. + Unstruc.) and obtaining a good overview of current and potential areas of applications. As there are various publications related to the topic of multimodal DL, the investigation was narrowed down to publications which introduce new methodical approaches or did pioneering work in their field by facilitating multimodal DL. 
+The last part of this section will also allude to applications of multimodal DL in settings where costly collected structured data was predominately used but freely available unstructured data sources were shown to be reasonable alternatives.
+
+## Multimodal DL in Survival
+
+Especially in the field of survival analysis, many interesting ideas were proposed with regards to multimodal deep learning which also incorporates structured data. While clinical patient data such as electronic health records (EHR) were traditionally used for modelling risks and hazards in survival analysis, recent research has started to incorporate image data such as body scans and other modalities such as gene expression or RNA data in the modelling framework. Before examining these procedures in detail, we will briefly revisit the classical modelling setup of survival analysis by referring to the well-known Cox Proportional Hazard Model (CPH).
+
+# Traditional Survival Analysis (Cox Proportional Hazard Model)
+
+
+# DeepConvSurv+DeepCorrSurv
+Briefly mention the advancements from DeepConv to DeepConvSurv over to DeepCorrSurv
+
+# Concat + Cross Auto Encoders
+Explain the new ideas regarding Autoencoders that Tong et al. (2020) in the setup of multi-modal DL. Stemming from the fact, that different modalities have complementary and consensus information that can be utilized differently.
+- not end-to-end learning
+- mention the simulation they did on MNIST and the idea to control the complementary and consensus information for model evaluation purposes
+
+# Cheerla and Gevaert (2019)
+Similar to Tong et al. (2020), they also try to make use of the common information that is shared by all modalities. However, they learn similar feature representation by means of end-to-end learning and incorporating a similarity loss additional to the survival loss. Also in contrast to Tong et al. (2020), they specifically try to incorporate the missingness of some data and do not discard those features entirely. Instead, they propose a variation of regular dropout, which they refer to as multimodal dropout. Hence, they dropout entire modalities while training in order to make the trained models less dependent on one single data source and to better handle missing data during inference time.
+-Mention t-SNE learned feature maps which surprisingly show 
+
+
+
+## Multimodal DL in Economics
+
+Law, Paige and Russell (2019)
+-end-to-end training to avoid labeling images
+-combining aerial images and street view images with classical features to predict house prices
+(compared to others, they dont use interior images)
+-they actually want to make the effects of images orthogonal to the ones of the strucutred ones -> they do that by fitting it in a two-stage process (regressing on the residuals)
+ 
+-showed that visual attributes actually improve prediction compared to struc features only (however struc are still the most important single modality)
+-showed that (linear) and GAM (interpretable models, perform similarly well) just perform slightly worse than full non linear model
+
+<Figure2: Results table – comparing different models>
+
+
+Jean et al (2016) – in detail
+
+Briefly mention the pioneering work the following publications did in their related field
+(Steele et al., 2017), (Sirko et al., 2021) and maybe (You et al., 2017), (Gebru et al., 2017)
+
+## Critical Assessment
+
+## Conclusion and Outlook
+-Achievements: Different ways to incorporate multi modal data using DL
+-General Observations:
+tabular data often carries the most important information (noisy image data and small sample size)
+end-to-end learning may improve performance of predictions
+Joint fusion with head classical statistical model can preserve interpretability
+-Major challenges: Small sample sizes particularly for images from patients,
+making it hard for DL to extract valuable information from images so that structured data sources mostly carry the most relevant information,
+insufficient benchmarking between proposed models as well as with the most important benchmark of single modality models (especially tabular data only models), DL has many tunable parameters, which makes it easy to achieve small improvements for some configurations
+not clear on which data and which fields multi-modal works best, not clear which DL archtiectures as well as fusion strategies work best (joint fusion with interpretable or NN as head)
+strong publication bias
+-Outlook: Do we need multi-modal deep learning in regular scientific context (outside classical Computer vision tasks) where good and interpretable structured data is available? - In current setup it might seem questionable, but with increasing data sizes 
+However: Missing Data might be more easily handled if different data sources contain not only complementary but also consensus information
+
+
+Outline of Chapter:
+
+\begin{enumerate}
+\item Structured vs. Unstructured Data
+\begin{itemize}
+  \item Taxonomy of Structured vs. Unstructured Data (Referring to classical examples and the respective modeling approaches traditionally used for them)
+  \item Shortly discussing the advantages/disadvantages of such modeling approaches (prediction performance vs. interpretability)
+  \item Discussing the fact that the line between Structured vs. Unstructured Data can become increasingly blurred if e.g. one feature can be interpreted on its own but only the combination of many yield the whole picture needed for prediction (e.g. measurement of a weather station)
+  \item Before the rise of DL methods, manually creating features (feature engineering) was the common way to integrate unstructured data into classical modeling frameworks. Besides being very labor intensive, the main disadvantages of such was that certain features were not retrievable with domain knowledge nor were their interactions with other features foreseeable in many contexts
+\end{itemize}
+
+\item Different Fusion Strategies 
+\begin{itemize}
+  \item Early Fusion
+    \begin{itemize}
+        \item Concatenation of different data modalities before inserting them to the model
+        \item Problematic when dimensions between data modalities differ a lot (e.g. images and non-image data)
+        \item Advantage: If dimensionality reduction/feature extraction such as PCA would be preferred over CNN due to limited available data (e.g. clinical images)
+    \end{itemize}
+  \item Intermediate Fusion 
+    \begin{itemize}
+        \item Feature learning (mostly on image data) and then fusing modalities into joint model (DNN or linear model) to yield final prediction, jointly trained
+        \item Advantages: Feature learning can be adjusted during joint training, dimensionality difference between data modes can easily be accounted for
+    \end{itemize}
+  \item Late Fusion
+    \begin{itemize}
+        \item Independent Model Training; this is more of an Ensemble (majority voting etc.)
+        \item Advantage: beneficial in case of different data modalities not complementing each other as the feature learning would be more straight forward
+    \end{itemize}
+\end{itemize}
+
+\item Multi-Modality DL in Medical/Biological Contexts
+\begin{itemize}
+  \item Examples
+    \begin{itemize}
+      \item Most publications focus on combining clinical image data (such as brain scans) with EHR (electronic health records, such as age, gender, weight etc.) in order to predict certain types of cancer or the progression of Alzheimer
+      \item The overall goal of this research is to closely mimic the doctors decision making process, as the doctor is also consulting various data sources from different modalities in order to reach a conclusion regarding a disease
+      \item Key findings and developments will be outlined: Huang et al (2020), Pölsterl et al (2020), Yala et al (2019) …
+    \end{itemize}
+  \item Critical Assessment of Publications
+    \begin{itemize}
+      \item Publication bias
+      \item Small samples sizes (due to limited patient data)
+      \item Often only marginal improvements that likely could have been due to hyperparameter tuning (“cheating”)
+      \item Results often not comparable (different data, metrics, architectures, hyperparameters)
+      \item Hence: Lack of systematic reviews and benchmarking which would yield deeper insights about the appropriateness of different multi-modal DL methods for specific use cases 
+    \end{itemize}
+\end{itemize}
+
+\item Multi-Modality DL in Other Contexts
+\begin{itemize}
+  \item Finance Li et al. (2020):
+    \begin{itemize}
+      \item Idea of the paper is that both fundamental financial information but also news reports impact stock movements
+      \item They specifically approach the problems of correlation between the two data modes as well as the problem of sampling heterogeneity which is inherent to many multi-modality problems
+      \item While fundamental market information normally changes (“sampled”) at fixed time points, news reports can arise (“be sampled”) at any time, which can make feature representation learning harder
+      \item Without going into to many details, the paper would be mentioned because of the interesting use case at hand. (Note: Depending on the overall chapter length, this might also be taken out again)
+    \end{itemize}
+  \item Economics Jean et al. (2016):
+    \begin{itemize}
+      \item Combining survey and satellite to predict poverty in different countries. The satellites image data are satellite images of luminosity at night and daytime images.  Survey data including several poverty measures. 
+      \item Although the fusion strategy of modalities itself is not particularly interesting, the use case seems very promising for future research
+    \end{itemize}
+  \item Wide and Deep Neural Networks (Cheng et al., 2016):
+    \begin{itemize}
+      \item Very influential publication at that time as it was one of the first publication that introduced the idea of modeling a wide (linear model) and deep (DNN) jointly
+      \item They used the idea to improve recommender systems which by then mostly relied on classical statistical model. The idea was to exploit the deep part to yield better generalization (via learned embedding vectors) and the wide part to achieve better memorization of certain special cases. 
+    \end{itemize}
+\end{itemize}
+
+\item The Combination of Both (New Approach for an Interpretable DL Model)
+\begin{itemize}
+  \item Semi-Structured Deep Distributional Regression (SSDDR):
+    \begin{itemize}
+       \item Rügamer, Kolb and Klein (2020) aim for a combination of classical statistical models (such as linear model and GAMs) and deep neural networks. They not only focus on mean prediction such as Wide and Deep NN, but incorporate the modeling of many distributional parameters with their special NN architecture.
+       \item As previous literature mainly focused on prediction performance, the identifiability of certain effect estimates (that naturally arises e.g. in the case of the Wide and Deep NN of Cheng et al.(2016) due the universal approx. property of NN) was of lesser concern. Hence, interpretability of the models given up in favor of prediction performance improvements
+       \item Unique contribution of paper: Orthogonalization cell in architecture which orthogonalizes the effects of the DNN part with respect to linear model or GAM part (their column space). This solves the issue of the identifiability problem and hence yields interpretable models while still being able to utilize the advantages of DNN for unstructured data
+\end{itemize}
+\end{itemize}
+
+\item Conclusion and Outlook
+\begin{itemize}
+  \item Summarize the main ideas and developments that have been developed in the past decade. Revisiting the critical assessment of publication and by that laying out the importance of real benchmark and systematic procedures in the field. Discussion of potential of certain methods and outlook on future developments.
+\end{itemize}
+
+\item Literature (was not incldued in yet as this would be done after merging in order to avoid merge conflicts)
+\begin{itemize}
+  \item Cheng et al.(2016): https://arxiv.org/abs/1606.07792
+  \item Jean et al. (2016): https://www.science.org/doi/10.1126/science.aaf7894
+  \item Yala et al (2019): https://pubs.rsna.org/doi/full/10.1148/radiol.2019182716
+  \item Huang et al (2020): https://www.nature.com/articles/s41746-020-00341-z
+  \item Pölsterl et al (2020): https://arxiv.org/abs/1909.03890
+  \item Li et al. (2020): https://ieeexplore.ieee.org/document/8966989
+  \item Rügamer, Kolb and Klein (2020): https://arxiv.org/pdf/2002.05777.pdf
+\end{itemize}
+
+\end{enumerate}
+
