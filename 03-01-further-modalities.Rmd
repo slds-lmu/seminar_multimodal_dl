@@ -1,14 +1,14 @@
 
-# Including Further Modalities
+## Including Further Modalities
 
 
 *Author: Marco Moldovan*
 
 *Supervisor: Rasmus Hvingelby*
 
-## Intro
+### Intro
 
-In this chapter we will build up a taxonomy of different perceivable and interpretable types of signals that we as humans use to navigate the world and we will see how today's state-of-the-art multimodal models are built and trained in order to process more and more modalities simultaneously in order to build more and more complete representations of world through available data. We will build up our taxonomy starting from the two most well-understood modalities - namely text and 2D images - and introduce models that learn relationships between increasingly many modalities at the same time and to map them to a cross-modal representation space in which we can apply distance functions to points in order to represent semantic relatedness between datapoint from these different modalities. 
+In this chapter we will build up a taxonomy of different perceivable and interpretable types of signals that we as humans use to navigate the world and we will see how today's state-of-the-art multimodal models are built and trained in order to process more and more modalities simultaneously in order to build more and more complete representations of world through available data. We will build up our taxonomy starting from the two most well-understood modalities - namely text and 2D images - and introduce models that learn relationships between increasingly many modalities at the same time and to map them to a cross-modal representation space in which we can apply distance functions to points in order to represent semantic relatedness between datapoint from these different modalities.
 Given such a learned cross-modal representation space we will look at some of the most important multimodal downstream tasks and applications.
 
 Towards the end of the chapter we will take a closer look at the two main types of model architectures and training paradigms: bi-encoders and "true" multimodal cross-encoders. The first kind of model can be seen as an ensemble of unimodal expert models that map into the same representation space while using some form of metric learning to relate representations of different modalities to one another. True multimodal models are essentially agnostic to their input (as long as it is preprocessed and featurized appropriately). We currently see the second kind of architecture as the more promising one for the case of approximating human-level perception. An example of a modality agnostic multimodal model is the Perceiver of which we will introduce a newer, even more efficient variant.
@@ -16,13 +16,13 @@ Towards the end of the chapter we will take a closer look at the two main types 
 Up until recently each modality required their own specific self-supervised training paradigm: for text a common approach would be MLM while the same training paradigm wasn't as effective for images or video. data2vec introduces a modality-agnostic SSL masked prediction setup which requires careful preprocessing but does not care about the source of the input. We see a model that marries a modality-agnostic model like Perceiver with a modality agnostic training paradigm like data2vec as a very promising path forward.
 Topic 11 will build on this idea of modality-agnostic models by introducing Google's Pathways: a concept for multimodal, multi-task, sparse world models.
 
-## Motivation
+### Motivation
 
 - World is inherently multimodal, images and text are just discrete snapshots while we as humans perceive lots of continuous multimodal signals.
 - We can extend the ideas and intuitions of image-text multimodal learning to include more modalities.
 - Listing research that includes continously more modalities would get out of hand quickly and seems unstructured: If we were to consider all possible learnable permutations of signal types we could go on forever.
 
-## Taxonomy of Multimodal Challenges
+### Taxonomy of Multimodal Challenges
 
 - Instead we want to build a taxonomy for multimodal machine learning that is based on challenges instead of modalities.
 - Viewing multimodal learning from the perspective of challenges is more generic and intuitive.
@@ -30,19 +30,19 @@ Topic 11 will build on this idea of modality-agnostic models by introducing Goog
 - The taxonomy will act as a blueprint for approaching multimodal learning challenges. For each category we will introduce some examples that apply a mixture of diverse modalities to a model.
 - We hope that the reader will understand that the different modalities are in priciple interchangable and that he/she will be able to apply the correct framework to their own multimodal problem.
 
-### Multimodal Representation Learning
+#### Multimodal Representation Learning
 
 - Representation learning lies at the base of solving most learning problems today, including for multimodal learning problems.
 - Dense representations are commonly learnt by deep neural networks like we've seen in the previous chapters.
 - If we want to generalize this notion to an arbitrary number of modalities we have to be clearn about the type of function that we want to learn and the kind of Representation we want to project to.
 
-#### Joint Representations
+##### Joint Representations
 
 - Different modalities live in the same representation space.
 - Given a multimodal signal one needs to learna model that "fuses" these modalities in order to learn a joint representation of these input signals.
 - Typically modalities are somehow concatenated as an input and are then fed into a model that is constructed such as to learn a joint representation.
 
-#### Coordinated Representation
+##### Coordinated Representation
 
 - Given input signals of different modalities we can learn a class of models that each projects a single modality into its own space.
 - One model will typically receive one modality.
@@ -50,7 +50,7 @@ Topic 11 will build on this idea of modality-agnostic models by introducing Goog
 - Essentially one learns to align different representation spaces to each other.
 - Contrastive learning is a popular paradigm for learning joint representations.
 
-### Multimodal Translation
+#### Multimodal Translation
 
 - Given a signal in one modality we want to return a semantically equivalent output in a different modality.
 - E.g. give a text input and retrieve a speech segment.
@@ -62,48 +62,48 @@ Topic 11 will build on this idea of modality-agnostic models by introducing Goog
 - VideoCLIP for video retrieval
 - SpeechBERT for text to speech retrieval
 
-### Multimodal Alignment
+#### Multimodal Alignment
 
 - Multimodal alignment is the challenge of how exactly to learn coordinated representation spaces.
 - VATT learns coordinated space contrastively. Can even share weights between modalities to serve as one-model-fits-all for multimodal alignment.
 - Alternative: masked multimodal autoencoding with MultiMAE.
 
-### Multimodal Fusion
+#### Multimodal Fusion
 
 - Multimodal fusion is the challenge of how to learn a joint representation space.
 - Where in the model does fusion happen? Early, late or hybrid fusion possible. What are the advantages and disadvantages of each approach?
 - Introduce Multimodal Bottleneck Transformer (MBT)
 
-## General Multimodal Architectures
+### General Multimodal Architectures
 
 - Introduce architectures that are general enough to be applied to most/any multimodal problem
 - NÜWA 3D Nearby Attention can take text, audio, images and video as input: data has to first be encoded into this format batch size x time x height x width x embedding size. Not necesserally suitable for joint representations but can serve as a general modality-agnostic encoder for coordinated representations. Time dimension can be replaced with channel or depth dimensions if one wants to encode more exotic modalities. Preserves locality in data.
 - Perceiver and Perceiver IO require almost no preprocessing and can read extremely long sequences of data by cross-attending between data and modality specific learnable latent array.
 - Hiearchical Perceiver is follow-up that can preserve locality and compositionality in data (very important).
 
-## Multimodal Training Paradigms
+### Multimodal Training Paradigms
 
 - Present training paradigms of how to train multimodal modal with SSL.
 
-### Modality-Agnostic Uni-Modal SSL
+#### Modality-Agnostic Uni-Modal SSL
 
 - data2vec is unimodal SSL paradigm but it's completely modality agnostic.
 
-### Generalized Cross-Modal SSL
+#### Generalized Cross-Modal SSL
 
 - Here we introduce methods for true multimodal SSL.
 - Have to seperate into contrastive and non-contrastive methods
 - Generalize as much as possible: are there any approaches that solve alignment and fusion at the same time?
 
-#### Contrastive Methods
+##### Contrastive Methods
 
 - VATT -> look for similar
 
-#### Non-Contrastive Methods
+##### Non-Contrastive Methods
 
 - MultiMAE -> look for similar
 - Can data2vec work with multiple modalities?
 
-## Combining General Architectures and Training Paradigms
+### Combining General Architectures and Training Paradigms
 
 - Future research: combining general architectures like Perceiver with contrastive methods like VATT, data2vec or MultiMAE.

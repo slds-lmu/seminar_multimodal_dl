@@ -1,31 +1,31 @@
-#  Text + Image
+##  Text + Image
 
 *Author: Steffen Jauch-Walser *
 
 *Supervisor: Daniel *
 
-# Todo 
+### Todo
 communicate with marco about perceiver and data2vec
 communicate about who does attention how detailled
 
-# challenges in AI
+### challenges in AI
 There have been many advances made in machine learning over the past years. However, there are two caveats. One model follows the next in short sequence. The overabundance of different models makes it hard to keep track. More importantly, however, it is often unclear whether advances in a particular field, for example with a specific type of input data, will carry over to another setting. On top of that, any model that requires labelled data inherently suffers from capacity constraints. Typically, models are trained on a handful of well-known data sets which have been created with great effort. How would a perfect model look like? Ideally, we would want to find that one general model to rule them all, a model structure that works with different inputs, little oversight and readily adapts to new tasks, similar as the human brain. \
   Although the human brain has been used as an inspiration for neural networks, mimicking brain structures is not the aim of machine learning nor should it be. Human learning is nevertheless useful in defining potential goals. There is more to machine learning than simply finding better predictions. Making models interpretable, making models independent of human capacity constraints, making models which work across different modalities and with potentially unknown inputs and creating model structures that are reusable as well as understandable are valuable aims, too. \
 Nevertheless, the main challanges in machine learning currently evolved around data. The rise of transformer models (@vaswani2017attention) highlights how impactful the computational power to handle more data can be. Being parrallizable, they outperform sequential neural networks not through complexity, but through the combination of simplicity and the capability  to handle vast amounts of data. \
 
-  
-  # data2vec
-  In their paper, data2vec (@baevski2022data2vec), data scientists at Meta, formerly facebook, developed an architecture that addresses some of those goals. Their algorithmic structure is able to work with either text, image or speech. On top of that, the model is self supervised with a teacher-student relationship which reduces the need  for human labelling. It is not a universal model in the sense that it works with any input, nor is it even a general model in the sense that the algorithm is exactly the same for each modality. However, the overall model structure remains the same for either text, speech or image input data, while only the specific encoding, normalization and masking strategies are modality-specific. In that regard, it is a step towards a more general way of dealing with different modalities and it is very effective at doing so given the benchmark results on typical data sets. 
+
+  ### data2vec
+  In their paper, data2vec (@baevski2022data2vec), data scientists at Meta, formerly facebook, developed an architecture that addresses some of those goals. Their algorithmic structure is able to work with either text, image or speech. On top of that, the model is self supervised with a teacher-student relationship which reduces the need  for human labelling. It is not a universal model in the sense that it works with any input, nor is it even a general model in the sense that the algorithm is exactly the same for each modality. However, the overall model structure remains the same for either text, speech or image input data, while only the specific encoding, normalization and masking strategies are modality-specific. In that regard, it is a step towards a more general way of dealing with different modalities and it is very effective at doing so given the benchmark results on typical data sets.
 
 — add benchmarks here?
 
-In the following, we’ll take a closer look at the data2vec framework. According to the authors, the core idea of the framework is to “predict latent representations of the full input data based on a masked view of the input in a self-distillation set-up using a standard Transformer architecture” (citation). 
+In the following, we’ll take a closer look at the data2vec framework. According to the authors, the core idea of the framework is to “predict latent representations of the full input data based on a masked view of the input in a self-distillation set-up using a standard Transformer architecture” (citation).
 
 — add paragraph about transformers here?
 
 More specifically, the framework is self-supervised, i.e. its core building blocks are a student and a teacher model whereby the teacher only differs in that it uses weights which are “an exponentially decaying average of the student model”. The transformer architecture itself follows an off-the-shelf network proposed by Vaswani et all, 2017 (citation). The exact setup can been in the following picture:
 
-— add picture 
+— add picture
 
 It is important to note that while the teach model is presented the full input data, the student model only obtains a masked, i.e a partial, view of the input data. Given that masked input, the task of the student model is to predict the latent representations created by the teach model. Specifically, the output of the top K blocks of the teacher model as highlighted in the graphic. It is notable that those latent representations are created from the complete input data and hence they are contextualized, which is not the case if you use visual tokens or pixels isolated to a current patch.
 
@@ -34,27 +34,27 @@ It is important to note that while the teach model is presented the full input d
 
 Diving deeper in to the model structure, the authors use the following loss function:
 
-— L = either L1 regularized or L2 depending on a parameter beta 
-The advantage of that particular loss function is that it is less sensitive to outlier, but one has to finetune beta. 
+— L = either L1 regularized or L2 depending on a parameter beta
+The advantage of that particular loss function is that it is less sensitive to outlier, but one has to finetune beta.
 
-As far as the parameterization of the teacher model weights are concerned, 
-they are implemented as 
+As far as the parameterization of the teacher model weights are concerned,
+they are implemented as
 
 — show equation
 
-In essence, this means that the teacher model update more frequently at the start of the training process when the model is still random and slower towards the end when meaningful weights have been learned. Aside from that, the teacher and student model are identical. Parameters of the feature encoder and positional encoder are shared between both models. 
+In essence, this means that the teacher model update more frequently at the start of the training process when the model is still random and slower towards the end when meaningful weights have been learned. Aside from that, the teacher and student model are identical. Parameters of the feature encoder and positional encoder are shared between both models.
 
 As far as the targets are concerned, they are constructed based on the outcome of the top K blocks of the teacher model as mentioned above. Specifically, a normalization is applied to each block and then outcomes are averaged across K blocks. The authors mention that averaging turned out to be more efficient than predicting each block separately at similar prediction rates. Normalization is important to help prevent model collapse as well as the domination of certain layers. As mentioned before, the normalization step is one of the parts of the model that is modality specific. For speech representations, instanced normalization is used. For natural language processing (NLP) and computer vision (CV), parameterless layer-normalization is used.
 
-— potentially explain more about normalization and variance-invariance-covariance normalization that was not used. 
+— potentially explain more about normalization and variance-invariance-covariance normalization that was not used.
 
-The other modality specific parts of the model are the encoding and the masking strategies. 
+The other modality specific parts of the model are the encoding and the masking strategies.
 
 Computer Vision:
 
 * 224x224  pixel as patches of 16x16 pixels
 * each patch linearly transformed and a sequence of 196 representations is input into
-* following BEit (Bao et al, 2021). 
+* following BEit (Bao et al, 2021).
 
 * —show picture of paper and explanation
 
@@ -90,7 +90,7 @@ Other models:
 * wave2vec
 ----
 * PeCo
-* flamingo 
+* flamingo
 
 How do they relate to data2vec? Create tables?
 
@@ -109,42 +109,42 @@ Speech Processing:
 
 NLP:
 
-* Books Corpus and English Wikipedia data. GLUE benchmark 
+* Books Corpus and English Wikipedia data. GLUE benchmark
 * first successful pre-trained nlp model not sureing discrete units as training target
 * outperforms roberta baseline
 
-Generally, best accuracy at around 10-12 layers. 
+Generally, best accuracy at around 10-12 layers.
 The model performs best when teacher is given full input.
 
-What do the findings mean for the future of the field? 
+What do the findings mean for the future of the field?
 The authors succeed in designing a single learning mechanism for different modalities. As a caveat, they still use modality specific encoding and masking strategies, but input data is also quite different. Is it possible to go beyond that? One of the main advances of the framework is the use of contextualized training targets through the use of the teacher self-attention mechanism.
 
 
 
-# vilbert
-# flamingo @alayrac2022flamingo
+### vilbert
+### flamingo @alayrac2022flamingo
 Not only obtaining labelled data, but also training time itself is prohibitively costly for many real world scenarios. It is incrediblly valuable
 if a model needs little training time. In the quest for more general AI models, that also corrsponds to the adaptability to new tasks. While researchers have
 used pre-trained models in conjunction with fine-tuning in order to adapt models to new tasks, that approach still requires substantial retraining. Another
 approach is 'few shot learning'. After pre-training a model, it has to adapt to a new task simply through being given a couple of prompting examples.
 One such model is Deepmind's Flamingo. \
 -picture- \
-Flamingo combines a vision model and large language model through a several achitectural advances. Rather than finetuning those models with a 
+Flamingo combines a vision model and large language model through a several achitectural advances. Rather than finetuning those models with a
 combined 80 billion parameters, the initial models are frozen after pretraining and connected through a perceiver resampler component as well as gateed
 cross attention layers. Both those components are trainable and during training transform the model from an initial large language model into a fully
-functioning visual language model with great expressive capabilities. Freezing the models severly cuts down on the required amount of training and also 
+functioning visual language model with great expressive capabilities. Freezing the models severly cuts down on the required amount of training and also
 ensures that the models always retain their full capabilities. \
 However, bridging pre-trained vision-only and language-only is not the only innovation in the flamingo architecture. The model can also handle arbitrary
 sequences of interleaved text and images, scraped from the web. Based on data from 43 million websites, the researches create three different data sets
 (interleaved data, text-image pairs and video-image pairs). They specifically avoid typical machine learning data sets and leverage the contextualization of
 web data, similar to data2vec. \
-Formally, Flamingo models the probablity of text y interleaved with a sequence of videos or images. 
+Formally, Flamingo models the probablity of text y interleaved with a sequence of videos or images.
 \
 equation
 \
-The perceiver resampler connects the vision encoder and the language model. Cleverly, it resamples a variable size of input tokens into a fixed amount of visual outputs. This resampling significantly reduces computational complexity, especially of the vision-text cross attention. As learnable component, it contains a predefined number of latent queries. The number of output tokens is equal to the number of learned queries. 
+The perceiver resampler connects the vision encoder and the language model. Cleverly, it resamples a variable size of input tokens into a fixed amount of visual outputs. This resampling significantly reduces computational complexity, especially of the vision-text cross attention. As learnable component, it contains a predefined number of latent queries. The number of output tokens is equal to the number of learned queries.
 
 \
-The other important trainable compontent are gated cross attention layers. They can be inserted at variable depths into the frozen language model and define the complexity of the final model. They attend the visual inputs with a specific masking system. 
+The other important trainable compontent are gated cross attention layers. They can be inserted at variable depths into the frozen language model and define the complexity of the final model. They attend the visual inputs with a specific masking system.
 The gating mechanism ensures that the first pass through the model corresponds to the original model. The amount of cross attention layers also lets
-the researcher choose the ratio between old (frozen) and new paramters. 
+the researcher choose the ratio between old (frozen) and new paramters.

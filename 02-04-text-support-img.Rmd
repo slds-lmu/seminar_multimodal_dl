@@ -1,10 +1,10 @@
-# Chapter 2.4 Text supporting computer vision models
+## Text supporting computer vision models
 
 *Author: Max Schneider*
 
 *Supervisor: Jann Goschenhofer*
 
-## Intro
+### Intro
 
 The text supported CV architectures presented in this chapter follow the spirit of <!-- ref to other chapter mentioning NLP progress -->.
 This means, they stem from a line of research which takes a lot of inspiration from preceding advancements in NLP.
@@ -22,9 +22,9 @@ They become to serve as so called foundation models, future architectures use th
 A trend which is observable for this new wave of CV models, too.
 They show a large potential to be the CV counterparts to NLP foundation models. <!-- ref Florence paper, ref models using CLIP as image encoder -->
 
-## Concepts
+### Concepts
 
-### Scaling sample size
+#### Scaling sample size
 
 <!-- Reference to bitter pill to swallow: More compute beats complex architecture. -->
 Arguably the most important aspect of these models is scale. <!-- ref to bitter pill to swallow -->
@@ -48,7 +48,7 @@ The so called contrastive loss turned out to be very suitable for that.
 * Contra: No longer a generative model, e.g., no flexible caption generation
 * Extra paper - but also in ALIGN?
 
-### Zero shooting and foundation models
+#### Zero shooting and foundation models
 
 _Zero shooting_ is a paradigm coming from NLP research.
 It means the previously fitted model is applied to a new, unseen dataset.
@@ -66,19 +66,19 @@ The model can readily function as a classifier by:
 But in order to enhance performance by a margin of %d percent the prompts are engineered further.
 They embed the class labels in sentence, e.g., "Picture of a (word)", which seemingly was necessary for the model to make full use of its learned parameters.
 
-### Connecting image representations to language
+#### Connecting image representations to language
 
 * Semantic concepts
 * Learn a representation _and_ connect it to language (-> NLP)
 * Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
 
-## CLIP
+### CLIP
 
 <!-- Intro -->
 * Focus on _task learning_ (datasets as proxies to tasks) instead of _representation learning_
 * Contrastive, Language, Image, Pre-training
 
-### Architecture
+#### Architecture
 
 * Original transformer with modifications used for GPT family as a text encoder
 * ResNet or vision transformer as a image encoder.
@@ -89,7 +89,7 @@ They embed the class labels in sentence, e.g., "Picture of a (word)", which seem
   * No: contrastive objective?
   * Yes: visual representations connected to natural language
 
-## ALIGN
+### ALIGN
 
 <!-- Intro -->
 * Over one billion image alt-text pairs
@@ -98,7 +98,7 @@ They embed the class labels in sentence, e.g., "Picture of a (word)", which seem
 * Image + text image retrieval (e.g., Image of Eiffel tower + "snow" -> snowy Eiffel tower)
 * Key difference to CLIP: training data. ALIGN does not filter that strongly, "dataset doesn't require expert knowledge to curate"
 
-## Florence
+### Florence
 
 <!-- Intro -->
 <!-- Object detection vs scene level -->
@@ -116,14 +116,14 @@ They embed the class labels in sentence, e.g., "Picture of a (word)", which seem
   * Swin transformer as the image encoder
   * CoSwin for embedding
 
-### Architecture
+#### Architecture
 
-## Performance comparison
+### Performance comparison
 
 * As all of these models are orders of magnitudes too large for performing a benchmark, findings reported inside the papers are believed here
 <!-- TODO: Other comparisons -->
 
-## Resources
+### Resources
 
 One can find the pre-trained CLIP models on [Github](https://github.com/openai/CLIP).
 They even found their way into simple command line tools already.
@@ -132,7 +132,7 @@ On my (mid-range) laptop I was able to find seemingly good matches for search te
 After an initial caching one request took about ten seconds.
 <!-- TODO: Look up if data if available -->
 
-## Outlook
+### Outlook
 
 CLIP as buildingblock
 CLASP

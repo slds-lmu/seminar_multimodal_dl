@@ -4,13 +4,13 @@
 
 *Supervisor: Matthias Assenmacher*
 
--	Summary book with key pointws:  
-    + Basics how does NLP and CV work 
-    + Comments of different multimodal architectures    
+-	Summary book with key pointws:
+    + Basics how does NLP and CV work
+    + Comments of different multimodal architectures
 -	Outlook and prospects
     + E.g. AI arts and NFTs (e.g. [starryai](e.g. https://www.starryai.com/create-nft-art-with-artificial-intelligence)()
     + Outlook Video + Text: e.g. David Beckham's recent global campaign showing Malaria survivors speaking through David Beckham to help raise awareness around the Malaria (see [website](https://techcrunch.com/2019/04/25/the-startup-behind-that-deep-fake-david-beckham-video-just-raised-3m/)). The video was produced in collaboration with the video startup [Synthesia](https://www.synthesia.io/). On there website you can chose an avatar and let it speak your text. They bring together the different modalities speech, image and text all together in videos.
-    
 
-    
+
+
 
