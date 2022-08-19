@@ -1,4 +1,5 @@
-## title 1
+
+## title 
 
 *Author: * Vladana Djakovic
 
@@ -285,3 +286,57 @@ $$ (3)
 $$\xi \leftarrow \tau \xi+(1-\tau) \theta$$ (1) where optimizer is an optimizer and η is a learning rate.
 At the end of training, we only keep the encoder fθ; as in [9]. When comparing to other methods, we consider the number of inference-time weights only in the final representation fθ. The full training procedure is summarized in Appendix A, and python pseudo-code based on the libraries JAX [64] and Haiku [65] is provided in in Appendix J.
 3.2 Intuitions on BYOL’s behavior
+
+<!-- This seems to be the old stuff, please uncomment if this should stay in your chapter or remove if it is obsolete. 
+History to ResNET
+○ https://www.motionmetrics.com/how-artificial-intelligence-revolutionized-computer
+-vision-a-brief-history/
+○ From 1970 and first idea that computers can be trained to imitate humans to AlexNet
+○ AlexNet and new era of CV in 2012
+● Supervised, Unsupervised, Self-supervised and Constractive learning
+○ Supervised learning, also known as supervised machine learning, is a subcategory of machine learning and artificial intelligence. It is defined by its use of labeled datasets to train algorithms that to classify data or predict outcomes accurately. (https://www.ibm.com/cloud/learn/supervised-learning)
+○ Unsupervised learning, also known as unsupervised machine learning, uses machine learning algorithms to analyze and cluster unlabeled datasets. These algorithms discover hidden patterns or data groupings without the need for human intervention. Its ability to discover similarities and differences in information make it the ideal solution for exploratory data analysis, cross-selling strategies, customer segmentation, and image recognition. (https://www.ibm.com/cloud/learn/unsupervised-learning )
+○ Self-supervised learning is a means for training computers to do tasks without humans providing labeled data (i.e., a picture of a dog accompanied by the label “dog”). It is a subset of unsupervised learning where outputs or goals are derived by machines that label, categorize, and analyze information on their own then draw conclusions based on connections and correlations.
+Self-supervised learning can also be an autonomous form of supervised learning because it does not require human input in the form of data labeling. In contrast to unsupervised learning, self-supervised learning does not focus on clustering and grouping that is commonly associated with unsupervised learning. (https://www.techslang.com/definition/what-is-self-supervised-learning/)
+○ Contrastive learning is a machine learning technique used to learn the general features of a dataset without labels by teaching the model which data points are similar or different. Just one part of self supervised learning (https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd966 07)
+○
+● ResNET-breakthroug in 2015
+○ Driven by the significance of depth, a question arises: Is learning better networks as easy as stacking more layers?
+○ When deeper networks are able to start converging, a degradation problem has been exposed: with the network depth increasing, accuracy gets saturated (which might be unsurprising) and then degrades rapidly
+○ Authors address the degradation problem by introducing a deep residual learning framework. Instead of hoping each few stacked layers directly fit a desired underlying mapping, they explicitly let these layers fit a residual mapping.
+○
+    
+ ● Efficient NET
+○ Convolutional Neural Networks (ConvNets) are commonly developed at a fixed
+resource budget, and then scaled up for better accuracy if more resources are
+available.
+○ Process of scaling up ConvNets has never been well understood and there are
+currently many ways to do it. The most common way is to scale up ConvNets by their depth or width. Another less common, but increasingly popular, method is to scale up models by image resolution. In previous work, it is common to scale only one of the three dimensions – depth, width, and image size.
+○
+● SimCLR
+○ SimCLR: a simple framework for contrastive learning of visual representations.
+○ Framework contains:
+■ A stochastic data augmentation module that transforms any given data example randomly resulting in two cor- related views of the same example, denoted x ̃i and x ̃j, which we consider as a positive pair. In this work, we sequentially apply three simple augmentations: random cropping followed by resize back to the original size, random color distortions, and random Gaussian blur.
+■ A neural network base encoder f (·) that extracts repre- sentation vectors from augmented data examples. Our framework allows various choices of the network archi- tecture without any constraints. We opt for simplicity and adopt the commonly used ResNet
+■ A small neural network projection head g(·) that maps representations to the space where contrastive loss is applied. We use a MLP with one hidden layer to obtain zi = g(hi) = W (2)σ(W (1)hi) where σ is a ReLU nonlinearity.
+■ A contrastive loss function defined for a contrastive pre- diction task. Given a set {x k̃ } including a positive pair of examples x ĩ and x ̃j, the contrastive prediction task aims to identify x ̃j in {x k̃ }k̸=i for a given x ĩ
+● BYOL
+○ Bootstrap Your Own Latent (BYOL), a new approach to self-supervised image
+representation learning. BYOL relies on two neural networks, referred to as
+online and target networks, that interact and learn from each other.
+○ BYOL achieves higher performance than state-of-the-art contrastive methods
+without using negative pairs. It iteratively bootstraps4 the outputs of a network to serve as targets for an enhanced representation. Moreover, BYOL is more robust to the choice of image augmentations than contrastive methods; we suspect that not relying on negative pairs is one of the leading reasons for its improved robustness
+○ The online network is defined by a set of weights θ and is comprised of three stages: an encoder fθ, a projector gθ and a predictor qθ,
+
+○ The target network has the same architecture as the online network, but uses a different set of weights ξ. The target network provides the regression targets to train the online network, and its parameters ξ are an exponential moving average of the online parameters θ
+○ ● SwAV
+○
+● Transformers for Image Recognition
+○ Self-attention-based architectures, in particular Transformers, have become the model of choice in natural language processing (NLP). The dominant approach is to pre-train on a large text corpus and then fine-tune on a smaller task-specific dataset. Thanks to Transformers’ computational efficiency and scalability, it has become possible to train models of unprecedented size, with over 100B parameters. With the models and datasets growing, there is still no sign of saturating performance.
+○ Inspired by the Transformer scaling successes in NLP, we experiment with applying a standard Transformer directly to images, with the fewest possible modifications. To do so, we split an image into patches and provide the sequence of linear embeddings of these patches as an input to a Transformer. Image patches are treated the same way as tokens (words) in an NLP application. We train the model on image classification in supervised fashion.
+○ VISION TRANSFORMER (VIT)
+■ The standard Transformer receives as input a 1D sequence of token
+embeddings. To handle 2D images, we reshape the image x ∈ RH×W×C into a sequence of flattened 2D patches xp ∈ RN×(P2·C), where (H,W) is the resolution of the original image,Cisthenumberofchannels,(P,P)istheresolutionofeachimagepatch,an dN =HW/P2 is the resulting number of patches, which also serves as the effective input sequence length for the Transformer. The Transformer uses constant latent vector size D through all of its layers, so we flatten the patches and map to D dimensions with a trainable linear projection
+■
+● Comparison between frameworks stated in the papers*
+-->
