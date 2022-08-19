@@ -250,7 +250,7 @@ An addition of a localization tasks to the classification tasks results into  ob
 ##### MS-COCO & Object365
 In the recent years, the Microsoft COCO dataset or the Object365 data have become the standards to evaluate object detection algorithms, but it's also possible to use a ImageNet dataset. The primary challenge metric is called mean Average Precision (mAP) at Intersection over Union (IoU) $=$.50:.05:.95. The IoU is the intersection of the predicted and ground truth boxes divided by the union of the predicted and ground truth boxes. IoU, also called Jaccard Index, values range from 0 to 1. Where 0 means no overlap and 1 means perfect overlap. But how is precision captured in the context of object detection? Precision is known as the ratio of $True~Positive/(True~Positive+False~Positive)$. With the help of the IoU threshold, it's possible to decide whether the prediction is True Positive(TP), False Positive(FP), or False Negative(FN). The example below shows predictions with IoU threshold ɑ set at 0.5.
 
-![taken from https://learnopencv.com](figures/01-chapter1/4-birds-prediction-types-1.webp)
+![taken from https://learnopencv.com](figures/01-chapter1/4-birds-prediction-types-1.png)
 The .50:.05:.95 means that one uses 10 IoU thresholds of $\{0.50, 0.55, 0.60, \dots ,0.95\}$. COCO uses this as primary metric, because it rewards detectors with better localization [@coco_eval].
 
 Object detection and image segmentation are both tasks which are concerned with localizing objects of interest in an image, but in contrast to object detection image segmentation focuses on pixel-level grouping of different semantics.
@@ -263,7 +263,7 @@ Semantic segmentation can be done one ADE20K[@zhou2017scene]. ADE are the first 
 In contrast to the object detection task, the definition of TP, FP, and FN is slightly different as it is not based on a predefined threshold. TP is now the area of intersection between Ground Truth and segmentation mask. FP is the predicted area outside the Ground Truth. FN is the number of pixels in the Ground Truth area that the model failed to predict. The calculation of IoU is the same as in object detection tasks. It's the intersection of the predicted and ground truth boxes aka. TP divided by the union of the predicted and ground truth boxes, which is essentially $TP + FN + FP$.
 A example is shown down below.
 
-![taken from https://learnopencv.com](figures/01-chapter1/5-segmentation-iou.webp)
+![taken from https://learnopencv.com](figures/01-chapter1/5-segmentation-iou.png)
 
 
 #### Multi-Modal Benchmarks

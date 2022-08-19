@@ -15,7 +15,7 @@ MS COCO Dataset contains 91 common object categories with a total of 328,000 ima
 2.Image collection and annotation 2.1 categories2.2 non-iconic2.3 annotation
 COCO is a large-scale richly annotated Datatset, the progress of building consists of two phases:Data collection and image annotation.
 
-In order to select representative object categories for Images in COCO, researchers collected several categories from different dataset like PASCAL VOC and other sources. All these object categories can be recognized by children between 4 to 8. The quality of the object categories were ensured by co-authors.Co-authors scale the categories from 1 to 5 depending on their common occurrence, practical applications and diversity from other categories [@mccoco].Thwe final number pf the list is 91, which includes all the categories from PASCAL VOC
+In order to select representative object categories for Images in COCO, researchers collected several categories from different dataset like PASCAL VOC and other sources. All these object categories can be recognized by children between 4 to 8. The quality of the object categories were ensured by co-authors.Co-authors scale the categories from 1 to 5 depending on their common occurrence, practical applications and diversity from other categories [@mccoco].The final number pf the list is 91, which includes all the categories from PASCAL VOC
 
 With the help of representative object categories, COCO want to collect a dataset which a majority of these images are non-iconic. Images are roughly divided into three types:iconic-object images, iconic-scene images and non-iconic images[@mccoco] (Images needs to be added)
 Images are collected through two strategies, firstly images from Flickr which contains photos uploaded by amateur photographer with keywords are collected. Secondly, Searching for pairwise combination of object categories like "dog + car" are used by researchers to gather more non-iconic images and images with rich contextual relationships.
@@ -115,7 +115,7 @@ $$ \tilde{X}=AddNorm(F(Z))$$
 
 Full encoder: multiple encoding layers in sequence,  the i-th layer uses the output set computed by layer i − 1.
 higher encoding Layers can exploit and refine relationships already identified by previous layers,
-N encoding layers -> multi level output $ \tilde{X}= (\tilde{X}^1 \dots \tilde{X}^n) $
+N encoding layers $\rightarrow$ multi level output $\tilde{X} = (\tilde{X}^1 \dots \tilde{X}^n)$
 
 2.3 decoder with stacks of attentive layers
 Conditioned on both previously generated words and region encodings

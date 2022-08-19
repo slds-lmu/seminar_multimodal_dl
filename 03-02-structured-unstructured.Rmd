@@ -96,4 +96,103 @@ strong publication bias
 -Outlook: Do we need multi-modal deep learning in regular scientific context (outside classical Computer vision tasks) where good and interpretable structured data is available? - In current setup it might seem questionable, but with increasing data sizes
 However: Missing Data might be more easily handled if different data sources contain not only complementary but also consensus information
 
+<!-- I think this is obsolete? Uncomment if not true.
 
+Outline of Chapter:
+
+\begin{enumerate}
+\item Structured vs. Unstructured Data
+\begin{itemize}
+  \item Taxonomy of Structured vs. Unstructured Data (Referring to classical examples and the respective modeling approaches traditionally used for them)
+  \item Shortly discussing the advantages/disadvantages of such modeling approaches (prediction performance vs. interpretability)
+  \item Discussing the fact that the line between Structured vs. Unstructured Data can become increasingly blurred if e.g. one feature can be interpreted on its own but only the combination of many yield the whole picture needed for prediction (e.g. measurement of a weather station)
+  \item Before the rise of DL methods, manually creating features (feature engineering) was the common way to integrate unstructured data into classical modeling frameworks. Besides being very labor intensive, the main disadvantages of such was that certain features were not retrievable with domain knowledge nor were their interactions with other features foreseeable in many contexts
+\end{itemize}
+
+\item Different Fusion Strategies
+\begin{itemize}
+  \item Early Fusion
+    \begin{itemize}
+        \item Concatenation of different data modalities before inserting them to the model
+        \item Problematic when dimensions between data modalities differ a lot (e.g. images and non-image data)
+        \item Advantage: If dimensionality reduction/feature extraction such as PCA would be preferred over CNN due to limited available data (e.g. clinical images)
+    \end{itemize}
+  \item Intermediate Fusion
+    \begin{itemize}
+        \item Feature learning (mostly on image data) and then fusing modalities into joint model (DNN or linear model) to yield final prediction, jointly trained
+        \item Advantages: Feature learning can be adjusted during joint training, dimensionality difference between data modes can easily be accounted for
+    \end{itemize}
+  \item Late Fusion
+    \begin{itemize}
+        \item Independent Model Training; this is more of an Ensemble (majority voting etc.)
+        \item Advantage: beneficial in case of different data modalities not complementing each other as the feature learning would be more straight forward
+    \end{itemize}
+\end{itemize}
+
+\item Multi-Modality DL in Medical/Biological Contexts
+\begin{itemize}
+  \item Examples
+    \begin{itemize}
+      \item Most publications focus on combining clinical image data (such as brain scans) with EHR (electronic health records, such as age, gender, weight etc.) in order to predict certain types of cancer or the progression of Alzheimer
+      \item The overall goal of this research is to closely mimic the doctors decision making process, as the doctor is also consulting various data sources from different modalities in order to reach a conclusion regarding a disease
+      \item Key findings and developments will be outlined: Huang et al (2020), Pölsterl et al (2020), Yala et al (2019) …
+    \end{itemize}
+  \item Critical Assessment of Publications
+    \begin{itemize}
+      \item Publication bias
+      \item Small samples sizes (due to limited patient data)
+      \item Often only marginal improvements that likely could have been due to hyperparameter tuning (“cheating”)
+      \item Results often not comparable (different data, metrics, architectures, hyperparameters)
+      \item Hence: Lack of systematic reviews and benchmarking which would yield deeper insights about the appropriateness of different multi-modal DL methods for specific use cases
+    \end{itemize}
+\end{itemize}
+
+\item Multi-Modality DL in Other Contexts
+\begin{itemize}
+  \item Finance Li et al. (2020):
+    \begin{itemize}
+      \item Idea of the paper is that both fundamental financial information but also news reports impact stock movements
+      \item They specifically approach the problems of correlation between the two data modes as well as the problem of sampling heterogeneity which is inherent to many multi-modality problems
+      \item While fundamental market information normally changes (“sampled”) at fixed time points, news reports can arise (“be sampled”) at any time, which can make feature representation learning harder
+      \item Without going into to many details, the paper would be mentioned because of the interesting use case at hand. (Note: Depending on the overall chapter length, this might also be taken out again)
+    \end{itemize}
+  \item Economics Jean et al. (2016):
+    \begin{itemize}
+      \item Combining survey and satellite to predict poverty in different countries. The satellites image data are satellite images of luminosity at night and daytime images.  Survey data including several poverty measures.
+      \item Although the fusion strategy of modalities itself is not particularly interesting, the use case seems very promising for future research
+    \end{itemize}
+  \item Wide and Deep Neural Networks (Cheng et al., 2016):
+    \begin{itemize}
+      \item Very influential publication at that time as it was one of the first publication that introduced the idea of modeling a wide (linear model) and deep (DNN) jointly
+      \item They used the idea to improve recommender systems which by then mostly relied on classical statistical model. The idea was to exploit the deep part to yield better generalization (via learned embedding vectors) and the wide part to achieve better memorization of certain special cases.
+    \end{itemize}
+\end{itemize}
+
+\item The Combination of Both (New Approach for an Interpretable DL Model)
+\begin{itemize}
+  \item Semi-Structured Deep Distributional Regression (SSDDR):
+    \begin{itemize}
+       \item Rügamer, Kolb and Klein (2020) aim for a combination of classical statistical models (such as linear model and GAMs) and deep neural networks. They not only focus on mean prediction such as Wide and Deep NN, but incorporate the modeling of many distributional parameters with their special NN architecture.
+       \item As previous literature mainly focused on prediction performance, the identifiability of certain effect estimates (that naturally arises e.g. in the case of the Wide and Deep NN of Cheng et al.(2016) due the universal approx. property of NN) was of lesser concern. Hence, interpretability of the models given up in favor of prediction performance improvements
+       \item Unique contribution of paper: Orthogonalization cell in architecture which orthogonalizes the effects of the DNN part with respect to linear model or GAM part (their column space). This solves the issue of the identifiability problem and hence yields interpretable models while still being able to utilize the advantages of DNN for unstructured data
+\end{itemize}
+\end{itemize}
+
+\item Conclusion and Outlook
+\begin{itemize}
+  \item Summarize the main ideas and developments that have been developed in the past decade. Revisiting the critical assessment of publication and by that laying out the importance of real benchmark and systematic procedures in the field. Discussion of potential of certain methods and outlook on future developments.
+\end{itemize}
+
+\item Literature (was not incldued in yet as this would be done after merging in order to avoid merge conflicts)
+\begin{itemize}
+  \item Cheng et al.(2016): https://arxiv.org/abs/1606.07792
+  \item Jean et al. (2016): https://www.science.org/doi/10.1126/science.aaf7894
+  \item Yala et al (2019): https://pubs.rsna.org/doi/full/10.1148/radiol.2019182716
+  \item Huang et al (2020): https://www.nature.com/articles/s41746-020-00341-z
+  \item Pölsterl et al (2020): https://arxiv.org/abs/1909.03890
+  \item Li et al. (2020): https://ieeexplore.ieee.org/document/8966989
+  \item Rügamer, Kolb and Klein (2020): https://arxiv.org/pdf/2002.05777.pdf
+\end{itemize}
+
+\end{enumerate}
+-->

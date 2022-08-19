@@ -27,6 +27,7 @@ bookdown::pdf_book:
   toc_depth: 1
   toc_unnumbered: no
   toc_appendix: yes
+  latex_engine: xelatex
   quote_footer: ["\\VA{", "}{}"]
 bookdown::epub_book:
   dev: svglite

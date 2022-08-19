@@ -281,7 +281,7 @@ A compound scaling method makes sense if an input image is bigger since a larger
 ##### Problem Formulation-everything from paper
 
  A ConvNet Layer *i* can be defined as a function: $Y_i = \mathcal{F}_i \left( X_i \right)$, where $\mathcal{F}_i$ is the operator, $Y_i$ is output tensor, $X_i$ is input tensor, with tensor shape $\left( H_i, W_i, C_i \right)$, where $H_i$ and $W_i$ are spatial dimension and $C_i$ is the channel dimension. A ConvNet N can be represented by a list of composed layers:  n $$ \mathcal{N}=\mathcal{F_k}\odot \cdots \mathcal{F_2}\odot\mathcal{F_1}\left( X_1 \right)=\bigodot_{j=1\cdots k}\mathcal{F_j}\left( X_1 \right)$$. In practice, ConvNet layers are often partitioned into multiple stages and all layers in each stage share the same architecture: for example, ResNet has five stages, and all layers in each stage has the same convolutional type except the first layer performs down-sampling. Therefore, we can define a ConvNet as:
- $$\mathcal{N}=\bigodot_{i=1\cdots s}\mathcal{F_i}^{L_i}\left( X_\left( H_i, W_i, C_i  \right) \right)$$
+ $$\mathcal{N}=\bigodot_{i=1\cdots s}\mathcal{F_i}^{L_i}\left( X_{\left( H_i, W_i, C_i  \right)} \right)$$
 where $\mathcal{F_i}^{L_i}$ denotes layer $\mathcal{F_i}$ is repeated $L_i$ times in stage *i*, $\left( H_i, W_i, C_i \right)$ enotes the shape of input tensor X of layer *i*
 
 
@@ -350,7 +350,7 @@ Intending to understand what qualifies good contrastive representation learning,
 * Representation learning with contrastive cross-entropy loss can be improved by normalizing embeddings and adjusting the temperature parameter appropriately.
 * Unlike its supervised counterpart, contrastive learning benefits from larger batch sizes and extended training periods. Contrastive learning also benefits from deeper and broader networks, just as supervised learning does.
 
-We combine these findings to achieve a new state-of-the-art self-supervised and semi-supervised learning on ImageNet ILSVRC-2012. Under the linear evaluation protocol, SimCLR achieves 76.5% top-accuracy, which is a 7% relative improvement over previous state-of-the-art H¬naff et al., 2.9 . When fine-tuned with only 1% of the ImageNet labels, SimCLR achieves 85.8% top-5 accuracy, a relative improvement of10% H¬naffetal., 2.9 . When fine-tuned on other natural image classification datasets, SimCLR performs on par with or better than a strong supervised baseline Kornblithetal.,2.9 on 10 out of 12 data sets.
+We combine these findings to achieve a new state-of-the-art self-supervised and semi-supervised learning on ImageNet ILSVRC-2012. Under the linear evaluation protocol, SimCLR achieves 76.5% top-accuracy, which is a 7% relative improvement over previous state-of-the-art Hnaff et al., . When fine-tuned with only 1% of the ImageNet labels, SimCLR achieves 85.8% top-5 accuracy, a relative improvement of Hnaffetal., . When fine-tuned on other natural image classification datasets, SimCLR performs on par with or better than a strong supervised baseline Kornblithetal., on 10 out of 12 data sets.
 
 #### Method
 
@@ -362,7 +362,7 @@ Like previous contrastive learning algorithms, the SimCLR learns representations
 
 2. A neural network *base encoder*  $f\left( \cdot  \right)$ that extracts representation vectors from augmented data examples. This framework does not restrict a choices of the network architecture, although authors for simplicity picked the commonly used ResNet and obtained $h_i=f\left( \tilde{x}_{i} \right)=ResNet\left(\tilde{x}_{i}\right)$ where $\textbf{h}_i\in \mathbb{R}^{d}$ is the output after the average pooling layer.
 
-3. A small neural network *projection head*  $g\left( \cdot  \right)$ that maps representations to the space where contrastive loss is applied. They have used a MLP with one hidden layer to obtain $z_i = g\left( \textbf{h}_i  \right) = W ^\left(  2\right)\sigma \left(  W^\left(  1\right) \textbf{h}_i\right)$ where $\sigma$ is a ReLU non-linearity.  Authors have explained later why defining the contrastive loss on $z_i$ instead of on $\textbf{h}_i$ is benefitial.
+3. A small neural network *projection head*  $g\left( \cdot  \right)$ that maps representations to the space where contrastive loss is applied. They have used a MLP with one hidden layer to obtain $z_i = g\left( \textbf{h}_i  \right) = W^{\left(  2\right)}\sigma \left(  W^{\left(  1\right)} \textbf{h}_i\right)$ where $\sigma$ is a ReLU non-linearity.  Authors have explained later why defining the contrastive loss on $z_i$ instead of on $\textbf{h}_i$ is benefitial.
 
 4. A *contrastive loss function* defined for a contrastive prediction task. Given a set $\left\{ \tilde{x}_{ik} \right\}$ including a positive pair of examples $\tilde{x}_{i}$ and $\tilde{x}_{j}$, the contrastive prediction task aims to identify $\tilde{x}_{i}$ in $\left\{ \tilde{x}_{i} \right\}_{k\neq i}$ for a given $\tilde{x}_{i}$.
 
@@ -371,7 +371,7 @@ where $\mathbb{I_{\left[ k\neq i \right]}}\in\left\{ 0,1 \right\}$ is an indicat
 
 ##### Training with Large Batch Size
 
-The authors did not use a memory bank to train the model for simplicity. They have varied the training batch size from 256 to 8192. This allowed them to get up to 16382 negative examples per positive pair from both augmentation views. The large batch size is not stable when using standard SGD Momentum with linear learning rate scaling Goyal et al., 2017. Moreover, to prevent that, the authors have used the LARS optimizer You et al., 2.. for all batch sizes.
+The authors did not use a memory bank to train the model for simplicity. They have varied the training batch size from 256 to 8192. This allowed them to get up to 16382 negative examples per positive pair from both augmentation views. The large batch size is not stable when using standard SGD Momentum with linear learning rate scaling Goyal et al., 2017. Moreover, to prevent that, the authors have used the LARS optimizer You et al., . for all batch sizes.
 
 ###### paraphrase this
 ***Global BN**  Standard ResNets use batch normalization. In distributed training with data parallelism, the BN mean and variance are typically aggregated locally per device. In our contrastive learning, as positive pairs are computed in the same device, the model can exploit the local information leakage to improve prediction accuracy without improving representations. We address this issue by aggregating BN mean and variance over all devices during the training. Other approaches include shuffling data examples across devices,or replacing BN with layer norm.
@@ -379,8 +379,8 @@ The authors did not use a memory bank to train the model for simplicity. They ha
 ##### Evaluation Protocol-How detailed this should be?
 
 Here we lay out the protocol for our empirical studies, which aim to understand different design choices in our framework.
-**Dataset and Metrics.** Most of our study for unsupervised pretraining learning encoder network f without labels is done using the ImageNet ILSVRC-2.2 dataset Russakovsky et al., 2.5 . Some additional pretraining experiments on CIFAR-10 Krizhevsky&Hinton,2..9 canbe found in Appendix B.9. We also test the pretrained results on a wide range of datasets for transfer learning. To evaluate the learned representations, we follow the widely used linearevaluationprotocol Zhangetal.,2.6.Oordetal., 2.8. Bachman et al., 2.9. Kolesnikov et al., 2.9 , where a linear classier is trained on top of the frozen base net- work, and test accuracy is used as a proxy for representation quality. Beyond linear evaluation, we also compare against state-of-the-art on semi-supervised and transfer learning.
-**Default setting.** Unless otherwise specified, for data augmentation we use random crop and resize with random ip , color distortions, and Gaussian blur for details, see Appendix A . We use ResNet-5. as the base encoder net- work, and a 2-layer MLP projection head to project the representation to a 28-dimensional latent space. As the loss, we use NT-Xent, optimized using LARS with learning rate of 4.8 =0.3×BatchSize/256 andweightdecayof 10−6. We train at batch size 4.96 for .. epochs.3 Fur- thermore, we use linear warmup for the rst . epochs, and decay the learning rate with the cosine decay schedule without restarts Loshchilov & Hutter, 2.6 .
+**Dataset and Metrics.** Most of our study for unsupervised pretraining learning encoder network f without labels is done using the ImageNet ILSVRC-2.2 dataset Russakovsky et al., 2.5 . Some additional pretraining experiments on CIFAR-10 Krizhevsky&Hinton,2..9 canbe found in Appendix B.9. We also test the pretrained results on a wide range of datasets for transfer learning. To evaluate the learned representations, we follow the widely used linearevaluationprotocol Zhangetal.,2.6.Oordetal., 2.8. Bachman et al., 2.9. Kolesnikov et al., 2.9 , where a linear classifier is trained on top of the frozen base net- work, and test accuracy is used as a proxy for representation quality. Beyond linear evaluation, we also compare against state-of-the-art on semi-supervised and transfer learning.
+**Default setting.** Unless otherwise specified, for data augmentation we use random crop and resize with random ip , color distortions, and Gaussian blur for details, see Appendix A . We use ResNet-5. as the base encoder net- work, and a 2-layer MLP projection head to project the representation to a 28-dimensional latent space. As the loss, we use NT-Xent, optimized using LARS with learning rate of 4.8 =0.3×BatchSize/256 andweightdecayof 10−6. We train at batch size 4.96 for .. epochs.3 Fur- thermore, we use linear warmup for the frst. epochs, and decay the learning rate with the cosine decay schedule without restarts Loshchilov & Hutter, 2.6 .
 
 #### Data Augmentation for Contrastive Representation Learning
 
@@ -414,20 +414,20 @@ Authors have also researched about importance of including a projection head, i.
 3 the default nonlinear projection with one additional hidden layer and ReLU activation
 
 ######need to sum up these results
-We observe that a nonlinear projection is better than a linear projection +3. , and much better than no projection .. . When a projection head is used, similar results are observed regardless of output dimension. Furthermore, even when nonlinear projection is used, the layer before the projection head, h, is still much better .. than the layer after, z = g(h), which shows that the hidden layer before the projection head is a better representation than the layer after.
-We conjecture that the importance of using the representation before the nonlinear projection is due to loss of information induced by the contrastive loss. In particular, z = g(h) is trained to be invariant to data transformation. Thus, g can remove information that may be useful for the downstream task, such as the color or orientation of objects. By leveraging the nonlinear transformation g(·), more information can be formed and maintained in h. To verify this hypothesis, we conduct experiments that use either h or g(h) to learn to predict the transformation applied during the pretraining. Here we set g(h) = W (2)σ(W (1)h), with the same input and output dimensionality i.e. 2.48 . Table 3 shows h contains much more information about the transformation applied, while g(h) loses information.
+We observe that a nonlinear projection is better than a linear projection +3. , and much better than no projection.  When a projection head is used, similar results are observed regardless of output dimension. Furthermore, even when nonlinear projection is used, the layer before the projection head, h, is still much better than the layer after, z = g(h), which shows that the hidden layer before the projection head is a better representation than the layer after.
+We conjecture that the importance of using the representation before the nonlinear projection is due to loss of information induced by the contrastive loss. In particular, z = g(h) is trained to be invariant to data transformation. Thus, g can remove information that may be useful for the downstream task, such as the color or orientation of objects. By leveraging the nonlinear transformation g(·), more information can be formed and maintained in h. To verify this hypothesis, we conduct experiments that use either h or g(h) to learn to predict the transformation applied during the pretraining. Here we set $g(h) = W (2)\sigma(W (1)h)$, with the same input and output dimensionality i.e. 2.48 . Table 3 shows h contains much more information about the transformation applied, while g(h) loses information.
 
 #### Loss Functions and Batch Size
 
 ##### Normalized cross entropy loss with adjustable temperature works better than alternatives
 
-We compare the NT-Xent loss against other commonly used contrastive loss functions, such as logistic loss Mikolov et al., 2.3 , and margin loss Schroff et al., 2.5 . Table 2 shows the objective function as well as the gradient to the input of the loss function. Looking at the gradient, we observe  l2 normalization i.e. cosine similarity along with temperature effectively weights different examples, and an appropriate temperature can help the model learn from hard negatives. and 2 unlike cross-entropy, other objective functions do not weigh the negatives by their relative hardness. As a result, one must apply semi-hard negative mining Schroff et al., 2.5 for these loss functions: in- stead of computing the gradient over all loss terms, one can computethegradientusingsemi-hardnegativeterms i.e., those that are within the loss margin and closest in distance, but farther than positive examples .
+We compare the NT-Xent loss against other commonly used contrastive loss functions, such as logistic loss Mikolov et al., 2.3 , and margin loss Schroff et al., 2.5 . Table 2 shows the objective function as well as the gradient to the input of the loss function. Looking at the gradient, we observe l2 normalization i.e. cosine similarity along with temperature effectively weights different examples, and an appropriate temperature can help the model learn from hard negatives. and 2 unlike cross-entropy, other objective functions do not weigh the negatives by their relative hardness. As a result, one must apply semi-hard negative mining Schroff et al., 2.5 for these loss functions: in- stead of computing the gradient over all loss terms, one can computethegradientusingsemi-hardnegativeterms i.e., those that are within the loss margin and closest in distance, but farther than positive examples .
 To make the comparisons fair, we use the same l2 normaliza- tion for all loss functions, and we tune the hyperparameters, and report their best results.8 Table 4 shows that, while semi-hard negative mining helps, the best result is still much worse than our default NT-Xent loss.
-We next test the importance of the l2 normalization i.e. cosine similarity vs dot product and temperature τ in our default NT-Xent loss. Table 5 shows that without normal- ization and proper temperature scaling, performance is sig- nicantly worse. Without l2 normalization, the contrastive task accuracy is higher, but the resulting representation is worse under linear evaluation.
+We next test the importance of the l2 normalization i.e. cosine similarity vs dot product and temperature $\tau$ in our default NT-Xent loss. Table 5 shows that without normal- ization and proper temperature scaling, performance is significantly worse. Without l2 normalization, the contrastive task accuracy is higher, but the resulting representation is worse under linear evaluation.
 
 ##### Contrastive learning benefits (more) from larger batch sizes and longer training
 
-Figure 9 shows the impact of batch size when models are trained for different numbers of epochs. We nd that, when the number of training epochs is small e.g. .. epochs , larger batch sizes have a signicant advantage over the smaller ones. With more training steps epochs, the gaps between different batch sizes decrease or disappear, pro- vided the batches are randomly resampled. In contrast to supervisedlearning Goyaletal.,2..,incontrastivelearn- ing, larger batch sizes provide more negative examples, facilitatingconvergence i.e.takingfewerepochsandsteps for a given accuracy . Training longer also provides more negative examples, improving the results. In Appendix B., results with even longer training steps are provided.
+Figure 9 shows the impact of batch size when models are trained for different numbers of epochs. We nd that, when the number of training epochs is small e.g. .. epochs , larger batch sizes have a signicant advantage over the smaller ones. With more training steps epochs, the gaps between different batch sizes decrease or disappear, pro- vided the batches are randomly resampled. In contrast to supervisedlearning Goyaletal.,2..,incontrastivelearn- ing, larger batch sizes provide more negative examples, facilitatingconvergence i.e.takingfewerepochsandsteps for a given accuracy . Training longer also provides more negative examples, improving the results. In Appendix B., results with even longer training steps are provided.
 
 ### Bootstrap Your Own Latent (BYOL)
 
@@ -767,7 +767,7 @@ An addition of a localization tasks to the classification tasks results into  ob
 ##### MS-COCO & Object365
 In the recent years, the Microsoft COCO dataset or the Object365 data have become the standards to evaluate object detection algorithms, but it's also possible to use a ImageNet dataset. The primary challenge metric is called mean Average Precision (mAP) at Intersection over Union (IoU) $=$.50:.05:.95. The IoU is the intersection of the predicted and ground truth boxes divided by the union of the predicted and ground truth boxes. IoU, also called Jaccard Index, values range from 0 to 1. Where 0 means no overlap and 1 means perfect overlap. But how is precision captured in the context of object detection? Precision is known as the ratio of $True~Positive/(True~Positive+False~Positive)$. With the help of the IoU threshold, it's possible to decide whether the prediction is True Positive(TP), False Positive(FP), or False Negative(FN). The example below shows predictions with IoU threshold ɑ set at 0.5.
 
-![taken from https://learnopencv.com](figures/01-chapter1/4-birds-prediction-types-1.webp)
+![taken from https://learnopencv.com](figures/01-chapter1/4-birds-prediction-types-1.png)
 The .50:.05:.95 means that one uses 10 IoU thresholds of $\{0.50, 0.55, 0.60, \dots ,0.95\}$. COCO uses this as primary metric, because it rewards detectors with better localization [@coco_eval].
 
 Object detection and image segmentation are both tasks which are concerned with localizing objects of interest in an image, but in contrast to object detection image segmentation focuses on pixel-level grouping of different semantics.
@@ -780,7 +780,7 @@ Semantic segmentation can be done one ADE20K[@zhou2017scene]. ADE are the first 
 In contrast to the object detection task, the definition of TP, FP, and FN is slightly different as it is not based on a predefined threshold. TP is now the area of intersection between Ground Truth and segmentation mask. FP is the predicted area outside the Ground Truth. FN is the number of pixels in the Ground Truth area that the model failed to predict. The calculation of IoU is the same as in object detection tasks. It's the intersection of the predicted and ground truth boxes aka. TP divided by the union of the predicted and ground truth boxes, which is essentially $TP + FN + FP$.
 A example is shown down below.
 
-![taken from https://learnopencv.com](figures/01-chapter1/5-segmentation-iou.webp)
+![taken from https://learnopencv.com](figures/01-chapter1/5-segmentation-iou.png)
 
 
 #### Multi-Modal Benchmarks
@@ -962,7 +962,7 @@ MS COCO Dataset contains 91 common object categories with a total of 328,000 ima
 2.Image collection and annotation 2.1 categories2.2 non-iconic2.3 annotation
 COCO is a large-scale richly annotated Datatset, the progress of building consists of two phases:Data collection and image annotation.
 
-In order to select representative object categories for Images in COCO, researchers collected several categories from different dataset like PASCAL VOC and other sources. All these object categories can be recognized by children between 4 to 8. The quality of the object categories were ensured by co-authors.Co-authors scale the categories from 1 to 5 depending on their common occurrence, practical applications and diversity from other categories [@mccoco].Thwe final number pf the list is 91, which includes all the categories from PASCAL VOC
+In order to select representative object categories for Images in COCO, researchers collected several categories from different dataset like PASCAL VOC and other sources. All these object categories can be recognized by children between 4 to 8. The quality of the object categories were ensured by co-authors.Co-authors scale the categories from 1 to 5 depending on their common occurrence, practical applications and diversity from other categories [@mccoco].The final number pf the list is 91, which includes all the categories from PASCAL VOC
 
 With the help of representative object categories, COCO want to collect a dataset which a majority of these images are non-iconic. Images are roughly divided into three types:iconic-object images, iconic-scene images and non-iconic images[@mccoco] (Images needs to be added)
 Images are collected through two strategies, firstly images from Flickr which contains photos uploaded by amateur photographer with keywords are collected. Secondly, Searching for pairwise combination of object categories like "dog + car" are used by researchers to gather more non-iconic images and images with rich contextual relationships.
@@ -1062,7 +1062,7 @@ $$ \tilde{X}=AddNorm(F(Z))$$
 
 Full encoder: multiple encoding layers in sequence,  the i-th layer uses the output set computed by layer i − 1.
 higher encoding Layers can exploit and refine relationships already identified by previous layers,
-N encoding layers -> multi level output $ \tilde{X}= (\tilde{X}^1 \dots \tilde{X}^n) $
+N encoding layers $\rightarrow$ multi level output $\tilde{X} = (\tilde{X}^1 \dots \tilde{X}^n)$
 
 2.3 decoder with stacks of attentive layers
 Conditioned on both previously generated words and region encodings
@@ -1277,7 +1277,7 @@ The aforementioned models assume implicitly a one-to-one correspondence between 
 
 @lazaridou2015combining propose a multimodal Skip-gram architecture where the objective function of a Skip-gram is "augmented" with an additional linguistic objective: $$\frac{1}{T}\sum_{t=1}^{T}\left(\mathcal{L}_{ling}(w_{t})+\mathcal{L}_{vision}(w_{t})\right)$$
 
-where $\mathcal{L}_{ling}$ is the Skip-gram loss function and $\mathcal{L}_{vision}$ is the additional visual loss for the target word $w_{t}$. In particular, $\mathcal{L}_{vision}$ has the following form of a max-margin framework, whose goal is to make the (vectorial) linguistic representation of a certain word more similar to its visual representation: $$^\mathcal{L}_{vision}(w_{t})=-\sum_{w^{'}\sim P_{n}(w)}\left(max(0,\gamma-cos(z_{w_{t}},v_{w_{t}})+cos(z_{w_{t}},v_{w^{'}})\right)$$
+where $\mathcal{L}_{ling}$ is the Skip-gram loss function and $\mathcal{L}_{vision}$ is the additional visual loss for the target word $w_{t}$. In particular, $\mathcal{L}_{vision}$ has the following form of a max-margin framework, whose goal is to make the (vectorial) linguistic representation of a certain word more similar to its visual representation: $$\mathcal{L}_{vision}(w_{t})=-\sum_{w^{'}\sim P_{n}(w)}\left(max(0,\gamma-cos(z_{w_{t}},v_{w_{t}})+cos(z_{w_{t}},v_{w^{'}})\right)$$
 
 where $v_{w^{'}}$ is a visual representation of a randomly chosen word $w^{'}$ used as negative sample, $v_{w_{t}}$ is the corresponding visual vector and $z_{w_{t}}$ is the target multimodal word representation which has to be learned by the model and it is nothing more than a linear transformation of a word representation $u_{w_{t}}$: $z_{w_{t}}=M^{u\rightarrow v}u_{w_{t}}$ and $M^{u\rightarrow v}$ is a cross-modal mapping matrix from linguistic inputs to a visual representation. It is important to remark that during training, for words which do not have associated images, $\mathcal{L}_{vision}$ gets the set to zero. When this cross-modal mapping matrix is estimated, it is then possible to find a visual representation for new words, which do not have a related image in the training set: the model allows to *imagine* new words. This is what is meant with grounded space: a perceptual (visual, in this case) space where a word is *grounded*, put in context.
 
@@ -1866,7 +1866,106 @@ strong publication bias
 -Outlook: Do we need multi-modal deep learning in regular scientific context (outside classical Computer vision tasks) where good and interpretable structured data is available? - In current setup it might seem questionable, but with increasing data sizes
 However: Missing Data might be more easily handled if different data sources contain not only complementary but also consensus information
 
+<!-- I think this is obsolete? Uncomment if not true.
 
+Outline of Chapter:
+
+\begin{enumerate}
+\item Structured vs. Unstructured Data
+\begin{itemize}
+  \item Taxonomy of Structured vs. Unstructured Data (Referring to classical examples and the respective modeling approaches traditionally used for them)
+  \item Shortly discussing the advantages/disadvantages of such modeling approaches (prediction performance vs. interpretability)
+  \item Discussing the fact that the line between Structured vs. Unstructured Data can become increasingly blurred if e.g. one feature can be interpreted on its own but only the combination of many yield the whole picture needed for prediction (e.g. measurement of a weather station)
+  \item Before the rise of DL methods, manually creating features (feature engineering) was the common way to integrate unstructured data into classical modeling frameworks. Besides being very labor intensive, the main disadvantages of such was that certain features were not retrievable with domain knowledge nor were their interactions with other features foreseeable in many contexts
+\end{itemize}
+
+\item Different Fusion Strategies
+\begin{itemize}
+  \item Early Fusion
+    \begin{itemize}
+        \item Concatenation of different data modalities before inserting them to the model
+        \item Problematic when dimensions between data modalities differ a lot (e.g. images and non-image data)
+        \item Advantage: If dimensionality reduction/feature extraction such as PCA would be preferred over CNN due to limited available data (e.g. clinical images)
+    \end{itemize}
+  \item Intermediate Fusion
+    \begin{itemize}
+        \item Feature learning (mostly on image data) and then fusing modalities into joint model (DNN or linear model) to yield final prediction, jointly trained
+        \item Advantages: Feature learning can be adjusted during joint training, dimensionality difference between data modes can easily be accounted for
+    \end{itemize}
+  \item Late Fusion
+    \begin{itemize}
+        \item Independent Model Training; this is more of an Ensemble (majority voting etc.)
+        \item Advantage: beneficial in case of different data modalities not complementing each other as the feature learning would be more straight forward
+    \end{itemize}
+\end{itemize}
+
+\item Multi-Modality DL in Medical/Biological Contexts
+\begin{itemize}
+  \item Examples
+    \begin{itemize}
+      \item Most publications focus on combining clinical image data (such as brain scans) with EHR (electronic health records, such as age, gender, weight etc.) in order to predict certain types of cancer or the progression of Alzheimer
+      \item The overall goal of this research is to closely mimic the doctors decision making process, as the doctor is also consulting various data sources from different modalities in order to reach a conclusion regarding a disease
+      \item Key findings and developments will be outlined: Huang et al (2020), Pölsterl et al (2020), Yala et al (2019) …
+    \end{itemize}
+  \item Critical Assessment of Publications
+    \begin{itemize}
+      \item Publication bias
+      \item Small samples sizes (due to limited patient data)
+      \item Often only marginal improvements that likely could have been due to hyperparameter tuning (“cheating”)
+      \item Results often not comparable (different data, metrics, architectures, hyperparameters)
+      \item Hence: Lack of systematic reviews and benchmarking which would yield deeper insights about the appropriateness of different multi-modal DL methods for specific use cases
+    \end{itemize}
+\end{itemize}
+
+\item Multi-Modality DL in Other Contexts
+\begin{itemize}
+  \item Finance Li et al. (2020):
+    \begin{itemize}
+      \item Idea of the paper is that both fundamental financial information but also news reports impact stock movements
+      \item They specifically approach the problems of correlation between the two data modes as well as the problem of sampling heterogeneity which is inherent to many multi-modality problems
+      \item While fundamental market information normally changes (“sampled”) at fixed time points, news reports can arise (“be sampled”) at any time, which can make feature representation learning harder
+      \item Without going into to many details, the paper would be mentioned because of the interesting use case at hand. (Note: Depending on the overall chapter length, this might also be taken out again)
+    \end{itemize}
+  \item Economics Jean et al. (2016):
+    \begin{itemize}
+      \item Combining survey and satellite to predict poverty in different countries. The satellites image data are satellite images of luminosity at night and daytime images.  Survey data including several poverty measures.
+      \item Although the fusion strategy of modalities itself is not particularly interesting, the use case seems very promising for future research
+    \end{itemize}
+  \item Wide and Deep Neural Networks (Cheng et al., 2016):
+    \begin{itemize}
+      \item Very influential publication at that time as it was one of the first publication that introduced the idea of modeling a wide (linear model) and deep (DNN) jointly
+      \item They used the idea to improve recommender systems which by then mostly relied on classical statistical model. The idea was to exploit the deep part to yield better generalization (via learned embedding vectors) and the wide part to achieve better memorization of certain special cases.
+    \end{itemize}
+\end{itemize}
+
+\item The Combination of Both (New Approach for an Interpretable DL Model)
+\begin{itemize}
+  \item Semi-Structured Deep Distributional Regression (SSDDR):
+    \begin{itemize}
+       \item Rügamer, Kolb and Klein (2020) aim for a combination of classical statistical models (such as linear model and GAMs) and deep neural networks. They not only focus on mean prediction such as Wide and Deep NN, but incorporate the modeling of many distributional parameters with their special NN architecture.
+       \item As previous literature mainly focused on prediction performance, the identifiability of certain effect estimates (that naturally arises e.g. in the case of the Wide and Deep NN of Cheng et al.(2016) due the universal approx. property of NN) was of lesser concern. Hence, interpretability of the models given up in favor of prediction performance improvements
+       \item Unique contribution of paper: Orthogonalization cell in architecture which orthogonalizes the effects of the DNN part with respect to linear model or GAM part (their column space). This solves the issue of the identifiability problem and hence yields interpretable models while still being able to utilize the advantages of DNN for unstructured data
+\end{itemize}
+\end{itemize}
+
+\item Conclusion and Outlook
+\begin{itemize}
+  \item Summarize the main ideas and developments that have been developed in the past decade. Revisiting the critical assessment of publication and by that laying out the importance of real benchmark and systematic procedures in the field. Discussion of potential of certain methods and outlook on future developments.
+\end{itemize}
+
+\item Literature (was not incldued in yet as this would be done after merging in order to avoid merge conflicts)
+\begin{itemize}
+  \item Cheng et al.(2016): https://arxiv.org/abs/1606.07792
+  \item Jean et al. (2016): https://www.science.org/doi/10.1126/science.aaf7894
+  \item Yala et al (2019): https://pubs.rsna.org/doi/full/10.1148/radiol.2019182716
+  \item Huang et al (2020): https://www.nature.com/articles/s41746-020-00341-z
+  \item Pölsterl et al (2020): https://arxiv.org/abs/1909.03890
+  \item Li et al. (2020): https://ieeexplore.ieee.org/document/8966989
+  \item Rügamer, Kolb and Klein (2020): https://arxiv.org/pdf/2002.05777.pdf
+\end{itemize}
+
+\end{enumerate}
+-->
 
 <!--chapter:end:03-02-structured-unstructured.Rmd-->
 
