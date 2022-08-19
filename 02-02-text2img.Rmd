@@ -88,6 +88,3 @@ Mention the following points and why they matter
 * open vs closed-source (mention dall-e mini)
 * copyrights
 * biases
-
-
-
