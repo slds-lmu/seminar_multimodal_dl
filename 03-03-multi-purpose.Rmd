@@ -40,7 +40,7 @@ transformers have been successful in a multimodal and multitask learning setting
 might be further enhanced by using so-called Mixture-of-Expert layers as done in [@Fedus2021] and recently [@Mustafa2022].
 In this chapter, multi-purpose models will be surveyed. At first, the term multi-purpose will be clarified since there is, to our best
 knowledge, no standard definition for this term. Different approaches from recent work will be presented, and eventually, the chapter
-will diverge to future developments, as outlined in @Dean2021. Jeff Dean proposed a promising architecture for future multi-purpose models,
+will diverge to future developments, as outlined in [@Dean2021]. Jeff Dean proposed a promising architecture for future multi-purpose models,
 which will be further examined on how this proposal has already been implemented. The chapter will conclude with an outlook and a discussion
 on how the field will likely evolve in the following years.
 
@@ -105,16 +105,16 @@ and then passed on to a transformer decoder which is connected to task-specific 
 the fit of transformers for multi-purpose models. On top of the decoder, task-specific heads are used to transform the obtained sequence into a solution to the
 given tasks. These heads are trainable networks, which are to be switched if specific tasks are used.
 The model often showed better results than a single-task specifically learned model. The model outperformed the single-task trained model for visual question answering
-(vqa), COCO [@mccoco], and visual genome detection @Krishna2017. On further tasks, when the model was trained for up to 8 tasks, it showed still comparable performance,
+(vqa), COCO [@mccoco], and visual genome detection [@Krishna2017]. On further tasks, when the model was trained for up to 8 tasks, it showed still comparable performance,
 however most of the time lower, than domain-specific models like BERT, VisualBERT [@Li2019], and DETR.
 
 #### OFA
-Another transformer-based model is OFA (@Wang2022). The multi-purpose approach is implemented such that every input is tokenized into a unified vocabulary, which becomes
+Another transformer-based model is OFA [@Wang2022]. The multi-purpose approach is implemented such that every input is tokenized into a unified vocabulary, which becomes
 possible since also images can be turned into tokens. Also, output sequences can be turned into their original or intended modality again, such that something like image
 generation from the text also becomes possible.
 
 #### Gato
-To combine different modalities and create a model which is also capable of solving different tasks, the generalist agent “gato” was introduced. To additionally improve
+To combine different modalities and create a model which is also capable of solving different tasks, the generalist agent “gato” was introduced [@Reed2022]. To additionally improve
 the model, reinforcement learning was also included to allow the model to become sequential and interact with it's environment. The model is not just able of solving text
 and visual tasks, but also to solve classic reinforcement learning tasks like playing ATARI games and proprioception. The results of the model are state-of-the-art.
 Reinforcement Learning is another approach in machine learning, where there is supervised learning, unsupervised learning and reinforcement learning. This technique is
@@ -127,7 +127,7 @@ properties, buttons and movements are tokenized such that these entities can be 
 ecoder of a transformer and is trained autoregressively, such that based on the previous sequence, the next token is predicted. This approach is akin to the GPT family.
 To predict multiple modalities based on previous inputs, the model needs to work with embeddings which itself are based on tokens. Although the model is is multi-purpose,
 different modalities are first processed using specific models at their entry points. Natural language data is encoded using SentencePiece, images are tokenized using the
-same procedure as in ViT and subsequently encoded using a ResNet v2 @He2016b, real world entities like buttons for games are also encoded to tokens allowing a transformer
+same procedure as in ViT and subsequently encoded using a ResNet v2 @He2016b (TODO), real world entities like buttons for games are also encoded to tokens allowing a transformer
 to become a multimodal model. Different techniques are applied to further represent these embeddings as sequences since transformer models are specifically designed for
 translation tasks and thus for sequence modeling. Text tokens remain in their intended order, while image tokens are represented as a raster to represent specific entities
 in a correct spatial representation. Tensors are also represented in a way such that rows are an important feature for sequencing. Nested structures are also ordered using
@@ -153,14 +153,14 @@ An important feature considering the proposal of dean however, is the aim to acc
 model and update every weights, in this approach for Pathways however, it was specifically addresssed to update fine-grained details fo the mdoel like weights to support
 sparse models like MIxture of Expert models.
 Pathway Implementations
-However, no truly multi-purpose model has been publish so far. The only models based on Pathways are the language model PaLM  @Chowdhery2022 and the text-to-image model
-parti @Yu2022. Both published less than a year after the proposal, indicating that more is to come in the next months.
+However, no truly multi-purpose model has been publish so far. The only models based on Pathways are the language model PaLM  [@Chowdhery2022] and the text-to-image model
+parti [@Yu2022]. Both published less than a year after the proposal, indicating that more is to come in the next months.
 
 <!-- ### TODO
  - More details on how hardware plays in the grand Pw proposal -->
 
 #### PathNet
-An architecture for neural networks @Fernando2017. Also achieved multitask solving by introducing a novel training algorithm. In contrast to single-task neural networks,
+An architecture for neural networks [@Fernando2017]. Also achieved multitask solving by introducing a novel training algorithm. In contrast to single-task neural networks,
 PathNet does not train the network solely on one task but on the whole network, but partially on one task and on a fraction of the network, randomly chosen. With this approach,
 knowledge sharing becomes possible.
 The pathway consists of a graph of networks where the networks are organized in columns of hidden layers in the network. Each node in this graph is a neural network itself.
@@ -168,7 +168,7 @@ This design intends to only train a path throughout the network on a specific ta
 the network to transfer already trained capability to the new task.
 The model achieves this transfer by selecting the best path using an evolutional approach. At first, an initial population of paths is initialized and evaluated against each
 other in a binary way after trained T/some epochs. The better-performing algorithm will then be modified to further compete against other pathways. After the winner is found,
-the winner’s path is frozen, meaning that all weights are not updated anymore to keep the performance on the trained task and avoid catastrophic forgetting. After fixing the
+the winner's path is frozen, meaning that all weights are not updated anymore to keep the performance on the trained task and avoid catastrophic forgetting. After fixing the
 winning path, all other parameters are newly initialized.
 Now, the same procedure is applied again to another task that is intended to benefit from the knowledge of the previous task. During this procedure, the tournament of different
 paths starts again, where the paths are trained and evaluated without the nodes from the previous winner path and eventually fixed again.
