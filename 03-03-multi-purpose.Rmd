@@ -127,7 +127,7 @@ properties, buttons and movements are tokenized such that these entities can be 
 ecoder of a transformer and is trained autoregressively, such that based on the previous sequence, the next token is predicted. This approach is akin to the GPT family.
 To predict multiple modalities based on previous inputs, the model needs to work with embeddings which itself are based on tokens. Although the model is is multi-purpose,
 different modalities are first processed using specific models at their entry points. Natural language data is encoded using SentencePiece, images are tokenized using the
-same procedure as in ViT and subsequently encoded using a ResNet v2 @He2016b (TODO), real world entities like buttons for games are also encoded to tokens allowing a transformer
+same procedure as in ViT and subsequently encoded using a ResNet v2 [@He2016b], real world entities like buttons for games are also encoded to tokens allowing a transformer
 to become a multimodal model. Different techniques are applied to further represent these embeddings as sequences since transformer models are specifically designed for
 translation tasks and thus for sequence modeling. Text tokens remain in their intended order, while image tokens are represented as a raster to represent specific entities
 in a correct spatial representation. Tensors are also represented in a way such that rows are an important feature for sequencing. Nested structures are also ordered using
