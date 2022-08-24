@@ -6,6 +6,7 @@
 
 *Supervisor: Jann Goschenhofer*
 
+<!-- TODO: Check present tense -->
 ### Introduction
 
 > "The biggest lesson that can be read from 70 years of AI research is that general methods that leverage computation are ultimately the most effective, and by a large margin.
@@ -62,46 +63,55 @@ The vector encodings are then aligned in the latent representation space by mini
 \end{equation}
 
 $\ell_1^{V_\text{img}, V_\text{txt}}$ is part of the loss for the first image-text pair, $v_\text{img}^1$ and $v_\text{txt}^1$ are latent representations of image 1 and text 1 and $h_\theta(\cdot)$ is a similarity measure.
-In order to guarantee symmetry, the total loss is the sum of $\ell_1^{V_\text{img}, V_\text{txt}}$ and $\ell_1^{V_\text{txt}, V_\text{img}}$, where the similarity of one text to all images is averaged insted of the other way around.
+In order to guarantee symmetry, the total loss is the sum of $\ell_1^{V_\text{img}, V_\text{txt}}$ and $\ell_1^{V_\text{txt}, V_\text{img}}$, where the similarity of one text to all images is averaged instead of the other way around.
 <!-- Question: Is the second part really necessary? If all columns are optimized, all elements are considered. Maybe only if the similarity measure really is asymmetrical?-->
 
 Figure \@ref(fig:contr-viz) visualizes this.
-As the initialization, all images and texts of a given set are encoded by their respective sub-networks.
-Using these latent vectors, a similarity matrix with elements $h_\theta(\{v_\text{img}^i,v_\text{txt}^j\})$ can be calculated.
-Loosely speaking, the contrastive objective seeks to maximize diagonal elements and minimize the rest.
+Initially all images and texts of a given dataset are encoded by the respective sub-networks.
+Using the resulting latent vectors, a similarity matrix with elements $h_\theta(\{v_\text{img}^i,v_\text{txt}^j\})$ can be calculated.
+Loosely speaking, the contrastive objective aims to maximize diagonal elements and minimize the rest.
 
 ```{r contr-viz, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:contr-viz)'}
 knitr::include_graphics('figures/02-04-text-support-img/contrastive-pre-training.png')
 ```
 (ref:contr-viz) Visualization of a contrastive objective [@radford2021learning].
 
-Another viewing angle on contrastive learning is shown in figure \@ref(fig:contr-vs-pred-learn).
-The examplary task of predicting an images color based on its black and white version illustates an interesting difference between predictive and contrasitve learning.
-In contrast to predictive learning, where first a prediction based on the input is made, and then the loss between this and the truth is calculated, contrastive learning has both the black and white image and its colors as input.
-After encoding both, the loss is calculated, based on their latent versions, in the representation space.
+Figure \@ref(fig:contr-vs-pred-learn) gives another interesting insight into contrastive learning, when it is compared to classical predictive learning.
+The exemplary task is to color an image given its B/W version.
+Approach (a) encodes the B/W image and in turn decodes its latent representation to fitting colors.
+The goodness of this fit is measured in the output space. \
+Conversely, approach (b) measures the loss in the representation space.^[Note that contrastive learning easily works with different combinations of modalities, here B&W and colors.]
+A reason for the good performance of contrastive learning could be that while common prediction losses (e.g., the $\mathcal{L}_2$ loss) penalize each prediction output dimension independently, approach (b) implies measurement in the intertwined representation space [@tian2020contrastive].
 
 ```{r contr-vs-pred-learn, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:contr-vs-pred-learn)'}
 knitr::include_graphics('figures/02-04-text-support-img/tian-predictive-vs-contrastive.png')
 ```
-(ref:contr-vs-pred-learn) Predictive vs. contrastive learning: Contrastive loss is measured is in the latent representation space [@tian2020contrastive].
+(ref:contr-vs-pred-learn) Predictive vs. contrastive learning: Predictive losses are measured in the output space while contrastive losses are measured is in the representation space; indicated by red dotted boxes [@tian2020contrastive].
 
-The deciding factor to use this objective function was data efficiency.
+But, rather than theoretical considerations, the driving factor for using this objective function is data efficiency.
+As can be seen in figure \@ref(fig:data-efficiency), @radford2021learning started their search for an adequate pre-train model (more on this in subsection \@ref(foundMod)) by experimenting with a transformer based language model predicting the exact captions of an image.
+This turns out to train three times slower, in terms of data efficiency, compared to a simpler baseline predicting a bag-of-words encoding.
+Switching to the contrastive objective of CLIP additionally improves data efficiency by a factor of four. \
+But, the switch to contrastive learning comes with some limitations.
+Especially its rigidity demands certain extra steps and forfeits the high flexibility of generative models.
+The end of the next subsection discusses this in more detail.
 
 ```{r data-efficiency, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:data-efficiency)'}
 knitr::include_graphics('figures/02-04-text-support-img/data-efficiency.png')
 ```
-(ref:data-efficiency) Data efficiency of contrastive objective [@radford2021learning].
+(ref:data-efficiency) Data efficiency of contrastive objective.
+Development of zero-shot accuracy on ImageNet with increasing number of instances of training data seen by models.
+The contrastive objective reaches same accuracies compared to the exact predictive objective while seeing only a seventh of the amount of data [@radford2021learning].
 
-* Pro: Efficient training <!-- citation e.g., ALIGN -->
-* Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities] <!-- ref to zero shot chapter -->
-* Contra: No longer a generative model, e.g., no flexible caption generation, see CLIP Limitations
-
-#### Zero shooting and foundation models
+#### Zero shooting and foundation models {#foundMod}
 
 <!-- But language models like BERT and GPT-3 have a big impact on another aspect of their field:
 They become to serve as so called foundation models, future architectures use them as building blocks. (ref to foundation model paper, ref to DALLE oder so)
 A trend which is observable for this new wave of CV models, too.
 They show a large potential to be the CV counterparts to NLP foundation models. (ref Florence paper, ref models using CLIP as image encoder) -->
+
+* Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities] <!-- ref to zero shot chapter -->
+* Contra: No longer a generative model, e.g., no flexible caption generation, see CLIP Limitations
 
 _Zero shooting_ is a paradigm coming from NLP research.
 It means the previously fitted model is applied to a new, unseen dataset.
