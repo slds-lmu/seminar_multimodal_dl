@@ -165,8 +165,7 @@ growing demand in deep learning. In the context of the pathway proposal, a novel
 and access specific parts of the model to utilize the technical advantages of sparse networks.
 As in dense models, it is not necessary to use the whole network but only chunks of it, which is in contrast to previous dense models, which require the whole model to be accessed.
 So far, two large pre-trained models have been introduced based on the new training framework. One is the Pathways Language Model (PaLM) [Chowdhery2022], which is by now the largest
-language model using 540 billion
-parameters, and Parti [@parti], which is a text-to-image generator.
+language model using 540 billion parameters, Minerva [@Lewkowycz2022], which is based on PaLM, and Parti [@parti], which is a text-to-image generator.
 
 
 <!-- ### TODO
@@ -191,10 +190,25 @@ Now, the same procedure is applied again to another task that is intended to ben
 paths starts again, where the paths are trained and evaluated without the nodes from the previous winner path and eventually fixed again.
 
 #### LIMoE
-Nevertheless, another worth-mentioning model in the context of Pathways is the Language Image Mixture of Expert Model LIMoE (Mustafa et al. 2022). This model changes the
-transformer encoder structure by swapping the feed-forward layer with a mixture of the expert layer.
-The model can input text and images into a single encoder without decoding the different modalities differently. At first, both images and text are tokenized and linearly
-transformed to fit the dimension of the encoder.
+Another work, worth mentioning in the context of the pathway proposal, is the LIMoE model [@Mustafa2022], which combines text and vision as modalities in a mixture-of-expert
+model.
+- Description
+- architectural (transformer exactly, buffer, contrastive)
+The model described in LIMoE is also transformer-based. To provide the input appropriately, the text data is encoded using one-hot-SentencePiece encoding, while the images are
+tokenized in the same way, as done in ViT [@dosovitskiy2020image]. The output of the transformer encoder is then fed into the mixture-of-expert layers, which consists of $E$ 
+experts from which $K$ experts are used in a forward pass. The decision about the experts is done by using a router layer which decides where the tokens are passedpm to using
+top-k routing. 
+- Objective
+The model is trained using a contrastive objective. The contrastive loss in this case aims to maximize the paired visual and textual input, while minimizing all combinations 
+of unpaired embeddings. This can be achieved by using the dot-product as a similarity measure between the two embeddings of both modalities, which can then be used to maximize
+or minimize the loss function. Besides contrastive loss, the mixture-of-expert is also considered since many pitfalls exist in training mixture of expert models and this only
+one modality. To address this issue two new losses based on entropy are introduced. The losses are aimed at controling the allocation of experts to tokens.
+One loss is considering the token level (local) and the other one is considering the overall expert distribution (global). The local loss aims to achieve no uniform behavior
+in expert allocation such that each token is truly assigned to specific experts, while the overall global loss aims to achieve uniformity over all tokens to avoid a 
+collapse in which tokens are solely assigned to few experts which do not have the capacity to deal with all tokens. These losses are computed for each modality. Furthermore,
+already available losses for training MoE models were also added.
+- Results
+- Pathways
 
 ### Discussion
 
