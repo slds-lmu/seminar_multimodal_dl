@@ -190,25 +190,38 @@ Now, the same procedure is applied again to another task that is intended to ben
 paths starts again, where the paths are trained and evaluated without the nodes from the previous winner path and eventually fixed again.
 
 #### LIMoE
-Another work, worth mentioning in the context of the pathway proposal, is the LIMoE model [@Mustafa2022], which combines text and vision as modalities in a mixture-of-expert
-model.
-- Description
-- architectural (transformer exactly, buffer, contrastive)
-The model described in LIMoE is also transformer-based. To provide the input appropriately, the text data is encoded using one-hot-SentencePiece encoding, while the images are
-tokenized in the same way, as done in ViT [@dosovitskiy2020image]. The output of the transformer encoder is then fed into the mixture-of-expert layers, which consists of $E$ 
-experts from which $K$ experts are used in a forward pass. The decision about the experts is done by using a router layer which decides where the tokens are passedpm to using
-top-k routing. 
-- Objective
+In the context of Pathways, the work LIMoE (Multimodal Contrastive Learning with LIMoE: the Language-Image Mixture of Experts) [@Mustafa2022] is also necessary to be mentioned.
+LIMoE combines text and vision input using a transformer encoder, which furthermore includes a MoE layer, that can be used sparsely during inference time. Besides the context of
+the pathways proposal, LIMoE also aims at providing a new approach in contrastive learning. While previous methods used two models to encode the modalities, LIMoE is solely based
+on one model, where the modalities are combined in a single transformer.
+The model described in LIMoE is also transformer-based. To provide the input appropriately, the text data is encoded using one-hot-SentencePiece encoding, while images are
+tokenized in the same way, as done in ViT [@dosovitskiy2020image]. The main difference to the vanilla transformer, is a MoE layer at the spot where the feed-forward-network
+usually lies. In this layer, $E$ experts are used, which are themselves feed-forward-networks. $K$ experts are used to process the input tokens, which are generated using
+another trained gating network, which uses top-k routing. The output of thetransformer encoder is then average pooled and subsequently multiplied with a modality specific weight
+matrix, which produces the eventual output. Another feature of LIMoE is a fixed-length-buffer for each expert in the MoE layer. This buffer stores the tokens, an expert will process
+under the assumption that the allocations of tokens for each expert are balanced. If it is not possible to buffer tokens for the experts, the tokens will be dropped.
+To furthermore decide which tokens are to be dropped, Batch Priority Routing [@Riquelme2021] is used to provide a ranking mechanism on how which token is to be dropped.
 The model is trained using a contrastive objective. The contrastive loss in this case aims to maximize the paired visual and textual input, while minimizing all combinations 
 of unpaired embeddings. This can be achieved by using the dot-product as a similarity measure between the two embeddings of both modalities, which can then be used to maximize
 or minimize the loss function. Besides contrastive loss, the mixture-of-expert is also considered since many pitfalls exist in training mixture of expert models and this only
-one modality. To address this issue two new losses based on entropy are introduced. The losses are aimed at controling the allocation of experts to tokens.
+one modality. To address this issue two new losses based on entropy are introduced. Entropy can be used as an appropriate term, since it provides a useful number for the unifromity of
+the distribution, which are necessary to balance the expert assignments. The losses are aimed at controling the allocation of experts to tokens, which is also necessary to fullfill
+the assumptions for the implemented buffer.
 One loss is considering the token level (local) and the other one is considering the overall expert distribution (global). The local loss aims to achieve no uniform behavior
 in expert allocation such that each token is truly assigned to specific experts, while the overall global loss aims to achieve uniformity over all tokens to avoid a 
 collapse in which tokens are solely assigned to few experts which do not have the capacity to deal with all tokens. These losses are computed for each modality. Furthermore,
 already available losses for training MoE models were also added.
 - Results
-- Pathways
+So far, LIMoE is a newly approach in contrastive learning. However, it also includes important aspects of the pathways proposal, by using the MoE layer where sparsity comes into play.
+By using different modalities, the idea for the general is also included. Training a MoE layer using multiple modalities might be an important step for the application of a proposed
+pathway model.
+
+####
+
+- idea
+- architecture, algorithm
+- evolutianary algo here
+- Aspect about multitask learning. 
 
 ### Discussion
 
