@@ -1,5 +1,106 @@
-# title
+# Multimodal architectures
 
-*Author: *
+*Authors: Luyang Chu, Karol Urbanczyk, Giacomo Loss, Max Schneider, Steffen Jauch-Walser*
 
-*Supervisor: *
+*Supervisor: Christian Heumann*
+
+
+Multimodal learning refers to the process of learning representations from different types of input modalities, such as image data, text or speech.
+Due to methodological breakthroughs in the fields of Natural Language Processing (NLP) as well as Computer Vision (CV), in recent years multimodal models have gained increasing attention as they are able to strengthen predictions and better emulate the way humans learn.
+This chapter focuses on discussing images and text as input data.
+The remainder of the chapter is structured as follows:
+
+The first part “Image2Text” discusses how transformer-based architectures improve meaningful captioning for complex images using a new large scale, richly annotated dataset COCO [@mccoco; @cornia2020m2].
+Whether it is seeing a photograph and describing it or parsing a complex scene and describing its context, it is not a difficult task for humans.
+But it is much more complex and challenging for computers.
+We start with focusing on images as input modalities.
+In 2014 Microsoft COCO was developed with a primary goal of advancing the state-of-the-art (SOTA) in object recognition by diving deeper into a broader question of scene understanding [@mccoco].
+COCO stands for Common Objects in Context.
+It addresses three core problems in scene understanding: object detection (non-iconic views), segmentation, and captioning.
+For tasks like machine translation and language understanding in NLP, transformer-based architecture is widely used.
+However, the potential of these applications in the multi-modal context has not been fully covered.
+With the help of the COCO dataset, a transformer-based architecture: Meshed-Memory Transformer for Image Captioning ($M^2$) will be introduced to improve both image encoding and the language generation steps [@cornia2020m2].
+The performance of the ($M^2$) Transformer and different fully-attentive models will be evaluated and compared on the COCO dataset.
+
+Next, in "Text2Image", the idea of incorporating textual input in order to generate visual representations is described.
+Current advancements in this field have been made possible largely due to recent breakthroughs in NLP, which first allowed for learning contextual representations of text.
+Transformer-like architectures are being used to encode the input into embedding vectors, which are later helpful in guiding the process of image generation.
+The chapter looks into details and discusses two SOTA model architectures by OpenAI, which both condition on text representations.
+Surprisingly, none of them uses a GAN approach - a method which probably has been seen as the go-to idea for image generation over the last years.
+The first model is DALL-E [@ramesh2021dalle], which essentially combines Variational Encoder (VAE) with Autoregressive Transformer.
+In the first step, VAE is being trained to learn downsized image representations.
+Such embeddings are concatenated with text embeddings into one text-image pair input.
+However, both of them use different dimensionality and vocabulary size.
+In the second step, the transformer is trained on a next token prediction task given these data pairs.
+Finally, at inference time, the model is able to generate images in the following way:
+
+1. Encode text input into text embedding
+2. Use trained transformer from step 2 to generate image embedding
+3. Use VAE from step 1 to generate image from image embedding
+
+The next approach to text-to-image generation is a GLIDE model [@nichol2021glide].
+GLIDE stands for Guided Language to Image Diffusion for Generation and Editing.
+Its idea is to use Diffusion Models.
+In its core, Diffusion Model is a simple idea – random noise is being added to the image in an iterative fashion, and then model learns how to reconstruct this image.
+In the case of GLIDE this learning process is conditioned on the text prompt, which is first passed through a transformer.
+Both models differ in their results.
+While DALL-E’s resulting images might have been overwhelming back in the beginning of 2021, GLIDE is thought to significantly improve on photorealism and resolution the generated images.
+Since the field has already seen further improvements following GLIDE, these new developments are also going to be mentioned in the chapter.
+
+The third part, “Images supporting Language Models”, deals with the integration of visual elements in pure textual language models.
+Distributional semantic models such as Word2Vec and BERT assume that the meaning of a given word or sentence can be understood by looking at how (in which context) and when the word or the sentence appear in the text corpus, namely from its “distribution” within the text.
+But this assumption has been historically questioned, because words and sentences must be grounded in other perceptual dimensions in order to understand their meaning [see for example the “symbol grounding problem”\; @harnad1990symbol].
+For these reasons, a broad range of models has been developed with the aim to improve pure language models, leveraging on the addition of other perceptual information, such as visual ones.
+This subchapter focuses in particular on the integration of visual elements (images) to support pure language models for various tasks at the word-level and sentence-level.
+The starting point is always a language model, on which visual representations (extracted often with the help of large pools of images like MS COCO, see chapter "Img2Text" for further references) are to be “integrated”.
+But how?
+There has been proposed a wide range of solutions:
+On one side of the spectrum, textual elements and visual ones are learned separately and then “combined” together whereas on the other side, the learning of textual and visual features takes place simultaneously/jointly.
+
+```{r, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Left, Silberer et al., 2014: stacked autoencoders to learn higher-level embeddings from textual and visual modalities, encoded as vectors of attributes. Right, Bordes et al., 2020: textual and visual information fused in an Intermediate space denoted as “grounded space”; the “grounding objective function” is not applied directly on sentence embeddings but trained on this intermediate space, on which sentence embeddings are projected.", }
+knitr::include_graphics("figures/02-chapter2/Img_Ch_Intro.png")
+```
+
+For example, @silberer2012grounded implement a model where a one-to-one correspondence between textual and visual space is assumed.
+Text and visual representations are passed to two separate unimodal encoders and both outputs are then fed to a bimodal autoencoder.
+On the other side, @bordes2020incorporating propose a “text objective function” whose parameters are shared with an additional “grounded objective function”.
+The training of the latter takes place in what the authors called a “grounded space”, which allows to avoid the one-to-one correspondence between textual and visual space.
+These are just introductory examples and between these two approaches there are many shades of gray (maybe more than fifty…).
+These models exhibit in many instances better performance than pure language models, but they still struggle on some aspects, for example when they deal with abstract words and sentences.
+
+Afterwards, in “Text supporting Image Models”, approaches where natural language is used as supervision for CV models are described.
+Intuitively these models should be more powerful compared to models supervised solely by manually labeled data, simply because there is much more training data available.
+An important example for this is the CLIP model [@radford2021learning] with its new dataset WIT (WebImageText) comprising 400 million text-image pairs scraped from the internet. \
+Similar to "Text2Image" the recent successes in NLP have inspired new approaches in this field.
+Most importantly pre-train methods, which directly learn from raw text [e. g. GPT-n, Generative Pre-trained Transformer\; @brown2020language].
+So, CLIP stands for Contrastive Language-Image Pre-training.
+A transformer-like architecture is used for jointly pre-training a text encoder and an image encoder.
+For this the contrastive goal to correctly predict which natural language text pertains to which image inside a certain batch, is employed.
+Training this way turned out to be more efficient than to generate captions for images. \
+This leads to a flexible model, which at test time uses the learned text encoder as a “zero-shot” classifier on embeddings of the target dataset’s classes.
+The model, for example, can perform optical character recognition, geo-location and action-recognition.
+Performance-wise CLIP can be competitive with task-specific supervised models, while never seeing an instance of the specific dataset before.
+This suggests an important step towards closing the “robustness gap”, where machine learning models fail to meet the expectations set by their previous performance -- especially on ImageNet test-sets -- on new datasets.
+
+Finally, “Text plus Images” discusses how text and image inputs can be incorporated into a single unifying framework in order to get closer to a general self-supervised learning model.
+There are two key advantages that make such a model particularly interesting.
+Similar to models mentioned in previous parts, devoid of human labelling, self-supervised models don't suffer from the same capacity constraints as regular supervised learning models.
+Nevertheless, while there have been notable advances in dealing with different modalities, it is often unclear to which extend a model structure generalizes across different modalities.
+Rather than potentially learning modality-specific biases, a general multipurpose framework can help increase robustness while also simplifying the learner portfolio and thereby better emulating human learning processes. \
+Data2vec [@baevski2022data2vec] is a new multimodal self-supervised learning model which uses a single framework for either speech, NLP or computer vision.
+This is in contrast to earlier models which used different algorithms for different modalities.
+The core idea of data2vec, developed by MetaAI, is to predict latent representations of the full input data based on a masked view of the input in a self-distillation setup using a standard transformer architecture [@baevski2022data2vec].
+As a result, the main improvement is in the framework, not the underlying models themselves.
+For example, the transformer architecture follows @vaswani2017attention.
+Transformers have several advantages over CNNs, such as encoding the relative position of features (citation needed).
+The central building block of the data2vec framework is a student-teacher structure that allows the learning process to occur without supervision.
+To achieve this, inputs serve both as training data and as learning targets by being masked.
+A key issue to be aware of is model collapse, i.e the model collapsing into a constant representation.
+Normalization helps prevent that, as well as the domination of certain layers with high norm.
+The encoding, normalization and masking strategies are modality-specific.
+However, the learning objective remains the same across all modalities.
+The model is trained to predict the model representation of the original unmasked training sample.
+As a result of the use of self-attention in creating teacher representations, the data2vec model works with continuous and contextualized targets which are richer in information than a fixed set of targets based on local context as used in most prior work.
+On top of that, working with latent representations of the network itself can be seen as a simplification of many prior modality-specific models [@baevski2022data2vec].
+As far as the results are concerned, data2vec is effective in all three modalities.
+It sets new SOTA scores on computer vision, speech recognition as well as speech learning benchmarking sets.
