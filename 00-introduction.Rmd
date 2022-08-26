@@ -5,12 +5,17 @@ date: "19.08.2022"
 bibliography: IntroConc.bib
 ---
 
+
+
 # Introduction
 
 *Author: Nadja Sauter*  
 
 *Supervisor: Matthias Assenmacher*
 
+blaba \@ref(introduction)
+blaba \@ref(chapter-1)
+blaba \@ref(introduction-to-multimodal-deep-learning)
 
 
 ## Introduction to Multimodal Deep Learning  
@@ -32,3 +37,15 @@ The second chapter \@ref(02-00-multimodal)focuses on different multimodal archit
 
 In the last chapter \@ref(03-00-further), methods are introduced that are also able to handle modalities other than text and image, like e.g. video or speech. The overall goal here is to find a general multimodal architecture based on challenges rather than modalities. Therefore, one needs to handle problems of multimodal fusion and alignment and decide whether you use a join or coordinated representation \ref(03-01-further-modalities). Moreover we go more into detail about how exactly to combine structured and unstructured data \@ref(03-02-structured-unstructured). Therefore, different fusion strategies which evolved in recent years will be presented. This is illustrated in this book by two use cases in survival analysis and economics. Besides this, another interesting research question is how to tackle different tasks in one so called multi-purpose model \@ref(03-03-multi-purpose) like it is intended to be done by [@Pathways]. Last but not least, we show one exemplary application of Multimodal Deep Learning in the arts scene where image generation models like DALL-E [@DALLE] are used to create art pieces in the area of Generative Arts \@ref(03-04-usecase). 
 
+ 
+### Dummy Section 1 {#dummy}  
+blabla  
+\@ref(dummy)
+
+
+### Dummy Section 2 {#03-04-usecase}  
+blabla  
+\@ref(03-04-usecase)
+
+### Dummy section 3
+[dummy section 3](#dummy-section-3)
