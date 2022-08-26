@@ -24,7 +24,7 @@ bookdown::pdf_book:
   citation_package: natbib
   template: null
   pandoc_args: --top-level-division=chapter
-  toc_depth: 1
+  toc_depth: 2
   toc_unnumbered: no
   toc_appendix: yes
   latex_engine: xelatex
