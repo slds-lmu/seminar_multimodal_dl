@@ -232,16 +232,39 @@ This approach is based on an evolutionary algorithm, which has been described ea
 - architecture, algorithm
 muNet is based on an evolutionary algorithm. The evolution here is about how the onverall configuration of the network is changed. Starting from an initial model, varieties of different configurations are mutated
 based on the initial model and then evaluated regarding their performance. While doing so, the parameters of the parent generation is fixed such that the acquired knowledge about previous tasks is not overwritten.
-This technique allows to avoid catastrophic forgetting, which is a common issue in multit-task learning.
-- Mutations
-Evolutionary algorithms require methods to mutate the initial parent population such that new modificiations (children) are obtained, from which a winning candidate is then chosen for the next generation.
-
+By applying this technique, the model evolves from an initial proposal to a suited multit-task model.
 - evolutianary algo
+The algorithm to develop the eventual model consists of three main stages, these stages include at first the selection of parent models which are mutated, the actual mutation step, and the tournament after training
+the child models on a specific task.
+In the beginning a root model is used, from which the further model is evolved from. This model can be a randomly initialized model or a pre-trained model. During training the so-called active population is evolveed for each
+active task (which can be active multiple times), which includes the candidates for mutation.
+Sampling appropriate parents is done by computing draw probabilities of available models. If models have already been trained on this task and have been evaluated, then it is possible to take the success already into account.
+The models are ordered in an asceding order with respect to the previously obtained score, then a probability is computed which also takes into account how often these models where already mutated: $\mathbb P(m|t) = 0.5 ^{ \#timesSelected(m, t)}$.
+where $\#timesSelected(m, t)$ is the number of previous mutations based on this model. The resulting probability thus considers exploitation (the earlier the model is called, the more likely it becomes that an event is successful based on the ordering of the list)
+and also exploration by considering the previous amount of mutation, thus punishing ineffective canidates which have not had successful offspring and improving the draw probability of fewer mutated candidates. If this does not succeed, models are randomly
+chosen from a list of all models including also the inactive ones, which are also collected for other tasks. For the start of the algorithm, the initially proposed model is used.
+The next step includes mutating the sampled canidates. Since this step is also random, it is thus not an issue if the same model has been drawn multiple times, since the probability of the exact same mutation is relatively low.
+In this step, the mutations are applied to the model and it is randomly decided wether or not the mutation is accepted. Afterwards, the models are trained on the task and scored. The best child model is kept and later also compared against
+already saved models, where also only the best model is kept.
+- Mutations
+Evolutionary algorithms require methods to mutate the initial parent population such that new modificiations (children) are obtained, from which a winning candidate is then chosen for the next generation. The mutations for muNet include four
+procedures to mutate models. These include:
+ - Layer cloning, in which the child model consists of the frozen parent model with an additional modifyable layer. This layer is a copy of the original layer from the parent, so that the already acquired knowledge is not lost but can be enhanced.
+   The child model still uses all other layers from the parent. The only further exception is in case of another task the model is trained on. In this case, the task head is also newly trained.
+ - Layer insertion, where two layers are added to the model to be mutated. These layers are residual adapters based on (X) and (X), where the dimension inbetween can be arbitrary and the layers are newly initialized. For training, the second layer is initialized using zeros, such that
+   an identity mapping is used first, so that the knowledge of the previously trained model is still used. During training, task specific knowledge can be acquired, based on the already trained starting point.
+ - Layer removal is used to skip layers from the parent model. The other layers are still in use being frozen. For transformers, it was specifically designed, however, that only the latter layers can be removed.
+ - Hyperparameter change, which is a random sampling of hyperparameters close to the current ones in use. This 
+
+- Results
 
 - Aspect about multitask learning. 
 
-- Results
+
 - Conclusion
+  - no multimodality
+  - task token?
+  - Include earlier knowledge (hyperparams, layers etc.)
 
 
 #### Conclusion Pathways
