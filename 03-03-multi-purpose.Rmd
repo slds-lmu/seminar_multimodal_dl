@@ -221,12 +221,33 @@ So far, LIMoE is a new approach to contrastive learning. It showed that the spar
 Furthermore, it also includes essential aspects of the pathways proposal using the MoE layer where sparsity comes into play. The authors stated that the critical aspect is how the model
 routes to the specific expert, which might also be helpful in an additional multitask setup, which is an important step towards a pathway model. However, the authors also stated that merging
 modalities remains a field of research, as well as adding further modalities, since Vision and text have already proven to be non-trivial to combine, and more problems might arise with further modalities.
-####
 
-- idea
+#### muNet
+While LIMoE offered a new appraoch to multimodality, another model, named muNet [@Gesmundo2022], aims at solving multi-tasking. Asit was already described in the initial pathways proposal, many aspects of current
+machine learning lack efficiency. This is especially a problem when it comes to training models from scratch everytime and not reusing the already acquired knowledge. Even transfer learning as used in BERT [@devlin]
+only trains on a specific new set again, which is based on a copy of the original model, thus modifiying the original model and furthermore not reusing the acquired knowledge in fine-tuning, so cthat the iniital 
+eneralizability is lost in the process. muNet aims to alleviate this problem by introducing an evolutionary approach to build an appropriate model, which is extensible, keeps prior knowledge while being unaffected
+of problems in multi-task learning, and furthermore alleviate the necessity of hyperparametertuning.
+This approach is based on an evolutionary algorithm, which has been described earlier (X).
 - architecture, algorithm
-- evolutianary algo here
+muNet is based on an evolutionary algorithm. The evolution here is about how the onverall configuration of the network is changed. Starting from an initial model, varieties of different configurations are mutated
+based on the initial model and then evaluated regarding their performance. While doing so, the parameters of the parent generation is fixed such that the acquired knowledge about previous tasks is not overwritten.
+This technique allows to avoid catastrophic forgetting, which is a common issue in multit-task learning.
+- Mutations
+Evolutionary algorithms require methods to mutate the initial parent population such that new modificiations (children) are obtained, from which a winning candidate is then chosen for the next generation.
+
+- evolutianary algo
+
 - Aspect about multitask learning. 
+
+- Results
+- Conclusion
+
+
+#### Conclusion Pathways
+- muNet and LIMoE show sparsity works (less param, good performance)
+- Evolutionary with large models
+
 
 ### Discussion
 
