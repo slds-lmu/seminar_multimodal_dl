@@ -176,6 +176,16 @@ language model using 540 billion parameters, Minerva [@Lewkowycz2022], which is 
 In this section, we will look at similar architecture to the proposed pathway model, that will provide a further overview on how capabilities in this field have developed.
 
 #### PathNet
+A similar approach, however neither multipurpose nor using specialist networks, is the model Pathnet [@Fernando2017]. Pathnet entails a concept for sequential multi-task learning
+and furthermore an indirect neural architecture search. Pathnet is build upon a evolutianary algorithm. Evolutionary algorithms are based on trial and error to find an optimum and are 
+can thus be used for optimization. An initial population of values is spawned, from which then a children generation is constructed. This construction can be done by combining individuals
+from the initial population (parents), based on their fitness (how good they are for solving the problem). The children from the earlier step become the parents in the next generation and the procedure
+is repeated until convergence. For a more detailed overview, the work of (X) is recommended. Due to the non-differentiable propoerty of EAs, they become an ideal algorithm for hyperparameter tuning
+or neural architecture search.
+Pathnet applies EAs to find the best paths through a greater neural network, that is analogous to the one proposed by [@Dean21]. A directed graph, mapping from the input to the output
+where layers with nodes are in between. The nodes are also neural networks here. At first a population of paths is spawned, mapping input to output through the overall neural network.
+
+
 An architecture for neural networks [@Fernando2017]. Also achieved multitask solving by introducing a novel training algorithm. In contrast to single-task neural networks,
 PathNet does not train the network solely on one task but on the whole network, but partially on one task and on a fraction of the network, randomly chosen. With this approach,
 knowledge sharing becomes possible.
@@ -223,7 +233,7 @@ routes to the specific expert, which might also be helpful in an additional mult
 modalities remains a field of research, as well as adding further modalities, since Vision and text have already proven to be non-trivial to combine, and more problems might arise with further modalities.
 
 #### muNet
-While LIMoE offered a new appraoch to multimodality, another model, named muNet [@Gesmundo2022], aims at solving multi-tasking. Asit was already described in the initial pathways proposal, many aspects of current
+While LIMoE offered a new appraoch to multimodality, another model, named muNet [@Gesmundo2022a], aims at solving multi-tasking. Asit was already described in the initial pathways proposal, many aspects of current
 machine learning lack efficiency. This is especially a problem when it comes to training models from scratch everytime and not reusing the already acquired knowledge. Even transfer learning as used in BERT [@devlin]
 only trains on a specific new set again, which is based on a copy of the original model, thus modifiying the original model and furthermore not reusing the acquired knowledge in fine-tuning, so cthat the iniital 
 eneralizability is lost in the process. muNet aims to alleviate this problem by introducing an evolutionary approach to build an appropriate model, which is extensible, keeps prior knowledge while being unaffected
@@ -254,17 +264,26 @@ procedures to mutate models. These include:
  - Layer insertion, where two layers are added to the model to be mutated. These layers are residual adapters based on (X) and (X), where the dimension inbetween can be arbitrary and the layers are newly initialized. For training, the second layer is initialized using zeros, such that
    an identity mapping is used first, so that the knowledge of the previously trained model is still used. During training, task specific knowledge can be acquired, based on the already trained starting point.
  - Layer removal is used to skip layers from the parent model. The other layers are still in use being frozen. For transformers, it was specifically designed, however, that only the latter layers can be removed.
- - Hyperparameter change, which is a random sampling of hyperparameters close to the current ones in use. This 
+ - Hyperparameter change, which is a random sampling of hyperparameters close to the current ones in use. This is done by sampling from a list of neighboring hyperparameters.
 
 - Results
+The model was furthermore evaluated on two challenges for finr-tuning in a multitask setting in the field of computervision. The first was the character mutlitask "Multitask Character Classification Benchmark" and the second one was the
+"Decathlon". The baseline was a ViT specifically designed to be genralizable on multiple tasks. Overall muNet outperformed ViT in almost all tasks on both benchmarks.
+Furthermore another itertion of muNet, which was just published shortly afterwards [@], was also tested. This version does not include layer removal and layer insertion for mutations but also includes the acceptance probabilty for mutations as a evolvable
+hyperparameter. An ablation study showed that the performance increases further when leaving layer insertion out [@Gesmundo2022a]. This model was also evalutated on the same benchmarks and also achieved similar results.
 
 - Aspect about multitask learning. 
+muNet tries to overcome prominent hindrances in multitask learning. Through freezing the parameters of the parent in the children model, it is possible to avoid catastrophic forgetting. Furthermore the issue of negative transfer is also
 
 
 - Conclusion
+  - not peer-reviewed
   - no multimodality
+  - tested for fine-tuning
   - task token?
   - Include earlier knowledge (hyperparams, layers etc.)
+While LIMoE proved that multimodality works in a sparse context, muNet achieved a neural architecture search in a multitask context. Both models are not the implementation of the pathway proposal but they may pave the path further. Both models are not multi-purpose, but it might
+be interesting to combine these approaches further down the road to even better muli-purpose models.
 
 
 #### Conclusion Pathways
