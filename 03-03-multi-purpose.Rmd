@@ -40,7 +40,7 @@ transformers have been successful in a multimodal and multitask learning setting
 might be further enhanced by using so-called Mixture-of-Expert layers as done in [@Fedus2021] and recently [@Mustafa2022].
 In this chapter, multi-purpose models will be surveyed. At first, the term multi-purpose will be clarified since there is, to our best
 knowledge, no standard definition for this term. Different approaches from recent work will be presented, and eventually, the chapter
-will diverge to future developments, as outlined in [@Dean2021]. Jeff Dean proposed a promising architecture for future multi-purpose models,
+will diverge to future developments, as outlined in [@Dean21]. Jeff Dean proposed a promising architecture for future multi-purpose models,
 which will be further examined on how this proposal has already been implemented. The chapter will conclude with an outlook and a discussion
 on how the field will likely evolve in the following years.
 
@@ -140,7 +140,7 @@ keys to represent nesting. Specific observations for reinforcement learning are 
 ### Pathway Proposal
 
 Multipurpose models can also be thought of without the currently well-performing transformer architecture. A proposal for a new approach to multipurpose models was introduced as Google's
-Pathways [@Dean2021] aiming to address current pitfalls in deep learning.
+Pathways [@Dean21] aiming to address current pitfalls in deep learning.
 Current deep learning consists mainly of large dense neural networks trained for a specific task. This paradigm is limiting so that no transfer between tasks is possible, and every
 time a model is trained, it needs to learn from scratch (or needs to be pre-trained from scratch). Human intelligence can also transfer knowledge between tasks, so it is not necessary
 to learn everything from scratch. However, transfer in deep learning models is not sufficiently possible, which is a severe constraint. The problem of catastrophic forgetting and negative transfer may arise.
@@ -233,63 +233,34 @@ routes to the specific expert, which might also be helpful in an additional mult
 modalities remains a field of research, as well as adding further modalities, since Vision and text have already proven to be non-trivial to combine, and more problems might arise with further modalities.
 
 #### muNet
-While LIMoE offered a new appraoch to multimodality, another model, named muNet [@Gesmundo2022a], aims at solving multi-tasking. Asit was already described in the initial pathways proposal, many aspects of current
-machine learning lack efficiency. This is especially a problem when it comes to training models from scratch everytime and not reusing the already acquired knowledge. Even transfer learning as used in BERT [@devlin]
-only trains on a specific new set again, which is based on a copy of the original model, thus modifiying the original model and furthermore not reusing the acquired knowledge in fine-tuning, so cthat the iniital 
-eneralizability is lost in the process. muNet aims to alleviate this problem by introducing an evolutionary approach to build an appropriate model, which is extensible, keeps prior knowledge while being unaffected
-of problems in multi-task learning, and furthermore alleviate the necessity of hyperparametertuning.
-This approach is based on an evolutionary algorithm, which has been described earlier (X).
-- architecture, algorithm
-muNet is based on an evolutionary algorithm. The evolution here is about how the onverall configuration of the network is changed. Starting from an initial model, varieties of different configurations are mutated
-based on the initial model and then evaluated regarding their performance. While doing so, the parameters of the parent generation is fixed such that the acquired knowledge about previous tasks is not overwritten.
-By applying this technique, the model evolves from an initial proposal to a suited multit-task model.
-- evolutianary algo
-The algorithm to develop the eventual model consists of three main stages, these stages include at first the selection of parent models which are mutated, the actual mutation step, and the tournament after training
-the child models on a specific task.
-In the beginning a root model is used, from which the further model is evolved from. This model can be a randomly initialized model or a pre-trained model. During training the so-called active population is evolveed for each
-active task (which can be active multiple times), which includes the candidates for mutation.
-Sampling appropriate parents is done by computing draw probabilities of available models. If models have already been trained on this task and have been evaluated, then it is possible to take the success already into account.
-The models are ordered in an asceding order with respect to the previously obtained score, then a probability is computed which also takes into account how often these models where already mutated: $\mathbb P(m|t) = 0.5 ^{ \#timesSelected(m, t)}$.
-where $\#timesSelected(m, t)$ is the number of previous mutations based on this model. The resulting probability thus considers exploitation (the earlier the model is called, the more likely it becomes that an event is successful based on the ordering of the list)
-and also exploration by considering the previous amount of mutation, thus punishing ineffective canidates which have not had successful offspring and improving the draw probability of fewer mutated candidates. If this does not succeed, models are randomly
-chosen from a list of all models including also the inactive ones, which are also collected for other tasks. For the start of the algorithm, the initially proposed model is used.
-The next step includes mutating the sampled canidates. Since this step is also random, it is thus not an issue if the same model has been drawn multiple times, since the probability of the exact same mutation is relatively low.
-In this step, the mutations are applied to the model and it is randomly decided wether or not the mutation is accepted. Afterwards, the models are trained on the task and scored. The best child model is kept and later also compared against
-already saved models, where also only the best model is kept.
-- Mutations
-Evolutionary algorithms require methods to mutate the initial parent population such that new modificiations (children) are obtained, from which a winning candidate is then chosen for the next generation. The mutations for muNet include four
-procedures to mutate models. These include:
- - Layer cloning, in which the child model consists of the frozen parent model with an additional modifyable layer. This layer is a copy of the original layer from the parent, so that the already acquired knowledge is not lost but can be enhanced.
-   The child model still uses all other layers from the parent. The only further exception is in case of another task the model is trained on. In this case, the task head is also newly trained.
- - Layer insertion, where two layers are added to the model to be mutated. These layers are residual adapters based on (X) and (X), where the dimension inbetween can be arbitrary and the layers are newly initialized. For training, the second layer is initialized using zeros, such that
-   an identity mapping is used first, so that the knowledge of the previously trained model is still used. During training, task specific knowledge can be acquired, based on the already trained starting point.
- - Layer removal is used to skip layers from the parent model. The other layers are still in use being frozen. For transformers, it was specifically designed, however, that only the latter layers can be removed.
- - Hyperparameter change, which is a random sampling of hyperparameters close to the current ones in use. This is done by sampling from a list of neighboring hyperparameters.
+Another model which is worth considering in the context of the pathways proposal is muNet [@Gesmundo2022a]. The initial criticism of current inefficiencies in deep learning is addressed by providing a framework to avoid discarding knowledge. muNet is an approach to improving multi-task learning with a focus on fine-tuning. In current practice for fine-tuning, a pre-trained model is copied and then explicitly trained on a task by overwriting previous knowledge. In other cases, models are only trained from scratch to solve one specific task.
+muNet evolves a pre-trained model on different tasks, using an EA to reuse already trained knowledge. An initial model is modified so that it becomes more and more optimized to adapt to specific tasks while keeping all previously learned knowledge. These modifications are so-called mutations applied to the model to score better. Eventually, a set of models is obtained, which includes new neural networks based majorly on the parameters of the initial model. The new modules can be seen as paths to layers from the initial network and newly added layers as well. Although the network is not sparse, the concept of reusing many parts of a network while accounting for multiple tasks is to be mentioned in the context of the pathway proposal.
+The EA of muNet starts with an initially proposed model that is mutated further on. All further mutations are stored so that after a set of candidates is available, the set can be split into models trained for this task (active population) and models for other tasks (inactive population). These two sets become the sets of candidates for the following task-specific iterations.
+Training a specific task follows three steps: sampling models, mutating, training, and evaluation. The best scoring model is added to the active population for further mutation.
+A sample algorithm accounts for exploration and exploitation to get a candidate model for subsequent mutation. The active population is ordered in a descending list based on the model's score. Each list entry is then revisited, starting from the highest scoring model onward, so that the better performing models are considered first (exploitation). The draw probability is computed as: $\mathbb P(m|t) = 0.5 ^{ \#timesSelected(m, t)}$, where $\#timesSelected(m, t)$ (where $\#timesSelected(m, t)$ is the amount of previous mutations based on model $m$ for task $t$). The more unsuccessful mutations the model has had before, the smaller the draw probability becomes. Thus, exploration is emphasized by considering previous attempts and allowing other models to be preferred. However, if this method does not yield a candidate, a model is drawn from the union of the inactive and active population.
+Applying mutations is the next step in the algorithm. A random number of mutations are drawn from the set of possible mutations, which include:
 
-- Results
-The model was furthermore evaluated on two challenges for finr-tuning in a multitask setting in the field of computervision. The first was the character mutlitask "Multitask Character Classification Benchmark" and the second one was the
-"Decathlon". The baseline was a ViT specifically designed to be genralizable on multiple tasks. Overall muNet outperformed ViT in almost all tasks on both benchmarks.
-Furthermore another itertion of muNet, which was just published shortly afterwards [@], was also tested. This version does not include layer removal and layer insertion for mutations but also includes the acceptance probabilty for mutations as a evolvable
-hyperparameter. An ablation study showed that the performance increases further when leaving layer insertion out [@Gesmundo2022a]. This model was also evalutated on the same benchmarks and also achieved similar results.
+- Layer cloning, a layer is cloned for training. The layer's parameters are copied from the parent model so that training can continue using the same knowledge. The other layers are still used but are not updated. Additionally, the task-specific head layer is cloned to account for the underlying changes. In the case of training on a new task, the head is also newly initialized.
+- Layer insertion. Two layers are added to the model as residual adapters ([@Rebuffi2017], [Houlsby2019@]). The second layer is zero-initialized to keep an identity function so that training can continue from the state before mutation.
+- Layer removal is used to skip layers while still using all other of the parent model in a frozen state.
+- Hyperparameter change. Sample hyperparameters that are close to the ones of the parent model. A list of neighboring values is constructed from which a parameter is drawn.
+Subsequently, the models are trained on the task and scored. If the mutated model is better than the parent model, it is also added to this task's set of active models. This routine is done for all tasks and can be repeated several times. Ultimately, only the best scoring models are kept for each task, yielding a list of models consisting of paths to layers of the old model and newly trained ones. 
+muNet was evaluated for fine-tuning against a ViT instance, which is aimed at being the most generalizable [@Steiner2021]. The evaluation benchmarks consisted of multiple classification problems (multi-task). ViT was fine-tuned on all of these tasks as a baseline. In contrast, another ViT was evolved using muNet, on which the baseline model was evaluated. The approach using muNet outperformed the fine-tuned ViT while using significantly fewer parameters.
+Although muNet is neither a multipurpose model nor a sparse model, the concept of building task-specific paths by enhancing pre-trained models fits in the broader context of the pathway proposal. Research in the direction of combining automated routing for tasks and adding multi-modality might lead toward the vision of pathways and is thus highly recommended.
 
-- Aspect about multitask learning. 
-muNet tries to overcome prominent hindrances in multitask learning. Through freezing the parameters of the parent in the children model, it is possible to avoid catastrophic forgetting. Furthermore the issue of negative transfer is also
-
-
-- Conclusion
+<!-- 
   - not peer-reviewed
   - no multimodality
   - tested for fine-tuning
   - task token?
-  - Include earlier knowledge (hyperparams, layers etc.)
-While LIMoE proved that multimodality works in a sparse context, muNet achieved a neural architecture search in a multitask context. Both models are not the implementation of the pathway proposal but they may pave the path further. Both models are not multi-purpose, but it might
-be interesting to combine these approaches further down the road to even better muli-purpose models.
+  - Include earlier knowledge (hyperparams, layers etc.) -->
 
 
 #### Conclusion Pathways
 - muNet and LIMoE show sparsity works (less param, good performance)
 - Evolutionary with large models
-
+- routing munet
+In conclusion 
 
 ### Discussion
 
