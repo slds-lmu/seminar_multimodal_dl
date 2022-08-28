@@ -172,32 +172,32 @@ language model using 540 billion parameters, Minerva [@Lewkowycz2022], which is 
  - More details on how hardware plays in the grand Pw proposal -->
  <!-- Downsides
   -->
-#### Related Work to Pathways
-In this section, we will look at similar architecture to the proposed pathway model, that will provide a further overview on how capabilities in this field have developed.
+
+### Related Work to Pathways
+In this section, similar architecture will be revisited to provide an overview how close current research has come to achieve a model like the pathway proposal.
 
 #### PathNet
-A similar approach, however neither multipurpose nor using specialist networks, is the model Pathnet [@Fernando2017]. Pathnet entails a concept for sequential multi-task learning
-and furthermore an indirect neural architecture search. Pathnet is build upon a evolutianary algorithm. Evolutionary algorithms are based on trial and error to find an optimum and are 
-can thus be used for optimization. An initial population of values is spawned, from which then a children generation is constructed. This construction can be done by combining individuals
-from the initial population (parents), based on their fitness (how good they are for solving the problem). The children from the earlier step become the parents in the next generation and the procedure
-is repeated until convergence. For a more detailed overview, the work of (X) is recommended. Due to the non-differentiable propoerty of EAs, they become an ideal algorithm for hyperparameter tuning
-or neural architecture search.
-Pathnet applies EAs to find the best paths through a greater neural network, that is analogous to the one proposed by [@Dean21]. A directed graph, mapping from the input to the output
-where layers with nodes are in between. The nodes are also neural networks here. At first a population of paths is spawned, mapping input to output through the overall neural network.
-
-
-An architecture for neural networks [@Fernando2017]. Also achieved multitask solving by introducing a novel training algorithm. In contrast to single-task neural networks,
-PathNet does not train the network solely on one task but on the whole network, but partially on one task and on a fraction of the network, randomly chosen. With this approach,
-knowledge sharing becomes possible.
-The pathway consists of a graph of networks where the networks are organized in columns of hidden layers in the network. Each node in this graph is a neural network itself.
-This design intends to only train a path throughout the network on a specific task and subsequently train the network on an alternative path on another task. Thereby allowing
-the network to transfer already trained capability to the new task.
-The model achieves this transfer by selecting the best path using an evolutional approach. At first, an initial population of paths is initialized and evaluated against each
-other in a binary way after trained T/some epochs. The better-performing algorithm will then be modified to further compete against other pathways. After the winner is found,
-the winner's path is frozen, meaning that all weights are not updated anymore to keep the performance on the trained task and avoid catastrophic forgetting. After fixing the
-winning path, all other parameters are newly initialized.
-Now, the same procedure is applied again to another task that is intended to benefit from the knowledge of the previous task. During this procedure, the tournament of different
-paths starts again, where the paths are trained and evaluated without the nodes from the previous winner path and eventually fixed again.
+An earlier approach for a sparse multi-task network, which looks deceptively similar, is Pathnet [@Fernando2017]. Pathnet is a training algorithm to reuse knowledge on a previously
+learned task without the risk of catastrophic forgetting, thus using the positive aspects of multi-task learning.
+The objective of the pathnet is built upon an evolutionary algorithm (EA). An evolutionary algorithm is used to optimize a discrete problem where derivative-based algorithms cannot be
+applied. The algorithm is based on a population and a fitness function. Parts of the population are chosen to create offspring either by mutation or recombination. The resulting population
+is then evaluated with respect to their fitness function, and only the best-suited individuals are kept. The same procedure is repeated based on the resulting population until a specific
+criterion is met (e.g., convergence). While evolving the population, it is necessary to balance exploration and exploitation to find the desired outcome. Since EAs are research topics
+themselves and may vary heavily, we refer to [@Baeck1993] and, more recently, to [@Doerr2021] for further insights.
+Neural networks are often depicted as a graph in which the input is directed to all nodes in hidden layers. The output of hidden layers is again directed to each node in the next
+hidden layer or nodes in an output layer.
+In this case, each node is itself a neural network; thus, all data is passed to each node.
+The training algorithm finds the best paths for a specific task through the network. At first random paths through the network are initialized, then the paths are trained for $T$
+epochs. After training, the paths are evaluated against each other, where the winning path overwrites the losing path. To achieve exploration, however, the overwritten path is mutated.
+The path is intended to deviate a little by also visiting neighboring nodes to achieve exploration. Until a specific criterion (e.g., number of epochs) to stop is reached, the current
+paths are frozen so that no more modifications to the parameters of the networks on this path are possible. All other parameters are newly initialized again. Also, a different, task-specific
+head is initialized. The same procedure is now done again for another task. The main difference is that the previously obtained path, including the trained networks, is frozen during training
+so that the model can transfer knowledge from the previous task to the new task. The model finds appropriate paths throughout the network until the stopping criterion is met.
+Pathnet was evaluated on supervised learning tasks and in reinforcement learning scenarios. As a baseline learning from scratch and fine-tuning were chosen. Fine-tuning is done on top of the
+first model, which Pathnet trains for the first task.
+Overall, pathnet improved training in the second task for time and quality in prediction, compared to standard fine-tuning and learning from scratch.
+Although pathnet only looks like pathways on the surface, it has shown a positive transfer from previously trained models in a network like this. Different tasks can reuse the knowledge
+from training on previous tasks.
 
 #### LIMoE
 In the context of Pathways, the work LIMoE (Multimodal Contrastive Learning with LIMoE: the Language-Image Mixture of Experts) [@Mustafa2022] is also necessary to be mentioned.
