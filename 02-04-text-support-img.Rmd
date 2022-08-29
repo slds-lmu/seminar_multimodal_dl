@@ -8,6 +8,9 @@
 
 <!-- TODO: Check present tense -->
 <!-- TODO: Check correct usage of "data" -->
+<!-- TODO: Check consistent spelling of pre-train -->
+<!-- TODO: Check consistent first letter capitalization of models -->
+<!-- TODO: check "an" and "a" -->
 ### Introduction
 
 > "The biggest lesson that can be read from 70 years of AI research is that general methods that leverage computation are ultimately the most effective, and by a large margin.
@@ -27,7 +30,7 @@ Their accuracy confirms the potential, hinted at by the impressive GPT-3 [@brown
 
 ### Concepts
 
-#### Web-scale data
+#### Web-scale data {#webScaleData}
 
 A core problem bugging researchers is the lack of robustness of previous state-of-the-art CV models to distribution shifts, i.e., when a pre-trained model with good accuracy on the original dataset fails to generalize to new datasets with the same categories.
 E.g., a ResNet101, trained on ImageNet to 76.2% accuracy, turns out to only have 32.6% accuracy when tested on ObjectNet [@radford2021learning].
@@ -56,7 +59,7 @@ Also the social biases inherent to the internet are reproduced and while the app
 
 The information contained in the co-occurrence of the image with its alt-text is made available through the framework of natural language supervision.
 The architectures use two jointly trained sub-networks to encode the image and the text, respectively.
-The vector encodings are then aligned in the latent representation space by minimizing a variant of the contrastive objective loss function \@ref(eq:contrLoss) [@tian2020contrastive].
+The vector encodings are then aligned in the latent representation space by minimizing a variant of the contrastive loss function \@ref(eq:contrLoss) [@tian2020contrastive].
 
 \begin{equation}
   \ell_1^{V_\text{img}, V_\text{txt}} = - \underset{\{v_\text{img}^1, v_\text{txt}^1, \ldots, v_\text{txt}^N\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_\text{img}^1,v_\text{txt}^1\})}{h_\theta(\{v_\text{img}^1,v_\text{txt}^1\}) + \sum_{k=2}^N h_\theta(\{v_\text{img}^1, v_\text{txt}^k\})} \right)
@@ -104,67 +107,96 @@ knitr::include_graphics('figures/02-04-text-support-img/data-efficiency.png')
 Development of zero-shot accuracy on ImageNet with increasing number of instances of training data seen by models.
 The contrastive objective reaches same accuracies compared to the exact predictive objective while seeing only a seventh of the amount of data [@radford2021learning].
 
+<!-- TODO: Contra: No longer a generative model, e.g., no flexible caption generation, see CLIP Limitations -->
 <!-- TODO: Learn a representation _and_ connect it to language (-> NLP) -->
 
-#### Zero shooting and foundation models {#foundMod}
+#### Foundation models and zero-shooting {#foundMod}
 
-Both concepts are paradigms from NLP.
-Foundation models [@bommasani2021opportunities] are intended to be used again, maybe as building blocks inside bigger models, e.g., CLIP is used inside DALL$\cdot$E 2 to embed images [@ramesh2022hierarchical].
-Another application of CLIP is the creation of the LAION-400M dataset [@schuhmann2022laion].
-To validate collected image-text pairs their similarity scores are calculated using CLIP and instances with a value too low are discarded.
+The first models, which are considered foundation models today, began to appear in NLP.
+The term, coined by @bommasani2021opportunities later, refers to models that are noteworthy due to their large scale and ability to adapt to a wide variety of downstream tasks.
+An early example would be BERT [@Devlin2018]. \
+A lot of times foundation models have an unfinished touch to them and the true scope of their capabilities remains unknown.
+This is because often times their desired abilities are not designed for explicitly, but emerge from their setup.
+@bommasani2021opportunities cite GPT-3's ability to perform certain types of new tasks soley by describing to it what is wanted in natural language, called in-context learning, which just happened, so to speak [@brown2020language]. \
+So, one can think of plenty of ways to employ these models and it never can be known if there is another one no one thought of yet.
+While this could mean saving computation and data collection costs down the line, the same is valid for malicious use cases, e.g., surveillance.
 
-One key concept and application for this is zero-shooting.
-This means applying a pre-trained model to new, unseen datasets.
-This is a form of more unbiased performance evaluation, as, e.g., overfitting to the data-generating distribution will not distort results. \
-Figure \@ref(fig:zero-shooting) visualizes how this is implemented in contrastive learning.
-For image classification, all available class names are embedded in a longer sentence prior to being encoded by the language model.
-Afterwards the image to be classified is encoded and all similarity scores are returned, where the highest one can be retrieved as the decision.
-Image retrieval would work the other way around.
-After an initial encoding, the closest image to a encoded text in the representation space can be returned.
+The quintessential concept for foundation models is transfer-learning; pre-training a model on one task, which optimally is easy to do, and applying it downstream to the desired task.
+For the models of this chapter this means pre-training on web-scale data (see subsection \@ref(webScaleData)) and evaluating performance on various common classification datasets.
+@radford2021learning name the SVHN dataset as a proxy for the task "street number transcription" with the caveat "on the distribution of Google Street View photos" as an example, but they remark that a lot of datasets have no obvious, specific task associated, e.g., CIFAR-10.
+On these kind of datasets they rather measure "robustness to distribution shift and domain generation", which still is of great interest like mentioned in subsection \@ref(webScaleData). \
+When there is no further fine-tuning on the downstream task, i.e., no resuming of training on the new dataset, this is called zero-shooting.
+<!-- TODO: Name some datasets and their associated tasks. -->
+It has the clear advantage of evaluating performance more unbiased, as processes like overfitting to the data-generating distribution will not distort results. \
+Figure \@ref(fig:zero-shooting) shows how contrastive models perform zero-shot transfer.
+For image classification all available classes are encoded by the language model.
+Afterwards the encoding of the image to be classified is computed by the CV sub-network and all similarity scores are returned, where the highest one can be retrieved as the decision. \
+Image retrieval works the other way around:
+After an initial encoding of all images, the closest ones to an encoded natural language text prompt in the representation space can be returned.
 
 ```{r zero-shooting, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:zero-shooting)'}
 knitr::include_graphics('figures/02-04-text-support-img/zero-shooting.png')
 ```
 (ref:zero-shooting) Visualization of zero-shooting [@radford2021learning].
 
-<!-- But language models like BERT and GPT-3 have a big impact on another aspect of their field:
-They become to serve as so called foundation models, future architectures use them as building blocks. (ref to foundation model paper, ref to DALLE oder so)
-A trend which is observable for this new wave of CV models, too.
-They show a large potential to be the CV counterparts to NLP foundation models. (ref Florence paper, ref models using CLIP as image encoder) -->
-
-* Pro: Out of box zero shot -> can serve as _foundation model_ [@bommasani2021opportunities] <!-- ref to zero shot chapter -->
-* Contra: No longer a generative model, e.g., no flexible caption generation, see CLIP Limitations
-
-_Zero shooting_ is a paradigm coming from NLP research.
-It means the previously fitted model is applied to a new, unseen dataset.
-In a way each dataset can be seen as a different task and used to evaluate the models ability to perform it.
-<!-- TODO: Name some datasets and their associated tasks. -->
-This is done in order to avoid a bias in performance evaluation, where the model overfitted on the specific data-generating distribution.
-This is possible due to the flexible text encoding of CLIP.
-
 ### Architectures
 
 #### CLIP
 
-<!-- TODO:
-  I skipped over the text embedding in figure zero-shooting
-  But in order to enhance performance by a margin of %d percent the prompts are engineered further.
-  They embed the class labels in sentence, e.g., "Picture of a (word)", which seemingly was necessary for the model to make full use of its learned parameters.
-  Directly communicate visual concepts to the model like "picture" or "macro" or "drawing"
-  Look up performance gain. -->
-<!-- mention parallelization capabilities of transformers -->
+The first large scale contrastive CV model was CLIP, short for Contrastive Language-Image Pre-training [@radford2021learning].
+The components of its name are explained in previous subsections \@ref(contrObj), \@ref(webScaleData) and \@ref(foundMod), respectively and are the defining concepts for ALIGN and Florence as well. \
+CLIP is a product of OpenAI, but its code is freely available and the different versions can be accessed as python modules.
+Not released is the corresponding dataset.
 
-<!-- Intro -->
-* Focus on _task learning_ (datasets as proxies to tasks) instead of _representation learning_
-* Contrastive, Language, Image, Pre-training
-* Ref to CLIP inspiration from medical field with contrastive objective formula
+A lot of preliminary work is done by @zhang2020contrastive, whose paper firstly uses contrastive representation learning with image-text pairs.
+CLIP version of the contrastive loss function \@ref(eq:contrLoss) is
 
-Architecture
+\begin{equation}
+  \ell_1^{V_\text{img}, V_\text{txt}} = - \log \frac{\exp(\langle v_\text{img}^1, v_\text{txt}^1 \rangle / \tau)}{\sum_{k=1}^{N} \exp(\langle v_\text{img}^1, v_\text{txt}^k \rangle / \tau)},
+  (\#eq:contrLossCLIP)
+\end{equation}
 
-* Original transformer with modifications used for GPT family as a text encoder
-* ResNet or vision transformer as a image encoder.
-  * Vision transformer: much less compute
-* High parallelization capabilities (transformer)
+where $\langle v_\text{img}^1, v_\text{txt}^1 \rangle$ represents the cosine similarity, i.e., $v_\text{img}^{1 \top} v_\text{txt}^1 / (\|v_\text{img}^1\| \|v_\text{txt}^1\|)$, and $\tau \in \mathbb{R}^+$ represents a temperature parameter, which is directly learned during training [@zhang2020contrastive].
+$\ell_1^{V_\text{txt}, V_\text{img}}$, the counterpart to $\ell_1^{V_\text{img}, V_\text{txt}}$ in the total loss, is function \@ref(eq:contrLossCLIP) with switched arguments.
+This can be viewed as a symmetric cross entropy loss over the cosine similarity of the embeddings [@radford2021learning].
+
+**Architecture**
+
+For CLIP the text encoder shown in figure \@ref(fig:contr-vs-pred-learn) is a Transformer [@vaswani2017attention] with the same modifications as for GPT-2 [@radford2019language], while multiple sub-networks were tried out for the image encoder:
+
+* ResNets: ResNet-50, ResNet-101
+* ResNets which follow EfficientNet-style model scaling: RN50x4, RN50x16, RN50x64
+* Vision Transformers: ViT-B/32, ViT-B/16, ViT-L/14
+
+The best performing sub-network was the ViT-L/14, for which in turn they continued training for an additional epoch with higher resolution images (336px), giving it the name ViT-L/14@336px.
+If not indicated otherwise the performance was measured on this version of CLIP.
+The EfficientNet-style ResNets use x4, x16 and x64 of the compute of a ResNet-50 and the largest model (the RN50x64) trained for 18 days on 592 V100 GPUs, while the ViT-L/14 only took 12 days on 256 GPUs.
+The high capabilities in terms of parallelization of transformers seems to pay off.
+
+When explaining zero-shooting (see subsection \@ref(foundMod)) initially, a part was skipped.
+As can be seen in figure \@ref(fig:zero-shooting) there is an additional step before feeding image labels into the text encoder.
+In order to enhance performance the prompts are further engineered, which seemingly is necessary for the model to understand the context of the words.
+For this, the class labels are embedded in a sentence, e.g., "A photo of a {label}.", which increases ImageNet accuracy by 1.3 percentage points (pp).
+When ensembling 80 different context prompts^[Prompts like: "A photo of a big {label}.", "A photo of a small {label}." [@radford2021learning]] ImageNet accuracy is improved by an additional 3.5pp, adding up to nearly 5pp.
+The average gain across 36 datasets is reported to be 5pp. \
+Another interesting aspect arising out of the connection of image and text representations is the ability to directly communicate visual concepts like "picture", "macro", "drawing" or even "dog" to the model.
+
+**Performance**
+
+Figure \@ref(fig:performance-clip) compares the performance of CLIP and a ResNet101 trained on ImageNet until it reached the same accuracy as zero-shot CLIP.
+The results of @radford2021learning show that CLIP constitutes an important step towards closing the robustness gap mentioned in subsection \@ref(webScaleData):
+With datasets coming from more and more different data-generating distributions to ImageNet the performance of ResNet101 deteriorates while CLIP remains fairly accurate. \
+But these findings have to be taken with a grain of salt.
+While @radford2021learning devote a subsection to data overlap analysis between training and zero-shot data, they do not give access their dataset, which makes their claims impossible to investigate by independent third parties.
+
+```{r performance-clip, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:performance-clip)'}
+knitr::include_graphics('figures/02-04-text-support-img/performance-clip.png')
+```
+(ref:performance-clip) Robustness of zero-shot CLIP to distribution shifts [@radford2021learning].
+
+**Discussion**
+
+* Training data not released to the public, can't be validated.
 * Can CLIP be seen as a step closer to human-like AI?
   * No: performance drop from zero- to one-shot setting
   * No: contrastive objective?
@@ -212,10 +244,12 @@ For example there is an application named [rclip](https://github.com/yurijmikhal
 On my (mid-range) laptop I was able to find seemingly good matches for search terms tried out inside a folder with about 100 pictures.
 After an initial caching one request took about ten seconds.
 <!-- TODO: Look up if data if available -->
+<!-- Assumption that all data is in-distribution -->
 
 ### Outlook
 
-CLIP as building block
-CLASP
-LAION dataset
-TODO: CLIP as module
+CLIP is used inside DALL$\cdot$E 2 to embed images [@ramesh2022hierarchical].
+Another application of CLIP is the creation of the LAION-400M dataset [@schuhmann2022laion].
+To validate collected image-text pairs their similarity scores are calculated using CLIP and instances with a value too low are discarded.
+<!-- CLASP -->
+
