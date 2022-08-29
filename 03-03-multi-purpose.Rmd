@@ -258,10 +258,16 @@ Although muNet is neither a multipurpose model nor a sparse model, the concept o
 
 
 #### Conclusion Pathways
-- muNet and LIMoE show sparsity works (less param, good performance)
+We presented models that might lead to a pathway model or a similar model. However, it must be stated that no model has been implemented so far up to this day (late august 2022). Although the
+path regarding appropriate hardware has already been paved, it is not sure how exactly the model will look. Many open questions remain. Will it have a layer-like structure as pathnet and as shown
+in the proposal video [@Dean21]? Will the path have a hierarchical structure, intermediate nodes, or loops? What will the sparsity look like in the model itself? How exactly will routing be achieved?
+However, the previously mentioned successes in multi-task learning, hardware, and the combination of MoE and multi-modal, as seen in LIMoE, already hint that this direction might be further researched
+in the upcoming month.
+ 
+<!-- - muNet and LIMoE show sparsity works (less param, good performance)
 - Evolutionary with large models
 - routing munet
-In conclusion 
+In conclusion  -->
 
 ### Discussion
 
