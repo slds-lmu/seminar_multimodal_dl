@@ -20,13 +20,13 @@
 >
 > --- @sutton2019bitterlesson
 
-Most model choices presented in this chapter seem be directly inspired from this insight.
-Each model can be seen as an attempt of its corresponding company to employ their available resources on the largest possible scale, with a particular focus on the size of the dataset.
-This largely becomes feasible through the implementation of recent natural language processing (NLP) findings <!-- TODO: reference to Cem --> in the field of computer vision (CV). \
-On the one hand, translations of architectural concepts firstly discovered in NLP are tried out for CV [see, e.g., the vision transformer\; @ImageT]. <!-- TODO: reference to Vladana -->
-On the other hand, the power of these new NLP models, mostly of the transformer [@vaswani2017attention], is leveraged as text encoder building blocks inside bigger models, giving this chapter its name.
-It has subchapters on the recent and relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@solawetz2021florenceopen] and discusses some of their core concepts.
-Their accuracy confirms the potential, hinted at by the impressive GPT-3 [@brown2020language], of improving scale using NLP concepts for CV.
+This insight seems to directly inspire most model choices presented in this chapter.
+Each network can be seen as an attempt of its company to employ their vast available resources on a large scale, with a particular focus on dataset sizes.
+These mostly become feasible through the adaptation of recent findings in natural language processing (NLP) <!-- TODO: reference to Cem --> to computer vision (CV). \
+On the one hand, architectural concepts firstly popularized in NLP are translated to CV [e.g., self-supervised learning or the Vision Transformer\; @ImageT <!-- TODO: reference to Vladana -->].
+On the other hand, these powerful new NLP models, mostly Transformers [@vaswani2017attention], support bigger models form the inside as text encoder building blocks; hence the name of this chapter.
+There are subsections on the recent and relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@solawetz2021florenceopen] and an overview of some relevant core concepts.
+Their strong performances confirm the potential, hinted at by the impressive GPT-3 [@brown2020language], of improving CV and increasing scale with the help of NLP.
 
 ### Concepts
 
