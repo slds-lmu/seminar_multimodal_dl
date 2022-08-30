@@ -32,26 +32,27 @@ Their strong performances confirm the potential, hinted at by the impressive GPT
 
 #### Web-scale data {#webScaleData}
 
-A core problem bugging researchers is the lack of robustness of previous state-of-the-art CV models to distribution shifts, i.e., when a pre-trained model with good accuracy on the original dataset fails to generalize to new datasets with the same categories.
-E.g., a ResNet101, trained on ImageNet to 76.2% accuracy, turns out to only have 32.6% accuracy when tested on ObjectNet [@radford2021learning].
-This suggests that perhaps the model did not learn correct latent representations, but overfit to the specific data-generating process. \
-One way to tackle this would be to make changes to the architecture and extend it in order to achieve better robustness.
-But these kind of adaptations, using expert knowledge, seem to repeat the mistake pointed out by @sutton2019bitterlesson; "micromanaging" a model is likely to hinder its scaling.
-<!-- E.g., introducing long short term memory to recurrent neural networks (RNN) improved them in the short term, but made them more computationally expensive, while not solving their core problem of poor parallelization, which resulted in it being outcompeted by the heavily parallelizable transformer architecture. | Is this really true?-->
+A core problem that troubles researchers is the lack of robustness of previous state-of-the-art CV models to distribution shifts.
+I.e., when a model with good performance on its original dataset fails to generalize (transfer its knowledge) to new, more or less similar datasets.
+E.g., @radford2021learning report that a ResNet101 which they trained on ImageNet to an accuracy of 76.2% maintains only an accuracy of 32.6% on ObjectNet.
+This suggests that the model perhaps did not learn high quality latent representations, but instead overfit to the dataset-specific data-generating distribution. \
+A common way to tackle this would be to try out various changes on the architecture and the training algorithm of the network.
+But this kind of adaptation, inscribing expert knowledge into the model, seems to repeat the mistake pointed out by @sutton2019bitterlesson; "micromanaging" a model is likely to thwart future scaling.
+<!-- E.g., introducing long short term memory to recurrent neural networks (RNN) improved them in the short term, but made them more computationally expensive, while not solving their core problem of poor parallelization, which resulted in it being outcompeted by the heavily parallelizable transformer architecture. | Does this really make sense?-->
 
-A different solution, based on scale, would be to increase the sample size, which is the approach explicitly taken by @jia2021scaling and, e.g., what @radford2021learning consider when making simplifications to their underlying architecture.
-The large numbers of observations
+The researchers of CLIP, ALIGN and Florence follow a different approach, based on scale.
+They try to increase sample size as much as possible and work with tremendous numbers of observations:
 
 * 400 million [CLIP\; @radford2021learning]
 * 900 million [Florence\; @yuan2021florence]
 * 1.8 billion [ALIGN\; @jia2021scaling]
 
-are achieved by tapping into the vast amount of image-text pairs produced and readily available on the internet.
+These are achieved with the vast amount of image-text pairs produced by and readily available on the internet.
 Thus, error prone, cost and labor intensive (difficult to scale), manual labeling is avoided. \
-But these web data have some<!-- kind of heavy --> drawbacks.
-Because of their extremely noisy nature, some form of pre-processing is needed, e.g., filtering for English language, excluding graphic content and images with non-informative alt-texts.
-I.e., still some degree of dataset curation is involved, necessitating arbitrary choices. \
-Also the social biases inherent to the internet are reproduced and while the approach improves data efficiency somewhat (see subsection \@ref(contrObj)), the poor performance of deep learning in this area is not substantially enhanced and mainly just compensated for with its super scalable source of supervision [@radford2021learning].
+Unfortunately the models also become vulnerable to the <!-- kind of heavy -->downsides of web data.
+Because of their extremely noisy nature, still some form of pre-processing is needed, e.g., filtering for English language, excluding graphic content and removing images with non-informative alt-texts.
+This makes some degree of dataset curation, and therefore arbitrary choices, necessary. \
+Likewise, the social biases inherent to the internet are reproduced and furthermore, while the approach improves data efficiency to some degree (see subsection \@ref(contrObj)), the poor performance of deep learning in this area is not substantially enhanced and mainly just compensated for with a super scalable source of supervision [@radford2021learning].
 
 <!-- TODO: Other chapters discussing web-scale data? -->
 
