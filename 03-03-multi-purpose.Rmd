@@ -44,8 +44,6 @@ will diverge to future developments, as outlined in [@Dean21]. Jeff Dean propose
 which will be further examined on how this proposal has already been implemented. The chapter will conclude with an outlook and a discussion
 on how the field will likely evolve in the following years.
 
-
-
 <!-- ### TODO
  - Broader survey on previous work (also VisualBERT, VilBERT etc.)
  - Adjacent models like FLAVA -->
@@ -80,11 +78,17 @@ internal representation using learned embeddings?. For the output, the represent
 fed into a softmax function. The modality net for images is multiple stacked convolution operations as done in Xception (TODO). Furthermore, there
 are also nets for audio and categorical modalities.
 Inside the model, where the unified representations are used, there is the encoder, which consists of multiple convolution operations and a mixture-of-expert
-layer block. The output of the encoder is further passed on to the I/O mixer and the decoder which are now used to produce the output in an autoregressive way.
+layer block.
+A mixture of expert layer (MoE) (Shaazer, jacobs  Jacobs) is an ensemble of different neural networks inside the layer. The neural networks are not used for every forward pass but only
+if the data is well suited to be dealt with by a specific expert. MoEs allow being more computationally efficient while still keeping or even improving performance.
+Training MoEs usually requires balancing the experts so that the routing does not collapse into one or a few experts. An additional gating network decides which of
+the experts is called. Gating can be implemented so that only $k$ experts are used, which reduces the computational costs for inference. 
+The output of the encoder is further passed on to the I/O mixer and the decoder which are now used to produce the output in an autoregressive way.
 The decoder produces the output, and the I/O mixer reads the previous output and combines it with the output of the encoder using attention and convolutional
 operations. Since this architecture is from the pre-transformer era, the attention mechanism used here is cross-attention.
 The decoder eventually processes the output of the encoder and the I/O mixer, thus the input sequence and also the generated sequence, to produce proper output,
 which is done using attention and convolutional operations.
+<!-- Objective Function, Results -->
 
 #### Unified Transformer (UniT)
 The Unified Transformer (UniT) [@Hu2021] is a thoroughly used transformer network with multiple encoders for each modality. Only a visual and a text encoder
@@ -107,11 +111,24 @@ given tasks. These heads are trainable networks, which are to be switched if spe
 The model often showed better results than a single-task specifically learned model. The model outperformed the single-task trained model for visual question answering
 (vqa), COCO [@mccoco], and visual genome detection [@Krishna2017]. On further tasks, when the model was trained for up to 8 tasks, it showed still comparable performance,
 however most of the time lower, than domain-specific models like BERT, VisualBERT [@Li2019], and DETR.
+<!-- Objective Function -->
 
 #### OFA
-Another transformer-based model is OFA [@Wang2022]. The multi-purpose approach is implemented such that every input is tokenized into a unified vocabulary, which becomes
-possible since also images can be turned into tokens. Also, output sequences can be turned into their original or intended modality again, such that something like image
-generation from the text also becomes possible.
+Another multi-purpose transformer is OFA (Once For All) [@Wang2022]. To utilize the seq2seq architecture of the transformer, all tasks and the respective modality
+presented are transformed into seq2seq problems.
+While other models fuse the modalities in the model, such that the modalities are presented as is to the model, OFA tries a different approach, tokenizing every
+input instead of using a shared vocabulary for all available modalities and tasks done differently for input and output. Since tokenizing an image using a vocabulary
+is not feasible, a similar approach to ViT is used (where input is flattened to 16x 16) to obtain a flattened sequence of $P$ representations. These representations
+are later used along the embeddings of tokens from text input, which is tokenized using Byte-Pair-Encoding (Sennrich). After feeding the embeddings to the encoder,
+the decoder produces the output as a sequence again. In this case, however, images are represented as a sequence of tokens, similar to DALL-E (RAMESH X). Furthermore,
+a unique sequence for the bounding box is also used for object detection and recognition. To generate the task-specific eventual solution, it is thus required that
+another model is used to generate the images based on the tokens and to visualize the bounding boxes based on the yielded coordinates.
+Since OFA is an autoregressive model, the objective is based on cross-entropy loss. The probability for the next token is predicted based on the previously produced
+tokens and the input provided.
+OFA was trained on different crossmodal: visual grounding, grounded captioning, image-text matching, image captioning, and visual question answering. And unimodal tasks:
+image infilling, object detection, and text reconstruction as in BART.
+OFA outperformed sota models on cross-modal tasks like image captioning, visual question answering, visual entailment, and visual grounding. On uni-modal tasks,
+OFA performed well, although it does not outperform sota models here.
 
 #### Gato
 To combine different modalities and create a model which is also capable of solving different tasks, the generalist agent “gato” was introduced [@Reed2022]. To additionally improve
@@ -158,7 +175,6 @@ Furthermore, multimodality is also considered a potential extension. Adding more
 introduced transformer-based models.
 Overall the approach of a sparse model combining multiple experts offers many opportunities to combine modalities and reuse task-specific capabilities. The sparsity of
 the model offers increased inference time since only some parts of the networks are activated during inference.
-
 Another part of the pathways project includes the improvement of current hardware limitations. It is already observable that Moore's Law (each x years, the compute capacity doubles)
 slows severely down while deep learning research has grown exponentially in the late 2010 years. Thus, also hardware needs to be adapted to the
 growing demand in deep learning. In the context of the pathway proposal, a novel framework for Google datacenters has been introduced, aiming to reduce overhead during computation
@@ -257,7 +273,7 @@ Although muNet is neither a multipurpose model nor a sparse model, the concept o
   - Include earlier knowledge (hyperparams, layers etc.) -->
 
 
-#### Conclusion Pathways
+### Conclusion Pathways
 We presented models that might lead to a pathway model or a similar model. However, it must be stated that no model has been implemented so far up to this day (late august 2022). Although the
 path regarding appropriate hardware has already been paved, it is not sure how exactly the model will look. Many open questions remain. Will it have a layer-like structure as pathnet and as shown
 in the proposal video [@Dean21]? Will the path have a hierarchical structure, intermediate nodes, or loops? What will the sparsity look like in the model itself? How exactly will routing be achieved?
