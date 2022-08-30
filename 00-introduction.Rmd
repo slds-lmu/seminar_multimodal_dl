@@ -15,7 +15,7 @@ There are five basic human senses: hearing, touch, smell, taste and sight. Proce
 
 
 ## Outline of the Booklet  
-Since multimodal models often use text and images as input or output, methods of Natural Language Processing (NLP) and Computer Vision (CV) are introduced as foundation in Chapter \@ref(01-00-intro-modalities). Methods in the area of NLP try to handle text data, whereas CV deals with image processing. With regard to NLP (subsection \@ref(01-01-sota-nlp)), one concept of major importance is the so-called word embedding, which is nowadays an essential part of all mutlimodal deep learning architectures. This concept also sets the foundation for transformer-based models like BERT [@BERT], which achieved a huge improvement in several NLP tasks. Especially the attention mechanism [@attention] of transformers revolutionized NLP models which is why most of them rely on the transformer as a backbone. In Computer Vision (subsection \@ref(01-02-sota-cv)) different network architectures, namely ResNet [@ResNet], EfficientNet [@EfficientNet], SimCLR [@SimCLR] and BYOL [@BYOL], will be introduced. Here it is of great interest to compare the different approaches in CV and their performance on challenging benchmarks. For this reason, the last subsection of chapter 1 (subsection \@ref(01-03-benchmarks)) gives an overall overview of different data sets, pre-training tasks and benchmarks for CV as well as for NLP.  
+Since multimodal models often use text and images as input or output, methods of Natural Language Processing (NLP) and Computer Vision (CV) are introduced as foundation in Chapter \@ref(01-00-intro-modalities). Methods in the area of NLP try to handle text data, whereas CV deals with image processing. With regard to NLP (subsection \@ref(01-01-sota-nlp)), one concept of major importance is the so-called word embedding, which is nowadays an essential part of all mutlimodal deep learning architectures. This concept also sets the foundation for transformer-based models like BERT [@BERT], which achieved a huge improvement in several NLP tasks. Especially the attention mechanism [@attention] of transformers revolutionized NLP models which is why most of them rely on the transformer as a backbone. In Computer Vision (subsection \@ref(01-02-sota-cv)) different network architectures, namely ResNet [@ResNet], EfficientNet [@EfficientNet], SimCLR [@SimCLR] and BYOL [@BYOL], will be introduced. Here it is of great interest to compare the different approaches in CV and their performance on challenging benchmarks. For this reason, the last subsection \@ref(01-03-benchmarks) of chapter 1 gives an overall overview of different data sets, pre-training tasks and benchmarks for CV as well as for NLP.  
 
 
 
@@ -24,7 +24,7 @@ The second Chapter (see \@ref(02-00-multimodal)) focuses on different multimodal
 
  
 
-In the last chapter (see \@ref(03-00-further)), methods are introduced that are also able to handle modalities other than text and image, like e.g. video or speech. The overall goal here is to find a general multimodal architecture based on challenges rather than modalities. Therefore, one needs to handle problems of multimodal fusion and alignment and decide whether you use a join or coordinated representation (subsection \@ref(03-01-further-modalities)). Moreover we go more into detail about how exactly to combine structured and unstructured data (subsection \@ref(03-02-structured-unstructured)). Therefore, different fusion strategies which evolved in recent years will be presented. This is illustrated in this book by two use cases in survival analysis and economics. Besides this, another interesting research question is how to tackle different tasks in one so called multi-purpose model (subsection \@ref(03-03-multi-purpose)) like it is intended to be done by @Pathways and their Pahtway model. Last but not least, we show one exemplary application of Multimodal Deep Learning in the arts scene where image generation models like DALL-E [@DALLE] are used to create art pieces in the area of Generative Arts (subsection \@ref(03-04-usecase)). 
+In the last chapter (see \@ref(03-00-further)), methods are introduced that are also able to handle modalities other than text and image, like e.g. video or speech. The overall goal here is to find a general multimodal architecture based on challenges rather than modalities. Therefore, one needs to handle problems of multimodal fusion and alignment and decide whether you use a join or coordinated representation (subsection \@ref(03-01-further-modalities)). Moreover we go more into detail about how exactly to combine structured and unstructured data (subsection \@ref(03-02-structured-unstructured)). Therefore, different fusion strategies which evolved in recent years will be presented. This is illustrated in this book by two use cases in survival analysis and economics. Besides this, another interesting research question is how to tackle different tasks in one so called multi-purpose model (subsection \@ref(03-03-multi-purpose)) like it is intended to be done by Google researchers @Pathways and their Pahtway model. Last but not least, we show one exemplary application of Multimodal Deep Learning in the arts scene where image generation models like DALL-E [@DALLE] are used to create art pieces in the area of Generative Arts (subsection \@ref(03-04-usecase)). 
 
 
 
@@ -35,13 +35,13 @@ In the last chapter (see \@ref(03-00-further)), methods are introduced that are 
 ### Header5 {#02-00-multimodal}
 ### Header6 {#02-01-img2text}
 ### Header7 {#02-02-text2img}
-### Header7 {#02-03-img-support-text}
-### Header7 {#02-04-text-support-img}
-### Header8 {#02-05-text-plus-img}
-### Header9 {#03-00-further}
-### Header10 {#03-01-further-modalities}
-### Header11 {#03-02-structured-unstructured}
-### Header12 {#03-03-multi-purpose}
-### Header13 {#03-04-usecase}
+### Header8 {#02-03-img-support-text}
+### Header9 {#02-04-text-support-img}
+### Header10 {#02-05-text-plus-img}
+### Header11 {#03-00-further}
+### Header12 {#03-01-further-modalities}
+### Header13 {#03-02-structured-unstructured}
+### Header14 {#03-03-multi-purpose}
+### Header15 {#03-04-usecase}
 
 
