@@ -1,55 +1,134 @@
-*Author:* Karol Urbańczyk
-## Text-2-image
 
+*Author:* Karol Urbańczyk  
 *Supervisor:* Jann Goschenhofer
 
-* introduce the concept in few sentences
-* choice of recent break-throughs is subjective, many important ones not mentioned (GAWWN, LAFITE, Make-a-Scene, probably many others)
+# Text-to-image
 
-Intention of this chapter is to grasp how the field of text-2-image modelling has been changing over the recent years. We will start with basic concepts that has been around since 2014 and end with the state-of-the-art approaches, as of August 2022. Since the field is developing in a rapid pace, with break-through models being announced every quarter, we are aware this chapter might soon not be fully covering the field. However, we must notice that cutting edge capabilities of these models tend to come from the scale and software engineering tricks. Therefore, we believe that focusing on the core concepts should make this chapter have a universal character.
+Have you ever wondered what a painting artist could bring you if you ordered *a high-quality oil painting of a psychedelic hamster dragon*? Probably not. Nevertheless, one of the answers could be:
 
+```{r hamster_dragon, fig.align = 'center', out.width = '40%',echo=FALSE, fig.cap="Hamster dragon. (xxx)", }
+knitr::include_graphics("figures/02-02-text-2-img/hamster_dragon.png")
+```
+
+The catch is that there is no human artist. The above picture comes from 3.5-billion parameter model called GLIDE by OpenAI. Each single value of every pixel was generated from a distribution that the model had to learn in the first place. Before generating the image, GLIDE abstracted what the 'hamster' or 'dragon' are from looking at millions of training images. Only then, it was able to create and combine them successfully into meaningful visual representation. Welcome to the world of current text-to-image modelling!
+
+The cross-modal field of text-to-image models has developed significantly over the recent years. What was considered unimaginable only few years ago, today constitutes a new benchmark for researchers. New break-throughs are being published every couple months. What might be even more important, possible business use cases are emerging, which attracts investment from the greatest players in the AI research. Further trend of closed-source models is continuing and the text-to-image field is probably one the most obvious ones where it can be noticed. We might need to get used to the fact that the greatest capabilities will soon be monopolized by few companies.
+
+At the same time, the general public is becoming aware of the field itself and the disruption potential it brings. Crucial questions are already emerging. What constitutes an art? What does the concept of being an author mean? Result of a generative model is in a sense a combination, or variation, of the abstracts it has seen in the past. But the same stands for a human author. Therefore, is a discussion about the prejudices and biases needed? Answers to all of these will require a refinement through an extensive discussion. The last section of this chapter will try to highlight the most important factors that will need to be considered.
+
+However, the primary intention of this chapter is to present the reader with a perspective on how the field was developing chronologically. Starting with the introduction of GANs, through first cross-domain models and ending with state-of-the-art achievements (as of September 2022), it will also try to grasp the most important concepts without being afraid of making technical deep-dives. 
+
+Authors are aware that since the rapid development pace makes it nearly impossible for this section to stay up-to-date, it might very soon not be fully covering the field. However, it must be stressed that cutting edge capabilities of the recent models tend to come from the scale and software engineering tricks. Therefore, focusing on the core concepts should hopefully make this chapter have a universal character, at least for some time. This design choice also explains why many important works did not make it to this publication. Just to name a few of them: GAWWN, StyleGAN, BigGAN, xxx, or most recent ones: LAFITE or Make-a-Scene. In one way or another, all of them pushed the research frontier one step further, which is widely acknowledged. Therefore, it needs to be clearly stated: the final selection of this chapter's content is a pure subjective decision of the author.
 
 ### Seeking objectivity
-* Objectivity in comparing generated images is very hard to grasp
-* However, there are some most common datasets and measures that are being used
-* This subchapter will quickly present them
 
-#### Datasets
-* COCO
-* CUB
-* Oxford 102
+Before diving into particular models, it would be worth to introduce objective procedures that could help assess how consecutive works are performing in comparison to their predecessors. Unfortunately, objectivity in comparing generative models is very hard to capture since there is no straight way to infer about the model's performance (https://arxiv.org/abs/1511.01844). However, multiple quantitative and qualitative techniques have been developed to make up for it. Unfortunately, there is no general consensus as to which measures should be used. Extensive comparison has been performed by (https://arxiv.org/abs/1802.03446). Few of them that seem to be most widely used in the current research are presented below.
 
-#### Measures
-* FID (Frechet Inception Distance)
-* IS (Inception Score)
-* Human evaluations - photorealism / caption similarity
+#### Metrics
 
+**Inception Score (IS)**
+
+Introduced by (https://arxiv.org/abs/1606.03498), Inception Score (IS) uses the Inception Net (https://arxiv.org/abs/1512.00567) trained on ImageNet data to classify the fake images generated by the assessed model. Then, it measures the average KL divergence between the marginal labels distribution $p(y)$ and the labels distribution conditioned on the generated samples $p(y|x)$.
+
+>$$exp(\mathop{{}\mathbb{E}}_{x}[KL(p(y|x) || p(y))])$$
+
+$p(y)$ is desired to have high diversity (entropy), in other words: images from generative model should represent a wide variety of classes. On the other hand, $p(y|x)$ is desired to have low diversity, meaning that images should represent meaningful concepts. If a range of cat images is being generated, they should be confidently classified by Inception Net as cats. The intention behind IS is that generative model with higher distance (KL divergence in this case) between these distributions should have higher score. IS is considered a metric that correlates well with the human judgment, hence its popularity.
+
+**Fréchet Inception Distance (FID)**
+
+A metric that is generally considered to improve upon Inception Score is Fréchet Inception Distance (FID). Heusel *at al.* (https://papers.nips.cc/paper/2017/hash/8a1d694707eb0fefe65871369074926d-Abstract.html) argue that the main drawback of IS is that it is not considering the real data at all. Therefore, FID again uses Inception Net, however this time it embeds the images (both fake and real samples) into feature space, stopping at specific layer. In other words, some of the most-right layers of the net are being discarded. Feature vectors are then assumed to come from Gaussian distribution and the Fréchet distance is calculated between real and generated data distributions:
+
+>$$d^2((m, C), (m_{w}, C_{w})) = ||m-m_{w}||_{2}^2 + Tr(C+C_{w}-2(CC_{w})^{1/2})$$
+
+$(m, C)$ and $(m_{w}, C_{w})$ represent mean and covariance of generated and real data Gaussians respectively. Obviously, low FID levels are desired.
+
+FID is considered to be consistent with human judgement and sensitive to image distortions, which are both desired properties. Figure (xxx) shows how FID increases (worsens) for different types of noise being added to images.
+
+```{r fid_distortions, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="FID is evaluated for different noise types. From upper left to lower right: Gaussian noise, Gaussian blur, implanted black rectangles, swirled images, salt and pepper, CelebA dataset contaminated by ImageNet images. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/fid_distortions.png")
+```
+
+**Precision / recall**
+
+Precision and recall are one of the most widely used metrics in many Machine Learning problem formulations. However, their classic definition cannot be applied to generative models due to lack of objective labels. Sajjadi (https://arxiv.org/abs/1806.00035) came up with a novel definition of these metrics calculated directly from distributions, which was further improved by Kynkaniemi (https://arxiv.org/abs/1904.06991). The argument behind a need for such approach is that metrics such as IS or FID provide only one-dimensional view on the model's performance, ignoring the trade-off between precision and recall. Decent FID result might very well mean high recall (large variation, i.e. wide range of data represented by the model), high precision (realistic images), or anything in between.
+
+Let $P_{r}$ denote the probability distribution of the real data, and $P_{g}$ be the distribution of the generated data. In short, recall is trying to answer how big part of $P_{r}$ can be generated from $P_{g}$, while precision is trying to grasp how many of generated images fall within $P_{r}$.
+
+```{r precision_and_recall, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Definition of precision and recall for distributions. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/precision_and_recall.png")
+```
+
+For more thorough explanation of metric calculation, one should follow (https://arxiv.org/abs/1904.06991).
+
+**CLIP score**
+
+CLIP is a model from OpenAI (https://arxiv.org/abs/2103.00020). Its details can be found in chapter (CROSS REFERENCE TO MAX's SECTION). In principle, it is capable of assessing the semantic similarity between the text caption and the image. CLIP score is defined as:
+
+>$$\mathop{{}\mathbb{E}}[s(f(image)*g(caption))]$$
+
+where the expectation is taken over the batch of generated images and $s$ is the CLIP logit scale. (https://arxiv.org/abs/2112.10741)
+
+**Human evaluations**
+
+It is common that researchers report also qualitative measures. Many potential applications of the models are focused on deceiving human spectator, which motivates reporting of metrics that are based on the human evaluation. Many variations can be found, therefore none is going to be presented here. However, the general idea is to test for:
+
+* photorealism
+* caption similarity (image-text alignment)
+
+Usually, a set of images is being presented to a human, whose task is to assess their quality with respect to the two above-mentioned criteria.
 
 ### Generative Adversarial Networks
-* quick intro focusing on why it is crucial to start from GANs
+
+Appearance of Generative Adversarial Networks (GAN) was a major milestone in the development of generative models. Introduced by Goodfellow *et al.* (https://arxiv.org/abs/1406.2661), idea of GANs presented new architecture and training regime, which corresponded to minimax two-player game between so called Generator and Discriminator (hence the word *adversarial*).
+
+GANs can be considered as an initial enabler for the field of text-to-image to exist in the first place and for a long time GAN-like models were achieving state-of-the-art results, which makes it more than justified to present their core concepts in this book.
 
 #### Vanilla GAN for Image Generation
-* intro of GAN
+
+In a vanilla GAN, Generator model ($G$) and Discriminator model ($D$) are optimized together in a minimax game, where $G$'s aim is to generate sample so convincing, that $D$ will not be able to distinguish if it comes from real or generated images distribution. On the other hand $D$ is being trained to discriminate between the two. Originally, multilayer perceptron was proposed as model architecture for both $D$ and $G$, although in theory any differentiable function could be used.
+
+More formally, let $p_{z}$ denote the prior distribution defined on the input noise vector $z$. Then, the generator $G(z)$ represents a function that is mapping this noisy random input to generated image $x$. The discriminator $D(x)$ outputs a probability that $x$ comes from the real data rather than generator's distribution $p_{g}$. In this framework, $D$ shall maximize probability of guessing the correct label of both real and fake data. $G$ is trained to minimize $log(1-D(G(z)))$. Now, such representation corresponds to the following value function (optimal solution):
+
+>$$\min_{G}\min_{D}V(D,G) = \mathop{{}\mathbb{E}}_{x \sim p_{data}(x)} [log(D(x))] + \mathop{{}\mathbb{E}}_{z \sim p_{z}(z)} [log(1-D(G(z)))]$$
+
+Figure (xxx) depicts this process in a visual way.
+
+```{r vanilla_gan, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="GAN framework as proposed in (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/vanilla_gan.png")
+```
+
+Some of the generated samples that had been achieved with this architecture already in 2014 can be seen in Figure (xxx).
+
+```{r vanilla_gan_samples, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Samples from generators trained on different datasets: a) MNIST b) TFD, c) CIFAR-10 (MLP used for G and D) d) CIFAR-10 (CNN used). Highlighted columns show nearest real example of the neighbouring sample. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/vanilla_gan_samples.png")
+```
 
 #### Conditioning on Text
+https://arxiv.org/pdf/1605.05396.pdf
 * how to encode the text and use it in the generation process
 * show some results
 
-#### Stacking generators
+#### Further GAN-like development 
+https://arxiv.org/pdf/1612.03242.pdf
 * intro of StackGAN, show some results
 
-#### Is attention all you need?
+https://arxiv.org/pdf/1711.10485.pdf
 * intro of AttGAN, show some results
+StyleGAN, BigGAN
+
+### Dall-E starting post-GAN era
 
 #### Variational Autoencoder
+https://arxiv.org/pdf/1312.6114v10.pdf
 * Introducing the concept of VAE
 * How is it helpful in generating images
 
-### Dall-E starting post-GAN era
 * Intro: OpenAI, dataset used, not public, etc
 * VQ-VAE and dVAE
 * Details how it's working. Combining Transformer with VQ-VAE. Training vs inference
 * Results and image examples
+
+cherrypicking
 
 ### GLIDE
 * Intro
@@ -88,3 +167,30 @@ Mention the following points and why they matter
 * open vs closed-source (mention dall-e mini)
 * copyrights
 * biases
+
+https://jumpstory.com/blog/the-future-of-ai-generated-images-why-its-both-fascinating-and-a-huge-legal-risk/
+
+
+<!--
+### Datasets
+
+**Microsoft Common Objects in Context (MS COCO)**
+
+MS COCO (https://arxiv.org/abs/1405.0312)
+
+* COCO
+* CUB
+* Oxford 102
+-->
+
+<!--Moreover, the section lists couple of popular datasets that are, or have been used by researchers either for assessment only or for the training process itself.-->
+
+<!--https://medium.com/octavian-ai/a-simple-explanation-of-the-inception-score-372dff6a8c7a-->
+<!--https://www.youtube.com/watch?v=YHRnZ13s7xo-->
+<!---->
+<!--https://medium.datadriveninvestor.com/a-very-short-introduction-to-frechlet-inception-distance-fid-86c95deb0930-->
+<!--https://www.youtube.com/watch?v=9zTwSzXxNDo-->
+
+
+
+
