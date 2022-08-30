@@ -183,9 +183,9 @@ Another interesting aspect arising out of the connection of image and text repre
 
 **Performance**
 
-Figure \@ref(fig:performance-clip) compares the performance of CLIP and a ResNet101 trained on ImageNet until it reached the same accuracy as zero-shot CLIP.
+Figure \@ref(fig:performance-clip) compares the performance of CLIP and a ResNet101 trained on ImageNet to the same accuracy as zero-shot CLIP.
 The results of @radford2021learning show that CLIP constitutes an important step towards closing the robustness gap mentioned in subsection \@ref(webScaleData):
-With datasets coming from more and more different data-generating distributions to ImageNet the performance of ResNet101 deteriorates while CLIP remains fairly accurate. \
+With datasets coming from more and more differing data-generating distributions to ImageNet the performance of ResNet101 deteriorates while CLIP remains fairly accurate. \
 But these findings have to be taken with a grain of salt.
 While @radford2021learning devote a subsection to data overlap analysis between training and zero-shot data, they do not give access their dataset, which makes their claims impossible to investigate by independent third parties.
 
@@ -194,24 +194,42 @@ knitr::include_graphics('figures/02-04-text-support-img/performance-clip.png')
 ```
 (ref:performance-clip) Robustness of zero-shot CLIP to distribution shifts [@radford2021learning].
 
-**Discussion**
+@shen2021much discover another curios fact.
+They study performance improvements in Vision-and-Language models when the visual encoder is switched to CLIPs strong image encoder and discover that in this field of CV the ViT-B scores worse than the ResNets.
+E.g., tests on image captioning reveal that the V&L model using ViT-B often is only half as good as the version using the RN50x4 -- the largest one used in this study. \
+They propose that ViT-B lacks visual localization abilities due to its pooling strategies.
+To test this @shen2021much perform some test which confirm their supposition, e.g., figure \@ref(fig:attention-ViT) which depicts a Grad-CAM Visualization of a V&L model with a ResNet-50 backbone and a ViT-B backbone for the question "What color is the woman's shirt on the left?".
 
-* Training data not released to the public, can't be validated.
-* Can CLIP be seen as a step closer to human-like AI?
-  * No: performance drop from zero- to one-shot setting
-  * No: contrastive objective?
-  * Yes: visual representations connected to natural language
+```{r attention-ViT, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:attention-ViT)'}
+knitr::include_graphics('figures/02-04-text-support-img/attention-of-ViT.png')
+```
+(ref:attention-ViT) Attention.
 
 #### ALIGN
 
-<!-- Intro -->
-* Over one billion image alt-text pairs
-* Name comes from alignment of visual and language representations trough the beloved and known contrastive loss or, very intuitively, "A Large-scale ImaGe and Noisy-text embedding"
-* Dual encoder architecture
-* Image + text image retrieval (e.g., Image of Eiffel tower + "snow" -> snowy Eiffel tower)
-* Key difference to CLIP: training data. ALIGN does not filter that strongly, "dataset doesn't require expert knowledge to curate"
+@jia2021scaling take an approach which is a little different.
+They reiterate the necessity of large-scale vision datasets and assert that even CLIPs data collection process still involves a non-trivial data curation cost.
+For this they explore employing a minimal amount of filtering and controlling the noise simply via sample size.
+This results in a dataset with 1.8 billion image-text pairs.
+They name their model ALIGN, short for "A Large-scale ImaGe and Noisy-text embedding", hinting at the contrastive loss, which aligns vector encodings in the representation space (see subsection \@ref(contrObj)).
 
-<!-- TODO: ALIGN doesn't filter data as strongly -->
+**Architecture**
+
+They use the dual encoder architecture with BERT-Large as the text and EfficientNet-L2 as the image encoder, which they train from scratch.
+The model has around 800 million parameters [@alford2021alignparams].
+
+They also mention a funny property of the access to aligned image and text encoders.
+One can perform simple arithmetic operations, which they use for image + text retrieval.
+E.g., encoding an image of the Eiffel tower and the word "snow" and adding up the vector encodings can retrieve a picture of a snowy Eiffel tower using cosine similarity, see firgure \@ref(fig:img-txt-addition).
+
+```{r img-txt-addition, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:img-txt-addition)'}
+knitr::include_graphics('figures/02-04-text-support-img/align-word-and-image-addition.png')
+```
+(ref:img-txt-addition) Addition of word and image embedding.
+
+**Diskussion**
+
+* more expensive training
 
 #### Florence
 
@@ -234,16 +252,30 @@ knitr::include_graphics('figures/02-04-text-support-img/performance-clip.png')
 ### Performance comparison
 
 * As all of these models are orders of magnitudes too large for performing a benchmark, findings reported inside the papers are believed here
-<!-- TODO: Other comparisons -->
+
+```{r table1, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:table1)'}
+knitr::include_graphics('figures/02-04-text-support-img/table-imagenet.png')
+```
+(ref:table1) Top-1 Accuracy of zero-shot transfer of models to image classification on ImageNet and its variants.
+
+
+```{r table2, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:table2)'}
+knitr::include_graphics('figures/02-04-text-support-img/table-img-txt-retrieval.png')
+```
+(ref:table2) Zero-shot image and text retrieval [@yuan2021florence].
+
+```{r table3, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:table3)'}
+knitr::include_graphics('figures/02-04-text-support-img/table-misc-datasets.png')
+```
+(ref:table3) Top-1 Accuracy of CLIP, Florence and ALIGN on various datasets.
 
 ### Resources
 
 One can find the pre-trained CLIP models on [Github](https://github.com/openai/CLIP).
 They even found their way into simple command line tools already.
-For example there is an application named [rclip](https://github.com/yurijmikhalevich/rclip), which can be used for personal image retrieval, wrapping the _ViT-B/32_ CLIP architecture.
+For example there is a CLI named [rclip](https://github.com/yurijmikhalevich/rclip), which can be used for personal image retrieval, wrapping the _ViT-B/32_ CLIP architecture.
 On my (mid-range) laptop I was able to find seemingly good matches for search terms tried out inside a folder with about 100 pictures.
 After an initial caching one request took about ten seconds.
-<!-- TODO: Look up if data if available -->
 <!-- Assumption that all data is in-distribution -->
 
 ### Outlook
