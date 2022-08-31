@@ -167,49 +167,54 @@ This can be viewed as a symmetric cross entropy loss over the cosine similarity 
 
 **Architecture**
 
-The text encoder for CLIP (see figure \@ref(fig:contr-vs-pred-learn)) is a modified Transformer [@vaswani2017attention], which was also used in GPT-2 [@radford2019language].
+The text encoder for CLIP (see figure \@ref(fig:contr-vs-pred-learn)) is a modified Transformer [@vaswani2017attention], which was also used for GPT-2 [@radford2019language].
 For the image encoder multiple sub-networks are tested:
 
 * ResNets: ResNet-50, ResNet-101
 * ResNets which follow EfficientNet-style model scaling: RN50x4, RN50x16, RN50x64
 * Vision Transformers: ViT-B/32, ViT-B/16, ViT-L/14
 
-The best performing sub-network was the ViT-L/14, for which in turn they continued training for an additional epoch with higher resolution images (336px), giving it the name ViT-L/14@336px.
-If not indicated otherwise the performance was measured on this version of CLIP.
+The best performing sub-network was the ViT-L/14.
+In turn, they trained it for an additional epoch with higher resolution images (336px), denoting this version ViT-L/14@336px.
+If not indicated otherwise, the performances of this version of CLIP are displayed.
 The EfficientNet-style ResNets use x4, x16 and x64 of the compute of a ResNet-50 and the largest model (the RN50x64) trained for 18 days on 592 V100 GPUs, while the ViT-L/14 only took 12 days on 256 GPUs.
-The high capabilities in terms of parallelization of transformers seems to pay off.
+The high parallelization capabilities of Transformers seem to pay off.
 
-When explaining zero-shooting (see subsection \@ref(foundMod)) initially, a part was skipped.
-As can be seen in figure \@ref(fig:zero-shooting) there is an additional step before feeding image labels into the text encoder.
-In order to enhance performance the prompts are further engineered, which seemingly is necessary for the model to understand the context of the words.
-For this, the class labels are embedded in a sentence, e.g., "A photo of a {label}.", which increases ImageNet accuracy by 1.3 percentage points (pp).
-When ensembling 80 different context prompts^[Prompts like: "A photo of a big {label}.", "A photo of a small {label}." [@radford2021learning]] ImageNet accuracy is improved by an additional 3.5pp, adding up to nearly 5pp.
-The average gain across 36 datasets is reported to be 5pp. \
-Another interesting aspect arising out of the connection of image and text representations is the ability to directly communicate visual concepts like "picture", "macro", "drawing" or even "dog" to the model.
+When explaining zero-shooting initially (see subsection \@ref(foundMod)), a text processing step was skipped.
+As can be seen in figure \@ref(fig:zero-shooting), there is an additional operation before the labels are fed into the text encoder.
+In order to help the model understand the context of the words, the class labels are embedded in a sentence, e.g., "A photo of a {label}.".
+This increases the models zero-shot accuracy on ImageNet by 1.3 percentage points (pp).
+When ensembling 80 different context prompts^[Prompts like: "A photo of a big {label}.", "A photo of a small {label}." [@radford2021learning]] @radford2021learning improve ImageNet accuracy by an additional 3.5pp, which adds up to a total of nearly 5pp.
+The average performance gain across 36 datasets is reported to be 5pp. \
+It is likewise possible to directly communicate visual concepts like "picture", "macro", "drawing" or even "dog" to the model.
 
-**Performance**
+**Robustness**
 
-Figure \@ref(fig:performance-clip) compares the performance of CLIP and a ResNet101 trained on ImageNet to the same accuracy as zero-shot CLIP.
-The results of @radford2021learning show that CLIP constitutes an important step towards closing the robustness gap mentioned in subsection \@ref(webScaleData):
-With datasets coming from more and more differing data-generating distributions to ImageNet the performance of ResNet101 deteriorates while CLIP remains fairly accurate. \
-But these findings have to be taken with a grain of salt.
-While @radford2021learning devote a subsection to data overlap analysis between training and zero-shot data, they do not give access their dataset, which makes their claims impossible to investigate by independent third parties.
+Figure \@ref(fig:performance-clip) reports the performance of CLIP and a ResNet101, whose training on ImageNet was stopped at the point it reached the same accuracy as zero-shot CLIP.
+It can be deduced that the methods studied in the paper of @radford2021learning constitute an important step towards closing the robustness gap mentioned earlier (see subsection \@ref(webScaleData)).
+While the performance of the ResNet101 deteriorates with datasets generated from more and more different data distributions compared to ImageNet, CLIP remains fairly accurate. \
+Note that these findings have to be taken with a grain of salt.
+Because OpenAI does not grant public access to their training data, independent parties cannot investigate these claims on their own.
+E.g., it has to be relied on the conclusions of their overlap analysis to rule out that CLIP has not seen biasing amounts of future test data during training.
 
 ```{r performance-clip, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:performance-clip)'}
 knitr::include_graphics('figures/02-04-text-support-img/performance-clip.png')
 ```
 (ref:performance-clip) Robustness of zero-shot CLIP to distribution shifts [@radford2021learning].
 
-@shen2021much discover another curios fact.
-They study performance improvements in Vision-and-Language models when the visual encoder is switched to CLIPs strong image encoder and discover that in this field of CV the ViT-B scores worse than the ResNets.
-E.g., tests on image captioning reveal that the V&L model using ViT-B often is only half as good as the version using the RN50x4 -- the largest one used in this study. \
-They propose that ViT-B lacks visual localization abilities due to its pooling strategies.
-To test this @shen2021much perform some test which confirm their supposition, e.g., figure \@ref(fig:attention-ViT) which depicts a Grad-CAM Visualization of a V&L model with a ResNet-50 backbone and a ViT-B backbone for the question "What color is the woman's shirt on the left?".
+**CLIP as a building block**
+
+@shen2021much study how the performance of Vision-and-Language (V&L) models improves, when the visual encoder is switched to CLIPs strong image encoder.
+They discover that in this field of CV the ViT-B scores significantly worse than the ResNets.
+E.g., tests on image captioning reveal that the V&L model using ViT-B often performs only half as strong as the version using the RN50x4 (the largest network used in this study). \
+This is possibly due to the pooling strategies of ViT-B, which result in a lack of visual localization abilities.
+@shen2021much test their hypothesis and generate, e.g., figure \@ref(fig:attention-ViT) which depicts Grad-CAM Visualizations for a V&L model with a ViT-B backbone and a ResNet-50 backbone and the question "What color is the woman's shirt on the left?".
+The red area indicates relevant pixels and appears much more focused for CLIP-Res50 than for CLIP-ViT-B.
 
 ```{r attention-ViT, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:attention-ViT)'}
 knitr::include_graphics('figures/02-04-text-support-img/attention-of-ViT.png')
 ```
-(ref:attention-ViT) Attention.
+(ref:attention-ViT) Grad-CAM Visualizations for the prompt "What color is the woman's shirt on the left?".
 
 #### ALIGN
 
