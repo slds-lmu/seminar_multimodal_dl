@@ -53,10 +53,10 @@ Since the early years of machine learning, multitask and multimodal learning par
 is the paradigm of training a model on different tasks with the intention that the model transfers the learned knowledge to new tasks,
 such that fewer resources are required to learn new tasks. Akin to humans, it is intended that the model benefits from previously learned tasks.
 Humans do not learn every task from scratch. However, machine learning models do. It is assumed that related tasks let the model further
-generalize. Although there exists field-specific issues like catastrophic forgetting and negative transfer, this approach is also promising
+generalize, similat to human intelligence. Although there exists field-specific issues like catastrophic forgetting and negative transfer, this approach is also promising
 for future implementations.
 Multimodal learning [@Baltrusaitis2019] is a paradigm in which a machine learning model is supplied with multiple modalities like images, text,
-tables, etc. As in multitask learning, this approach is also inspired by human intelligence since humans perceive the world through multiple
+tables, etc. As in multitask learning, this approach is also inspired by natural intelligence since intelligent beings perceive the world through multiple
 senses. It is thus assumed that multimodal models achieve better performance due to the higher input quality of the provided data. However,
 this field also has some specific problems, mainly focusing on how the different representations can be aligned when fused.
 We want to marry the two paradigms to form a so-called multi-purpose model for this work. These kinds of models are both multimodal and multitask.
@@ -91,31 +91,24 @@ operations. Since this architecture is from the pre-transformer era, the attenti
 The decoder eventually processes the output of the encoder and the I/O mixer, thus the input sequence and the generated sequence, to produce proper output,
 which is done using attention and convolutional operations. A positional encoding conceptually similar to the one in transformers was also used for the attention mechanism.
 Multimodel was trained on eight datasets, from which six were from the language domain and COCO (X) as well as ImageNet (X) additionally. For training, four
-experts in the MoE layers were used. Compared to training Multimodel for each task specifically, the combined training showed better performance. 
+experts in the MoE layers were used. Compared to training Multimodel for each task specifically, the combined training showed comparable or better performance. 
 he combined trained multimodel on ImageNet (X) and machine translation were below sota models.
+<!-- No output for IMages  -->
 
 #### Unified Transformer (UniT)
-The Unified Transformer (UniT) [@Hu2021] is a thoroughly used transformer network with multiple encoders for each modality. Only a visual and a text encoder
-have been used in the initial setting. However, the authors state that an arbitrary amount of encoders can be used. For the textual input, a BERT model [@Devlin2018]
-has been used, while for the visual encoder, a DETR [@Carion2020] has been used. In this approach, the images are first pre-encoded using a ResNet [@ResNet].
-After the input image is encoded and linearly projected to the hidden dimension of the transformer, another task-specific vector is added to the data and fed
-into the here used visual transformer, which follows DETR. The authors chose BERT [@Devlin2018] as an encoder for the textual representation. To encode the
-text, words of sentences are tokenized, and BERT-specific tokens, like the [CLS] token, are added. As in the visual encoder, a task-specific vector is added
-to the input, which is later removed from the output sequence. After the data from all modalities is encoded, it is concatenated and passed to the decoder, a
-vanilla transformer decoder according to [@vaswani2017attention] and the one used in DETR. To the embedded sequence, a task-specific query representation sequence is
-also passed. Initially, the authors used both task-specific and task-agnostic decoders for their experiments.
-
-After some developments in the field of multimodal transformers took place (VilBERT, ViT, etc.), the Unified Transformer (UniT) [@Hu2021] was introduced.
-Compared to previous approaches in the multi-purpose models, UniT aims to simplify the architecture. Achieving the capability of multitasking resulted in
-many hyperparameters and specific submodels to be set by hand for each task and or modality. UniT tried to achieve independence of this caveat, despite also
-using some task-specific submodules. The approach is as follows; transformers encode the input sequence on each domain, and the input encodings are concatenated
-and then passed on to a transformer decoder which is connected to task-specific output heads. Even though these heads were to be set manually, the model proved
-the fit of transformers for multi-purpose models. On top of the decoder, task-specific heads are used to transform the obtained sequence into a solution to the
-given tasks. These heads are trainable networks, which are to be switched if specific tasks are used.
-The model often showed better results than a single-task specifically learned model. The model outperformed the single-task trained model for visual question answering
-(vqa), COCO [@mccoco], and visual genome detection [@Krishna2017]. On further tasks, when the model was trained for up to 8 tasks, it showed still comparable performance,
-however most of the time lower, than domain-specific models like BERT, VisualBERT [@Li2019], and DETR.
-<!-- Objective Function -->
+A more recent multi-purpose model is UniT (Unified Transformer) [@Hu2021]. UniT is built upon the transformer architecture, in which both encoder and decoder are used.
+To account for multimodality and multitasking, the transformer is enhanced.
+The encoder part of UniT consists of two encoders since the initial setup is aimed at the modalities of text and vision. However, more modality-specific encoders may
+be added. For the case of language, a BERT model [@Devlin2018] is used, while a DETR model [@Carion2020] is used for vision. The [CLS] token is also used in the BERT
+encoder, which is also included in the output sequence. A task-specific token is additionally added to the input of the encoders.
+The output of the encoders is then concatenated in case all modalities are used. Otherwise, only the modality-specific encodings are passed on.
+The decoder is modality agnostic and thus stays the same;its input is the concatenated sequence of the encodings and an additional task-specific sequence. Since the
+decoder architecture sticks to the DETR model, the obtained sequence of the decoder is then passed to task-specific output heads, which need to be changed for each
+task and are also learned. A task-specific loss was used for object detection, while the cross-entropy loss was used for the other tasks.
+In experiments, UniT was evaluated against a single-domain version of itself. The general model outperformed the specialist one on multimodal tasks but was outperformed
+on unimodal tasks by the specialist UniT. UniT was furthermore also outperformed by sota models, although the numbers remained close.
+Even though UniT does not achieve sota or consistently outperforms its specialist version, it is a powerful method to achieve a simple multi-purpose model. Using available
+encoder models, it is easily extendable and does not require a novel embedding scheme.
 
 #### OFA
 Another multi-purpose transformer is OFA (Once For All) [@Wang2022]. To utilize the seq2seq architecture of the transformer, all tasks and the respective modality
@@ -148,11 +141,21 @@ $$\[x_{Text}, x_{Images}, x_{Discrete and Continuous Values} | y_{Action}\]$$
 Since it is only necessary to predict the action based on the conditioning values, a mask function is added to the cross-entropy loss function, which masks the conditioning
 values so that only the next action is predicted. The masking function is always one for text since every previous text token is necessary to predict the next one.
 GATO was evaluated in RL-based tasks against specialist RL agents, where GATO was lower than the specialist agents or at a human level. On unseen tasks, GATO required fine-tuning
-since few-shot learning is not feasible due to the input length restrictions in transformers. However, the results were mixed, so improvements were possible, the expert was
-outperformed, and even massive fine-tuning efforts only led to small gains. In robotics, GATO showed similar behavior to the baseline sota model. Additionally, GATO also showed 
+since few-shot learning is not feasible due to the input length restrictions in transformers. However, the results were mixed, some improvements were possible, the expert was
+outperformed, but also massive fine-tuning efforts only led to small gains. However it was found that the generalist agent outperformed the specialist agent (in this case, a GATO
+model only trained on this task from scratch), only trained for this task, most of the times. Only one task, where also fine-tuning did not increase the performance, the specialist 
+odel achieved better results.
+In robotics, GATO showed similar behavior to the baseline sota model. Additionally, GATO also showed 
 capabilities in image captioning and dialogue modeling. However, these aspects were not elaborated further.
 
 #### Comparison
+We revisited four multi-purpose models (Multimodel, UniT, OFA, and GATO), of which three were based on the transformer architecture. The last two models transformed the tasks into
+seq2seq problems for feeding the transformer. UniT, using the entire transformer architecture, also eventually produces a sequence, but the focus here is on task-specific heads. At
+this point, a similarity to OFA can be found since OFA also needs to use additional task models to produce the eventual output, like the visualizer and the image generator. Indirectly
+or directly, all presented models produce a sequence as output, which might be an intermediate result of the nature of the transformer, which is a naturally autoregressive model. However,
+while UniT used multiple encoders for different modalities, it might be interesting to see potentially different decoders, especially with the rise of diffusion, where the sequential output of
+the transformer decoder might only be a hindrance.
+Although these models did not achieve sota most of the time, sometimes they showed a better performance than their specialist version (GATO, Multimodel)
 
 ### Pathway Proposal
 
