@@ -11,6 +11,12 @@
 <!-- TODO: Check consistent spelling of pre-train -->
 <!-- TODO: Check consistent first letter capitalization of models -->
 <!-- TODO: check "an" and "a" -->
+### Dummy chapter 1 {#sotanlp}
+<!-- 01-01-sota-nlp -->
+
+### Dummy chapter 2 {#benchmarks}
+<!-- 01-03-benchmarks -->
+
 ### Introduction
 
 > "The biggest lesson that can be read from 70 years of AI research is that general methods that leverage computation are ultimately the most effective, and by a large margin.
@@ -218,53 +224,61 @@ knitr::include_graphics('figures/02-04-text-support-img/attention-of-ViT.png')
 
 #### ALIGN
 
-@jia2021scaling take an approach which is a little different.
-They reiterate the necessity of large-scale vision datasets and assert that even CLIPs data collection process still involves a non-trivial data curation cost.
-For this they explore employing a minimal amount of filtering and controlling the noise simply via sample size.
-This results in a dataset with 1.8 billion image-text pairs.
-They name their model ALIGN, short for "A Large-scale ImaGe and Noisy-text embedding", hinting at the contrastive loss, which aligns vector encodings in the representation space (see subsection \@ref(contrObj)).
+The approach of @jia2021scaling is largely similar to CLIP.
+They reiterate the necessity of large-scale vision datasets, but assert that even CLIPs data collection process still involves a non-trivial amount of data curation.
+They propose that the amount of additional observations obtained through minimizing the amount of filtering makes up for the increased noise.
+The result is a dataset with 1.8 billion image-text pairs. \
+The corresponding model is named ALIGN, short for "A Large-scale ImaGe and Noisy-text embedding", whose acronym hints at the contrastive loss, which aligns vector encodings in the representation space (see subsection \@ref(contrObj)).
 
 **Architecture**
 
-They use the dual encoder architecture with BERT-Large as the text and EfficientNet-L2 as the image encoder, which they train from scratch.
-The model has around 800 million parameters [@alford2021alignparams].
+ALIGN follows the dual encoder architecture employed by @zhang2020contrastive and @radford2021learning, but uses part of BERT-Large as the text and EfficientNet-L2 as the image encoder, which they jointly train from scratch.
+The model has around 800 million parameters [@alford2021alignparams]. \
+Subsection \@ref(performanceComp) goes into more detail about the performance of ALIGN and compares all three models discussed in this subsection.
 
-They also mention a funny property of the access to aligned image and text encoders.
-One can perform simple arithmetic operations, which they use for image + text retrieval.
-E.g., encoding an image of the Eiffel tower and the word "snow" and adding up the vector encodings can retrieve a picture of a snowy Eiffel tower using cosine similarity, see firgure \@ref(fig:img-txt-addition).
+**Connecting image and text representations**
 
-<!-- TODO: Learn a representation _and_ connect it to language (-> NLP) -->
+The contrastive loss function aligns the latent representations of the different modalities.
+In other words, the explicit objective is that similar vector encodings implicate similar inputs.
+This means arithmetic operations like the ones mentioned in chapter \@ref(sotanlp) are not only meaningful on encodings belonging to the same modality, but to different. \
+E.g., one can add up the image encoding of a picture of the Eiffel tower and the text encoding of the word "snow" and retrieve pictures with high cosine similarity to the result, see figure \@ref(fig:img-txt-addition).
 
 ```{r img-txt-addition, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:img-txt-addition)'}
 knitr::include_graphics('figures/02-04-text-support-img/align-word-and-image-addition.png')
 ```
-(ref:img-txt-addition) Addition of word and image embedding.
-
-**Diskussion**
-
-* more expensive training
+(ref:img-txt-addition) Multimodal image retrieval via arithmetic operation on word and image embeddings.
 
 #### Florence
 
-<!-- Intro -->
-<!-- Object detection vs scene level -->
-* More fine-grained, dynamic, multimodal representations
-* Focus shift to finding _foundation model_ as CLIP turned out to be especially useful for that.
-  * Pre-trained core
-  * Flexible addition of modules
-    * _Dynamic Head_ for object detection - citations coming later
-    * _METER_ as a adapter for vision-language (e.g., visual question answering)
-    * Adaptation to video recognition through _CoSwin_
-* General trend in this direction, better and better predictions [CoCa\; @yu2022coca]
-* Optimization inside image-label-description space
-* Encoders
-  * Uses CLIP pendant as the language encoder
-  * Swin transformer as the image encoder
-  * CoSwin for embedding
+While in principle the approach of @yuan2021florence does not largely differ from the others, the focus of this paper is more about making a true foundation model.
+In order to achieve this, they propose a map of possible vision applications, which the try to cover via extending the core model with modules.
+As figure \@ref(fig:florence-dimensions) depicts, they want to advance into the dimensions of fine-grained object detection, dynamic action recognition and true multimodal tasks.
+Because of their big ambitions, they name their model Florence, after "the birthplace of Renaissance" [@yuan2021florence].
 
-### Performance comparison
+```{r florence-dimensions, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:florence-dimensions)'}
+knitr::include_graphics('figures/02-04-text-support-img/florence-dimensions.png')
+```
+(ref:florence-dimensions) Florence' approach to foundation models: A general purpose vision system for all tasks.
 
-* As all of these models are orders of magnitudes too large for performing a benchmark, findings reported inside the papers are believed here
+**Architecture**
+
+For the two encoders of the pre-trained core they use a hierarchical Vision Transformer (CoSwin Transformer) for images and a Transformer similar to CLIPs for text.
+Their 893 million parameters are also jointly trained from scratch, on 900 million image-text pairs.
+The alignment happens in the so called image-label-description space, which is encoded through a special version of the contrastive loss function, which regards all image-text pairs with the same label as positive instances.
+Figure \@ref(fig:florence-architecture) depicts their version of figure \@ref(fig:contr-viz), where one can schematically see how they flexibly add modules to the pre-trained core in order to adapt to various downstream tasks.
+
+```{r florence-architecture, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:florence-architecture)'}
+knitr::include_graphics('figures/02-04-text-support-img/florence-architecture.png')
+```
+(ref:florence-architecture) Modular architecture of Florence.
+
+### Performance comparison {#performanceComp}
+
+Throughout the papers of @radford2021learning, @jia2021scaling and @yuan2021florence is was possible the collect three tables with reported performance measures. \
+
+Table \@ref(fig:table1) summarizes the zero-shot accuracies on different ImageNet variants.
+Unfortunately @yuan2021florence only stated their performance on the original ImageNet, where they beat CLIP and ALIGN by a margin of 7.3pp.
+The results on the other three ImageNet pendants are mixed and there is no clear winner between CLIP and ALIGN.
 
 ```{r table1, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:table1)'}
 knitr::include_graphics('figures/02-04-text-support-img/table-imagenet.png')
@@ -272,29 +286,35 @@ knitr::include_graphics('figures/02-04-text-support-img/table-imagenet.png')
 (ref:table1) Top-1 Accuracy of zero-shot transfer of models to image classification on ImageNet and its variants.
 
 
+Table \@ref(fig:table2) concerns zero-shot image retrieval on the Flickr30K and the MSCOCO dataset (see chapter \@ref(benchmarks)).
+Even tough there are not many major difference in scores, there is a clear order with CLIP on third, ALIGN on second and Florence on first place.
+
 ```{r table2, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:table2)'}
 knitr::include_graphics('figures/02-04-text-support-img/table-img-txt-retrieval.png')
 ```
 (ref:table2) Zero-shot image and text retrieval [@yuan2021florence].
+
+The most comprehensive comparison comprises table \@ref(fig:table3).
+It depicts the accuracy of zero-shot CLIP and Florence on various datasets as well as the scores of all three models fine tuned.
+For zero-shooting Florence beats CLIP in nearly all evaluations, as well as for fine tuned performance.
+@jia2021scaling only report on three of the twelve dataset, where they lead two thirds of the time.
 
 ```{r table3, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:table3)'}
 knitr::include_graphics('figures/02-04-text-support-img/table-misc-datasets.png')
 ```
 (ref:table3) Top-1 Accuracy of CLIP, Florence and ALIGN on various datasets.
 
+Once again note that none of the training datasets were made publicly available.
+It cannot be guaranteed that all benchmarks were evaluated on unseen datasets.
+
 ### Resources
 
-One can find the pre-trained CLIP models on [Github](https://github.com/openai/CLIP).
-They even found their way into simple command line tools already.
+One can access the pre-trained CLIP models on [Github](https://github.com/openai/CLIP) and they even found their way into simple command line tools already.
 For example there is a CLI named [rclip](https://github.com/yurijmikhalevich/rclip), which can be used for personal image retrieval, wrapping the _ViT-B/32_ CLIP architecture.
 On my (mid-range) laptop I was able to find seemingly good matches for search terms tried out inside a folder with about 100 pictures.
-After an initial caching one request took about ten seconds.
-<!-- Assumption that all data is in-distribution -->
-
-### Outlook
-
-CLIP is used inside DALL$\cdot$E 2 to embed images [@ramesh2022hierarchical].
-Another application of CLIP is the creation of the LAION-400M dataset [@schuhmann2022laion].
-To validate collected image-text pairs their similarity scores are calculated using CLIP and instances with a value too low are discarded.
-<!-- CLASP -->
+After an initial caching one request took about ten seconds. \
+CLIP continues to be used inside new models, e.g., DALL$\cdot$E 2, where it embeds images [@ramesh2022hierarchical]. \
+Also, there is an effort to replicate CLIP training dataset called LAION-400M dataset [@schuhmann2022laion].
+To validate the image-text pairs collected for this, their cosine similarity is computed using CLIP and instances with a value too low are discarded. \
+As to my knowledge nothing was made publicly available as part of the other two papers.
 
