@@ -1007,3 +1007,266 @@
   TITLE = {Ms-celeb-1m: A dataset and benchmark for large-scale face recognition},
 }
 
+@INPROCEEDINGS{sun
+	author={Xiao, Jianxiong and Hays, James and Ehinger, Krista A. and Oliva, Aude and Torralba, Antonio},
+	booktitle={2010 IEEE Computer Society Conference on Computer Vision and Pattern Recognition}, 
+	title={SUN database: Large-scale scene recognition from abbey to zoo}, 
+	year={2010},
+	volume={},
+	number={},
+	pages={3485-3492},
+	doi={10.1109/CVPR.2010.5539970}}
+	
+@article{pascalvoc
+	title = "The PASCAL Visual Object Classes (VOC) Challenge",
+	abstract = "The PASCAL Visual Object Classes (VOC) challenge is a benchmark in visual object category recognition and detection, providing the vision and machine learning communities with a standard dataset of images and annotation, and standard evaluation procedures. Organised annually from 2005 to present, the challenge and its associated dataset has become accepted as the benchmark for object detection.This paper describes the dataset and evaluation procedure. We review the state-of-the-art in evaluated methods for both classification and detection, analyse whether the methods are statistically different, what they are learning from the images (e.g. the object or its context), and what the methods find easy or confuse. The paper concludes with lessons learnt in the three year history of the challenge, and proposes directions for future improvement and extension.",
+	keywords = "Benchmark, Database, Object detection, Object recognition",
+	author = "Mark Everingham and {van Gool}, Luc and Williams, {Christopher K. I.} and John Winn and Andrew Zisserman",
+	year = "2010",
+	month = jun,
+	doi = "10.1007/s11263-009-0275-4",
+	language = "English",
+	volume = "88",
+	pages = "303--338",
+	journal = "International Journal of Computer Vision",
+	issn = "0920-5691",
+	publisher = "Springer Netherlands",
+	number = "2",
+}
+
+@article{WordNet,
+	title={WordNet : an electronic lexical database},
+	author={Christiane D. Fellbaum},
+	journal={Language},
+	year={2000},
+	volume={76},
+	pages={706}
+}
+
+@INPROCEEDINGS{Socher10connectingmodalities,
+	author = {Richard Socher and Li Fei-fei},
+	title = {Connecting modalities: Semi-supervised segmentation and annotation of images using unaligned text corpora},
+	booktitle = {In IEEE Computer Society Conference on Computer Vision and Pattern Recognition},
+	year = {2010}
+}
+
+@ARTICLE{5487377,
+	author={Yao, Benjamin Z. and Yang, Xiong and Lin, Liang and Lee, Mun Wai and Zhu, Song-Chun},
+	journal={Proceedings of the IEEE}, 
+	title={I2T: Image Parsing to Text Description}, 
+	year={2010},
+	volume={98},
+	number={8},
+	pages={1485-1508},
+	doi={10.1109/JPROC.2010.2050411}}
+	
+@inproceedings{vinyals,
+	author = {Vinyals, Oriol and Toshev, Alexander and Bengio, Samy and Erhan, Dumitru},
+	year = {2015},
+	month = {06},
+	pages = {3156-3164},
+	title = {Show and tell: A neural image caption generator},
+	doi = {10.1109/CVPR.2015.7298935}
+}
+
+@misc{karpthy1,
+	doi = {10.48550/ARXIV.1412.2306},
+	url = {https://arxiv.org/abs/1412.2306},
+	author = {Karpathy, Andrej and Fei-Fei, Li},
+	keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+	title = {Deep Visual-Semantic Alignments for Generating Image Descriptions},
+	publisher = {arXiv},
+	year = {2014},
+	copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@misc{xu1,
+	doi = {10.48550/ARXIV.1502.03044},
+	url = {https://arxiv.org/abs/1502.03044},
+	author = {Xu, Kelvin and Ba, Jimmy and Kiros, Ryan and Cho, Kyunghyun and Courville, Aaron and Salakhutdinov, Ruslan and Zemel, Richard and Bengio, Yoshua},
+	keywords = {Machine Learning (cs.LG), Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+	title = {Show, Attend and Tell: Neural Image Caption Generation with Visual Attention},
+	publisher = {arXiv},
+	year = {2015},
+	copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@misc{yao1,
+	doi = {10.48550/ARXIV.1809.07041},
+	url = {https://arxiv.org/abs/1809.07041},
+	author = {Yao, Ting and Pan, Yingwei and Li, Yehao and Mei, Tao},
+	keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+	title = {Exploring Visual Relationship for Image Captioning
+	publisher = {arXiv},
+	year = {2018},
+	copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@inproceedings{devlin-etal-2019-bert,
+	title = "{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+	author = "Devlin, Jacob  and
+	Chang, Ming-Wei  and
+	Lee, Kenton  and
+	Toutanova, Kristina",
+	booktitle = "Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)",
+	month = jun,
+	year = "2019",
+	address = "Minneapolis, Minnesota",
+	publisher = "Association for Computational Linguistics",
+	url = "https://aclanthology.org/N19-1423",
+	doi = "10.18653/v1/N19-1423",
+	pages = "4171--4186",
+	abstract = "We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models (Peters et al., 2018a; Radford et al., 2018), BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications. BERT is conceptually simple and empirically powerful. It obtains new state-of-the-art results on eleven natural language processing tasks, including pushing the GLUE score to 80.5 (7.7 point absolute improvement), MultiNLI accuracy to 86.7{\%} (4.6{\%} absolute improvement), SQuAD v1.1 question answering Test F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1 (5.1 point absolute improvement).",
+}
+
+@inproceedings{HerdadeKBS19,
+	title = {Image Captioning: Transforming Objects into Words},
+	author = {Simao Herdade and Armin Kappeler and Kofi Boakye and Joao Soares},
+	year = {2019},
+	url = {http://papers.nips.cc/paper/9293-image-captioning-transforming-objects-into-words},
+	researchr = {https://researchr.org/publication/HerdadeKBS19,
+	cites = {0},
+	citedby = {0},
+	pages = {11135-11145},
+	booktitle = {Advances in Neural Information Processing Systems 32: Annual Conference on Neural Information Processing Systems 2019, NeurIPS 2019, 8-14 December 2019, Vancouver, BC, Canada},
+	editor = {Hanna M. Wallach and Hugo Larochelle and Alina Beygelzimer and Florence d'Alché-Buc and Edward A. Fox and Roman Garnett},
+}
+
+@inproceedings{huang1
+	author = {Huang, Lun and Wang, Wenmin and Chen, Jie and Wei, Xiao-Yong},
+	year = {2019},
+	month = {10},
+	pages = {4633-4642},
+	title = {Attention on Attention for Image Captioning},
+	doi = {10.1109/ICCV.2019.00473}
+}
+
+@inproceedings{NIPS2017_3f5ee243,
+	author = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, \L ukasz and Polosukhin, Illia},
+	booktitle = {Advances in Neural Information Processing Systems},
+	editor = {I. Guyon and U. Von Luxburg and S. Bengio and H. Wallach and R. Fergus and S. Vishwanathan and R. Garnett},
+	pages = {},
+	publisher = {Curran Associates, Inc.},
+	title = {Attention is All you Need},
+	url = {https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf},
+	volume = {30},
+	year = {2017}
+}
+
+@InProceedings{spice,
+	author="Anderson, Peter
+	and Fernando, Basura
+	and Johnson, Mark
+	and Gould, Stephen",
+	editor="Leibe, Bastian
+	and Matas, Jiri
+	and Sebe, Nicu
+	and Welling, Max",
+	title="SPICE: Semantic Propositional Image Caption Evaluation",
+	booktitle="Computer Vision -- ECCV 2016",
+	year="2016",
+	publisher="Springer International Publishing",
+	address="Cham",
+	pages="382--398",
+	abstract="There is considerable interest in the task of automatically generating image captions. However, evaluation is challenging. Existing automatic evaluation metrics are primarily sensitive to n-gram overlap, which is neither necessary nor sufficient for the task of simulating human judgment. We hypothesize that semantic propositional content is an important component of human caption evaluation, and propose a new automated caption evaluation metric defined over scene graphs coined SPICE. Extensive evaluations across a range of models and datasets indicate that SPICE captures human judgments over model-generated captions better than other automatic metrics (e.g., system-level correlation of 0.88 with human judgments on the MS COCO dataset, versus 0.43 for CIDEr and 0.53 for METEOR). Furthermore, SPICE can answer questions such as which caption-generator best understands colors? and can caption-generators count?",
+	isbn="978-3-319-46454-1"
+}
+
+@inproceedings{meteor,
+	title = "{METEOR}: An Automatic Metric for {MT} Evaluation with Improved Correlation with Human Judgments",
+	author = "Banerjee, Satanjeev  and
+	Lavie, Alon",
+	booktitle = "Proceedings of the {ACL} Workshop on Intrinsic and Extrinsic Evaluation Measures for Machine Translation and/or Summarization",
+	month = jun,
+	year = "2005",
+	address = "Ann Arbor, Michigan",
+	publisher = "Association for Computational Linguistics",
+	url = "https://aclanthology.org/W05-0909",
+	pages = "65--72",
+}
+
+@inproceedings{lin-2004-rouge,
+	title = "{ROUGE}: A Package for Automatic Evaluation of Summaries",
+	author = "Lin, Chin-Yew",
+	booktitle = "Text Summarization Branches Out",
+	month = jul,
+	year = "2004",
+	address = "Barcelona, Spain",
+	publisher = "Association for Computational Linguistics",
+	url = "https://aclanthology.org/W04-1013",
+	pages = "74--81",
+}
+
+@INPROCEEDINGS{cider,
+	author={Vedantam, Ramakrishna and Zitnick, C. Lawrence and Parikh, Devi},
+	booktitle={2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}, 
+	title={CIDEr: Consensus-based image description evaluation},
+	year={2015},
+	volume={},
+	number={},
+	pages={4566-4575},
+	doi={10.1109/CVPR.2015.7299087}}
+@inproceedings{papineni-etal-2002-bleu,
+	title = "{B}leu: a Method for Automatic Evaluation of Machine Translation",
+	author = "Papineni, Kishore  and
+	Roukos, Salim  and
+	Ward, Todd  and
+	Zhu, Wei-Jing",
+	booktitle = "Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics",
+	month = jul,
+	year = "2002",
+	address = "Philadelphia, Pennsylvania, USA",
+	publisher = "Association for Computational Linguistics",
+	url = "https://aclanthology.org/P02-1040",
+	doi = "10.3115/1073083.1073135",
+	pages = "311--318",
+}
+
+@INPROCEEDINGS{8578734,
+	author={Anderson, Peter and He, Xiaodong and Buehler, Chris and Teney, Damien and Johnson, Mark and Gould, Stephen and Zhang, Lei},
+	booktitle={2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition}, 
+	title={Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering}, 
+	year={2018},
+	volume={},
+	number={},
+	pages={6077-6086},
+	doi={10.1109/CVPR.2018.00636}}
+@misc{rfnet,
+	doi = {10.48550/ARXIV.1807.09986},
+	url = {https://arxiv.org/abs/1807.09986},
+	author = {Jiang, Wenhao and Ma, Lin and Jiang, Yu-Gang and Liu, Wei and Zhang, Tong},
+	keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+	title = {Recurrent Fusion Network for Image Captioning},
+	publisher = {arXiv},
+	year = {2018},
+	copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@INPROCEEDINGS{8099614,
+	author={Rennie, Steven J. and Marcheret, Etienne and Mroueh, Youssef and Ross, Jerret and Goel, Vaibhava},
+	booktitle={2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}, 
+	title={Self-Critical Sequence Training for Image Captioning}, 
+	year={2017},
+	volume={},
+	number={},
+	pages={1179-1195},
+	doi={10.1109/CVPR.2017.131}}
+	
+@InProceedings{Yang_2019_CVPR,
+	author = {Yang, Xu and Tang, Kaihua and Zhang, Hanwang and Cai, Jianfei},
+	title = {Auto-Encoding Scene Graphs for Image Captioning},
+	booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+	month = {June},
+	year = {2019}
+}
+
+@misc{GCN-LSTM,
+	doi = {10.48550/ARXIV.1809.07041},
+	url = {https://arxiv.org/abs/1809.07041},
+	author = {Yao, Ting and Pan, Yingwei and Li, Yehao and Mei, Tao},
+	keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+	title = {Exploring Visual Relationship for Image Captioning},
+	publisher = {arXiv},
+	year = {2018},
+	copyright = {arXiv.org perpetual, non-exclusive license}
+}
