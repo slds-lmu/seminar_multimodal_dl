@@ -6,15 +6,13 @@
 
 *Supervisor: Jann Goschenhofer*
 
-<!-- TODO: Check present tense -->
-<!-- TODO: Check correct usage of "data" -->
-<!-- TODO: Check consistent spelling of pre-train -->
-<!-- TODO: Check consistent first letter capitalization of models -->
-<!-- TODO: check "an" and "a" -->
 ### Dummy chapter 1 {#sotanlp}
 <!-- 01-01-sota-nlp -->
 
-### Dummy chapter 2 {#benchmarks}
+### Dummy chapter 2 {#sotacv}
+<!-- 01-01-sota-cv -->
+
+### Dummy chapter 3 {#benchmarks}
 <!-- 01-03-benchmarks -->
 
 ### Introduction
@@ -28,8 +26,8 @@
 
 This insight seems to directly inspire most model choices presented in this chapter.
 Each network can be seen as an attempt of its company to employ their vast available resources on a large scale, with a particular focus on dataset sizes.
-These mostly become feasible through the adaptation of recent findings in natural language processing (NLP) <!-- TODO: reference to Cem --> to computer vision (CV). \
-On the one hand, architectural concepts firstly popularized in NLP are translated to CV [e.g., self-supervised learning or the Vision Transformer\; @ImageT <!-- TODO: reference to Vladana -->].
+These mostly become feasible through the adaptation of recent findings in natural language processing (NLP; see chapter \@ref(sotanlp)) to computer vision (CV). \
+On the one hand, architectural concepts firstly popularized in NLP are translated to CV [e.g., self-supervised learning or the Vision Transformer\; @ImageT] (see chapter \@ref(sotacv)).
 On the other hand, these powerful new NLP models, mostly Transformers [@vaswani2017attention], support bigger models from the inside as text encoding building blocks; hence the name of this chapter.
 There are subsections on the recent and relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@solawetz2021florenceopen] and a discussion of some relevant core concepts.
 The strong performances confirm the potential, hinted at by the impressive GPT-3 [@brown2020language], of improving CV and increasing scale with the help of NLP.
@@ -42,7 +40,7 @@ A core problem that troubles researchers is the lack of robustness of previous s
 I.e., when a model with good performance on its original dataset fails to generalize (transfer its knowledge) to new, more or less similar datasets.
 E.g., @radford2021learning report that a ResNet101 which they trained on ImageNet to an accuracy of 76.2% maintains only an accuracy of 32.6% on ObjectNet.
 This suggests that the model perhaps did not learn high quality latent representations, but instead overfit to the dataset-specific data-generating distribution. \
-A <!-- TODO: naheliegend -->common way to tackle this would be to try out various changes on the architecture and the training algorithm of the network.
+A common way to tackle this would be to try out various changes on the architecture and the training algorithm of the network.
 But this kind of adaptation, inscribing expert knowledge into the model, seems to repeat the mistake pointed out by @sutton2019bitterlesson; "micromanaging" a model is likely to thwart future scaling.
 <!-- E.g., introducing long short term memory to recurrent neural networks (RNN) improved them in the short term, but made them more computationally expensive, while not solving their core problem of poor parallelization, which resulted in it being outcompeted by the heavily parallelizable transformer architecture. | Does this really make sense?-->
 
@@ -59,8 +57,6 @@ Unfortunately, the models trained on web data also become vulnerable to their <!
 Because of the extremely noisy nature of them, still some form of pre-processing is needed, e.g., filtering for English language, excluding graphic content and, optionally, removing images with non-informative alt-texts.
 This makes some degree of dataset curation, and therefore arbitrary choices, necessary. \
 Likewise, the social biases inherent to the internet are reproduced and furthermore, while the approach improves data efficiency to some degree (see next subsection \@ref(contrObj)), the poor performance of deep learning in this area is not substantially enhanced and mainly just compensated for with a super scalable source of supervision [@radford2021learning].
-
-<!-- TODO: Other chapters discussing web-scale data? -->
 
 #### Contrastive objective {#contrObj}
 
@@ -276,7 +272,7 @@ knitr::include_graphics('figures/02-04-text-support-img/florence-architecture.pn
 
 Throughout the papers of @radford2021learning, @jia2021scaling and @yuan2021florence is was possible the collect three tables with reported performance measures. \
 
-Table \@ref(fig:table1) summarizes the zero-shot accuracies on different ImageNet variants.
+Table \@ref(fig:table1) summarizes the zero-shot accuracies on four different ImageNet variants.
 Unfortunately @yuan2021florence only stated their performance on the original ImageNet, where they beat CLIP and ALIGN by a margin of 7.3pp.
 The results on the other three ImageNet pendants are mixed and there is no clear winner between CLIP and ALIGN.
 
@@ -287,22 +283,25 @@ knitr::include_graphics('figures/02-04-text-support-img/table-imagenet.png')
 
 
 Table \@ref(fig:table2) concerns zero-shot image retrieval on the Flickr30K and the MSCOCO dataset (see chapter \@ref(benchmarks)).
-Even tough there are not many major difference in scores, there is a clear order with CLIP on third, ALIGN on second and Florence on first place.
+Even though there are not many major score differences, there is a clear ranking with CLIP on third, ALIGN on second and Florence on first place.
 
 ```{r table2, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:table2)'}
 knitr::include_graphics('figures/02-04-text-support-img/table-img-txt-retrieval.png')
 ```
 (ref:table2) Zero-shot image and text retrieval [@yuan2021florence].
 
-The most comprehensive comparison comprises table \@ref(fig:table3).
-It depicts the accuracy of zero-shot CLIP and Florence on various datasets as well as the scores of all three models fine tuned.
-For zero-shooting Florence beats CLIP in nearly all evaluations, as well as for fine tuned performance.
-@jia2021scaling only report on three of the twelve dataset, where they lead two thirds of the time.
+The most comprehensive comparison is comprised in table \@ref(fig:table3).
+It depicts the accuracy of zero-shot CLIP and Florence on various datasets as well as the scores of all three models fine tuned to the data. \
+Florence beats CLIP in nearly all evaluations, for the zero-shot setting as well as for fine tuned performance.
+@jia2021scaling only report on four of the twelve dataset, where they lead half of the time.
 
 ```{r table3, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:table3)'}
 knitr::include_graphics('figures/02-04-text-support-img/table-misc-datasets.png')
 ```
 (ref:table3) Top-1 Accuracy of CLIP, Florence and ALIGN on various datasets.
+
+Summing up, ALIGN achieves its goal of replicating CLIPs impressive performance while dramatically reducing data curation efforts and Florence has the overall top performance.
+This could be attributed to its custom loss, maybe to @yuan2021florence striking the best balance between sample size and data curation or to Florence having the best sub-networks; or a combination of all three.
 
 Once again note that none of the training datasets were made publicly available.
 It cannot be guaranteed that all benchmarks were evaluated on unseen datasets.
