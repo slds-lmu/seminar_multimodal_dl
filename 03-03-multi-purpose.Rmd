@@ -67,28 +67,32 @@ at the end of the chapter.
 ### Previous Work
 
 #### MultiModel
-The first prominent multi-purpose model is the so-called MultiModel [@Kaiser2017]. This model, from the pre-transformer time, combines multiple
-architectural approaches from different fields to tackle both multimodality and multiple tasks. The model itself is itself inspired by the
-encoder-decoder architecture, popular in NLP at that time, making it an autoregressive model.
-The model consists of four important modules, which are the so-called modality nets, the encoder, the  I/O Mixer, and the decoder.
-The modality nets are used to form a representation on which the other modules can work such that it can be fed into the encoder or the I/O encoder
-(which is necessary because of the autoregressive structure) but also construct the output since they are also used to decode from the internal
-representation to the specific modality. For the language task, the modality net tokenizes the input sequences and is then transformed into the
-internal representation using learned embeddings?. For the output, the representation is fed into a simple feed-forward network, which is then
-fed into a softmax function. The modality net for images is multiple stacked convolution operations as done in Xception (TODO). Furthermore, there
-are also nets for audio and categorical modalities.
-Inside the model, where the unified representations are used, there is the encoder, which consists of multiple convolution operations and a mixture-of-expert
-layer block.
-A mixture of expert layer (MoE) (Shaazer, jacobs  Jacobs) is an ensemble of different neural networks inside the layer. The neural networks are not used for every forward pass but only
-if the data is well suited to be dealt with by a specific expert. MoEs allow being more computationally efficient while still keeping or even improving performance.
-Training MoEs usually requires balancing the experts so that the routing does not collapse into one or a few experts. An additional gating network decides which of
+A first prominent multi-purpose model is the so-called MultiModel [@Kaiser2017]. This model, from the pre-transformer time, combines multiple
+architectural approaches from different fields to tackle both multimodality and multiple tasks.
+The model consists of four essential modules: the so-called modality nets, the encoder, the  I/O Mixer, and the decoder.
+The modality nets function as translators between the data and a suitable representation for the inner modules. They also follow the purpose of
+back translating to create output. For language tasks, the modality net is a tokenizer that 
+utputs the appropriate embeddings, while for vision tasks, convolution operations transform the images into the proper representation. Furthermore,
+there are also nets for audio and categorical modalities.
+For the language task, the modality net tokenizes the input sequences and is then transformed into the internal representation using learned embeddings?
+For the output, the representation is fed into a simple feed-forward network, which is then fed into a softmax function. The modality net for images is
+multiple stacked convolution operations as done in Xception (TODO).
+For the architecture and the chapter generally, it is necessary to recall the concept of Mixture of Experts (MoE) (Shaazer, jacobs  Jacobs), which is an
+ensemble of different neural networks inside the layer. The neural networks are not used for every forward pass but only if the data is well suited to
+be dealt with by a specific expert. MoEs allow being more computationally efficient while still keeping or even improving performance. Training MoEs
+usually requires balancing the experts so that the routing does not collapse into one or a few experts. An additional gating network decides which of
 the experts is called. Gating can be implemented so that only $k$ experts are used, which reduces the computational costs for inference. 
-The output of the encoder is further passed on to the I/O mixer and the decoder which are now used to produce the output in an autoregressive way.
+Inside the model, where the unified representations are used, there is the encoder, which consists of multiple convolution operations and a mixture-of-expert
+layer block. The output of the encoder is further passed on to the I/O mixer and the decoder. The decoder produces the next token, while the I/O mixer reads the
+previous tokens and provides further context to the decoder. Both modules produce the output in an autoregressive manner. The I/O mixer combines the produced
+output with the input from the encoder using cross attention.
 The decoder produces the output, and the I/O mixer reads the previous output and combines it with the output of the encoder using attention and convolutional
 operations. Since this architecture is from the pre-transformer era, the attention mechanism used here is cross-attention.
-The decoder eventually processes the output of the encoder and the I/O mixer, thus the input sequence and also the generated sequence, to produce proper output,
-which is done using attention and convolutional operations.
-<!-- Objective Function, Results -->
+The decoder eventually processes the output of the encoder and the I/O mixer, thus the input sequence and the generated sequence, to produce proper output,
+which is done using attention and convolutional operations. A positional encoding conceptually similar to the one in transformers was also used for the attention mechanism.
+Multimodel was trained on eight datasets, from which six were from the language domain and COCO (X) as well as ImageNet (X) additionally. For training, four
+experts in the MoE layers were used. Compared to training Multimodel for each task specifically, the combined training showed better performance. 
+he combined trained multimodel on ImageNet (X) and machine translation were below sota models.
 
 #### Unified Transformer (UniT)
 The Unified Transformer (UniT) [@Hu2021] is a thoroughly used transformer network with multiple encoders for each modality. Only a visual and a text encoder
@@ -131,28 +135,24 @@ OFA outperformed sota models on cross-modal tasks like image captioning, visual 
 OFA performed well, although it does not outperform sota models here.
 
 #### Gato
-To combine different modalities and create a model which is also capable of solving different tasks, the generalist agent “gato” was introduced [@Reed2022]. To additionally improve
-the model, reinforcement learning was also included to allow the model to become sequential and interact with it's environment. The model is not just able of solving text
-and visual tasks, but also to solve classic reinforcement learning tasks like playing ATARI games and proprioception. The results of the model are state-of-the-art.
-Reinforcement Learning is another approach in machine learning, where there is supervised learning, unsupervised learning and reinforcement learning. This technique is
-used to model sequential decision propblems namely, modeling the decision of a model depending on a specific state. The classic RL setup consists of an environment and an
-agent. The agent is led by a policy function and is informed about it's decision using reward from the environment. The policy is then updated to optimize for the as best
-as possible policy by maximizing the reward of the agent. RL proved to be beneficial in many different setups and led in 2016 with DeepMind's AlphaGo to a breakthrough by
-beating the grandmaster of go, which is considered a very complex game.
-The internally used policy is a transformer, which is capable of dealing with discrete input (tokens) and also continuous properties of it's environment. Text, visual
-properties, buttons and movements are tokenized such that these entities can be embedded as it is commonly used in natural language processing. The model itself is a 
-ecoder of a transformer and is trained autoregressively, such that based on the previous sequence, the next token is predicted. This approach is akin to the GPT family.
-To predict multiple modalities based on previous inputs, the model needs to work with embeddings which itself are based on tokens. Although the model is is multi-purpose,
-different modalities are first processed using specific models at their entry points. Natural language data is encoded using SentencePiece, images are tokenized using the
-same procedure as in ViT and subsequently encoded using a ResNet v2 [@He2016b], real world entities like buttons for games are also encoded to tokens allowing a transformer
-to become a multimodal model. Different techniques are applied to further represent these embeddings as sequences since transformer models are specifically designed for
-translation tasks and thus for sequence modeling. Text tokens remain in their intended order, while image tokens are represented as a raster to represent specific entities
-in a correct spatial representation. Tensors are also represented in a way such that rows are an important feature for sequencing. Nested structures are also ordered using
-keys to represent nesting. Specific observations for reinforcement learning are also sequenced such that actions and observations are also tokenized and sequenced.
+Another model that uses the seq2seq architecture of the transformer is GATO (A Generalist Agent). The model can be used as a language model, an agent to play games,
+and an agent to control robotics.
+As in OFA, the problems are transformed into a seq2seq problem, on which a transformer (decoder only) is applied. Although the model was trained in a supervised fashion,
+it is intended to view GATO as a reinforcement learning agent.
+Every data input is embedded, as in OFA, where the critical difference here is that actions are encoded too.
+Visual input is encoded using a flattened sequence of 16x16 patches and embedded using a ResNet (X), while text input is tokenized using SentencePiece (X). Furthermore,
+discrete values like buttons in games and continuous data like movements from robotics are tokenized in a 1024 vocabulary each. To represent all modalities sequentially,
+the different tokens are concatenated. A separator token is added to distinguish the observations from the following action. Using this approach, the transformer can predict
+the next token, the action, based on the conditioning values:
+$$\[x_{Text}, x_{Images}, x_{Discrete and Continuous Values} | y_{Action}\]$$
+Since it is only necessary to predict the action based on the conditioning values, a mask function is added to the cross-entropy loss function, which masks the conditioning
+values so that only the next action is predicted. The masking function is always one for text since every previous text token is necessary to predict the next one.
+GATO was evaluated in RL-based tasks against specialist RL agents, where GATO was lower than the specialist agents or at a human level. On unseen tasks, GATO required fine-tuning
+since few-shot learning is not feasible due to the input length restrictions in transformers. However, the results were mixed, so improvements were possible, the expert was
+outperformed, and even massive fine-tuning efforts only led to small gains. In robotics, GATO showed similar behavior to the baseline sota model. Additionally, GATO also showed 
+capabilities in image captioning and dialogue modeling. However, these aspects were not elaborated further.
 
-<!-- ### TODO
- - Results on tasks
- - Describe architecture in detail -->
+#### Comparison
 
 ### Pathway Proposal
 
@@ -182,12 +182,6 @@ and access specific parts of the model to utilize the technical advantages of sp
 As in dense models, it is not necessary to use the whole network but only chunks of it, which is in contrast to previous dense models, which require the whole model to be accessed.
 So far, two large pre-trained models have been introduced based on the new training framework. One is the Pathways Language Model (PaLM) [Chowdhery2022], which is by now the largest
 language model using 540 billion parameters, Minerva [@Lewkowycz2022], which is based on PaLM, and Parti [@parti], which is a text-to-image generator.
-
-
-<!-- ### TODO
- - More details on how hardware plays in the grand Pw proposal -->
- <!-- Downsides
-  -->
 
 ### Related Work to Pathways
 In this section, similar architecture will be revisited to provide an overview how close current research has come to achieve a model like the pathway proposal.
