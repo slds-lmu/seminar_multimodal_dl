@@ -10,15 +10,15 @@ Have you ever wondered what a painting artist could bring you if you ordered *a 
 knitr::include_graphics("figures/02-02-text-2-img/hamster_dragon.png")
 ```
 
-The catch is that there is no human artist. The above picture comes from 3.5-billion parameter model called GLIDE by OpenAI. Each single value of every pixel was generated from a distribution that the model had to learn in the first place. Before generating the image, GLIDE abstracted what the 'hamster' or 'dragon' are from looking at millions of training images. Only then, it was able to create and combine them successfully into meaningful visual representation. Welcome to the world of current text-to-image modelling!
+The catch is that there is no human artist. The above picture comes from 3.5-billion parameter model called GLIDE by OpenAI (ref. here). Each single value of every pixel was generated from a distribution that the model had to learn in the first place. Before generating the image, GLIDE abstracted what the 'hamster' or 'dragon' are from looking at millions of training images. Only then, it was able to create and combine them successfully into meaningful visual representation. Welcome to the world of current text-to-image modelling!
 
-The cross-modal field of text-to-image models has developed significantly over the recent years. What was considered unimaginable only few years ago, today constitutes a new benchmark for researchers. New break-throughs are being published every couple months. What might be even more important, possible business use cases are emerging, which attracts investment from the greatest players in the AI research. Further trend of closed-source models is continuing and the text-to-image field is probably one the most obvious ones where it can be noticed. We might need to get used to the fact that the greatest capabilities will soon be monopolized by few companies.
+The cross-modal field of text-to-image models has developed significantly over the recent years. What was considered unimaginable only few years ago, today constitutes a new benchmark for researchers. New break-throughs are being published every couple months. What might be even more important, possible business use cases are emerging, which attracts investment from the greatest players in the AI research. However, further trend of closed-source models is continuing and the text-to-image field is probably one the most obvious ones where it can be noticed. We might need to get used to the fact that the greatest capabilities will soon be monopolized by few companies.
 
 At the same time, the general public is becoming aware of the field itself and the disruption potential it brings. Crucial questions are already emerging. What constitutes an art? What does the concept of being an author mean? Result of a generative model is in a sense a combination, or variation, of the abstracts it has seen in the past. But the same stands for a human author. Therefore, is a discussion about the prejudices and biases needed? Answers to all of these will require a refinement through an extensive discussion. The last section of this chapter will try to highlight the most important factors that will need to be considered.
 
 However, the primary intention of this chapter is to present the reader with a perspective on how the field was developing chronologically. Starting with the introduction of GANs, through first cross-domain models and ending with state-of-the-art achievements (as of September 2022), it will also try to grasp the most important concepts without being afraid of making technical deep-dives. 
 
-Authors are aware that since the rapid development pace makes it nearly impossible for this section to stay up-to-date, it might very soon not be fully covering the field. However, it must be stressed that cutting edge capabilities of the recent models tend to come from the scale and software engineering tricks. Therefore, focusing on the core concepts should hopefully make this chapter have a universal character, at least for some time. This design choice also explains why many important works did not make it to this publication. Just to name a few of them: GAWWN, StyleGAN, BigGAN, xxx, or most recent ones: LAFITE or Make-a-Scene. In one way or another, all of them pushed the research frontier one step further, which is widely acknowledged. Therefore, it needs to be clearly stated: the final selection of this chapter's content is a pure subjective decision of the author.
+Author is aware that since the rapid development pace makes it nearly impossible for this section to stay up-to-date, it might very soon not be fully covering the field. However, it must be stressed that cutting edge capabilities of the recent models tend to come from the scale and software engineering tricks. Therefore, focusing on the core concepts should hopefully make this chapter have a universal character, at least for some time. This design choice also explains why many important works did not make it to this publication. Just to name a few of them: GAWWN, xxx, or most recent ones: LAFITE or Make-a-Scene or CogView. In one way or another, all of them pushed the research frontier one step further, which is widely acknowledged. Therefore, it needs to be clearly stated: the final selection of this chapter's content is a pure subjective decision of the author.
 
 ### Seeking objectivity
 
@@ -32,7 +32,7 @@ Introduced by (https://arxiv.org/abs/1606.03498), Inception Score (IS) uses the 
 
 >$$exp(\mathop{{}\mathbb{E}}_{x}[KL(p(y|x) || p(y))])$$
 
-$p(y)$ is desired to have high diversity (entropy), in other words: images from generative model should represent a wide variety of classes. On the other hand, $p(y|x)$ is desired to have low diversity, meaning that images should represent meaningful concepts. If a range of cat images is being generated, they should be confidently classified by Inception Net as cats. The intention behind IS is that generative model with higher distance (KL divergence in this case) between these distributions should have higher score. IS is considered a metric that correlates well with the human judgment, hence its popularity.
+$p(y)$ is desired to have high diversity (entropy), in other words: images from generative model should represent a wide variety of classes. On the other hand, $p(y|x)$ is desired to have low diversity, meaning that images should represent meaningful concepts. If a range of cat images is being generated, they all should be confidently classified by Inception Net as cats. The intention behind IS is that generative model with higher distance (KL divergence in this case) between these distributions should have better score. IS is considered a metric that correlates well with the human judgment, hence its popularity.
 
 **Fréchet Inception Distance (FID)**
 
@@ -104,19 +104,63 @@ knitr::include_graphics("figures/02-02-text-2-img/vanilla_gan_samples.png")
 ```
 
 #### Conditioning on Text
-https://arxiv.org/pdf/1605.05396.pdf
-* how to encode the text and use it in the generation process
-* show some results
+
+So far, only image generation has been covered, completely ignoring textual input. Reed *at al* (https://arxiv.org/abs/1605.05396) introduced an interesting concept of conditioning DC-GAN (GAN with CNNs as Generator and Discriminator) on textual embeddings. Separate model is being trained and used for encoding the text. Then, result embeddings are concatenated with noise vector and fed into the Generator. Discriminator takes embeddings as an input as well. Result model is referred to as GAN-INT-CLS. Both abbreviations (INT and CLS) stand for specific training choices, which are going to be explained later in the chapter. The overview of the proposed architecture can be seen in Figure (xxx).
+
+
+```{r gan_cls, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Proposed architecture of convolutional GAN conditioned on text. Text encoding $\varphi(t)$ is fed into both Generator and Discriminator. Before further convolutional processing, it is first projected to lower dimensionality in fully-connected layers and concatenated with image feature maps. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/gan_cls.png")
+```
+
+**Text embeddings**
+
+Since regular text embeddings are commonly trained in separation from visual modality simply by looking on textual context, they are not well suited for capturing visual properties. This motivated Reed *at al* to come up with a structured joint embeddings of images and text descriptions (https://arxiv.org/abs/1605.05395). GAN-INT-CLS (xxx) implements it in a way described in Figure (xxx).
+
+```{r gan_cls_embeddings, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/gan_cls_embeddings.png")
+```
+
+GoogLeNet is being used as an image encoder $\phi$. For text encoding $\varphi$, authors use a character-level CNN combined with RNN. Essentially, the objective of the training is to minimize the distance between encoded image representation and text representation. Image encoder is then being discarded and $\varphi$ only is used as depicted in Figure (xxx).
+
+**GAN-CLS**
+
+CLS stands for Conditional Latent Space, which essentially means GAN is conditioned on the embedded text. However, in order to fully grasp how exactly the model is conditioned on the input, we need the go beyond architectural choices. It is also crucial to present specific training regime that was introduced for GAN-CLS and the motivation behind it.
+
+One of the possible ways how the system could be trained is to view text-image pairs as joint observations and train the discriminator to classify entire pair as real or fake. However, in such a case discriminator does not have an understanding of whether the image matches the meaning of the text. This is because discriminator does not distinguish between two types of error that exist, namely when the image is unrealistic or when it is realistic but the text does not match.
+
+Proposed solution to this problem is to present the discriminator with three observations at a time, all of which are included later in the loss function. These three are: {real image with right text}, {real image with wrong text}, {fake image with right text}. Intention is that discriminator should classify them as {true}, {false}, {false}, respectively.
+
+**GAN-INT**
+
+Motivation behind this concept comes from the fact that interpolating between text embeddings tend to create observation pairs which are still close to the real data manifold. Therefore, generating additional synthetic text embeddings and using them instead of real captions in the training process might help in a sense that it works as a form of data augmentation and helps regularize the training process. Figure (xxx) might be helpful for developing the intuition behind interpolation process.
+
+```{r interpolating_birds, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Interpolating between sentences. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/interpolating_birds.png")
+```
+
+**Results**
+
+The model achieves best performance when both of the mentioned methods are being used (so called GAN-INT-CLS). Models prove to successfully transfer style (pose of the objects) and background from the training data when trained on CUB (birds) and Oxford-102 (flowers) datasets. They also show interesting zero-shot abilities, meaning they can generate observations from unseen test classes (Figure xxx). When trained on MS-COCO, GAN-CLS proves its potential to generalize over many domains, although the results are not always coherent (Figure xxx).
+
+```{r gan_cls_zeroshot, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Zero-shot generated birds using GAN, GAN-CLS, GAN-INT, GAN-INT-CLS. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/gan_cls_zeroshot.png")
+```
+
+```{r gan_cls_mscoco, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Generated images using GAN-CLS on MS-COCO validation set. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/gan_cls_mscoco.png")
+```
 
 #### Further GAN-like development 
-https://arxiv.org/pdf/1612.03242.pdf
-* intro of StackGAN, show some results
 
-https://arxiv.org/pdf/1711.10485.pdf
-* intro of AttGAN, show some results
-StyleGAN, BigGAN
+Mention further GAN models that improved results. No deep-dive, just quickly go over 1 concept per model (most important one it introduced)
 
-### Dall-E starting post-GAN era
+* GAWWN (or not???) (https://arxiv.org/abs/1610.02454)
+* StackGAN (https://arxiv.org/pdf/1612.03242.pdf)
+* AttGAN (https://arxiv.org/pdf/1711.10485.pdf)
+* DF-GAN (https://arxiv.org/abs/2008.05865)
+* DM-GAN (https://arxiv.org/abs/1904.01310)
+
+### Dall-E
 
 #### Variational Autoencoder
 https://arxiv.org/pdf/1312.6114v10.pdf
@@ -130,12 +174,17 @@ https://arxiv.org/pdf/1312.6114v10.pdf
 
 cherrypicking
 
+
 ### GLIDE
 * Intro
-* Diffusion concept
-* details how GLIDE is working
-* results / scores
-* Limitations / strengths & weaknesses
+**Diffusions models**
+
+**GLIDE**
+
+**Results**
+
+**Limitations**
+
 
 ### Dall-E 2
 * Intro (mention PR move)
@@ -162,7 +211,6 @@ cherrypicking
 
 ### Discussion
 Mention the following points and why they matter
-
 * potential business use cases
 * open vs closed-source (mention dall-e mini)
 * copyrights
@@ -190,6 +238,8 @@ MS COCO (https://arxiv.org/abs/1405.0312)
 <!---->
 <!--https://medium.datadriveninvestor.com/a-very-short-introduction-to-frechlet-inception-distance-fid-86c95deb0930-->
 <!--https://www.youtube.com/watch?v=9zTwSzXxNDo-->
+
+<!--https://towardsdatascience.com/text-to-image-a3b201b003ae-->
 
 
 
