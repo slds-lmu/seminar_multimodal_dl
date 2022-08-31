@@ -18,9 +18,9 @@
 ### Introduction
 
 > "The biggest lesson that can be read from 70 years of AI research is that general methods that leverage computation are ultimately the most effective, and by a large margin.
-> [\ldots] Most AI research has been conducted as if the computation available to the agent were constant (in which case leveraging human knowledge would be one of the only ways to improve performance) but, over a slightly longer time than a typical research project, massively more computation inevitably becomes available.
+> [...] Most AI research has been conducted as if the computation available to the agent were constant (in which case leveraging human knowledge would be one of the only ways to improve performance) but, over a slightly longer time than a typical research project, massively more computation inevitably becomes available.
 > Seeking an improvement that makes a difference in the shorter term, researchers seek to leverage their human knowledge of the domain, but the only thing that matters in the long run is the leveraging of computation.
-> [\ldots] One thing that should be learned from the bitter lesson is the great power of general purpose methods, of methods that continue to scale with increased computation even as the available computation becomes very great."
+> [...] One thing that should be learned from the bitter lesson is the great power of general purpose methods, of methods that continue to scale with increased computation even as the available computation becomes very great."
 >
 > --- @sutton2019bitterlesson
 
@@ -29,7 +29,7 @@ Each network can be seen as an attempt of its company to employ their vast avail
 These mostly become feasible through the adaptation of recent findings in natural language processing (NLP; see chapter \@ref(sotanlp)) to computer vision (CV). \
 On the one hand, architectural concepts firstly popularized in NLP are translated to CV [e.g., self-supervised learning or the Vision Transformer\; @ImageT] (see chapter \@ref(sotacv)).
 On the other hand, these powerful new NLP models, mostly Transformers [@vaswani2017attention], support bigger models from the inside as text encoding building blocks; hence the name of this chapter.
-There are subsections on the recent and relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@solawetz2021florenceopen] and a discussion of some relevant core concepts.
+There are subsections on the recent and relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@yuan2021florence] and a discussion of some relevant core concepts.
 The strong performances confirm the potential, hinted at by the impressive GPT-3 [@brown2020language], of improving CV and increasing scale with the help of NLP.
 
 ### Concepts
@@ -206,7 +206,7 @@ knitr::include_graphics('figures/02-04-text-support-img/performance-clip.png')
 
 **CLIP as a building block**
 
-@shen2021much study how the performance of Vision-and-Language (V&L) models improves, when the visual encoder is switched to CLIPs strong image encoder.
+@shen2021much study how the performance of Vision-and-Language (V&L) models improves, when the visual encoder is switched to CLIP's strong image encoder.
 They discover that in this field of CV the ViT-B scores significantly worse than the ResNets.
 E.g., tests on image captioning reveal that the V&L model using ViT-B often performs only half as strong as the version using the RN50x4 (the largest network used in this study). \
 This is possibly due to the pooling strategies of ViT-B, which result in a lack of visual localization abilities.
@@ -221,7 +221,7 @@ knitr::include_graphics('figures/02-04-text-support-img/attention-of-ViT.png')
 #### ALIGN
 
 The approach of @jia2021scaling is largely similar to CLIP.
-They reiterate the necessity of large-scale vision datasets, but assert that even CLIPs data collection process still involves a non-trivial amount of data curation.
+They reiterate the necessity of large-scale vision datasets, but assert that even CLIP's data collection process still involves a non-trivial amount of data curation.
 They propose that the amount of additional observations obtained through minimizing the amount of filtering makes up for the increased noise.
 The result is a dataset with 1.8 billion image-text pairs. \
 The corresponding model is named ALIGN, short for "A Large-scale ImaGe and Noisy-text embedding", whose acronym hints at the contrastive loss, which aligns vector encodings in the representation space (see subsection \@ref(contrObj)).
@@ -236,20 +236,20 @@ Subsection \@ref(performanceComp) goes into more detail about the performance of
 
 The contrastive loss function aligns the latent representations of the different modalities.
 In other words, the explicit objective is that similar vector encodings implicate similar inputs.
-This means arithmetic operations like the ones mentioned in chapter \@ref(sotanlp) are not only meaningful on encodings belonging to the same modality, but to different. \
+This means arithmetic operations like the ones mentioned in chapter \@ref(sotanlp) are not only meaningful on encodings belonging to the same modality, but to different modalities. \
 E.g., one can add up the image encoding of a picture of the Eiffel tower and the text encoding of the word "snow" and retrieve pictures with high cosine similarity to the result, see figure \@ref(fig:img-txt-addition).
 
 ```{r img-txt-addition, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:img-txt-addition)'}
 knitr::include_graphics('figures/02-04-text-support-img/align-word-and-image-addition.png')
 ```
-(ref:img-txt-addition) Multimodal image retrieval via arithmetic operation on word and image embeddings.
+(ref:img-txt-addition) Multimodal image retrieval via arithmetic operations on word and image embeddings.
 
 #### Florence
 
 While in principle the approach of @yuan2021florence does not largely differ from the others, the focus of this paper is more about making a true foundation model.
-In order to achieve this, they propose a map of possible vision applications, which the try to cover via extending the core model with modules.
+In order to achieve this, they propose a map of possible vision applications which the try to cover via extending the core model with modules.
 As figure \@ref(fig:florence-dimensions) depicts, they want to advance into the dimensions of fine-grained object detection, dynamic action recognition and true multimodal tasks.
-Because of their big ambitions, they name their model Florence, after "the birthplace of Renaissance" [@yuan2021florence].
+Because of their big ambitions, they name their model Florence after "the birthplace of Renaissance" [@yuan2021florence].
 
 ```{r florence-dimensions, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:florence-dimensions)'}
 knitr::include_graphics('figures/02-04-text-support-img/florence-dimensions.png')
@@ -258,10 +258,10 @@ knitr::include_graphics('figures/02-04-text-support-img/florence-dimensions.png'
 
 **Architecture**
 
-For the two encoders of the pre-trained core they use a hierarchical Vision Transformer (CoSwin Transformer) for images and a Transformer similar to CLIPs for text.
-Their 893 million parameters are also jointly trained from scratch, on 900 million image-text pairs.
-The alignment happens in the so called image-label-description space, which is encoded through a special version of the contrastive loss function, which regards all image-text pairs with the same label as positive instances.
-Figure \@ref(fig:florence-architecture) depicts their version of figure \@ref(fig:contr-viz), where one can schematically see how they flexibly add modules to the pre-trained core in order to adapt to various downstream tasks.
+For the two encoders of the pre-trained core they use a hierarchical Vision Transformer (CoSwin Transformer) for images and a Transformer similar to CLIP's for text.
+Their 893 million parameters are also jointly trained from scratch on 900 million image-text pairs.
+The alignment happens in the so called image-label-description space which is encoded through a special version of the contrastive loss function which regards all image-text pairs with the same label as positive instances.
+Figure \@ref(fig:florence-architecture) depicts their version of figure \@ref(fig:contr-viz) where one can schematically see how they flexibly add modules to the pre-trained core in order to adapt to various downstream tasks.
 
 ```{r florence-architecture, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:florence-architecture)'}
 knitr::include_graphics('figures/02-04-text-support-img/florence-architecture.png')
@@ -291,7 +291,7 @@ knitr::include_graphics('figures/02-04-text-support-img/table-img-txt-retrieval.
 (ref:table2) Zero-shot image and text retrieval [@yuan2021florence].
 
 The most comprehensive comparison is comprised in table \@ref(fig:table3).
-It depicts the accuracy of zero-shot CLIP and Florence on various datasets as well as the scores of all three models fine tuned to the data. \
+It depicts the accuracy of zero-shot CLIP and Florence on various datasets as well as the scores of all three models fine tuned to the respective datasets. \
 Florence beats CLIP in nearly all evaluations, for the zero-shot setting as well as for fine tuned performance.
 @jia2021scaling only report on four of the twelve dataset, where they lead half of the time.
 
@@ -300,7 +300,7 @@ knitr::include_graphics('figures/02-04-text-support-img/table-misc-datasets.png'
 ```
 (ref:table3) Top-1 Accuracy of CLIP, Florence and ALIGN on various datasets.
 
-Summing up, ALIGN achieves its goal of replicating CLIPs impressive performance while dramatically reducing data curation efforts and Florence has the overall top performance.
+Summing up, ALIGN achieves its goal of replicating CLIP's impressive performance while dramatically reducing data curation efforts and Florence has the overall top performance.
 This could be attributed to its custom loss, maybe to @yuan2021florence striking the best balance between sample size and data curation or to Florence having the best sub-networks; or a combination of all three.
 
 Once again note that none of the training datasets were made publicly available.
@@ -310,10 +310,10 @@ It cannot be guaranteed that all benchmarks were evaluated on unseen datasets.
 
 One can access the pre-trained CLIP models on [Github](https://github.com/openai/CLIP) and they even found their way into simple command line tools already.
 For example there is a CLI named [rclip](https://github.com/yurijmikhalevich/rclip), which can be used for personal image retrieval, wrapping the _ViT-B/32_ CLIP architecture.
-On my (mid-range) laptop I was able to find seemingly good matches for search terms tried out inside a folder with about 100 pictures.
+On my (mid-range) laptop I was able to find seemingly good matches for search terms which I tried out inside a folder containing about 100 pictures.
 After an initial caching one request took about ten seconds. \
-CLIP continues to be used inside new models, e.g., DALL$\cdot$E 2, where it embeds images [@ramesh2022hierarchical]. \
-Also, there is an effort to replicate CLIP training dataset called LAION-400M dataset [@schuhmann2022laion].
+Furthermore CLIP continues to be used inside new models, e.g., DALL$\cdot$E 2, where it is responsible for image embedding [@ramesh2022hierarchical]. \
+Also, there is an effort to replicate CLIP's training dataset called LAION-400M [@schuhmann2022laion].
 To validate the image-text pairs collected for this, their cosine similarity is computed using CLIP and instances with a value too low are discarded. \
 As to my knowledge nothing was made publicly available as part of the other two papers.
 
