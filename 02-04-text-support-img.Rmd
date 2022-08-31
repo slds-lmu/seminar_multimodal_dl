@@ -24,9 +24,9 @@ This insight seems to directly inspire most model choices presented in this chap
 Each network can be seen as an attempt of its company to employ their vast available resources on a large scale, with a particular focus on dataset sizes.
 These mostly become feasible through the adaptation of recent findings in natural language processing (NLP) <!-- TODO: reference to Cem --> to computer vision (CV). \
 On the one hand, architectural concepts firstly popularized in NLP are translated to CV [e.g., self-supervised learning or the Vision Transformer\; @ImageT <!-- TODO: reference to Vladana -->].
-On the other hand, these powerful new NLP models, mostly Transformers [@vaswani2017attention], support bigger models form the inside as text encoder building blocks; hence the name of this chapter.
-There are subsections on the recent and relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@solawetz2021florenceopen] and an overview of some relevant core concepts.
-Their strong performances confirm the potential, hinted at by the impressive GPT-3 [@brown2020language], of improving CV and increasing scale with the help of NLP.
+On the other hand, these powerful new NLP models, mostly Transformers [@vaswani2017attention], support bigger models from the inside as text encoding building blocks; hence the name of this chapter.
+There are subsections on the recent and relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@solawetz2021florenceopen] and a discussion of some relevant core concepts.
+The strong performances confirm the potential, hinted at by the impressive GPT-3 [@brown2020language], of improving CV and increasing scale with the help of NLP.
 
 ### Concepts
 
@@ -36,7 +36,7 @@ A core problem that troubles researchers is the lack of robustness of previous s
 I.e., when a model with good performance on its original dataset fails to generalize (transfer its knowledge) to new, more or less similar datasets.
 E.g., @radford2021learning report that a ResNet101 which they trained on ImageNet to an accuracy of 76.2% maintains only an accuracy of 32.6% on ObjectNet.
 This suggests that the model perhaps did not learn high quality latent representations, but instead overfit to the dataset-specific data-generating distribution. \
-A common way to tackle this would be to try out various changes on the architecture and the training algorithm of the network.
+A <!-- TODO: naheliegend -->common way to tackle this would be to try out various changes on the architecture and the training algorithm of the network.
 But this kind of adaptation, inscribing expert knowledge into the model, seems to repeat the mistake pointed out by @sutton2019bitterlesson; "micromanaging" a model is likely to thwart future scaling.
 <!-- E.g., introducing long short term memory to recurrent neural networks (RNN) improved them in the short term, but made them more computationally expensive, while not solving their core problem of poor parallelization, which resulted in it being outcompeted by the heavily parallelizable transformer architecture. | Does this really make sense?-->
 
@@ -49,91 +49,94 @@ They try to increase sample size as much as possible and work with tremendous nu
 
 These are achieved with the vast amount of image-text pairs produced by and readily available on the internet.
 Thus, error prone, cost and labor intensive (difficult to scale), manual labeling is avoided. \
-Unfortunately the models also become vulnerable to the <!-- kind of heavy -->downsides of web data.
-Because of their extremely noisy nature, still some form of pre-processing is needed, e.g., filtering for English language, excluding graphic content and removing images with non-informative alt-texts.
+Unfortunately, the models trained on web data also become vulnerable to their <!-- kind of heavy -->downsides.
+Because of the extremely noisy nature of them, still some form of pre-processing is needed, e.g., filtering for English language, excluding graphic content and, optionally, removing images with non-informative alt-texts.
 This makes some degree of dataset curation, and therefore arbitrary choices, necessary. \
-Likewise, the social biases inherent to the internet are reproduced and furthermore, while the approach improves data efficiency to some degree (see subsection \@ref(contrObj)), the poor performance of deep learning in this area is not substantially enhanced and mainly just compensated for with a super scalable source of supervision [@radford2021learning].
+Likewise, the social biases inherent to the internet are reproduced and furthermore, while the approach improves data efficiency to some degree (see next subsection \@ref(contrObj)), the poor performance of deep learning in this area is not substantially enhanced and mainly just compensated for with a super scalable source of supervision [@radford2021learning].
 
 <!-- TODO: Other chapters discussing web-scale data? -->
 
 #### Contrastive objective {#contrObj}
 
-The information contained in the co-occurrence of the image with its alt-text is made available through the framework of natural language supervision.
-The architectures use two jointly trained sub-networks to encode the image and the text, respectively.
-The vector encodings are then aligned in the latent representation space by minimizing a variant of the contrastive loss function \@ref(eq:contrLoss) [@tian2020contrastive].
+This source of supervision is the information contained in the co-occurrence of the image with its alt-text.
+It is accessed through natural language supervision.
+The architectures jointly train two sub-networks for image and text encoding, respectively.
+During this, the vector encodings are aligned in the latent representation space through minimizing a variant of the contrastive loss function \@ref(eq:contrLoss) [@tian2020contrastive].
+Half of the first image-text pair loss
 
 \begin{equation}
-  \ell_1^{V_\text{img}, V_\text{txt}} = - \underset{\{v_\text{img}^1, v_\text{txt}^1, \ldots, v_\text{txt}^N\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_\text{img}^1,v_\text{txt}^1\})}{h_\theta(\{v_\text{img}^1,v_\text{txt}^1\}) + \sum_{k=2}^N h_\theta(\{v_\text{img}^1, v_\text{txt}^k\})} \right)
+  \ell_1^{V_\text{img}, V_\text{txt}} = - \underset{\{v_\text{img}^1, v_\text{txt}^1, \ldots, v_\text{txt}^N\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_\text{img}^1,v_\text{txt}^1\})}{h_\theta(\{v_\text{img}^1,v_\text{txt}^1\}) + \sum_{k=2}^N h_\theta(\{v_\text{img}^1, v_\text{txt}^k\})} \right),
   (\#eq:contrLoss)
 \end{equation}
 
-$\ell_1^{V_\text{img}, V_\text{txt}}$ is the first half of the loss for the first image-text pair, $v_\text{img}^1$ and $v_\text{txt}^1$ are latent representations of image 1 and text 1 and $h_\theta(\cdot)$ is a similarity measure.
-In order to guarantee symmetry, the total loss is the sum of $\ell_1^{V_\text{img}, V_\text{txt}}$ and $\ell_1^{V_\text{txt}, V_\text{img}}$, where the pairwise similarity of one text and all images is averaged instead of the other way around.
+where $v_\text{img}^1$ and $v_\text{txt}^1$ are vector encodings (latent representations) of image 1 and text 1 and $h_\theta(\cdot)$ is a similarity measure.
+In order to guarantee symmetry, the total loss is formed by the sum of $\ell_1^{V_\text{img}, V_\text{txt}}$ and $\ell_1^{V_\text{txt}, V_\text{img}}$, where the pairwise similarities of one text and every image is calculated instead of the other way around.
 <!-- Question: Is the second part really necessary? If all columns are optimized, all elements are considered. Maybe only if the similarity measure really is asymmetrical?-->
 
 Figure \@ref(fig:contr-viz) visualizes this.
-Initially all images and texts of a given dataset are encoded by the respective sub-networks.
-Using the resulting latent vectors, a similarity matrix with elements $h_\theta(\{v_\text{img}^i,v_\text{txt}^j\})$ can be calculated.
-Loosely speaking, the contrastive objective aims to maximize diagonal elements and minimize the rest.
+Initially all images and texts in the training data are encoded by the responsible sub-network.
+Using the resulting encodings, a similarity matrix with elements $h_\theta(\{v_\text{img}^i,v_\text{txt}^j\})$ can be calculated.
+Loosely speaking, the contrastive objective is to maximize elements on the diagonal and minimize the others.
 
 ```{r contr-viz, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:contr-viz)'}
 knitr::include_graphics('figures/02-04-text-support-img/contrastive-pre-training.png')
 ```
-(ref:contr-viz) Visualization of a contrastive objective [@radford2021learning].
+(ref:contr-viz) Visualization of a contrastive objective [@radford2021learning]. After encoding the data, a similarity matrix for the images and texts is computed. The aim is that the N true image-text pairs score high in terms of similarity, while the $\text{N}^2 - \text{N}$ other possible combinations score low.
 
-Figure \@ref(fig:contr-vs-pred-learn) compares contrastive learning to classical predictive learning, giving another interesting insight.
+Contrastive learning can be contrasted with classical predictive learning.
+Figure \@ref(fig:contr-vs-pred-learn) gives an interesting insight into the choice of space, where goodness of fit is measured.
 The exemplary task is to color an image given its B/W version.
-Approach (a) encodes the B/W image and in turn decodes its latent representation to fitting colors.
-The goodness of this fit is measured in the output space. \
+Approach (a) first encodes the B/W image and then decodes the interim latent representation to fitting colors.
+The goodness of this fit is measured in the output space, meaning the estimated colors are compared to the true colors. \
 Conversely, approach (b) measures the loss in the representation space.^[Note that contrastive learning easily works with other combinations of modalities than text and image; here B/W and colors.]
-A reason for the good performance of contrastive learning could be that while common prediction losses (e.g., the $\mathcal{L}_2$ loss) penalize each prediction output dimension independently, approach (b) implies measurement in the intertwined representation space [@tian2020contrastive].
+A reason for the good performance of contrastive learning could be that, while common prediction losses (e.g., the $\mathcal{L}_2$ loss) penalize each prediction output dimension independently, approach (b) implies measurement in the intertwined representation space [@tian2020contrastive].
 
 ```{r contr-vs-pred-learn, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:contr-vs-pred-learn)'}
 knitr::include_graphics('figures/02-04-text-support-img/tian-predictive-vs-contrastive.png')
 ```
-(ref:contr-vs-pred-learn) Predictive vs. contrastive learning: Predictive losses are measured in the output space while contrastive losses are measured is in the representation space; indicated by red dotted boxes [@tian2020contrastive].
+(ref:contr-vs-pred-learn) Predictive vs. contrastive learning: Predictive losses are measured in the output space while contrastive losses are measured is in the representation space, indicated by red dotted boxes [@tian2020contrastive].
 
-But, rather than theoretical considerations, the driving factor for using this objective is data efficiency.
-As can be seen in figure \@ref(fig:data-efficiency), @radford2021learning start their search for an adequate pre-train model (more on this in subsection \@ref(foundMod)) by experimenting with a transformer based language model predicting the exact captions of an image.
-This turns out to train three times slower, in terms of data efficiency, compared to a simpler baseline predicting a bag-of-words text encoding.
-Switching to the contrastive objective of CLIP additionally improves data efficiency by a factor of four. \
-But, the switch to contrastive learning comes with some limitations.
-Especially its rigidity demands certain extra steps and forfeits the high flexibility of generative models.
-The end of the next subsection discusses this in more detail.
+But in the end, rather than theoretical considerations, the driving factor for using this objective is data efficiency.
+As can be seen in figure \@ref(fig:data-efficiency), @radford2021learning start their search for an adequate pre-train model (more on this in subsection \@ref(foundMod)) by experimenting with a Transformer-based language model predicting the exact captions of an image.
+It turns out that this approach trains three times slower, in terms of data efficiency, compared to a simpler baseline of predicting a bag-of-words text encoding.
+Additionally, switching to the contrastive objective of CLIP improves data efficiency by a factor of four.
 
 ```{r data-efficiency, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:data-efficiency)'}
 knitr::include_graphics('figures/02-04-text-support-img/data-efficiency.png')
 ```
-(ref:data-efficiency) Data efficiency of contrastive objective.
-Development of zero-shot accuracy on ImageNet with increasing number of instances of training data seen by models.
-The contrastive objective reaches same accuracies compared to the exact predictive objective while seeing only a seventh of the amount of data [@radford2021learning].
+(ref:data-efficiency) Data efficiency of contrastive objective. Development of zero-shot accuracy (see next subsection \@ref(foundMod)) on ImageNet with increasing number of instances of training data seen by models. The contrastive objective reaches same accuracies as the generative approach with only a seventh of the amount of data [@radford2021learning].
 
-<!-- TODO: Contra: No longer a generative model, e.g., no flexible caption generation, see CLIP Limitations -->
-<!-- TODO: Learn a representation _and_ connect it to language (-> NLP) -->
+Nonetheless, the switch to contrastive learning leads to some limitations.
+Its rigidity demands certain extra steps and forfeits the high flexibility of generative models.
+In particular, this means contrastive models similar to CLIP are limited to choose from available options and cannot freely generate texts or images.
+To extend the capabilities of those models additional network building blocks are necessary.
 
 #### Foundation models and zero-shooting {#foundMod}
 
-The first models, which are considered foundation models today, began to appear in NLP.
-The term, coined by @bommasani2021opportunities later, refers to models that are noteworthy due to their large scale and ability to adapt to a wide variety of downstream tasks.
-An early example would be BERT [@Devlin2018]. \
-A lot of times foundation models have an unfinished touch to them and the true scope of their capabilities remains unknown.
-This is because often times their desired abilities are not designed for explicitly, but emerge from their setup.
-@bommasani2021opportunities cite GPT-3's ability to perform certain types of new tasks soley by describing to it what is wanted in natural language, called in-context learning, which just happened, so to speak [@brown2020language]. \
-So, one can think of plenty of ways to employ these models and it never can be known if there is another one no one thought of yet.
-While this could mean saving computation and data collection costs down the line, the same is valid for malicious use cases, e.g., surveillance.
+The first models which are considered foundation models today began to appear in NLP.
+The term, later coined by @bommasani2021opportunities, refers to models that are noteworthy due to their large scale and ability to adapt to a wide variety of downstream tasks.
+An early example is BERT [@Devlin2018]. \
+A lot of the time, foundation models have an unfinished touch to them and the true scope of their capabilities cannot be sketched out clearly.
+This generally is the case, because the desired abilities of neural networks are not designed for explicitly, but rather emerge during their implementation.
+@bommasani2021opportunities cite GPT-3's ability to perform certain types of new tasks soley by confronting it with the right natural language prompt.
+E.g., it is possible to get GPT-3 to summarize a paragraph by appending "TL;DR" (too long, didn't read) to the prompt, which is a common pattern on the internet to signal a following summery.
+This is called "in-context learning" [@brown2020language]. \
+It is apparent that one can make up plenty of unexpected ways to employ these models and it cannot be known whether there is a further way no one thought of yet.
+This means possibly saving computational and data collection costs down the line, which ineptly is true for malicious use cases, e.g., surveillance, too.
 
-The quintessential concept for foundation models is transfer-learning; pre-training a model on one task, which optimally is easy to do, and applying it downstream to the desired task.
-For the models of this chapter this means pre-training on web-scale data (see subsection \@ref(webScaleData)) and evaluating performance on various common classification datasets.
-@radford2021learning name the SVHN dataset as a proxy for the task "street number transcription" with the caveat "on the distribution of Google Street View photos" as an example, but they remark that a lot of datasets have no obvious, specific task associated, e.g., CIFAR-10.
-On these kind of datasets they rather measure "robustness to distribution shift and domain generation", which still is of great interest like mentioned in subsection \@ref(webScaleData). \
+Foundation models build on the concept of transfer-learning, i.e., pre-training a model on a task that is feasible to do and applying it to the desired task downstream.
+In the context of this chapter this means pre-training on web-scale data (see subsection \@ref(webScaleData)) and evaluating performance on various common classification datasets.
+E.g., @radford2021learning name the SVHN dataset as a proxy for the task "street number transcription" with the caveat "on the distribution of Google Street View photos", but they remark that a lot of datasets have no obvious, specific task associated, e.g., CIFAR-10.
+They use these kind of datasets for measuring the "robustness to distribution shift and domain generation" of their model, which still is a topic of great interest as mentioned in subsection \@ref(webScaleData). \
 When there is no further fine-tuning on the downstream task, i.e., no resuming of training on the new dataset, this is called zero-shooting.
-<!-- TODO: Name some datasets and their associated tasks. -->
-It has the clear advantage of evaluating performance more unbiased, as processes like overfitting to the data-generating distribution will not distort results. \
+It has the clear advantage of evaluating performance more unbiased, as processes like overfitting to the data-generating distribution will not distort results.
+
 Figure \@ref(fig:zero-shooting) shows how contrastive models perform zero-shot transfer.
-For image classification all available classes are encoded by the language model.
-Afterwards the encoding of the image to be classified is computed by the CV sub-network and all similarity scores are returned, where the highest one can be retrieved as the decision. \
+In the case of image classification all available classes are encoded by the language model.
+Afterwards, the CV sub-network computes the encoding of the image to be classified and all pair-wise similarity scores are returned.
+The pair with the best score can be retrieved as the decision. \
 Image retrieval works the other way around:
-After an initial encoding of all images, the closest ones to an encoded natural language text prompt in the representation space can be returned.
+After an initial encoding of all images, the ones most similar to the encoded natural language text prompt in the representation space can be returned.
 
 ```{r zero-shooting, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:zero-shooting)'}
 knitr::include_graphics('figures/02-04-text-support-img/zero-shooting.png')
@@ -144,26 +147,28 @@ knitr::include_graphics('figures/02-04-text-support-img/zero-shooting.png')
 
 #### CLIP
 
-The first large scale contrastive CV model was CLIP, short for Contrastive Language-Image Pre-training [@radford2021learning].
-The components of its name are explained in previous subsections \@ref(contrObj), \@ref(webScaleData) and \@ref(foundMod), respectively and are the defining concepts for ALIGN and Florence as well. \
-CLIP is a product of OpenAI, but its code is freely available and the different versions can be accessed as python modules.
-Not released is the corresponding dataset.
+The first of the large scale contrastive CV models that were published is CLIP, short for Contrastive Language-Image Pre-training [@radford2021learning].
+The components of its name are explained in previous subsections \@ref(contrObj), \@ref(webScaleData) and \@ref(foundMod) and are the crucial concepts of ALIGN and Florence as well.
+CLIP is a product of OpenAI, but its code is freely available and the different versions can be accessed as [python modules](https://github.com/openai/CLIP).
+Not released is its dataset.
 
-A lot of preliminary work is done by @zhang2020contrastive, whose paper firstly uses contrastive representation learning with image-text pairs.
-CLIP version of the contrastive loss function \@ref(eq:contrLoss) is
+A lot of preliminary work stems from @zhang2020contrastive, whose paper firstly describes contrastive representation learning using image-text pairs.
+Their implementation of the contrastive loss function \@ref(eq:contrLoss) is
 
 \begin{equation}
   \ell_1^{V_\text{img}, V_\text{txt}} = - \log \frac{\exp(\langle v_\text{img}^1, v_\text{txt}^1 \rangle / \tau)}{\sum_{k=1}^{N} \exp(\langle v_\text{img}^1, v_\text{txt}^k \rangle / \tau)},
   (\#eq:contrLossCLIP)
 \end{equation}
 
-where $\langle v_\text{img}^1, v_\text{txt}^1 \rangle$ represents the cosine similarity, i.e., $v_\text{img}^{1 \top} v_\text{txt}^1 / (\|v_\text{img}^1\| \|v_\text{txt}^1\|)$, and $\tau \in \mathbb{R}^+$ represents a temperature parameter, which is directly learned during training [@zhang2020contrastive].
-$\ell_1^{V_\text{txt}, V_\text{img}}$, the counterpart to $\ell_1^{V_\text{img}, V_\text{txt}}$ in the total loss, is function \@ref(eq:contrLossCLIP) with switched arguments.
+where $\langle v_\text{img}^1, v_\text{txt}^1 \rangle$ represents the cosine similarity, i.e., $v_\text{img}^{1 \top} v_\text{txt}^1 / (\|v_\text{img}^1\| \|v_\text{txt}^1\|)$, and $\tau \in \mathbb{R}^+$ is a temperature parameter, which is directly learned during training [@zhang2020contrastive].
+CLIP adopts this.
+$\ell_1^{V_\text{txt}, V_\text{img}}$, the counterpart to $\ell_1^{V_\text{img}, V_\text{txt}}$ for the total loss, is function \@ref(eq:contrLossCLIP) with switched arguments.
 This can be viewed as a symmetric cross entropy loss over the cosine similarity of the embeddings [@radford2021learning].
 
 **Architecture**
 
-For CLIP the text encoder shown in figure \@ref(fig:contr-vs-pred-learn) is a Transformer [@vaswani2017attention] with the same modifications as for GPT-2 [@radford2019language], while multiple sub-networks were tried out for the image encoder:
+The text encoder for CLIP (see figure \@ref(fig:contr-vs-pred-learn)) is a modified Transformer [@vaswani2017attention], which was also used in GPT-2 [@radford2019language].
+For the image encoder multiple sub-networks are tested:
 
 * ResNets: ResNet-50, ResNet-101
 * ResNets which follow EfficientNet-style model scaling: RN50x4, RN50x16, RN50x64
@@ -222,6 +227,8 @@ The model has around 800 million parameters [@alford2021alignparams].
 They also mention a funny property of the access to aligned image and text encoders.
 One can perform simple arithmetic operations, which they use for image + text retrieval.
 E.g., encoding an image of the Eiffel tower and the word "snow" and adding up the vector encodings can retrieve a picture of a snowy Eiffel tower using cosine similarity, see firgure \@ref(fig:img-txt-addition).
+
+<!-- TODO: Learn a representation _and_ connect it to language (-> NLP) -->
 
 ```{r img-txt-addition, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:img-txt-addition)'}
 knitr::include_graphics('figures/02-04-text-support-img/align-word-and-image-addition.png')
