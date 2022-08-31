@@ -1,9 +1,5 @@
 # Epilogue
 
-*Author:*
+*Author: *
 
-*Supervisor:*
-
-
-    
-
+## test

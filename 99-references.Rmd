@@ -7,3 +7,394 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 
+@inproceedings{alexnet,
+ author = {Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {F. Pereira and C.J. Burges and L. Bottou and K.Q. Weinberger},
+ pages = {},
+ publisher = {Curran Associates, Inc.},
+ title = {ImageNet Classification with Deep Convolutional Neural Networks},
+ url = {https://proceedings.neurips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf},
+ volume = {25},
+ year = {2012}
+}
+@misc{history1,
+	note = {[Online; accessed 2022-06-29]},
+	author = {Jaspreet},
+	year = {2019},
+	month = {apr 8},
+	publisher = {towardsdatascience.com},
+	title = {A {Concise} {History} of {Neural} {Networks} \textbar{} by {Jaspreet} \textbar{} {Towards} {Data} {Science}},
+}
+
+
+@misc{history2,
+	note = {[Online; accessed 2022-06-29]},
+	publisher = {cs.stanford.edu},
+	title = {Neural {Networks} - {History}},
+}
+
+
+@misc{supervised,
+	note = {[Online; accessed 2022-06-29]},
+	author = {Education, IBM Cloud},
+	year = {2020},
+	month = {aug 19},
+	publisher = {www.ibm.com},
+	title = {What is {Supervised} {Learning}?},
+}
+
+
+@misc{unsupervised,
+	note = {[Online; accessed 2022-06-29]},
+	author = {Education, IBM Cloud},
+	year = {2020},
+	month = {sep 21},
+	publisher = {www.ibm.com},
+	title = {What is {Unsupervised} {Learning}?},
+}
+
+
+@misc{selfsup,
+	note = {[Online; accessed 2022-06-29]},
+	author = {techslang},
+	year = {2020},
+	month = {may 4},
+	publisher = {www.techslang.com},
+	title = {What is {Self}-{Supervised} {Learning}? --- {Definition} by {Techslang}},
+}
+
+
+@misc{selfsup2,
+	note = {[Online; accessed 2022-06-29]},
+	author = {Shah, Deval},
+	year = {2022},
+	month = {mar 14},
+	publisher = {neptune.ai},
+	title = {Self-{Supervised} {Learning} and {Its} {Applications} - neptune.ai},
+}
+
+
+@misc{contrastive,
+	note = {[Online; accessed 2022-06-29]},
+	author = {Tiu, Ekin},
+	year = {2021},
+	month = {jan 8},
+	publisher = {towardsdatascience.com},
+	title = {Understanding {Contrastive} {Learning} \textbar{} by {Ekin} {Tiu} \textbar{} {Towards} {Data} {Science}},
+}
+
+@article{resnet,
+  author    = {Kaiming He and
+               Xiangyu Zhang and
+               Shaoqing Ren and
+               Jian Sun},
+  title     = {Deep Residual Learning for Image Recognition},
+  journal   = {CoRR},
+  volume    = {abs/1512.03385},
+  year      = {2015},
+  url       = {http://arxiv.org/abs/1512.03385},
+  eprinttype = {arXiv},
+  eprint    = {1512.03385},
+  timestamp = {Wed, 17 Apr 2019 17:23:45 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/HeZRS15.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{vgg,
+  abstract = {The used CNN implementation (VGGNet) by the main paper (used)},
+  added-at = {2020-06-08T19:18:30.000+0200},
+  author = {Simonyan, Karen and Zisserman, Andrew},
+  biburl = {https://www.bibsonomy.org/bibtex/2bc3ee27a1dd159f48b10ac3555879865/buch_jon},
+  citeulike-article-id = {14183517},
+  interhash = {4e6fa56cb7cf99400d5701543ee228de},
+  intrahash = {bc3ee27a1dd159f48b10ac3555879865},
+  journal = {arXiv preprint arXiv:1409.1556},
+  keywords = {},
+  posted-at = {2016-11-14 05:20:24},
+  priority = {2},
+  timestamp = {2020-06-08T19:18:30.000+0200},
+  title = {{Very deep convolutional networks for large-scale image recognition}},
+  year = 2014
+}
+
+@article{width,
+  author    = {Sergey Zagoruyko and
+               Nikos Komodakis},
+  title     = {Wide Residual Networks},
+  journal   = {CoRR},
+  volume    = {abs/1605.07146},
+  year      = {2016},
+  url       = {http://arxiv.org/abs/1605.07146},
+  eprinttype = {arXiv},
+  eprint    = {1605.07146},
+  timestamp = {Mon, 13 Aug 2018 16:46:42 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/ZagoruykoK16.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{resolution,
+  author    = {Yanping Huang and
+               Yonglong Cheng and
+               Dehao Chen and
+               HyoukJoong Lee and
+               Jiquan Ngiam and
+               Quoc V. Le and
+               Zhifeng Chen},
+  title     = {GPipe: Efficient Training of Giant Neural Networks using Pipeline
+               Parallelism},
+  journal   = {CoRR},
+  volume    = {abs/1811.06965},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1811.06965},
+  eprinttype = {arXiv},
+  eprint    = {1811.06965},
+  timestamp = {Sun, 25 Nov 2018 18:57:12 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1811-06965.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@misc{depthwidth,
+  doi = {10.48550/ARXIV.1606.05336},
+  
+  url = {https://arxiv.org/abs/1606.05336},
+  
+  author = {Raghu, Maithra and Poole, Ben and Kleinberg, Jon and Ganguli, Surya and Sohl-Dickstein, Jascha},
+  
+  keywords = {Machine Learning (stat.ML), Artificial Intelligence (cs.AI), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {On the Expressive Power of Deep Neural Networks},
+  
+  publisher = {arXiv},
+  
+  year = {2016},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@article{mobilenet,
+  author    = {Andrew G. Howard and
+               Menglong Zhu and
+               Bo Chen and
+               Dmitry Kalenichenko and
+               Weijun Wang and
+               Tobias Weyand and
+               Marco Andreetto and
+               Hartwig Adam},
+  title     = {MobileNets: Efficient Convolutional Neural Networks for Mobile Vision
+               Applications},
+  journal   = {CoRR},
+  volume    = {abs/1704.04861},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1704.04861},
+  eprinttype = {arXiv},
+  eprint    = {1704.04861},
+  timestamp = {Thu, 27 May 2021 16:20:51 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/HowardZCKWWAA17.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+@article{effecient,
+  author    = {Mingxing Tan and
+               Quoc V. Le},
+  title     = {EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks},
+  journal   = {CoRR},
+  volume    = {abs/1905.11946},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1905.11946},
+  eprinttype = {arXiv},
+  eprint    = {1905.11946},
+  timestamp = {Mon, 03 Jun 2019 13:42:33 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1905-11946.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+a service of  Schloss Dagstuhl - Leibniz Center for Informatics	homebrowsesearchabout
+
+
+@article{gpipe,
+  author    = {Yanping Huang and
+               Yonglong Cheng and
+               Dehao Chen and
+               HyoukJoong Lee and
+               Jiquan Ngiam and
+               Quoc V. Le and
+               Zhifeng Chen},
+  title     = {GPipe: Efficient Training of Giant Neural Networks using Pipeline
+               Parallelism},
+  journal   = {CoRR},
+  volume    = {abs/1811.06965},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1811.06965},
+  eprinttype = {arXiv},
+  eprint    = {1811.06965},
+  timestamp = {Sun, 25 Nov 2018 18:57:12 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1811-06965.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{simclr,
+  author    = {Ting Chen and
+               Simon Kornblith and
+               Mohammad Norouzi and
+               Geoffrey E. Hinton},
+  title     = {A Simple Framework for Contrastive Learning of Visual Representations},
+  journal   = {CoRR},
+  volume    = {abs/2002.05709},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2002.05709},
+  eprinttype = {arXiv},
+  eprint    = {2002.05709},
+  timestamp = {Fri, 14 Feb 2020 12:07:41 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2002-05709.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{byol,
+  author    = {Jean{-}Bastien Grill and
+               Florian Strub and
+               Florent Altch{\'{e}} and
+               Corentin Tallec and
+               Pierre H. Richemond and
+               Elena Buchatskaya and
+               Carl Doersch and
+               Bernardo {\'{A}}vila Pires and
+               Zhaohan Daniel Guo and
+               Mohammad Gheshlaghi Azar and
+               Bilal Piot and
+               Koray Kavukcuoglu and
+               R{\'{e}}mi Munos and
+               Michal Valko},
+  title     = {Bootstrap Your Own Latent: {A} New Approach to Self-Supervised Learning},
+  journal   = {CoRR},
+  volume    = {abs/2006.07733},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2006.07733},
+  eprinttype = {arXiv},
+  eprint    = {2006.07733},
+  timestamp = {Wed, 17 Jun 2020 14:28:54 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2006-07733.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{NNCLR,
+  author    = {Debidatta Dwibedi and
+               Yusuf Aytar and
+               Jonathan Tompson and
+               Pierre Sermanet and
+               Andrew Zisserman},
+  title     = {With a Little Help from My Friends: Nearest-Neighbor Contrastive Learning
+               of Visual Representations},
+  journal   = {CoRR},
+  volume    = {abs/2104.14548},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2104.14548},
+  eprinttype = {arXiv},
+  eprint    = {2104.14548},
+  timestamp = {Tue, 04 May 2021 15:12:43 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2104-14548.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{ORE,
+  author    = {K. J. Joseph and
+               Salman H. Khan and
+               Fahad Shahbaz Khan and
+               Vineeth N. Balasubramanian},
+  title     = {Towards Open World Object Detection},
+  journal   = {CoRR},
+  volume    = {abs/2103.02603},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2103.02603},
+  eprinttype = {arXiv},
+  eprint    = {2103.02603},
+  timestamp = {Thu, 12 Aug 2021 15:37:07 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2103-02603.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{SwAV,
+  author    = {Mathilde Caron and
+               Ishan Misra and
+               Julien Mairal and
+               Priya Goyal and
+               Piotr Bojanowski and
+               Armand Joulin},
+  title     = {Unsupervised Learning of Visual Features by Contrasting Cluster Assignments},
+  journal   = {CoRR},
+  volume    = {abs/2006.09882},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2006.09882},
+  eprinttype = {arXiv},
+  eprint    = {2006.09882},
+  timestamp = {Tue, 23 Jun 2020 17:57:22 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2006-09882.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+@article{vit,
+  author    = {Alexey Dosovitskiy and
+               Lucas Beyer and
+               Alexander Kolesnikov and
+               Dirk Weissenborn and
+               Xiaohua Zhai and
+               Thomas Unterthiner and
+               Mostafa Dehghani and
+               Matthias Minderer and
+               Georg Heigold and
+               Sylvain Gelly and
+               Jakob Uszkoreit and
+               Neil Houlsby},
+  title     = {An Image is Worth 16x16 Words: Transformers for Image Recognition
+               at Scale},
+  journal   = {CoRR},
+  volume    = {abs/2010.11929},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2010.11929},
+  eprinttype = {arXiv},
+  eprint    = {2010.11929},
+  timestamp = {Fri, 20 Nov 2020 14:04:05 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2010-11929.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{wang,
+author = {Wang, Jun and Li, Shengchen},
+year = {2018},
+month = {08},
+pages = {},
+title = {Detection and Classification of Acoustic Scenes and Events 2018 SELF-ATTENTION MECHANISM BASED SYSTEM FOR DCASE2018 CHALLENGE TASK1 AND TASK4},
+doi = {10.13140/RG.2.2.28317.13281}
+}
+@article{selfa,
+  author    = {Prajit Ramachandran and
+               Niki Parmar and
+               Ashish Vaswani and
+               Irwan Bello and
+               Anselm Levskaya and
+               Jonathon Shlens},
+  title     = {Stand-Alone Self-Attention in Vision Models},
+  journal   = {CoRR},
+  volume    = {abs/1906.05909},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1906.05909},
+  eprinttype = {arXiv},
+  eprint    = {1906.05909},
+  timestamp = {Mon, 24 Jun 2019 17:28:45 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1906-05909.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{noisy,
+  author    = {Qizhe Xie and
+               Eduard H. Hovy and
+               Minh{-}Thang Luong and
+               Quoc V. Le},
+  title     = {Self-training with Noisy Student improves ImageNet classification},
+  journal   = {CoRR},
+  volume    = {abs/1911.04252},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1911.04252},
+  eprinttype = {arXiv},
+  eprint    = {1911.04252},
+  timestamp = {Sun, 01 Dec 2019 20:31:34 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1911-04252.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
