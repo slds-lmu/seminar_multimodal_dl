@@ -137,7 +137,7 @@ Visual input is encoded using a flattened sequence of 16x16 patches and embedded
 discrete values like buttons in games and continuous data like movements from robotics are tokenized in a 1024 vocabulary each. To represent all modalities sequentially,
 the different tokens are concatenated. A separator token is added to distinguish the observations from the following action. Using this approach, the transformer can predict
 the next token, the action, based on the conditioning values:
-$$\[x_{Text}, x_{Images}, x_{Discrete and Continuous Values} | y_{Action}\]$$
+<!-- $$\[x_{Text}, x_{Images}, x_{Discrete and Continuous Values} | y_{Action}\]$$ -->
 Since it is only necessary to predict the action based on the conditioning values, a mask function is added to the cross-entropy loss function, which masks the conditioning
 values so that only the next action is predicted. The masking function is always one for text since every previous text token is necessary to predict the next one.
 GATO was evaluated in RL-based tasks against specialist RL agents, where GATO was lower than the specialist agents or at a human level. On unseen tasks, GATO required fine-tuning
