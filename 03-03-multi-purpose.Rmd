@@ -1,4 +1,4 @@
-## Multi-purpose Models
+## Multi-Purpose Models
 
 *Author: Philipp Koch*
 
@@ -7,19 +7,18 @@
 ### Intro
 After we read about adding further modalities besides video and text, we will look at models that aim to be as generalizable as possible, that not
 just allow different modalities but also try to achieve multitasking. This section will survey previous attempts for multimodal and multitasking models.
-Recent developments showed that transformers [@vaswaniX] proved to be the best-suited models for text (BERT X) and vision (ViT X). Thus many recent attempts
-are also based on the transformer architecture to different degrees. Furthermore, we will also present an early model that is not transformer-based yet found
-similar behavior in generalizability.
-We will look further into cutting-edge development in the second half of the section, where the Pathway proposal from 2021 by Google will be revisited, as well
+Recent developments showed that transformers [@vaswani2017attention] proved to be the best-suited models for text (BERT, @Devlin2018) and vision (ViT @dosovitskiy2020image).
+Thus many recent attempts are also based on the transformer architecture to different degrees. Furthermore, we will also present an early model that is
+not transformer-based yet found similar behavior in generalizability.
+We will look further into cutting-edge development in the second half of the section, where the Pathway proposal by Google [@Dean21] will be revisited, as well
 as attempts in the broader context of this work. The chapter will conclude with an outlook and a discussion on how the field will likely evolve.
 
-#### Multipurpose Models
+#### Multi-Purpose Models
 Since the early years of machine learning, multitask and multimodal learning paradigms have been around. Multitask learning [@Crawshaw2020]
 is the paradigm of training a model on different tasks with the intention that the model transfers the learned knowledge to new tasks,
 such that fewer resources are required to learn new tasks. Akin to humans, it is intended that the model benefits from previously learned tasks.
 Humans do not learn every task from scratch. However, machine learning models do. It is assumed that related tasks let the model further
-generalize, similat to human intelligence. Although there exists field-specific issues like catastrophic forgetting and negative transfer, this approach is also promising
-for future implementations.
+generalize, similat to human intelligence. 
 Multimodal learning [@Baltrusaitis2019] is a paradigm in which a machine learning model is supplied with multiple modalities like images, text,
 tables, etc. As in multitask learning, this approach is also inspired by natural intelligence since intelligent beings perceive the world through multiple
 senses. It is thus assumed that multimodal models achieve better performance due to the higher input quality of the provided data. However,
@@ -40,9 +39,8 @@ translating to create output. For language tasks, the modality net is a tokenize
 convolution operations transform the images into the proper representation. Furthermore, there are also nets for audio and categorical modalities.
 For the language task, the modality net tokenizes the input sequences and is then transformed into the internal representation using learned
 embeddings?
-For the output, the representation is fed into a simple feed-forward network, which is then fed into a softmax function. The modality net for images is multiple
-stacked convolution operations as done in Xception (TODO).
-For the architecture and the chapter generally, it is necessary to recall the concept of Mixture of Experts (MoE) (Shaazer, jacobs  Jacobs), which is an
+For the output, the representation is fed into a simple feed-forward network, which is then fed into a softmax function.
+For the architecture and the chapter generally, it is necessary to recall the concept of Mixture of Experts (MoE) (@Jacobs1991, @Jordan1994, @Shaazer2017), which is an
 ensemble of different neural networks inside the layer. The neural networks are not used for every forward pass but only if the data is well suited to be
 dealt with by a specific expert. MoEs allow being more computationally efficient while still keeping or even improving performance. Training MoEs usually
 requires balancing the experts so that the routing does not collapse into one or a few experts. An additional gating network decides which of the experts
@@ -55,13 +53,17 @@ The decoder produces the output, and the I/O mixer reads the previous output and
 operations. Since this architecture is from the pre-transformer era, the attention mechanism used here is cross-attention.
 The decoder eventually processes the output of the encoder and the I/O mixer, thus the input sequence and the generated sequence, to produce proper output,
 which is done using attention and convolutional operations. A positional encoding conceptually similar to the one in transformers was also used for the attention mechanism.
-Multimodel was trained on eight datasets, from which six were from the language domain and COCO (X) as well as ImageNet (X) additionally. For training, four 
+Multimodel was trained on eight datasets, from which six were from the language domain and COCO [@mccoco] as well as ImageNet [@ImageNet] additionally. For training, four 
 experts in the MoE layers were used. Compared to training Multimodel for each task specifically, the combined training showed better performance. The combined
-trained multimodel on ImageNet (X) and machine translation were below sota models. Also, the combined model did not achieve significantly better results than a
+trained multimodel on ImageNet and machine translation were below sota models. Also, the combined model did not achieve significantly better results than a
 specialist model, which is the same model but trained solely on one task. However, it was found that the combined model did perform much better on a low-resource task
 than the respective specialist model.
 Multimodel offers a pre-transformer approach to deal with different modalities on multiple tasks; although it was only used to generate text, the setup allows
 extending to other modalities.
+
+```{r multimodel, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Architecture of *MultiModel*. The outer boxes without text are the modality nets. From @Kaiser2017.", }
+knitr::include_graphics("figures/03-03-multipurpose/multimodel.png")
+```
 
 #### Unified Transformer (UniT)
 A more recent multi-purpose model is UniT (Unified Transformer) [@Hu2021]. UniT is built upon the transformer architecture, in which both encoder and decoder are used.
@@ -80,31 +82,39 @@ unimodal tasks by the specialist UniT. UniT was furthermore also outperformed by
 Even though UniT does not achieve sota or consistently outperforms its specialist version, it is a powerful method to achieve a simple multi-purpose model. Using available
 encoder models, it is easily extendable and does not require a novel embedding scheme.
 
-#### OFA
+```{r unit, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Modified transformer for UniT. The decoder follows the implementation of DETR [@Carion2020]. From @Hu2021.", }
+knitr::include_graphics("figures/03-03-multipurpose/UniT.png")
+```
+
+#### OFA - Once For All
 Another multi-purpose transformer is OFA (Once For All) [@Wang2022]. To utilize the seq2seq architecture of the transformer, all tasks and the respective modality
 presented are transformed into seq2seq problems.
 While other models fuse the modalities in the model, such that the modalities are presented as is to the model, OFA tries a different approach, tokenizing every
 input instead of using a shared vocabulary for all available modalities and tasks done differently for input and output. Since tokenizing an image using a vocabulary
-is not feasible, a similar approach to ViT is used (where input is flattened to 16x 16) to obtain a flattened sequence of $P$ representations. These representations
-are later used along the embeddings of tokens from text input, which is tokenized using Byte-Pair-Encoding (Sennrich). After feeding the embeddings to the encoder,
-the decoder produces the output as a sequence again. In this case, however, images are represented as a sequence of tokens, similar to DALL-E (RAMESH X). Furthermore,
+is not feasible, a similar approach to ViT [@dosovitskiy2020image] is used (where input is flattened to 16x 16) to obtain a flattened sequence of $P$ representations. These representations
+are later used along the embeddings of tokens from text input, which is tokenized using Byte-Pair-Encoding [@sennrich-etal-2016-neural]. After feeding the embeddings to the encoder,
+the decoder produces the output as a sequence again. In this case, however, images are represented as a sequence of tokens, similar to DALL-E [@pmlr-v139-ramesh21a]. Furthermore,
 a unique sequence for the bounding box is also used for object detection and recognition. To generate the task-specific eventual solution, it is thus required that
 another model is used to generate the images based on the tokens and to visualize the bounding boxes based on the yielded coordinates.
 Since OFA is an autoregressive model, the objective is based on cross-entropy loss. The probability for the next token is predicted based on the previously produced
 tokens and the input provided.
 OFA was trained on different crossmodal: visual grounding, grounded captioning, image-text matching, image captioning, and visual question answering. And unimodal tasks:
-image infilling, object detection, and text reconstruction as in BART.
+image infilling, object detection, and text reconstruction as in BART (X).
 OFA outperformed sota models on cross-modal tasks like image captioning, visual question answering, visual entailment, and visual grounding. On uni-modal tasks,
 OFA performed well, although it does not outperform sota models here. However, OFA showed transfer capabilities to unseen task, on which it was provided with a 
 description, to solve the task in a few-shot manner. Although the results were satisfactory, the model was not compared against a baseline.
 
-#### Gato
-Another model that uses the seq2seq architecture of the transformer is GATO (A Generalist Agent). The model can be used as a language model, an agent to play games,
+```{r ofa, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="*OFA*, the different input and output concepts can be seen here. From @Wang2022.", }
+knitr::include_graphics("figures/03-03-multipurpose/OFA.png")
+```
+
+#### Gato - A Generalist Agent
+Another model that uses the seq2seq architecture of the transformer is GATO (A Generalist Agent) [@Reed2022]. The model can be used as a language model, an agent to play games,
 and an agent to control robotics.
 As in OFA, the problems are transformed into a seq2seq problem, on which a transformer (decoder only) is applied. Although the model was trained in a supervised fashion,
 it is intended to view GATO as a reinforcement learning agent.
 Every data input is embedded, as in OFA, where the critical difference here is that actions are encoded too.
-Visual input is encoded using a flattened sequence of 16x16 patches and embedded using a ResNet (X), while text input is tokenized using SentencePiece (X). Furthermore,
+Visual input is encoded using a flattened sequence of 16x16 patches and embedded using a ResNet [@ResNet], while text input is tokenized using SentencePiece [@kudo-richardson-2018-sentencepiece] Furthermore,
 discrete values like buttons in games and continuous data like movements from robotics are tokenized in a 1024 vocabulary each. To represent all modalities sequentially,
 the different tokens are concatenated. A separator token is added to distinguish the observations from the following action. Using this approach, the transformer can predict
 the next token, the action, based on the conditioning values:
@@ -134,11 +144,16 @@ untrained specialist model in Atari Boxing.
 
 ### Pathway Proposal
 
-Multipurpose models can also be thought of without the currently well-performing transformer architecture. A proposal for a new approach to multipurpose models was introduced as Google's
+Multi-purpose models can also be thought of without the currently well-performing transformer architecture. A proposal for a new approach to multi-purpose models was introduced as Google's
 Pathways [@Dean21] aiming to address current pitfalls in deep learning.
 Current deep learning consists mainly of large dense neural networks trained for a specific task. This paradigm is limiting so that no transfer between tasks is possible, and every
 time a model is trained, it needs to learn from scratch (or needs to be pre-trained from scratch). Human intelligence can also transfer knowledge between tasks, so it is not necessary
 to learn everything from scratch. However, transfer in deep learning models is not sufficiently possible, which is a severe constraint. The problem of catastrophic forgetting and negative transfer may arise.
+
+```{r pathways, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Concept of pathways. Different tasks follow different paths to different expert models. From @Dean21, [Screenshot August 31th 2022](https://www.youtube.com/watch?v=Nf-d9CcEZ2w).", }
+knitr::include_graphics("figures/03-03-multipurpose/Pathways.png")
+```
+
 
 #### Idea
 
@@ -165,7 +180,7 @@ language model using 540 billion parameters, Minerva [@Lewkowycz2022], which is 
 In this section, similar architecture will be revisited to provide an overview how close current research has come to achieve a model like the pathway proposal.
 
 #### PathNet
-An earlier approach for a sparse multi-task network, which looks deceptively similar, is Pathnet [@Fernando2017]. Pathnet is a training algorithm to reuse knowledge on a previously
+An earlier approach for a sparse multi-task network, which looks deceptively similar, is PathNet [@Fernando2017]. PathNet is a training algorithm to reuse knowledge on a previously
 learned task without the risk of catastrophic forgetting, thus using the positive aspects of multi-task learning.
 The objective of the pathnet is built upon an evolutionary algorithm (EA). An evolutionary algorithm is used to optimize a discrete problem where derivative-based algorithms cannot be
 applied. The algorithm is based on a population and a fitness function. Parts of the population are chosen to create offspring either by mutation or recombination. The resulting population
@@ -175,17 +190,20 @@ themselves and may vary heavily, we refer to [@Baeck1993] and, more recently, to
 Neural networks are often depicted as a graph in which the input is directed to all nodes in hidden layers. The output of hidden layers is again directed to each node in the next
 hidden layer or nodes in an output layer.
 In this case, each node is itself a neural network; thus, all data is passed to each node.
-The training algorithm finds the best paths for a specific task through the network. At first random paths through the network are initialized, then the paths are trained for $T$
+The training algorithm finds the best paths for a specific task through the network. At first random paths through the network are initialized, then the paths are trained for *T*
 epochs. After training, the paths are evaluated against each other, where the winning path overwrites the losing path. To achieve exploration, however, the overwritten path is mutated.
 The path is intended to deviate a little by also visiting neighboring nodes to achieve exploration. Until a specific criterion (e.g., number of epochs) to stop is reached, the current
 paths are frozen so that no more modifications to the parameters of the networks on this path are possible. All other parameters are newly initialized again. Also, a different, task-specific
 head is initialized. The same procedure is now done again for another task. The main difference is that the previously obtained path, including the trained networks, is frozen during training
 so that the model can transfer knowledge from the previous task to the new task. The model finds appropriate paths throughout the network until the stopping criterion is met.
-Pathnet was evaluated on supervised learning tasks and in reinforcement learning scenarios. As a baseline learning from scratch and fine-tuning were chosen. Fine-tuning is done on top of the
-first model, which Pathnet trains for the first task.
+PathNet was evaluated on supervised learning tasks and in reinforcement learning scenarios. As a baseline learning from scratch and fine-tuning were chosen. Fine-tuning is done on top of the
+first model, which PathNet trains for the first task.
 Overall, pathnet improved training in the second task for time and quality in prediction, compared to standard fine-tuning and learning from scratch.
 Although pathnet only looks like pathways on the surface, it has shown a positive transfer from previously trained models in a network like this. Different tasks can reuse the knowledge
 from training on previous tasks.
+```{r pathnet, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Training *PathNet* on two tasks. At first random paths are initialized (1), then trained (2-3) and fixed (4). The same procedure is repeated for the next paths using the previously fixed paths and new parameters in all other nodes (5-9). From @Fernando2017.", }
+knitr::include_graphics("figures/03-03-multipurpose/PathNet.png")
+```
 
 #### LIMoE
 In the context of Pathways, the work LIMoE (Multimodal Contrastive Learning with LIMoE: the Language-Image Mixture of Experts) [@Mustafa2022] is also necessary to be mentioned.
@@ -194,12 +212,15 @@ proposal, LIMoE also aims to provide a new approach to contrastive learning. Whi
 on one model, where the modalities are processed in a single transformer-like model (one-tower).
 Thus, the model described in LIMoE is based on a modified transformer. The text data is encoded using one-hot-SentencePiece encoding, while images are tokenized in the same way as
 done in ViT [@dosovitskiy2020image] to provide the input appropriately. The main difference to the standard transformer is an MoE layer at the spot where the feed-forward network
-usually lies. In this layer, $E$ experts are used, which are themselves feed-forward-networks. For each token, $K$ appropriate experts will map the tokens further downstream.
+usually lies. In this layer, *E* experts are used, which are themselves feed-forward-networks. For each token,*K* appropriate experts will map the tokens further downstream.
 The routing is computed by a gating net network, which uses top-k routing. Another feature here is a fixed-length buffer for each expert in the MoE layer. This buffer is used to
 store tokens before an expert network processes them, assuming that the allocations of tokens for each expert are balanced. If it is impossible to buffer tokens for the experts,
 the tokens will be dropped. To furthermore decide which tokens are to be dropped, Batch Priority Routing [@Riquelme2021] is used to provide a ranking mechanism on how which token
 is to be dropped. The output of the transformer encoder is then average pooled and subsequently multiplied with a modality-specific weight matrix, which produces the eventual output
-for the token of both modalities $z_{image}$ and $z_{text}$.
+for the token of both modalities.
+```{r LIMoE, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Architecture of *LIMoE*. From @Mustafa2022.", }
+knitr::include_graphics("figures/03-03-multipurpose/LIMoE.png")
+```
 The model is trained using a contrastive objective. The contrastive loss, in this case, aims to maximize the paired visual and textual input while minimizing all combinations of
 unpaired embeddings. This objective can be achieved by using the dot-product as a similarity measure between the two embeddings of both modalities, which provide a differentiable
 operation through which the overall loss can be minimized.
@@ -220,12 +241,12 @@ Furthermore, it also includes essential aspects of the pathways proposal using t
 routes to the specific expert, which might also be helpful in an additional multitask setup, which is an important step towards a pathway model. However, the authors also stated that merging
 modalities remains a field of research, as well as adding further modalities, since Vision and text have already proven to be non-trivial to combine, and more problems might arise with further modalities.
 
-#### muNet
+#### muNet (Multi-Task Net)
 Another model which is worth considering in the context of the pathways proposal is muNet [@Gesmundo2022a]. The initial criticism of current inefficiencies in deep learning is addressed by providing aframework to avoid discarding knowledge. muNet is an approach to improving multi-task learning with a focus on fine-tuning. In current practice for fine-tuning, a pre-trained model is copied and then explicitly trained on a task by overwriting previous knowledge. In other cases, models are only trained from scratch to solve one specific task.
 muNet evolves a pre-trained model on different tasks, using an EA to reuse already trained knowledge. An initial model is modified so that it becomes more and more optimized to adapt to specific tasks while keeping all previously learned knowledge. These modifications are so-called mutations applied to the model to score better. Eventually, a set of models is obtained, which includes new neural networks based majorly on the parameters of the initial model. The new modules can be seen as paths to layers from the initial network and newly added layers as well. Although the network is not sparse, the concept of reusing many parts of a network while accounting for multiple tasks is to be mentioned in the context of the pathway proposal.
 The EA of muNet starts with an initially proposed model that is mutated further on. All further mutations are stored so that after a set of candidates is available, the set can be split into models trained for this task (active population) and models for other tasks (inactive population). These two sets become the sets of candidates for the following task-specific iterations.
 Training a specific task follows three steps: sampling models, mutating, training, and evaluation. The best scoring model is added to the active population for further mutation.
-A sample algorithm accounts for exploration and exploitation to get a candidate model for subsequent mutation. The active population is ordered in a descending list based on the model's score. Each list entry is then revisited, starting from the highest scoring model onward, so that the better performing models are considered first (exploitation). The draw probability is computed as: $\mathbb P(m|t) = 0.5 ^{ \#timesSelected(m, t)}$, where $\#timesSelected(m, t)$ (where $\#timesSelected(m, t)$ is the amount of previous mutations based on model $m$ for task $t$). The more unsuccessful mutations the model has had before, the smaller the draw probability becomes. Thus, exploration is emphasized by considering previous attempts and allowing other models to be preferred. However, if this method does not yield a candidate, a model is drawn from the union of the inactive and active population.
+A sample algorithm accounts for exploration and exploitation to get a candidate model for subsequent mutation. The active population is ordered in a descending list based on the model's score. Each list entry is then revisited, starting from the highest scoring model onward, so that the better performing models are considered first (exploitation). The draw probability is computed as: $$\mathbb P(m|t) = 0.5 ^{ \#timesSelected(m, t)}$$, where $$\#timesSelected(m, t)$$ is the amount of previous mutations based on model *m* for task *t*). The more unsuccessful mutations the model has had before, the smaller the draw probability becomes. Thus, exploration is emphasized by considering previous attempts and allowing other models to be preferred. However, if this method does not yield a candidate, a model is drawn from the union of the inactive and active population.
 Applying mutations is the next step in the algorithm. A random number of mutations are drawn from the set of possible mutations, which include:
 
 - Layer cloning, a layer is cloned for training. The layer's parameters are copied from the parent model so that training can continue using the same knowledge. The other layers are still used but are not updated. Additionally, the task-specific head layer is cloned to account for the underlying changes. In the case of training on a new task, the head is also newly initialized.
@@ -235,7 +256,7 @@ Applying mutations is the next step in the algorithm. A random number of mutatio
 
 Subsequently, the models are trained on the task and scored. If the mutated model is better than the parent model, it is also added to this task's set of active models. This routine is done for all tasks and can be repeated several times. Ultimately, only the best scoring models are kept for each task, yielding a list of models consisting of paths to layers of the old model and newly trained ones. 
 muNet was evaluated for fine-tuning against a ViT instance, which is aimed at being the most generalizable [@Steiner2021]. The evaluation benchmarks consisted of multiple classification problems (multi-task). ViT was fine-tuned on all of these tasks as a baseline. In contrast, another ViT was evolved using muNet, on which the baseline model was evaluated. The approach using muNet outperformed the fine-tuned ViT while using significantly fewer parameters.
-Although muNet is neither a multipurpose model nor a sparse model, the concept of building task-specific paths by enhancing pre-trained models fits in the broader context of the pathway proposal. Research in the direction of combining automated routing for tasks and adding multi-modality might lead toward the vision of pathways and is thus highly recommended.
+Although muNet is neither a multi-purpose model nor a sparse model, the concept of building task-specific paths by enhancing pre-trained models fits in the broader context of the pathway proposal. Research in the direction of combining automated routing for tasks and adding multi-modality might lead toward the vision of pathways and is thus highly recommended.
 
 <!-- 
   - not peer-reviewed
@@ -247,33 +268,20 @@ Although muNet is neither a multipurpose model nor a sparse model, the concept o
 
 ### Conclusion Pathways
 So far, some steps have been made to fulfill the proposed direction of the pathways paper. Hardware upgrades were already introduced, on which sota models have already been built (PaLM, Parti, and Minerva)
-and smaller steps towards sparsity (LIMoE) and research in less resource-intensive deep learning as outlined in muNet and already done earlier in Pathnet.
-However, many open questions remain. How will a model like the proposed Pathway be structured? Will it have a layer-like structure as Pathnet and as shown in the proposal [@Dean21]? Will the path have a
+and smaller steps towards sparsity (LIMoE) and research in less resource-intensive deep learning as outlined in muNet and already done earlier in PathNet.
+However, many open questions remain. How will a model like the proposed Pathway be structured? Will it have a layer-like structure as PathNet and as shown in the proposal [@Dean21]? Will the path have a
 hierarchical structure, intermediate nodes, or loops? What will the sparsity look like in the model itself? How exactly will routing be achieved? Will EA play a more significant role?
 However, the previously mentioned successes in multi-task learning, hardware, and the combination of MoE and multi-modal, as seen in LIMoE, already hint that this direction is about to be researched
 further in the upcoming month.
 
 ### Discussion
-
-Considering the pace of the field and that results, as seen in Gato, flamingo and parti would not have been anticipated a few years ago, it is highly likely to see further
-breakthroughs in the field of multi-purpose models, which is especially the case since hardware-related issues are now being addressed and further developed. Based on these
-developments, more general models will be published in the near future. Models with even higher capabilities will also let new questions and problems arise. At this point,
-there is already the first issue arising, which is the trend of proprietary models. When GPT-3 was published, OpenAI closed access to the model leaving only a few with API keys
-to access the model.
-In contrast to the introduction of BERT, which was open source, there did not follow a trend of GPTology as it was done with BERTology, leaving the model underresearched compared
-to its open source and significantly smaller peers. On the other side, there also exists a trend of open sourcing some models, as seen with GPT-J and GPT-Neo or recently with the
-introduction of OPT by meta. However, even though this trend exists, there is the issue of the increasing size of the models, which makes it almost impossible to train or even
-fine-tune these models without using massive amounts of computational resources.
-Another issue that comes with the higher capability of these models is the societal impact of these models. Pop culture has severely impacted the perception of artificial
-intelligence, which might also become a topic in the future. It has already been a public issue that a google employee claimed that LamDA is sentient. With further high-quality
-models, there might be more discussions on how to deal with AI in the future. Since this already showed that the Turing test might not be an appropriate metric anymore, it might
-also be helpful to research new metrics for AI and possibly AGI.
-In his TED-talk, Dean saw Pathway as a promising path toward AGI, which is a bold statement. However, considering the quality of already existing models, it might be a significant
-step in increasing the quality of generative models for solving multiple general tasks. Nevertheless, new problems will arise which are likely not solved with this model like
-continuous learning. The examined models and pathways are only trained once and then remain frozen in their knowledge. This issue is already visible in older language models like
-BERT and GPT, where Donald Trump is still president and COVID-19 does not exist.
-
-<!-- ### TODO
- - Proposal for unifying standardizing evaluation, common benchmarks etc.
- - Outlook -->
-
+Most of the developments described in this section took place in the last two years. The pathway proposal is not a year old, and research in this direction is already ongoing, with some results to show.
+Thus, novel models will likely be introduced in the next month, which will probably set new state-of-the-arts. NLP shows that the larger models get, the better they become (@Chowdhery2022, @brown2020language), which
+might also lead to the same trend for multi-purpose models. A pitfall of models of these sizes is the low accessibility. Researchers need to access the model through an API since running these models on a
+few GPUs will be highly unlikely. It might be unlikely to see a BERT-like engagement with the community of researchers if the access to models remains limited. On the contrary, more open-source collaborations,
+as seen with Meta's OPT ([www.eleuther.ai](www.eleuther.ai)) or Huggingface ([huggingface.co](https://huggingface.co/)), might evolve as well as a countermovement and techniques like distillation [@Hinton2015] might become more important.
+Another issue with multi-purpose models is the lack of metrics. Current metrics are not suited for multi-task and multimodal models. Evaluation might also become harder since many different modalities can be
+used, as seen here with the robotics property of GATO, which was not used in any of the models.
+Eventually, it is also necessary to consider the societal impact. The bias problem will also become an issue in multi-purpose models, especially since multiple datasets must be considered now. Also, the
+environmental impact of training large models needs to be considered since it is likely that larger models will yield better performance according to scaling laws [@Reed2022] but will also have a larger carbon footprint.
+This problem needs to be considered, especially in relation to the performance of the model and the lack of metrics.
