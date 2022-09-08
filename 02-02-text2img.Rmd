@@ -185,18 +185,18 @@ Last but not least, DF-GAN (Deep Fusion GAN) (https://arxiv.org/abs/2008.05865) 
 
 ### Dall-E 1
 
-* Intro: OpenAI, dataset used, not public, etc
-before we go, we describe couple of important concepts
+OpenAI's Dall-E undoubtedly took text-to-image field to another level. For the first time a model showed great zero-shot capabilities, comparable to previous domain-specific models. To achieve that, unprecedented scale of the dataset and training process was needed. 250 million text-image pairs were collected for that purpose, which enabled training of 12 billion parameter version of the model. Unfortunately, Dall-E is not publicly available and follows the most recent trend of closed-source models. Or, to put it more precisely, it started this trend and GLIDE, Dall-E 2, Imagen, Parti and others followed. Nevertheless, Dall-E's inner workings are described in (https://arxiv.org/abs/2102.12092) and this section will try to explain its most important parts. However, before that, it is crucial to understand one of the fundamental concepts that has been around in the field of generative models for already quite some time - namely Variational Autoencoders.
 
-**Variational Autoencoder**
+**Variational Autoencoder (VAE)**
 
 https://arxiv.org/pdf/1312.6114v10.pdf
 
 **VQ-VAE / dVAE**
 
 **The Model**
+
 say why we are not going to explain transformers
-* Details how it's working. Combining Transformer with VQ-VAE. Training vs inference
+* Details how it's working. Combining Transformer with dVAE. Training vs inference
 
 **Results**
 * Results and image examples
@@ -207,7 +207,7 @@ cherrypicking
 
 ### GLIDE
 
-Introduced by (https://arxiv.org/abs/2112.10741), GLIDE started an era of huge scale diffusion models. The concept of diffusion has already been used in area of Deep Learning for some time before. However, authors of the GLIDE took a step further and combined it together with a text-based guidance which is supposed to steer learning process in the direction of the text meaning. This powerful method proved itself to achieve outstanding results which remain competitive to current state-of-the-art models at the moment of writing. Alt
+Introduced by (https://arxiv.org/abs/2112.10741), GLIDE started an era of huge scale diffusion models. The concept of diffusion has already been used in area of Deep Learning for some time before. However, authors of the GLIDE took a step further and combined it together with a text-based guidance which is supposed to steer the learning process in the direction of the text meaning. This powerful method was proved to achieve outstanding results which remain competitive to current state-of-the-art models at the moment of writing.
 
 **Diffusion models**
 
@@ -224,17 +224,44 @@ where $(1-\alpha_{t})$ parametrizes the magnitude of the noise being added at ea
 where particular mean function $\mu_{\theta}$ has been proposed by (https://arxiv.org/pdf/2006.11239.pdf). For more detailed explanation of how this is later parametrized and trained, one could follow (https://lilianweng.github.io/posts/2021-07-11-diffusion-models/).
 
 **GLIDE**
-Classifier free guidance as a guided diffusion
 
-mention that they were also using CLIP guidance but with worse results
+GLIDE can essentially be broken down into to two parts. First of them is the pretrained Transformer model, which in principle is responsible for creating the text embeddings. Last token embedding is used as a class embedding (text representation) in later stages. Additionally, all tokens from the last embedding layer are being used (*attended to*) by all attention layers in the diffusion model itself. This makes model aware of the text meaning while reconstructing the previous step in the Markov chain.
+
+Second component of the GLIDE is diffusion model itself. U-Net-like architecture with multiple attention blocks is used here. This part's sole goal is to model $p_{\theta}(x_{t-1}|x_{t},y)$, where $y$ corresponds to last token embedding mentioned above. Or, to put it differently, to predict $\epsilon_{\theta}(x_{t}|y)$ since the problem can be reframed as calculating the amount of noise being added at each step.
+
+Additionally, to make the model even more aware of the text meaning, so called guidance is being used at inference time. In short, the idea is to control the direction of diffusion process. Authors test two different approaches. First, they try guidance with a use of separate classifier, OpenAI's CLIP in this case. However, better results were in general achieved by classifier-free guidance process. The idea is to produce two different images at each step. One is conditioned on text, while the other one not. Distance between them is being calculated and then, after significant scaling, added to the image obtained without conditioning. This way, model speeds up progression of the image towards the meaning of the text. The process can be written the following way:
+
+> $$\hat{\epsilon_{\theta}}(x_{t}|y)=\epsilon_{\theta}(x_{t}|\emptyset)+s*(\epsilon_{\theta}(x_{t}|y)-\epsilon_{\theta}(x_{t}|\emptyset))$$
+
+where $s$ denotes the parameter for scaling the difference between mentioned images.
 
 **Results**
 
-**Limitations**
-complex scenarios (complex prompts or highly unusual scenarios) - check figure they provide in the paper
-sequential make it slower
-closed source
+GLIDE achieves significantly more photorealistic results compared to its predecessors. FID reported on the MS-COCO 256x256 dataset can be seen in Figure (xxx). It is worth noting that GLIDE was not trained on this dataset, hence its zero-shot capabilities are even more impressing.
 
+```{r glide_fid, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Comparison of FID on MS-COCO 256×256. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/glide_fid.png")
+```
+
+Results are also preferred by human evaluators in terms of photorealism and similarity of the images to its caption. Comparison to DALL-E 1 results can be seen in Figure (xxx)
+
+```{r glide_realism, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Win probabilities of GLIDE vs DALL-E. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/glide_realism.png")
+```
+
+Finally, some of the cherry-picked images together with their corresponding captions can be seen in Figure (xxx).
+
+```{r glide_results, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Samples from GLIDE with classifier-free-guidance and s=3. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/glide_results.png")
+```
+
+**Limitations**
+
+GLIDE suffers from two problems. First, it fails when being presented with complex or unusual text prompt. Few examples can be seen in Figure (xxx). Also, the model is relatively slow at inference time (much slower than GANs). This is caused by the sequential character of the architecture, where consecutive steps in Markov chain reconstruction cannot be simply parallelized. 
+
+```{r glide_fails, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Failures happen mostly for unusual prompts. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/glide_fails.png")
+```
 
 ### Dall-E 2
 * Intro (mention PR move)
