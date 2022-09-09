@@ -189,9 +189,17 @@ OpenAI's Dall-E undoubtedly took text-to-image field to another level. For the f
 
 **Variational Autoencoder (VAE)**
 
-https://arxiv.org/pdf/1312.6114v10.pdf
+Regular Autoencoder architecture aims at finding identity function that is able to find meaningful representation of the data in lower-dimensional space and then reconstruct it. It is considered as unsupervised learning method for reducing dimensionality, however trained in a supervised regime with the data itself being the label. Component performing reduction is called encoder, while part responsible for reconstruction is called decoder. The idea behind Variational Autoencoder (https://arxiv.org/abs/1312.6114) is similar, however instead of learning the mapping to static low-dimensional vector, model learns its distribution. This design equips decoder part with desired generative capabilities, as sampling from the latent low-dimensional space will result in varying data being generated. The architecture is depicted in Figure(xxx).
+
+```{r vae, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Variational (probabilistic) Autoencoder architecture. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/vae.png")
+```
+
+$q_{\phi}(z|x)$ denotes the encoder under the assumption that $z$ comes from multivariate Gaussian. $\mu$ and $\sigma$ are being learned. Reconstruction process is modelled by conditional probability $p_{\theta}(x|z)$, given samples latent vector $z$.
 
 **VQ-VAE / dVAE**
+
+
 
 **The Model**
 
@@ -298,6 +306,13 @@ safety considerations from GLIDE paper?
 https://jumpstory.com/blog/the-future-of-ai-generated-images-why-its-both-fascinating-and-a-huge-legal-risk/
 
 
+At the end:
+* check style vs other people
+* fix chapter numbering (check other people)
+* fix all citations + cross citations
+* fix all figures
+* grammarly
+* read everything once again and let Ilonka read
 <!--
 ### Datasets
 
