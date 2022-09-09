@@ -1,5 +1,6 @@
+## Text-2-image {#c02-02-text2img}
+
 *Author:* Karol Urbańczyk
-## Text-2-image
 
 *Supervisor:* Jann Goschenhofer
 

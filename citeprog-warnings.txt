@@ -1,0 +1,502 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/Arch Linux)
+The top-level auxiliary file: book.aux
+The style file: apalike.bst
+Case mismatch error between cite keys resnet and ResNet
+---line 89 of file book.aux
+ : \citation{resnet
+ :                 }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys simclr and SimCLR
+---line 144 of file book.aux
+ : \citation{simclr
+ :                 }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys byol and BYOL
+---line 145 of file book.aux
+ : \citation{byol
+ :               }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys simclr and SimCLR
+---line 151 of file book.aux
+ : \citation{simclr
+ :                 }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys byol and BYOL
+---line 166 of file book.aux
+ : \citation{byol
+ :               }
+I'm skipping whatever remains of this command
+Database file #1: book.bib
+Warning--entry type for "Dean21" isn't style-file defined
+--line 90 of file book.bib
+Warning--entry type for "Lewkowycz2022" isn't style-file defined
+--line 185 of file book.bib
+Warning--entry type for "darkMatter" isn't style-file defined
+--line 477 of file book.bib
+Warning--entry type for "redditUsers" isn't style-file defined
+--line 485 of file book.bib
+Warning--entry type for "coco_eval" isn't style-file defined
+--line 493 of file book.bib
+Warning--entry type for "unsupBrain" isn't style-file defined
+--line 501 of file book.bib
+Warning--entry type for "sutton2019bitterlesson" isn't style-file defined
+--line 1861 of file book.bib
+Warning--entry type for "alford2021alignparams" isn't style-file defined
+--line 1875 of file book.bib
+Warning--entry type for "schuhmann2022laion" isn't style-file defined
+--line 1882 of file book.bib
+Database file #2: packages.bib
+Warning--I didn't find a database entry for "Mikolov2013"
+Warning--I didn't find a database entry for "Bojanowski2016"
+Warning--I didn't find a database entry for "Sutskever2014"
+Warning--I didn't find a database entry for "Bahdanau2014"
+Warning--I didn't find a database entry for "Raffel2019"
+Warning--I didn't find a database entry for "SwAV"
+Warning--I didn't find a database entry for "ImageT"
+Warning--I didn't find a database entry for "history1"
+Warning--I didn't find a database entry for "history2"
+Warning--I didn't find a database entry for "alexnet"
+Warning--I didn't find a database entry for "supervised"
+Warning--I didn't find a database entry for "unsupervised"
+Warning--I didn't find a database entry for "selfsup"
+Warning--I didn't find a database entry for "selfsup2"
+Warning--I didn't find a database entry for "contrastive"
+Warning--I didn't find a database entry for "width"
+Warning--I didn't find a database entry for "gpipe"
+Warning--I didn't find a database entry for "esnet"
+Warning--I didn't find a database entry for "vgg"
+Warning--I didn't find a database entry for "effecient"
+Warning--I didn't find a database entry for "depthwidth"
+Warning--I didn't find a database entry for "mobilenet"
+Warning--I didn't find a database entry for "NNCLR"
+Warning--I didn't find a database entry for "ORE"
+Warning--I didn't find a database entry for "TRANSFORMERS_NLP"
+Warning--I didn't find a database entry for "wang"
+Warning--I didn't find a database entry for "selfa"
+Warning--I didn't find a database entry for "vit"
+Warning--I didn't find a database entry for "noisy"
+Warning--I didn't find a database entry for "gao2020pile"
+Warning--I didn't find a database entry for "rosset2020turing"
+Warning--I didn't find a database entry for "zhu2015aligning"
+Warning--I didn't find a database entry for "fellbaum2010wordnet"
+Warning--I didn't find a database entry for "krizhevsky2009learning"
+Warning--I didn't find a database entry for "hinton2015distilling"
+Warning--I didn't find a database entry for "sun2017revisiting"
+Warning--I didn't find a database entry for "torralba2011unbiased"
+Warning--I didn't find a database entry for "schuhmann2021laion"
+Warning--I didn't find a database entry for "pont2020connecting"
+Warning--I didn't find a database entry for "zhou2017scene"
+Warning--I didn't find a database entry for "young2014image"
+Warning--I didn't find a database entry for "kuznetsova2020open"
+Warning--I didn't find a database entry for "krishna2017visual"
+Warning--I didn't find a database entry for "saharia2022photorealistic"
+Warning--I didn't find a database entry for "LocNarWeb"
+Warning--I didn't find a database entry for "cornia2020m2"
+Warning--I didn't find a database entry for "ramesh2021dalle"
+Warning--I didn't find a database entry for "nichol2021glide"
+Warning--I didn't find a database entry for "bordes2020incorporating"
+Warning--I didn't find a database entry for "renet"
+Warning--I didn't find a database entry for "tian2020contrastive"
+Warning--I didn't find a database entry for "bommasani2021opportunities"
+Warning--I didn't find a database entry for "ramesh2022hierarchical"
+Warning--I didn't find a database entry for "HuangFusion2020"
+Warning--I didn't find a database entry for "Katzman2018"
+Warning--I didn't find a database entry for "DeepConvSurv"
+Warning--I didn't find a database entry for "DeepCorrSurv"
+Warning--I didn't find a database entry for "TongAE"
+Warning--I didn't find a database entry for "Cheerla2019"
+Warning--I didn't find a database entry for "MultiSurv2021"
+Warning--I didn't find a database entry for "WideDeepNN2016"
+Warning--I didn't find a database entry for "Poelsterl2020"
+Warning--I didn't find a database entry for "DeepPAMM2022"
+Warning--I didn't find a database entry for "SSDDR2020"
+Warning--I didn't find a database entry for "Law2019"
+Warning--I didn't find a database entry for "Jean2016"
+Warning--I didn't find a database entry for "Gebru2017"
+Warning--I didn't find a database entry for "DeepGPYou2017"
+Warning--I didn't find a database entry for "Sirko2021"
+Warning--empty year in agirre2009study
+Warning--empty journal in agirre2009study
+Warning--empty year in ailem2018probabilistic
+Warning--empty journal in ailem2018probabilistic
+Warning--empty year in alayrac2022flamingo
+Warning--empty journal in alayrac2022flamingo
+Warning--empty year in Flamingo
+Warning--empty year in alford2021alignparams
+Warning--empty year in spice
+Warning--empty year in 8578734
+Warning--empty year in antol2015vqa
+Warning--empty year in unrealEngine
+Warning--empty year in baevski2022data2vec
+Warning--empty journal in baevski2022data2vec
+Warning--empty year in baevski2020wav2vec
+Warning--empty journal in baevski2020wav2vec
+Warning--empty year in Baltrusaitis2019
+Warning--empty journal in Baltrusaitis2019
+Warning--empty year in bandy2021addressing
+Warning--empty journal in bandy2021addressing
+Warning--empty year in meteor
+Warning--empty year in bao2021beit
+Warning--empty journal in bao2021beit
+Warning--empty year in Pathways
+Warning--empty year in atari
+Warning--empty journal in atari
+Warning--empty year in beyer2020we
+Warning--empty journal in beyer2020we
+Warning--empty year in birhane2021multimodal
+Warning--empty journal in birhane2021multimodal
+Warning--empty year in DALLEmini
+Warning--empty year in bosch2007image
+Warning--empty year in bowman2021will
+Warning--empty journal in bowman2021will
+Warning--empty year in bromley1993signature
+Warning--empty journal in bromley1993signature
+Warning--empty year in brown2020language
+Warning--empty journal in brown2020language
+Warning--empty year in GPT3
+Warning--empty year in bruni2014multimodal
+Warning--empty journal in bruni2014multimodal
+Warning--empty year in brysbaert2014concreteness
+Warning--empty journal in brysbaert2014concreteness
+Warning--empty year in Baeck1993
+Warning--empty journal in Baeck1993
+Warning--empty year in Carion2020
+Warning--empty journal in Carion2020
+Warning--empty year in caron2021emerging
+Warning--empty year in SimCLR
+Warning--empty year in chen2021empirical
+Warning--empty year in chowdhery2022palm
+Warning--empty journal in chowdhery2022palm
+Warning--empty year in Chowdhery2022
+Warning--empty journal in Chowdhery2022
+Warning--empty year in collell2017imagined
+Warning--can't use both volume and number fields in collell2017imagined
+Warning--empty year in meshed_memory
+Warning--empty year in Crawshaw2020
+Warning--empty year in das2017human
+Warning--empty journal in das2017human
+Warning--empty year in Dean20
+Warning--empty year in Dean21
+Warning--empty year in misconduct
+Warning--empty journal in misconduct
+Warning--empty year in deng2009imagenet
+Warning--empty year in devereux2014centre
+Warning--empty journal in devereux2014centre
+Warning--empty year in BERT
+Warning--empty year in Devlin2018
+Warning--empty journal in Devlin2018
+Warning--empty year in devlin-etal-2019-bert
+Warning--empty booktitle in devlin-etal-2019-bert
+Warning--empty year in devlin2018bert
+Warning--empty journal in devlin2018bert
+Warning--empty year in dhamala2021bold
+Warning--empty year in DiffusionModels
+Warning--empty journal in DiffusionModels
+Warning--empty year in Doerr2021
+Warning--empty journal in Doerr2021
+Warning--empty year in dosovitskiy2020image
+Warning--empty journal in dosovitskiy2020image
+Warning--empty year in bias
+Warning--empty year in esser2021taming
+Warning--empty year in pascalvoc
+Warning--empty journal in pascalvoc
+Warning--empty year in WordNet
+Warning--empty journal in WordNet
+Warning--empty year in Fernando2017
+Warning--empty booktitle in Fernando2017
+Warning--empty year in galanter2016generative
+Warning--empty journal in galanter2016generative
+Warning--empty year in gao2017knowledge
+Warning--empty journal in gao2017knowledge
+Warning--empty year in StyleTransfer
+Warning--empty year in Gesmundo2022a
+Warning--empty year in Gokaslan2019OpenWeb
+Warning--empty year in NIPS2014_5ca3e9b1
+Warning--empty year in GAN
+Warning--empty year in goodfellow2014explaining
+Warning--empty journal in goodfellow2014explaining
+Warning--empty year in goyal2017making
+Warning--empty year in grill2020bootstrap
+Warning--empty journal in grill2020bootstrap
+Warning--empty year in BYOL
+Warning--empty year in guo2016ms
+Warning--empty year in harnad1990symbol
+Warning--empty journal in harnad1990symbol
+Warning--empty year in harris1954distributional
+Warning--empty journal in harris1954distributional
+Warning--empty year in he2022masked
+Warning--empty year in ResNet
+Warning--empty journal in ResNet
+Warning--empty year in henderson2020towards
+Warning--empty journal in henderson2020towards
+Warning--empty year in HerdadeKBS19
+Warning--empty booktitle in HerdadeKBS19
+Warning--empty year in hill2014learning
+Warning--empty year in hill2015simlex
+Warning--empty journal in hill2015simlex
+Warning--empty year in Hinton2015
+Warning--empty year in hochreiter1997long
+Warning--empty journal in hochreiter1997long
+Warning--empty year in hoffmann2022training
+Warning--empty journal in hoffmann2022training
+Warning--empty year in hu2021unit
+Warning--empty year in Hu2021
+Warning--empty year in huang1
+Warning--empty booktitle in huang1
+Warning--empty year in hudson2019gqa
+Warning--empty year in ive2019distilling
+Warning--empty journal in ive2019distilling
+Warning--empty year in Jacobs1991
+Warning--empty journal in Jacobs1991
+Warning--empty year in jaegle2021perceiver
+Warning--empty year in ALIGN
+Warning--empty journal in ALIGN
+Warning--empty year in jia2021scaling
+Warning--empty year in Jordan1994
+Warning--empty journal in Jordan1994
+Warning--empty year in explainaility
+Warning--empty journal in explainaility
+Warning--empty year in Kaiser2017
+Warning--empty journal in Kaiser2017
+Warning--empty year in karpthy1
+Warning--empty year in karras2019style
+Warning--empty year in kiela2014learning
+Warning--empty year in kiela2017learning
+Warning--empty journal in kiela2017learning
+Warning--empty year in VAE
+Warning--empty journal in VAE
+Warning--empty year in kiros2018illustrative
+Warning--empty year in koehn2005europarl
+Warning--empty year in kolesnikov2019large
+Warning--empty journal in kolesnikov2019large
+Warning--empty year in kottur2016visual
+Warning--empty year in krishnavisualgenome
+Warning--empty booktitle in krishnavisualgenome
+Warning--empty year in krizhevsky2012imagenet
+Warning--empty journal in krizhevsky2012imagenet
+Warning--empty year in kudo-richardson-2018-sentencepiece
+Warning--empty year in lazaridou2015combining
+Warning--empty journal in lazaridou2015combining
+Warning--empty year in lewis-etal-2020-bart
+Warning--empty year in Lewkowycz2022
+Warning--empty year in lin-2004-rouge
+Warning--empty year in COCO
+Warning--empty year in lin2014microsoft
+Warning--empty year in mccoco
+Warning--empty year in liu2019roberta
+Warning--empty journal in liu2019roberta
+Warning--empty year in lottick2019energy
+Warning--empty journal in lottick2019energy
+Warning--empty year in VilBert
+Warning--empty year in lu2019vilbert
+Warning--empty journal in lu2019vilbert
+Warning--empty year in lu2022imagination
+Warning--empty journal in lu2022imagination
+Warning--empty year in mahajan2018exploring
+Warning--empty year in mayer2014creating
+Warning--empty journal in mayer2014creating
+Warning--empty year in 3D
+Warning--empty journal in 3D
+Warning--empty year in redditUsers
+Warning--empty year in mikolov2013efficient
+Warning--empty journal in mikolov2013efficient
+Warning--empty year in unsupBrain
+Warning--empty year in coco_eval
+Warning--empty year in mordvintsev_2015
+Warning--empty year in Mustafa2022
+Warning--empty year in GLIDE
+Warning--empty year in DALLEpytorch
+Warning--empty year in papineni-etal-2002-bleu
+Warning--empty year in parcalabescu-etal-2022-valse
+Warning--empty year in StyleGAN
+Warning--empty journal in StyleGAN
+Warning--empty year in pennington2014glove
+Warning--empty year in perez2021true
+Warning--empty journal in perez2021true
+Warning--empty year in pezzelle2021word
+Warning--empty journal in pezzelle2021word
+Warning--empty year in prabhu2020large
+Warning--empty journal in prabhu2020large
+Warning--empty year in qiao2022initial
+Warning--empty year in rlang
+Warning--empty year in radford2021learning
+Warning--empty year in CLIP
+Warning--empty year in Radford2019LanguageMA
+Warning--empty booktitle in Radford2019LanguageMA
+Warning--empty year in radford2019language
+Warning--empty journal in radford2019language
+Warning--empty year in rajpurkar2018know
+Warning--empty journal in rajpurkar2018know
+Warning--empty year in rajpurkar2016squad
+Warning--empty journal in rajpurkar2016squad
+Warning--empty year in DALLE2
+Warning--empty year in DALLE
+Warning--empty year in pmlr-v139-ramesh21a
+Warning--empty year in Rebuffi2017
+Warning--empty year in recht2019imagenet
+Warning--empty year in Reed2022
+Warning--empty year in ren2015faster
+Warning--empty journal in ren2015faster
+Warning--empty year in 8099614
+Warning--empty year in ribeiro2020beyond
+Warning--empty journal in ribeiro2020beyond
+Warning--empty year in Riquelme2021
+Warning--empty year in ImageNet
+Warning--empty journal in ImageNet
+Warning--empty year in schuhmann2022laion
+Warning--empty year in LAION
+Warning--empty journal in LAION
+Warning--empty year in sennrich2015neural
+Warning--empty journal in sennrich2015neural
+Warning--empty year in sennrich-etal-2016-neural
+Warning--empty year in shao2019objects365
+Warning--empty year in Shaazer2017
+Warning--empty booktitle in Shaazer2017
+Warning--empty year in shekhar2017foil
+Warning--empty journal in shekhar2017foil
+Warning--empty year in shen2021much
+Warning--empty journal in shen2021much
+Warning--empty year in sheng2019woman
+Warning--empty journal in sheng2019woman
+Warning--empty year in ruDALLE
+Warning--empty year in sikarwar2022efficacy
+Warning--empty journal in sikarwar2022efficacy
+Warning--empty year in silberer2012grounded
+Warning--empty year in silberer2014learning
+Warning--empty year in singh2022flava
+Warning--empty year in Socher10connectingmodalities
+Warning--empty year in 8477754
+Warning--empty year in srinivasan2021wit
+Warning--empty year in bias_ML
+Warning--empty year in srivastava2022beyond
+Warning--empty journal in srivastava2022beyond
+Warning--empty year in Steiner2021
+Warning--empty journal in Steiner2021
+Warning--empty year in strubell2019energy
+Warning--empty journal in strubell2019energy
+Warning--empty year in environment
+Warning--empty year in sun2021multimodal
+Warning--empty journal in sun2021multimodal
+Warning--empty year in sutton2019bitterlesson
+Warning--empty year in tan2020vokenization
+Warning--empty journal in tan2020vokenization
+Warning--empty year in EfficientNet
+Warning--empty journal in EfficientNet
+Warning--empty year in uppal2022multimodal
+Warning--empty journal in uppal2022multimodal
+Warning--empty year in attention
+Warning--empty year in vaswani2017attention
+Warning--empty journal in vaswani2017attention
+Warning--empty year in NIPS2017_3f5ee243
+Warning--empty year in cider
+Warning--empty year in vinyals
+Warning--empty booktitle in vinyals
+Warning--empty year in wang2018glue
+Warning--empty journal in wang2018glue
+Warning--empty year in Wang2022
+Warning--empty year in NFT
+Warning--empty year in wei2022masked
+Warning--empty year in wenzek2019ccnet
+Warning--empty journal in wenzek2019ccnet
+Warning--empty year in WZRD
+Warning--empty year in sun
+Warning--empty year in xu1
+Warning--empty year in xue2020mt5
+Warning--empty journal in xue2020mt5
+Warning--empty year in Yang_2019_CVPR
+Warning--empty year in darkMatter
+Warning--empty year in 5487377
+Warning--empty journal in 5487377
+Warning--empty year in yao1
+Warning--empty year in GCN-LSTM
+Warning--empty year in parti
+Warning--empty journal in parti
+Warning--empty year in yuan2021florence
+Warning--empty journal in yuan2021florence
+Warning--empty year in yuan2022wudaomm
+Warning--empty journal in yuan2022wudaomm
+Warning--empty year in zellers2019recognition
+Warning--empty year in zellers2018swag
+Warning--empty journal in zellers2018swag
+Warning--empty year in zeng2022socratic
+Warning--empty journal in zeng2022socratic
+Warning--empty year in zhang2016yin
+Warning--empty year in zhang2020contrastive
+Warning--empty journal in zhang2020contrastive
+Warning--empty year in zhuang2021unsupervised
+Warning--empty journal in zhuang2021unsupervised
+
+
+[WARNING] Citeproc: citation Bahdanau2014 not found
+[WARNING] Citeproc: citation Bojanowski2016 not found
+[WARNING] Citeproc: citation Cheerla2019 not found
+[WARNING] Citeproc: citation DeepConvSurv not found
+[WARNING] Citeproc: citation DeepCorrSurv not found
+[WARNING] Citeproc: citation DeepGPYou2017 not found
+[WARNING] Citeproc: citation DeepPAMM2022 not found
+[WARNING] Citeproc: citation Gebru2017 not found
+[WARNING] Citeproc: citation HuangFusion2020 not found
+[WARNING] Citeproc: citation ImageT not found
+[WARNING] Citeproc: citation Jean2016 not found
+[WARNING] Citeproc: citation Katzman2018 not found
+[WARNING] Citeproc: citation Law2019 not found
+[WARNING] Citeproc: citation LocNarWeb not found
+[WARNING] Citeproc: citation Mikolov2013 not found
+[WARNING] Citeproc: citation MultiSurv2021 not found
+[WARNING] Citeproc: citation NNCLR not found
+[WARNING] Citeproc: citation ORE not found
+[WARNING] Citeproc: citation Poelsterl2020 not found
+[WARNING] Citeproc: citation Raffel2019 not found
+[WARNING] Citeproc: citation SSDDR2020 not found
+[WARNING] Citeproc: citation Sirko2021 not found
+[WARNING] Citeproc: citation Sutskever2014 not found
+[WARNING] Citeproc: citation SwAV not found
+[WARNING] Citeproc: citation TRANSFORMERS_NLP not found
+[WARNING] Citeproc: citation TongAE not found
+[WARNING] Citeproc: citation WideDeepNN2016 not found
+[WARNING] Citeproc: citation alexnet not found
+[WARNING] Citeproc: citation bommasani2021opportunities not found
+[WARNING] Citeproc: citation bordes2020incorporating not found
+[WARNING] Citeproc: citation byol not found
+[WARNING] Citeproc: citation contrastive not found
+[WARNING] Citeproc: citation cornia2020m2 not found
+[WARNING] Citeproc: citation depthwidth not found
+[WARNING] Citeproc: citation effecient not found
+[WARNING] Citeproc: citation fellbaum2010wordnet not found
+[WARNING] Citeproc: citation gao2020pile not found
+[WARNING] Citeproc: citation gpipe not found
+[WARNING] Citeproc: citation hinton2015distilling not found
+[WARNING] Citeproc: citation history1 not found
+[WARNING] Citeproc: citation history2 not found
+[WARNING] Citeproc: citation krishna2017visual not found
+[WARNING] Citeproc: citation krizhevsky2009learning not found
+[WARNING] Citeproc: citation kuznetsova2020open not found
+[WARNING] Citeproc: citation mobilenet not found
+[WARNING] Citeproc: citation nichol2021glide not found
+[WARNING] Citeproc: citation noisy not found
+[WARNING] Citeproc: citation pont2020connecting not found
+[WARNING] Citeproc: citation ramesh2021dalle not found
+[WARNING] Citeproc: citation ramesh2022hierarchical not found
+[WARNING] Citeproc: citation renet not found
+[WARNING] Citeproc: citation resnet not found
+[WARNING] Citeproc: citation rosset2020turing not found
+[WARNING] Citeproc: citation saharia2022photorealistic not found
+[WARNING] Citeproc: citation schuhmann2021laion not found
+[WARNING] Citeproc: citation selfa not found
+[WARNING] Citeproc: citation selfsup not found
+[WARNING] Citeproc: citation selfsup2 not found
+[WARNING] Citeproc: citation simclr not found
+[WARNING] Citeproc: citation sun2017revisiting not found
+[WARNING] Citeproc: citation supervised not found
+[WARNING] Citeproc: citation tian2020contrastive not found
+[WARNING] Citeproc: citation torralba2011unbiased not found
+[WARNING] Citeproc: citation unsupervised not found
+[WARNING] Citeproc: citation vgg not found
+[WARNING] Citeproc: citation vit not found
+[WARNING] Citeproc: citation wang not found
+[WARNING] Citeproc: citation width not found
+[WARNING] Citeproc: citation young2014image not found
+[WARNING] Citeproc: citation zhou2017scene not found
+[WARNING] Citeproc: citation zhu2015aligning not found
+
+

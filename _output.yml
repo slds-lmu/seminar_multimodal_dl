@@ -1,12 +1,13 @@
 bookdown::gitbook:
   dev: svglite
   css: css/style.css
+  toc_depth: 2
   split_by: chapter
   config:
     toc:
       collapse: section
       before: |
-        <li><a href="./">Multimodal Deep Learning></li>
+        <li><a href="./index.html">Multimodal Deep Learning</li>
       after: |
         <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
     download: [pdf, epub]
@@ -15,6 +16,7 @@ bookdown::gitbook:
       facebook: no
 bookdown::html_chapters:
   css: [css/style.css, css/toc.css]
+  toc_depth: 2
 bookdown::pdf_book:
   includes:
     in_header: latex/preamble.tex
@@ -31,4 +33,5 @@ bookdown::pdf_book:
   quote_footer: ["\\VA{", "}{}"]
 bookdown::epub_book:
   dev: svglite
+  toc_depth: 2
   stylesheet: css/style.css

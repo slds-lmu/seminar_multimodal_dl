@@ -1,0 +1,1170 @@
+\begin{thebibliography}{}
+
+\bibitem[Agirre et~al., ]{agirre2009study}
+Agirre, E., Alfonseca, E., Hall, K., Kravalova, J., Pasca, M., and Soroa, A.
+\newblock A study on similarity and relatedness using distributional and
+  wordnet-based approaches.
+
+\bibitem[Ailem et~al., ]{ailem2018probabilistic}
+Ailem, M., Zhang, B., Bellet, A., Denis, P., and Sha, F.
+\newblock A probabilistic model for joint learning of word embeddings from
+  texts and images.
+
+\bibitem[Alayrac et~al., a]{alayrac2022flamingo}
+Alayrac, J.-B., Donahue, J., Luc, P., Miech, A., Barr, I., Hasson, Y., Lenc,
+  K., Mensch, A., Millican, K., Reynolds, M., et~al.
+\newblock Flamingo: a visual language model for few-shot learning.
+
+\bibitem[Alayrac et~al., b]{Flamingo}
+Alayrac, J.-B., Donahue, J., Luc, P., Miech, A., Barr, I., Hasson, Y., Lenc,
+  K., Mensch, A., Millican, K., Reynolds, M., Ring, R., Rutherford, E., Cabi,
+  S., Han, T., Gong, Z., Samangooei, S., Monteiro, M., Menick, J., Borgeaud,
+  S., Brock, A., Nematzadeh, A., Sharifzadeh, S., Binkowski, M., Barreira, R.,
+  Vinyals, O., Zisserman, A., and Simonyan, K.
+\newblock Flamingo: a visual language model for few-shot learning.
+
+\bibitem[Alford, ]{alford2021alignparams}
+Alford, A.
+\newblock Google announces 800m parameter vision-language ai model align.
+
+\bibitem[Anderson et~al., a]{spice}
+Anderson, P., Fernando, B., Johnson, M., and Gould, S.
+\newblock Spice: Semantic propositional image caption evaluation.
+\newblock In Leibe, B., Matas, J., Sebe, N., and Welling, M., editors, {\em
+  Computer Vision -- ECCV 2016}, pages 382--398. Springer International
+  Publishing.
+
+\bibitem[Anderson et~al., b]{8578734}
+Anderson, P., He, X., Buehler, C., Teney, D., Johnson, M., Gould, S., and
+  Zhang, L.
+\newblock Bottom-up and top-down attention for image captioning and visual
+  question answering.
+\newblock In {\em 2018 IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition}, pages 6077--6086.
+
+\bibitem[Antol et~al., ]{antol2015vqa}
+Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C.~L., and
+  Parikh, D.
+\newblock Vqa: Visual question answering.
+\newblock In {\em Proceedings of the IEEE international conference on computer
+  vision}, pages 2425--2433.
+
+\bibitem[Aran, ]{unrealEngine}
+Aran, K.
+\newblock When you generate images with vqgan clip, the image quality
+  dramatically improves if you add "unreal engine" to your prompt. people are
+  now calling this "unreal engine trick".
+
+\bibitem[Baevski et~al., a]{baevski2022data2vec}
+Baevski, A., Hsu, W.-N., Xu, Q., Babu, A., Gu, J., and Auli, M.
+\newblock Data2vec: A general framework for self-supervised learning in speech,
+  vision and language.
+
+\bibitem[Baevski et~al., b]{baevski2020wav2vec}
+Baevski, A., Zhou, Y., Mohamed, A., and Auli, M.
+\newblock wav2vec 2.0: A framework for self-supervised learning of speech
+  representations.
+\newblock 33:12449--12460.
+
+\bibitem[Baltrušaitis et~al., ]{Baltrusaitis2019}
+Baltrušaitis, T., Ahuja, C., and Morency, L.-P.
+\newblock Multimodal machine learning: A survey and taxonomy.
+\newblock 41(2):423--443.
+
+\bibitem[Bandy and Vincent, ]{bandy2021addressing}
+Bandy, J. and Vincent, N.
+\newblock Addressing" documentation debt" in machine learning research: A
+  retrospective datasheet for bookcorpus.
+
+\bibitem[Banerjee and Lavie, ]{meteor}
+Banerjee, S. and Lavie, A.
+\newblock {METEOR}: An automatic metric for {MT} evaluation with improved
+  correlation with human judgments.
+\newblock In {\em Proceedings of the {ACL} Workshop on Intrinsic and Extrinsic
+  Evaluation Measures for Machine Translation and/or Summarization}, pages
+  65--72. Association for Computational Linguistics.
+
+\bibitem[Bao et~al., ]{bao2021beit}
+Bao, H., Dong, L., and Wei, F.
+\newblock Beit: Bert pre-training of image transformers.
+
+\bibitem[Barham et~al., ]{Pathways}
+Barham, P., Chowdhery, A., Dean, J., Ghemawat, S., Hand, S., Hurt, D., Isard,
+  M., Lim, H., Pang, R., Roy, S., Saeta, B., Schuh, P., Sepassi, R., Shafey,
+  L.~E., Thekkath, C.~A., and Wu, Y.
+\newblock Pathways: Asynchronous distributed dataflow for ml.
+
+\bibitem[Bellemare et~al., ]{atari}
+Bellemare, M.~G., Naddaf, Y., Veness, J., and Bowling, M.
+\newblock The arcade learning environment: An evaluation platform for general
+  agents.
+\newblock 47(1):253--279.
+
+\bibitem[Beyer et~al., ]{beyer2020we}
+Beyer, L., Hénaff, O.~J., Kolesnikov, A., Zhai, X., and Oord, A. v.~d.
+\newblock Are we done with imagenet?
+
+\bibitem[Birhane et~al., ]{birhane2021multimodal}
+Birhane, A., Prabhu, V.~U., and Kahembwe, E.
+\newblock Multimodal datasets: misogyny, pornography, and malignant
+  stereotypes.
+
+\bibitem[Boris, ]{DALLEmini}
+Boris, D.
+\newblock Dall·e mini.
+
+\bibitem[Bosch et~al., ]{bosch2007image}
+Bosch, A., Zisserman, A., and Munoz, X.
+\newblock Image classification using random forests and ferns.
+\newblock In {\em 2007 IEEE 11th international conference on computer vision},
+  pages 1--8. Ieee.
+
+\bibitem[Bowman and Dahl, ]{bowman2021will}
+Bowman, S.~R. and Dahl, G.~E.
+\newblock What will it take to fix benchmarking in natural language
+  understanding?
+
+\bibitem[Bromley et~al., ]{bromley1993signature}
+Bromley, J., Guyon, I., LeCun, Y., Säckinger, E., and Shah, R.
+\newblock Signature verification using a" siamese" time delay neural network.
+\newblock 6.
+
+\bibitem[Brown et~al., a]{brown2020language}
+Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J.~D., Dhariwal, P.,
+  Neelakantan, A., Shyam, P., Sastry, G., Askell, A., et~al.
+\newblock Language models are few-shot learners.
+\newblock 33:1877--1901.
+
+\bibitem[Brown et~al., b]{GPT3}
+Brown, T.~B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P.,
+  Neelakantan, A., Shyam, P., Sastry, G., Askell, A., Agarwal, S.,
+  Herbert-Voss, A., Krueger, G., Henighan, T., Child, R., Ramesh, A., Ziegler,
+  D.~M., Wu, J., Winter, C., Hesse, C., Chen, M., Sigler, E., Litwin, M., Gray,
+  S., Chess, B., Clark, J., Berner, C., McCandlish, S., Radford, A., Sutskever,
+  I., and Amodei, D.
+\newblock Language models are few-shot learners.
+
+\bibitem[Bruni et~al., ]{bruni2014multimodal}
+Bruni, E., Tran, N.-K., and Baroni, M.
+\newblock Multimodal distributional semantics.
+\newblock 49:1--47.
+
+\bibitem[Brysbaert et~al., ]{brysbaert2014concreteness}
+Brysbaert, M., Warriner, A.~B., and Kuperman, V.
+\newblock Concreteness ratings for 40 thousand generally known english word
+  lemmas.
+\newblock 46(3):904--911.
+
+\bibitem[Bäck and Schwefel, ]{Baeck1993}
+Bäck, T. and Schwefel, H.-P.
+\newblock An overview of evolutionary algorithms for parameter optimization.
+\newblock 1(1):1--23.
+
+\bibitem[Carion et~al., ]{Carion2020}
+Carion, N., Massa, F., Synnaeve, G., Usunier, N., Kirillov, A., and Zagoruyko,
+  S.
+\newblock End-to-end object detection with transformers.
+
+\bibitem[Caron et~al., ]{caron2021emerging}
+Caron, M., Touvron, H., Misra, I., Jégou, H., Mairal, J., Bojanowski, P., and
+  Joulin, A.
+\newblock Emerging properties in self-supervised vision transformers.
+\newblock In {\em Proceedings of the IEEE/CVF International Conference on
+  Computer Vision}, pages 9650--9660.
+
+\bibitem[Chen et~al., a]{SimCLR}
+Chen, T., Kornblith, S., Norouzi, M., and Hinton, G.
+\newblock A simple framework for contrastive learning of visual
+  representations.
+
+\bibitem[Chen et~al., b]{chen2021empirical}
+Chen, X., Xie, S., and He, K.
+\newblock An empirical study of training self-supervised vision transformers.
+\newblock In {\em Proceedings of the IEEE/CVF International Conference on
+  Computer Vision}, pages 9640--9649.
+
+\bibitem[Chowdhery et~al., a]{chowdhery2022palm}
+Chowdhery, A., Narang, S., Devlin, J., Bosma, M., Mishra, G., Roberts, A.,
+  Barham, P., Chung, H.~W., Sutton, C., Gehrmann, S., et~al.
+\newblock Palm: Scaling language modeling with pathways.
+
+\bibitem[Chowdhery et~al., b]{Chowdhery2022}
+Chowdhery, A., Narang, S., Devlin, J., Bosma, M., Mishra, G., Roberts, A.,
+  Barham, P., Chung, H.~W., Sutton, C., Gehrmann, S., Schuh, P., Shi, K.,
+  Tsvyashchenko, S., Maynez, J., Rao, A., Barnes, P., Tay, Y., Shazeer, N.,
+  Prabhakaran, V., Reif, E., Du, N., Hutchinson, B., Pope, R., Bradbury, J.,
+  Austin, J., Isard, M., Gur-Ari, G., Yin, P., Duke, T., Levskaya, A.,
+  Ghemawat, S., Dev, S., Michalewski, H., Garcia, X., Misra, V., Robinson, K.,
+  Fedus, L., Zhou, D., Ippolito, D., Luan, D., Lim, H., Zoph, B., Spiridonov,
+  A., Sepassi, R., Dohan, D., Agrawal, S., Omernick, M., Dai, A.~M., Pillai,
+  T.~S., Pellat, M., Lewkowycz, A., Moreira, E., Child, R., Polozov, O., Lee,
+  K., Zhou, Z., Wang, X., Saeta, B., Diaz, M., Firat, O., Catasta, M., Wei, J.,
+  Meier-Hellstern, K., Eck, D., Dean, J., Petrov, S., and Fiedel, N.
+\newblock Palm: Scaling language modeling with pathways.
+
+\bibitem[Collell et~al., ]{collell2017imagined}
+Collell, G., Zhang, T., and Moens, M.-F.
+\newblock Imagined visual representations as multimodal embeddings.
+\newblock In {\em Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~31.
+
+\bibitem[Cornia et~al., ]{meshed_memory}
+Cornia, M., Stefanini, M., Baraldi, L., and Cucchiara, R.
+\newblock Meshed-memory transformer for image captioning.
+
+\bibitem[Crawshaw, ]{Crawshaw2020}
+Crawshaw, M.
+\newblock Multi-task learning with deep neural networks: A survey.
+
+\bibitem[Das et~al., ]{das2017human}
+Das, A., Agrawal, H., Zitnick, L., Parikh, D., and Batra, D.
+\newblock Human attention in visual question answering: Do humans and deep
+  networks look at the same regions?
+\newblock 163:90--100.
+
+\bibitem[Dean, a]{Dean20}
+Dean, J.
+\newblock 1.1 the deep learning revolution and its implications for computer
+  architecture and chip design.
+\newblock In {\em 2020 IEEE International Solid- State Circuits Conference -
+  (ISSCC)}, pages 8--14.
+
+\bibitem[Dean, b]{Dean21}
+Dean, J.
+\newblock Introducing pathways: A next-generation ai architecture.
+
+\bibitem[Dehouche, ]{misconduct}
+Dehouche, N.
+\newblock Plagiarism in the age of massive generative pre-trained transformers
+  (gpt-3).
+\newblock 21:17--23.
+
+\bibitem[Deng et~al., ]{deng2009imagenet}
+Deng, J., Dong, W., Socher, R., Li, L.-J., Li, K., and Fei-Fei, L.
+\newblock Imagenet: A large-scale hierarchical image database.
+\newblock In {\em 2009 IEEE conference on computer vision and pattern
+  recognition}, pages 248--255. Ieee.
+
+\bibitem[Devereux et~al., ]{devereux2014centre}
+Devereux, B.~J., Tyler, L.~K., Geertzen, J., and Randall, B.
+\newblock The centre for speech, language and the brain (cslb) concept property
+  norms.
+\newblock 46(4):1119--1127.
+
+\bibitem[Devlin et~al., a]{BERT}
+Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+
+\bibitem[Devlin et~al., b]{Devlin2018}
+Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+
+\bibitem[Devlin et~al., c]{devlin-etal-2019-bert}
+Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K.
+\newblock {BERT}: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock pages 4171--4186. Association for Computational Linguistics.
+
+\bibitem[Devlin et~al., d]{devlin2018bert}
+Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+
+\bibitem[Dhamala et~al., ]{dhamala2021bold}
+Dhamala, J., Sun, T., Kumar, V., Krishna, S., Pruksachatkun, Y., Chang, K.-W.,
+  and Gupta, R.
+\newblock Bold: Dataset and metrics for measuring biases in open-ended language
+  generation.
+\newblock In {\em Proceedings of the 2021 ACM Conference on Fairness,
+  Accountability, and Transparency}, pages 862--872.
+
+\bibitem[Dhariwal and Nichol, ]{DiffusionModels}
+Dhariwal, P. and Nichol, A.
+\newblock Diffusion models beat gans on image synthesis.
+
+\bibitem[Doerr and Neumann, ]{Doerr2021}
+Doerr, B. and Neumann, F.
+\newblock A survey on recent progress in the theory of evolutionary algorithms
+  for discrete optimization.
+\newblock 1(4).
+
+\bibitem[Dosovitskiy et~al., ]{dosovitskiy2020image}
+Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X.,
+  Unterthiner, T., Dehghani, M., Minderer, M., Heigold, G., Gelly, S., et~al.
+\newblock An image is worth 16x16 words: Transformers for image recognition at
+  scale.
+
+\bibitem[Esser et~al., a]{bias}
+Esser, P., Rombach, R., and Ommer, B.
+\newblock A note on data biases in generative models.
+
+\bibitem[Esser et~al., b]{esser2021taming}
+Esser, P., Rombach, R., and Ommer, B.
+\newblock Taming transformers for high-resolution image synthesis.
+\newblock In {\em Proceedings of the IEEE/CVF conference on computer vision and
+  pattern recognition}, pages 12873--12883.
+
+\bibitem[Everingham et~al., ]{pascalvoc}
+Everingham, M., {van Gool}, L., Williams, C., Winn, J., and Zisserman, A.
+\newblock The pascal visual object classes (voc) challenge.
+\newblock 88(2):303--338.
+
+\bibitem[Fellbaum, ]{WordNet}
+Fellbaum, C.~D.
+\newblock Wordnet : an electronic lexical database.
+\newblock 76:706.
+
+\bibitem[Fernando et~al., ]{Fernando2017}
+Fernando, C., Banarse, D., Blundell, C., Zwols, Y., Ha, D., Rusu, A.~A.,
+  Pritzel, A., and Wierstra, D.
+\newblock Pathnet: Evolution channels gradient descent in super neural
+  networks.
+
+\bibitem[Galanter, ]{galanter2016generative}
+Galanter, P.
+\newblock Generative art theory.
+\newblock 1:631.
+
+\bibitem[Gao et~al., ]{gao2017knowledge}
+Gao, J., Li, Z., Nevatia, R., et~al.
+\newblock Knowledge concentration: Learning 100k object classifiers in a single
+  cnn.
+
+\bibitem[Gatys et~al., ]{StyleTransfer}
+Gatys, L.~A., Ecker, A.~S., and Bethge, M.
+\newblock A neural algorithm of artistic style.
+
+\bibitem[Gesmundo and Dean, ]{Gesmundo2022a}
+Gesmundo, A. and Dean, J.
+\newblock munet: Evolving pretrained deep neural networks into scalable
+  auto-tuning multitask systems.
+
+\bibitem[Gokaslan and Cohen, ]{Gokaslan2019OpenWeb}
+Gokaslan, A. and Cohen, V.
+\newblock Openwebtext corpus.
+
+\bibitem[Goodfellow et~al., a]{NIPS2014_5ca3e9b1}
+Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair,
+  S., Courville, A., and Bengio, Y.
+\newblock Generative adversarial nets.
+\newblock In Ghahramani, Z., Welling, M., Cortes, C., Lawrence, N., and
+  Weinberger, K., editors, {\em Advances in Neural Information Processing
+  Systems}, volume~27. Curran Associates, Inc.
+
+\bibitem[Goodfellow et~al., b]{GAN}
+Goodfellow, I.~J., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D.,
+  Ozair, S., Courville, A., and Bengio, Y.
+\newblock Generative adversarial networks.
+
+\bibitem[Goodfellow et~al., c]{goodfellow2014explaining}
+Goodfellow, I.~J., Shlens, J., and Szegedy, C.
+\newblock Explaining and harnessing adversarial examples.
+
+\bibitem[Goyal et~al., ]{goyal2017making}
+Goyal, Y., Khot, T., Summers-Stay, D., Batra, D., and Parikh, D.
+\newblock Making the v in vqa matter: Elevating the role of image understanding
+  in visual question answering.
+\newblock In {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition}, pages 6904--6913.
+
+\bibitem[Grill et~al., a]{grill2020bootstrap}
+Grill, J.-B., Strub, F., Altché, F., Tallec, C., Richemond, P., Buchatskaya,
+  E., Doersch, C., Avila~Pires, B., Guo, Z., Gheshlaghi~Azar, M., et~al.
+\newblock Bootstrap your own latent-a new approach to self-supervised learning.
+\newblock 33:21271--21284.
+
+\bibitem[Grill et~al., b]{BYOL}
+Grill, J.-B., Strub, F., Altché, F., Tallec, C., Richemond, P.~H.,
+  Buchatskaya, E., Doersch, C., Pires, B.~A., Guo, Z.~D., Azar, M.~G., Piot,
+  B., Kavukcuoglu, K., Munos, R., and Valko, M.
+\newblock Bootstrap your own latent: A new approach to self-supervised
+  learning.
+
+\bibitem[Guo et~al., ]{guo2016ms}
+Guo, Y., Zhang, L., Hu, Y., He, X., and Gao, J.
+\newblock Ms-celeb-1m: A dataset and benchmark for large-scale face
+  recognition.
+\newblock In {\em European conference on computer vision}, pages 87--102.
+  Springer.
+
+\bibitem[Harnad, ]{harnad1990symbol}
+Harnad, S.
+\newblock The symbol grounding problem.
+\newblock 42(1-3):335--346.
+
+\bibitem[Harris et~al., ]{harris1954distributional}
+Harris, Z. et~al.
+\newblock Distributional hypothesis.
+\newblock 10(23):146--162.
+
+\bibitem[He et~al., a]{he2022masked}
+He, K., Chen, X., Xie, S., Li, Y., Dollár, P., and Girshick, R.
+\newblock Masked autoencoders are scalable vision learners.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition}, pages 16000--16009.
+
+\bibitem[He et~al., b]{ResNet}
+He, K., Zhang, X., Ren, S., and Sun, J.
+\newblock Deep residual learning for image recognition.
+
+\bibitem[Henderson et~al., ]{henderson2020towards}
+Henderson, P., Hu, J., Romoff, J., Brunskill, E., Jurafsky, D., and Pineau, J.
+\newblock Towards the systematic reporting of the energy and carbon footprints
+  of machine learning.
+\newblock 21(248):1--43.
+
+\bibitem[Herdade et~al., ]{HerdadeKBS19}
+Herdade, S., Kappeler, A., Boakye, K., and Soares, J.
+\newblock Image captioning: Transforming objects into words.
+\newblock pages 11135--11145.
+
+\bibitem[Hill and Korhonen, ]{hill2014learning}
+Hill, F. and Korhonen, A.
+\newblock Learning abstract concept embeddings from multi-modal data: Since you
+  probably can’t see what i mean.
+\newblock In {\em Proceedings of the 2014 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 255--265.
+
+\bibitem[Hill et~al., ]{hill2015simlex}
+Hill, F., Reichart, R., and Korhonen, A.
+\newblock Simlex-999: Evaluating semantic models with (genuine) similarity
+  estimation.
+\newblock 41(4):665--695.
+
+\bibitem[Hinton et~al., ]{Hinton2015}
+Hinton, G., Vinyals, O., and Dean, J.
+\newblock Distilling the knowledge in a neural network.
+
+\bibitem[Hochreiter and Schmidhuber, ]{hochreiter1997long}
+Hochreiter, S. and Schmidhuber, J.
+\newblock Long short-term memory.
+\newblock 9(8):1735--1780.
+
+\bibitem[Hoffmann et~al., ]{hoffmann2022training}
+Hoffmann, J., Borgeaud, S., Mensch, A., Buchatskaya, E., Cai, T., Rutherford,
+  E., Casas, D. d.~L., Hendricks, L.~A., Welbl, J., Clark, A., et~al.
+\newblock Training compute-optimal large language models.
+
+\bibitem[Hu and Singh, a]{hu2021unit}
+Hu, R. and Singh, A.
+\newblock Unit: Multimodal multitask learning with a unified transformer.
+\newblock In {\em Proceedings of the IEEE/CVF International Conference on
+  Computer Vision}, pages 1439--1449.
+
+\bibitem[Hu and Singh, b]{Hu2021}
+Hu, R. and Singh, A.
+\newblock Unit: Multimodal multitask learning with a unified transformer.
+\newblock In {\em 2021 IEEE/CVF International Conference on Computer Vision
+  (ICCV)}, pages 1419--1429.
+
+\bibitem[Huang et~al., ]{huang1}
+Huang, L., Wang, W., Chen, J., and Wei, X.-Y.
+\newblock Attention on attention for image captioning.
+\newblock pages 4633--4642.
+
+\bibitem[Hudson and Manning, ]{hudson2019gqa}
+Hudson, D.~A. and Manning, C.~D.
+\newblock Gqa: A new dataset for real-world visual reasoning and compositional
+  question answering.
+\newblock In {\em Proceedings of the IEEE/CVF conference on computer vision and
+  pattern recognition}, pages 6700--6709.
+
+\bibitem[Ive et~al., ]{ive2019distilling}
+Ive, J., Madhyastha, P., and Specia, L.
+\newblock Distilling translations with visual awareness.
+
+\bibitem[Jacobs et~al., ]{Jacobs1991}
+Jacobs, R.~A., Jordan, M.~I., Nowlan, S.~J., and Hinton, G.~E.
+\newblock Adaptive mixtures of local experts.
+\newblock 3(1):79--87.
+
+\bibitem[Jaegle et~al., ]{jaegle2021perceiver}
+Jaegle, A., Gimeno, F., Brock, A., Vinyals, O., Zisserman, A., and Carreira, J.
+\newblock Perceiver: General perception with iterative attention.
+\newblock In {\em International conference on machine learning}, pages
+  4651--4664. PMLR.
+
+\bibitem[Jia et~al., a]{ALIGN}
+Jia, C., Yang, Y., Xia, Y., Chen, Y., Parekh, Z., Pham, H., Le, Q.~V., Sung,
+  Y., Li, Z., and Duerig, T.
+\newblock Scaling up visual and vision-language representation learning with
+  noisy text supervision.
+
+\bibitem[Jia et~al., b]{jia2021scaling}
+Jia, C., Yang, Y., Xia, Y., Chen, Y.-T., Parekh, Z., Pham, H., Le, Q., Sung,
+  Y.-H., Li, Z., and Duerig, T.
+\newblock Scaling up visual and vision-language representation learning with
+  noisy text supervision.
+\newblock In {\em International Conference on Machine Learning}, pages
+  4904--4916. PMLR.
+
+\bibitem[Jordan and Jacobs, ]{Jordan1994}
+Jordan, M.~I. and Jacobs, R.~A.
+\newblock Hierarchical mixtures of experts and the em algorithm.
+\newblock 6(2):181--214.
+
+\bibitem[Joshi et~al., ]{explainaility}
+Joshi, G., Walambe, R., and Kotecha, K.
+\newblock A review on explainability in multimodal deep neural nets.
+\newblock 9:59800--59821.
+
+\bibitem[Kaiser et~al., ]{Kaiser2017}
+Kaiser, L., Gomez, A.~N., Shazeer, N., Vaswani, A., Parmar, N., Jones, L., and
+  Uszkoreit, J.
+\newblock One model to learn them all.
+
+\bibitem[Karpathy and Fei-Fei, ]{karpthy1}
+Karpathy, A. and Fei-Fei, L.
+\newblock Deep visual-semantic alignments for generating image descriptions.
+
+\bibitem[Karras et~al., ]{karras2019style}
+Karras, T., Laine, S., and Aila, T.
+\newblock A style-based generator architecture for generative adversarial
+  networks.
+\newblock In {\em Proceedings of the IEEE/CVF conference on computer vision and
+  pattern recognition}, pages 4401--4410.
+
+\bibitem[Kiela and Bottou, ]{kiela2014learning}
+Kiela, D. and Bottou, L.
+\newblock Learning image embeddings using convolutional neural networks for
+  improved multi-modal semantics.
+\newblock In {\em Proceedings of the 2014 Conference on empirical methods in
+  natural language processing (EMNLP)}, pages 36--45.
+
+\bibitem[Kiela et~al., ]{kiela2017learning}
+Kiela, D., Conneau, A., Jabri, A., and Nickel, M.
+\newblock Learning visually grounded sentence representations.
+
+\bibitem[Kingma and Welling, ]{VAE}
+Kingma, D.~P. and Welling, M.
+\newblock An introduction to variational autoencoders.
+
+\bibitem[Kiros et~al., ]{kiros2018illustrative}
+Kiros, J., Chan, W., and Hinton, G.
+\newblock Illustrative language understanding: Large-scale visual grounding
+  with image search.
+\newblock In {\em Proceedings of the 56th Annual Meeting of the Association for
+  Computational Linguistics (Volume 1: Long Papers)}, pages 922--933.
+
+\bibitem[Koehn, ]{koehn2005europarl}
+Koehn, P.
+\newblock Europarl: A parallel corpus for statistical machine translation.
+\newblock In {\em Proceedings of machine translation summit x: papers}, pages
+  79--86.
+
+\bibitem[Kolesnikov et~al., ]{kolesnikov2019large}
+Kolesnikov, A., Beyer, L., Zhai, X., Puigcerver, J., Yung, J., Gelly, S., and
+  Houlsby, N.
+\newblock Large scale learning of general visual representations for transfer.
+\newblock 2(8).
+
+\bibitem[Kottur et~al., ]{kottur2016visual}
+Kottur, S., Vedantam, R., Moura, J.~M., and Parikh, D.
+\newblock Visual word2vec (vis-w2v): Learning visually grounded word embeddings
+  using abstract scenes.
+\newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}, pages 4985--4994.
+
+\bibitem[Krishna et~al., ]{krishnavisualgenome}
+Krishna, R., Zhu, Y., Groth, O., Johnson, J., Hata, K., Kravitz, J., Chen, S.,
+  Kalantidis, Y., Li, L.-J., Shamma, D.~A., Bernstein, M., and Fei-Fei, L.
+\newblock Visual genome: Connecting language and vision using crowdsourced
+  dense image annotations.
+
+\bibitem[Krizhevsky et~al., ]{krizhevsky2012imagenet}
+Krizhevsky, A., Sutskever, I., and Hinton, G.~E.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock 25.
+
+\bibitem[Kudo and Richardson, ]{kudo-richardson-2018-sentencepiece}
+Kudo, T. and Richardson, J.
+\newblock {S}entence{P}iece: A simple and language independent subword
+  tokenizer and detokenizer for neural text processing.
+\newblock In {\em Proceedings of the 2018 Conference on Empirical Methods in
+  Natural Language Processing: System Demonstrations}, pages 66--71.
+  Association for Computational Linguistics.
+
+\bibitem[Lazaridou et~al., ]{lazaridou2015combining}
+Lazaridou, A., Pham, N.~T., and Baroni, M.
+\newblock Combining language and vision with a multimodal skip-gram model.
+
+\bibitem[Lewis et~al., ]{lewis-etal-2020-bart}
+Lewis, M., Liu, Y., Goyal, N., Ghazvininejad, M., Mohamed, A., Levy, O.,
+  Stoyanov, V., and Zettlemoyer, L.
+\newblock {BART}: Denoising sequence-to-sequence pre-training for natural
+  language generation, translation, and comprehension.
+\newblock In {\em Proceedings of the 58th Annual Meeting of the Association for
+  Computational Linguistics}, pages 7871--7880. Association for Computational
+  Linguistics.
+
+\bibitem[Lewkowycz et~al., ]{Lewkowycz2022}
+Lewkowycz, A., Andreassen, A., Dohan, D.~M., Dyer, E.~S., Michalewski, H.,
+  Ramasesh, V., Slone, A., Anil, C., Schlag, I., Gutman-Solo, T., Wu, Y.,
+  Neyshabur, B., Gur-Ari, G., and Misra, V.
+\newblock Solving quantitative reasoning problems with language models.
+
+\bibitem[Lin, ]{lin-2004-rouge}
+Lin, C.-Y.
+\newblock {ROUGE}: A package for automatic evaluation of summaries.
+\newblock In {\em Text Summarization Branches Out}, pages 74--81. Association
+  for Computational Linguistics.
+
+\bibitem[Lin et~al., a]{COCO}
+Lin, T.-Y., Maire, M., Belongie, S., Bourdev, L., Girshick, R., Hays, J.,
+  Perona, P., Ramanan, D., Zitnick, C.~L., and Dollár, P.
+\newblock Microsoft coco: Common objects in context.
+
+\bibitem[Lin et~al., b]{lin2014microsoft}
+Lin, T.-Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D.,
+  Dollár, P., and Zitnick, C.~L.
+\newblock Microsoft coco: Common objects in context.
+\newblock In {\em European conference on computer vision}, pages 740--755.
+  Springer.
+
+\bibitem[Lin et~al., c]{mccoco}
+Lin, T.-Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D.,
+  Dollár, P., and Zitnick, C.~L.
+\newblock Microsoft coco: Common objects in context.
+\newblock In {\em Computer Vision -- ECCV 2014}, pages 740--755. Springer
+  International Publishing.
+
+\bibitem[Liu et~al., ]{liu2019roberta}
+Liu, Y., Ott, M., Goyal, N., Du, J., Joshi, M., Chen, D., Levy, O., Lewis, M.,
+  Zettlemoyer, L., and Stoyanov, V.
+\newblock Roberta: A robustly optimized bert pretraining approach.
+
+\bibitem[Lottick et~al., ]{lottick2019energy}
+Lottick, K., Susai, S., Friedler, S.~A., and Wilson, J.~P.
+\newblock Energy usage reports: Environmental awareness as part of algorithmic
+  accountability.
+
+\bibitem[Lu et~al., a]{VilBert}
+Lu, J., Batra, D., Parikh, D., and Lee, S.
+\newblock Vilbert: Pretraining task-agnostic visiolinguistic representations
+  for vision-and-language tasks.
+
+\bibitem[Lu et~al., b]{lu2019vilbert}
+Lu, J., Batra, D., Parikh, D., and Lee, S.
+\newblock Vilbert: Pretraining task-agnostic visiolinguistic representations
+  for vision-and-language tasks.
+\newblock 32.
+
+\bibitem[Lu et~al., c]{lu2022imagination}
+Lu, Y., Zhu, W., Wang, X.~E., Eckstein, M., and Wang, W.~Y.
+\newblock Imagination-augmented natural language understanding.
+
+\bibitem[Mahajan et~al., ]{mahajan2018exploring}
+Mahajan, D., Girshick, R., Ramanathan, V., He, K., Paluri, M., Li, Y.,
+  Bharambe, A., and Van Der~Maaten, L.
+\newblock Exploring the limits of weakly supervised pretraining.
+\newblock In {\em Proceedings of the European conference on computer vision
+  (ECCV)}, pages 181--196.
+
+\bibitem[Mayer and Cysouw, ]{mayer2014creating}
+Mayer, T. and Cysouw, M.
+\newblock Creating a massively parallel bible corpus.
+\newblock 135(273):40.
+
+\bibitem[Mccormack and Gambardella, ]{3D}
+Mccormack, J. and Gambardella, C.~C.
+\newblock Growing and evolving 3-d prints.
+\newblock 26(1):88--99.
+
+\bibitem[MICHAEL~BARTHEL and MITCHELL, ]{redditUsers}
+MICHAEL~BARTHEL, GALEN~STOCKING, J.~H. and MITCHELL, A.
+\newblock Reddit news users more likely to be male, young and digital in their
+  news preferences.
+
+\bibitem[Mikolov et~al., ]{mikolov2013efficient}
+Mikolov, T., Chen, K., Corrado, G., and Dean, J.
+\newblock Efficient estimation of word representations in vector space.
+
+\bibitem[Mineault, ]{unsupBrain}
+Mineault, P.
+\newblock Unsupervised models of the brain.
+
+\bibitem[Mircosoft, ]{coco_eval}
+Mircosoft.
+\newblock Evaluate:detection.
+
+\bibitem[Mordvintsev, ]{mordvintsev_2015}
+Mordvintsev, A.
+\newblock Inceptionism: Going deeper into neural networks.
+
+\bibitem[Mustafa et~al., ]{Mustafa2022}
+Mustafa, B., Riquelme, C., Puigcerver, J., Jenatton, R., and Houlsby, N.
+\newblock Multimodal contrastive learning with limoe: the language-image
+  mixture of experts.
+
+\bibitem[Nichol et~al., ]{GLIDE}
+Nichol, A., Dhariwal, P., Ramesh, A., Shyam, P., Mishkin, P., McGrew, B.,
+  Sutskever, I., and Chen, M.
+\newblock Glide: Towards photorealistic image generation and editing with
+  text-guided diffusion models.
+
+\bibitem[OpenAI, ]{DALLEpytorch}
+OpenAI.
+\newblock Dall-e.
+
+\bibitem[Papineni et~al., ]{papineni-etal-2002-bleu}
+Papineni, K., Roukos, S., Ward, T., and Zhu, W.-J.
+\newblock {B}leu: a method for automatic evaluation of machine translation.
+\newblock In {\em Proceedings of the 40th Annual Meeting of the Association for
+  Computational Linguistics}, pages 311--318. Association for Computational
+  Linguistics.
+
+\bibitem[Parcalabescu et~al., ]{parcalabescu-etal-2022-valse}
+Parcalabescu, L., Cafagna, M., Muradjan, L., Frank, A., Calixto, I., and Gatt,
+  A.
+\newblock {VALSE}: A task-independent benchmark for vision and language models
+  centered on linguistic phenomena.
+\newblock In {\em Proceedings of the 60th Annual Meeting of the Association for
+  Computational Linguistics (Volume 1: Long Papers)}, pages 8253--8280.
+  Association for Computational Linguistics.
+
+\bibitem[Patashnik et~al., ]{StyleGAN}
+Patashnik, O., Wu, Z., Shechtman, E., Cohen{-}Or, D., and Lischinski, D.
+\newblock Styleclip: Text-driven manipulation of stylegan imagery.
+
+\bibitem[Pennington et~al., ]{pennington2014glove}
+Pennington, J., Socher, R., and Manning, C.~D.
+\newblock Glove: Global vectors for word representation.
+\newblock In {\em Proceedings of the 2014 conference on empirical methods in
+  natural language processing (EMNLP)}, pages 1532--1543.
+
+\bibitem[Perez et~al., ]{perez2021true}
+Perez, E., Kiela, D., and Cho, K.
+\newblock True few-shot learning with language models.
+\newblock 34:11054--11070.
+
+\bibitem[Pezzelle et~al., ]{pezzelle2021word}
+Pezzelle, S., Takmaz, E., and Fernández, R.
+\newblock Word representation learning in multimodal pre-trained transformers:
+  An intrinsic evaluation.
+\newblock 9:1563--1579.
+
+\bibitem[Prabhu and Birhane, ]{prabhu2020large}
+Prabhu, V.~U. and Birhane, A.
+\newblock Large image datasets: A pyrrhic win for computer vision?
+
+\bibitem[Qiao et~al., ]{qiao2022initial}
+Qiao, H., Liu, V., and Chilton, L.
+\newblock Initial images: Using image prompts to improve subject representation
+  in multimodal ai generated art.
+\newblock In {\em Creativity and Cognition}, pages 15--28.
+
+\bibitem[{R Core Team}, ]{rlang}
+{R Core Team}.
+\newblock {\em R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing.
+
+\bibitem[Radford et~al., a]{radford2021learning}
+Radford, A., Kim, J.~W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry,
+  G., Askell, A., Mishkin, P., Clark, J., et~al.
+\newblock Learning transferable visual models from natural language
+  supervision.
+\newblock In {\em International Conference on Machine Learning}, pages
+  8748--8763. PMLR.
+
+\bibitem[Radford et~al., b]{CLIP}
+Radford, A., Kim, J.~W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry,
+  G., Askell, A., Mishkin, P., Clark, J., Krueger, G., and Sutskever, I.
+\newblock Learning transferable visual models from natural language
+  supervision.
+
+\bibitem[Radford et~al., c]{Radford2019LanguageMA}
+Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., and Sutskever, I.
+\newblock Language models are unsupervised multitask learners.
+
+\bibitem[Radford et~al., d]{radford2019language}
+Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., Sutskever, I., et~al.
+\newblock Language models are unsupervised multitask learners.
+\newblock 1(8):9.
+
+\bibitem[Rajpurkar et~al., a]{rajpurkar2018know}
+Rajpurkar, P., Jia, R., and Liang, P.
+\newblock Know what you don't know: Unanswerable questions for squad.
+
+\bibitem[Rajpurkar et~al., b]{rajpurkar2016squad}
+Rajpurkar, P., Zhang, J., Lopyrev, K., and Liang, P.
+\newblock Squad: 100,000+ questions for machine comprehension of text.
+
+\bibitem[Ramesh et~al., a]{DALLE2}
+Ramesh, A., Dhariwal, P., Nichol, A., Chu, C., and Chen, M.
+\newblock Hierarchical text-conditional image generation with clip latents.
+
+\bibitem[Ramesh et~al., b]{DALLE}
+Ramesh, A., Pavlov, M., Goh, G., Gray, S., Voss, C., Radford, A., Chen, M., and
+  Sutskever, I.
+\newblock Zero-shot text-to-image generation.
+
+\bibitem[Ramesh et~al., c]{pmlr-v139-ramesh21a}
+Ramesh, A., Pavlov, M., Goh, G., Gray, S., Voss, C., Radford, A., Chen, M., and
+  Sutskever, I.
+\newblock Zero-shot text-to-image generation.
+\newblock In Meila, M. and Zhang, T., editors, {\em Proceedings of the 38th
+  International Conference on Machine Learning}, volume 139 of {\em Proceedings
+  of Machine Learning Research}, pages 8821--8831. PMLR.
+
+\bibitem[Rebuffi et~al., ]{Rebuffi2017}
+Rebuffi, S.-A., Bilen, H., and Vedaldi, A.
+\newblock Learning multiple visual domains with residual adapters.
+\newblock In Guyon, I., Luxburg, U.~V., Bengio, S., Wallach, H., Fergus, R.,
+  Vishwanathan, S., and Garnett, R., editors, {\em Advances in Neural
+  Information Processing Systems}, volume~30. Curran Associates, Inc.
+
+\bibitem[Recht et~al., ]{recht2019imagenet}
+Recht, B., Roelofs, R., Schmidt, L., and Shankar, V.
+\newblock Do imagenet classifiers generalize to imagenet?
+\newblock In {\em International Conference on Machine Learning}, pages
+  5389--5400. PMLR.
+
+\bibitem[Reed et~al., ]{Reed2022}
+Reed, S., Zolna, K., Parisotto, E., Colmenarejo, S.~G., Novikov, A.,
+  Barth-Maron, G., Gimenez, M., Sulsky, Y., Kay, J., Springenberg, J.~T.,
+  Eccles, T., Bruce, J., Razavi, A., Edwards, A., Heess, N., Chen, Y., Hadsell,
+  R., Vinyals, O., Bordbar, M., and de~Freitas, N.
+\newblock A generalist agent.
+
+\bibitem[Ren et~al., ]{ren2015faster}
+Ren, S., He, K., Girshick, R., and Sun, J.
+\newblock Faster r-cnn: Towards real-time object detection with region proposal
+  networks.
+\newblock 28.
+
+\bibitem[Rennie et~al., ]{8099614}
+Rennie, S.~J., Marcheret, E., Mroueh, Y., Ross, J., and Goel, V.
+\newblock Self-critical sequence training for image captioning.
+\newblock In {\em 2017 IEEE Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, pages 1179--1195.
+
+\bibitem[Ribeiro et~al., ]{ribeiro2020beyond}
+Ribeiro, M.~T., Wu, T., Guestrin, C., and Singh, S.
+\newblock Beyond accuracy: Behavioral testing of nlp models with checklist.
+
+\bibitem[Riquelme et~al., ]{Riquelme2021}
+Riquelme, C., Puigcerver, J., Mustafa, B., Neumann, M., Jenatton, R.,
+  Susano~Pinto, A., Keysers, D., and Houlsby, N.
+\newblock Scaling vision with sparse mixture of experts.
+\newblock In Ranzato, M., Beygelzimer, A., Dauphin, Y., Liang, P., and Vaughan,
+  J.~W., editors, {\em Advances in Neural Information Processing Systems},
+  volume~34, pages 8583--8595. Curran Associates, Inc.
+
+\bibitem[Russakovsky et~al., ]{ImageNet}
+Russakovsky, O., Deng, J., Su, H., Krause, J., Satheesh, S., Ma, S., Huang, Z.,
+  Karpathy, A., Khosla, A., Bernstein, M., Berg, A.~C., and Fei-Fei, L.
+\newblock Imagenet large scale visual recognition challenge.
+\newblock 115(3):211--252.
+
+\bibitem[Schuhmann, ]{schuhmann2022laion}
+Schuhmann, C.
+\newblock Laion-400-million open dataset.
+
+\bibitem[Schuhmann et~al., ]{LAION}
+Schuhmann, C., Vencu, R., Beaumont, R., Kaczmarczyk, R., Mullis, C., Katta, A.,
+  Coombes, T., Jitsev, J., and Komatsuzaki, A.
+\newblock {LAION-400M:} open dataset of clip-filtered 400 million image-text
+  pairs.
+
+\bibitem[Sennrich et~al., a]{sennrich2015neural}
+Sennrich, R., Haddow, B., and Birch, A.
+\newblock Neural machine translation of rare words with subword units.
+
+\bibitem[Sennrich et~al., b]{sennrich-etal-2016-neural}
+Sennrich, R., Haddow, B., and Birch, A.
+\newblock Neural machine translation of rare words with subword units.
+\newblock In {\em Proceedings of the 54th Annual Meeting of the Association for
+  Computational Linguistics (Volume 1: Long Papers)}, pages 1715--1725.
+  Association for Computational Linguistics.
+
+\bibitem[Shao et~al., ]{shao2019objects365}
+Shao, S., Li, Z., Zhang, T., Peng, C., Yu, G., Zhang, X., Li, J., and Sun, J.
+\newblock Objects365: A large-scale, high-quality dataset for object detection.
+\newblock In {\em Proceedings of the IEEE/CVF international conference on
+  computer vision}, pages 8430--8439.
+
+\bibitem[Shazeer et~al., ]{Shaazer2017}
+Shazeer, N., Mirhoseini, A., Maziarz, K., Davis, A., Le, Q., Hinton, G., and
+  Dean, J.
+\newblock Outrageously large neural networks: The sparsely-gated
+  mixture-of-experts layer.
+
+\bibitem[Shekhar et~al., ]{shekhar2017foil}
+Shekhar, R., Pezzelle, S., Klimovich, Y., Herbelot, A., Nabi, M., Sangineto,
+  E., and Bernardi, R.
+\newblock Foil it! find one mismatch between image and language caption.
+
+\bibitem[Shen et~al., ]{shen2021much}
+Shen, S., Li, L.~H., Tan, H., Bansal, M., Rohrbach, A., Chang, K.-W., Yao, Z.,
+  and Keutzer, K.
+\newblock How much can clip benefit vision-and-language tasks?
+
+\bibitem[Sheng et~al., ]{sheng2019woman}
+Sheng, E., Chang, K.-W., Natarajan, P., and Peng, N.
+\newblock The woman worked as a babysitter: On biases in language generation.
+
+\bibitem[Shonenkov, ]{ruDALLE}
+Shonenkov, A.
+\newblock rudall-e.
+
+\bibitem[Sikarwar and Kreiman, ]{sikarwar2022efficacy}
+Sikarwar, A. and Kreiman, G.
+\newblock On the efficacy of co-attention transformer layers in visual question
+  answering.
+
+\bibitem[Silberer and Lapata, a]{silberer2012grounded}
+Silberer, C. and Lapata, M.
+\newblock Grounded models of semantic representation.
+\newblock In {\em Tsujii J, Henderson J, Paşca M, editors. Proceedings of the
+  2012 Joint Conference on Empirical Methods in Natural Language Processing and
+  Computational Natural Language Learning; 2012 Jul 12--14; Jeju Island, Korea.
+  Stroudsburg: ACL; 2012. p. 1423-33.} ACL (Association for Computational
+  Linguistics).
+
+\bibitem[Silberer and Lapata, b]{silberer2014learning}
+Silberer, C. and Lapata, M.
+\newblock Learning grounded meaning representations with autoencoders.
+\newblock In {\em Proceedings of the 52nd Annual Meeting of the Association for
+  Computational Linguistics (Volume 1: Long Papers)}, pages 721--732.
+
+\bibitem[Singh et~al., ]{singh2022flava}
+Singh, A., Hu, R., Goswami, V., Couairon, G., Galuba, W., Rohrbach, M., and
+  Kiela, D.
+\newblock Flava: A foundational language and vision alignment model.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition}, pages 15638--15650.
+
+\bibitem[Socher and Fei-fei, ]{Socher10connectingmodalities}
+Socher, R. and Fei-fei, L.
+\newblock Connecting modalities: Semi-supervised segmentation and annotation of
+  images using unaligned text corpora.
+\newblock In {\em In IEEE Computer Society Conference on Computer Vision and
+  Pattern Recognition}.
+
+\bibitem[Soderlund and Blair, ]{8477754}
+Soderlund, J. and Blair, A.
+\newblock Adversarial image generation using evolution and deep learning.
+\newblock In {\em 2018 IEEE Congress on Evolutionary Computation (CEC)}, pages
+  1--8.
+
+\bibitem[Srinivasan et~al., ]{srinivasan2021wit}
+Srinivasan, K., Raman, K., Chen, J., Bendersky, M., and Najork, M.
+\newblock Wit: Wikipedia-based image text dataset for multimodal multilingual
+  machine learning.
+\newblock In {\em Proceedings of the 44th International ACM SIGIR Conference on
+  Research and Development in Information Retrieval}, pages 2443--2449.
+
+\bibitem[Srinivasan and Uchino, ]{bias_ML}
+Srinivasan, R. and Uchino, K.
+\newblock Biases in generative art: A causal look from the lens of art history.
+\newblock In {\em Proceedings of the 2021 ACM Conference on Fairness,
+  Accountability, and Transparency}, pages 41--51.
+
+\bibitem[Srivastava et~al., ]{srivastava2022beyond}
+Srivastava, A., Rastogi, A., Rao, A., Shoeb, A. A.~M., Abid, A., Fisch, A.,
+  Brown, A.~R., Santoro, A., Gupta, A., Garriga-Alonso, A., et~al.
+\newblock Beyond the imitation game: Quantifying and extrapolating the
+  capabilities of language models.
+
+\bibitem[Steiner et~al., ]{Steiner2021}
+Steiner, A., Kolesnikov, A., Zhai, X., Wightman, R., Uszkoreit, J., and Beyer,
+  L.
+\newblock How to train your vit? data, augmentation, and regularization in
+  vision transformers.
+
+\bibitem[Strubell et~al., a]{strubell2019energy}
+Strubell, E., Ganesh, A., and McCallum, A.
+\newblock Energy and policy considerations for deep learning in nlp.
+
+\bibitem[Strubell et~al., b]{environment}
+Strubell, E., Ganesh, A., and McCallum, A.
+\newblock Energy and policy considerations for deep learning in nlp.
+
+\bibitem[Sun et~al., ]{sun2021multimodal}
+Sun, Q., Wang, Y., Xu, C., Zheng, K., Yang, Y., Hu, H., Xu, F., Zhang, J.,
+  Geng, X., and Jiang, D.
+\newblock Multimodal dialogue response generation.
+
+\bibitem[Sutton, ]{sutton2019bitterlesson}
+Sutton, R.~S.
+\newblock The bitter lesson.
+
+\bibitem[Tan and Bansal, ]{tan2020vokenization}
+Tan, H. and Bansal, M.
+\newblock Vokenization: Improving language understanding with contextualized,
+  visual-grounded supervision.
+
+\bibitem[Tan and Le, ]{EfficientNet}
+Tan, M. and Le, Q.~V.
+\newblock Efficientnet: Rethinking model scaling for convolutional neural
+  networks.
+
+\bibitem[Uppal et~al., ]{uppal2022multimodal}
+Uppal, S., Bhagat, S., Hazarika, D., Majumder, N., Poria, S., Zimmermann, R.,
+  and Zadeh, A.
+\newblock Multimodal research in vision and language: A review of current and
+  emerging trends.
+\newblock 77:149--171.
+
+\bibitem[Vaswani et~al., a]{attention}
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.~N.,
+  Kaiser, �., and Polosukhin, I.
+\newblock Attention is all you need.
+\newblock In Guyon, I., Luxburg, U.~V., Bengio, S., Wallach, H., Fergus, R.,
+  Vishwanathan, S., and Garnett, R., editors, {\em Advances in Neural
+  Information Processing Systems}, volume~30. Curran Associates, Inc.
+
+\bibitem[Vaswani et~al., b]{vaswani2017attention}
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.~N.,
+  Kaiser, �., and Polosukhin, I.
+\newblock Attention is all you need.
+\newblock 30.
+
+\bibitem[Vaswani et~al., c]{NIPS2017_3f5ee243}
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.~N.,
+  Kaiser, �., and Polosukhin, I.
+\newblock Attention is all you need.
+\newblock In Guyon, I., Luxburg, U.~V., Bengio, S., Wallach, H., Fergus, R.,
+  Vishwanathan, S., and Garnett, R., editors, {\em Advances in Neural
+  Information Processing Systems}, volume~30. Curran Associates, Inc.
+
+\bibitem[Vedantam et~al., ]{cider}
+Vedantam, R., Zitnick, C.~L., and Parikh, D.
+\newblock Cider: Consensus-based image description evaluation.
+\newblock In {\em 2015 IEEE Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, pages 4566--4575.
+
+\bibitem[Vinyals et~al., ]{vinyals}
+Vinyals, O., Toshev, A., Bengio, S., and Erhan, D.
+\newblock Show and tell: A neural image caption generator.
+\newblock pages 3156--3164.
+
+\bibitem[Wang et~al., a]{wang2018glue}
+Wang, A., Singh, A., Michael, J., Hill, F., Levy, O., and Bowman, S.~R.
+\newblock Glue: A multi-task benchmark and analysis platform for natural
+  language understanding.
+
+\bibitem[Wang et~al., b]{Wang2022}
+Wang, P., Yang, A., Men, R., Lin, J., Bai, S., Li, Z., Ma, J., Zhou, C., Zhou,
+  J., and Yang, H.
+\newblock {OFA}: Unifying architectures, tasks, and modalities through a simple
+  sequence-to-sequence learning framework.
+\newblock In Chaudhuri, K., Jegelka, S., Song, L., Szepesvari, C., Niu, G., and
+  Sabato, S., editors, {\em Proceedings of the 39th International Conference on
+  Machine Learning}, volume 162 of {\em Proceedings of Machine Learning
+  Research}, pages 23318--23340. PMLR.
+
+\bibitem[Wang et~al., c]{NFT}
+Wang, Q., Li, R., Wang, Q., and Chen, S.
+\newblock Non-fungible token (nft): Overview, evaluation, opportunities and
+  challenges.
+
+\bibitem[Wei et~al., ]{wei2022masked}
+Wei, C., Fan, H., Xie, S., Wu, C.-Y., Yuille, A., and Feichtenhofer, C.
+\newblock Masked feature prediction for self-supervised visual pre-training.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition}, pages 14668--14678.
+
+\bibitem[Wenzek et~al., ]{wenzek2019ccnet}
+Wenzek, G., Lachaux, M.-A., Conneau, A., Chaudhary, V., Guzmán, F., Joulin,
+  A., and Grave, E.
+\newblock Ccnet: Extracting high quality monolingual datasets from web crawl
+  data.
+
+\bibitem[WZRD, ]{WZRD}
+WZRD.
+\newblock Wzrd.
+
+\bibitem[Xiao et~al., ]{sun}
+Xiao, J., Hays, J., Ehinger, K.~A., Oliva, A., and Torralba, A.
+\newblock Sun database: Large-scale scene recognition from abbey to zoo.
+\newblock In {\em 2010 IEEE Computer Society Conference on Computer Vision and
+  Pattern Recognition}, pages 3485--3492.
+
+\bibitem[Xu et~al., ]{xu1}
+Xu, K., Ba, J., Kiros, R., Cho, K., Courville, A., Salakhutdinov, R., Zemel,
+  R., and Bengio, Y.
+\newblock Show, attend and tell: Neural image caption generation with visual
+  attention.
+
+\bibitem[Xue et~al., ]{xue2020mt5}
+Xue, L., Constant, N., Roberts, A., Kale, M., Al-Rfou, R., Siddhant, A., Barua,
+  A., and Raffel, C.
+\newblock mt5: A massively multilingual pre-trained text-to-text transformer.
+
+\bibitem[Yang et~al., ]{Yang_2019_CVPR}
+Yang, X., Tang, K., Zhang, H., and Cai, J.
+\newblock Auto-encoding scene graphs for image captioning.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition (CVPR)}.
+
+\bibitem[Yann and Ishan, ]{darkMatter}
+Yann, L. and Ishan, M.
+\newblock Self-supervised learning: The dark matter of intelligence.
+
+\bibitem[Yao et~al., a]{5487377}
+Yao, B.~Z., Yang, X., Lin, L., Lee, M.~W., and Zhu, S.-C.
+\newblock I2t: Image parsing to text description.
+\newblock 98(8):1485--1508.
+
+\bibitem[Yao et~al., b]{yao1}
+Yao, T., Pan, Y., Li, Y., and Mei, T.
+\newblock Exploring visual relationship for image captioning.
+
+\bibitem[Yao et~al., c]{GCN-LSTM}
+Yao, T., Pan, Y., Li, Y., and Mei, T.
+\newblock Exploring visual relationship for image captioning.
+
+\bibitem[Yu et~al., ]{parti}
+Yu, J., Xu, Y., Koh, J., Luong, T., Baid, G., Vasudevan, V., Ku, A., Yang, Y.,
+  Ayan, B., Hutchinson, B., Han, W., Parekh, Z., Li, X., Zhang, H., Baldridge,
+  J., and Wu, Y.
+\newblock Scaling autoregressive models for content-rich text-to-image
+  generation.
+
+\bibitem[Yuan et~al., a]{yuan2021florence}
+Yuan, L., Chen, D., Chen, Y.-L., Codella, N., Dai, X., Gao, J., Hu, H., Huang,
+  X., Li, B., Li, C., et~al.
+\newblock Florence: A new foundation model for computer vision.
+
+\bibitem[Yuan et~al., b]{yuan2022wudaomm}
+Yuan, S., Shuai, Z., Jiahong, L., Zhao, X., Hanyu, Z., and Jie, T.
+\newblock Wudaomm: A large-scale multi-modal dataset for pre-training models.
+
+\bibitem[Zellers et~al., a]{zellers2019recognition}
+Zellers, R., Bisk, Y., Farhadi, A., and Choi, Y.
+\newblock From recognition to cognition: Visual commonsense reasoning.
+\newblock In {\em Proceedings of the IEEE/CVF conference on computer vision and
+  pattern recognition}, pages 6720--6731.
+
+\bibitem[Zellers et~al., b]{zellers2018swag}
+Zellers, R., Bisk, Y., Schwartz, R., and Choi, Y.
+\newblock Swag: A large-scale adversarial dataset for grounded commonsense
+  inference.
+
+\bibitem[Zeng et~al., ]{zeng2022socratic}
+Zeng, A., Wong, A., Welker, S., Choromanski, K., Tombari, F., Purohit, A.,
+  Ryoo, M., Sindhwani, V., Lee, J., Vanhoucke, V., et~al.
+\newblock Socratic models: Composing zero-shot multimodal reasoning with
+  language.
+
+\bibitem[Zhang et~al., a]{zhang2016yin}
+Zhang, P., Goyal, Y., Summers-Stay, D., Batra, D., and Parikh, D.
+\newblock Yin and yang: Balancing and answering binary visual questions.
+\newblock In {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition}, pages 5014--5022.
+
+\bibitem[Zhang et~al., b]{zhang2020contrastive}
+Zhang, Y., Jiang, H., Miura, Y., Manning, C.~D., and Langlotz, C.~P.
+\newblock Contrastive learning of medical visual representations from paired
+  images and text.
+
+\bibitem[Zhuang et~al., ]{zhuang2021unsupervised}
+Zhuang, C., Yan, S., Nayebi, A., Schrimpf, M., Frank, M.~C., DiCarlo, J.~J.,
+  and Yamins, D.~L.
+\newblock Unsupervised neural network models of the ventral visual stream.
+\newblock 118(3):e2014196118.
+
+\end{thebibliography}
