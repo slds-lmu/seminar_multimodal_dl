@@ -21,3 +21,6 @@ blockquote > p:last-child {
 blockquote > p:first-child {
   text-align: inherit;
 }
+body {
+  text-align: justify;
+}

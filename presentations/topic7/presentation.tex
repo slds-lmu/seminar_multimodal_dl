@@ -1,7 +1,8 @@
-% preamble ---------------------------------------------------------------
 \documentclass[xcolor=dvipsnames]{beamer}
 
-% meta data --------------------------------------------------------------
+% Preamble ---------------------------------------------------------------------
+% {{{ Meta data
+
 \title[Text supporting CV models]{Seminar: Multimodal Deep Learning}
 \subtitle{Topic 7: Text supporting CV models}
 \author[Max Schneider]{Author: Maximilian Schneider\\
@@ -13,7 +14,9 @@
             }
 \date{\today}
 
-% theme
+% }}}
+% {{{ Theme
+
 \usetheme{Madrid}
 \usecolortheme{dove}
 \beamertemplatenavigationsymbolsempty  % no navigation symbols
@@ -23,7 +26,9 @@
 \usefonttheme[onlymath]{serif}  % better math font
 \setbeamertemplate{caption}[numbered]
 
-% packages ---------------------------------------------------------------
+% }}}
+% {{{ Packages
+
 % text encoding
 \usepackage[utf8]{inputenc}
 
@@ -67,7 +72,10 @@
 % math symbols
 \usepackage{amsmath, amssymb, bm}
 
-\begin{document} %--------------------------------------------------------
+% }}}
+
+% Document ---------------------------------------------------------------------
+\begin{document}
 
 {
 \setbeamertemplate{footline}{}
@@ -77,7 +85,7 @@
 }
 \addtocounter{framenumber}{-1}
 
-\section{Introduction} %--------------------------------------------------
+\section{Introduction}
 
 \begin{frame}{Introduction: Scale}
   \blockquote{
@@ -97,13 +105,13 @@
   }
 \end{frame}
 
-\section{Concepts} %------------------------------------------------------
+\section{Concepts}
 \begin{frame}{Contents}
   \tableofcontents[sections={1-2}, currentsection]
   \tableofcontents[sections={3-6}]
 \end{frame}
 
-\subsection{Web-scale data} %---------------------------------------------
+\subsection{Web-scale data}
 \begin{frame}{Concepts: Web-scale data}
   \begin{itemize}
     \item Internet full of naturally occurring image-text pairs
@@ -119,7 +127,7 @@
   \end{itemize}
 \end{frame}
 
-\subsection{Contrastive objective} %--------------------------------------
+\subsection{Contrastive objective}
 \begin{frame}{Concepts: Contrastive objective}
   \begin{equation}
     \ell_1^{V1, V2} = - \underset{\{v_1^1, v_2^1, \ldots, v_2^N\}}{\mathbb{E}} \left( \log \frac{h_\theta(\{v_1^1,v_2^1\})}{h_\theta(\{v_1^1,v_2^1\}) + \sum_{k=2}^N h_\theta(\{v_1^1, v_2^k\})} \right)
@@ -158,7 +166,7 @@
   \end{columns}
 \end{frame}
 
-\subsection{Zero shooting and foundation models} %------------------------
+\subsection{Zero shooting and foundation models}
 \begin{frame}{Concepts: Zero shooting and foundation models}
   \begin{itemize}
     \item Paradigms from NLP
@@ -188,14 +196,13 @@
   \end{itemize}
 \end{frame}
 
-\section{Architectures} %-------------------------------------------------
+\section{Architectures}
 \begin{frame}{Contents}
   \tableofcontents[sections={1-3}, currentsection]
   \tableofcontents[sections={4-6}]
 \end{frame}
 
-
-\subsection{CLIP} %-------------------------------------------------------
+\subsection{CLIP}
 \begin{frame}{CLIP \parencite{radford2021learning}: Architecture}
   \begin{itemize}
     \item Jointly trained image encoder and text encoder from scratch
@@ -237,7 +244,7 @@
   \end{figure}
 \end{frame}
 
-\subsection{ALIGN} %------------------------------------------------------
+\subsection{ALIGN}
 \begin{frame}{ALIGN \parencite{jia2021scaling}}
   \begin{itemize}
     \item Key difference to CLIP: Less (costly) data curation (400 million image-text pairs $\rightarrow$ 1.8 billion image-text pairs)
@@ -257,7 +264,7 @@
   \end{figure}
 \end{frame}
 
-\subsection{Florence} %---------------------------------------------------
+\subsection{Florence}
 \begin{frame}{Florence \parencite{yuan2021florence}}
   \begin{figure}[ht]
     \centering
@@ -287,7 +294,7 @@
 \end{frame}
 
 
-\section{Performance comparison} %----------------------------------------
+\section{Performance comparison}
 \begin{frame}{Performance comparison}
   \begin{table}[ht]
     \centering
@@ -350,7 +357,7 @@ Florence (fine tuned) & \textbf{96.2}    & 97.6    & 87.1     & \textbf{84.2}   
   \end{table}
 \end{frame}
 
-\section{Resources} %-----------------------------------------------------
+\section{Resources}
 \begin{frame}{Resources}
   \begin{itemize}
     \item Pre-trained CLIP models on Github: \url{https://github.com/openai/CLIP}
@@ -363,9 +370,10 @@ Florence (fine tuned) & \textbf{96.2}    & 97.6    & 87.1     & \textbf{84.2}   
   \end{itemize}
 \end{frame}
 
-\section{Sources} %-------------------------------------------------------
+\section{Sources}
 \begin{frame}[allowframebreaks]{Sources}
   \printbibliography[heading=bibnumbered, title = Bibliography]
 \end{frame}
 
-\end{document} %----------------------------------------------------------
+\end{document}
+
