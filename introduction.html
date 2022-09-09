@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Introduction | Multimodal Deep Learning</title>
-  <meta name="description" content="In the last few years, there have been several breakthroughs in the methodologies used in Natural Language Processing (NLP) as well as Computer Vision (CV). Beyond these improvements on single-modality models, large-scale multi-modal approaches have become a very active area of research. In this seminar, we are planning to review these approaches and create a solid overview of the field, starting with the current state-of-the-art approaches in the two subfields of Deep Learning individually. We will further discuss modeling frameworks, where one modality is transformed into the other as well as models in which one modality is utilized to enhance representation learning for the other. Finally, we plan to also potentially cover other modalities as well as general-purpose multi-modal models, which are able to handle different tasks on different modalities within one unified architecture. Interesting applications/use cases could also be potential topics for a seminar paper." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="description" content="." />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Introduction | Multimodal Deep Learning" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="In the last few years, there have been several breakthroughs in the methodologies used in Natural Language Processing (NLP) as well as Computer Vision (CV). Beyond these improvements on single-modality models, large-scale multi-modal approaches have become a very active area of research. In this seminar, we are planning to review these approaches and create a solid overview of the field, starting with the current state-of-the-art approaches in the two subfields of Deep Learning individually. We will further discuss modeling frameworks, where one modality is transformed into the other as well as models in which one modality is utilized to enhance representation learning for the other. Finally, we plan to also potentially cover other modalities as well as general-purpose multi-modal models, which are able to handle different tasks on different modalities within one unified architecture. Interesting applications/use cases could also be potential topics for a seminar paper." />
+  <meta property="og:description" content="." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 1 Introduction | Multimodal Deep Learning" />
   
-  <meta name="twitter:description" content="In the last few years, there have been several breakthroughs in the methodologies used in Natural Language Processing (NLP) as well as Computer Vision (CV). Beyond these improvements on single-modality models, large-scale multi-modal approaches have become a very active area of research. In this seminar, we are planning to review these approaches and create a solid overview of the field, starting with the current state-of-the-art approaches in the two subfields of Deep Learning individually. We will further discuss modeling frameworks, where one modality is transformed into the other as well as models in which one modality is utilized to enhance representation learning for the other. Finally, we plan to also potentially cover other modalities as well as general-purpose multi-modal models, which are able to handle different tasks on different modalities within one unified architecture. Interesting applications/use cases could also be potential topics for a seminar paper." />
+  <meta name="twitter:description" content="." />
   
 
 <meta name="author" content="" />
 
 
-<meta name="date" content="2022-06-07" />
+<meta name="date" content="2022-09-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="foreword.html"/>
-<link rel="next" href="chapter-1.html"/>
+<link rel="next" href="introducing-the-modalities.html"/>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -75,47 +75,106 @@
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="" data-path="foreword.html"><a href="foreword.html"><i class="fa fa-check"></i>Foreword</a><ul>
+<li class="chapter" data-level="0.1" data-path="foreword.html"><a href="foreword.html#citation"><i class="fa fa-check"></i><b>0.1</b> Citation</a></li>
 <li class="chapter" data-level="" data-path="foreword.html"><a href="foreword.html#technical-setup"><i class="fa fa-check"></i>Technical Setup</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#intro-about-the-seminar-topic"><i class="fa fa-check"></i><b>1.1</b> Intro About the Seminar Topic</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#outline-of-the-booklet"><i class="fa fa-check"></i><b>1.2</b> Outline of the Booklet</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html"><i class="fa fa-check"></i><b>2</b> Introducing the modalities</a><ul>
+<li class="chapter" data-level="2.1" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#state-of-the-art-in-computer-vision"><i class="fa fa-check"></i><b>2.1</b> State-of-the-art in computer vision</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#history"><i class="fa fa-check"></i><b>2.1.1</b> History</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#supervised-and-unsupervised-learning"><i class="fa fa-check"></i><b>2.1.2</b> Supervised and unsupervised learning</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#resnet"><i class="fa fa-check"></i><b>2.1.3</b> ResNet</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#efficientnet"><i class="fa fa-check"></i><b>2.1.4</b> EfficientNet</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#simclr"><i class="fa fa-check"></i><b>2.1.5</b> SimCLR</a></li>
+<li class="chapter" data-level="2.1.6" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#bootstrap-your-own-latent-byol"><i class="fa fa-check"></i><b>2.1.6</b> Bootstrap Your Own Latent (BYOL)</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="chapter-1.html"><a href="chapter-1.html"><i class="fa fa-check"></i><b>2</b> Chapter 1</a><ul>
-<li class="chapter" data-level="2.1" data-path="chapter-1.html"><a href="chapter-1.html#title"><i class="fa fa-check"></i><b>2.1</b> title</a></li>
-<li class="chapter" data-level="2.2" data-path="chapter-1.html"><a href="chapter-1.html#title-1"><i class="fa fa-check"></i><b>2.2</b> title</a></li>
+<li class="chapter" data-level="2.2" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#resources-and-benchmarks-for-nlp-cv-and-multimodal-tasks"><i class="fa fa-check"></i><b>2.2</b> Resources and Benchmarks for NLP, CV and multimodal tasks</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#datasets"><i class="fa fa-check"></i><b>2.2.1</b> Datasets</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#pre-training-tasks"><i class="fa fa-check"></i><b>2.2.2</b> Pre-Training Tasks</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introducing-the-modalities.html"><a href="introducing-the-modalities.html#benchmarks"><i class="fa fa-check"></i><b>2.2.3</b> Benchmarks</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="resources-and-benchmarks-for-nlp-cv-and-multimodal-tasks.html"><a href="resources-and-benchmarks-for-nlp-cv-and-multimodal-tasks.html"><i class="fa fa-check"></i><b>3</b> Resources and Benchmarks for NLP, CV and multimodal tasks</a></li>
-<li class="chapter" data-level="4" data-path="chapter-1-1.html"><a href="chapter-1-1.html"><i class="fa fa-check"></i><b>4</b> Chapter 1</a><ul>
-<li class="chapter" data-level="4.1" data-path="chapter-1-1.html"><a href="chapter-1-1.html#lorem-ipsum"><i class="fa fa-check"></i><b>4.1</b> Lorem Ipsum</a></li>
-<li class="chapter" data-level="4.2" data-path="chapter-1-1.html"><a href="chapter-1-1.html#using-figures"><i class="fa fa-check"></i><b>4.2</b> Using Figures</a></li>
-<li class="chapter" data-level="4.3" data-path="chapter-1-1.html"><a href="chapter-1-1.html#using-tex"><i class="fa fa-check"></i><b>4.3</b> Using Tex</a></li>
-<li class="chapter" data-level="4.4" data-path="chapter-1-1.html"><a href="chapter-1-1.html#using-stored-results"><i class="fa fa-check"></i><b>4.4</b> Using Stored Results</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="title-2.html"><a href="title-2.html"><i class="fa fa-check"></i><b>5</b> title</a></li>
-<li class="chapter" data-level="6" data-path="title-3.html"><a href="title-3.html"><i class="fa fa-check"></i><b>6</b> title</a></li>
-<li class="chapter" data-level="7" data-path="title-4.html"><a href="title-4.html"><i class="fa fa-check"></i><b>7</b> title</a></li>
-<li class="chapter" data-level="8" data-path="title-5.html"><a href="title-5.html"><i class="fa fa-check"></i><b>8</b> title</a></li>
-<li class="chapter" data-level="9" data-path="title-6.html"><a href="title-6.html"><i class="fa fa-check"></i><b>9</b> title</a></li>
-<li class="chapter" data-level="10" data-path="title-7.html"><a href="title-7.html"><i class="fa fa-check"></i><b>10</b> title</a></li>
-<li class="chapter" data-level="11" data-path="chapter-2-multimodal-architectures.html"><a href="chapter-2-multimodal-architectures.html"><i class="fa fa-check"></i><b>11</b> Chapter 2 Multimodal architectures</a><ul>
-<li class="chapter" data-level="11.1" data-path="chapter-2-multimodal-architectures.html"><a href="chapter-2-multimodal-architectures.html#introduction-1"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html"><i class="fa fa-check"></i><b>3</b> Multimodal architectures</a><ul>
+<li class="chapter" data-level="3.1" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#img2text"><i class="fa fa-check"></i><b>3.1</b> img2text</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#microsoft-coco-common-objects-in-context"><i class="fa fa-check"></i><b>3.1.1</b> 2.1.1 Microsoft COCO: Common Objects in Context</a></li>
+<li class="chapter" data-level="3.1.2" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#meshed-memory-transformer-for-image-captioning-m2"><i class="fa fa-check"></i><b>3.1.2</b> 2.1.2 Meshed-Memory Transformer for Image Captioning (<span class="math inline">\(M^2\)</span>)</a></li>
+<li class="chapter" data-level="3.1.3" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#seeking-objectivity"><i class="fa fa-check"></i><b>3.1.3</b> Seeking objectivity</a></li>
+<li class="chapter" data-level="3.1.4" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#generative-adversarial-networks"><i class="fa fa-check"></i><b>3.1.4</b> Generative Adversarial Networks</a></li>
+<li class="chapter" data-level="3.1.5" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#dall-e-starting-post-gan-era"><i class="fa fa-check"></i><b>3.1.5</b> Dall-E starting post-GAN era</a></li>
+<li class="chapter" data-level="3.1.6" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#glide"><i class="fa fa-check"></i><b>3.1.6</b> GLIDE</a></li>
+<li class="chapter" data-level="3.1.7" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#dall-e-2"><i class="fa fa-check"></i><b>3.1.7</b> Dall-E 2</a></li>
+<li class="chapter" data-level="3.1.8" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#imagen"><i class="fa fa-check"></i><b>3.1.8</b> Imagen</a></li>
+<li class="chapter" data-level="3.1.9" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#parti"><i class="fa fa-check"></i><b>3.1.9</b> Parti</a></li>
+<li class="chapter" data-level="3.1.10" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#open-source-community"><i class="fa fa-check"></i><b>3.1.10</b> Open-Source Community</a></li>
+<li class="chapter" data-level="3.1.11" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#discussion"><i class="fa fa-check"></i><b>3.1.11</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="further-topics.html"><a href="further-topics.html"><i class="fa fa-check"></i><b>12</b> Further Topics</a></li>
-<li class="chapter" data-level="13" data-path="further-modalities.html"><a href="further-modalities.html"><i class="fa fa-check"></i><b>13</b> Further Modalities</a><ul>
-<li class="chapter" data-level="13.1" data-path="further-modalities.html"><a href="further-modalities.html#intro"><i class="fa fa-check"></i><b>13.1</b> Intro</a></li>
+<li class="chapter" data-level="3.2" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#images-supporting-language-models"><i class="fa fa-check"></i><b>3.2</b> Images supporting language models</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#words-in-non-symbolic-contexts"><i class="fa fa-check"></i><b>3.2.1</b> Words In (Non-Symbolic) Contexts</a></li>
+<li class="chapter" data-level="3.2.2" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#word-embeddings-survival-kit"><i class="fa fa-check"></i><b>3.2.2</b> Word-Embeddings: Survival-Kit</a></li>
+<li class="chapter" data-level="3.2.3" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#the-beginning-sequential-multimodal-embeddings"><i class="fa fa-check"></i><b>3.2.3</b> The Beginning: Sequential Multimodal Embeddings</a></li>
+<li class="chapter" data-level="3.2.4" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#the-grounded-space"><i class="fa fa-check"></i><b>3.2.4</b> The Grounded Space</a></li>
+<li class="chapter" data-level="3.2.5" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#the-transformers-era"><i class="fa fa-check"></i><b>3.2.5</b> The Transformers Era</a></li>
+<li class="chapter" data-level="3.2.6" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#was-it-worth"><i class="fa fa-check"></i><b>3.2.6</b> Was It Worth?</a></li>
+<li class="chapter" data-level="3.2.7" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#the-end-of-this-story"><i class="fa fa-check"></i><b>3.2.7</b> The End Of This Story</a></li>
+<li class="chapter" data-level="3.2.8" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#appendix-selected-models---summary"><i class="fa fa-check"></i><b>3.2.8</b> Appendix: Selected Models - Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="strucutered-unstrucutered-data.html"><a href="strucutered-unstrucutered-data.html"><i class="fa fa-check"></i><b>14</b> Strucutered + Unstrucutered Data</a><ul>
-<li class="chapter" data-level="14.1" data-path="strucutered-unstrucutered-data.html"><a href="strucutered-unstrucutered-data.html#intro-1"><i class="fa fa-check"></i><b>14.1</b> Intro</a></li>
+<li class="chapter" data-level="3.3" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#text-supporting-computer-vision-models"><i class="fa fa-check"></i><b>3.3</b> Text supporting computer vision models</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#intro"><i class="fa fa-check"></i><b>3.3.1</b> Intro</a></li>
+<li class="chapter" data-level="3.3.2" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#concepts"><i class="fa fa-check"></i><b>3.3.2</b> Concepts</a></li>
+<li class="chapter" data-level="3.3.3" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#contrastive-loss"><i class="fa fa-check"></i><b>3.3.3</b> Contrastive loss</a></li>
+<li class="chapter" data-level="3.3.4" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#clip"><i class="fa fa-check"></i><b>3.3.4</b> CLIP</a></li>
+<li class="chapter" data-level="3.3.5" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#align"><i class="fa fa-check"></i><b>3.3.5</b> ALIGN</a></li>
+<li class="chapter" data-level="3.3.6" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#florence"><i class="fa fa-check"></i><b>3.3.6</b> Florence</a></li>
+<li class="chapter" data-level="3.3.7" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#performance-comparison"><i class="fa fa-check"></i><b>3.3.7</b> Performance comparison</a></li>
+<li class="chapter" data-level="3.3.8" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#resources"><i class="fa fa-check"></i><b>3.3.8</b> Resources</a></li>
+<li class="chapter" data-level="3.3.9" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#outlook"><i class="fa fa-check"></i><b>3.3.9</b> Outlook</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="multi-purpose-models.html"><a href="multi-purpose-models.html"><i class="fa fa-check"></i><b>15</b> Multi-purpose Models</a><ul>
-<li class="chapter" data-level="15.1" data-path="multi-purpose-models.html"><a href="multi-purpose-models.html#intro-2"><i class="fa fa-check"></i><b>15.1</b> Intro</a></li>
+<li class="chapter" data-level="3.4" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#text-image"><i class="fa fa-check"></i><b>3.4</b> Text + Image</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#todo"><i class="fa fa-check"></i><b>3.4.1</b> Todo</a></li>
+<li class="chapter" data-level="3.4.2" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#challenges-in-ai"><i class="fa fa-check"></i><b>3.4.2</b> challenges in AI</a></li>
+<li class="chapter" data-level="3.4.3" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#vilbert"><i class="fa fa-check"></i><b>3.4.3</b> vilbert</a></li>
+<li class="chapter" data-level="3.4.4" data-path="multimodal-architectures.html"><a href="multimodal-architectures.html#flamingo-alayrac2022flamingo"><i class="fa fa-check"></i><b>3.4.4</b> flamingo <span class="citation">(<span class="citeproc-not-found" data-reference-id="alayrac2022flamingo"><strong>???</strong></span>)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="title-8.html"><a href="title-8.html"><i class="fa fa-check"></i><b>16</b> title</a></li>
-<li class="chapter" data-level="17" data-path="epilogue.html"><a href="epilogue.html"><i class="fa fa-check"></i><b>17</b> Epilogue</a><ul>
-<li class="chapter" data-level="17.1" data-path="epilogue.html"><a href="epilogue.html#test"><i class="fa fa-check"></i><b>17.1</b> test</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>18</b> Acknowledgements</a></li>
+<li class="chapter" data-level="4" data-path="further-topics.html"><a href="further-topics.html"><i class="fa fa-check"></i><b>4</b> Further Topics</a><ul>
+<li class="chapter" data-level="4.1" data-path="further-topics.html"><a href="further-topics.html#including-further-modalities"><i class="fa fa-check"></i><b>4.1</b> Including Further Modalities</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="further-topics.html"><a href="further-topics.html#intro-1"><i class="fa fa-check"></i><b>4.1.1</b> Intro</a></li>
+<li class="chapter" data-level="4.1.2" data-path="further-topics.html"><a href="further-topics.html#motivation"><i class="fa fa-check"></i><b>4.1.2</b> Motivation</a></li>
+<li class="chapter" data-level="4.1.3" data-path="further-topics.html"><a href="further-topics.html#taxonomy-of-multimodal-challenges"><i class="fa fa-check"></i><b>4.1.3</b> Taxonomy of Multimodal Challenges</a></li>
+<li class="chapter" data-level="4.1.4" data-path="further-topics.html"><a href="further-topics.html#general-multimodal-architectures"><i class="fa fa-check"></i><b>4.1.4</b> General Multimodal Architectures</a></li>
+<li class="chapter" data-level="4.1.5" data-path="further-topics.html"><a href="further-topics.html#multimodal-training-paradigms"><i class="fa fa-check"></i><b>4.1.5</b> Multimodal Training Paradigms</a></li>
+<li class="chapter" data-level="4.1.6" data-path="further-topics.html"><a href="further-topics.html#combining-general-architectures-and-training-paradigms"><i class="fa fa-check"></i><b>4.1.6</b> Combining General Architectures and Training Paradigms</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="further-topics.html"><a href="further-topics.html#strucutered-unstrucutered-data"><i class="fa fa-check"></i><b>4.2</b> Strucutered + Unstrucutered Data</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="further-topics.html"><a href="further-topics.html#intro-2"><i class="fa fa-check"></i><b>4.2.1</b> Intro</a></li>
+<li class="chapter" data-level="4.2.2" data-path="further-topics.html"><a href="further-topics.html#taxonomy-structured-vs.-unstructured-data"><i class="fa fa-check"></i><b>4.2.2</b> Taxonomy: Structured vs. Unstructured Data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="further-topics.html"><a href="further-topics.html#fusion-strategies"><i class="fa fa-check"></i><b>4.2.3</b> Fusion Strategies</a></li>
+<li class="chapter" data-level="4.2.4" data-path="further-topics.html"><a href="further-topics.html#applications-of-multimodal-dl"><i class="fa fa-check"></i><b>4.2.4</b> Applications of Multimodal DL</a></li>
+<li class="chapter" data-level="4.2.5" data-path="further-topics.html"><a href="further-topics.html#multimodal-dl-in-survival"><i class="fa fa-check"></i><b>4.2.5</b> Multimodal DL in Survival</a></li>
+<li class="chapter" data-level="4.2.6" data-path="further-topics.html"><a href="further-topics.html#traditional-survival-analysis-cox-proportional-hazard-model"><i class="fa fa-check"></i><b>4.2.6</b> Traditional Survival Analysis (Cox Proportional Hazard Model)</a></li>
+<li class="chapter" data-level="4.2.7" data-path="further-topics.html"><a href="further-topics.html#deepconvsurvdeepcorrsurv"><i class="fa fa-check"></i><b>4.2.7</b> DeepConvSurv+DeepCorrSurv</a></li>
+<li class="chapter" data-level="4.2.8" data-path="further-topics.html"><a href="further-topics.html#concat-cross-auto-encoders"><i class="fa fa-check"></i><b>4.2.8</b> Concat + Cross Auto Encoders</a></li>
+<li class="chapter" data-level="4.2.9" data-path="further-topics.html"><a href="further-topics.html#cheerla-and-gevaert-2019"><i class="fa fa-check"></i><b>4.2.9</b> Cheerla and Gevaert (2019)</a></li>
+<li class="chapter" data-level="4.2.10" data-path="further-topics.html"><a href="further-topics.html#multimodal-dl-in-economics"><i class="fa fa-check"></i><b>4.2.10</b> Multimodal DL in Economics</a></li>
+<li class="chapter" data-level="4.2.11" data-path="further-topics.html"><a href="further-topics.html#critical-assessment"><i class="fa fa-check"></i><b>4.2.11</b> Critical Assessment</a></li>
+<li class="chapter" data-level="4.2.12" data-path="further-topics.html"><a href="further-topics.html#conclusion-and-outlook"><i class="fa fa-check"></i><b>4.2.12</b> Conclusion and Outlook</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="further-topics.html"><a href="further-topics.html#multi-purpose-models"><i class="fa fa-check"></i><b>4.3</b> Multi-purpose Models</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="further-topics.html"><a href="further-topics.html#intro-3"><i class="fa fa-check"></i><b>4.3.1</b> Intro</a></li>
+<li class="chapter" data-level="4.3.2" data-path="further-topics.html"><a href="further-topics.html#introduction-1"><i class="fa fa-check"></i><b>4.3.2</b> Introduction</a></li>
+<li class="chapter" data-level="4.3.3" data-path="further-topics.html"><a href="further-topics.html#todo-1"><i class="fa fa-check"></i><b>4.3.3</b> TODO</a></li>
+<li class="chapter" data-level="4.3.4" data-path="further-topics.html"><a href="further-topics.html#previous-work"><i class="fa fa-check"></i><b>4.3.4</b> Previous Work</a></li>
+<li class="chapter" data-level="4.3.5" data-path="further-topics.html"><a href="further-topics.html#todo-2"><i class="fa fa-check"></i><b>4.3.5</b> TODO</a></li>
+<li class="chapter" data-level="4.3.6" data-path="further-topics.html"><a href="further-topics.html#pathway-proposal"><i class="fa fa-check"></i><b>4.3.6</b> Pathway Proposal</a></li>
+<li class="chapter" data-level="4.3.7" data-path="further-topics.html"><a href="further-topics.html#todo-3"><i class="fa fa-check"></i><b>4.3.7</b> TODO</a></li>
+<li class="chapter" data-level="4.3.8" data-path="further-topics.html"><a href="further-topics.html#discussion-1"><i class="fa fa-check"></i><b>4.3.8</b> Discussion</a></li>
+<li class="chapter" data-level="4.3.9" data-path="further-topics.html"><a href="further-topics.html#todo-4"><i class="fa fa-check"></i><b>4.3.9</b> TODO</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="title.html"><a href="title.html"><i class="fa fa-check"></i><b>5</b> title</a></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
+<li class="chapter" data-level="7" data-path="epilogue.html"><a href="epilogue.html"><i class="fa fa-check"></i><b>7</b> Epilogue</a></li>
+<li class="chapter" data-level="8" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>8</b> Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -139,15 +198,35 @@
             <section class="normal" id="section-">
 <div id="introduction" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 1</span> Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><em>Author: </em></p>
-<p><em>Supervisor: </em></p>
-<div id="intro-about-the-seminar-topic" class="section level2 hasAnchor">
-<h2><span class="header-section-number">1.1</span> Intro About the Seminar Topic<a href="introduction.html#intro-about-the-seminar-topic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>Author: Nadja Sauter</em></p>
+<p><em>Supervisor: Matthias Assenmacher</em></p>
+<div class="figure">
+<img src="figures/00-chapter0/AI_art.png" alt="" />
+<p class="caption">A cute monster taking a shower in a bathtub trending on art station (CLIP + Guided Diffuision) from <a href="https://multimodal.art/">multimodal.art</a></p>
 </div>
-<div id="outline-of-the-booklet" class="section level2 hasAnchor">
-<h2><span class="header-section-number">1.2</span> Outline of the Booklet<a href="introduction.html#outline-of-the-booklet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Intro About the Seminar Topic: show “AI Art” -&gt; multimodal deep learning Text2Img (methods: CLIP + Guided Diffuision (see pictrue above) or DALL-E; Glide)<br />
+</li>
+<li>Different types of multimodal deep learning:
+<ul>
+<li>Text2Img (mentioned before)<br />
+</li>
+<li>Img2Text (methods: Microsoft Coco; Meshed memory Transformer for Image captioning M2)<br />
+</li>
+<li>Image supporting Language models<br />
+</li>
+<li>…</li>
+</ul></li>
+<li>Detailed methods explained in book<br />
+</li>
+<li>Outline of the Booklet:
+<ul>
+<li>Fundamentals: NLP + CV<br />
+</li>
+<li>Specific mutlimoald models mentioned above</li>
+</ul></li>
+</ul>
 
-</div>
 </div>
             </section>
 
@@ -155,7 +234,7 @@
         </div>
       </div>
 <a href="foreword.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introducing-the-modalities.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
@@ -215,7 +294,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
