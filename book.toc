@@ -4,14 +4,14 @@
 \contentsline {section}{\numberline {1.1}Introduction to Multimodal Deep Learning}{3}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Outline of the Booklet}{4}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Introducing the modalities}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}State-of-the-art in NLP}{9}{section.2.1}%
-\contentsline {section}{\numberline {2.2}State-of-the-art in Computer Vision}{9}{section.2.2}%
+\contentsline {section}{\numberline {2.1}State-of-the-art in NLP}{10}{section.2.1}%
+\contentsline {section}{\numberline {2.2}State-of-the-art in Computer Vision}{10}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}History}{10}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Supervised and unsupervised learning}{11}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Scaling networks}{11}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.3}Scaling networks}{12}{subsection.2.2.3}%
 \contentsline {subsection}{\numberline {2.2.4}Deep residual networks}{12}{subsection.2.2.4}%
-\contentsline {subsubsection}{\numberline {2.2.4.1}Deep Residual Learning}{12}{subsubsection.2.2.4.1}%
-\contentsline {paragraph}{\numberline {2.2.4.1.1}Residual Learning}{12}{paragraph.2.2.4.1.1}%
+\contentsline {subsubsection}{\numberline {2.2.4.1}Deep Residual Learning}{13}{subsubsection.2.2.4.1}%
+\contentsline {paragraph}{\numberline {2.2.4.1.1}Residual Learning}{13}{paragraph.2.2.4.1.1}%
 \contentsline {paragraph}{\numberline {2.2.4.1.2}Identity Mapping by Shortcuts}{13}{paragraph.2.2.4.1.2}%
 \contentsline {subsubsection}{\numberline {2.2.4.2}Network Architectures}{14}{subsubsection.2.2.4.2}%
 \contentsline {subsection}{\numberline {2.2.5}EfficientNet}{15}{subsection.2.2.5}%
@@ -21,14 +21,14 @@
 \contentsline {paragraph}{\numberline {2.2.5.1.3}Compound Scaling}{18}{paragraph.2.2.5.1.3}%
 \contentsline {subsubsection}{\numberline {2.2.5.2}EfficientNet Architecture}{19}{subsubsection.2.2.5.2}%
 \contentsline {subsection}{\numberline {2.2.6}Results and comparison of the networks}{19}{subsection.2.2.6}%
-\contentsline {subsection}{\numberline {2.2.7}Contrastive learning}{20}{subsection.2.2.7}%
+\contentsline {subsection}{\numberline {2.2.7}Contrastive learning}{21}{subsection.2.2.7}%
 \contentsline {subsection}{\numberline {2.2.8}A Simple Framework for Contrastive Learning of Visual Representations}{21}{subsection.2.2.8}%
 \contentsline {subsubsection}{\numberline {2.2.8.1}The Contrastive Learning Framework}{22}{subsubsection.2.2.8.1}%
 \contentsline {paragraph}{\numberline {2.2.8.1.1}Stochastic data augmentation module}{22}{paragraph.2.2.8.1.1}%
 \contentsline {paragraph}{\numberline {2.2.8.1.2}Neural network base encoder}{23}{paragraph.2.2.8.1.2}%
 \contentsline {paragraph}{\numberline {2.2.8.1.3}Small neural network projection head}{23}{paragraph.2.2.8.1.3}%
 \contentsline {paragraph}{\numberline {2.2.8.1.4}Contrastive loss function}{24}{paragraph.2.2.8.1.4}%
-\contentsline {subsection}{\numberline {2.2.9}Bootstrap Your Own Latent}{24}{subsection.2.2.9}%
+\contentsline {subsection}{\numberline {2.2.9}Bootstrap Your Own Latent}{25}{subsection.2.2.9}%
 \contentsline {subsubsection}{\numberline {2.2.9.1}Description of method}{25}{subsubsection.2.2.9.1}%
 \contentsline {subsection}{\numberline {2.2.10}Comparison of contrastive learning frameworks}{26}{subsection.2.2.10}%
 \contentsline {subsection}{\numberline {2.2.11}Transformers in Computer Vision}{27}{subsection.2.2.11}%
@@ -55,61 +55,61 @@
 \contentsline {paragraph}{\numberline {2.3.1.3.4}Wikipedia Image Text (WIT)}{38}{paragraph.2.3.1.3.4}%
 \contentsline {subsubsection}{\numberline {2.3.1.4}Bias In Datasets}{39}{subsubsection.2.3.1.4}%
 \contentsline {subsection}{\numberline {2.3.2}Pre-Training Tasks}{41}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Benchmarks}{43}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.3}Benchmarks}{44}{subsection.2.3.3}%
 \contentsline {subsubsection}{\numberline {2.3.3.1}Natural Language Processing Benchmarks}{44}{subsubsection.2.3.3.1}%
 \contentsline {paragraph}{\numberline {2.3.3.1.1}(Super)GLUE}{44}{paragraph.2.3.3.1.1}%
-\contentsline {paragraph}{\numberline {2.3.3.1.2}Stanford Question Answering Dataset (SQuAD) (1.0 \& 2.0)}{47}{paragraph.2.3.3.1.2}%
-\contentsline {paragraph}{\numberline {2.3.3.1.3}Beyond the Imitation Game Benchmark (BIG-bench)}{47}{paragraph.2.3.3.1.3}%
+\contentsline {paragraph}{\numberline {2.3.3.1.2}Stanford Question Answering Dataset (SQuAD) (1.0 \& 2.0)}{46}{paragraph.2.3.3.1.2}%
+\contentsline {paragraph}{\numberline {2.3.3.1.3}Beyond the Imitation Game Benchmark (BIG-bench)}{48}{paragraph.2.3.3.1.3}%
 \contentsline {paragraph}{\numberline {2.3.3.1.4}WMT}{48}{paragraph.2.3.3.1.4}%
 \contentsline {paragraph}{\numberline {2.3.3.1.5}CheckList}{49}{paragraph.2.3.3.1.5}%
-\contentsline {subsubsection}{\numberline {2.3.3.2}Computer Vision Benchmarks}{49}{subsubsection.2.3.3.2}%
-\contentsline {paragraph}{\numberline {2.3.3.2.1}ImageNet Versions}{49}{paragraph.2.3.3.2.1}%
-\contentsline {paragraph}{\numberline {2.3.3.2.2}MS-COCO \& Object365}{50}{paragraph.2.3.3.2.2}%
-\contentsline {paragraph}{\numberline {2.3.3.2.3}ADE20k}{51}{paragraph.2.3.3.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.3.2}Computer Vision Benchmarks}{50}{subsubsection.2.3.3.2}%
+\contentsline {paragraph}{\numberline {2.3.3.2.1}ImageNet Versions}{50}{paragraph.2.3.3.2.1}%
+\contentsline {paragraph}{\numberline {2.3.3.2.2}MS-COCO \& Object365}{51}{paragraph.2.3.3.2.2}%
+\contentsline {paragraph}{\numberline {2.3.3.2.3}ADE20k}{52}{paragraph.2.3.3.2.3}%
 \contentsline {subsubsection}{\numberline {2.3.3.3}Multi-Modal Benchmarks}{52}{subsubsection.2.3.3.3}%
-\contentsline {paragraph}{\numberline {2.3.3.3.1}Visual Commonsense Reasoning (VCR)}{52}{paragraph.2.3.3.3.1}%
-\contentsline {paragraph}{\numberline {2.3.3.3.2}Visual Question Answering 1.0 \& 2.0 (VQA)}{53}{paragraph.2.3.3.3.2}%
+\contentsline {paragraph}{\numberline {2.3.3.3.1}Visual Commonsense Reasoning (VCR)}{53}{paragraph.2.3.3.3.1}%
+\contentsline {paragraph}{\numberline {2.3.3.3.2}Visual Question Answering 1.0 \& 2.0 (VQA)}{54}{paragraph.2.3.3.3.2}%
 \contentsline {subsubsection}{\numberline {2.3.3.4}GQA}{54}{subsubsection.2.3.3.4}%
-\contentsline {paragraph}{\numberline {2.3.3.4.1}Generative Benchmarks}{54}{paragraph.2.3.3.4.1}%
-\contentsline {paragraph}{\numberline {2.3.3.4.2}PartiPrompts, DrawBench, Localized Narratives}{56}{paragraph.2.3.3.4.2}%
+\contentsline {paragraph}{\numberline {2.3.3.4.1}Generative Benchmarks}{55}{paragraph.2.3.3.4.1}%
+\contentsline {paragraph}{\numberline {2.3.3.4.2}PartiPrompts, DrawBench, Localized Narratives}{55}{paragraph.2.3.3.4.2}%
 \contentsline {paragraph}{\numberline {2.3.3.4.3}FOIL it!}{56}{paragraph.2.3.3.4.3}%
 \contentsline {paragraph}{\numberline {2.3.3.4.4}VALSE}{57}{paragraph.2.3.3.4.4}%
 \contentsline {subsubsection}{\numberline {2.3.3.5}Other Benchmarks}{57}{subsubsection.2.3.3.5}%
 \contentsline {chapter}{\numberline {3}Multimodal architectures}{59}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Img2text}{63}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Microsoft COCO: Common Objects in Context}{63}{subsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.1.1}Image Collection and Annotation for MS COCO}{64}{subsubsection.3.1.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.1}Image Collection and Annotation for MS COCO}{65}{subsubsection.3.1.1.1}%
 \contentsline {subsubsection}{\numberline {3.1.1.2}Comparison with other Datasets}{66}{subsubsection.3.1.1.2}%
 \contentsline {subsubsection}{\numberline {3.1.1.3}Discussion}{68}{subsubsection.3.1.1.3}%
 \contentsline {subsection}{\numberline {3.1.2}Models for Image captioning}{68}{subsection.3.1.2}%
 \contentsline {subsection}{\numberline {3.1.3}Meshed-Memory Transformer for Image Captioning (\(M^2\))}{69}{subsection.3.1.3}%
-\contentsline {subsubsection}{\numberline {3.1.3.1}\(M^2\) Transformer Architecture}{70}{subsubsection.3.1.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.3.1}\(M^2\) Transformer Architecture}{69}{subsubsection.3.1.3.1}%
 \contentsline {paragraph}{\numberline {3.1.3.1.1}Memory-Augmented Encoder}{71}{paragraph.3.1.3.1.1}%
 \contentsline {paragraph}{\numberline {3.1.3.1.2}Meshed Decoder}{72}{paragraph.3.1.3.1.2}%
 \contentsline {paragraph}{\numberline {3.1.3.1.3}Comparison with other models on COCO Datasets}{73}{paragraph.3.1.3.1.3}%
-\contentsline {section}{\numberline {3.2}Text-2-image}{75}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Text-2-image}{76}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Seeking objectivity}{76}{subsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.1.1}Datasets}{76}{subsubsection.3.2.1.1}%
 \contentsline {subsubsection}{\numberline {3.2.1.2}Measures}{76}{subsubsection.3.2.1.2}%
 \contentsline {subsection}{\numberline {3.2.2}Generative Adversarial Networks}{76}{subsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.2.1}Vanilla GAN for Image Generation}{76}{subsubsection.3.2.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2.2}Conditioning on Text}{76}{subsubsection.3.2.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.2.3}Stacking generators}{76}{subsubsection.3.2.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.2.2}Conditioning on Text}{77}{subsubsection.3.2.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.3}Stacking generators}{77}{subsubsection.3.2.2.3}%
 \contentsline {subsubsection}{\numberline {3.2.2.4}Is attention all you need?}{77}{subsubsection.3.2.2.4}%
 \contentsline {subsubsection}{\numberline {3.2.2.5}Variational Autoencoder}{77}{subsubsection.3.2.2.5}%
 \contentsline {subsection}{\numberline {3.2.3}Dall-E starting post-GAN era}{77}{subsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.2.4}GLIDE}{77}{subsection.3.2.4}%
 \contentsline {subsection}{\numberline {3.2.5}Dall-E 2}{77}{subsection.3.2.5}%
 \contentsline {subsection}{\numberline {3.2.6}Imagen}{77}{subsection.3.2.6}%
-\contentsline {subsection}{\numberline {3.2.7}Parti}{77}{subsection.3.2.7}%
+\contentsline {subsection}{\numberline {3.2.7}Parti}{78}{subsection.3.2.7}%
 \contentsline {subsection}{\numberline {3.2.8}Open-Source Community}{78}{subsection.3.2.8}%
 \contentsline {subsection}{\numberline {3.2.9}Discussion}{78}{subsection.3.2.9}%
 \contentsline {section}{\numberline {3.3}Images supporting language models}{78}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Words In (Non-Symbolic) Contexts}{78}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Word-Embeddings: Survival-Kit}{80}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}The Beginning: Sequential Multimodal Embeddings}{80}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.2}Word-Embeddings: Survival-Kit}{79}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}The Beginning: Sequential Multimodal Embeddings}{81}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}The Grounded Space}{82}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}The Transformers Era}{84}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.5}The Transformers Era}{85}{subsection.3.3.5}%
 \contentsline {subsubsection}{\numberline {3.3.5.1}Vokenization}{86}{subsubsection.3.3.5.1}%
 \contentsline {paragraph}{\numberline {3.3.5.1.1}The Relevance Score Function: Model, Training, Inference}{89}{paragraph.3.3.5.1.1}%
 \contentsline {subsubsection}{\numberline {3.3.5.2}One Step Further: The Power Of Imagination}{90}{subsubsection.3.3.5.2}%
@@ -130,7 +130,7 @@
 \contentsline {subsubsection}{\numberline {3.4.3.3}Florence}{122}{subsubsection.3.4.3.3}%
 \contentsline {subsection}{\numberline {3.4.4}Performance comparison}{123}{subsection.3.4.4}%
 \contentsline {subsection}{\numberline {3.4.5}Resources}{125}{subsection.3.4.5}%
-\contentsline {section}{\numberline {3.5}Text + Image}{125}{section.3.5}%
+\contentsline {section}{\numberline {3.5}Text + Image}{126}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}Data2vec}{127}{subsection.3.5.1}%
 \contentsline {subsection}{\numberline {3.5.2}Vision-and-Language Bert (VilBert)}{133}{subsection.3.5.2}%
 \contentsline {subsection}{\numberline {3.5.3}Flamingo}{137}{subsection.3.5.3}%

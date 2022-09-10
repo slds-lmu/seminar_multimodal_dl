@@ -431,15 +431,6 @@
   VOLUME = {30},
 }
 
-@INPROCEEDINGS{radford2021learning,
-  AUTHOR = {Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and others},
-  ORGANIZATION = {PMLR},
-  BOOKTITLE = {International Conference on Machine Learning},
-  DATE = {2021},
-  PAGES = {8748--8763},
-  TITLE = {Learning transferable visual models from natural language supervision},
-}
-
 @INPROCEEDINGS{deng2009imagenet,
   AUTHOR = {Deng, Jia and Dong, Wei and Socher, Richard and Li, Li-Jia and Li, Kai and Fei-Fei, Li},
   ORGANIZATION = {Ieee},
@@ -1771,3 +1762,246 @@
   TITLE = {Swag: A large-scale adversarial dataset for grounded commonsense inference},
 }
 
+@MANUAL{rlang,
+  AUTHOR = {{R Core Team}},
+  LOCATION = {Vienna, Austria},
+  ORGANIZATION = {R Foundation for Statistical Computing},
+  URL = {https://www.R-project.org/},
+  DATE = {2018},
+  TITLE = {R: A Language and Environment for Statistical Computing},
+}
+
+@INPROCEEDINGS{radford2021learning,
+  AUTHOR = {Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and others},
+  ORGANIZATION = {PMLR},
+  BOOKTITLE = {International Conference on Machine Learning},
+  DATE = {2021},
+  PAGES = {8748--8763},
+  TITLE = {Learning transferable visual models from natural language supervision},
+}
+
+@ARTICLE{baevski2022data2vec,
+  AUTHOR = {Baevski, Alexei and Hsu, Wei-Ning and Xu, Qiantong and Babu, Arun and Gu, Jiatao and Auli, Michael},
+  DATE = {2022},
+  JOURNALTITLE = {arXiv preprint arXiv:2202.03555},
+  TITLE = {Data2vec: A general framework for self-supervised learning in speech, vision and language},
+}
+
+@ARTICLE{bao2021beit,
+  AUTHOR = {Bao, Hangbo and Dong, Li and Wei, Furu},
+  DATE = {2021},
+  JOURNALTITLE = {arXiv preprint arXiv:2106.08254},
+  TITLE = {Beit: Bert pre-training of image transformers},
+}
+
+@ARTICLE{radford2019language,
+  AUTHOR = {Radford, Alec and Wu, Jeffrey and Child, Rewon and Luan, David and Amodei, Dario and Sutskever, Ilya and others},
+  DATE = {2019},
+  JOURNALTITLE = {OpenAI blog},
+  NUMBER = {8},
+  PAGES = {9},
+  TITLE = {Language models are unsupervised multitask learners},
+  VOLUME = {1},
+}
+
+@ARTICLE{shen2021much,
+  AUTHOR = {Shen, Sheng and Li, Liunian Harold and Tan, Hao and Bansal, Mohit and Rohrbach, Anna and Chang, Kai-Wei and Yao, Zhewei and Keutzer, Kurt},
+  DATE = {2021},
+  JOURNALTITLE = {arXiv preprint arXiv:2107.06383},
+  TITLE = {How Much Can CLIP Benefit Vision-and-Language Tasks?},
+}
+
+@INPROCEEDINGS{silberer2012grounded,
+  AUTHOR = {Silberer, Carina and Lapata, Mirella},
+  ORGANIZATION = {ACL (Association for Computational Linguistics)},
+  BOOKTITLE = {Tsujii J, Henderson J, Paşca M, editors. Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning; 2012 Jul 12--14; Jeju Island, Korea. Stroudsburg: ACL; 2012. p. 1423-33.},
+  DATE = {2012},
+  TITLE = {Grounded models of semantic representation},
+}
+
+@ARTICLE{sennrich2015neural,
+  AUTHOR = {Sennrich, Rico and Haddow, Barry and Birch, Alexandra},
+  DATE = {2015},
+  JOURNALTITLE = {arXiv preprint arXiv:1508.07909},
+  TITLE = {Neural machine translation of rare words with subword units},
+}
+
+@ARTICLE{baevski2020wav2vec,
+  AUTHOR = {Baevski, Alexei and Zhou, Yuhao and Mohamed, Abdelrahman and Auli, Michael},
+  DATE = {2020},
+  JOURNALTITLE = {Advances in Neural Information Processing Systems},
+  PAGES = {12449--12460},
+  TITLE = {wav2vec 2.0: A framework for self-supervised learning of speech representations},
+  VOLUME = {33},
+}
+
+@INPROCEEDINGS{chen2021empirical,
+  AUTHOR = {Chen, Xinlei and Xie, Saining and He, Kaiming},
+  BOOKTITLE = {Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  DATE = {2021},
+  PAGES = {9640--9649},
+  TITLE = {An empirical study of training self-supervised vision transformers},
+}
+
+@INPROCEEDINGS{he2022masked,
+  AUTHOR = {He, Kaiming and Chen, Xinlei and Xie, Saining and Li, Yanghao and Dollár, Piotr and Girshick, Ross},
+  BOOKTITLE = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  DATE = {2022},
+  PAGES = {16000--16009},
+  TITLE = {Masked autoencoders are scalable vision learners},
+}
+
+@ARTICLE{zhang2020contrastive,
+  AUTHOR = {Zhang, Yuhao and Jiang, Hang and Miura, Yasuhide and Manning, Christopher D and Langlotz, Curtis P},
+  DATE = {2020},
+  JOURNALTITLE = {arXiv preprint arXiv:2010.00747},
+  TITLE = {Contrastive learning of medical visual representations from paired images and text},
+}
+
+@ONLINE{sutton2019bitterlesson,
+  AUTHOR = {Sutton, R. S.},
+  URL = {http://www.incompleteideas.net/IncIdeas/BitterLesson.html},
+  DATE = {2019-03-13},
+  TITLE = {The Bitter Lesson},
+}
+
+@ONLINE{openai2021clipblog,
+  AUTHOR = {OpenAI},
+  URL = {https://openai.com/blog/clip/},
+  DATE = {2021-01-05},
+  TITLE = {CLIP: Connection Text and Images},
+}
+
+@ONLINE{alford2021alignparams,
+  AUTHOR = {Alford, A.},
+  URL = {https://www.infoq.com/news/2021/07/google-vision-language-ai/},
+  DATE = {2021-07-20},
+  TITLE = {Google Announces 800M Parameter Vision-Language AI Model ALIGN},
+}
+
+@ONLINE{schuhmann2022laion,
+  AUTHOR = {Schuhmann, C.},
+  URL = {https://laion.ai/blog/laion-400-open-dataset/},
+  DATE = {2022-07-07},
+  TITLE = {Laion-400-Million Open Dataset},
+}
+
+@ONLINE{solawetz2021florenceopen,
+  AUTHOR = {Solawetz, J.},
+  URL = {https://blog.roboflow.com/florence-a-new-foundational-model-for-computer-vision/},
+  DATE = {2021-12-09},
+  TITLE = {Florence: A New Foundation for Computer Vision},
+}
+
+@INPROCEEDINGS{wei2022masked,
+  AUTHOR = {Wei, Chen and Fan, Haoqi and Xie, Saining and Wu, Chao-Yuan and Yuille, Alan and Feichtenhofer, Christoph},
+  BOOKTITLE = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  DATE = {2022},
+  PAGES = {14668--14678},
+  TITLE = {Masked feature prediction for self-supervised visual pre-training},
+}
+
+@INPROCEEDINGS{jaegle2021perceiver,
+  AUTHOR = {Jaegle, Andrew and Gimeno, Felix and Brock, Andy and Vinyals, Oriol and Zisserman, Andrew and Carreira, Joao},
+  ORGANIZATION = {PMLR},
+  BOOKTITLE = {International conference on machine learning},
+  DATE = {2021},
+  PAGES = {4651--4664},
+  TITLE = {Perceiver: General perception with iterative attention},
+}
+
+@ARTICLE{alayrac2022flamingo,
+  AUTHOR = {Alayrac, Jean-Baptiste and Donahue, Jeff and Luc, Pauline and Miech, Antoine and Barr, Iain and Hasson, Yana and Lenc, Karel and Mensch, Arthur and Millican, Katie and Reynolds, Malcolm and others},
+  DATE = {2022},
+  JOURNALTITLE = {arXiv preprint arXiv:2204.14198},
+  TITLE = {Flamingo: a visual language model for few-shot learning},
+}
+
+@ARTICLE{lu2019vilbert,
+  AUTHOR = {Lu, Jiasen and Batra, Dhruv and Parikh, Devi and Lee, Stefan},
+  DATE = {2019},
+  JOURNALTITLE = {Advances in neural information processing systems},
+  TITLE = {Vilbert: Pretraining task-agnostic visiolinguistic representations for vision-and-language tasks},
+  VOLUME = {32},
+}
+
+@ARTICLE{uppal2022multimodal,
+  AUTHOR = {Uppal, Shagun and Bhagat, Sarthak and Hazarika, Devamanyu and Majumder, Navonil and Poria, Soujanya and Zimmermann, Roger and Zadeh, Amir},
+  PUBLISHER = {Elsevier},
+  DATE = {2022},
+  JOURNALTITLE = {Information Fusion},
+  PAGES = {149--171},
+  TITLE = {Multimodal research in vision and language: A review of current and emerging trends},
+  VOLUME = {77},
+}
+
+@ARTICLE{hoffmann2022training,
+  AUTHOR = {Hoffmann, Jordan and Borgeaud, Sebastian and Mensch, Arthur and Buchatskaya, Elena and Cai, Trevor and Rutherford, Eliza and Casas, Diego de Las and Hendricks, Lisa Anne and Welbl, Johannes and Clark, Aidan and others},
+  DATE = {2022},
+  JOURNALTITLE = {arXiv preprint arXiv:2203.15556},
+  TITLE = {Training Compute-Optimal Large Language Models},
+}
+
+@INPROCEEDINGS{jia2021scaling,
+  AUTHOR = {Jia, Chao and Yang, Yinfei and Xia, Ye and Chen, Yi-Ting and Parekh, Zarana and Pham, Hieu and Le, Quoc and Sung, Yun-Hsuan and Li, Zhen and Duerig, Tom},
+  ORGANIZATION = {PMLR},
+  BOOKTITLE = {International Conference on Machine Learning},
+  DATE = {2021},
+  PAGES = {4904--4916},
+  TITLE = {Scaling up visual and vision-language representation learning with noisy text supervision},
+}
+
+@ARTICLE{perez2021true,
+  AUTHOR = {Perez, Ethan and Kiela, Douwe and Cho, Kyunghyun},
+  DATE = {2021},
+  JOURNALTITLE = {Advances in Neural Information Processing Systems},
+  PAGES = {11054--11070},
+  TITLE = {True few-shot learning with language models},
+  VOLUME = {34},
+}
+
+@ARTICLE{zeng2022socratic,
+  AUTHOR = {Zeng, Andy and Wong, Adrian and Welker, Stefan and Choromanski, Krzysztof and Tombari, Federico and Purohit, Aveek and Ryoo, Michael and Sindhwani, Vikas and Lee, Johnny and Vanhoucke, Vincent and others},
+  DATE = {2022},
+  JOURNALTITLE = {arXiv preprint arXiv:2204.00598},
+  TITLE = {Socratic models: Composing zero-shot multimodal reasoning with language},
+}
+
+@ARTICLE{ren2015faster,
+  AUTHOR = {Ren, Shaoqing and He, Kaiming and Girshick, Ross and Sun, Jian},
+  DATE = {2015},
+  JOURNALTITLE = {Advances in neural information processing systems},
+  TITLE = {Faster r-cnn: Towards real-time object detection with region proposal networks},
+  VOLUME = {28},
+}
+
+@INPROCEEDINGS{krishnavisualgenome,
+  AUTHOR = {Krishna, Ranjay and Zhu, Yuke and Groth, Oliver and Johnson, Justin and Hata, Kenji and Kravitz, Joshua and Chen, Stephanie and Kalantidis, Yannis and Li, Li-Jia and Shamma, David A and Bernstein, Michael and Fei-Fei, Li},
+  URL = {https://arxiv.org/abs/1602.07332},
+  DATE = {2016},
+  TITLE = {Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations},
+}
+
+@ARTICLE{sikarwar2022efficacy,
+  AUTHOR = {Sikarwar, Ankur and Kreiman, Gabriel},
+  DATE = {2022},
+  JOURNALTITLE = {arXiv preprint arXiv:2201.03965},
+  TITLE = {On the efficacy of co-attention transformer layers in visual question answering},
+}
+
+@ARTICLE{chowdhery2022palm,
+  AUTHOR = {Chowdhery, Aakanksha and Narang, Sharan and Devlin, Jacob and Bosma, Maarten and Mishra, Gaurav and Roberts, Adam and Barham, Paul and Chung, Hyung Won and Sutton, Charles and Gehrmann, Sebastian and others},
+  DATE = {2022},
+  JOURNALTITLE = {arXiv preprint arXiv:2204.02311},
+  TITLE = {Palm: Scaling language modeling with pathways},
+}
+
+@ARTICLE{das2017human,
+  AUTHOR = {Das, Abhishek and Agrawal, Harsh and Zitnick, Larry and Parikh, Devi and Batra, Dhruv},
+  PUBLISHER = {Elsevier},
+  DATE = {2017},
+  JOURNALTITLE = {Computer Vision and Image Understanding},
+  PAGES = {90--100},
+  TITLE = {Human attention in visual question answering: Do humans and deep networks look at the same regions?},
+  VOLUME = {163},
+}
