@@ -337,12 +337,41 @@ knitr::include_graphics("figures/02-02-text-2-img/timessquare.png")
 ```
 
 ### Imagen & Parti
-* Intro
-* details how it is working
-* results / scores
-* Limitations / strengths & weaknesses
+
+Only few months after unCLIP was released by OpenAI, for the first time Google came into play with its new autoregressive model called Imagen (https://arxiv.org/pdf/2205.11487.pdf). Another one followed just two months later - Parti (https://arxiv.org/pdf/2206.10789.pdf). Both of these models pushed the boundaries even further, although they take entirely different approach. None of them is introducing completely new way of looking at a problem of text-to-image generation. Their advancements come from engineering and further scaling existing solutions. However, it must be stressed that currently (September 2022) they are delivering the most outstanding results on the market.
+
+Imagen is a diffusion model. Its main contribution is that instead of using text encoder trained on image captions, it actually uses huge pretrained NLP model called T5-XXL (cit) that is taken off-the-shelf and frozen. Authors argue that this helps model understand language much more deeply, as it has seen more diverse and complex texts than just image captions.
+
+On the other hand Parti takes an autoregressive approach. Similarly to first version of Dall-E, it consists of two stages, namely image tokenizer and sequence-to-sequence autoregressive part which is reponsible for generating image tokens from set of text tokens. In this case, ViT-VQGAN (cit) is used as a tokenizer and autoregressive component is again Transformer-like.
+
+**Results**
+
+Both of the models improved the FID significantly compared to the previous works. Figure (xxx) shows the comparison.
+
+```{r parti_results, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Comparison of FID on MS-COCO. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/parti_results.png")
+```
+
+Samples from Parti can be seen in Figure xxx. They are included here on purpose - this is the current state-of-the-art as of the moment of writing!
+
+```{r parti_images, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Selected samples from Parti. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/parti_images.png")
+```
+
+**Limitations**
+
+(xxx) mention an extensive list of problems, with which Parti still struggles. At this point, all of them can be treated as a set that is common to almost all the models available on the market. Among others, they touch:
+
+* feature blending (where features of two different objects are missed)
+* ommission or duplicating details
+* displaced positioning of objects
+* counting
+* negation in text prompts
+
+and many many more. These flaws pose a challenge for the future research and undoubtedly they are the ones that need to be addressed first to enable another leap forward for the field of text-to-image generation.
 
 ### Discussion
+
 Mention the following points and why they matter
 
 **Open-Source Community**
