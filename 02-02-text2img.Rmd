@@ -199,18 +199,41 @@ $q_{\phi}(z|x)$ denotes the encoder under the assumption that $z$ comes from mul
 
 **VQ-VAE / dVAE**
 
+The VQ-VAE (Vector Quantized VAE) (https://arxiv.org/abs/1711.00937) differs from regular VAE in the way it approaches encoding the latent space. Instead of mapping data into continuous distribution, Vector Quantized version does it in a discrete way. This is motivated by the fact that for many data modalities it is more natural to represent them in a discrete way (e.g. speech, human language, reasoning about objects in images, etc.). VQ-VAE achieves that by using separate codebook of vectors. The architecture is depicted in Figure (xxx).
 
+```{r vqvae, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="VQ-VAE architecture. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/vqvae.png")
+```
 
-**The Model**
+The idea is to map the output of the encoder to one of the vectors from the $K$-dimensional codebook. This process is called quantization and essentially means finding the vector that is the nearest neighbour to encoder's output (in a sense of Euclidean distance). Since this moment, this newly found vector from the codebook is going to be used instead. The codebook itself is also subject to learning process. One could argue that passing gradients during the training through such a discrete system might be problematic. VQ-VAE overcomes this problem by simply copying gradients from decoder's input to encoder's output. Great explanation of the training process and further mathematical details can be found in (https://lilianweng.github.io/posts/2018-08-12-vae/#vq-vae-and-vq-vae-2) and (https://ml.berkeley.edu/blog/posts/vq-vae/).
 
-say why we are not going to explain transformers
-* Details how it's working. Combining Transformer with dVAE. Training vs inference
+Dall-E, however, is using what is called dVAE. Essentially, it is a VQ-VAE with a couple of details changed. In short, the main difference is that instead of learning deterministic mapping from encoder's output to the codebook, it produces probabilities of a latent over all codebook vectors.
+
+**Dall-E system**
+
+Dall-E is composed of two stages. The above-introduction of VQ-VAE was necessary to understand the first one. It really is nothing more than training dVAE to compress 256x256 images into 32x32 grid of tokens. This model will play crucial role in the second stage.
+
+Second stage is about learning the prior distribution of text-image pairs. First, text is byte-pair-encoded (https://arxiv.org/abs/1508.07909) into maximum 256 tokens, where vocabulary is of 16384 size. Next, image representation encoded by previously trained dVAE is unrolled (from 32x32 grid to 1024 tokens) and concatenated to the text tokens. This sequence (of 256+1024 tokens) is used as an input for huge transformer-like architecture. Its goal is to autoregressively model the next token prediction.
+
+During inference time text caption is again encoded into 256 tokens at most. The generation process starts with predicting all of the next 1024 image-related tokens. They are later decoded with the dVAE decoder that was trained in the first step. Its output represents the final image.
 
 **Results**
-* Results and image examples
-cherrypicking
+
+Results achieved with the original Dall-E attracted so much attention mainly due to its diversity and zero-shot capabilities. Dall-E was capable of producing better results compared to previous state-of-the-art models which were trained on data coming from the same domain as data used for evaluation. One comparison can be seen in Figure (xxx).
+
+```{r dalle_photorealism, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Human evaluation of Dall-E vs DF-GAN on text caption from MS-COCO dataset. When asked for realism and caption similarity, evaluators preferred Dall-E's results over 90% of the time. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/dalle_photorealism.png")
+```
+
+Outputs of some the prior approaches described in this chapter compared with Dall-E can be seen in Figure (xxx).
+
+```{r dalle_examples, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Comparison of the results from Dall-E vs prior works on MS-COCO. Dall-E's outputs are chosen as best out of 512 images, ranked by contrastive model. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/dalle_examples.png")
+```
 
 **Limitations**
+
+Although Dall-E made a huge step forward in text-to-image modelling, it still showed multiple flaws. First, photorealism of the outputs is still relatively low. In other words, when prompted for images containing realistic situations, it is rarely capable of *deceiving* human evaluator. Second, the model has evident problems with understanding relatively complex abstractions, such as text inside an image, or relative objects positions in the scene.
 
 
 ### GLIDE
@@ -231,7 +254,7 @@ where $(1-\alpha_{t})$ parametrizes the magnitude of the noise being added at ea
 
 where particular mean function $\mu_{\theta}$ has been proposed by (https://arxiv.org/pdf/2006.11239.pdf). For more detailed explanation of how this is later parametrized and trained, one could follow (https://lilianweng.github.io/posts/2021-07-11-diffusion-models/).
 
-**GLIDE**
+**GLIDE system**
 
 GLIDE can essentially be broken down into to two parts. First of them is the pretrained Transformer model, which in principle is responsible for creating the text embeddings. Last token embedding is used as a class embedding (text representation) in later stages. Additionally, all tokens from the last embedding layer are being used (*attended to*) by all attention layers in the diffusion model itself. This makes model aware of the text meaning while reconstructing the previous step in the Markov chain.
 
@@ -271,36 +294,72 @@ GLIDE suffers from two problems. First, it fails when being presented with compl
 knitr::include_graphics("figures/02-02-text-2-img/glide_fails.png")
 ```
 
-### Dall-E 2
-* Intro (mention PR move)
-* details how it is working
-* results / scores
-* Limitations / strengths & weaknesses
+### Dall-E 2 / unCLIP
 
+The contribution that probably attracted the most attention in the field is known under the name Dall-E 2 (https://cdn.openai.com/papers/dall-e-2.pdf). For the first time wide public of people not coming from Deep Learning research had picked up so much interest in its potential applications. This might be due to a great PR that could be seen from the authors, namely OpenAI. Dall-E 2, also known as just Dall-E, or unCLIP, has been advertised as a successor of Dall-E 1, on which results it significantly improved. In reality, architecture and results it achieved are much more similar to that of GLIDE. Additionally, social media has been flooded with images generated by the model. This was possible thanks to OpenAI giving access to it to everybody who was interested and patient enough to get through a waiting list. However, the model itself again remains unpublished. Another factor that might have contributed to Dall-E's success were its inpainting and outpainting capabilities. Although, it is worth mentioning they were already also possible with GLIDE.
 
-### Imagen
+Novelty contribution of the model remains debatable from the perspective of scientific research. UnCLIP is rather a very smart combination of what was already produced by OpenAI but is now re-engineered and applied in a new way. Nevertheless, the model represents significant leap forward, that is why it cannot be ommitted in this chapter.
+
+**Dall-E 2 system**
+
+UnCLIP consists of two components: so called prior and decoder. Let $x$ be the image and $y$ its caption. $z_{i}$ and $z_{t}$ are CLIP image and text embedding of this $(x, y)$ pair. Then, *prior* $P(z_{i}|y)$ is responsible for producing CLIP image embeddings conditioned on the text caption. A decoder $P(x|z_{i},y)$ outputs an image conditioned on the CLIP image embedding and, again, the text caption itself. 
+
+For the *prior* authors try two different approaches, namely autoregressive and diffusion models. The latter ended up yielding slightly better results. Diffusion prior is nothing else than Transformer taking as an input a special sequence of: encoded text prompt, CLIP text embedding, embedding for the diffusion step and noised CLIP image embedding.
+
+Decoder consists of diffusion models again. Firstly, GLIDE-like model takes CLIP image embedding as its $x_{t}$ instead of pure noise that was used in its original version. Similarly to original GLIDE, classifier-free guidance is applied, however with slight differences. Lastly, two diffusion upsampler models are trained to bring images first from 64x64 to 256x256, and then from 256x256 to 1024x1024 resolution. Authors find there is no benefit of conditioning these models on text captions. Finally, unCLIP can be summarized as a mixture of GLIDE and CLIP with a lot of engineering behind. 
+
+**Results**
+
+When compared to GLIDE, unCLIP shows it is capable of representing wider diversity of the data, while achieving similar level of photorealism and cpation similarity. Comparison to previous works on the MS-COCO dataset shows that unCLIP achieves unprecedented FID (Figure xxx). Few output examples calculated on MS-COCO captions can be found in Figure (xxx).
+
+```{r unclip_table, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Comparison of FID on MS-COCO. Best results for unCLIP were reported with the guidance scale of 1.25. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/unclip_table.png")
+```
+
+```{r unclip_images, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Image samples on MS-COCO text prompts. Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/unclip_images.png")
+```
+
+**Limitations**
+
+UnCLIP suffers from the very similar problems as its predecessor GLIDE did. First, compositionality in the images tend to sometimes be confused by the model. Failure cases can be seen in Figure (xxx). Second, UnCLIP struggles with generating coherent text inside an image (Figure xxx). Authors hypothesize that using CLIP embeddings, although improved diversity, might be responsible for making these problems more evident than in GLIDE. Lastly, UnCLIP often fails with delivering details in highly complex scenes (Figure xxx). Again, according to the authors, this might be a result of the fact that decoder is producing only 64x64 images which are later upsampled.
+
+```{r cube, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="'a red cube on top of a blue cube' Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/cube.png")
+```
+
+```{r sign, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="'A sign that says deep learning.' Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/sign.png")
+```
+
+```{r timessquare, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="'A high quality photo of Times Square.' Figure from (xxx).", }
+knitr::include_graphics("figures/02-02-text-2-img/timessquare.png")
+```
+
+### Imagen & Parti
 * Intro
 * details how it is working
 * results / scores
 * Limitations / strengths & weaknesses
 
-### Parti
-* Intro
-* details how it is working
-* results / scores
-* Limitations / strengths & weaknesses
+### Discussion
+Mention the following points and why they matter
 
-### Open-Source Community
+**Open-Source Community**
+
 * Although most of the recent work comes from OpenAI and Google, there are very interesting directions taken by the open community
 * Mentioning the models and quickly what is happening. VQGAN+CLIP, Latent Diffusion models for sure
 * Maybe some links for the reader to play with?
 
-### Discussion
-Mention the following points and why they matter
-* potential business use cases
-* open vs closed-source (mention dall-e mini)
+**Open- vs closed-source**
+
+**Possible applications**
+
+**Ethics**
+
 * copyrights
 * biases
+
 
 safety considerations from GLIDE paper?
 https://jumpstory.com/blog/the-future-of-ai-generated-images-why-its-both-fascinating-and-a-huge-legal-risk/
@@ -313,28 +372,3 @@ At the end:
 * fix all figures
 * grammarly
 * read everything once again and let Ilonka read
-<!--
-### Datasets
-
-**Microsoft Common Objects in Context (MS COCO)**
-
-MS COCO (https://arxiv.org/abs/1405.0312)
-
-* COCO
-* CUB
-* Oxford 102
--->
-
-<!--Moreover, the section lists couple of popular datasets that are, or have been used by researchers either for assessment only or for the training process itself.-->
-
-<!--https://medium.com/octavian-ai/a-simple-explanation-of-the-inception-score-372dff6a8c7a-->
-<!--https://www.youtube.com/watch?v=YHRnZ13s7xo-->
-<!---->
-<!--https://medium.datadriveninvestor.com/a-very-short-introduction-to-frechlet-inception-distance-fid-86c95deb0930-->
-<!--https://www.youtube.com/watch?v=9zTwSzXxNDo-->
-
-<!--https://towardsdatascience.com/text-to-image-a3b201b003ae-->
-
-
-
-
