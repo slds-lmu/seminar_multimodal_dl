@@ -7,8 +7,8 @@
 
 Have you ever wondered what a painting artist could bring you if you ordered *a high-quality oil painting of a psychedelic hamster dragon*? Probably not. Nevertheless, one of the answers could be:
 
-```{r hamster_dragon, fig.align = 'center', out.width = '40%',echo=FALSE, fig.cap="Hamster dragon. (xxx)", }
-knitr::include_graphics("figures/02-02-text-2-img/hamster_dragon.png")
+```{r hamsterdragon, fig.align = 'center', out.width = '40%',echo=FALSE, fig.cap="Hamster dragon", }
+knitr::include_graphics("figures/02-02-text-2-img/hamsterdragon.png")
 ```
 
 The catch is that there is no human artist. The above picture comes from 3.5-billion parameter model called GLIDE by OpenAI [@Glide2021]. Each single value of every pixel was generated from a distribution that the model had to learn in the first place. Before generating the image, GLIDE abstracted what the 'hamster' or 'dragon' are from looking at millions of training images. Only then, it was able to create and combine them successfully into meaningful visual representation. Welcome to the world of current text-to-image modelling!
@@ -41,10 +41,10 @@ A metric that is generally considered to improve upon Inception Score is Fréche
 
 $(m, C)$ and $(m_{w}, C_{w})$ represent mean and covariance of generated and real data Gaussians respectively. Obviously, low FID levels are desired.
 
-FID is considered to be consistent with human judgement and sensitive to image distortions, which are both desired properties. Figure (xxx) shows how FID increases (worsens) for different types of noise being added to images.
+FID is considered to be consistent with human judgement and sensitive to image distortions, which are both desired properties. Figure \@ref(fig:fiddistortions) shows how FID increases (worsens) for different types of noise being added to images.
 
-```{r fid_distortions, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="FID is evaluated for different noise types. From upper left to lower right: Gaussian noise, Gaussian blur, implanted black rectangles, swirled images, salt and pepper, CelebA dataset contaminated by ImageNet images. Figure from @FID2017.", }
-knitr::include_graphics("figures/02-02-text-2-img/fid_distortions.png")
+```{r fiddistortions, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="FID is evaluated for different noise types. From upper left to lower right: Gaussian noise, Gaussian blur, implanted black rectangles, swirled images, salt and pepper, CelebA dataset contaminated by ImageNet images. Figure from @FID2017.", }
+knitr::include_graphics("figures/02-02-text-2-img/fiddistortions.png")
 ```
 
 **Precision / recall**
@@ -53,8 +53,8 @@ Precision and recall are one of the most widely used metrics in many Machine Lea
 
 Let $P_{r}$ denote the probability distribution of the real data, and $P_{g}$ be the distribution of the generated data. In short, recall is trying to answer how big part of $P_{r}$ can be generated from $P_{g}$, while precision is trying to grasp how many of generated images fall within $P_{r}$.
 
-```{r precision_and_recall, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Definition of precision and recall for distributions. Figure from @ImprovedPrecisionRecall2019.", }
-knitr::include_graphics("figures/02-02-text-2-img/precision_and_recall.png")
+```{r precisionandrecall, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Definition of precision and recall for distributions. Figure from @ImprovedPrecisionRecall2019.", }
+knitr::include_graphics("figures/02-02-text-2-img/precisionandrecall.png")
 ```
 
 For more thorough explanation of metric calculation, one should follow the already mentioned @ImprovedPrecisionRecall2019.
@@ -90,36 +90,36 @@ More formally, let $p_{z}$ denote the prior distribution defined on the input no
 
 >$$\min_{G}\min_{D}V(D,G) = \mathop{{}\mathbb{E}}_{x \sim p_{data}(x)} [log(D(x))] + \mathop{{}\mathbb{E}}_{z \sim p_{z}(z)} [log(1-D(G(z)))]$$
 
-Figure (xxx) depicts this process in a visual way.
+Figure \@ref(fig:vanillagan) depicts this process in a visual way.
 
-```{r vanilla_gan, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="GAN framework as proposed in @GAN2014.", }
-knitr::include_graphics("figures/02-02-text-2-img/vanilla_gan.png")
+```{r vanillagan, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="GAN framework as proposed in @GAN2014.", }
+knitr::include_graphics("figures/02-02-text-2-img/vanillagan.png")
 ```
 
-Some of the generated samples that had been achieved with this architecture already in 2014 can be seen in Figure (xxx).
+Some of the generated samples that had been achieved with this architecture already in 2014 can be seen in Figure \@ref(fig:vanillagansamples).
 
-```{r vanilla_gan_samples, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Samples from generators trained on different datasets: a) MNIST b) TFD, c) CIFAR-10 (MLP used for G and D) d) CIFAR-10 (CNN used). Highlighted columns show nearest real example of the neighbouring sample. Figure from @GAN2014.", }
-knitr::include_graphics("figures/02-02-text-2-img/vanilla_gan_samples.png")
+```{r vanillagansamples, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Samples from generators trained on different datasets: a) MNIST b) TFD, c) CIFAR-10 (MLP used for G and D) d) CIFAR-10 (CNN used). Highlighted columns show nearest real example of the neighbouring sample. Figure from @GAN2014.", }
+knitr::include_graphics("figures/02-02-text-2-img/vanillagansamples.png")
 ```
 
 #### Conditioning on Text
 
-So far, only image generation has been covered, completely ignoring textual input. @GANTextToImage2016 introduced an interesting concept of conditioning DC-GAN (GAN with CNNs as Generator and Discriminator) on textual embeddings. Separate model is being trained and used for encoding the text. Then, result embeddings are concatenated with noise vector and fed into the Generator. Discriminator takes embeddings as an input as well. Result model is referred to as GAN-INT-CLS. Both abbreviations (INT and CLS) stand for specific training choices, which are going to be explained later in the chapter. The overview of the proposed architecture can be seen in Figure (xxx).
+So far, only image generation has been covered, completely ignoring textual input. @GANTextToImage2016 introduced an interesting concept of conditioning DC-GAN (GAN with CNNs as Generator and Discriminator) on textual embeddings. Separate model is being trained and used for encoding the text. Then, result embeddings are concatenated with noise vector and fed into the Generator. Discriminator takes embeddings as an input as well. Result model is referred to as GAN-INT-CLS. Both abbreviations (INT and CLS) stand for specific training choices, which are going to be explained later in the chapter. The overview of the proposed architecture can be seen in Figure \@ref(fig:gancls).
 
 
-```{r gan_cls, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Proposed architecture of convolutional GAN conditioned on text. Text encoding $\varphi(t)$ is fed into both Generator and Discriminator. Before further convolutional processing, it is first projected to lower dimensionality in fully-connected layers and concatenated with image feature maps. Figure from @GANTextToImage2016.", }
-knitr::include_graphics("figures/02-02-text-2-img/gan_cls.png")
+```{r gancls, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Proposed architecture of convolutional GAN conditioned on text. Text encoding $\varphi(t)$ is fed into both Generator and Discriminator. Before further convolutional processing, it is first projected to lower dimensionality in fully-connected layers and concatenated with image feature maps. Figure from @GANTextToImage2016.", }
+knitr::include_graphics("figures/02-02-text-2-img/gancls.png")
 ```
 
 **Text embeddings**
 
-Since regular text embeddings are commonly trained in separation from visual modality simply by looking on textual context, they are not well suited for capturing visual properties. This motivated @JointRepresentations2016 to come up with a structured joint embeddings of images and text descriptions. GAN-INT-CLS (xxx) implements it in a way described in Figure (xxx).
+Since regular text embeddings are commonly trained in separation from visual modality simply by looking on textual context, they are not well suited for capturing visual properties. This motivated @JointRepresentations2016 to come up with a structured joint embeddings of images and text descriptions. GAN-INT-CLS (xxx) implements it in a way described in Figure \@ref(fig:ganclsembeddings).
 
-```{r gan_cls_embeddings, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Figure from @GANTextToImage2016.", }
-knitr::include_graphics("figures/02-02-text-2-img/gan_cls_embeddings.png")
+```{r ganclsembeddings, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Figure from @GANTextToImage2016.", }
+knitr::include_graphics("figures/02-02-text-2-img/ganclsembeddings.png")
 ```
 
-GoogLeNet is being used as an image encoder $\phi$. For text encoding $\varphi$, authors use a character-level CNN combined with RNN. Essentially, the objective of the training is to minimize the distance between encoded image representation and text representation. Image encoder is then being discarded and $\varphi$ only is used as depicted in Figure (xxx).
+GoogLeNet is being used as an image encoder $\phi$. For text encoding $\varphi$, authors use a character-level CNN combined with RNN. Essentially, the objective of the training is to minimize the distance between encoded image representation and text representation. Image encoder is then being discarded and $\varphi$ only is used as depicted in Figure \@ref(fig:gancls).
 
 **GAN-CLS**
 
@@ -131,22 +131,22 @@ Proposed solution to this problem is to present the discriminator with three obs
 
 **GAN-INT**
 
-Motivation behind this concept comes from the fact that interpolating between text embeddings tend to create observation pairs which are still close to the real data manifold. Therefore, generating additional synthetic text embeddings and using them instead of real captions in the training process might help in a sense that it works as a form of data augmentation and helps regularize the training process. Figure (xxx) might be helpful for developing the intuition behind interpolation process.
+Motivation behind this concept comes from the fact that interpolating between text embeddings tend to create observation pairs which are still close to the real data manifold. Therefore, generating additional synthetic text embeddings and using them instead of real captions in the training process might help in a sense that it works as a form of data augmentation and helps regularize the training process. Figure \@ref(fig:interpolatingbirds) might be helpful for developing the intuition behind interpolation process.
 
-```{r interpolating_birds, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Interpolating between sentences. Figure from @GANTextToImage2016.", }
-knitr::include_graphics("figures/02-02-text-2-img/interpolating_birds.png")
+```{r interpolatingbirds, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Interpolating between sentences. Figure from @GANTextToImage2016.", }
+knitr::include_graphics("figures/02-02-text-2-img/interpolatingbirds.png")
 ```
 
 **Results**
 
-The model achieves best performance when both of the mentioned methods are being used (so called GAN-INT-CLS). Models prove to successfully transfer style (pose of the objects) and background from the training data when trained on CUB (birds) and Oxford-102 (flowers) datasets. They also show interesting zero-shot abilities, meaning they can generate observations from unseen test classes (Figure xxx). When trained on MS-COCO, GAN-CLS proves its potential to generalize over many domains, although the results are not always coherent (Figure xxx).
+The model achieves best performance when both of the mentioned methods are being used (so called GAN-INT-CLS). Models prove to successfully transfer style (pose of the objects) and background from the training data when trained on CUB (birds) and Oxford-102 (flowers) datasets. They also show interesting zero-shot abilities, meaning they can generate observations from unseen test classes (Figure \@ref(fig:ganclszeroshot)). When trained on MS-COCO, GAN-CLS proves its potential to generalize over many domains, although the results are not always coherent (Figure \@ref(fig:ganclsmscoco)).
 
-```{r gan_cls_zeroshot, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Zero-shot generated birds using GAN, GAN-CLS, GAN-INT, GAN-INT-CLS. Figure from @GANTextToImage2016.", }
-knitr::include_graphics("figures/02-02-text-2-img/gan_cls_zeroshot.png")
+```{r ganclszeroshot, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Zero-shot generated birds using GAN, GAN-CLS, GAN-INT, GAN-INT-CLS. Figure from @GANTextToImage2016.", }
+knitr::include_graphics("figures/02-02-text-2-img/ganclszeroshot.png")
 ```
 
-```{r gan_cls_mscoco, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Generated images using GAN-CLS on MS-COCO validation set. Figure from @GANTextToImage2016.", }
-knitr::include_graphics("figures/02-02-text-2-img/gan_cls_mscoco.png")
+```{r ganclsmscoco, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Generated images using GAN-CLS on MS-COCO validation set. Figure from @GANTextToImage2016.", }
+knitr::include_graphics("figures/02-02-text-2-img/ganclsmscoco.png")
 ```
 
 #### Further GAN-like development 
@@ -170,7 +170,7 @@ knitr::include_graphics("figures/02-02-text-2-img/stackgan.png")
 
 It is 2017 and many researches believe attention is all they need [@AttentionIsAllYouNeed2017]. Probably for the first time in text-to-image generation attention mechanism was used by @AttnGAN2017. Authors combined the idea with what StackGAN proposed and used three stages (generators $G_{0}$, $G_{1}$ and $G_{2}$). However, this time first layers of particular generator are attending to word feature vectors. This mechanism not only helps control how particular areas of the image are being improved by consecutive generators, but also allows for visualizing attention maps. 
 
-```{r attngan, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Images generated by $G_{0}$, $G_{1}$, $G_{2}$. Two bottom rows show 5 most attended words by $G_{1}$ and $G_{2}$ respectively. Figure from @AttnGAN2017.", }
+```{r attngan, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Images generated by $G_{0}$, $G_{1}$, $G_{2}$. Two bottom rows show 5 most attended words by $G_{1}$ and $G_{2}$ respectively. Figure from @AttnGAN2017.", }
 knitr::include_graphics("figures/02-02-text-2-img/attngan.png")
 ```
 
@@ -188,7 +188,7 @@ OpenAI's Dall-E undoubtedly took text-to-image field to another level. For the f
 
 **Variational Autoencoder (VAE)**
 
-Regular Autoencoder architecture aims at finding identity function that is able to find meaningful representation of the data in lower-dimensional space and then reconstruct it. It is considered as unsupervised learning method for reducing dimensionality, however trained in a supervised regime with the data itself being the label. Component performing reduction is called encoder, while part responsible for reconstruction is called decoder. The idea behind Variational Autoencoder [@VAE2013] is similar, however instead of learning the mapping to static low-dimensional vector, model learns its distribution. This design equips decoder part with desired generative capabilities, as sampling from the latent low-dimensional space will result in varying data being generated. The architecture is depicted in Figure(xxx).
+Regular Autoencoder architecture aims at finding identity function that is able to find meaningful representation of the data in lower-dimensional space and then reconstruct it. It is considered as unsupervised learning method for reducing dimensionality, however trained in a supervised regime with the data itself being the label. Component performing reduction is called encoder, while part responsible for reconstruction is called decoder. The idea behind Variational Autoencoder [@VAE2013] is similar, however instead of learning the mapping to static low-dimensional vector, model learns its distribution. This design equips decoder part with desired generative capabilities, as sampling from the latent low-dimensional space will result in varying data being generated. The architecture is depicted in Figure \@ref(fig:vae).
 
 ```{r vae, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Variational (probabilistic) Autoencoder architecture. Figure from @weng2018VAE.", }
 knitr::include_graphics("figures/02-02-text-2-img/vae.png")
@@ -198,7 +198,7 @@ $q_{\phi}(z|x)$ denotes the encoder under the assumption that $z$ comes from mul
 
 **VQ-VAE / dVAE**
 
-The VQ-VAE (Vector Quantized VAE) [@VQVAE2017] differs from regular VAE in the way it approaches encoding the latent space. Instead of mapping data into continuous distribution, Vector Quantized version does it in a discrete way. This is motivated by the fact that for many data modalities it is more natural to represent them in a discrete way (e.g. speech, human language, reasoning about objects in images, etc.). VQ-VAE achieves that by using separate codebook of vectors. The architecture is depicted in Figure (xxx).
+The VQ-VAE (Vector Quantized VAE) [@VQVAE2017] differs from regular VAE in the way it approaches encoding the latent space. Instead of mapping data into continuous distribution, Vector Quantized version does it in a discrete way. This is motivated by the fact that for many data modalities it is more natural to represent them in a discrete way (e.g. speech, human language, reasoning about objects in images, etc.). VQ-VAE achieves that by using separate codebook of vectors. The architecture is depicted in Figure \@ref(fig:vqvae).
 
 ```{r vqvae, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="VQ-VAE architecture. Figure from @VQVAE2017.", }
 knitr::include_graphics("figures/02-02-text-2-img/vqvae.png")
@@ -218,16 +218,16 @@ During inference time text caption is again encoded into 256 tokens at most. The
 
 **Results**
 
-Results achieved with the original Dall-E attracted so much attention mainly due to its diversity and zero-shot capabilities. Dall-E was capable of producing better results compared to previous state-of-the-art models which were trained on data coming from the same domain as data used for evaluation. One comparison can be seen in Figure (xxx).
+Results achieved with the original Dall-E attracted so much attention mainly due to its diversity and zero-shot capabilities. Dall-E was capable of producing better results compared to previous state-of-the-art models which were trained on data coming from the same domain as data used for evaluation. One comparison can be seen in Figure \@ref(fig:dallephotorealism).
 
-```{r dalle_photorealism, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Human evaluation of Dall-E vs DF-GAN on text caption from MS-COCO dataset. When asked for realism and caption similarity, evaluators preferred Dall-E's results over 90% of the time. Figure from @DALLE1.", }
-knitr::include_graphics("figures/02-02-text-2-img/dalle_photorealism.png")
+```{r dallephotorealism, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Human evaluation of Dall-E vs DF-GAN on text caption from MS-COCO dataset. When asked for realism and caption similarity, evaluators preferred Dall-E's results over 90% of the time. Figure from @DALLE1.", }
+knitr::include_graphics("figures/02-02-text-2-img/dallephotorealism.png")
 ```
 
-Outputs of some the prior approaches described in this chapter compared with Dall-E can be seen in Figure (xxx).
+Outputs of some the prior approaches described in this chapter compared with Dall-E can be seen in Figure \@ref(fig:dalleexamples).
 
-```{r dalle_examples, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Comparison of the results from Dall-E vs prior works on MS-COCO. Dall-E's outputs are chosen as best out of 512 images, ranked by contrastive model. Figure from @DALLE1.", }
-knitr::include_graphics("figures/02-02-text-2-img/dalle_examples.png")
+```{r dalleexamples, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Comparison of the results from Dall-E vs prior works on MS-COCO. Dall-E's outputs are chosen as best out of 512 images, ranked by contrastive model. Figure from @DALLE1.", }
+knitr::include_graphics("figures/02-02-text-2-img/dalleexamples.png")
 ```
 
 **Limitations**
@@ -267,30 +267,30 @@ where $s$ denotes the parameter for scaling the difference between mentioned ima
 
 **Results**
 
-GLIDE achieves significantly more photorealistic results compared to its predecessors. FID reported on the MS-COCO 256x256 dataset can be seen in Figure (xxx). It is worth noting that GLIDE was not trained on this dataset, hence its zero-shot capabilities are even more impressing.
+GLIDE achieves significantly more photorealistic results compared to its predecessors. FID reported on the MS-COCO 256x256 dataset can be seen in Figure \@ref(fig:glidefid). It is worth noting that GLIDE was not trained on this dataset, hence its zero-shot capabilities are even more impressing.
 
-```{r glide_fid, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Comparison of FID on MS-COCO 256×256. Figure from @Glide2021.", }
-knitr::include_graphics("figures/02-02-text-2-img/glide_fid.png")
+```{r glidefid, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Comparison of FID on MS-COCO 256×256. Figure from @Glide2021.", }
+knitr::include_graphics("figures/02-02-text-2-img/glidefid.png")
 ```
 
-Results are also preferred by human evaluators in terms of photorealism and similarity of the images to its caption. Comparison to DALL-E 1 results can be seen in Figure (xxx)
+Results are also preferred by human evaluators in terms of photorealism and similarity of the images to its caption. Comparison to DALL-E 1 results can be seen in Figure \@ref(fig:gliderealism)
 
-```{r glide_realism, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Win probabilities of GLIDE vs DALL-E. Figure from @Glide2021.", }
-knitr::include_graphics("figures/02-02-text-2-img/glide_realism.png")
+```{r gliderealism, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Win probabilities of GLIDE vs DALL-E. Figure from @Glide2021.", }
+knitr::include_graphics("figures/02-02-text-2-img/gliderealism.png")
 ```
 
-Finally, some of the cherry-picked images together with their corresponding captions can be seen in Figure (xxx).
+Finally, some of the cherry-picked images together with their corresponding captions can be seen in Figure \@ref(fig:glideresults).
 
-```{r glide_results, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Samples from GLIDE with classifier-free-guidance and s=3. Figure from @Glide2021.", }
-knitr::include_graphics("figures/02-02-text-2-img/glide_results.png")
+```{r glideresults, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Samples from GLIDE with classifier-free-guidance and s=3. Figure from @Glide2021.", }
+knitr::include_graphics("figures/02-02-text-2-img/glideresults.png")
 ```
 
 **Limitations**
 
-GLIDE suffers from two problems. First, it fails when being presented with complex or unusual text prompt. Few examples can be seen in Figure (xxx). Also, the model is relatively slow at inference time (much slower than GANs). This is caused by the sequential character of the architecture, where consecutive steps in Markov chain reconstruction cannot be simply parallelized. 
+GLIDE suffers from two problems. First, it fails when being presented with complex or unusual text prompt. Few examples can be seen in Figure \@ref(fig:glidefails). Also, the model is relatively slow at inference time (much slower than GANs). This is caused by the sequential character of the architecture, where consecutive steps in Markov chain reconstruction cannot be simply parallelized. 
 
-```{r glide_fails, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Failures happen mostly for unusual prompts. Figure from @Glide2021.", }
-knitr::include_graphics("figures/02-02-text-2-img/glide_fails.png")
+```{r glidefails, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Failures happen mostly for unusual prompts. Figure from @Glide2021.", }
+knitr::include_graphics("figures/02-02-text-2-img/glidefails.png")
 ```
 
 ### Dall-E 2 / unCLIP
@@ -309,19 +309,19 @@ Decoder consists of diffusion models again. Firstly, GLIDE-like model takes CLIP
 
 **Results**
 
-When compared to GLIDE, unCLIP shows it is capable of representing wider diversity of the data, while achieving similar level of photorealism and cpation similarity. Comparison to previous works on the MS-COCO dataset shows that unCLIP achieves unprecedented FID (Figure xxx). Few output examples calculated on MS-COCO captions can be found in Figure (xxx).
+When compared to GLIDE, unCLIP shows it is capable of representing wider diversity of the data, while achieving similar level of photorealism and cpation similarity. Comparison to previous works on the MS-COCO dataset shows that unCLIP achieves unprecedented FID (Figure \@ref(fig:uncliptable)). Few output examples calculated on MS-COCO captions can be found in Figure \@ref(fig:unclipimages).
 
-```{r unclip_table, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Comparison of FID on MS-COCO. Best results for unCLIP were reported with the guidance scale of 1.25. Figure from @DALLE2.", }
-knitr::include_graphics("figures/02-02-text-2-img/unclip_table.png")
+```{r uncliptable, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Comparison of FID on MS-COCO. Best results for unCLIP were reported with the guidance scale of 1.25. Figure from @DALLE2.", }
+knitr::include_graphics("figures/02-02-text-2-img/uncliptable.png")
 ```
 
-```{r unclip_images, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Image samples on MS-COCO text prompts. Figure from @DALLE2.", }
-knitr::include_graphics("figures/02-02-text-2-img/unclip_images.png")
+```{r unclipimages, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Image samples on MS-COCO text prompts. Figure from @DALLE2.", }
+knitr::include_graphics("figures/02-02-text-2-img/unclipimages.png")
 ```
 
 **Limitations**
 
-UnCLIP suffers from the very similar problems as its predecessor GLIDE did. First, compositionality in the images tend to sometimes be confused by the model. Failure cases can be seen in Figure (xxx). Second, UnCLIP struggles with generating coherent text inside an image (Figure xxx). Authors hypothesize that using CLIP embeddings, although improved diversity, might be responsible for making these problems more evident than in GLIDE. Lastly, UnCLIP often fails with delivering details in highly complex scenes (Figure xxx). Again, according to the authors, this might be a result of the fact that decoder is producing only 64x64 images which are later upsampled.
+UnCLIP suffers from the very similar problems as its predecessor GLIDE did. First, compositionality in the images tend to sometimes be confused by the model. Failure cases can be seen in Figure \@ref(fig:cube). Second, UnCLIP struggles with generating coherent text inside an image (Figure \@ref(fig:sign)). Authors hypothesize that using CLIP embeddings, although improved diversity, might be responsible for making these problems more evident than in GLIDE. Lastly, UnCLIP often fails with delivering details in highly complex scenes (Figure \@ref(fig:timessquare)). Again, according to the authors, this might be a result of the fact that decoder is producing only 64x64 images which are later upsampled.
 
 ```{r cube, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="'a red cube on top of a blue cube' Figure from @DALLE2.", }
 knitr::include_graphics("figures/02-02-text-2-img/cube.png")
@@ -345,16 +345,16 @@ On the other hand Parti takes an autoregressive approach. Similarly to first ver
 
 **Results**
 
-Both of the models improved the FID significantly compared to the previous works. Figure (xxx) shows the comparison.
+Both of the models improved the FID significantly compared to the previous works. Figure \@ref(fig:partiresults) shows the comparison.
 
-```{r parti_results, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Comparison of FID on MS-COCO. Figure from @Parti2022.", }
-knitr::include_graphics("figures/02-02-text-2-img/parti_results.png")
+```{r partiresults, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="Comparison of FID on MS-COCO. Figure from @Parti2022.", }
+knitr::include_graphics("figures/02-02-text-2-img/partiresults.png")
 ```
 
-Samples from Parti can be seen in Figure xxx. They are included here on purpose - this is the current state-of-the-art as of the moment of writing!
+Samples from Parti can be seen in Figure \@ref(fig:partiimages). They are included here on purpose - this is the current state-of-the-art as of the moment of writing!
 
-```{r parti_images, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Selected samples from Parti. Figure from @Parti2022.", }
-knitr::include_graphics("figures/02-02-text-2-img/parti_images.png")
+```{r partiimages, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Selected samples from Parti. Figure from @Parti2022.", }
+knitr::include_graphics("figures/02-02-text-2-img/partiimages.png")
 ```
 
 **Limitations**
@@ -397,7 +397,7 @@ Automated image generation poses an array of serious questions of ethical charac
 
 First and very significant risk is potential misuse of the models. Fake image generation can easily be used for harassment and disinformation. Especially combined with inpainting, which is capable of erasing or adding objects to a real scenes, it poses a real challenge for researchers on how to responsible share their work.
 
-Another important area touches biases and stereotypes which are intrinsically built into the technology. Obviously, a model combines concepts from the data it has seen. However, if this area is to be commercialized, it needs to ensure broader diversity. Interesting example of Dall-E 2 samples can be seen in Figure xxx.
+Another important area touches biases and stereotypes which are intrinsically built into the technology. Obviously, a model combines concepts from the data it has seen. However, if this area is to be commercialized, it needs to ensure broader diversity. Interesting example of Dall-E 2 samples can be seen in Figure \@ref(fig:bias).
 
 ```{r bias, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Biased samples from Dall-E 2. Figure from @mishkin2022risks.", }
 knitr::include_graphics("figures/02-02-text-2-img/bias.png")
@@ -408,16 +408,16 @@ In order to fully enable AI generation on the market, problem of copyrights need
 
 
 
-
 * check style vs other people
+* fix all figures
+
 
 At the end:
 * fix all citations + cross citations
-* fix all figures
-equations
+
+* equations`
 * grammarly
 * read everything once again and let Ilonka read
 
 * fix introduction
-
 * fix chapter numbering (check other people) - tylko w glownym tytule rozdzialu!
