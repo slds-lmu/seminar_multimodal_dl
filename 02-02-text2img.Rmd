@@ -19,7 +19,7 @@ At the same time, the general public is becoming aware of the field itself and t
 
 However, the primary intention of this chapter is to present the reader with a perspective on how the field was developing chronologically. Starting with the introduction of GANs, through first cross-domain models and ending with state-of-the-art achievements (as of September 2022), it will also try to grasp the most important concepts without being afraid of making technical deep-dives. 
 
-Author is aware that since the rapid development pace makes it nearly impossible for this section to stay up-to-date, it might very soon not be fully covering the field. However, it must be stressed that cutting edge capabilities of the recent models tend to come from the scale and software engineering tricks. Therefore, focusing on the core concepts should hopefully make this chapter have a universal character, at least for some time. This design choice also explains why many important works did not make it to this publication. Just to name a few of them: GAWWN [], PPGN [], or most recent ones: LAFITE [], Make-a-Scene [] or CogView []. In one way or another, all of them pushed the research frontier one step further, which is widely acknowledged. Therefore, it needs to be clearly stated: the final selection of this chapter's content is a pure subjective decision of the author.
+Author is aware that since the rapid development pace makes it nearly impossible for this section to stay up-to-date, it might very soon not be fully covering the field. However, it must be stressed that cutting edge capabilities of the recent models tend to come from the scale and software engineering tricks. Therefore, focusing on the core concepts should hopefully make this chapter have a universal character, at least for some time. This design choice also explains why many important works did not make it to this publication. Just to name a few of them: GAWWN [@GAWWN2016], MirrorGAN [@MirrorGAN2019], or most recent ones: LAFITE [@LAFITE2021], Make-a-Scene [@MakeAScene2022] or CogView [@CogView2021]. In one way or another, all of them pushed the research frontier one step further, which is widely acknowledged. Therefore, it needs to be clearly stated: the final selection of this chapter's content is a pure subjective decision of the author.
 
 ### Seeking objectivity
 
@@ -61,7 +61,7 @@ For more thorough explanation of metric calculation, one should follow the alrea
 
 **CLIP score**
 
-CLIP is a model from OpenAI [CLIP2021]. Its details can be found in chapter (CROSS REFERENCE TO MAX's SECTION). In principle, it is capable of assessing the semantic similarity between the text caption and the image. CLIP score is defined as:
+CLIP is a model from OpenAI [CLIP2021]. Its details can be found in chapter about *text-supporting computer vision models*. In principle, CLIP is capable of assessing the semantic similarity between the text caption and the image. CLIP score is defined as:
 
 >$$\mathop{{}\mathbb{E}}[s(f(image)*g(caption))]$$
 
@@ -113,7 +113,7 @@ knitr::include_graphics("figures/02-02-text-2-img/gancls.png")
 
 **Text embeddings**
 
-Since regular text embeddings are commonly trained in separation from visual modality simply by looking on textual context, they are not well suited for capturing visual properties. This motivated @JointRepresentations2016 to come up with a structured joint embeddings of images and text descriptions. GAN-INT-CLS (xxx) implements it in a way described in Figure \@ref(fig:ganclsembeddings).
+Since regular text embeddings are commonly trained in separation from visual modality simply by looking on textual context, they are not well suited for capturing visual properties. This motivated @JointRepresentations2016 to come up with a structured joint embeddings of images and text descriptions. GAN-INT-CLS implements it in a way described in Figure \@ref(fig:ganclsembeddings).
 
 ```{r ganclsembeddings, fig.align = 'center', out.width = '60%',echo=FALSE, fig.cap="Figure from @GANTextToImage2016.", }
 knitr::include_graphics("figures/02-02-text-2-img/ganclsembeddings.png")
@@ -410,14 +410,14 @@ In order to fully enable AI generation on the market, problem of copyrights need
 
 * check style vs other people
 * fix all figures
-
-
-At the end:
 * fix all citations + cross citations
 
 * equations`
+
+
+At the end:
 * grammarly
 * read everything once again and let Ilonka read
-
 * fix introduction
+
 * fix chapter numbering (check other people) - tylko w glownym tytule rozdzialu!
