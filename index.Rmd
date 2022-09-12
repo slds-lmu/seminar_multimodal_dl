@@ -69,15 +69,18 @@ If you refer to the book, please use the following citation (authors in alphabet
 ```
 @misc{seminar_22_multimodal,
   title = {Multimodal Deep Learning},
-  author = {Akkus, Cem and Chu, Luyang and Djakovic, Vladana and Jauch-Walser, Steffen and
-            Koch, Philipp and Loss, Giacomo and Marquardt, Christopher and Moldovan, Marco
-            and Sauter, Nadja and Schneider, Maximilian and Schulte, Ricker and Urbanczyk, Karol
-            and Goschenhofer, Jann and Heumann, Christian and Hvingelby, Rasmus and Schalk, Daniel
-            and Aßenmacher, Matthias},
+  author = {Akkus, Cem and Chu, Luyang and Djakovic, Vladana and
+            Jauch-Walser, Steffen and Koch, Philipp and Loss,
+            Giacomo and Marquardt, Christopher and Moldovan,
+            Marco and Sauter, Nadja and Schneider, Maximilian
+            and Schulte, Ricker and Urbanczyk, Karol and
+            Goschenhofer, Jann and Heumann, Christian and
+            Hvingelby, Rasmus and Schalk, Daniel and
+            Aßenmacher, Matthias},
   url = {https://slds-lmu.github.io/seminar_multimodal_dl/},
-  day = { 30 },
-  month = { Sep },
-  year = { 2022 }
+  day = {30},
+  month = {Sep},
+  year = {2022}
 }
 ```
 

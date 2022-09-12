@@ -76,17 +76,7 @@ Warning--I didn't find a database entry for "renet"
 Warning--I didn't find a database entry for "tian2020contrastive"
 Warning--I didn't find a database entry for "bommasani2021opportunities"
 Warning--I didn't find a database entry for "ramesh2022hierarchical"
-Warning--I didn't find a database entry for "HuangFusion2020"
-Warning--I didn't find a database entry for "Katzman2018"
-Warning--I didn't find a database entry for "DeepConvSurv"
 Warning--I didn't find a database entry for "DeepCorrSurv"
-Warning--I didn't find a database entry for "TongAE"
-Warning--I didn't find a database entry for "Cheerla2019"
-Warning--I didn't find a database entry for "MultiSurv2021"
-Warning--I didn't find a database entry for "WideDeepNN2016"
-Warning--I didn't find a database entry for "Poelsterl2020"
-Warning--I didn't find a database entry for "DeepPAMM2022"
-Warning--I didn't find a database entry for "SSDDR2020"
 Warning--I didn't find a database entry for "Law2019"
 Warning--I didn't find a database entry for "Jean2016"
 Warning--I didn't find a database entry for "Gebru2017"
@@ -195,45 +185,45 @@ Warning--empty journal in zellers2018swag
 Warning--empty journal in zeng2022socratic
 Warning--empty journal in zhang2020contrastive
 Warning--empty journal in zhuang2021unsupervised
-You've used 207 entries,
+You've used 217 entries,
             1935 wiz_defined-function locations,
-            1427 strings with 45476 characters,
-and the built_in function-call counts, 100918 in all, are:
-= -- 9294
-> -- 6405
-< -- 118
-+ -- 2384
-- -- 2307
-* -- 8860
-:= -- 17522
-add.period$ -- 544
-call.type$ -- 207
-change.case$ -- 2153
-chr.to.int$ -- 168
-cite$ -- 310
-duplicate$ -- 3501
-empty$ -- 5663
-format.name$ -- 2577
-if$ -- 19431
+            1480 strings with 47869 characters,
+and the built_in function-call counts, 106017 in all, are:
+= -- 9796
+> -- 6670
+< -- 124
++ -- 2482
+- -- 2401
+* -- 9304
+:= -- 18375
+add.period$ -- 577
+call.type$ -- 217
+change.case$ -- 2249
+chr.to.int$ -- 178
+cite$ -- 320
+duplicate$ -- 3688
+empty$ -- 5987
+format.name$ -- 2685
+if$ -- 20446
 int.to.chr$ -- 40
 int.to.str$ -- 0
-missing$ -- 163
-newline$ -- 935
-num.names$ -- 637
-pop$ -- 2432
+missing$ -- 173
+newline$ -- 985
+num.names$ -- 667
+pop$ -- 2529
 preamble$ -- 1
-purify$ -- 2154
+purify$ -- 2250
 quote$ -- 0
-skip$ -- 2726
+skip$ -- 2867
 stack$ -- 0
-substring$ -- 5316
-swap$ -- 643
-text.length$ -- 65
+substring$ -- 5656
+swap$ -- 685
+text.length$ -- 69
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1242
+type$ -- 1302
 warning$ -- 103
-while$ -- 650
+while$ -- 692
 width$ -- 0
-write$ -- 2367
-(There were 181 warnings)
+write$ -- 2499
+(There were 171 warnings)

@@ -183,8 +183,8 @@
 \contentsline {section}{\numberline {4.4}Generative Art}{178}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Historical Overview}{179}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}How to use models?}{181}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Different tasks and modalities}{182}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Discussion and prospects}{183}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.3}Different tasks and modalities}{183}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Discussion and prospects}{184}{subsection.4.4.4}%
 \contentsline {chapter}{\numberline {5}Conclusion}{187}{chapter.5}%
 \contentsline {chapter}{\numberline {6}Epilogue}{189}{chapter.6}%
 \contentsline {chapter}{\numberline {7}Acknowledgements}{191}{chapter.7}%
