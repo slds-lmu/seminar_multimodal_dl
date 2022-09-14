@@ -18,7 +18,7 @@ currently happening. Thereby we will focus on mainly three aspects:
 
 ## New influential architectures
 
-In [**Chapter 3.2: "Text2Image"**](./02-02-text2img.html) and [**Chapter 4.4: "Generative Art**](./03-04-usecase.html) some important models for generating images/art from free-text prompts have been presented. However, one example of an even better (at least perceived this way by many people) generative model was just published by researchers from Björn Ommer's group at LMU: _"High-Resolution Image Synthesis with Latent Diffusion Models"_  
+In [**Chapter 3.2: "Text2Image"**](./c02-00-multimodal.html#c02-02-text2img) and [**Chapter 4.4: "Generative Art**](./c03-00-further.html#c03-04-usecase) some important models for generating images/art from free-text prompts have been presented. However, one example of an even better (at least perceived this way by many people) generative model was just published by researchers from Björn Ommer's group at LMU: _"High-Resolution Image Synthesis with Latent Diffusion Models"_  
 They introduced a model called _Stable Diffusion_ which allows users to generate photorealisitic images. Further (as opposed to numerous other architectures, it is available open-source and can even be tried out via [huggingface](https://huggingface.co/spaces/stabilityai/stable-diffusion).
 
 We hope that this little outlook can adequately round off this nice piece of academic work created by extremely motivated students and we hope that you enjoyed reading.
