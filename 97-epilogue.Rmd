@@ -1,9 +1,24 @@
 # Epilogue
 
-*Author:*
+*Author: Matthias Aßenmacher*
 
-*Supervisor:*
+Since this project was realized in a limited time frame and accounted for about one third
+of the ECTS points which should be achieved during one semester, it is obvious that this
+booklet cannot provide exhaustive coverage of the vast research field of _Multimodal Deep Learning_.  
 
+Furthermore this area of research is moving very rapidly at the moment, which means that
+certain architectures, improvements or ideas had net yet even been published when we sat down
+and came up with the chapter topics in February 2022. Yet, as you might have seen, in some cases the
+students were even able to incorporate ongoing research published over the course of the seminar.
+Thus, this epilogue tries to put the content of this booklet into context and relate it to what is 
+currently happening. Thereby we will focus on mainly three aspects:
 
-    
+- New influential (or even state-of-the-art) architectures
+- ..
 
+## New influential architectures
+
+In [**Chapter 3.2: "Text2Image"**](./02-02-text2img.html) and [**Chapter 4.4: "Generative Art**](./03-04-usecase.html) some important models for generating images/art from free-text prompts have been presented. However, one example of an even better (at least perceived this way by many people) generative model was just published by researchers from Björn Ommer's group at LMU: _"High-Resolution Image Synthesis with Latent Diffusion Models"_  
+They introduced a model called _Stable Diffusion_ which allows users to generate photorealisitic images. Further (as opposed to numerous other architectures, it is available open-source and can even be tried out via [huggingface](https://huggingface.co/spaces/stabilityai/stable-diffusion).
+
+We hope that this little outlook can adequately round off this nice piece of academic work created by extremely motivated students and we hope that you enjoyed reading.
