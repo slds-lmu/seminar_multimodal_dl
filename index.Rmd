@@ -33,7 +33,7 @@ is.html = !is.null(output) && output == "html"
 
 In the last few years, there have been several breakthroughs in the methodologies used in Natural Language Processing (NLP) as well as Computer Vision (CV). Beyond these improvements on single-modality models, large-scale multi-modal approaches have become a very active area of research.
 
-In this seminar, we reviewed these approaches and attempted to create a solid overview of the field, starting with the current state-of-the-art approaches in the two subfields of Deep Learning individually. Further, modeling frameworks are discussed where one modality is transformed into the other ([Chapter 2.1](./02-01-img2text.html) and [Chapter 2.2](./02-02-text2img.html)), as well as models in which one modality is utilized to enhance representation learning for the other ([Chapter 2.3](./02-03-img-support-text.html) and [Chapter 2.4](./02-04-text-support-img.html)). To conclude the second part, architectures with a focus on handling both modalities simultaneously are introduced ([Chapter 2.5](./02-05-text-plus-img.html)). Finally, we also cover other modalities ([Chapter 3.1](./03-01-further-modalities.html) and [Chapter 3.2](./03-02-structured-unstructured.html)) as well as general-purpose multi-modal models ([Chapter 3.3](./03-03-multi-purpose.html)), which are able to handle different tasks on different modalities within one unified architecture. One interesting application (Generative Art, [Chapter 3.4](./03-04-usecase.html)) eventually caps off this booklet.
+In this seminar, we reviewed these approaches and attempted to create a solid overview of the field, starting with the current state-of-the-art approaches in the two subfields of Deep Learning individually. Further, modeling frameworks are discussed where one modality is transformed into the other Chapter \@ref(c02-01-img2text) and Chapter \@ref(c02-02-text2img)), as well as models in which one modality is utilized to enhance representation learning for the other (Chapter \@ref(c02-03-img-support-text) and Chapter \@ref(c02-04-text-support-img)). To conclude the second part, architectures with a focus on handling both modalities simultaneously are introduced (Chapter \@ref(c02-05-text-plus-img)). Finally, we also cover other modalities (Chapter \@ref(c03-01-further-modalities) and Chapter \@ref(c03-02-structured-unstructured)) as well as general-purpose multi-modal models (Chapter \@ref(c03-03-multi-purpose)), which are able to handle different tasks on different modalities within one unified architecture. One interesting application (Generative Art, Chapter \@ref(c03-04-usecase)) eventually caps off this booklet.
 
 <!---
 Cover by [\@YvonneDoinel](https://twitter.com/YvonneDoinel)
@@ -62,22 +62,25 @@ We deviated in several ways:
 1. We designed the work to live beyond the seminar.
 1. We emphasized collaboration. Students wrote the introduction to chapters in teams and reviewed each others individual texts.
 
-## Citation
+## Citation {-}
 
 If you refer to the book, please use the following citation (authors in alphabetical order):
 
 ```
 @misc{seminar_22_multimodal,
   title = {Multimodal Deep Learning},
-  author = {Akkus, Cem and Chu, Luyang and Djakovic, Vladana and Jauch-Walser, Steffen and
-            Koch, Philipp and Loss, Giacomo and Marquardt, Christopher and Moldovan, Marco
-            and Sauter, Nadja and Schneider, Maximilian and Schulte, Ricker and Urbanczyk, Karol
-            and Goschenhofer, Jann and Heumann, Christian and Hvingelby, Rasmus and Schalk, Daniel
-            and Aßenmacher, Matthias},
+  author = {Akkus, Cem and Chu, Luyang and Djakovic, Vladana and
+            Jauch-Walser, Steffen and Koch, Philipp and Loss,
+            Giacomo and Marquardt, Christopher and Moldovan,
+            Marco and Sauter, Nadja and Schneider, Maximilian
+            and Schulte, Ricker and Urbanczyk, Karol and
+            Goschenhofer, Jann and Heumann, Christian and
+            Hvingelby, Rasmus and Schalk, Daniel and
+            Aßenmacher, Matthias},
   url = {https://slds-lmu.github.io/seminar_multimodal_dl/},
-  day = { 30 },
-  month = { Sep },
-  year = { 2022 }
+  day = {30},
+  month = {Sep},
+  year = {2022}
 }
 ```
 

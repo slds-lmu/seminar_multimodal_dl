@@ -1,0 +1,166 @@
+[0] Config.pm:307> INFO - This is Biber 2.17 running in TOOL mode
+[0] Config.pm:310> INFO - Logfile is 'book.bib.backup.blg'
+[49] biber:340> INFO - === Fri Sep  9, 2022, 15:30:09
+[68] Biber.pm:4570> INFO - Looking for bibtex file 'book.bib.backup'
+[74] bibtex.pm:1713> INFO - LaTeX decoding ...
+[201] bibtex.pm:1518> INFO - Found BibTeX data source 'book.bib.backup'
+[1467] Biber.pm:1663> INFO - Datamodel validation starting
+[1493] Biber.pm:1712> INFO - Datamodel validation complete
+[1514] UCollate.pm:68> INFO - Overriding locale 'en_US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1514] UCollate.pm:68> INFO - Overriding locale 'en_US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1514] Biber.pm:4203> INFO - Sorting list 'tool/global//global/global' of type 'entry' with template 'tool' and locale 'en_US'
+[1514] Biber.pm:4209> INFO - No sort tailoring available for locale 'en_US'
+[1584] bibtex.pm:439> INFO - Writing 'book_bibertool.bib' with encoding 'UTF-8'
+[1587] bibtex.pm:479> INFO - Output to book_bibertool.bib
+[1587] Biber.pm:130> WARN - Duplicate entry key: 'bias' in file 'book.bib.backup', skipping ...
+[1587] Biber.pm:130> WARN - legacy month field '09--15 Jun' in entry 'Houlsby2019' is not an integer - this will probably not sort properly.
+[1587] Biber.pm:130> WARN - Datamodel: Entry 'ALIGN' (book.bib.backup): Field 'timestamp' invalid in data model - ignoring
+[1587] Biber.pm:130> WARN - Datamodel: Entry 'ALIGN' (book.bib.backup): Field 'biburl' invalid in data model - ignoring
+[1587] Biber.pm:130> WARN - Datamodel: Entry 'ALIGN' (book.bib.backup): Field 'bibsource' invalid in data model - ignoring
+[1587] Biber.pm:130> WARN - Datamodel: Entry 'BERT' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1587] Biber.pm:130> WARN - Datamodel: Entry 'GAN' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1587] Biber.pm:130> WARN - Datamodel: Entry 'rfnet' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'Steiner2021' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'GLIDE' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'EfficientNet' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'CLIP' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'Crawshaw2020' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'DiffusionModels' (book.bib.backup): Field 'timestamp' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'DiffusionModels' (book.bib.backup): Field 'biburl' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'DiffusionModels' (book.bib.backup): Field 'bibsource' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - legacy month field 'June' in entry 'Yang_2019_CVPR' is not an integer - this will probably not sort properly.
+[1588] Biber.pm:130> WARN - legacy month field '18--24 Jul' in entry 'pmlr-v139-ramesh21a' is not an integer - this will probably not sort properly.
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'LAION' (book.bib.backup): Field 'timestamp' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'LAION' (book.bib.backup): Field 'biburl' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'LAION' (book.bib.backup): Field 'bibsource' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'Doerr2021' (book.bib.backup): Field 'issue_date' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - legacy month field 'oct' in entry 'Doerr2021' is not an integer - this will probably not sort properly.
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'Doerr2021' (book.bib.backup): Field 'articleno' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'Doerr2021' (book.bib.backup): Field 'numpages' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'VAE' (book.bib.backup): Field 'timestamp' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'VAE' (book.bib.backup): Field 'biburl' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'VAE' (book.bib.backup): Field 'bibsource' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'ImageNet' (book.bib.backup): Field 'issue_date' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - legacy month field 'dec' in entry 'ImageNet' is not an integer - this will probably not sort properly.
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'ImageNet' (book.bib.backup): Field 'numpages' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'environment' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'BYOL' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'Mustafa2022' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'bias' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'Yu2022' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'SimCLR' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'NFT' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'DALLE' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1588] Biber.pm:130> WARN - Datamodel: Entry 'Li2019' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'atari' (book.bib.backup): Field 'issue_date' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - legacy month field 'may' in entry 'atari' is not an integer - this will probably not sort properly.
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'atari' (book.bib.backup): Field 'numpages' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'GCN-LSTM' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Fedus2021' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'GPT3' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - legacy month field '17--23 Jul' in entry 'Wang2022' is not an integer - this will probably not sort properly.
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Gesmundo2022a' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'HerdadeKBS19' (book.bib.backup): Field 'researchr' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'StyleTransfer' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Reed2022' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Hinton2015' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'xu1' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'VilBert' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Krishna2017' (book.bib.backup): Field 'issue_date' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - legacy month field 'may' in entry 'Krishna2017' is not an integer - this will probably not sort properly.
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Krishna2017' (book.bib.backup): Field 'numpages' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'DALLE2' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'StyleGAN' (book.bib.backup): Field 'timestamp' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'StyleGAN' (book.bib.backup): Field 'biburl' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'StyleGAN' (book.bib.backup): Field 'bibsource' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Flamingo' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'yao1' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'COCO' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Pathways' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Carion2020' (book.bib.backup): Field 'timestamp' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Carion2020' (book.bib.backup): Field 'biburl' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Carion2020' (book.bib.backup): Field 'bibsource' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - legacy month field 'Jan' in entry 'morris_2022' is not an integer - this will probably not sort properly.
+[1589] Biber.pm:130> WARN - legacy month field 'Jun' in entry 'mordvintsev_2015' is not an integer - this will probably not sort properly.
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'karpthy1' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'meshed_memory' (book.bib.backup): Field 'copyright' invalid in data model - ignoring
+[1589] Biber.pm:130> WARN - Datamodel: Entry 'Fedus2021' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Mustafa2022' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Carion2020' (book.bib.backup): Invalid value of field 'volume' must be datatype 'integer' - ignoring field
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Crawshaw2020' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Li2019' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Krishna2017' (book.bib.backup): Invalid field 'location' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Krishna2017' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Wang2022' (book.bib.backup): Invalid value of field 'month' must be datatype 'datepart' - ignoring field
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Reed2022' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Yu2022' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Fernando2017' (book.bib.backup): Missing mandatory field 'booktitle'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Lewkowycz2022' (book.bib.backup): Missing mandatory field 'institution'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Gesmundo2022a' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Steiner2021' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Steiner2021' (book.bib.backup): Missing mandatory field 'journaltitle'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Houlsby2019' (book.bib.backup): Invalid value of field 'month' must be datatype 'datepart' - ignoring field
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Doerr2021' (book.bib.backup): Invalid field 'location' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Doerr2021' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Hinton2015' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Shaazer2017' (book.bib.backup): Missing mandatory field 'booktitle'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'pmlr-v139-ramesh21a' (book.bib.backup): Invalid value of field 'month' must be datatype 'datepart' - ignoring field
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'Devlin2018' (book.bib.backup): Missing mandatory field 'journaltitle'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'ImageNet' (book.bib.backup): Invalid field 'location' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'ImageNet' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'parti' (book.bib.backup): Missing mandatory field 'journaltitle'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'atari' (book.bib.backup): Invalid field 'location' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'atari' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'zhuang2021unsupervised' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'kolesnikov2019large' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'pascalvoc' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'vinyals' (book.bib.backup): Missing mandatory field 'booktitle'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'karpthy1' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1590] Biber.pm:130> WARN - Datamodel: Entry 'xu1' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'yao1' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'devlin-etal-2019-bert' (book.bib.backup): Missing mandatory field 'booktitle'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'HerdadeKBS19' (book.bib.backup): Missing mandatory field 'booktitle'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'huang1' (book.bib.backup): Missing mandatory field 'booktitle'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'rfnet' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'GCN-LSTM' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'galanter2016generative' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'mordvintsev_2015' (book.bib.backup): Invalid field 'journaltitle' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'mordvintsev_2015' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'tensorflow2015' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'StyleTransfer' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'StyleGAN' (book.bib.backup): Invalid value of field 'volume' must be datatype 'integer' - ignoring field
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'DiffusionModels' (book.bib.backup): Invalid value of field 'volume' must be datatype 'integer' - ignoring field
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'LAION' (book.bib.backup): Invalid value of field 'volume' must be datatype 'integer' - ignoring field
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'DALLE2' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'bias' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'Radford2019LanguageMA' (book.bib.backup): Missing mandatory field 'booktitle'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'GPT3' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'environment' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'BERT' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'unrealEngine' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'NFT' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'EfficientNet' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'EfficientNet' (book.bib.backup): Missing mandatory field 'journaltitle'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'SimCLR' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'BYOL' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'COCO' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'meshed_memory' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'VAE' (book.bib.backup): Invalid value of field 'volume' must be datatype 'integer' - ignoring field
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'DALLE' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'CLIP' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1591] Biber.pm:130> WARN - Datamodel: Entry 'VilBert' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'Flamingo' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'GAN' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'GLIDE' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'Pathways' (book.bib.backup): Invalid field 'publisher' for entrytype 'misc'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'ALIGN' (book.bib.backup): Invalid value of field 'volume' must be datatype 'integer' - ignoring field
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'agirre2009study' (book.bib.backup): Missing mandatory field 'journaltitle'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'ailem2018probabilistic' (book.bib.backup): Missing mandatory field 'journaltitle'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'brysbaert2014concreteness' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'devereux2014centre' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'harnad1990symbol' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'hill2015simlex' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'hochreiter1997long' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'pezzelle2021word' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1592] Biber.pm:130> WARN - Datamodel: Entry 'russakovsky2015imagenet' (book.bib.backup): Invalid field 'publisher' for entrytype 'article'
+[1592] Biber.pm:132> INFO - WARNINGS: 151
