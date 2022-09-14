@@ -1,8 +1,8 @@
-## Images supporting language models {#c02-03-img-support-text}
+## Images supporting Language Models {#c02-03-img-support-text}
 
-*Author: Giacomo Loss
+*Author:* Giacomo Loss
 
-*Supervisor: Matthias Assenmacher
+*Supervisor:* Matthias Aßenmacher
 
 ### Words In (Non-Symbolic) Contexts
 
