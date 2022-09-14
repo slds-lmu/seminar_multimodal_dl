@@ -36,8 +36,15 @@ In the example depicting one-hot encoding (see
 are ten simple words and the dark squares indicate the only index with a
 non-zero value.
 
+```{r fig:one-hot, echo=FALSE, out.width="70%", fig.cap="(ref:one-hot)", fig.align="center"}
+knitr::include_graphics("./figures/01-01-nlp/onehot_pilehvar_p10.png")
+```
+(ref:one-hot) Ten one-hot encoded words (Source: @Pilehvar2021).
+
+<!--
 ![Ten one-hot encoded words. Source:
 [@Pilehvar2021].](onehot_pilehvar_p10.png){#fig:one-hot width="70%"}
+-->
 
 In contrast, there are multiple non-zero values while using
 bag-of-words, which is another way of extracting features from text to
