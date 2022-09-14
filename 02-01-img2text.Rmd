@@ -1,4 +1,4 @@
-## Img2text {#c02-01-img2text}
+## Image2Text {#c02-01-img2text}
 
 *Author: Luyang Chu
 
