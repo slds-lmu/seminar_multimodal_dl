@@ -80,7 +80,7 @@ hyperparameter). The values for the embedding are trainable parameters
 which are learned similarly to a model learning the weights for a dense
 layer. The dimensionality of the word representations is typically much
 smaller than the number of words in the dictionary. For example,
-[@Mikolov2013] called dimensions between 50-100 modest for more than a
+[@mikolov2013efficient] called dimensions between 50-100 modest for more than a
 few hundred million words. For small data sets, dimensionality for the
 word vectors could start at 8 and go up to 1024 for larger data sets. It
 is expected that higher dimensions can rather pick up intricate
@@ -123,7 +123,7 @@ insight from before referring to the word endings being similar because
 in this instance the past tenses of both verbs walking and swimming are
 not similar in structure. Additionally, on the right side of the figure,
 there is a form of the commonly portrayed and easily understood
-Country-Capital example (see [@Mikolov2013]).
+Country-Capital example (see [@mikolov2013efficient]).
 
 ```{r fig:embed_vectors, echo=FALSE, out.width="100%", fig.cap="(ref:embed_vectors)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/embed_vectors_google.png")
@@ -177,13 +177,13 @@ English. In addition, the used Vietnamese model contains numerous
 synonyms, which complicates making exact predictions (see
 [@Mikolov2013a]).\
 Turning the attention to one of the most impactful embedding techniques,
-word2vec. It was proposed by [@Mikolov2013] and is not a singular
+word2vec. It was proposed by [@mikolov2013efficient] and is not a singular
 algorithm. It can rather be seen as a family of model architectures and
 optimizations to learn word representations. Word2vec's popularity also
 stems from its success on multiple downstream natural language
 processing tasks. It has a very simple structure which is based on a
 basic feed forward neural network. They published multiple papers (see
-[@Mikolov2013], [@Mikolov2013a], [@Mikolov2013b]) that are stemming
+[@mikolov2013efficient], [@Mikolov2013a], [@Mikolov2013b]) that are stemming
 around two different but related methods for learning word embeddings
 (see ). Firstly, the Continuous bag-of-words model aims to predict the
 middle word based on surrounding context words. Hence, it considers
@@ -197,11 +197,11 @@ layer.
 ```{r fig:embed_arch, echo=FALSE, out.width="85%", fig.cap="(ref:embed_arch)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/embed_arch_mikolov_p5.png")
 ```
-(ref:embed_arch) CBOW and Skip-gram architecture (Source: @Mikolov2013).
+(ref:embed_arch) CBOW and Skip-gram architecture (Source: @mikolov2013efficient).
 
 <!--
 ![CBOW and Skip-gram architecture. Source:
-[@Mikolov2013].](embed_arch_mikolov_p5.png){#fig:embed_arch width="85%"}
+[@mikolov2013efficient].](embed_arch_mikolov_p5.png){#fig:embed_arch width="85%"}
 -->
 
 Then, [@Bojanowski2016] built on skip-gram models by accounting for the
@@ -504,7 +504,7 @@ allows for efficient pretraining and leads them to be the standard model
 architecture. In fact, all top models on the popular aggregate benchmark
 GLUE are pretrained and Transformer-based. Moreover, they have even
 shown promise outside of NLP, e.g. in Image Classification, Protein
-Folding and ML for Systems (see [@Dosovitskiy2020], [@Jumper2021],
+Folding and ML for Systems (see [@dosovitskiy2020image], [@Jumper2021],
 [@Zhou2020], respectively).\
 If recurrence has its flaws, another adjustment of the attention
 mechanism might be beneficial. Until now, it was defined from decoder to
@@ -582,7 +582,7 @@ should specifically be not allowed to simply look ahead and observe more
 than the objective allows. Moreover, the word order is no longer
 encoder, and it is bag-of-words once again.\
 Fortunately, the previously mentioned weaknesses have been addressed for
-the original transformer-architecture proposed by [@Vaswani2017]. The
+the original transformer-architecture proposed by [@vaswani2017attention]. The
 first problem can be easily fixed by applying a feed forward layer to
 the output of attention. It provides non-linear activation as well as
 extra expressive power. Then, for cases in which bidirectionality
@@ -616,11 +616,11 @@ next to receive the weights of the values.
 ```{r fig:tf_sdpa, echo=FALSE, out.width="18%", fig.cap="(ref:tf_sdpa)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformers_scaled-dot-attention2_vaswani.png")
 ```
-(ref:tf_sdpa) Scaled dot-product attention (Source: @Vaswani2017).
+(ref:tf_sdpa) Scaled dot-product attention (Source: @vaswani2017attention).
 
 <!--
 ![Scaled dot-product attention. Source:
-[@Vaswani2017].](transformers_scaled-dot-attention2_vaswani.png){#fig:tf_sdpa
+[@vaswani2017attention].](transformers_scaled-dot-attention2_vaswani.png){#fig:tf_sdpa
 width="18%"}
 -->
 
@@ -637,11 +637,11 @@ combining their outputs.
 ```{r fig:tf_mha, echo=FALSE, out.width="34%", fig.cap="(ref:tf_mha)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformers_multi-head-attention2_vaswani.png")
 ```
-(ref:tf_mha) Multi-head attention (Source: @Vaswani2017).
+(ref:tf_mha) Multi-head attention (Source: @vaswani2017attention).
 
 <!--
 ![Multi-head attention. Source:
-[@Vaswani2017]](transformers_multi-head-attention2_vaswani.png){#fig:tf_mha
+[@vaswani2017attention]](transformers_multi-head-attention2_vaswani.png){#fig:tf_mha
 width="34%"}
 -->
 
@@ -669,11 +669,11 @@ distribution over the possible words.
 ```{r fig:tf_arch, echo=FALSE, out.width="55%", fig.cap="(ref:tf_arch)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformer_arch_vaswani.png")
 ```
-(ref:tf_arch) Transformer architecture (Source: @Vaswani2017).
+(ref:tf_arch) Transformer architecture (Source: @vaswani2017attention).
 
 <!--
 ![Transformer architecture. Source:
-[@Vaswani2017].](transformer_arch_vaswani.png){#fig:tf_arch width="55%"}
+[@vaswani2017attention].](transformer_arch_vaswani.png){#fig:tf_arch width="55%"}
 -->
 
 ### Transformer architectures: BERT, T5, GPT-3
@@ -741,7 +741,7 @@ pre-training, and favourable use cases. In the following, three
 different but very influential transformer architectures will be
 discussed. BERT can be seen as stacked encoders ([@Devlin2018]), T5 aims
 to combine the good parts of encoders and decoders ([@Raffel2019]),
-while GPT are stacked decoders ([@Brown2020]).
+while GPT are stacked decoders ([@brown2020language]).
 
 #### BERT
 
@@ -852,7 +852,7 @@ from the developments. Risks and harms among environmental and financial
 costs have been studied by [@Bender2021]. They state that marginalized
 communities are not only less likely to benefit from LM progress, but
 also more likely to suffer from the environmental repercussions of
-increasing resource consumption. [@Strubell2019] estimated that training
+increasing resource consumption. [@strubel2019energy] estimated that training
 a Transformer (big) model resulted in 249t of $CO_2$. To compare, an
 average human is responsible for approximately 5t of $CO_2$ per year
 (according to [@Ritchie2020]). In addition, they discovered that an
@@ -931,29 +931,29 @@ description, examples, and the prompt. In , the task is a translation
 from English to French, a few examples, as well as the word that should
 be translated are given. Moreover, zero-shot and one-shot learning refer
 to the model predicting with no and one learned example, respectively
-([@Brown2020]).
+([@brown2020language]).
 
 ```{r fig:gpt3_few-shot-learning, echo=FALSE, out.width="50%", fig.cap="(ref:gpt3_few-shot-learning)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/gpt3_few-shot-learning.png")
 ```
-(ref:gpt3_few-shot-learning) Few-shot learning (Source: @Brown2020).
+(ref:gpt3_few-shot-learning) Few-shot learning (Source: @brown2020language).
 
 <!--
 ![Few-shot learning. Source:
-[@Brown2020]](gpt3_few-shot-learning.png){#fig:gpt3_few-shot-learning
+[@brown2020language]](gpt3_few-shot-learning.png){#fig:gpt3_few-shot-learning
 width="50%"}
 -->
 
 It is complicated to create the few-shot examples, since the application
 relies on them to express the task. This is why smaller models are
-susceptible to examples written unfavourably. In [@Brown2020], it was
+susceptible to examples written unfavourably. In [@brown2020language], it was
 shown that few-shot performance scales with the number of model
 parameters. Even though GPT-3's in-context learning improved few-shot
 prompting capabilities, it is still sensitive to the order of training
 examples, decoding strategy, and hyperparameter selection. All of this
 combined with the fact that current research uses larger or held-out
 data sets leads to the suspicion that the true few-shot ability of
-language models is overestimated (see [@Perez2021]).\
+language models is overestimated (see [@perez2021true]).\
 Moreover, [@Lialin2022] have found that common transformer models could
 not resolve compositional questions in a zero-shot fashion and that the
 model's parameter count does not correlate with performance. This
