@@ -1,12 +1,9 @@
 
-## Including Further Modalities
-
+## Including Further Modalities {#c03-01-further-modalities}
 
 *Author: Marco Moldovan*
 
 *Supervisor: Rasmus Hvingelby*
-
-### Introducing
 
 Over the course of the previous chapters, we have introduced the basics of computer vision (CV) and natural language processing (NLP), after that we have learned about several directions how we can combine these two subfields in machine learning. In the most general sense, we have explored ways in which we can process more than just one modality with our machine learning models.
 
@@ -25,7 +22,6 @@ After understanding these challenges the reader will hopefully take home a new w
 Looking at the broader spectrum of the AI research landscape – as Yann LeCun has done in his recent paper [@lecun2022path] we can identify that multimodal perception through deep learning is one particularly important building block for creating autonomous agents capable of displaying reason. 
 
 After having thoroughly introduced these central multimodal learning challenges we will look at some of the current research trends of multimodal deep learning from the point of view of our challenge taxonomy. In order to solve these challenges a system must implement two major building blocks: a multimodal model architecture and a training paradigm. In this part of the chapter we will introduce examples for both and successively generalize these concepts. By introducing more and more universal and problem- as well as modality-agnostic systems from current research we will lead into a research project that we ourselves are undertaking to merge a general multimodal model with a problem-agnostic training paradigm which will form the conclusion of this chapter. Hopefully by then two major concepts will have transpired: 1) Introduce models and training paradigms that are general enough as to give a conclusion to this chapter’s very title: learning from any and including an arbitrary amount of further modalities in our learner and 2) sticking to the analogy of the human perceptive system and presenting models and training paradigms that can learn from any type of input signal just like we humans can. In the spirit of Yann LeCun’s JEPA paper the perceptive aspect of artificial intelligence is only one aspect of the system. Looking at the broader spectrum of the AI research landscape – as Yann LeCun has done in his recent paper, we can identify that multimodal perception through deep learning is one particularly important building block for creating autonomous agents capable of displaying reason. Other aspects such as reasoning and especially multi-tasking and scaling will be elaborated in [this] following chapter. 
-
 
 ### Taxonomy of Multimodal Challenges
 
@@ -135,10 +131,10 @@ With information about locality and compositionality being mostly lost in the Pe
 
 Research of the past years has shown that in deep learning usually it is best to perform some sort of generalized task-agnostic pretraining routine. During self-supervised training that does not rely on any labeled data our model is trained to find underlying structures in the given unlabeled data. Given the right model and training scheme the model is able to approximate the true data distribution of a given dataset. This is extremely helpful as unlabeled data is extremely abundant so self-supervised learning lends itself as a way to infuse knowledge about the data into our model that it can leverage either directly for a downstream task (zero-shot) or helps as a running start during fine-tuning.
 
+
 Since the conceptual part of pre-training was shown to have such an immense influence on downstream task performance, we will mainly focus on the self-supervised learning aspect of multimodal deep learning in this subchapter. 
 
 For self-supervised multimodal training paradigms, we can devise two major subcategories: those training paradigms that are agnostic to the input modality but operate only on a unimodal input and those that are both agnostic to input modalities but are truly multimodal.
-
 
 ##### Uni-Modal Modality-Agnostic Self-Supervised Learning
 

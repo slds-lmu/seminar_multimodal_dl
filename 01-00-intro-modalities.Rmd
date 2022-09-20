@@ -1,4 +1,4 @@
-# Chapter 1
+# Introducing the modalities {#c01-00-intro-modalities}
 
 *Authors: Cem Akkus, Vladana Djakovic, Christopher Benjamin Marquardt*
 
