@@ -36,15 +36,10 @@ In the example depicting one-hot encoding (see
 are ten simple words and the dark squares indicate the only index with a
 non-zero value.
 
-```{r fig:one-hot, echo=FALSE, out.width="70%", fig.cap="(ref:one-hot)", fig.align="center"}
+```{r fig:onehot, echo=FALSE, out.width="70%", fig.cap="(ref:onehot)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/onehot_pilehvar_p10.png")
 ```
-(ref:one-hot) Ten one-hot encoded words (Source: @Pilehvar2021).
-
-<!--
-![Ten one-hot encoded words. Source:
-[@Pilehvar2021].](onehot_pilehvar_p10.png){#fig:one-hot width="70%"}
--->
+(ref:onehot) Ten one-hot encoded words (Source: @Pilehvar2021).
 
 In contrast, there are multiple non-zero values while using
 bag-of-words, which is another way of extracting features from text to
@@ -86,15 +81,10 @@ word vectors could start at 8 and go up to 1024 for larger data sets. It
 is expected that higher dimensions can rather pick up intricate
 relationships between words if given enough data to learn from.
 
-```{r fig:embed_pilehvar_p11, echo=FALSE, out.width="70%", fig.cap="(ref:embed_pilehvar_p11)", fig.align="center"}
+```{r fig:embedPilehvarP11, echo=FALSE, out.width="70%", fig.cap="(ref:embedPilehvarP11)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/embed_pilehvar_p11.png")
 ```
-(ref:embed_pilehvar_p11) Three-dimensional word embeddings (Source: @Pilehvar2021).
-
-<!--
-![Three-dimensional word embeddings. Source:
-[@Pilehvar2021].](embed_pilehvar_p11.png){#fig:embed_pilehvar_p11 width="70%"}
--->
+(ref:embedPilehvarP11) Three-dimensional word embeddings (Source: @Pilehvar2021).
 
 For any NLP tasks, it is sensible to start with word embeddings because
 it allows to conveniently incorporate prior knowledge into the model and
@@ -125,14 +115,14 @@ not similar in structure. Additionally, on the right side of the figure,
 there is a form of the commonly portrayed and easily understood
 Country-Capital example (see [@mikolov2013efficient]).
 
-```{r fig:embed_vectors, echo=FALSE, out.width="100%", fig.cap="(ref:embed_vectors)", fig.align="center"}
+```{r fig:embedVectors, echo=FALSE, out.width="100%", fig.cap="(ref:embedVectors)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/embed_vectors_google.png")
 ```
-(ref:embed_vectors) Three types of similarities as word embeddings (Source: @Google2022).
+(ref:embedVectors) Three types of similarities as word embeddings (Source: @Google2022).
 
 <!--
 ![Three types of similarities as word embeddings. Source:
-[@Google2022].](embed_vectors_google.png){#fig:embed_vectors 
+[@Google2022].](embed_vectors_google.png){#fig:embed_vectors
 width="100%"}
 -->
 
@@ -146,16 +136,10 @@ feasible. Applying this simple method for a larger set of translations
 in English and Spanish led to remarkable results - achieving almost 90 %
 precision.
 
-```{r fig:embed_transl, echo=FALSE, out.width="90%", fig.cap="(ref:embed_transl)", fig.align="center"}
+```{r fig:embedTransl, echo=FALSE, out.width="90%", fig.cap="(ref:embedTransl)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/embed_transl_mikolova_p2.png")
 ```
-(ref:embed_transl) Representations of numbers in English and Spanish (Source: @Mikolov2013a).
-
-<!--
-![Representations of numbers in English and Spanish. Source:
-[@Mikolov2013a].](embed_transl_mikolova_p2.png){#fig:embed_transl
-width="90%"}
--->
+(ref:embedTransl) Representations of numbers in English and Spanish (Source: @Mikolov2013a).
 
 This technique was then used for other experiments. One use case is the
 detection of dictionary errors. Taking translations from a dictionary
@@ -194,15 +178,11 @@ and predicts others within a range before and after it in the same
 sentence. Both of the models use a softmax classifier for the output
 layer.
 
-```{r fig:embed_arch, echo=FALSE, out.width="85%", fig.cap="(ref:embed_arch)", fig.align="center"}
+```{r fig:embedArch, echo=FALSE, out.width="85%", fig.cap="(ref:embedArch)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/embed_arch_mikolov_p5.png")
 ```
-(ref:embed_arch) CBOW and Skip-gram architecture (Source: @mikolov2013efficient).
+(ref:embedArch) CBOW and Skip-gram architecture (Source: @mikolov2013efficient).
 
-<!--
-![CBOW and Skip-gram architecture. Source:
-[@mikolov2013efficient].](embed_arch_mikolov_p5.png){#fig:embed_arch width="85%"}
--->
 
 Then, [@Bojanowski2016] built on skip-gram models by accounting for the
 morphology (internal structure) of words. A different classical
@@ -235,15 +215,10 @@ deal with different word orders and active, as well as passive voice
 ([@Sutskever2014]). A simplified example of the encoder-decoder model
 can be seen in .
 
-```{r fig:arch1_encdec, echo=FALSE, out.width="85%", fig.cap="(ref:arch1_encdec)", fig.align="center"}
+```{r fig:arch1Encdec, echo=FALSE, out.width="85%", fig.cap="(ref:arch1Encdec)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/encdec_arch1_deepl.png")
 ```
-(ref:arch1_encdec) Translation through simplified seq2seq model (Source: @Manning2022).
-
-<!--
-![Translation through simplified seq2seq model. Source:
-[@Manning2022].](encdec_arch1_deepl.png){#fig:arch1_encdec width="85%"}
--->
+(ref:arch1Encdec) Translation through simplified seq2seq model (Source: @Manning2022).
 
 Before going through the equations quantifying the concepts, it makes
 sense to examine the sequence-to-sequence design closer by studying
@@ -262,16 +237,10 @@ state of the decoder, the decoder RNN uses this information to produce
 the target sequence of length $n_y$, which can of course vary from
 $n_x$.
 
-```{r fig:encdec_arch_Cho, echo=FALSE, out.width="56%", fig.cap="(ref:encdec_arch_Cho)", fig.align="center"}
+```{r fig:encdecArchCho, echo=FALSE, out.width="56%", fig.cap="(ref:encdecArchCho)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/encdec_arch_Cho.png")
 ```
-(ref:encdec_arch_Cho) Encoder-decoder architecture (Source: @Cho2014).
-
-<!--
-![Encoder-decoder architecture. Source:
-[@Cho2014]](encdec_arch_Cho.png){#fig:encdec_arch_Cho width="56%"}
--->
-
+(ref:encdecArchCho) Encoder-decoder architecture (Source: @Cho2014).
 
 At the latest through the above illustration, it is clear that the
 decoder is particularly interesting to look at in the form of equations.
@@ -308,15 +277,10 @@ are recommended by the researchers. The idea is that lower layers
 compute lower-level features and higher layers compute higher-level
 features.
 
-```{r fig:encdec_arch2, echo=FALSE, out.width="70%", fig.cap="(ref:encdec_arch2)", fig.align="center"}
+```{r fig:encdecArch2, echo=FALSE, out.width="70%", fig.cap="(ref:encdecArch2)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/encdec_arch2_deepl.png")
 ```
-(ref:encdec_arch2) Translation through seq2seq model (Source: @Manning2022).
-
-<!--
-![Translation through seq2seq model. Source:
-[@Manning2022]](encdec_arch2_deepl.png){#fig:encdec_arch2 width="70%"}
--->
+(ref:encdecArch2) Translation through seq2seq model (Source: @Manning2022).
 
 Gated recurrent networks, especially long short-term memory networks,
 have been found to be effective in both components of the
@@ -380,15 +344,10 @@ equivalents for this phrase, it is expected that there is not only one
 nearly non-zero score. In this snapshot, the attention distribution can
 be seen to have two significant contributors.
 
-```{r fig:attention_ex_stanford, echo=FALSE, out.width="90%", fig.cap="(ref:attention_ex_stanford)", fig.align="center"}
+```{r fig:attentionExStanford, echo=FALSE, out.width="90%", fig.cap="(ref:attentionExStanford)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/attention_ex_stanford.png")
 ```
-(ref:attention_ex_stanford) Translation process with attention mechanism (Source: @Manning2022).
-
-<!--
-![Translation process with attention mechanism. Source:
-[@Manning2022].](attention_ex_stanford.png){#fig:attention_ex_stanford width="90%"}
--->
+(ref:attentionExStanford) Translation process with attention mechanism (Source: @Manning2022).
 
 The following equations aim to compactly represent the relations brought
 forward in the last paragraphs and mainly follow [@Manning2022]. The
@@ -436,16 +395,11 @@ to perfect the phrase \"zone économique européene\". Additional
 qualitative analysis has shown that the model alignments are
 predominantly analogous to our intuition.\
 
-```{r fig:attention_focus, echo=FALSE, out.width="50%", fig.cap="(ref:attention_focus)", fig.align="center"}
+```{r fig:attentionfocus, echo=FALSE, out.width="50%", fig.cap="(ref:attentionfocus)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/attention_focus_bahdanau.png")
 ```
-(ref:attention_focus) Attention alignments (Source: @Bahdanau2014).
+(ref:attentionfocus) Attention alignments (Source: @Bahdanau2014).
 
-<!--
-![Attention alignments. Source:
-[@Bahdanau2014].](attention_focus_bahdanau.png){#fig:attention_focus
-width="50%"}
--->
 
 ### Transformer
 
@@ -462,16 +416,10 @@ problems, it is therefore hard to learn long-distance dependencies. In
 addition, the linear order is ingrained. Even though, as known, the
 sequential structure does not tell the whole story.
 
-```{r fig:tf_rnnlim_stanford, echo=FALSE, out.width="70%", fig.cap="(ref:tf_rnnlim_stanford)", fig.align="center"}
+```{r fig:tfrnnlimstanford, echo=FALSE, out.width="70%", fig.cap="(ref:tfrnnlimstanford)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformer_rnnlim_stanford.png")
 ```
-(ref:tf_rnnlim_stanford) Sequential processing of recurrent model (Source: @Manning2022).
-
-<!--
-![Sequential processing of recurrent model. Source:
-[@Manning2022].](transformer_rnnlim_stanford.png){#fig:tf_rnnlim_stanford
-width="70%"}
--->
+(ref:tfrnnlimstanford) Sequential processing of recurrent model (Source: @Manning2022).
 
 GPUs can perform multiple calculations simultaneously and could help to
 reduce the execution time of the deep learning algorithm massively.
@@ -481,17 +429,10 @@ cannot be computed in full before past states have been computed. This
 inhibits training on massive data sets. indicates the minimum number of
 steps before the respective state can be calculated.
 
-```{r fig:tf_rnnlim2_stanford, echo=FALSE, out.width="70%", fig.cap="(ref:tf_rnnlim2_stanford)", fig.align="center"}
+```{r fig:tfrnnlim2stanford, echo=FALSE, out.width="70%", fig.cap="(ref:tfrnnlim2stanford)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformer_rnnlim2_stanford.png")
 ```
-(ref:tf_rnnlim2_stanford) Sequential processing of recurrent model with number of steps indicated (Source: @Manning2022).
-
-<!--
-![Sequential processing of recurrent model with number of steps
-indicated. Source:
-[@Manning2022].](transformer_rnnlim2_stanford.png){#fig:tf_rnnlim2_stanford
-width="70%"}
--->
+(ref:tfrnnlim2stanford) Sequential processing of recurrent model with number of steps indicated (Source: @Manning2022).
 
 After proving that attention dramatically increases performance, google
 researchers took it further and based transformers solely on attention,
@@ -516,16 +457,10 @@ architecture. depicts this process in which each word attends to all
 words in the previous layer. Even though in practice, most arrows are
 omitted eventually.\
 
-```{r fig:tf_self-a, echo=FALSE, out.width="70%", fig.cap="(ref:tf_self-a)", fig.align="center"}
+```{r fig:tfselfa, echo=FALSE, out.width="70%", fig.cap="(ref:tfselfa)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformer_self-attention_stanford.png")
 ```
-(ref:tf_self-a) Connections of classic attention mechanism (Source: @Manning2022).
-
-<!--
-![Connections of classic attention mechanism. Source:
-[@Manning2022]](transformer_self-attention_stanford.png){#fig:tf_self-a
-width="70%"}
--->
+(ref:tfselfa) Connections of classic attention mechanism (Source: @Manning2022).
 
 Thinking of self-attention as an approximate hash table eases
 understanding its intuition. To look up a value, queries are compared
@@ -535,18 +470,11 @@ contrast, in self-attention, each key is matched to varying degrees by
 each query. Thus, a sum of values weighted by the query-key match is
 returned.
 
-```{r fig:tf_hashtable, echo=FALSE, out.width="70%", fig.cap="(ref:tf_hashtable)", fig.align="center"}
+```{r fig:tfhashtable, echo=FALSE, out.width="70%", fig.cap="(ref:tfhashtable)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformer_hash-table_stanford.png")
 ```
-(ref:tf_hashtable) Comparison of classic attention mechanism with self-attention with
+(ref:tfhashtable) Comparison of classic attention mechanism with self-attention with
 hash tables (Source: @Manning2022).
-
-<!--
-![Comparison of classic attention mechanism with self-attention with
-hash tables. Source:
-[@Manning2022]](transformer_hash-table_stanford.png){#fig:tf_hashtable
-width="70%"}
--->
 
 The process briefly described in the last paragraph can be summarized by
 the following steps that mainly follow [@Manning2022]. Firstly, deriving
@@ -613,16 +541,10 @@ computing the dot products of the query with its keys, dividing them by
 the dimension of keys $\sqrt{d_k}$, and applying the softmax function
 next to receive the weights of the values.
 
-```{r fig:tf_sdpa, echo=FALSE, out.width="18%", fig.cap="(ref:tf_sdpa)", fig.align="center"}
+```{r fig:tfsdpa, echo=FALSE, out.width="18%", fig.cap="(ref:tfsdpa)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformers_scaled-dot-attention2_vaswani.png")
 ```
-(ref:tf_sdpa) Scaled dot-product attention (Source: @vaswani2017attention).
-
-<!--
-![Scaled dot-product attention. Source:
-[@vaswani2017attention].](transformers_scaled-dot-attention2_vaswani.png){#fig:tf_sdpa
-width="18%"}
--->
+(ref:tfsdpa) Scaled dot-product attention (Source: @vaswani2017attention).
 
 Attention learns where to search for relevant information. Surely,
 attending to different types of information in a sentence at once
@@ -634,16 +556,10 @@ construct value vectors differently. Multi-headed self-attention is
 implemented by simply creating $n$ independent attention mechanisms and
 combining their outputs.
 
-```{r fig:tf_mha, echo=FALSE, out.width="34%", fig.cap="(ref:tf_mha)", fig.align="center"}
+```{r fig:tfmha, echo=FALSE, out.width="34%", fig.cap="(ref:tfmha)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformers_multi-head-attention2_vaswani.png")
 ```
-(ref:tf_mha) Multi-head attention (Source: @vaswani2017attention).
-
-<!--
-![Multi-head attention. Source:
-[@vaswani2017attention]](transformers_multi-head-attention2_vaswani.png){#fig:tf_mha
-width="34%"}
--->
+(ref:tfmha) Multi-head attention (Source: @vaswani2017attention).
 
 At this point, every part that constitutes the encoder in the
 transformer architecture has been introduced (see ). First, positional
@@ -666,15 +582,10 @@ to project the embeddings into a larger vector that has the length of
 the vocabulary size. At last, a softmax layer generates a probability
 distribution over the possible words.
 
-```{r fig:tf_arch, echo=FALSE, out.width="55%", fig.cap="(ref:tf_arch)", fig.align="center"}
+```{r fig:tfarch, echo=FALSE, out.width="55%", fig.cap="(ref:tfarch)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformer_arch_vaswani.png")
 ```
-(ref:tf_arch) Transformer architecture (Source: @vaswani2017attention).
-
-<!--
-![Transformer architecture. Source:
-[@vaswani2017attention].](transformer_arch_vaswani.png){#fig:tf_arch width="55%"}
--->
+(ref:tfarch) Transformer architecture (Source: @vaswani2017attention).
 
 ### Transformer architectures: BERT, T5, GPT-3
 
@@ -697,33 +608,15 @@ parts are hidden to train the model to reconstruct them. This leads to
 building suitable parameter initializations and robust probability
 distributions over language.\
 
-```{r fig:tf_pretrain, echo=FALSE, out.width="80%", fig.cap="(ref:tf_pretrain)", fig.align="center"}
+```{r fig:tfpretrain, echo=FALSE, out.width="80%", fig.cap="(ref:tfpretrain)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformer_pretrain_stanford.png")
 ```
-(ref:tf_pretrain) Partly pre-trained model (Source: @Manning2022).
+(ref:tfpretrain) Partly pre-trained model (Source: @Manning2022).
 
-<!--
-![image](transformer_pretrain_stanford.png){#fig:tf_pretrain2
-width=".8\\linewidth"} [\[fig:tf_pretrain\]]{#fig:tf_pretrain
-label="fig:tf_pretrain"}
--->
-
-```{r fig:tf_pretrain2, echo=FALSE, out.width="80%", fig.cap="(ref:tf_pretrain2)", fig.align="center"}
+```{r fig:tfpretrain2, echo=FALSE, out.width="80%", fig.cap="(ref:tfpretrain2)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/transformer_pretrain2_stanford.png")
 ```
-(ref:tf_pretrain2) Jointly pre-trained model (Source: @Manning2022).
-
-<!--
-![image](transformer_pretrain2_stanford.png){#fig:tf_pretrain2
-width=".8\\linewidth"} [\[fig:tf_pretrain2\]]{#fig:tf_pretrain2
-label="fig:tf_pretrain2"}
--->
-
-<!--
-```{r, echo=FALSE,out.width="49%",out.height="49%",fig.show='hold',
-fig.align='center', fig.cap="Partly pre-trained and jointly pre-trained model."}
-knitr::include_graphics(c("tf_pretrain.png","tf_pretrain2.png"))
--->
+(ref:tfpretrain2) Jointly pre-trained model (Source: @Manning2022).
 
 Classic machine learning does not match human learning. Specifically
 referring to training a model from scratch, and only being able to learn
@@ -797,11 +690,6 @@ knitr::include_graphics("./figures/01-01-nlp/t5_stanford.png")
 ```
 (ref:t5) Applications of T5 model (Source: @Raffel2019).
 
-<!--
-![Applications of T5 model. Source:
-[@Raffel2019].](t5_stanford.png){#fig:t5 width="80%"}
--->
-
 #### GPT-3
 
 As previously stated, the neural architecture influences the type of
@@ -831,16 +719,11 @@ context. The tasks are specified by the in-context examples, and the
 conditional probability distribution simulates performing the task to an
 extent.
 
-```{r fig:gpt3_scaling, echo=FALSE, out.width="70%", fig.cap="(ref:gpt3_scaling)", fig.align="center"}
+```{r fig:gpt3scaling, echo=FALSE, out.width="70%", fig.cap="(ref:gpt3scaling)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/gpt3_comparison.png")
 ```
-(ref:gpt3_scaling) Comparison of number of parameters between Transformer-architectures (Source: @Saifee2020).
+(ref:gpt3scaling) Comparison of number of parameters between Transformer-architectures (Source: @Saifee2020).
 
-<!--
-![Comparison of number of parameters between Transformer-architectures.
-Source: [@Saifee2020]](gpt3_comparison.png){#fig:gpt3_scaling
-width="70%"}
--->
 
 ### Current Topics
 
@@ -899,16 +782,11 @@ notable performance loss ([@Voita2019]). Probing attention maps can be
 tedious, but allows to gain knowledge of common patterns, such as an
 unexpected amount focusing on the delimiter token \[SEP\].
 
-```{r fig:ct_attention-heads, echo=FALSE, out.width="90%", fig.cap="(ref:ct_attention-heads)", fig.align="center"}
+```{r fig:ctattentionheads, echo=FALSE, out.width="90%", fig.cap="(ref:ctattentionheads)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/ct_attention-heads.png")
 ```
-(ref:ct_attention-heads) Common patterns of attention heads (Source: @Clark2019).
+(ref:ctattentionheads) Common patterns of attention heads (Source: @Clark2019).
 
-<!--
-![Common patterns of attention heads. Source:
-[@Clark2019]](ct_attention-heads.png){#fig:ct_attention-heads
-width="90%"}
--->
 
 #### Few-Shot Learning
 
@@ -933,16 +811,10 @@ be translated are given. Moreover, zero-shot and one-shot learning refer
 to the model predicting with no and one learned example, respectively
 ([@brown2020language]).
 
-```{r fig:gpt3_few-shot-learning, echo=FALSE, out.width="50%", fig.cap="(ref:gpt3_few-shot-learning)", fig.align="center"}
+```{r fig:gpt3fewshotlearning, echo=FALSE, out.width="50%", fig.cap="(ref:gpt3fewshotlearning)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/gpt3_few-shot-learning.png")
 ```
-(ref:gpt3_few-shot-learning) Few-shot learning (Source: @brown2020language).
-
-<!--
-![Few-shot learning. Source:
-[@brown2020language]](gpt3_few-shot-learning.png){#fig:gpt3_few-shot-learning
-width="50%"}
--->
+(ref:gpt3fewshotlearning) Few-shot learning (Source: @brown2020language).
 
 It is complicated to create the few-shot examples, since the application
 relies on them to express the task. This is why smaller models are
