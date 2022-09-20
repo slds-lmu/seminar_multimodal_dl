@@ -1,4 +1,4 @@
-## Text supporting computer vision models {#c02-04-text-support-img}
+## Text supporting Computer Vision Models {#c02-04-text-support-img}
 
 *Author: Max Schneider*
 

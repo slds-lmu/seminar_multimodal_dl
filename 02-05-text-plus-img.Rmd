@@ -1,4 +1,4 @@
-## Text + Image {#c02-05-text-plus-img}
+## Models for both modalities {#c02-05-text-plus-img}
 
 *Author: Steffen Jauch-Walser *
 
