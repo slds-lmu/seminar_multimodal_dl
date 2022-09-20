@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2022-09-14" />
+<meta name="date" content="2022-09-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -89,7 +89,7 @@
 </ul></li>
 <li class="chapter" data-level="3" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html"><i class="fa fa-check"></i><b>3</b> Multimodal architectures</a><ul>
 <li class="chapter" data-level="3.1" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#c02-01-img2text"><i class="fa fa-check"></i><b>3.1</b> Image2Text</a></li>
-<li class="chapter" data-level="3.2" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#c02-02-text2img"><i class="fa fa-check"></i><b>3.2</b> Text-2-image</a></li>
+<li class="chapter" data-level="3.2" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#text-to-image-c02-02-text2image"><i class="fa fa-check"></i><b>3.2</b> Text-to-image {#c02-02-text2image</a></li>
 <li class="chapter" data-level="3.3" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#c02-03-img-support-text"><i class="fa fa-check"></i><b>3.3</b> Images supporting Language Models</a></li>
 <li class="chapter" data-level="3.4" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#c02-04-text-support-img"><i class="fa fa-check"></i><b>3.4</b> Text supporting Computer Vision Models</a></li>
 <li class="chapter" data-level="3.5" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#c02-05-text-plus-img"><i class="fa fa-check"></i><b>3.5</b> Models for both modalities</a></li>
@@ -130,26 +130,896 @@
 <h1><span class="header-section-number">Chapter 2</span> Introducing the modalities<a href="c01-00-intro-modalities.html#c01-00-intro-modalities" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><em>Authors: Cem Akkus, Vladana Djakovic, Christopher Benjamin Marquardt</em></p>
 <p><em>Supervisor: Dr. Matthias Aßenmacher</em></p>
-<p>Natural Language Processing (NLP) has existed for about 50 years, but it is more relevant than ever. There have been several breakthroughs in this branch of machine learning that is concerned with spoken and written language. For example, learning internal representations of words was one of the greater advances of the last decade. Word embeddings (<span class="citation">(<span class="citeproc-not-found" data-reference-id="Mikolov2013"><strong>???</strong></span>)</span>, <span class="citation">(<span class="citeproc-not-found" data-reference-id="Bojanowski2016"><strong>???</strong></span>)</span>) made it possible and allowed developers to encode words as dense vectors that capture their underlying semantic content. In this way, similar words are embedded close to each other in a lower-dimensional feature space. Another important challenge was solved by Encoder-decoder (also called sequence-to-sequence) architectures <span class="citation">(<span class="citeproc-not-found" data-reference-id="Sutskever2014"><strong>???</strong></span>)</span>, which made it possible to map input sequences to output sequences of different lengths. They are especially useful for complex tasks like machine translation, video captioning or question answering. This approach makes minimal assumptions on the sequence structure and can deal with different word orders and active, as well as passive voice.</p>
-<p>A definitely significant state-of-the-art technique is Attention <span class="citation">(<span class="citeproc-not-found" data-reference-id="Bahdanau2014"><strong>???</strong></span>)</span>, which enables models to actively shift their focus – just like humans do. It allows following one thought at a time while suppressing information irrelevant to the task. As a consequence, it has been shown to significantly improve performance for tasks like machine translation. By giving the decoder access to directly look at the source, the bottleneck is avoided and at the same time, it provides a shortcut to faraway states and thus helps with the vanishing gradient problem. One of the most recent sequence data modeling techniques is Transformers (<span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (<a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>), which are solely based on attention and do not have to process the input data sequentially (like RNNs). Therefore, the deep learning model is better in remembering context-induced earlier in long sequences. It is the dominant paradigm in NLP currently and even makes better use of GPUs, because it can perform parallel operations. Transformer architectures like BERT (<span class="citation">Devlin et al. (<a href="#ref-Devlin2018" role="doc-biblioref">2018</a><a href="#ref-Devlin2018" role="doc-biblioref">c</a>)</span>), T5 (<span class="citation">(<span class="citeproc-not-found" data-reference-id="Raffel2019"><strong>???</strong></span>)</span>) or GPT-3 (<span class="citation">T. Brown et al. (<a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>) are pre-trained on a large corpus and can be fine-tuned for specific language tasks. They have the capability to generate stories, poems, code and much more. With the help of the aforementioned breakthroughs, deep networks have been successful in retrieving information and finding representations of semantics in the modality text. In the next paragraphs, developments for another modality image are going to be presented.</p>
+<p>Natural Language Processing (NLP) has existed for about 50 years, but it is more relevant than ever. There have been several breakthroughs in this branch of machine learning that is concerned with spoken and written language. For example, learning internal representations of words was one of the greater advances of the last decade. Word embeddings (<span class="citation">Mikolov, Chen, et al. (<a href="#ref-Mikolov2013" role="doc-biblioref">2013</a><a href="#ref-Mikolov2013" role="doc-biblioref">a</a>)</span>, <span class="citation">Bojanowski et al. (<a href="#ref-Bojanowski2016" role="doc-biblioref">2016</a>)</span>) made it possible and allowed developers to encode words as dense vectors that capture their underlying semantic content. In this way, similar words are embedded close to each other in a lower-dimensional feature space. Another important challenge was solved by Encoder-decoder (also called sequence-to-sequence) architectures <span class="citation">Sutskever, Vinyals, and Le (<a href="#ref-Sutskever2014" role="doc-biblioref">2014</a>)</span>, which made it possible to map input sequences to output sequences of different lengths. They are especially useful for complex tasks like machine translation, video captioning or question answering. This approach makes minimal assumptions on the sequence structure and can deal with different word orders and active, as well as passive voice.</p>
+<p>A definitely significant state-of-the-art technique is Attention <span class="citation">Bahdanau, Cho, and Bengio (<a href="#ref-Bahdanau2014" role="doc-biblioref">2014</a>)</span>, which enables models to actively shift their focus – just like humans do. It allows following one thought at a time while suppressing information irrelevant to the task. As a consequence, it has been shown to significantly improve performance for tasks like machine translation. By giving the decoder access to directly look at the source, the bottleneck is avoided and at the same time, it provides a shortcut to faraway states and thus helps with the vanishing gradient problem. One of the most recent sequence data modeling techniques is Transformers (<span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (<a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>), which are solely based on attention and do not have to process the input data sequentially (like RNNs). Therefore, the deep learning model is better in remembering context-induced earlier in long sequences. It is the dominant paradigm in NLP currently and even makes better use of GPUs, because it can perform parallel operations. Transformer architectures like BERT (<span class="citation">Devlin et al. (<a href="#ref-Devlin2018" role="doc-biblioref">2018</a><a href="#ref-Devlin2018" role="doc-biblioref">c</a>)</span>), T5 (<span class="citation">Raffel et al. (<a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">b</a>)</span>) or GPT-3 (<span class="citation">T. Brown et al. (<a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>) are pre-trained on a large corpus and can be fine-tuned for specific language tasks. They have the capability to generate stories, poems, code and much more. With the help of the aforementioned breakthroughs, deep networks have been successful in retrieving information and finding representations of semantics in the modality text. In the next paragraphs, developments for another modality image are going to be presented.</p>
 <p>Computer vision (CV) focuses on replicating parts of the complexity of the human visual system and enabling computers to identify and process objects in images and videos in the same way that humans do. In recent years it has become one of the main and widely applied fields of computer science. However, there are still problems that are current research topics, whose solutions depend on the research’s view on the topic. One of the problems is how to optimize deep convolutional neural networks for image classification. The accuracy of classification depends on width, depth and image resolution. One way to address the degradation of training accuracy is by introducing a deep residual learning framework <span class="citation">(He et al. <a href="#ref-ResNet" role="doc-biblioref">2015</a>)</span>. On the other hand, another less common method is to scale up ConvNets, to achieve better accuracy is by scaling up image resolution. Based on this observation, there was proposed a simple yet effective compound scaling method, called EfficientNets <span class="citation">(Tan and Le <a href="#ref-EfficientNet" role="doc-biblioref">2019</a>)</span>.</p>
-<p>Another state-of-the-art trend in computer vision is learning effective visual representations without human supervision. Discriminative approaches based on contrastive learning in the latent space have recently shown great promise, achieving state-of-the-art results, but the simple framework for contrastive learning of visual representations, which is called SimCLR, outperforms previous work <span class="citation">(Chen et al. <a href="#ref-SimCLR" role="doc-biblioref">2020</a>)</span>. However, another research proposes as an alternative a simple “swapped” prediction problem where we predict the code of a view from the representation of another view. Where features are learned by Swapping Assignments between multiple Views of the same image (SwAV) <span class="citation">(<span class="citeproc-not-found" data-reference-id="SwAV"><strong>???</strong></span>)</span>.
-Further recent contrastive methods are trained by reducing the distance between representations of different augmented views of the same image (‘positive pairs’) and increasing the distance between representations of augmented views from different images (‘negative pairs’). Bootstrap Your Own Latent (BYOL) is a new algorithm for self-supervised learning of image representatios <span class="citation">(Grill, Strub, Altché, Tallec, Richemond, et al. <a href="#ref-BYOL" role="doc-biblioref">2020</a><a href="#ref-BYOL" role="doc-biblioref">b</a>)</span>.</p>
+<p>Another state-of-the-art trend in computer vision is learning effective visual representations without human supervision. Discriminative approaches based on contrastive learning in the latent space have recently shown great promise, achieving state-of-the-art results, but the simple framework for contrastive learning of visual representations, which is called SimCLR, outperforms previous work <span class="citation">(T. Chen, Kornblith, Norouzi, and Hinton <a href="#ref-SimCLR" role="doc-biblioref">2020</a><a href="#ref-SimCLR" role="doc-biblioref">a</a>)</span>. However, another research proposes as an alternative a simple “swapped” prediction problem where we predict the code of a view from the representation of another view. Where features are learned by Swapping Assignments between multiple Views of the same image (SwAV) <span class="citation">(<span class="citeproc-not-found" data-reference-id="SwAV"><strong>???</strong></span>)</span>.
+Further recent contrastive methods are trained by reducing the distance between representations of different augmented views of the same image (‘positive pairs’) and increasing the distance between representations of augmented views from different images (‘negative pairs’). Bootstrap Your Own Latent (BYOL) is a new algorithm for self-supervised learning of image representatios <span class="citation">(Grill, Strub, Altché, et al. <a href="#ref-BYOL" role="doc-biblioref">2020</a>)</span>.</p>
 <p>Self-attention-based architectures, in particular, Transformers have become the model of choice in natural language processing (NLP). Inspired by NLP successes, multiple works try combining CNN-like architectures with self-attention, some replacing the convolutions entirely. The latter models, while theoretically efficient, have not yet been scaled effectively on modern hardware accelerators due to the use of specialized attention patterns. Inspired by the Transformer scaling successes in NLP, one of the experiments is applying a standard Transformer directly to the image <span class="citation">(<span class="citeproc-not-found" data-reference-id="ImageT"><strong>???</strong></span>)</span>. Due to the widespread application of computer vision, these problems differ and are constantly being at the center of attention of more and more research.</p>
 <p>With the rapid development in NLP and CV in recent years, it was just a question of time to merge both modalities to tackle multi-modal tasks. The release of DALL-E 2 just hints at what one can expect from this merge in the future. DALL-E 2 is able to create photorealistic images or even art from any given text input. So it takes the information of one modality and turns it into another modality. It needs multi-modal datasets to make this possible, which are still relatively rare. This shows the importance of available data and the ability to use it even more. Nevertheless, all modalities are in need of huge datasets to pre-train their models. It’s common to pre-train a model and fine-tune it afterwards for a specific task on another dataset. For example, every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset. The cardinality of the datasets used for CV is immense, but the datasets used for NLP are of a completely different magnitude. BERT uses the English Wikipedia and the Bookscorpus to pre-train the model. The latter consists of almost 1 billion words and 74 million sentences. The pre-training of GPT-3 is composed of five huge corpora: CommonCrawl, Books1 and Books2, Wikipedia and WebText2. Unlike language model pre-training that can leverage tremendous natural language data, vision-language tasks require high-quality image descriptions that are hard to obtain for free. Widely used pre-training datasets for VL-PTM are Microsoft Common Objects in Context (COCO), Visual Genome (VG), Conceptual Captions (CC), Flickr30k, LAION-400M and LAION-5B, which is now the biggest openly accessible image-text dataset.</p>
 <p>Besides the importance of pre-training data, there must also be a way to test or compare the different models. A reasonable approach is to compare the performance on specific tasks, which is called benchmarking. A nice feature of benchmarks is that they allow us to compare the models to a human baseline. Different metrics are used to compare the performance of the models. Accuracy is widely used, but there are also some others. For CV the most common benchmark datasets are ImageNet, ImageNetReaL, CIFAR-10(0), OXFORD-IIIT PET, OXFORD Flower 102, COCO and Visual Task Adaptation Benchmark (VTAB). The most common benchmarks for NLP are General Language Understanding Evaluation (GLUE), SuperGLUE, SQuAD 1.1, SQuAD 2.0, SWAG, RACE, ReCoRD, and CoNLL-2003. VTAB, GLUE and SuperGLUE also provide a public leader board. Cross-modal tasks such as Visual Question Answering (VQA), Visual Commonsense Reasoning (VCR), Natural Language Visual Reasoning (NLVR), Flickr30K, COCO and Visual Entailment are common benchmarks for VL-PTM.</p>
 
-<!--
-
-## title
-
-*Author: *
-
-*Supervisor: *
--->
 <div id="c01-01-sota-nlp" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.1</span> State-of-the-art in NLP<a href="c01-00-intro-modalities.html#c01-01-sota-nlp" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>Author: Cem Akkus</em></p>
+<p><em>Supervisor: Matthias Aßenmacher</em></p>
+<div id="introduction-1" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.1</span> Introduction<a href="c01-00-intro-modalities.html#introduction-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Natural Language Processing (NLP) exists for about 50 years, but it is
+more relevant than ever. There have been several breakthroughs in this
+branch of machine learning that is concerned with spoken and written
+language. In this work, the most influential ones of the last decade are
+going to be presented. Starting with word embeddings, which efficiently
+model word semantics. Encoder-decoder architectures represent another
+step forward by making minimal assumptions about the sequence structure.
+Next, the attention mechanism allows human-like focus shifting to put
+more emphasis on more relevant parts. Then, the transformer applies
+attention in its architecture to process the data non-sequentially,
+which boosts the performance on language tasks to exceptional levels. At
+last, the most influential transformer architectures are recognized
+before a few current topics in natural language processing are
+discussed.</p>
+</div>
+<div id="word-embeddings" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.2</span> Word Embeddings<a href="c01-00-intro-modalities.html#word-embeddings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As mentioned in the introduction, one of the earlier advances in NLP is
+learning word internal representations. Before that, a big problem with
+text modelling was its messiness, while machine learning algorithms
+undoubtedly prefer structured and well-defined fixed-length inputs. On a
+granular level, the models rather work with numerical than textual data.
+Thus, by using very basic techniques like one-hot encoding or
+bag-of-words, a text is converted into its equivalent vector of numbers
+without losing information.<br />
+In the example depicting one-hot encoding (see
+<a href="#fig:one-hot" reference-type="ref" reference="fig:one-hot">1</a>), there
+are ten simple words and the dark squares indicate the only index with a
+non-zero value.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/onehot_pilehvar_p10.png" alt="Ten one-hot encoded words (Source: Pilehvar and Camacho-Collados (2021))." width="70%" />
+<p class="caption">
+(#fig:fig:onehot)Ten one-hot encoded words (Source: <span class="citation">Pilehvar and Camacho-Collados (<a href="#ref-Pilehvar2021" role="doc-biblioref">2021</a>)</span>).
+</p>
+</div>
 
+<p>In contrast, there are multiple non-zero values while using
+bag-of-words, which is another way of extracting features from text to
+use in modelling where we measure if a word is present from a vocabulary
+of known words. It is called bag-of-words because the order is
+disregarded here.<br />
+Treating words as atomic units has some plausible reasons, like
+robustness and simplicity. It was even argued that simple models on a
+huge amount of data outperform complex models trained on less data.
+However, simple techniques are problematic for many tasks, e.g. when it
+comes to relevant in-domain data for automatic speech recognition. The
+size of high-quality transcribed speech data is often limited to just
+millions of words, so simply scaling up simpler models is not possible
+in certain situations and therefore more advanced techniques are needed.
+Additionally, thanks to the progress of machine learning techniques, it
+is realistic to train more complex models on massive amounts of data.
+Logically, more complex models generally outperform basic ones. Other
+disadvantages of classic word representations are described by the curse
+of dimensionality and the generalization problem. The former becomes a
+problem due to the growing vocabulary equivalently increasing the
+feature size. This results in sparse and high-dimensional vectors. The
+latter occurs because the similarity between words is not captured.
+Therefore, previously learned information cannot be used. Besides,
+assigning a distinct vector to each word is a limitation, which becomes
+especially obvious for languages with large vocabularies and many rare
+words.<br />
+To combat the downfalls of simple word representations, word embeddings
+enable to use efficient and dense representations in which similar words
+have a similar encoding. So words that are closer in the vector space
+are expected to be similar in meaning. An embedding is hereby defined as
+a vector of floating point values (with the length of the vector being a
+hyperparameter). The values for the embedding are trainable parameters
+which are learned similarly to a model learning the weights for a dense
+layer. The dimensionality of the word representations is typically much
+smaller than the number of words in the dictionary. For example,
+<span class="citation">(Mikolov, Chen, et al. <a href="#ref-mikolov2013efficient" role="doc-biblioref">2013</a><a href="#ref-mikolov2013efficient" role="doc-biblioref">b</a>)</span> called dimensions between 50-100 modest for more than a
+few hundred million words. For small data sets, dimensionality for the
+word vectors could start at 8 and go up to 1024 for larger data sets. It
+is expected that higher dimensions can rather pick up intricate
+relationships between words if given enough data to learn from.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/embed_pilehvar_p11.png" alt="Three-dimensional word embeddings (Source: Pilehvar and Camacho-Collados (2021))." width="70%" />
+<p class="caption">
+(#fig:fig:embedPilehvarP11)Three-dimensional word embeddings (Source: <span class="citation">Pilehvar and Camacho-Collados (<a href="#ref-Pilehvar2021" role="doc-biblioref">2021</a>)</span>).
+</p>
+</div>
+
+<p>For any NLP tasks, it is sensible to start with word embeddings because
+it allows to conveniently incorporate prior knowledge into the model and
+can be seen as a basic form of transfer learning. It is important to
+note that even though embeddings attempt to represent the meaning of
+words and do that to an extent, the semantics of the word in a given
+context cannot be captured. This is due to the words having static
+precomputed representations in traditional embedding techniques. Thus,
+the word "bank" can either refer to a financial institution or a river
+bank. Contextual embedding methods offer a solution, but more about them
+will follow later.<br />
+It should be noted that words can have various degrees of similarity. In
+the context of inflectional languages, it becomes obvious because words
+are adjusted to articulate grammatical categories. For example, in a
+subspace of the original vector, nouns that have similar endings can be
+found. However, it even exceeds simple syntactic regularities. With
+straightforward operations on the word vectors, it can be displayed that
+vector (“King”) - vector (“Man”) + vector (“Woman”) equals a vector that
+is closest in vector space (and therefore in meaning) to the word
+"Queen". A simple visualization of this relationship can be seen in
+the left graph below (see ). The three coordinate systems are
+representations of higher dimensions that are depicted in this way via
+dimension reduction techniques. Furthermore, the verb-to-tense
+relationship is expressed in the middle graphic, which extends the
+insight from before referring to the word endings being similar because
+in this instance the past tenses of both verbs walking and swimming are
+not similar in structure. Additionally, on the right side of the figure,
+there is a form of the commonly portrayed and easily understood
+Country-Capital example (see <span class="citation">(Mikolov, Chen, et al. <a href="#ref-mikolov2013efficient" role="doc-biblioref">2013</a><a href="#ref-mikolov2013efficient" role="doc-biblioref">b</a>)</span>).</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/embed_vectors_google.png" alt="Three types of similarities as word embeddings (Source: Google (2022))." width="100%" />
+<p class="caption">
+(#fig:fig:embedVectors)Three types of similarities as word embeddings (Source: <span class="citation">Google (<a href="#ref-Google2022" role="doc-biblioref">2022</a>)</span>).
+</p>
+</div>
+
+<!--
+![Three types of similarities as word embeddings. Source:
+[@Google2022].](embed_vectors_google.png){#fig:embed_vectors
+width="100%"}
+-->
+<p>Another way of using vector representations of words is in the field of
+translations. It has been presented that relations can be drawn from
+feature spaces of different languages. In below, the distributed word
+representations of numbers between English and Spanish are compared. In
+this case, the same numbers have similar geometric arrangements, which
+suggests that mapping linearly between vector spaces of languages is
+feasible. Applying this simple method for a larger set of translations
+in English and Spanish led to remarkable results - achieving almost 90 %
+precision.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/embed_transl_mikolova_p2.png" alt="Representations of numbers in English and Spanish (Source: Mikolov, Le, and Sutskever (2013))." width="90%" />
+<p class="caption">
+(#fig:fig:embedTransl)Representations of numbers in English and Spanish (Source: <span class="citation">Mikolov, Le, and Sutskever (<a href="#ref-Mikolov2013a" role="doc-biblioref">2013</a>)</span>).
+</p>
+</div>
+
+<p>This technique was then used for other experiments. One use case is the
+detection of dictionary errors. Taking translations from a dictionary
+and computing their geometric distance returns a confidence measure.
+Closely evaluating the translations with low confidence and outputting
+an alternative (one that is closest in vector space) results in a plain
+way to assess dictionary translations. Furthermore, training the word
+embeddings on a large corpora makes it possible to give sensible
+out-of-dictionary predictions for words. This was tested by randomly
+removing a part of the vocabulary before. Taking a look at the
+predictions revealed that they were often to some extent related to the
+translations with regard to meaning and semantics. Despite the
+accomplishments in other tasks, translations between distant languages
+exposed shortcomings of word embeddings. For example, the accuracy for
+translations between English and Vietnamese seemed significantly lower.
+This can be ascribed to both languages not having a good one-to-one
+correspondence because the concept of a word is different than in
+English. In addition, the used Vietnamese model contains numerous
+synonyms, which complicates making exact predictions (see
+<span class="citation">(Mikolov, Le, and Sutskever <a href="#ref-Mikolov2013a" role="doc-biblioref">2013</a>)</span>).<br />
+Turning the attention to one of the most impactful embedding techniques,
+word2vec. It was proposed by <span class="citation">(Mikolov, Chen, et al. <a href="#ref-mikolov2013efficient" role="doc-biblioref">2013</a><a href="#ref-mikolov2013efficient" role="doc-biblioref">b</a>)</span> and is not a singular
+algorithm. It can rather be seen as a family of model architectures and
+optimizations to learn word representations. Word2vec’s popularity also
+stems from its success on multiple downstream natural language
+processing tasks. It has a very simple structure which is based on a
+basic feed forward neural network. They published multiple papers (see
+<span class="citation">(Mikolov, Chen, et al. <a href="#ref-mikolov2013efficient" role="doc-biblioref">2013</a><a href="#ref-mikolov2013efficient" role="doc-biblioref">b</a>)</span>, <span class="citation">(Mikolov, Le, and Sutskever <a href="#ref-Mikolov2013a" role="doc-biblioref">2013</a>)</span>, <span class="citation">(Mikolov, Sutskever, et al. <a href="#ref-Mikolov2013b" role="doc-biblioref">2013</a>)</span>) that are stemming
+around two different but related methods for learning word embeddings
+(see ). Firstly, the Continuous bag-of-words model aims to predict the
+middle word based on surrounding context words. Hence, it considers
+components before and after the target word. As the order of words in
+the context is not relevant, it is called a bag-of-words model.
+Secondly, the Continuous skip-gram model only considers the current word
+and predicts others within a range before and after it in the same
+sentence. Both of the models use a softmax classifier for the output
+layer.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/embed_arch_mikolov_p5.png" alt="CBOW and Skip-gram architecture (Source: Mikolov, Chen, et al. (2013b))." width="85%" />
+<p class="caption">
+(#fig:fig:embedArch)CBOW and Skip-gram architecture (Source: <span class="citation">Mikolov, Chen, et al. (<a href="#ref-mikolov2013efficient" role="doc-biblioref">2013</a><a href="#ref-mikolov2013efficient" role="doc-biblioref">b</a>)</span>).
+</p>
+</div>
+
+<p>Then, <span class="citation">(Bojanowski et al. <a href="#ref-Bojanowski2016" role="doc-biblioref">2016</a>)</span> built on skip-gram models by accounting for the
+morphology (internal structure) of words. A different classical
+embedding architecture that has to be at least mentioned is the GloVe
+model, which does not use a neural network but incorporates local
+context information with global co-occurrence statistics.</p>
+</div>
+<div id="encoder-decoder" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.3</span> Encoder-Decoder<a href="c01-00-intro-modalities.html#encoder-decoder" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The field of natural language processing is concerned with a variety of
+different tasks surrounding text. Depending on the type of NLP problem,
+the network may be confronted with variable length sequences as input
+and/or output. This is the case for many compelling applications, such
+as question answering, dialogue systems or machine translation. In the
+following, many examples will explore machine translations in more
+detail, since it is a major problem domain. Regarding translation tasks,
+it becomes obvious that input sequences need to be mapped to output
+sequences of different lengths. To manage this type of input and output,
+a design with two main parts could be useful. The first one is called
+the encoder because, in this part of the network, a variable length
+input sequence is transformed into a state with a fixed state. Next, the
+second component called the decoder maps the encoded state to an output
+of a variable length sequence. As a whole, it is known as an
+encoder-decoder or sequence-to-sequence architecture and has become an
+effective and standard approach for many applications which even
+recurrent neural networks with gated hidden units have trouble solving
+successfully. Deep RNNs may have a chance, but different architectures
+like encoder-decoder have proven to be the most effective. It can even
+deal with different word orders and active, as well as passive voice
+(<span class="citation">(Sutskever, Vinyals, and Le <a href="#ref-Sutskever2014" role="doc-biblioref">2014</a>)</span>). A simplified example of the encoder-decoder model
+can be seen in .</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/encdec_arch1_deepl.png" alt="Translation through simplified seq2seq model (Source: Manning, Goldie, and Hewitt (2022))." width="85%" />
+<p class="caption">
+(#fig:fig:arch1Encdec)Translation through simplified seq2seq model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+</p>
+</div>
+
+<p>Before going through the equations quantifying the concepts, it makes
+sense to examine the sequence-to-sequence design closer by studying
+proposed by <span class="citation">(Cho et al. <a href="#ref-Cho2014" role="doc-biblioref">2014</a>)</span>. An encoder-RNN processes the input sequence of
+length <span class="math inline">\(n_x\)</span> and computes a fixed-length context vector C, which is
+usually the final hidden state of the encoder or a simple function of
+the hidden states. After the input sequence is processed, it is added to
+the hidden state and passed forward in time through the recurrent
+connections between the hidden states in the encoder. Despite the
+context vector usually being a simple function of the last hidden state,
+its role cannot be underestimated. Specifically, the encoded state
+summarizes important information from the input sequence, e.g. the
+intent in a question answering task or the meaning of a text in the case
+of machine translation. After the context is passed to every hidden
+state of the decoder, the decoder RNN uses this information to produce
+the target sequence of length <span class="math inline">\(n_y\)</span>, which can of course vary from
+<span class="math inline">\(n_x\)</span>.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/encdec_arch_Cho.png" alt="Encoder-decoder architecture (Source: Cho et al. (2014))." width="56%" />
+<p class="caption">
+(#fig:fig:encdecArchCho)Encoder-decoder architecture (Source: <span class="citation">Cho et al. (<a href="#ref-Cho2014" role="doc-biblioref">2014</a>)</span>).
+</p>
+</div>
+
+<p>At the latest through the above illustration, it is clear that the
+decoder is particularly interesting to look at in the form of equations.
+The notations mainly follow <span class="citation">(Cho et al. <a href="#ref-Cho2014" role="doc-biblioref">2014</a>)</span>. The decoder is another type of
+RNN which is trained to predict the target based on the hidden state at
+the last time step. However, unlike regular RNNs, it is also conditioned
+on the output of the last time step (<span class="math inline">\(y_{t-1}\)</span>) and a summary of the
+input c. Therefore, the hidden state of the decoder is computed by:</p>
+<p><span class="math display">\[h_d^{[t]} = f(h_d^{[t-1]},y^{[t-1]},c).
+    \label{eqn:h_dec}\]</span></p>
+<p>Similarly, each conditional probability is given by the following, where
+f is a non-linear activation function (and must produce probabilities in
+, e.g. the softmax function):</p>
+<p><span class="math display">\[P(y^{[t]}|y^{[1]},...,y^{[t-1]},c) = f(h_d^{[t]}, y^{[t-1]}, c).     \label{eqn:P_dec}\]</span></p>
+<p>The two parts are jointly trained to maximize the conditional
+log-likelihood, where <span class="math inline">\(\theta\)</span> denotes the set of model parameters and
+<span class="math inline">\((x_n, y_n)\)</span> is an (input sequence, output sequence) pair from the
+training set with size <span class="math inline">\(N\)</span>:</p>
+<p><span class="math display">\[\max_\theta \frac{1}{N} \displaystyle \sum_{n=1}^{N} \log p_{\theta}(y_n|x_n).
+    \label{eqn:train_dec}\]</span></p>
+<p>The best probability is usually found by using the beam search
+algorithm. The core idea of it is that on each step of the decoder, we
+keep track of the <span class="math inline">\(k\)</span> most probable partial translations (which are
+called hypotheses).<br />
+Examining the translation presented in with hidden units unrolled
+through time could look like in . In particular, multiple hidden layers
+are recommended by the researchers. The idea is that lower layers
+compute lower-level features and higher layers compute higher-level
+features.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/encdec_arch2_deepl.png" alt="Translation through seq2seq model (Source: Manning, Goldie, and Hewitt (2022))." width="70%" />
+<p class="caption">
+(#fig:fig:encdecArch2)Translation through seq2seq model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+</p>
+</div>
+
+<p>Gated recurrent networks, especially long short-term memory networks,
+have been found to be effective in both components of the
+sequence-to-sequence architecture. Furthermore, it was revealed that
+deep LSTMs significantly outperform shallow LSTMs. Each additional layer
+reduced perplexity by nearly 10%, possibly due to their much larger
+hidden state. For example, <span class="citation">(Sutskever, Vinyals, and Le <a href="#ref-Sutskever2014" role="doc-biblioref">2014</a>)</span> used deep LSTMs with 4
+layers and 1000 cells at each layer for 1000-dimensional word
+embeddings. Thus, in total, 8000 real numbers are used to represent a
+sentence. For simplification, the neural networks are in the following
+referred to as RNNs which is not contradicting the insights of this
+paragraph as LSTMs are a type of gated RNNS (<span class="citation">(Sutskever, Vinyals, and Le <a href="#ref-Sutskever2014" role="doc-biblioref">2014</a>)</span>).</p>
+</div>
+<div id="attention" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.4</span> Attention<a href="c01-00-intro-modalities.html#attention" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Although encoder-decoder architectures simplified dealing with variable
+length sequences, they also caused complications. Due to its design, the
+encoding of the source sentence is a single vector representation
+(context vector). The problem is that this state must compress all
+information about the source sentence in a single vector and is commonly
+referred to as the bottleneck problem. To be precise, the entire
+semantics of arbitrarily long sentences need to be wrapped into a single
+hidden state. Moreover, it constitutes a different learning problem
+because the information needs to be passed between numerous time steps.
+This leads to vanishing gradients within the network as a consequence of
+factors less than 1 multiplied with each other at every point. To
+illustrate, the last sentence is an ideal example of one in which an
+encoder-decoder approach could have difficulty coping. In particular, if
+the sentences are longer than the ones in the training corpus
+(<span class="citation">(Manning, Goldie, and Hewitt <a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).<br />
+Due to the aforementioned reasons, an extension to the
+sequence-to-sequence architecture was proposed by <span class="citation">(Bahdanau, Cho, and Bengio <a href="#ref-Bahdanau2014" role="doc-biblioref">2014</a>)</span>, which
+learns to align and translate jointly. For every generated word, the
+model scans through some positions in the source sentence where the most
+relevant information is located. Afterwards, based on the context around
+and the previously generated words, the model predicts the target word
+for the current time step. This approach is called attention, as it
+emulates human-like (cognitive) attention. As a result of directly
+looking at the source and bypassing the bottleneck, it provides a
+solution to the problem. Then, it mitigates the vanishing gradient
+problem, since there is now a shortcut to faraway states. Consequently,
+incorporating the attention mechanism has been shown to considerably
+boost the performance of models on NLP tasks.<br />
+A walkthrough of the example below should resolve any outstanding
+questions regarding the procedure of the attention mechanism. The source
+sentence is seen on the bottom left, which is given in French and acts
+as the input for the encoder-RNN (in red). Then, the attention scores
+(in blue) are computed by taking the dot product between the previous
+output word and input words. Next, the softmax function turns the scores
+into a probability distribution (in pink). They are used to take a
+weighted sum of the encoder’s hidden states and form the attention
+output, which mostly contains information from the hidden states that
+received high attention. Afterwards, the attention output is
+concatenated with the decoder hidden state (in green), which is applied
+to compute the decoder output as before. In some scenarios, the
+attention output is also fed into the decoder (along with the usual
+decoder input). This specific example was chosen because "entarter"
+means "to hit someone with a pie" and is therefore a word that needs
+to be translated with many words. As a consequence of no existing direct
+equivalents for this phrase, it is expected that there is not only one
+nearly non-zero score. In this snapshot, the attention distribution can
+be seen to have two significant contributors.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/attention_ex_stanford.png" alt="Translation process with attention mechanism (Source: Manning, Goldie, and Hewitt (2022))." width="90%" />
+<p class="caption">
+(#fig:fig:attentionExStanford)Translation process with attention mechanism (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+</p>
+</div>
+
+<p>The following equations aim to compactly represent the relations brought
+forward in the last paragraphs and mainly follow <span class="citation">(Manning, Goldie, and Hewitt <a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>. The
+attention scores <span class="math inline">\(e^{[t]}\)</span> are computed by scalarly combining the hidden
+state of the decoder with all of the hidden states of the encoder:</p>
+<p><span class="math display">\[e^{[t]} = [(h_{d}^{[t]})^T h_{e}^{[1]}, \ldots  , (h_{d}^{[t]})^T h_{e}^{[N]} ].\]</span></p>
+<p>Besides the basic dot-product attention, there are also other ways to
+calculate the attention scores, e.g. through multiplicative or additive
+attention. Although they will not be further discussed at this point, it
+makes sense to at least mention them. Then, applying the softmax to the
+scalar scores results in the attention distribution <span class="math inline">\(\alpha^{[t]}\)</span>, a
+probability distribution whose values sum up to 1:</p>
+<p><span class="math display">\[\alpha^{[t]} = softmax(e^{[t]}).\]</span></p>
+<p>Next, the attention output <span class="math inline">\(a^{[t]}\)</span> is obtained by the attention
+distribution acting as a weight for the encoder hidden states:</p>
+<p><span class="math display">\[a^{[t]} = \sum_{i=1}^{N} \alpha_i^{[t]} h_{e,i}.\]</span></p>
+<p>Concatenating attention output with decoder hidden state and proceeding
+as in the non-attention sequence-to-sequence model are the final steps:</p>
+<p><span class="math display">\[o^{[t]} = f(a^{[t]} h_d^{[t]}).\]</span></p>
+<p>By visualizing the attention distribution, also called alignments (see
+<span class="citation">(Bahdanau, Cho, and Bengio <a href="#ref-Bahdanau2014" role="doc-biblioref">2014</a>)</span>), it is easy to observe what the decoder was focusing on
+and understand why it chose a specific translation. The x-axis of the
+plot of below corresponds to the words in the source sentence (English)
+and the y-axis to the words in the generated translation (French). Each
+pixel shows the weight of the source word for the respective target word
+in grayscale, where 0 is black and 1 is white. As a result, which
+positions in the source sentence were more relevant when generating the
+target word becomes apparent. As expected, the alignment between English
+and French is largely monotonic, as the pixels are brighter, and
+therefore the weights are higher along the main diagonal of the matrix.
+However, there is an exception because adjectives and nouns are
+typically ordered differently between the two languages. Thus, the model
+(correctly) translated "European Economic Area" into "zone économique
+européene". By jumping over two words ("European" and "Economic"),
+it aligned "zone" with "area". Then, it looked one word back twice
+to perfect the phrase "zone économique européene". Additional
+qualitative analysis has shown that the model alignments are
+predominantly analogous to our intuition.<br />
+</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/attention_focus_bahdanau.png" alt="Attention alignments (Source: Bahdanau, Cho, and Bengio (2014))." width="50%" />
+<p class="caption">
+(#fig:fig:attentionfocus)Attention alignments (Source: <span class="citation">Bahdanau, Cho, and Bengio (<a href="#ref-Bahdanau2014" role="doc-biblioref">2014</a>)</span>).
+</p>
+</div>
+
+</div>
+<div id="transformer" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.5</span> Transformer<a href="c01-00-intro-modalities.html#transformer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For this subsection, <span class="citation">(Manning, Goldie, and Hewitt <a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span> constitutes the main source.<br />
+RNNs are unrolled from one side to the other. Thus, from left to right
+and right to left. This encodes linear locality, which is a useful
+heuristic because nearby words often affect each other’s meaning. But
+how is it when distant words need to interact with each other? For
+instance, when we mention a person at the beginning of a text portion
+and refer back to them only at the very end, the whole text in between
+needs to be tracked back (see below). Hence, RNNs take O(sequence
+length) steps for distant word pairs to interact. Due to gradient
+problems, it is therefore hard to learn long-distance dependencies. In
+addition, the linear order is ingrained. Even though, as known, the
+sequential structure does not tell the whole story.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/transformer_rnnlim_stanford.png" alt="Sequential processing of recurrent model (Source: Manning, Goldie, and Hewitt (2022))." width="70%" />
+<p class="caption">
+(#fig:fig:tfrnnlimstanford)Sequential processing of recurrent model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+</p>
+</div>
+
+<p>GPUs can perform multiple calculations simultaneously and could help to
+reduce the execution time of the deep learning algorithm massively.
+However, forward and backward passes lack parallelizability in recurrent
+models and have O(sequence length). To be precise, future hidden states
+cannot be computed in full before past states have been computed. This
+inhibits training on massive data sets. indicates the minimum number of
+steps before the respective state can be calculated.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/transformer_rnnlim2_stanford.png" alt="Sequential processing of recurrent model with number of steps indicated (Source: Manning, Goldie, and Hewitt (2022))." width="70%" />
+<p class="caption">
+(#fig:fig:tfrnnlim2stanford)Sequential processing of recurrent model with number of steps indicated (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+</p>
+</div>
+
+<p>After proving that attention dramatically increases performance, google
+researchers took it further and based transformers solely on attention,
+so without any RNNs. For this reason, the paper in which they were
+introduced is called "Attention is all you need". Spoiler: It is not
+quite all we need, but more about that on the following pages.
+Transformers have achieved great results on multiple settings such as
+machine translation and document generation. Their parallelizability
+allows for efficient pretraining and leads them to be the standard model
+architecture. In fact, all top models on the popular aggregate benchmark
+GLUE are pretrained and Transformer-based. Moreover, they have even
+shown promise outside of NLP, e.g. in Image Classification, Protein
+Folding and ML for Systems (see <span class="citation">(Dosovitskiy et al. <a href="#ref-dosovitskiy2020image" role="doc-biblioref">2020</a>)</span>, <span class="citation">(Jumper et al. <a href="#ref-Jumper2021" role="doc-biblioref">2021</a>)</span>,
+<span class="citation">(Zhou et al. <a href="#ref-Zhou2020" role="doc-biblioref">2020</a>)</span>, respectively).<br />
+If recurrence has its flaws, another adjustment of the attention
+mechanism might be beneficial. Until now, it was defined from decoder to
+encoder. Alternatively, attention could also be from one state to all
+states in the same set. This is the definition of self-attention, which
+is encoder-encoder or decoder-decoder attention (instead of
+encoder-decoder) and represents a cornerstone of the transformer
+architecture. depicts this process in which each word attends to all
+words in the previous layer. Even though in practice, most arrows are
+omitted eventually.<br />
+</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/transformer_self-attention_stanford.png" alt="Connections of classic attention mechanism (Source: Manning, Goldie, and Hewitt (2022))." width="70%" />
+<p class="caption">
+(#fig:fig:tfselfa)Connections of classic attention mechanism (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+</p>
+</div>
+
+<p>Thinking of self-attention as an approximate hash table eases
+understanding its intuition. To look up a value, queries are compared
+against keys in a table. In a hash table, which is shown on the left
+side of , there is exactly one key-value pair for each query (hash). In
+contrast, in self-attention, each key is matched to varying degrees by
+each query. Thus, a sum of values weighted by the query-key match is
+returned.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/transformer_hash-table_stanford.png" alt="(ref:tfhashtable)" width="70%" />
+<p class="caption">
+(#fig:fig:tfhashtable)(ref:tfhashtable)
+</p>
+</div>
+<p>(ref:tfhashtable) Comparison of classic attention mechanism with self-attention with
+hash tables (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).</p>
+<p>The process briefly described in the last paragraph can be summarized by
+the following steps that mainly follow <span class="citation">(Manning, Goldie, and Hewitt <a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>. Firstly, deriving
+query, key, and value for each word <span class="math inline">\(x_i\)</span> is necessary:
+<span class="math display">\[q_i = W^Q x_i , \hspace{3mm} k_i = W^K x_i, \hspace{3mm} v_i = W^V x_i\]</span></p>
+<p>Secondly, the attention scores have to be calculated:</p>
+<p><span class="math display">\[e_{ij} = q_i k_j\]</span></p>
+<p>Thirdly, to normalize the attention scores, the softmax function is
+applied:</p>
+<p><span class="math display">\[\alpha_{ij} = softmax( e_{ij} ) = \frac{exp(e_{ij})}{\displaystyle \sum_k e_{ij}}\]</span></p>
+<p>Lastly, taking the weighted sum of the values results in obtaining the
+attention output:</p>
+<p><span class="math display">\[a_{i} = \displaystyle \sum_j \alpha_{ij} v_j\]</span></p>
+<p>Multiple advantages of incorporating self-attention instead of
+recurrences have been revealed. Since all words interact at every layer,
+the maximum interaction distance is O(1) and is a crucial upgrade. In
+addition, the model is deeply bidirectional because each word attends to
+the context in both directions. As a result of these advances, all word
+representations per layer can be computed in parallel. Nevertheless,
+some issues have to be discussed. Attention does no more than weighted
+averaging. So without neural networks, there are no element-wise
+non-linearities. Their importance cannot be understated and shows why
+attention is not actually all that is needed. Furthermore,
+bidirectionality is not always desired. In language modelling, the model
+should specifically be not allowed to simply look ahead and observe more
+than the objective allows. Moreover, the word order is no longer
+encoder, and it is bag-of-words once again.<br />
+Fortunately, the previously mentioned weaknesses have been addressed for
+the original transformer-architecture proposed by <span class="citation">(Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. <a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>. The
+first problem can be easily fixed by applying a feed forward layer to
+the output of attention. It provides non-linear activation as well as
+extra expressive power. Then, for cases in which bidirectionality
+contradicts the learning objective, future states can be masked so that
+attention is restricted to previous states. Moreover, the loss of the
+word can be corrected by adding position representations to the inputs.<br />
+The more complex deep learning models are, the closer they become to
+model the complexity of the real world. That is why the transformer
+encoder and decoder consist of many layers of self-attention with a feed
+forward network, which is necessary to extract both syntactic and
+semantic features from sentences. Otherwise, using word embeddings,
+which are semantically deep representations between words, would be
+unnecessary (see <span class="citation">(Sejnowski <a href="#ref-Sejnowski2020" role="doc-biblioref">2020</a>)</span>). At the same time, training deep
+networks can be troublesome. Therefore, some tricks are applied to help
+with the training process.<br />
+One of them is to pass the "raw" embeddings directly to the next
+layer, which prevents forgetting or misrepresent important information
+as it is passed through many layers. This process is called residual
+connections and is also believed to smoothen the loss landscape.
+Additionally, it is problematic to train the parameters of a given layer
+when its inputs keep shifting because of layers beneath. Reducing
+uninformative variation by normalizing within each layer to mean zero
+and standard deviation to one weakens this effect. Another challenge is
+caused by the dot product tending to take on extreme values because of
+the variance scaling with increasing dimensionality <span class="math inline">\(d_k\)</span>. It is solved
+by Scaled Dot Product Attention (seen in below), which consists of
+computing the dot products of the query with its keys, dividing them by
+the dimension of keys <span class="math inline">\(\sqrt{d_k}\)</span>, and applying the softmax function
+next to receive the weights of the values.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/transformers_scaled-dot-attention2_vaswani.png" alt="Scaled dot-product attention (Source: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (2017b))." width="18%" />
+<p class="caption">
+(#fig:fig:tfsdpa)Scaled dot-product attention (Source: <span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (<a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>).
+</p>
+</div>
+
+<p>Attention learns where to search for relevant information. Surely,
+attending to different types of information in a sentence at once
+delivers even more promising results. To implement this, the idea is to
+have multiple attention heads per layer. While one attention head might
+learn to attend to tense information, another might learn to attend to
+relevant topics. Thus, each head focuses on separate features, and
+construct value vectors differently. Multi-headed self-attention is
+implemented by simply creating <span class="math inline">\(n\)</span> independent attention mechanisms and
+combining their outputs.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/transformers_multi-head-attention2_vaswani.png" alt="Multi-head attention (Source: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (2017b))." width="34%" />
+<p class="caption">
+(#fig:fig:tfmha)Multi-head attention (Source: <span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (<a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>).
+</p>
+</div>
+
+<p>At this point, every part that constitutes the encoder in the
+transformer architecture has been introduced (see ). First, positional
+encodings are included in the input embeddings. There are multiple
+options to realize this step, e.g. through sinusoids. The multi-head
+attention follows, which was just mentioned. "Add &amp; Norm" stands for
+the residual connections and the normalization layer. A feed forward
+network follows, which is also accompanied by residual connections and a
+normalization layer. All of it is repeated <span class="math inline">\(n\)</span> times. For the decoder,
+the individual components are similar. One difference is that the
+outputs go through masked multi-head attention before multi-head
+attention and the feed forward network (with residual connections and
+layer normalization). It is critical to ensure that the decoder cannot
+peek at the future. To execute this, the set of keys and queries could
+be modified at every time step to only include past words. However, it
+would be very inefficient. Instead, to enable parallelization, future
+states are masked by setting the attention scores to <span class="math inline">\(-\infty\)</span>. After
+the decoder process is also repeated <span class="math inline">\(n\)</span> times, a linear layer is added
+to project the embeddings into a larger vector that has the length of
+the vocabulary size. At last, a softmax layer generates a probability
+distribution over the possible words.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/transformer_arch_vaswani.png" alt="Transformer architecture (Source: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (2017b))." width="55%" />
+<p class="caption">
+(#fig:fig:tfarch)Transformer architecture (Source: <span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (<a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>).
+</p>
+</div>
+
+</div>
+<div id="transformer-architectures-bert-t5-gpt-3" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.6</span> Transformer architectures: BERT, T5, GPT-3<a href="c01-00-intro-modalities.html#transformer-architectures-bert-t5-gpt-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>"You shall know a word by the company it keeps", an adage by linguist
+John Rupert Firth from 1957 goes. Even earlier, in 1935, he stated that
+"... the complete meaning of a word is always contextual, and no study
+of meaning apart from a complete context can be taken seriously". The
+quotes of the famous linguist sum up the motivation to learn word
+meaning and context perfectly. Many years later, in 2017, pretraining
+word embeddings started. However, some complications arise from solely
+pretraining the first part of the network. For instance, to teach the
+model all contextual aspects of language, the training data for the
+downstream task (e.g. question answering) needs to be adequate.
+Additionally, most of the parameters are usually randomly initialized.
+presents the network discussed, in which the word "movie" gets the
+same embedding irrespective of the sentence it appears in. On the
+contrary, parameters in modern NLP architectures are initialized via
+pretraining (see ). Furthermore, during the pretraining, certain input
+parts are hidden to train the model to reconstruct them. This leads to
+building suitable parameter initializations and robust probability
+distributions over language.<br />
+</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/transformer_pretrain_stanford.png" alt="Partly pre-trained model (Source: Manning, Goldie, and Hewitt (2022))." width="80%" />
+<p class="caption">
+(#fig:fig:tfpretrain)Partly pre-trained model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+</p>
+</div>
+
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/transformer_pretrain2_stanford.png" alt="Jointly pre-trained model (Source: Manning, Goldie, and Hewitt (2022))." width="80%" />
+<p class="caption">
+(#fig:fig:tfpretrain2)Jointly pre-trained model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+</p>
+</div>
+
+<p>Classic machine learning does not match human learning. Specifically
+referring to training a model from scratch, and only being able to learn
+from the training data. In contrast, human beings already have prior
+knowledge they can apply to new tasks. Transfer learning emulates this
+by using an already trained network. The main idea is to use a model
+that was pretrained on a hard, general language understanding task using
+endless amounts of data, so that, it eventually contains the best
+possible approximation of language understanding. Afterwards, the
+training data for the new task is applied to slightly modify the weights
+of the pretrained model, which is referred to as fine-tuning
+(<span class="citation">(Manning, Goldie, and Hewitt <a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).<br />
+The specific architecture of a transformer model affects the type of
+pre-training, and favourable use cases. In the following, three
+different but very influential transformer architectures will be
+discussed. BERT can be seen as stacked encoders (<span class="citation">(Devlin et al. <a href="#ref-Devlin2018" role="doc-biblioref">2018</a><a href="#ref-Devlin2018" role="doc-biblioref">c</a>)</span>), T5 aims
+to combine the good parts of encoders and decoders (<span class="citation">(Raffel et al. <a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">b</a>)</span>),
+while GPT are stacked decoders (<span class="citation">(T. Brown et al. <a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>).</p>
+<div id="bert" class="section level4 hasAnchor">
+<h4><span class="header-section-number">2.1.6.1</span> BERT<a href="c01-00-intro-modalities.html#bert" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Transfer learning led to state-of-the-art results in natural language
+processing. One of the architectures that led the way was BERT, which
+stands for Bidirectional Encoder Representations from Transformers. It
+receives bidirectional context, which is why it is not a natural fit for
+language modelling. To train it on this objective regardless, masked
+language modelling was proposed. The main idea is to cover up a fraction
+of the input words and let the model predict them. In this way, the LM
+objective can be used while sustaining connections to words in the
+future. The masked LM for BERT randomly predicts 15% of all word tokens
+in each sequence. Of those, 80% are replaced by the <span class="math display">\[MASK\]</span> token, 10%
+by a random token, and 10% remain unchanged. Moreover, because the
+masked words are not even seen in the fine-tuning phase, the model
+cannot get complacent and relies on strong representations of non-masked
+words. Initially, BERT had an additional objective of whether one
+sentence follows another, which is known as next sentence prediction.
+However, it was dropped in later work due to having an insignificant
+effect.<br />
+BERT is hugely versatile and was greatly popular after its release.
+Fine-tuning BERT led to outstanding results on a variety of
+applications, including question answering, sentiment analysis and text
+summarization. Thanks to its design, if the task involves generating
+sequences, pretrained decoders outperform pretrained encoders like BERT.
+Even though, it would not be recommended for autoregressive generation,
+up to this day, "small" models like BERT are applied as general tools
+for numerous tasks.</p>
+</div>
+<div id="t5" class="section level4 hasAnchor">
+<h4><span class="header-section-number">2.1.6.2</span> T5<a href="c01-00-intro-modalities.html#t5" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The Text-To-Text Transfer Transformer (T5) is a new model that can be
+regarded as an application of the insights gathered by an extensive
+empirical study searching for the best transfer learning techniques. It
+is pretrained on Colossal Clean Crawled Corpus (C4), an open-source
+dataset. <span class="citation">(Raffel et al. <a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">b</a>)</span> found that the best pretraining objective to use
+for the encoder component was span corruption. In short, different
+length word groups (spans) are replaced with unique placeholders, and
+let the model decode them. Text preprocessing is necessary for its
+implementation. For the decoder, it is still a language modelling task.
+Compared to models like BERT, which can only output a span of the input
+or a class label, T5 reframes all NLP tasks into a unified text-to-text
+format, where inputs and outputs always consist of text strings. As a
+result, the same model, loss function, and hyperparameters can be used
+on any NLP task, such as machine translation, document summarization,
+question answering, and classification tasks like sentiment analysis. T5
+can even be applied to regression tasks by training it to predict the
+string representation of a number (and not the number itself). Examples
+of potential use cases are depicted in below.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/t5_stanford.png" alt="Applications of T5 model (Source: Raffel et al. (2019b))." width="80%" />
+<p class="caption">
+(#fig:fig:t5)Applications of T5 model (Source: <span class="citation">Raffel et al. (<a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">b</a>)</span>).
+</p>
+</div>
+
+</div>
+<div id="gpt-3" class="section level4 hasAnchor">
+<h4><span class="header-section-number">2.1.6.3</span> GPT-3<a href="c01-00-intro-modalities.html#gpt-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>As previously stated, the neural architecture influences the type of
+pretraining. The original GPT architecture consists of a Transformer
+decoder with 12 layers (see <span class="citation">(Radford et al. <a href="#ref-Radford2018" role="doc-biblioref">2018</a>)</span>). For decoders, it is
+sensible to simply pretrain them as language models. Afterwards, they
+can be used as generators to fine-tune their probability of predicting
+the next word conditioned on the previous words. The models are suitable
+for tasks similar to the training, including any type of dialogue and
+document summarization. Transformer language models are great for
+transfer learning. They are fine-tuned by randomly initializing a
+softmax classifier on top of the pretrained model and training both
+(with only a very small learning rate and a small number of epochs) so
+that the gradient propagates through the whole network.<br />
+The success of BERT in 2018 prompted a "gold rush" in NLP, in which
+ever greater language models were created. One that topped the headlines
+and used a customer supercluster for computation was the third iteration
+of the GPT architecture by OpenAI, known as GPT-3. reveals why GPT-3 is
+a famous example of current research focusing on scaling up neural
+language models. While the largest T5 model has 11 billion parameters,
+GPT-3 has 175 billion parameters. Moreover, the training data set
+contains around 500 billion tokens of text, while the average young
+american child hears around 6 million words per year (see <span class="citation">(Hart and Risley <a href="#ref-Hart1995" role="doc-biblioref">1995</a>)</span>).
+The results of huge language models suggest that they perform some form
+of learning (without gradient steps) simply from examples provided via
+context. The tasks are specified by the in-context examples, and the
+conditional probability distribution simulates performing the task to an
+extent.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/gpt3_comparison.png" alt="Comparison of number of parameters between Transformer-architectures (Source: Saifee (2020))." width="70%" />
+<p class="caption">
+(#fig:fig:gpt3scaling)Comparison of number of parameters between Transformer-architectures (Source: <span class="citation">Saifee (<a href="#ref-Saifee2020" role="doc-biblioref">2020</a>)</span>).
+</p>
+</div>
+
+</div>
+</div>
+<div id="current-topics" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.7</span> Current Topics<a href="c01-00-intro-modalities.html#current-topics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="sec:concerns-lm" class="section level4 hasAnchor">
+<h4><span class="header-section-number">2.1.7.1</span> Concerns regarding growing size of Language Models<a href="c01-00-intro-modalities.html#sec:concerns-lm" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>As the last chapter ended with GPT-3 and emphasized the concerning trend
+of ever larger language models, one could ask which other costs arise
+from the developments. Risks and harms among environmental and financial
+costs have been studied by <span class="citation">(Bender et al. <a href="#ref-Bender2021" role="doc-biblioref">2021</a>)</span>. They state that marginalized
+communities are not only less likely to benefit from LM progress, but
+also more likely to suffer from the environmental repercussions of
+increasing resource consumption. <span class="citation">(<span class="citeproc-not-found" data-reference-id="strubel2019energy"><strong>???</strong></span>)</span> estimated that training
+a Transformer (big) model resulted in 249t of <span class="math inline">\(CO_2\)</span>. To compare, an
+average human is responsible for approximately 5t of <span class="math inline">\(CO_2\)</span> per year
+(according to <span class="citation">(Ritchie, Roser, and Rosado <a href="#ref-Ritchie2020" role="doc-biblioref">2020</a>)</span>). In addition, they discovered that an
+estimated increase of 0.1 in BLEU score increased computation costs by
+$ 150,000 (for English to German translations). Furthermore, larger
+models require more data to sufficiently train them. This has resulted
+in large but poorly documented training data sets. Multiple risks can be
+mitigated if there is a common understanding of the model’s learnings.<br />
+Moreover, it has been argued that datasets consisting of web data
+over-represent hegemonic views and encode bias towards marginalized
+communities. This is among other factors due to internet access being
+unevenly distributed. In particular, there is an over-representation of
+younger internet users and those from developed countries. It is
+generally naive to educate AI systems on all aspects of the complex
+world, and hope for the beautiful to prevail (<span class="citation">(Bender et al. <a href="#ref-Bender2021" role="doc-biblioref">2021</a>)</span>).</p>
+</div>
+<div id="improving-understanding-of-transformer-based-models" class="section level4 hasAnchor">
+<h4><span class="header-section-number">2.1.7.2</span> Improving Understanding of Transformer-based models<a href="c01-00-intro-modalities.html#improving-understanding-of-transformer-based-models" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The results of transformer-based models clearly show that they deliver
+successful results. However, it is less clear why. The size of the
+models makes it difficult to experiment with them. Nevertheless, having
+a limited understanding restrains researchers from coming up with
+further improvements. Therefore, multiple papers analysed BERT’s
+attention in search of an improved understanding of large transformer
+models. BERT is a smaller model out of the more popular ones, and its
+attention is naturally interpretable because the attention weight
+indicates how significant a word is for the next representation of the
+current word (<span class="citation">(Clark et al. <a href="#ref-Clark2019" role="doc-biblioref">2019</a>)</span>). In the following, some of the findings are
+going to be shared.<br />
+BERT representations are rather hierarchical than linear, and they
+include information about parts of speech, syntactic chunks and roles
+(see <span class="citation">(Lin, Tan, and Frank <a href="#ref-Lin2019" role="doc-biblioref">2019</a>)</span> and <span class="citation">(N. F. Liu et al. <a href="#ref-Liu2019" role="doc-biblioref">2019</a>)</span>) Furthermore, it has semantic knowledge.
+For example, BERT can recognize e.g. that "to tip a chef" is better
+than "to tip a robin" but worse than "to tip a waiter"
+(<span class="citation">(Ettinger <a href="#ref-Ettinger2019" role="doc-biblioref">2019</a>)</span>). However, it makes sense that BERT has issues with
+knowledge that is assumed and not mentioned, which especially refers to
+visual and perceptual properties (<span class="citation">(Da and Kasai <a href="#ref-Da2019" role="doc-biblioref">2019</a>)</span>). Additionally, BERT
+struggles with inferences, e.g. even though it is known that "people
+walk into houses" and "houses are big", it cannot infer that "houses
+are bigger than people" (<span class="citation">(Forbes, Holtzman, and Choi <a href="#ref-Forbes2019" role="doc-biblioref">2019</a>)</span>).<br />
+While it is true that different transformer heads attend to various
+patterns (see ), interestingly, most of them could be neglected without
+notable performance loss (<span class="citation">(Voita et al. <a href="#ref-Voita2019" role="doc-biblioref">2019</a>)</span>). Probing attention maps can be
+tedious, but allows to gain knowledge of common patterns, such as an
+unexpected amount focusing on the delimiter token <span class="math display">\[SEP\]</span>.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/ct_attention-heads.png" alt="Common patterns of attention heads (Source: Clark et al. (2019))." width="90%" />
+<p class="caption">
+(#fig:fig:ctattentionheads)Common patterns of attention heads (Source: <span class="citation">Clark et al. (<a href="#ref-Clark2019" role="doc-biblioref">2019</a>)</span>).
+</p>
+</div>
+
+</div>
+<div id="few-shot-learning" class="section level4 hasAnchor">
+<h4><span class="header-section-number">2.1.7.3</span> Few-Shot Learning<a href="c01-00-intro-modalities.html#few-shot-learning" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For NLP tasks, the model is usually trained on a set of labelled
+examples and is expected to generalize to unseen data. Annotating is not
+only costly but also difficult to gather for numerous languages,
+domains, and tasks. In practice, there is often only a very limited
+amount of labelled examples. Consequently, few-shot learning is a highly
+relevant research area (<span class="citation">(<span class="citeproc-not-found" data-reference-id="Schick2020"><strong>???</strong></span>)</span>). It defines a model that is
+trained on a limited number of demonstrations to guide its predictions.
+Referring back to , the benefits of lower computational and
+environmental costs have to be mentioned.<br />
+Traditional fine-tuning uses a large corpus of example tasks, and the
+model is updated repeatedly with gradient steps so that it adapts to the
+task with minimal accuracy error.</p>
+<p>In contrast, few-shot applications have to complete tasks at test time
+with only forward passes. They have three main parts: the task
+description, examples, and the prompt. In , the task is a translation
+from English to French, a few examples, as well as the word that should
+be translated are given. Moreover, zero-shot and one-shot learning refer
+to the model predicting with no and one learned example, respectively
+(<span class="citation">(T. Brown et al. <a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>).</p>
+<div class="figure" style="text-align: center">
+<img src="figures/01-01-nlp/gpt3_few-shot-learning.png" alt="Few-shot learning (Source: T. Brown et al. (2020))." width="50%" />
+<p class="caption">
+(#fig:fig:gpt3fewshotlearning)Few-shot learning (Source: <span class="citation">T. Brown et al. (<a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>).
+</p>
+</div>
+
+<p>It is complicated to create the few-shot examples, since the application
+relies on them to express the task. This is why smaller models are
+susceptible to examples written unfavourably. In <span class="citation">(T. Brown et al. <a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>, it was
+shown that few-shot performance scales with the number of model
+parameters. Even though GPT-3’s in-context learning improved few-shot
+prompting capabilities, it is still sensitive to the order of training
+examples, decoding strategy, and hyperparameter selection. All of this
+combined with the fact that current research uses larger or held-out
+data sets leads to the suspicion that the true few-shot ability of
+language models is overestimated (see <span class="citation">(Perez, Kiela, and Cho <a href="#ref-perez2021true" role="doc-biblioref">2021</a>)</span>).<br />
+Moreover, <span class="citation">(Lialin et al. <a href="#ref-Lialin2022" role="doc-biblioref">2022</a>)</span> have found that common transformer models could
+not resolve compositional questions in a zero-shot fashion and that the
+model’s parameter count does not correlate with performance. This
+indicates a limitation for zero-shot prompting with the existing
+pre-training objectives. However, different models provided the best
+accuracy with regard to different symbolic reasoning tasks. This
+suggests that optimization or masking strategies could be more
+significant than the pre-training, data set size or model architecture.</p>
+</div>
+</div>
+<div id="summary" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.8</span> Summary<a href="c01-00-intro-modalities.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Natural Language Processing has been one of the most exciting fields of
+machine learning in the last decade considering all the breakthroughs
+discussed in this work. Word embeddings made it possible and allowed
+developers to encode words as dense vectors that capture their
+underlying semantic content. In this way, similar words are embedded
+close to each other in a lower-dimensional feature space. Another
+important challenge was solved by encoder-decoder (also called
+sequence-to-sequence) architectures, which made it possible to map input
+sequences to output sequences of different lengths. They are especially
+useful for complex tasks like machine translation, video captioning or
+question answering. A significant state-of-the-art technique is
+attention, which enabled models to actively shift their focus – just
+like humans do. It allows following one thought at a time while
+suppressing information irrelevant to the task. As a consequence, it has
+been shown to significantly improve performance for tasks like machine
+translation. By giving the decoder access to directly look at the
+source, the bottleneck is avoided and at the same time, it provides a
+shortcut to faraway states and thus helps with the vanishing gradient
+problem. One of the most recent data modelling techniques is the
+transformer, which is solely based on attention and does not have to
+process the input data sequentially. Therefore, the deep learning model
+is better in remembering context-induced earlier in long sequences. It
+is the dominant paradigm in NLP currently and makes better use of GPUs
+because it can perform parallel operations. Transformer architectures
+like BERT, T5 or GPT-3 are pre-trained on a large corpus and can be
+fine-tuned for specific language tasks. They can generate stories,
+poems, code and much more. Currently, there seems to be breaking
+transformer news nearly every week with no sign of slowing. This is why
+many trends could be recognized as relevant current topics. One of them
+is increasing concerns regarding the growing size of language models and
+the correlated environmental and financial costs. Another active
+research aspect is concerned with improving the understanding of
+transformer-based models to further advance them. Additionally, there
+are many studies about achieving respectable results on language
+modelling tasks after only learning from a few examples, which is known
+as few-shot learning.</p>
+
+</div>
 </div>
 <div id="c01-02-sota-cv" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.2</span> State-of-the-art in Computer Vision<a href="c01-00-intro-modalities.html#c01-02-sota-cv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -484,13 +1354,13 @@ Afterward, the depth of the network was increased and ResNet-50, ResNet-101, and
 </div>
 <div id="contrastive-learning" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.7</span> Contrastive learning<a href="c01-00-intro-modalities.html#contrastive-learning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In recent years the problem of classification of the unlabeled dataset is becoming more widespread. More unlabeled datasets are being created in fields like medicine, the automotive industry, military, etc., requiring human labeling. Since the process is expensive and time-consuming, researchers assumed, it could be automated with contrastive learning frameworks. One of the first and most known contrastive learning frameworks is SimCLR <span class="citation">Chen et al. (<a href="#ref-SimCLR" role="doc-biblioref">2020</a>)</span>. The advantage of this framework is its simplicity, yet it achieves high accuracy on classification tasks. The main idea is to have two copies of the image, which are then used to train two networks and later compared. The problem with this framework is that it doubles the size of the dataset and reaches among all images, which can be computationally unfeasible in large datasets. Bootstrap Your Own Latent <span class="citation">Grill, Strub, Altché, Tallec, Richemond, et al. (<a href="#ref-BYOL" role="doc-biblioref">2020</a><a href="#ref-BYOL" role="doc-biblioref">b</a>)</span> was introduced to avoid making double-sized datasets. The idea was to bootstrap images’ representations, avoiding unnecessary image comparison. These two frameworks will be described in this work.
+<p>In recent years the problem of classification of the unlabeled dataset is becoming more widespread. More unlabeled datasets are being created in fields like medicine, the automotive industry, military, etc., requiring human labeling. Since the process is expensive and time-consuming, researchers assumed, it could be automated with contrastive learning frameworks. One of the first and most known contrastive learning frameworks is SimCLR <span class="citation">T. Chen, Kornblith, Norouzi, and Hinton (<a href="#ref-SimCLR" role="doc-biblioref">2020</a><a href="#ref-SimCLR" role="doc-biblioref">a</a>)</span>. The advantage of this framework is its simplicity, yet it achieves high accuracy on classification tasks. The main idea is to have two copies of the image, which are then used to train two networks and later compared. The problem with this framework is that it doubles the size of the dataset and reaches among all images, which can be computationally unfeasible in large datasets. Bootstrap Your Own Latent <span class="citation">Grill, Strub, Altché, et al. (<a href="#ref-BYOL" role="doc-biblioref">2020</a>)</span> was introduced to avoid making double-sized datasets. The idea was to bootstrap images’ representations, avoiding unnecessary image comparison. These two frameworks will be described in this work.
 Further improvements in the choice of creating two views of images and comparison techniques were presented in different frameworks such as Nearest-Neighbor Contrastive Learning (NNCLR) <span class="citation">(<span class="citeproc-not-found" data-reference-id="NNCLR"><strong>???</strong></span>)</span>, Open World Object Detection (ORE) <span class="citation">(<span class="citeproc-not-found" data-reference-id="ORE"><strong>???</strong></span>)</span>, Swapping Assignments between multiple Views (SwAV) <span class="citation">(<span class="citeproc-not-found" data-reference-id="SwAV"><strong>???</strong></span>)</span>, and many more.
 This field is a constant research topic, and new, improved frameworks are being created to help researchers solve other tasks requiring labeled datasets.</p>
 </div>
 <div id="a-simple-framework-for-contrastive-learning-of-visual-representations" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.8</span> A Simple Framework for Contrastive Learning of Visual Representations<a href="c01-00-intro-modalities.html#a-simple-framework-for-contrastive-learning-of-visual-representations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Chen T. et al. intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations and called it SimCLR <span class="citation">Chen et al. (<a href="#ref-SimCLR" role="doc-biblioref">2020</a>)</span>. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.</p>
+<p>Chen T. et al. intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations and called it SimCLR <span class="citation">T. Chen, Kornblith, Norouzi, and Hinton (<a href="#ref-SimCLR" role="doc-biblioref">2020</a><a href="#ref-SimCLR" role="doc-biblioref">a</a>)</span>. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.</p>
 <p>Intending to understand what qualifies good contrastive representation learning, the significant components of the framework were studied and resulted in:</p>
 <ul>
 <li>A contrastive prediction task requires combining multiple data augmentation operations, which results in effective representations. Unsupervised contrastive learning benefits from more significant data augmentation.</li>
@@ -563,7 +1433,7 @@ Applying just individual transformation is insufficient for the model to learn g
 </div>
 <div id="bootstrap-your-own-latent" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.9</span> Bootstrap Your Own Latent<a href="c01-00-intro-modalities.html#bootstrap-your-own-latent" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The fundamental idea of contrastive learning is to create pairs of images on which the framework would be trained. Creating negative pairs relies on large batch sizes, memory banks, or customized mining strategies which can be challenging in larger datasets. Grill J.B. at al. wanted to create a new approach that would achieve better performance than other contrastive methods without using negative pairs. A solution they have introduced is a method called Bootstrap Your Own Latent (BYOL) <span class="citation">Grill, Strub, Altché, Tallec, Richemond, et al. (<a href="#ref-BYOL" role="doc-biblioref">2020</a><a href="#ref-BYOL" role="doc-biblioref">b</a>)</span>. The idea was to bootstrap representations of images. As a result, BYOL is more robust to the choice of image augmentations.
+<p>The fundamental idea of contrastive learning is to create pairs of images on which the framework would be trained. Creating negative pairs relies on large batch sizes, memory banks, or customized mining strategies which can be challenging in larger datasets. Grill J.B. at al. wanted to create a new approach that would achieve better performance than other contrastive methods without using negative pairs. A solution they have introduced is a method called Bootstrap Your Own Latent (BYOL) <span class="citation">Grill, Strub, Altché, et al. (<a href="#ref-BYOL" role="doc-biblioref">2020</a>)</span>. The idea was to bootstrap representations of images. As a result, BYOL is more robust to the choice of image augmentations.
 Furthermore, BYOL has two neural networks, called online and target networks, which interact and learn from each other. Using an augmented view of an image, BYOL trains its online network to predict the target network’s representation of another augmented view. This approach achieved state-of-the-art results when trained on the ImageNet dataset under the linear evaluation protocol. Additionally, compared to SimCLR, a strong contrastive baseline, BYOL suffers from much less performance drop when only random crops are used to augment images.</p>
 <div id="description-of-method" class="section level4 hasAnchor">
 <h4><span class="header-section-number">2.2.9.1</span> Description of method<a href="c01-00-intro-modalities.html#description-of-method" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -809,7 +1679,7 @@ Till now all datasets were freely available and almost directly usable. The next
 <div id="localized-narratives" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.3.2</span> Localized Narratives<a href="c01-00-intro-modalities.html#localized-narratives" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Localized Narratives choose a new form of connecting vision and language in multi-modal image annotations <span class="citation">(<span class="citeproc-not-found" data-reference-id="pont2020connecting"><strong>???</strong></span>)</span>. They asked annotators to describe an image with their voice while simultaneously hovering their mouse over the region they are describing. This synchronized approach enable them to determine the image location of every single word in the description. Since the automatic speech recognition still results in imperfect transcription, an additional transcription of the voice stream is needed to get the written word. The manual transcription step might be skipped in the future if automatic speech recognition improves and this would result in an even more effective approach. They collected Localized Narratives for, the earlier introduced, COCO <span class="citation">(T.-Y. Lin, Maire, Belongie, Hays, Perona, Ramanan, Dollár, and Zitnick <a href="#ref-lin2014microsoft" role="doc-biblioref">2014</a><a href="#ref-lin2014microsoft" role="doc-biblioref">a</a>)</span> dataset, ADE20K <span class="citation">(<span class="citeproc-not-found" data-reference-id="zhou2017scene"><strong>???</strong></span>)</span>, Flickr30k &amp; 32k datasets <span class="citation">(<span class="citeproc-not-found" data-reference-id="young2014image"><strong>???</strong></span>)</span> and 671k images of Open Images<span class="citation">(<span class="citeproc-not-found" data-reference-id="kuznetsova2020open"><strong>???</strong></span>)</span>.</p>
-<p>Localized Narratives can be used in many different multi-modal tasks, since it incorporates four synchronized modalities (Image, Text, Speech, Grounding). Another difference is that the captions are longer than in most previous datasets <span class="citation">(<span class="citeproc-not-found" data-reference-id="krishna2017visual"><strong>???</strong></span>; <span class="citeproc-not-found" data-reference-id="kuznetsova2020open"><strong>???</strong></span>; T.-Y. Lin, Maire, Belongie, Hays, Perona, Ramanan, Dollár, and Zitnick <a href="#ref-lin2014microsoft" role="doc-biblioref">2014</a><a href="#ref-lin2014microsoft" role="doc-biblioref">a</a>)</span> and models like Imagen <span class="citation">(<span class="citeproc-not-found" data-reference-id="saharia2022photorealistic"><strong>???</strong></span>)</span> and Parti <span class="citation">(Yu et al. <a href="#ref-parti" role="doc-biblioref">2022</a>)</span> work well with long prompts. Beside to that the 849k images with Localized Narratives are publicly available <span class="citation">(<span class="citeproc-not-found" data-reference-id="LocNarWeb"><strong>???</strong></span>)</span>.</p>
+<p>Localized Narratives can be used in many different multi-modal tasks, since it incorporates four synchronized modalities (Image, Text, Speech, Grounding). Another difference is that the captions are longer than in most previous datasets <span class="citation">(<span class="citeproc-not-found" data-reference-id="krishna2017visual"><strong>???</strong></span>; <span class="citeproc-not-found" data-reference-id="kuznetsova2020open"><strong>???</strong></span>; T.-Y. Lin, Maire, Belongie, Hays, Perona, Ramanan, Dollár, and Zitnick <a href="#ref-lin2014microsoft" role="doc-biblioref">2014</a><a href="#ref-lin2014microsoft" role="doc-biblioref">a</a>)</span> and models like Imagen <span class="citation">(Saharia et al. <a href="#ref-saharia2022photorealistic" role="doc-biblioref">2022</a><a href="#ref-saharia2022photorealistic" role="doc-biblioref">a</a>)</span> and Parti <span class="citation">(J. Yu, Xu, Koh, et al. <a href="#ref-parti" role="doc-biblioref">2022</a><a href="#ref-parti" role="doc-biblioref">a</a>)</span> work well with long prompts. Beside to that the 849k images with Localized Narratives are publicly available <span class="citation">(<span class="citeproc-not-found" data-reference-id="LocNarWeb"><strong>???</strong></span>)</span>.</p>
 </div>
 <div id="wudaomm" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.3.3</span> WuDaoMM<a href="c01-00-intro-modalities.html#wudaomm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
@@ -881,8 +1751,8 @@ Take the training data of GPT-2 as an example. It is sourced by scraping outboun
 <p>Meta AI proposed an unified view of self-supervised method. They say an energy-based model (EBM) is a system that, given two inputs, x and y, tells us how incompatible they are with each other <span class="citation">(Yann and Ishan <a href="#ref-darkMatter" role="doc-biblioref">2021</a>)</span>. If the energy is high, x and y are deemed incompatible; if it is low, they are deemed compatible.</p>
 <p>The idea sounds simple, but it is difficult to achieve this. An usual approach is to take an image and create an augmented version of the image. By this approach the energy has to be low, because it’s from save picture. For example one can gray scale the image. By this we say the model the color does not matter. <span class="citation">Bromley et al. (<a href="#ref-bromley1993signature" role="doc-biblioref">1993</a>)</span> proposed this kind of approach under the name Siamese networks. The difficulty is to make sure that the networks produce high energy, i.e. different embedding vectors, when x and y are different images. The problem is that these Siamese networks tend to collapse. When a collapse occurs, the energy is not higher for nonmatching x and y than it is for matching x and y. So the networks ignore their input and produce the same embeddings.</p>
 <p>This lead to so called contrastive methods. The method used to train NLP systems by masking or substituting some input words belongs to the category of contrastive methods. Contrastive methods are based on the simple idea of constructing pairs of x and y that are not compatible, and adjusting the parameters of the model so that the corresponding output energy is large. The problem is that they are very inefficient to train. For a contrastive methods one needs so called hard negatives. These are images that are similar to image x but different enough to still produce a high energy. This is a major issue of contrastive methods. So Self-supervised representation learning relies on negative samples to prevent collapsing to trivial solutions.</p>
-<p>So the best idea is to get rid of the hard negatives and BYOL <span class="citation">(Grill, Strub, Altché, Tallec, Richemond, et al. <a href="#ref-grill2020bootstrap" role="doc-biblioref">2020</a><a href="#ref-grill2020bootstrap" role="doc-biblioref">a</a>)</span> is one approach that achieved exactly this. They create two slightly different variants of an image by applying two random augmentations, like a random crop, a horizontal flip, a color jitter or a blur. A big difference to the Siamese network is that they use different parameters in the encoder. They use so called online and target parameters. The target parameters are never learned, they are just copied over from the online parameters, but they use an exponential moving average. So it’s some kind of a lagged version of the online parameters. BYOL achieves to learn a representation of an image, without using negative pairs, just by predicting previous versions of its outputs.</p>
-<p>Still they say, that BYOL remains dependent on existing sets of augmentations and these augmentations require human intention and automating the search for these augmentations would be an important next step, if this is even possible <span class="citation">(Grill, Strub, Altché, Tallec, Richemond, et al. <a href="#ref-grill2020bootstrap" role="doc-biblioref">2020</a><a href="#ref-grill2020bootstrap" role="doc-biblioref">a</a>)</span>.</p>
+<p>So the best idea is to get rid of the hard negatives and BYOL <span class="citation">(Grill, Strub, Altch’e, et al. <a href="#ref-grill2020bootstrap" role="doc-biblioref">2020</a>)</span> is one approach that achieved exactly this. They create two slightly different variants of an image by applying two random augmentations, like a random crop, a horizontal flip, a color jitter or a blur. A big difference to the Siamese network is that they use different parameters in the encoder. They use so called online and target parameters. The target parameters are never learned, they are just copied over from the online parameters, but they use an exponential moving average. So it’s some kind of a lagged version of the online parameters. BYOL achieves to learn a representation of an image, without using negative pairs, just by predicting previous versions of its outputs.</p>
+<p>Still they say, that BYOL remains dependent on existing sets of augmentations and these augmentations require human intention and automating the search for these augmentations would be an important next step, if this is even possible <span class="citation">(Grill, Strub, Altch’e, et al. <a href="#ref-grill2020bootstrap" role="doc-biblioref">2020</a>)</span>.</p>
 <p><span class="citation">He et al. (<a href="#ref-he2022masked" role="doc-biblioref">2022</a>)</span> recently came very close to the MLM pre-training used in BERT with their masked autoencoder (MAE). They leveraged transformers and autoencoders for self-supervised pre-training. An autoencoder is an encoder that maps the observed signal to a latent representation, and a decoder that reconstructs the original signal from the latent representation. The MAE is a form of denoising autoencoding exactly like the MLM. Their approach is to divide an image into, for example, 16 <span class="math inline">\(\times\)</span> 16 patches. Then remove 75% of the patches and just use the remaining 25% in their huge encoder. Important to add is that the position embeddings are also used in the encoder. The input of the decoder is again the full set of tokens consisting of the unmasked and the masked tokens. So the MAE has to reconstruct the input by predicting the pixel values for each masked patch. Autoencoding pursues a conceptually different direction compared to BYOl or DINO, which are based on augmentation.</p>
 <p>Still their reconstructions look kind of blury, but the learned representations are already very rich. Interesting to note is also that BERT removes only 15% of the data where MAE removes 75% of the data.</p>
 <p>Dual encoder models like CLIP <span class="citation">(Radford, Kim, Hallacy, Ramesh, Goh, Agarwal, Sastry, Askell, Mishkin, Clark, and others <a href="#ref-radford2021learning" role="doc-biblioref">2021</a>)</span> and ALIGN <span class="citation">(C. Jia, Yang, Xia, Chen, et al. <a href="#ref-jia2021scaling" role="doc-biblioref">2021</a><a href="#ref-jia2021scaling" role="doc-biblioref">a</a>)</span> demonstrated in the past that contrastive objectives on noisy image-text pairs can lead to strong image and text representations. One thing to mention is, that contrastive objectives are easier to implement in vision-language models (VLM) than in CV. This comes from the fact that VLM use image-text pairs. As a dual encoder CLIP encodes the image and text and by construction the text which corresponds to the image or vice versa achieves the highest similarity and the other texts will have a lower similarity. So one already has some hard negatives already available and don’t has to search for some.</p>
@@ -991,7 +1861,7 @@ A example is shown down below.</p>
 <div id="visual-question-answering-1.0-2.0-vqa" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.3.3.2</span> Visual Question Answering 1.0 &amp; 2.0 (VQA)<a href="c01-00-intro-modalities.html#visual-question-answering-1.0-2.0-vqa" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>For this reason <span class="citation">Antol et al. (<a href="#ref-antol2015vqa" role="doc-biblioref">2015</a>)</span> created an open-ended answering task and a multiple-choice task. Their dataset contains roughly 250k images, 760k questions, and 10M answers. 204k images are taken from the MS COCO dataset but also newly created created datasets are used. Three questions were collected for each image or scene. Each question was answered by ten subjects along with their confidence. The dataset contains over 760K questions with around 10M answers. “what”-, “how”-, “is”- questions are mainly used in the benchmark. But they had major flaws in their creation. An model which blindly answering “yes” without reading the rest of the question or looking at the associated image results in a VQA accuracy of 87% or the most common sport answer “tennis” was the correct answer for 41% of the questions starting with “What sport is”, and “2” is the correct answer for 39% of the questions starting with “How many” <span class="citation">(Antol et al. <a href="#ref-antol2015vqa" role="doc-biblioref">2015</a>)</span>.</p>
-<p><span class="citation">Zhang et al. (<a href="#ref-zhang2016yin" role="doc-biblioref">2016</a>)</span> pointed out a particular ‘visual priming bias’ in the VQA dataset. <span class="citation">Zhang et al. (<a href="#ref-zhang2016yin" role="doc-biblioref">2016</a>)</span> showed that language provides a strong prior that can result in good superficial performance, without the underlying models truly understanding the visual content. <span class="citation">Zhang et al. (<a href="#ref-zhang2016yin" role="doc-biblioref">2016</a>)</span> collected a balanced dataset containing pairs of complementary scenes to reduce or eliminate the strong prior of the language. <span class="citation">Goyal et al. (<a href="#ref-goyal2017making" role="doc-biblioref">2017</a>)</span> did the same and made a second iteration of the Visual Question Answering Dataset and Challenge (VQA v2.0). <span class="citation">Goyal et al. (<a href="#ref-goyal2017making" role="doc-biblioref">2017</a>)</span> balanced the popular VQA dataset <span class="citation">(Antol et al. <a href="#ref-antol2015vqa" role="doc-biblioref">2015</a>)</span> by collecting complementary images such that every question in balanced dataset is associated with not just a single image, but rather a pair of similar images that result in two different answers to the question. The dataset is by construction more balanced than the original VQA dataset and has approximately twice the number of image-question pairs.</p>
+<p><span class="citation">P. Zhang et al. (<a href="#ref-zhang2016yin" role="doc-biblioref">2016</a>)</span> pointed out a particular ‘visual priming bias’ in the VQA dataset. <span class="citation">P. Zhang et al. (<a href="#ref-zhang2016yin" role="doc-biblioref">2016</a>)</span> showed that language provides a strong prior that can result in good superficial performance, without the underlying models truly understanding the visual content. <span class="citation">P. Zhang et al. (<a href="#ref-zhang2016yin" role="doc-biblioref">2016</a>)</span> collected a balanced dataset containing pairs of complementary scenes to reduce or eliminate the strong prior of the language. <span class="citation">Goyal et al. (<a href="#ref-goyal2017making" role="doc-biblioref">2017</a>)</span> did the same and made a second iteration of the Visual Question Answering Dataset and Challenge (VQA v2.0). <span class="citation">Goyal et al. (<a href="#ref-goyal2017making" role="doc-biblioref">2017</a>)</span> balanced the popular VQA dataset <span class="citation">(Antol et al. <a href="#ref-antol2015vqa" role="doc-biblioref">2015</a>)</span> by collecting complementary images such that every question in balanced dataset is associated with not just a single image, but rather a pair of similar images that result in two different answers to the question. The dataset is by construction more balanced than the original VQA dataset and has approximately twice the number of image-question pairs.</p>
 </div>
 </div>
 <div id="gqa" class="section level4 hasAnchor">
@@ -1000,7 +1870,7 @@ A example is shown down below.</p>
 <p>They even made a comparison between GQA and VQA 2.0. They came to the conclusion that the questions of GQA are objective, unambiguous, more compositional and can be answered from the images only, potentially making this benchmark more controlled and convenient for making research progress on. Conversely, VQA questions tend to be a bit more ambiguous and subjective, at times with no clear and conclusive answer. Finally, we can see that GQA provides more questions for each image and thus covers it more thoroughly than VQA.</p>
 <div id="generative-benchmarks" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.3.4.1</span> Generative Benchmarks<a href="c01-00-intro-modalities.html#generative-benchmarks" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Almost everybody is talking right now about generative models like DALL-E2, Imagen, Parti. It seems like every month a new one is presented. But how can we compare these models? Automatic image quality and automatic image-text alignment are two reasonable evaluation metrics. Fréchet Inception Distance (FID) can be used as primary automated metric for measuring image quality. The Frechet Inception Distance compares the distribution of generated images with the distribution of real images that were used to train the generator. A small value is wanted, as it’s a distance measure. Text-image fit can be captured through automated captioning evaluation. For this an image output by the model is captioned with a model, which is able to do image captioning. The similarity of the input prompt and the generated caption is then assessed via BLEU, CIDEr, METEOR and SPICE and also human evaluation is done. Here different generative models are used with the same prompts and the human is asked to choose which output is a higher quality image and which is a better match to the input prompt. One always has to keep in mind, that the images of the generative models are always “cherry picked”. They do not typically represent, for example, a single shot interaction in which the model directly produces such an image. To make this clear, <span class="citation">Yu et al. (<a href="#ref-parti" role="doc-biblioref">2022</a>)</span> showed their way of growing the cherry tree.</p>
+<p>Almost everybody is talking right now about generative models like DALL-E2, Imagen, Parti. It seems like every month a new one is presented. But how can we compare these models? Automatic image quality and automatic image-text alignment are two reasonable evaluation metrics. Fréchet Inception Distance (FID) can be used as primary automated metric for measuring image quality. The Frechet Inception Distance compares the distribution of generated images with the distribution of real images that were used to train the generator. A small value is wanted, as it’s a distance measure. Text-image fit can be captured through automated captioning evaluation. For this an image output by the model is captioned with a model, which is able to do image captioning. The similarity of the input prompt and the generated caption is then assessed via BLEU, CIDEr, METEOR and SPICE and also human evaluation is done. Here different generative models are used with the same prompts and the human is asked to choose which output is a higher quality image and which is a better match to the input prompt. One always has to keep in mind, that the images of the generative models are always “cherry picked”. They do not typically represent, for example, a single shot interaction in which the model directly produces such an image. To make this clear, <span class="citation">J. Yu, Xu, Koh, et al. (<a href="#ref-parti" role="doc-biblioref">2022</a><a href="#ref-parti" role="doc-biblioref">a</a>)</span> showed their way of growing the cherry tree.</p>
 <div class="figure">
 <img src="figures/01-chapter1/Parti_Growing.png" alt="" />
 <p class="caption">taken from Parti Paper</p>
@@ -1041,14 +1911,23 @@ A example is shown down below.</p>
 <div id="ref-antol2015vqa">
 <p>Antol, Stanislaw, Aishwarya Agrawal, Jiasen Lu, Margaret Mitchell, Dhruv Batra, C Lawrence Zitnick, and Devi Parikh. 2015. “Vqa: Visual Question Answering.” In <em>Proceedings of the Ieee International Conference on Computer Vision</em>, 2425–33.</p>
 </div>
+<div id="ref-Bahdanau2014">
+<p>Bahdanau, Dzmitry, Kyunghyun Cho, and Yoshua Bengio. 2014. “Neural Machine Translation by Jointly Learning to Align and Translate,” September. <a href="http://arxiv.org/abs/1409.0473">http://arxiv.org/abs/1409.0473</a>.</p>
+</div>
 <div id="ref-bandy2021addressing">
 <p>Bandy, Jack, and Nicholas Vincent. 2021. “Addressing" Documentation Debt" in Machine Learning Research: A Retrospective Datasheet for Bookcorpus.” <em>arXiv Preprint arXiv:2105.05241</em>.</p>
+</div>
+<div id="ref-Bender2021">
+<p>Bender, Emily M., Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell. 2021. “On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?” In <em>Proceedings of the 2021 Acm Conference on Fairness, Accountability, and Transparency</em>, 610–23. FAccT ’21. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3442188.3445922">https://doi.org/10.1145/3442188.3445922</a>.</p>
 </div>
 <div id="ref-beyer2020we">
 <p>Beyer, Lucas, Olivier J Hénaff, Alexander Kolesnikov, Xiaohua Zhai, and Aäron van den Oord. 2020. “Are We Done with Imagenet?” <em>arXiv Preprint arXiv:2006.07159</em>.</p>
 </div>
 <div id="ref-birhane2021multimodal">
 <p>Birhane, Abeba, Vinay Uday Prabhu, and Emmanuel Kahembwe. 2021. “Multimodal Datasets: Misogyny, Pornography, and Malignant Stereotypes.” <em>arXiv Preprint arXiv:2110.01963</em>.</p>
+</div>
+<div id="ref-Bojanowski2016">
+<p>Bojanowski, Piotr, Edouard Grave, Armand Joulin, and Tomas Mikolov. 2016. “Enriching Word Vectors with Subword Information,” July. <a href="http://arxiv.org/abs/1607.04606">http://arxiv.org/abs/1607.04606</a>.</p>
 </div>
 <div id="ref-bowman2021will">
 <p>Bowman, Samuel R, and George E Dahl. 2021. “What Will It Take to Fix Benchmarking in Natural Language Understanding?” <em>arXiv Preprint arXiv:2104.02145</em>.</p>
@@ -1060,7 +1939,16 @@ A example is shown down below.</p>
 <p>Brown, Tom, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, et al. 2020. “Language Models Are Few-Shot Learners.” <em>Advances in Neural Information Processing Systems</em> 33: 1877–1901.</p>
 </div>
 <div id="ref-SimCLR">
-<p>Chen, Ting, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. 2020. “A Simple Framework for Contrastive Learning of Visual Representations.” arXiv. <a href="https://doi.org/10.48550/ARXIV.2002.05709">https://doi.org/10.48550/ARXIV.2002.05709</a>.</p>
+<p>Chen, Ting, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. 2020a. “A Simple Framework for Contrastive Learning of Visual Representations.” arXiv. <a href="https://doi.org/10.48550/ARXIV.2002.05709">https://doi.org/10.48550/ARXIV.2002.05709</a>.</p>
+</div>
+<div id="ref-Cho2014">
+<p>Cho, Kyunghyun, Bart van Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. 2014. “Learning Phrase Representations Using Rnn Encoder-Decoder for Statistical Machine Translation,” June. <a href="http://arxiv.org/abs/1406.1078">http://arxiv.org/abs/1406.1078</a>.</p>
+</div>
+<div id="ref-Clark2019">
+<p>Clark, Kevin, Urvashi Khandelwal, Omer Levy, and Christopher D. Manning. 2019. “What Does Bert Look at? An Analysis of Bert’s Attention,” June. <a href="http://arxiv.org/abs/1906.04341">http://arxiv.org/abs/1906.04341</a>.</p>
+</div>
+<div id="ref-Da2019">
+<p>Da, Jeff, and Jungo Kasai. 2019. “Cracking the Contextual Commonsense Code: Understanding Commonsense Reasoning Aptitude of Deep Contextual Representations,” October. <a href="http://arxiv.org/abs/1910.01157">http://arxiv.org/abs/1910.01157</a>.</p>
 </div>
 <div id="ref-deng2009imagenet">
 <p>Deng, Jia, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei. 2009. “Imagenet: A Large-Scale Hierarchical Image Database.” In <em>2009 Ieee Conference on Computer Vision and Pattern Recognition</em>, 248–55. Ieee.</p>
@@ -1071,6 +1959,15 @@ A example is shown down below.</p>
 <div id="ref-dhamala2021bold">
 <p>Dhamala, Jwala, Tony Sun, Varun Kumar, Satyapriya Krishna, Yada Pruksachatkun, Kai-Wei Chang, and Rahul Gupta. 2021. “Bold: Dataset and Metrics for Measuring Biases in Open-Ended Language Generation.” In <em>Proceedings of the 2021 Acm Conference on Fairness, Accountability, and Transparency</em>, 862–72.</p>
 </div>
+<div id="ref-dosovitskiy2020image">
+<p>Dosovitskiy, Alexey, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, et al. 2020. “An Image Is Worth 16x16 Words: Transformers for Image Recognition at Scale.” <em>arXiv Preprint arXiv:2010.11929</em>.</p>
+</div>
+<div id="ref-Ettinger2019">
+<p>Ettinger, Allyson. 2019. “What Bert Is Not: Lessons from a New Suite of Psycholinguistic Diagnostics for Language Models,” July. <a href="http://arxiv.org/abs/1907.13528">http://arxiv.org/abs/1907.13528</a>.</p>
+</div>
+<div id="ref-Forbes2019">
+<p>Forbes, Maxwell, Ari Holtzman, and Yejin Choi. 2019. “Do Neural Language Representations Learn Physical Commonsense?” August. <a href="http://arxiv.org/abs/1908.02899">http://arxiv.org/abs/1908.02899</a>.</p>
+</div>
 <div id="ref-gao2017knowledge">
 <p>Gao, Jiyang, Zhen Li, Ram Nevatia, and others. 2017. “Knowledge Concentration: Learning 100k Object Classifiers in a Single Cnn.” <em>arXiv Preprint arXiv:1711.07607</em>.</p>
 </div>
@@ -1080,17 +1977,23 @@ A example is shown down below.</p>
 <div id="ref-goodfellow2014explaining">
 <p>Goodfellow, Ian J, Jonathon Shlens, and Christian Szegedy. 2014. “Explaining and Harnessing Adversarial Examples.” <em>arXiv Preprint arXiv:1412.6572</em>.</p>
 </div>
+<div id="ref-Google2022">
+<p>Google. 2022. “Embeddings: Translating to a Lower-Dimensional Space.”</p>
+</div>
 <div id="ref-goyal2017making">
 <p>Goyal, Yash, Tejas Khot, Douglas Summers-Stay, Dhruv Batra, and Devi Parikh. 2017. “Making the V in Vqa Matter: Elevating the Role of Image Understanding in Visual Question Answering.” In <em>Proceedings of the Ieee Conference on Computer Vision and Pattern Recognition</em>, 6904–13.</p>
 </div>
 <div id="ref-grill2020bootstrap">
-<p>Grill, Jean-Bastien, Florian Strub, Florent Altché, Corentin Tallec, Pierre Richemond, Elena Buchatskaya, Carl Doersch, et al. 2020a. “Bootstrap Your Own Latent-a New Approach to Self-Supervised Learning.” <em>Advances in Neural Information Processing Systems</em> 33: 21271–84.</p>
+<p>Grill, Jean-Bastien, Florian Strub, Florent Altch’e, Corentin Tallec, Pierre H. Richemond, Elena Buchatskaya, Carl Doersch, et al. 2020. “Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning.” <em>Neurips</em>.</p>
 </div>
 <div id="ref-BYOL">
-<p>Grill, Jean-Bastien, Florian Strub, Florent Altché, Corentin Tallec, Pierre H. Richemond, Elena Buchatskaya, Carl Doersch, et al. 2020b. “Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning.” arXiv. <a href="https://doi.org/10.48550/ARXIV.2006.07733">https://doi.org/10.48550/ARXIV.2006.07733</a>.</p>
+<p>Grill, Jean-Bastien, Florian Strub, Florent Altché, Corentin Tallec, Pierre H. Richemond, Elena Buchatskaya, Carl Doersch, et al. 2020. “Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning.” arXiv. <a href="https://doi.org/10.48550/ARXIV.2006.07733">https://doi.org/10.48550/ARXIV.2006.07733</a>.</p>
 </div>
 <div id="ref-guo2016ms">
 <p>Guo, Yandong, Lei Zhang, Yuxiao Hu, Xiaodong He, and Jianfeng Gao. 2016. “Ms-Celeb-1m: A Dataset and Benchmark for Large-Scale Face Recognition.” In <em>European Conference on Computer Vision</em>, 87–102. Springer.</p>
+</div>
+<div id="ref-Hart1995">
+<p>Hart, B., and T. R. Risley. 1995. “Meaningful Differences in the Everyday Experience of Young American Children.” <em>Baltimore, MD: Paul H. Brookes Publishing Company,</em></p>
 </div>
 <div id="ref-he2022masked">
 <p>He, Kaiming, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Dollár, and Ross Girshick. 2022. “Masked Autoencoders Are Scalable Vision Learners.” In <em>Proceedings of the Ieee/Cvf Conference on Computer Vision and Pattern Recognition</em>, 16000–16009.</p>
@@ -1104,14 +2007,26 @@ A example is shown down below.</p>
 <div id="ref-jia2021scaling">
 <p>Jia, Chao, Yinfei Yang, Ye Xia, Yi-Ting Chen, Zarana Parekh, Hieu Pham, Quoc Le, Yun-Hsuan Sung, Zhen Li, and Tom Duerig. 2021a. “Scaling up Visual and Vision-Language Representation Learning with Noisy Text Supervision.” In <em>International Conference on Machine Learning</em>, 4904–16. PMLR.</p>
 </div>
+<div id="ref-Jumper2021">
+<p>Jumper, John, Richard Evans, Alexander Pritzel, Tim Green, Michael Figurnov, Olaf Ronneberger, Kathryn Tunyasuvunakool, et al. 2021. “Highly Accurate Protein Structure Prediction with AlphaFold.” <em>Nature</em> 596 (7873): 583–89. <a href="https://doi.org/10.1038/s41586-021-03819-2">https://doi.org/10.1038/s41586-021-03819-2</a>.</p>
+</div>
 <div id="ref-koehn2005europarl">
 <p>Koehn, Philipp. 2005. “Europarl: A Parallel Corpus for Statistical Machine Translation.” In <em>Proceedings of Machine Translation Summit X: Papers</em>, 79–86.</p>
 </div>
 <div id="ref-kolesnikov2019large">
 <p>Kolesnikov, Alexander, Lucas Beyer, Xiaohua Zhai, Joan Puigcerver, Jessica Yung, Sylvain Gelly, and Neil Houlsby. 2019. “Large Scale Learning of General Visual Representations for Transfer.” <em>arXiv Preprint arXiv:1912.11370</em> 2 (8).</p>
 </div>
+<div id="ref-Lialin2022">
+<p>Lialin, Vladislav, Kevin Zhao, Namrata Shivagunde, and Anna Rumshisky. 2022. “Life After Bert: What Do Other Muppets Understand About Language?” May. <a href="http://arxiv.org/abs/2205.10696">http://arxiv.org/abs/2205.10696</a>.</p>
+</div>
 <div id="ref-lin2014microsoft">
 <p>Lin, Tsung-Yi, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr Dollár, and C Lawrence Zitnick. 2014a. “Microsoft Coco: Common Objects in Context.” In <em>European Conference on Computer Vision</em>, 740–55. Springer.</p>
+</div>
+<div id="ref-Lin2019">
+<p>Lin, Yongjie, Yi Chern Tan, and Robert Frank. 2019. “Open Sesame: Getting Inside BERT’s Linguistic Knowledge.” In <em>Proceedings of the 2019 ACL Workshop BlackboxNLP: Analyzing and Interpreting Neural Networks for NLP</em>. Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/w19-4825">https://doi.org/10.18653/v1/w19-4825</a>.</p>
+</div>
+<div id="ref-Liu2019">
+<p>Liu, Nelson F., Matt Gardner, Yonatan Belinkov, Matthew E. Peters, and Noah A. Smith. 2019. “Linguistic Knowledge and Transferability of Contextual Representations,” March. <a href="http://arxiv.org/abs/1903.08855">http://arxiv.org/abs/1903.08855</a>.</p>
 </div>
 <div id="ref-lottick2019energy">
 <p>Lottick, Kadan, Silvia Susai, Sorelle A Friedler, and Jonathan P Wilson. 2019. “Energy Usage Reports: Environmental Awareness as Part of Algorithmic Accountability.” <em>arXiv Preprint arXiv:1911.08354</em>.</p>
@@ -1119,11 +2034,26 @@ A example is shown down below.</p>
 <div id="ref-mahajan2018exploring">
 <p>Mahajan, Dhruv, Ross Girshick, Vignesh Ramanathan, Kaiming He, Manohar Paluri, Yixuan Li, Ashwin Bharambe, and Laurens Van Der Maaten. 2018. “Exploring the Limits of Weakly Supervised Pretraining.” In <em>Proceedings of the European Conference on Computer Vision (Eccv)</em>, 181–96.</p>
 </div>
+<div id="ref-Manning2022">
+<p>Manning, Chris, Anna Goldie, and John Hewitt. 2022. “Stanford Cs224n: Natural Language Processing with Deep Learning.”</p>
+</div>
 <div id="ref-mayer2014creating">
 <p>Mayer, Thomas, and Michael Cysouw. 2014. “Creating a Massively Parallel Bible Corpus.” <em>Oceania</em> 135 (273): 40.</p>
 </div>
 <div id="ref-redditUsers">
 <p>MICHAEL BARTHEL, JESSE HOLCOMB, GALEN STOCKING, and AMY MITCHELL. 2016. “Reddit News Users More Likely to Be Male, Young and Digital in Their News Preferences.” 2016. <a href="https://www.pewresearch.org/journalism/2016/02/25/reddit-news-users-more-likely-to-be-male-young-and-digital-in-their-news-preferences/">https://www.pewresearch.org/journalism/2016/02/25/reddit-news-users-more-likely-to-be-male-young-and-digital-in-their-news-preferences/</a>.</p>
+</div>
+<div id="ref-Mikolov2013">
+<p>Mikolov, Tomas, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013a. “Efficient Estimation of Word Representations in Vector Space.” <em>arXiv Preprint arXiv:1301.3781</em>.</p>
+</div>
+<div id="ref-mikolov2013efficient">
+<p>Mikolov, Tomas, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013b. “Efficient Estimation of Word Representations in Vector Space.” <em>arXiv Preprint arXiv:1301.3781</em>.</p>
+</div>
+<div id="ref-Mikolov2013a">
+<p>Mikolov, Tomas, Quoc V. Le, and Ilya Sutskever. 2013. “Exploiting Similarities Among Languages for Machine Translation,” September. <a href="http://arxiv.org/abs/1309.4168">http://arxiv.org/abs/1309.4168</a>.</p>
+</div>
+<div id="ref-Mikolov2013b">
+<p>Mikolov, Tomas, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013. “Distributed Representations of Words and Phrases and Their Compositionality,” October. <a href="http://arxiv.org/abs/1310.4546">http://arxiv.org/abs/1310.4546</a>.</p>
 </div>
 <div id="ref-unsupBrain">
 <p>Mineault, Patrick. 2021. “Unsupervised Models of the Brain.” 2021. <a href="https://xcorr.net/2021/12/31/2021-in-review-unsupervised-brain-models/">https://xcorr.net/2021/12/31/2021-in-review-unsupervised-brain-models/</a>.</p>
@@ -1134,11 +2064,23 @@ A example is shown down below.</p>
 <div id="ref-parcalabescu-etal-2022-valse">
 <p>Parcalabescu, Letitia, Michele Cafagna, Lilitta Muradjan, Anette Frank, Iacer Calixto, and Albert Gatt. 2022. “VALSE: A Task-Independent Benchmark for Vision and Language Models Centered on Linguistic Phenomena.” In <em>Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</em>, 8253–80. Association for Computational Linguistics. <a href="https://aclanthology.org/2022.acl-long.567">https://aclanthology.org/2022.acl-long.567</a>.</p>
 </div>
+<div id="ref-perez2021true">
+<p>Perez, Ethan, Douwe Kiela, and Kyunghyun Cho. 2021. “True Few-Shot Learning with Language Models.” <em>Advances in Neural Information Processing Systems</em> 34: 11054–70.</p>
+</div>
+<div id="ref-Pilehvar2021">
+<p>Pilehvar, Mohammad Taher, and Jose Camacho-Collados. 2021. <em>Embeddings in Natural Language Processing</em>. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-031-02177-0">https://doi.org/10.1007/978-3-031-02177-0</a>.</p>
+</div>
 <div id="ref-prabhu2020large">
 <p>Prabhu, Vinay Uday, and Abeba Birhane. 2020. “Large Image Datasets: A Pyrrhic Win for Computer Vision?” <em>arXiv Preprint arXiv:2006.16923</em>.</p>
 </div>
 <div id="ref-radford2021learning">
 <p>Radford, Alec, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, et al. 2021. “Learning Transferable Visual Models from Natural Language Supervision.” In <em>International Conference on Machine Learning</em>, 8748–63. PMLR.</p>
+</div>
+<div id="ref-Radford2018">
+<p>Radford, Alec, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever. 2018. “Improving Language Understanding by Generative Pre-Training.”</p>
+</div>
+<div id="ref-Raffel2019">
+<p>Raffel, Colin, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J. 2019b. “Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer,” October. <a href="http://arxiv.org/abs/1910.10683">http://arxiv.org/abs/1910.10683</a>.</p>
 </div>
 <div id="ref-rajpurkar2018know">
 <p>Rajpurkar, Pranav, Robin Jia, and Percy Liang. 2018. “Know What You Don’t Know: Unanswerable Questions for Squad.” <em>arXiv Preprint arXiv:1806.03822</em>.</p>
@@ -1151,6 +2093,18 @@ A example is shown down below.</p>
 </div>
 <div id="ref-ribeiro2020beyond">
 <p>Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. 2020. “Beyond Accuracy: Behavioral Testing of Nlp Models with Checklist.” <em>arXiv Preprint arXiv:2005.04118</em>.</p>
+</div>
+<div id="ref-Ritchie2020">
+<p>Ritchie, Hannah, Max Roser, and Pablo Rosado. 2020. “<span class="math inline">\(CO_2\)</span> And Greenhouse Gas Emissions.” <em>Our World in Data</em>.</p>
+</div>
+<div id="ref-saharia2022photorealistic">
+<p>Saharia, Chitwan, William Chan, Saurabh Saxena, Lala Li, Jay Whang, Emily Denton, Seyed Kamyar Seyed Ghasemipour, et al. 2022a. “Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding.” <em>arXiv Preprint arXiv: Arxiv-2205.11487</em>.</p>
+</div>
+<div id="ref-Saifee2020">
+<p>Saifee, Moiz. 2020. “GPT-3: The New Mighty Language Model from Openai.”</p>
+</div>
+<div id="ref-Sejnowski2020">
+<p>Sejnowski, Terrence J. 2020. “The Unreasonable Effectiveness of Deep Learning in Artificial Intelligence.” <em>Proceedings of the National Academy of Sciences U.S.A. (2020) Https://Www.pnas.org/Content/Early/2020/01/23/1907373117</em>, February. <a href="https://doi.org/10.1073/pnas.1907373117">https://doi.org/10.1073/pnas.1907373117</a>.</p>
 </div>
 <div id="ref-shao2019objects365">
 <p>Shao, Shuai, Zeming Li, Tianyuan Zhang, Chao Peng, Gang Yu, Xiangyu Zhang, Jing Li, and Jian Sun. 2019. “Objects365: A Large-Scale, High-Quality Dataset for Object Detection.” In <em>Proceedings of the Ieee/Cvf International Conference on Computer Vision</em>, 8430–9.</p>
@@ -1170,11 +2124,17 @@ A example is shown down below.</p>
 <div id="ref-strubell2019energy">
 <p>Strubell, Emma, Ananya Ganesh, and Andrew McCallum. 2019a. “Energy and Policy Considerations for Deep Learning in Nlp.” <em>arXiv Preprint arXiv:1906.02243</em>.</p>
 </div>
+<div id="ref-Sutskever2014">
+<p>Sutskever, Ilya, Oriol Vinyals, and Quoc V. Le. 2014. “Sequence to Sequence Learning with Neural Networks,” September. <a href="http://arxiv.org/abs/1409.3215">http://arxiv.org/abs/1409.3215</a>.</p>
+</div>
 <div id="ref-EfficientNet">
 <p>Tan, Mingxing, and Quoc V. Le. 2019. “EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks.” <a href="https://doi.org/10.48550/ARXIV.1905.11946">https://doi.org/10.48550/ARXIV.1905.11946</a>.</p>
 </div>
 <div id="ref-vaswani2017attention">
 <p>Vaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017b. “Attention Is All You Need.” <em>Advances in Neural Information Processing Systems</em> 30.</p>
+</div>
+<div id="ref-Voita2019">
+<p>Voita, Elena, David Talbot, Fedor Moiseev, Rico Sennrich, and Ivan Titov. 2019. “Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned,” May. <a href="http://arxiv.org/abs/1905.09418">http://arxiv.org/abs/1905.09418</a>.</p>
 </div>
 <div id="ref-wenzek2019ccnet">
 <p>Wenzek, Guillaume, Marie-Anne Lachaux, Alexis Conneau, Vishrav Chaudhary, Francisco Guzmán, Armand Joulin, and Edouard Grave. 2019. “Ccnet: Extracting High Quality Monolingual Datasets from Web Crawl Data.” <em>arXiv Preprint arXiv:1911.00359</em>.</p>
@@ -1186,7 +2146,7 @@ A example is shown down below.</p>
 <p>Yann, Lecun, and Misra Ishan. 2021. “Self-Supervised Learning: The Dark Matter of Intelligence.” 2021. <a href="https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/">https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/</a>.</p>
 </div>
 <div id="ref-parti">
-<p>Yu, Jiahui, Yuanzhong Xu, Jing Koh, Thang Luong, Gunjan Baid, Vijay Vasudevan, Alexander Ku, et al. 2022. “Scaling Autoregressive Models for Content-Rich Text-to-Image Generation,” June. <a href="https://doi.org/10.48550/arXiv.2206.10789">https://doi.org/10.48550/arXiv.2206.10789</a>.</p>
+<p>Yu, Jiahui, Yuanzhong Xu, Jing Koh, Thang Luong, Gunjan Baid, Vijay Vasudevan, Alexander Ku, et al. 2022a. “Scaling Autoregressive Models for Content-Rich Text-to-Image Generation,” June. <a href="https://doi.org/10.48550/arXiv.2206.10789">https://doi.org/10.48550/arXiv.2206.10789</a>.</p>
 </div>
 <div id="ref-yuan2022wudaomm">
 <p>Yuan, Sha, Zhao Shuai, Leng Jiahong, Xue Zhao, Zhao Hanyu, and Tang Jie. 2022. “WuDaoMM: A Large-Scale Multi-Modal Dataset for Pre-Training Models.” <em>arXiv Preprint arXiv:2203.11480</em>.</p>
@@ -1196,6 +2156,9 @@ A example is shown down below.</p>
 </div>
 <div id="ref-zhang2016yin">
 <p>Zhang, Peng, Yash Goyal, Douglas Summers-Stay, Dhruv Batra, and Devi Parikh. 2016. “Yin and Yang: Balancing and Answering Binary Visual Questions.” In <em>Proceedings of the Ieee Conference on Computer Vision and Pattern Recognition</em>, 5014–22.</p>
+</div>
+<div id="ref-Zhou2020">
+<p>Zhou, Yanqi, Sudip Roy, Amirali Abdolrashidi, Daniel Wong, Peter Ma, Qiumin Xu, Hanxiao Liu, et al. 2020. “Transferable Graph Optimizers for Ml Compilers.” <em>NeurIPS 2020</em>, October. <a href="http://arxiv.org/abs/2010.12438">http://arxiv.org/abs/2010.12438</a>.</p>
 </div>
 <div id="ref-zhuang2021unsupervised">
 <p>Zhuang, Chengxu, Siming Yan, Aran Nayebi, Martin Schrimpf, Michael C Frank, James J DiCarlo, and Daniel LK Yamins. 2021. “Unsupervised Neural Network Models of the Ventral Visual Stream.” <em>Proceedings of the National Academy of Sciences</em> 118 (3): e2014196118.</p>
