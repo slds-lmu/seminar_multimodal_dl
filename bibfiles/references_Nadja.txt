@@ -1,0 +1,792 @@
+
+@article{galanter2016generative,
+  title={Generative art theory},
+  author={Galanter, Philip},
+  journal={A Companion to Digital Art},
+  volume={1},
+  pages={631},
+  year={2016},
+  publisher={John Wiley \& Sons Hoboken, NJ}
+}
+
+@misc{mordvintsev_2015, 
+title={Inceptionism: Going Deeper into Neural Networks}, 
+url={https://ai.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html},
+journal={Google AI Blog}, 
+publisher={Google}, 
+author={Mordvintsev, Alexander}, 
+year={2015}, 
+month={Jun}} 
+
+
+
+@misc{tensorflow2015,
+title={DeepDream},
+publisher={tensorflow.org},
+url={https://www.tensorflow.org/tutorials/generative/deepdream},
+note={Google Colab available from tensorflow.org},
+  year={2015},
+}
+
+
+@misc{StyleTransfer,
+  doi = {10.48550/ARXIV.1508.06576},
+  url = {https://arxiv.org/abs/1508.06576},
+  author = {Gatys, Leon A. and Ecker, Alexander S. and Bethge, Matthias},
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), Neural and Evolutionary Computing (cs.NE), Neurons and Cognition (q-bio.NC), FOS: Computer and information sciences, FOS: Computer and information sciences, FOS: Biological sciences, FOS: Biological sciences},
+  title = {A Neural Algorithm of Artistic Style},
+  publisher = {arXiv},
+  year = {2016},
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+@inproceedings{NIPS2014_5ca3e9b1,
+ author = {Goodfellow, Ian and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {Z. Ghahramani and M. Welling and C. Cortes and N. Lawrence and K.Q. Weinberger},
+ pages = {},
+ publisher = {Curran Associates, Inc.},
+ title = {Generative Adversarial Nets},
+ url = {https://proceedings.neurips.cc/paper/2014/file/5ca3e9b122f61f8f06494c97b1afccf3-Paper.pdf},
+ volume = {27},
+ year = {2014}
+}
+
+
+@inproceedings{karras2019style,
+  title={A style-based generator architecture for generative adversarial networks},
+  author={Karras, Tero and Laine, Samuli and Aila, Timo},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={4401--4410},
+  year={2019}
+}
+
+
+@misc{morris_2022, 
+url={https://www.bibme.org/bibtex/website-citation}, 
+title={The Weird and Wonderful World of AI Art}, 
+author={Morris, Jack}, 
+year={2022}, 
+month={Jan}
+} 
+
+@INPROCEEDINGS{8477754,
+  author={Soderlund, Jacob and Blair, Alan},
+  booktitle={2018 IEEE Congress on Evolutionary Computation (CEC)}, 
+  title={Adversarial Image Generation Using Evolution and Deep Learning}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={1-8},
+  doi={10.1109/CEC.2018.8477754}}
+
+@article{StyleGAN,
+  author    = {Or Patashnik and
+               Zongze Wu and
+               Eli Shechtman and
+               Daniel Cohen{-}Or and
+               Dani Lischinski},
+  title     = {StyleCLIP: Text-Driven Manipulation of StyleGAN Imagery},
+  journal   = {CoRR},
+  volume    = {abs/2103.17249},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2103.17249},
+  eprinttype = {arXiv},
+  eprint    = {2103.17249},
+  timestamp = {Thu, 14 Oct 2021 09:15:43 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2103-17249.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+@article{DiffusionModels,
+  author    = {Prafulla Dhariwal and
+               Alex Nichol},
+  title     = {Diffusion Models Beat GANs on Image Synthesis},
+  journal   = {CoRR},
+  volume    = {abs/2105.05233},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2105.05233},
+  eprinttype = {arXiv},
+  eprint    = {2105.05233},
+  timestamp = {Fri, 14 May 2021 12:13:30 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2105-05233.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+
+@article{GLIDE,
+  author    = {Alex Nichol and
+               Prafulla Dhariwal and
+               Aditya Ramesh and
+               Pranav Shyam and
+               Pamela Mishkin and
+               Bob McGrew and
+               Ilya Sutskever and
+               Mark Chen},
+  title     = {{GLIDE:} Towards Photorealistic Image Generation and Editing with
+               Text-Guided Diffusion Models},
+  journal   = {CoRR},
+  volume    = {abs/2112.10741},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2112.10741},
+  eprinttype = {arXiv},
+  eprint    = {2112.10741},
+  timestamp = {Tue, 04 Jan 2022 15:59:27 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2112-10741.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+
+@misc{ruDALLE, 
+url={https://github.com/ai-forever/ru-dalle}, 
+title={ruDALL-E}, 
+author={Shonenkov, Alex}, 
+year={2021}
+} 
+
+@misc{DALLEmini, 
+url={https://huggingface.co/spaces/dalle-mini/dalle-mini}, 
+title={DALL·E mini},  
+author = {Boris, Dayma},
+year={2022}
+} 
+
+
+@misc{DALLEpytorch, 
+url={https://github.com/openai/DALL-E}, 
+title={DALL-E}, 
+author={OpenAI}, 
+year={2021}
+} 
+
+
+
+@inproceedings{liu2022design,
+  title={Design Guidelines for Prompt Engineering Text-to-Image Generative Models},
+  author={Liu, Vivian and Chilton, Lydia B},
+  booktitle={CHI Conference on Human Factors in Computing Systems},
+  pages={1--23},
+  year={2022}
+}
+
+@article{LAION,
+  author    = {Christoph Schuhmann and
+               Richard Vencu and
+               Romain Beaumont and
+               Robert Kaczmarczyk and
+               Clayton Mullis and
+               Aarush Katta and
+               Theo Coombes and
+               Jenia Jitsev and
+               Aran Komatsuzaki},
+  title     = {{LAION-400M:} Open Dataset of CLIP-Filtered 400 Million Image-Text
+               Pairs},
+  journal   = {CoRR},
+  volume    = {abs/2111.02114},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2111.02114},
+  eprinttype = {arXiv},
+  eprint    = {2111.02114},
+  timestamp = {Fri, 05 Nov 2021 15:25:54 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2111-02114.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+@misc{WZRD, 
+url={https://wzrd.ai/}, 
+title={WZRD}, 
+author={WZRD}, 
+year = 2020
+} 
+
+
+
+
+@misc{DALLE2,
+  doi = {10.48550/ARXIV.2204.06125},
+  
+  url = {https://arxiv.org/abs/2204.06125},
+  
+  author = {Ramesh, Aditya and Dhariwal, Prafulla and Nichol, Alex and Chu, Casey and Chen, Mark},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Hierarchical Text-Conditional Image Generation with CLIP Latents},
+  
+  publisher = {arXiv},
+  
+  year = {2022},
+  
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+
+
+
+@ARTICLE{3D,
+  author={Mccormack, Jon and Gambardella, Camilo Cruz},
+  journal={IEEE Transactions on Evolutionary Computation}, 
+  title={Growing and Evolving 3-D Prints}, 
+  year={2022},
+  volume={26},
+  number={1},
+  pages={88-99},
+  doi={10.1109/TEVC.2021.3095156}
+  }
+  
+  
+
+
+
+@article{misconduct,
+  title={Plagiarism in the age of massive Generative Pre-trained Transformers (GPT-3)},
+  author={Dehouche, Nassim},
+  journal={Ethics in Science and Environmental Politics},
+  volume={21},
+  pages={17--23},
+  year={2021}
+}
+
+
+@article{bias,
+    title={CLIP Prompt Engineering for Generative Art},
+    author={McAteer, Matthew},
+    journal={matthewmcateer.me},
+    year={2021},
+    url={https://matthewmcateer.me/blog/clip-prompt-engineering/}
+}
+
+
+
+
+
+@inproceedings{bias_ML,
+  title={Biases in generative art: A causal look from the lens of art history},
+  author={Srinivasan, Ramya and Uchino, Kanji},
+  booktitle={Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency},
+  pages={41--51},
+  year={2021}
+}
+
+
+
+@inproceedings{qiao2022initial,
+  title={Initial Images: Using Image Prompts to Improve Subject Representation in Multimodal AI Generated Art},
+  author={Qiao, Han and Liu, Vivian and Chilton, Lydia},
+  booktitle={Creativity and Cognition},
+  pages={15--28},
+  year={2022}
+}
+
+
+@misc{unrealEngine,
+  title={When you generate images with VQGAN CLIP, the image quality dramatically improves if you add "unreal engine" to your prompt. People are now calling this "unreal engine trick"},
+  author={Aran, Komatsuzaki},
+  url = {https://twitter.com/arankomatsuzaki/status/1399471244760649729},
+  year={2021},
+  publisher = {Twitter}
+}
+
+
+
+@misc{NFT,
+  doi = {10.48550/ARXIV.2105.07447},
+  
+  url = {https://arxiv.org/abs/2105.07447},
+  
+  author = {Wang, Qin and Li, Rujia and Wang, Qi and Chen, Shiping},
+  
+  keywords = {Cryptography and Security (cs.CR), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Non-Fungible Token (NFT): Overview, Evaluation, Opportunities and Challenges},
+  
+  publisher = {arXiv},
+  
+  year = {2021},
+  
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+
+
+
+@misc{DALLE,
+  doi = {10.48550/ARXIV.2102.12092},
+  
+  url = {https://arxiv.org/abs/2102.12092},
+  
+  author = {Ramesh, Aditya and Pavlov, Mikhail and Goh, Gabriel and Gray, Scott and Voss, Chelsea and Radford, Alec and Chen, Mark and Sutskever, Ilya},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Zero-Shot Text-to-Image Generation},
+  
+  publisher = {arXiv},
+  
+  year = {2021},
+  
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+
+
+
+@misc{CLIP,
+  doi = {10.48550/ARXIV.2103.00020},
+  
+  url = {https://arxiv.org/abs/2103.00020},
+  
+  author = {Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and Krueger, Gretchen and Sutskever, Ilya},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Learning Transferable Visual Models From Natural Language Supervision},
+  
+  publisher = {arXiv},
+  
+  year = {2021},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@misc{bias,
+  doi = {10.48550/ARXIV.2012.02516},
+  
+  url = {https://arxiv.org/abs/2012.02516},
+  
+  author = {Esser, Patrick and Rombach, Robin and Ommer, Björn},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {A Note on Data Biases in Generative Models},
+  
+  publisher = {arXiv},
+  
+  year = {2020},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+  
+@inproceedings{Radford2019LanguageMA,
+  title={Language Models are Unsupervised Multitask Learners},
+  author={Alec Radford and Jeff Wu and Rewon Child and David Luan and Dario Amodei and Ilya Sutskever},
+  year={2019}
+}
+
+@misc{GPT3,
+  doi = {10.48550/ARXIV.2005.14165},
+  
+  url = {https://arxiv.org/abs/2005.14165},
+  
+  author = {Brown, Tom B. and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and Agarwal, Sandhini and Herbert-Voss, Ariel and Krueger, Gretchen and Henighan, Tom and Child, Rewon and Ramesh, Aditya and Ziegler, Daniel M. and Wu, Jeffrey and Winter, Clemens and Hesse, Christopher and Chen, Mark and Sigler, Eric and Litwin, Mateusz and Gray, Scott and Chess, Benjamin and Clark, Jack and Berner, Christopher and McCandlish, Sam and Radford, Alec and Sutskever, Ilya and Amodei, Dario},
+  
+  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Language Models are Few-Shot Learners},
+  
+  publisher = {arXiv},
+  
+  year = {2020},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+@misc{environment,
+  doi = {10.48550/ARXIV.1906.02243},
+  
+  url = {https://arxiv.org/abs/1906.02243},
+  
+  author = {Strubell, Emma and Ganesh, Ananya and McCallum, Andrew},
+  
+  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Energy and Policy Considerations for Deep Learning in NLP},
+  
+  publisher = {arXiv},
+  
+  year = {2019},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+
+
+
+@misc{BERT,
+  doi = {10.48550/ARXIV.1810.04805},
+  
+  url = {https://arxiv.org/abs/1810.04805},
+  
+  author = {Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  
+  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding},
+  
+  publisher = {arXiv},
+  
+  year = {2018},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+
+@inproceedings{attention,
+ author = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, \L ukasz and Polosukhin, Illia},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {I. Guyon and U. Von Luxburg and S. Bengio and H. Wallach and R. Fergus and S. Vishwanathan and R. Garnett},
+ pages = {},
+ publisher = {Curran Associates, Inc.},
+ title = {Attention is All you Need},
+ url = {https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf},
+ volume = {30},
+ year = {2017}
+}
+
+
+@misc{ResNet,
+  doi = {10.48550/ARXIV.1512.03385},
+  
+  url = {https://arxiv.org/abs/1512.03385},
+  
+  author = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Deep Residual Learning for Image Recognition},
+  
+  publisher = {arXiv},
+  
+  year = {2015},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+
+@article{EfficientNet,
+  doi = {10.48550/ARXIV.1905.11946},
+  
+  url = {https://arxiv.org/abs/1905.11946},
+  
+  author = {Tan, Mingxing and Le, Quoc V.},
+  
+  keywords = {Machine Learning (cs.LG), Computer Vision and Pattern Recognition (cs.CV), Machine Learning (stat.ML), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks},
+  
+  publisher = {arXiv},
+  
+  year = {2019},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+@misc{SimCLR,
+  doi = {10.48550/ARXIV.2002.05709},
+  
+  url = {https://arxiv.org/abs/2002.05709},
+  
+  author = {Chen, Ting and Kornblith, Simon and Norouzi, Mohammad and Hinton, Geoffrey},
+  
+  keywords = {Machine Learning (cs.LG), Computer Vision and Pattern Recognition (cs.CV), Machine Learning (stat.ML), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {A Simple Framework for Contrastive Learning of Visual Representations},
+  
+  publisher = {arXiv},
+  
+  year = {2020},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+@misc{BYOL,
+  doi = {10.48550/ARXIV.2006.07733},
+  
+  url = {https://arxiv.org/abs/2006.07733},
+  
+  author = {Grill, Jean-Bastien and Strub, Florian and Altché, Florent and Tallec, Corentin and Richemond, Pierre H. and Buchatskaya, Elena and Doersch, Carl and Pires, Bernardo Avila and Guo, Zhaohan Daniel and Azar, Mohammad Gheshlaghi and Piot, Bilal and Kavukcuoglu, Koray and Munos, Rémi and Valko, Michal},
+  
+  keywords = {Machine Learning (cs.LG), Computer Vision and Pattern Recognition (cs.CV), Machine Learning (stat.ML), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Bootstrap your own latent: A new approach to self-supervised Learning},
+  
+  publisher = {arXiv},
+  
+  year = {2020},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+@misc{COCO,
+  doi = {10.48550/ARXIV.1405.0312},
+  
+  url = {https://arxiv.org/abs/1405.0312},
+  
+  author = {Lin, Tsung-Yi and Maire, Michael and Belongie, Serge and Bourdev, Lubomir and Girshick, Ross and Hays, James and Perona, Pietro and Ramanan, Deva and Zitnick, C. Lawrence and Dollár, Piotr},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Microsoft COCO: Common Objects in Context},
+  
+  publisher = {arXiv},
+  
+  year = {2014},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+
+
+@misc{meshed_memory ,
+  doi = {10.48550/ARXIV.1912.08226},
+  
+  url = {https://arxiv.org/abs/1912.08226},
+  
+  author = {Cornia, Marcella and Stefanini, Matteo and Baraldi, Lorenzo and Cucchiara, Rita},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Meshed-Memory Transformer for Image Captioning},
+  
+  publisher = {arXiv},
+  
+  year = {2019},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+@article{VAE,
+  author    = {Diederik P. Kingma and
+               Max Welling},
+  title     = {An Introduction to Variational Autoencoders},
+  journal   = {CoRR},
+  volume    = {abs/1906.02691},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1906.02691},
+  eprinttype = {arXiv},
+  eprint    = {1906.02691},
+  timestamp = {Thu, 13 Jun 2019 13:36:00 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1906-02691.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+@misc{DALLE,
+  doi = {10.48550/ARXIV.2102.12092},
+  
+  url = {https://arxiv.org/abs/2102.12092},
+  
+  author = {Ramesh, Aditya and Pavlov, Mikhail and Goh, Gabriel and Gray, Scott and Voss, Chelsea and Radford, Alec and Chen, Mark and Sutskever, Ilya},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Zero-Shot Text-to-Image Generation},
+  
+  publisher = {arXiv},
+  
+  year = {2021},
+  
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+
+
+@misc{CLIP,
+  doi = {10.48550/ARXIV.2103.00020},
+  
+  url = {https://arxiv.org/abs/2103.00020},
+  
+  author = {Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and Krueger, Gretchen and Sutskever, Ilya},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Learning Transferable Visual Models From Natural Language Supervision},
+  
+  publisher = {arXiv},
+  
+  year = {2021},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+
+
+@misc{VilBert,
+  doi = {10.48550/ARXIV.1908.02265},
+  
+  url = {https://arxiv.org/abs/1908.02265},
+  
+  author = {Lu, Jiasen and Batra, Dhruv and Parikh, Devi and Lee, Stefan},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {ViLBERT: Pretraining Task-Agnostic Visiolinguistic Representations for Vision-and-Language Tasks},
+  
+  publisher = {arXiv},
+  
+  year = {2019},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+
+@misc{Flamingo,
+  doi = {10.48550/ARXIV.2204.14198},
+  
+  url = {https://arxiv.org/abs/2204.14198},
+  
+  author = {Alayrac, Jean-Baptiste and Donahue, Jeff and Luc, Pauline and Miech, Antoine and Barr, Iain and Hasson, Yana and Lenc, Karel and Mensch, Arthur and Millican, Katie and Reynolds, Malcolm and Ring, Roman and Rutherford, Eliza and Cabi, Serkan and Han, Tengda and Gong, Zhitao and Samangooei, Sina and Monteiro, Marianne and Menick, Jacob and Borgeaud, Sebastian and Brock, Andrew and Nematzadeh, Aida and Sharifzadeh, Sahand and Binkowski, Mikolaj and Barreira, Ricardo and Vinyals, Oriol and Zisserman, Andrew and Simonyan, Karen},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), Artificial Intelligence (cs.AI), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Flamingo: a Visual Language Model for Few-Shot Learning},
+  
+  publisher = {arXiv},
+  
+  year = {2022},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+
+
+@misc{GAN,
+  doi = {10.48550/ARXIV.1406.2661},
+  
+  url = {https://arxiv.org/abs/1406.2661},
+  
+  author = {Goodfellow, Ian J. and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua},
+  
+  keywords = {Machine Learning (stat.ML), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Generative Adversarial Networks},
+  
+  publisher = {arXiv},
+  
+  year = {2014},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+
+@misc{GLIDE,
+  doi = {10.48550/ARXIV.2112.10741},
+  
+  url = {https://arxiv.org/abs/2112.10741},
+  
+  author = {Nichol, Alex and Dhariwal, Prafulla and Ramesh, Aditya and Shyam, Pranav and Mishkin, Pamela and McGrew, Bob and Sutskever, Ilya and Chen, Mark},
+  
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), Graphics (cs.GR), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models},
+  
+  publisher = {arXiv},
+  
+  year = {2021},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+
+@misc{Pathways,
+  doi = {10.48550/ARXIV.2203.12533},
+  
+  url = {https://arxiv.org/abs/2203.12533},
+  
+  author = {Barham, Paul and Chowdhery, Aakanksha and Dean, Jeff and Ghemawat, Sanjay and Hand, Steven and Hurt, Dan and Isard, Michael and Lim, Hyeontaek and Pang, Ruoming and Roy, Sudip and Saeta, Brennan and Schuh, Parker and Sepassi, Ryan and Shafey, Laurent El and Thekkath, Chandramohan A. and Wu, Yonghui},
+  
+  keywords = {Distributed, Parallel, and Cluster Computing (cs.DC), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Pathways: Asynchronous Distributed Dataflow for ML},
+  
+  publisher = {arXiv},
+  
+  year = {2022},
+  
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+
+
+
+
+
+@ARTICLE{explainaility,
+  author={Joshi, Gargi and Walambe, Rahee and Kotecha, Ketan},
+  journal={IEEE Access}, 
+  title={A Review on Explainability in Multimodal Deep Neural Nets}, 
+  year={2021},
+  volume={9},
+  number={},
+  pages={59800-59821},
+  doi={10.1109/ACCESS.2021.3070212}}
+  
+  
+
+@article{ALIGN,
+  author    = {Chao Jia and
+               Yinfei Yang and
+               Ye Xia and
+               Yi{-}Ting Chen and
+               Zarana Parekh and
+               Hieu Pham and
+               Quoc V. Le and
+               Yun{-}Hsuan Sung and
+               Zhen Li and
+               Tom Duerig},
+  title     = {Scaling Up Visual and Vision-Language Representation Learning With
+               Noisy Text Supervision},
+  journal   = {CoRR},
+  volume    = {abs/2102.05918},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2102.05918},
+  eprinttype = {arXiv},
+  eprint    = {2102.05918},
+  timestamp = {Wed, 05 May 2021 14:06:23 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2102-05918.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+@article{yuan2021florence,
+  title={Florence: A New Foundation Model for Computer Vision},
+  author={Yuan, Lu and Chen, Dongdong and Chen, Yi-Ling and Codella, Noel and Dai, Xiyang and Gao, Jianfeng and Hu, Houdong and Huang, Xuedong and Li, Boxin and Li, Chunyuan and others},
+  journal={arXiv preprint arXiv:2111.11432},
+  year={2021}
+}
+
+
+
+
+
+
+
+
+
+
