@@ -68,36 +68,36 @@ Generally, identity mappings are not optimal, but new reformulations may help to
 
 ##### Identity Mapping by Shortcuts
 
-Residual learning is adopted to every few stacked layers where a building block is defined as shown in Fig. 1:
+Residual learning is adopted to every few stacked layers where a building block is defined as shown in Figure \@ref(fig:ch01-figure01):
 
 \begin{equation}
-\tag{1}
+(\#eq:ch01-02-01)
 y = F  \left( x,\left\{  W_i\right\} \right) + x
 \end{equation}
 
 x and y present the input and output vectors of the layers.
 
-```{r ch01-figure01, echo=FALSE, out.width="35%", fig.cap="Figure 1. Building block of residual learning", fig.align="center"}
+```{r ch01-figure01, echo=FALSE, out.width="35%", fig.cap="Building block of residual learning", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/resnetBlock.png")
 ```
 
-The function $F \left( x,\left\{  W_i\right\} \right)$ represents the residual mapping that is to be learned. For the example with two layers from Fig.1 that has two layers, $F = W_2\sigma\left( W_1x\right)$ in which $\sigma$ denotes the ReLU activation function, and to simplify the notations, biases are left out. The operation $F + x$ is conducted with a shortcut connection and element-wise addition. Afterward, He et al. applied second nonlinearity ( i.e., $\sigma \left( y \right)$, Fig.1).
+The function $F \left( x,\left\{  W_i\right\} \right)$ represents the residual mapping that is to be learned. For the example with two layers from Figure \@ref(fig:ch01-figure01) that has two layers, $F = W_2\sigma\left( W_1x\right)$ in which $\sigma$ denotes the ReLU activation function, and to simplify the notations, biases are left out. The operation $F + x$ is conducted with a shortcut connection and element-wise addition. Afterward, He et al. applied second non-linearity ( i.e., $\sigma \left( y \right)$, \@ref(fig:ch01-figure01)).
 
-The shortcut connections in Eq. (1) neither adds an extra parameter nor increases computation complexity, which enables comparisons between plain and residual networks that concurrently have the same number of parameters, depth, width, and computational cost (except for the negligible element-wise addition).
-Dimensions of x and F must be equal in Eq. (1). Alternatively, to match the dimensions, linear projection $W_s$ by the shortcut connections can be applied:
+The shortcut connections in Equation \@ref(eq:ch01-02-01) neither adds an extra parameter nor increases computation complexity, which enables comparisons between plain and residual networks that concurrently have the same number of parameters, depth, width, and computational cost (except for the negligible element-wise addition).
+Dimensions of x and F must be equal in Equation \@ref(eq:ch01-02-01). Alternatively, to match the dimensions, linear projection $W_s$ by the shortcut connections can be applied:
 
 \begin{equation}
-\tag{2}
+(\#eq:ch01-02-02)
 y = F  \left( x,\left\{  W_i\right\} \right)+ W_sx.
 \end{equation}
 
-The square matrix $W_s$ can be used in Eq. (1). However, experiments showed that identity mapping is enough to solve the degradation problem.  Therefore, $W_s$  only aims to match dimensions. Although more levels are possible, it was experimented with function F having two or three layers without stating the exact form of it. Assuming F only has one layer, Eq (1) it is comparable to a linear layer:  $y = W_1 x + x$. The theoretical notations are about fully-connected layers, but convolutional layers were used. The function $F  \left( x,\left\{  W_i\right\} \right)$  can be applied to represent multiple convolutional layers. Two feature maps are added element-wise, channel by channel.
+The square matrix $W_s$ can be used in Equation \@ref(eq:ch01-02-02). However, experiments showed that identity mapping is enough to solve the degradation problem.  Therefore, $W_s$  only aims to match dimensions. Although more levels are possible, it was experimented with function F having two or three layers without stating the exact form of it. Assuming F only has one layer, Equation \@ref(eq:ch01-02-01), it is comparable to a linear layer:  $y = W_1 x + x$. The theoretical notations are about fully-connected layers, but convolutional layers were used. The function $F  \left( x,\left\{  W_i\right\} \right)$  can be applied to represent multiple convolutional layers. Two feature maps are added element-wise, channel by channel.
 
 
 #### Network Architectures
 
 
-To construct efficient residual network, various plain/residual networks were tested. They trained the network on benchmarked datasets, one of them being the ImageNet dataset, which will be used for a comparison of network architectures. Fig. 2 shows that every residual network needs a plain baseline network inspired by the VGG network @vgg on which identity mapping by shortcuts is applied.
+To construct efficient residual network, various plain/residual networks were tested. They trained the network on benchmarked datasets, one of them being the ImageNet dataset, which will be used for a comparison of network architectures. Figure \@ref(eq:ch01-02-02) shows that every residual network needs a plain baseline network inspired by the VGG network @vgg on which identity mapping by shortcuts is applied.
 
 
 *Plain Network* The philosophy of VGG nets 41 mainly inspires plain baselines. There are two rules that convolution layers, which usually have 3x3 filters, follow:
@@ -105,17 +105,17 @@ To construct efficient residual network, various plain/residual networks were te
 * feature maps with the same output size have the same number of layers;
 * reducing the size of a feature map by half doubles the number of filters per layer to maintain time complexity per layer
 
-Convolutional layers with a stride of 2 perform downsampling directly. A global average pooling layer and a 1000-way fully-connected layer with softmax are at the end of the network. The number of weighted layers sums up to 34 in Fig. 2 (middle).Compared to VGG nets, this model has fewer filters and lower complexity. (Fig. 2, left).
+Convolutional layers with a stride of 2 perform downsampling directly. A global average pooling layer and a 1000-way fully-connected layer with softmax are at the end of the network. The number of weighted layers sums up to 34 in Figure \@ref(fig:ch01-figure02) (middle).Compared to VGG nets, this model has fewer filters and lower complexity. (Figure \@ref(fig:ch01-figure02), left).
 
-*Residual Network* Based on the above plain network, additional shortcut connections (Fig. 2, right) turn the network into its associate residual variant. The identity shortcuts (Eq. (1)) can be directly used in the case of the exact dimensions of the input and output (solid line shortcuts in Fig. 2). For the different dimensions  (dotted line shortcuts in Fig. 2), two options are considered:
+*Residual Network* Based on the above plain network, additional shortcut connections (Figure \@ref(fig:ch01-figure02), right) turn the network into its associate residual variant. The identity shortcuts (Equation \@ref(eq:ch01-02-01)) can be directly used in the case of the exact dimensions of the input and output (solid line shortcuts in Figure \@ref(fig:ch01-figure02)). For the different dimensions  (dotted line shortcuts in Figure \@ref(fig:ch01-figure02)), two options are considered:
 
 * The shortcut still performs identity mapping, but with extra zero entries padded to cope with the increasing dimensions, without adding new parameters;
-* The projection shortcut in Eq. (2) matches dimensions (due to 1×1 convolutions).
+* The projection shortcut in Equation \@ref(eq:ch01-02-02) matches dimensions (due to 1×1 convolutions).
 
 In both cases, shortcuts will be done with a stride of two when they go across feature maps of two sizes.
 
 
-```{r ch01-figure02, echo=FALSE, out.width="100%", fig.cap="Figure 2. Architecture of ResNet", fig.align="center"}
+```{r ch01-figure02, echo=FALSE, out.width="100%", fig.cap="Architecture of ResNet", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/ResNet_architecture.png")
 ```
 
@@ -123,10 +123,10 @@ knitr::include_graphics("./figures/01-chapter1/ResNet_architecture.png")
 ### EfficientNet
 
   Until Tan M. introduced EfficientNet @effecient, it was popular to scale only one of the three dimensions – depth, width, or image size. The empirical study shows that it is critical to balance all network dimensions, which can be achieved by simply scaling each with a constant ratio. Based on this observation, a simple yet effective compound scaling method was proposed, which uniformly scales network width, depth, and resolution with a set of fixed scaling coefficients.
-For example, if 2N times more computational resources are available. In that case, increasing the network depth by $\alpha N$, width by $\beta N$, and image size by $\gamma N$ would be possible.Here $\alpha,\beta,\gamma$ are constant coefficients determined by a small grid search on the original miniature model. Fig. 3 illustrates the difference between this scaling method and conventional methods.
+  For example, if 2N times more computational resources are available. In that case, increasing the network depth by $\alpha N$, width by $\beta N$, and image size by $\gamma N$ would be possible.Here $\alpha,\beta,\gamma$ are constant coefficients determined by a small grid search on the original miniature model. Figure \@ref(fig:ch01-figure03) illustrates the difference between this scaling method and conventional methods.
 A compound scaling method makes sense if an input image is bigger since a larger receptive field requires more layers and more significant channel features to capture fine-grained patterns. Theoretically and empirically, there has been a special relationship between network width and depth @depthwidth. Existing MobileNets @mobilenet and ResNet are used to demonstrated new scaling method.
 
-```{r ch01-figure03, echo=FALSE, out.width="100%", fig.cap="Figure 3. Model scaling", fig.align="center"}
+```{r ch01-figure03, echo=FALSE, out.width="100%", fig.cap="Model scaling", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/Model_scaling.png")
 ```
 
@@ -136,29 +136,26 @@ knitr::include_graphics("./figures/01-chapter1/Model_scaling.png")
 ##### Problem Formulation
 
 A function $Y_i = \mathcal{F}i \left( X_i \right)$ with the operator $\mathcal{F}_i$, output tensor $Y_i$, input tensor $X_i$ of shape $\left( H_i, W_i, C_i \right)$, spatial dimensions $H_i$, $W_i$, and channel dimension $C_i$ is called a ConvNet Layer $i$. A ConvNet N appears as a list of composing layers:
-\begin{equation}
-\tag{3}
+$$
 \mathcal{N}=\mathcal{F_k}\odot \cdots \mathcal{F_2}\odot\mathcal{F_1}\left( X_1 \right)=\bigodot{j=1\cdots k}\mathcal{F_j}\left( X_1 \right)
-\end{equation}
+$$
 
 Effectively, these layers are often partitioned into multiple stages, and all layers in each stage share the same architecture. For example, ResNet has five stages, with all layers in every stage being the same convolutional type, except for the first layer that performs down-sampling. Therefore, a ConvNet can be defined as:
 
-\begin{equation}
-\tag{4}
- \mathcal{N}=\bigodot_{i=1\cdots s}\mathcal{F_i}^{L_i}\left( X_{\left( H_i, W_i, C_i  \right)} \right)
-\end{equation}
+$$
+\mathcal{N}=\bigodot_{i=1\cdots s}\mathcal{F_i}^{L_i}\left( X_{\left( H_i, W_i, C_i  \right)} \right)
+$$
 
 where $\mathcal{F_i}^{L_i}$ denotes layer $\mathcal{F_i}$ which is repeated $L_i$ times in stage $i$, and $\left( H_i, W_i, C_i \right)$ is the shape of input tensor $X$ of layer $i$.
 
 In comparison to the regular ConvNet focusing on best layer architecture $\mathcal{F_i}$ search, model scaling centers on the expansion of the network length $\left( L_i\right)$, width $\left( C_i \right)$, and/or resolution $\left( H_i, W_i\right)$ without changing $\mathcal{F_i}$ that was predefined in the baseline network. Although model scaling simplifies the design problem of the new resource constraints through the fixing $\mathcal{F_i}$, different $\left( L_i, H_i, W_i, C_i \right)$ for each layer, the large designe space remains to be explored. To further reduce design space, all layers are restricted to be scaled uniformly with a constant ratio. In this case, the goal is to maximize the model's accuracy for any given resource constraints, which can be presented as an optimization problem:
 
-\begin{equation}
-\tag{5}
-\max_{d,w,r}  Accuracy \left( \mathcal{N}\left( d,w,r \right) \right) \\
-s.t.\mathcal{N}\left( d,w,r \right)=\bigodot_{I=1...s}\hat{\mathcal{F}}{i}^{d\cdot \hat{L{i}}}\left( X_{\left\langle r\cdot \hat{H_i},r\cdot \hat{W_i},w\cdot \hat{C_i}\right\rangle} \right) \\
-Memory\left( \mathcal{N} \right)≤ targetMemory \\
-FLOPS\left( \mathcal{N} \right) ≤ targetFlops \\
-\end{equation}
+\begin{align*}
+\max_{d,w,r} &\text{Accuracy} \left( \mathcal{N}\left( d,w,r \right) \right) \\
+s.t.\mathcal{N}\left( d,w,r \right) &=\bigodot_{I=1...s}\hat{\mathcal{F}}{i}^{d\cdot \hat{L{i}}}\left( X_{\left\langle r\cdot \hat{H_i},r\cdot \hat{W_i},w\cdot \hat{C_i}\right\rangle} \right) \\
+Memory\left( \mathcal{N} \right) &\leq\ targetMemory \\
+FLOPS\left( \mathcal{N} \right) &\leq\ targetFlops
+\end{align*}
 where w,d,r are coefficients for scaling network width, depth, and resolution; $\left(\widehat{\mathcal{F}}_i, \widehat{L}_i, \widehat{H}_i, \widehat{W}_i, \widehat{C}_i \right)$ are predefined parameters in baseline network.
 
 ##### Scaling Dimensions
@@ -184,14 +181,16 @@ To confirm this thought, results of networks width $w$ without changing depth ($
 
 A new **compound scaling method**, which uses a compound coefficient $\varphi$ to uniformly scale network width, depth, and resolution in a principled way, was proposed.
 
-\begin{equation}
-\tag{6}
-depth: \mathcal{d}=\alpha^{\varphi} \\
-width: \mathcal{w}=\beta^{\varphi}\\
-resolution: \mathcal{r}=\gamma^{\varphi}\\
-s.t.  \alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\\
- \alpha \ge 1, \beta \ge 1, \gamma \ge 1\\
-\end{equation}
+\begin{align}
+\begin{split}
+\text{depth:} &\mathcal{d}=\alpha^{\varphi} \\
+\text{width:} &\mathcal{w}=\beta^{\varphi}\\
+\text{resolution:} &\mathcal{r}=\gamma^{\varphi}\\
+&s.t.  \alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\\
+&\alpha \ge 1, \beta \ge 1, \gamma \ge 1
+\end{split}
+ (\#eq:01-02-06)
+\end{align}
 
 where $\alpha, \beta, \gamma$ are constants that can be determined by a small grid search, $\varphi$ is a user-specified coefficient that controls how many more resources are available for model scaling, while $\alpha, \beta, \gamma$ specify how to assign these extra resources to network width, depth, and resolution, respectively. Notably, the FLOPS of a regular convolution op is proportional to $d, w^{2}, r^{2}$, i.e., doubling network depth will double FLOPS, but doubling network width or Resolution will increase FLOPS by four times. Scaling a ConvNet with  previous equation will approximately increase total FLOPS by $\left( \alpha\cdot \beta^{2}\cdot \gamma^{2} \right)^{\varphi}$. In this paper, $\alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2$ is constrain such that for any new $\varphi$, the total FLOPS will approximately increase by $2\varphi$
 
@@ -201,9 +200,9 @@ where $\alpha, \beta, \gamma$ are constants that can be determined by a small gr
 A new mobile-sized baseline called EfficientNet was developed to show the effectiveness of the new scaling method. Metrics that were used to estimate the efficacy are accuracy and FLOPS.
 The baseline efficient network that was created is named EfficientNet-B0. Afterward, this compound scaling method is applied in two steps:
 
-* **STEP 1**:  By fixing  $\varphi = 1$ and, assuming twice more resources available, a small grid search of $\alpha, \beta, \gamma $ based Eq. (6) showed that the best values for EfficientNet-B0 are $\alpha = 1.2, \beta = 1.1, \gamma=1.15$, under constraint of $\alpha·\beta^2·\gamma^2 ≈2$.
+* **STEP 1**:  By fixing  $\varphi = 1$ and, assuming twice more resources available, a small grid search of $\alpha, \beta, \gamma $ based Equation \@ref(eq:01-02-06) showed that the best values for EfficientNet-B0 are $\alpha = 1.2, \beta = 1.1, \gamma=1.15$, under constraint of $\alpha·\beta^2·\gamma^2 ≈2$.
 
-* **STEP 2**: Afterward fix $\alpha,\beta,\gamma$ as constants and scale up the baseline network with different $\varphi$ using Eq.(6) to  construct EfficientNet-B1 to B7
+* **STEP 2**: Afterward fix $\alpha,\beta,\gamma$ as constants and scale up the baseline network with different $\varphi$ using Equation \@ref(eq:01-02-06) to  construct EfficientNet-B1 to B7
 
 | Name             | Number of parameters|
 |:---------------:|:--------:|
@@ -259,7 +258,7 @@ This field is a constant research topic, and new, improved frameworks are being 
 
 ### A Simple Framework for Contrastive Learning of Visual Representations
 
-Chen T. et al. intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations and called it SimCLR @SimCLR. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.
+@SimCLR intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations and called it SimCLR. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.
 
   Intending to understand what qualifies good contrastive representation learning, the significant components of the framework were studied and resulted in:
 
@@ -271,7 +270,7 @@ Chen T. et al. intended to analyze and describe a better approach to learning vi
 
 #### The Contrastive Learning Framework
 
- Like previous contrastive learning algorithms,  in the SimCLR, a contrastive loss is used to learn representations by maximizing agreement between various augmented views of the same data example. This framework contains four significant components, which are shown in Fig. 4:
+ Like previous contrastive learning algorithms,  in the SimCLR, a contrastive loss is used to learn representations by maximizing agreement between various augmented views of the same data example. This framework contains four significant components, which are shown in Figure \@ref(fig:ch01-figure4):
 
 1. A stochastic *data augmentation* module
 
@@ -281,7 +280,7 @@ Chen T. et al. intended to analyze and describe a better approach to learning vi
 
 4. A *contrastive loss function*
 
-```{r ch01-figure04, echo=FALSE, out.width="30%", fig.cap="Figure 4. A simple framework for contrastive learning of visual representations", fig.align="center"}
+```{r ch01-figure04, echo=FALSE, out.width="30%", fig.cap="A simple framework for contrastive learning of visual representations", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/SimCLR.png")
 ```
 
@@ -296,7 +295,7 @@ There are many data augmentation operations, the focus was on the most common on
 * **spatial geometric transformation**: cropping and resizing (with horizontal flipping), rotation and cutout,
 *  **appearance transformation**:  color distortion (including color dropping), brightness, contrast, saturation, Gaussian blur, and Sobel filtering.
 
-```{r ch01-figure05, echo=FALSE, out.width="80%", fig.cap="Figure 5. Augmentation texhniques", fig.align="center"}
+```{r ch01-figure05, echo=FALSE, out.width="80%", fig.cap="Augmentation texhniques", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/augmentation.png")
 ```
 
@@ -325,10 +324,9 @@ This step is performed because defining the contrastive loss on $z_i$ instead of
 
 Given a set $\left\{ \tilde{x}_{ik} \right\}$ including a positive pair of examples $\tilde{x}_{i}$ and $\tilde{x}_{j}$, the contrastive prediction task aims to identify $\tilde{x}_{i}$ in $\left\{ \tilde{x}_{i} \right\}_{k\neq i}$ for a given $\tilde{x}_{i}$. In the case of positive examples, the loss function is as follows  $\left(  i, j\right)$ is defined as
 
-\begin{equation}
-\tag{7}
+$$
 \mathcal{l}_{i,j} = −\log\frac{exp\left( \frac{sim(z_i,z_j)}{\tau} \right)}{\sum_{k=1}^{2N}\mathbb{I_{\left[ k\neq i \right]}}exp\left( \frac{sim(z_i,z_k)}{\tau} \right)}
-\end{equation}
+$$
 
 where $\mathbb{I_{\left[ k\neq i \right]}}\in\left\{ 0,1 \right\}$ is an indicator function, $\tau$ denotes a temperature parameter and $sim\left(\textbf{u,v} \right)= \frac{\textbf{u}^T\textbf{v}}{\left\|  \textbf{u}\right\|\left\| \textbf{v} \right\|}$ is a dot product between $\mathcal{l}_2$ normalized $\textbf{u},\textbf{v}$.
 
@@ -339,7 +337,7 @@ The NT-Xent loss was compared against other commonly used contrastive loss funct
 
 ### Bootstrap Your Own Latent
 
-The fundamental idea of contrastive learning is to create pairs of images on which the framework would be trained. Creating negative pairs relies on large batch sizes, memory banks, or customized mining strategies which can be challenging in larger datasets. Grill J.B. at al. wanted to create a new approach that would achieve better performance than other contrastive methods without using negative pairs. A solution they have introduced is a method called Bootstrap Your Own Latent (BYOL) @BYOL. The idea was to bootstrap representations of images. As a result, BYOL is more robust to the choice of image augmentations.
+The fundamental idea of contrastive learning is to create pairs of images on which the framework would be trained. Creating negative pairs relies on large batch sizes, memory banks, or customized mining strategies which can be challenging in larger datasets. @BYOL wanted to create a new approach that would achieve better performance than other contrastive methods without using negative pairs. A solution they have introduced is a method called Bootstrap Your Own Latent (BYOL). The idea was to bootstrap representations of images. As a result, BYOL is more robust to the choice of image augmentations.
 Furthermore, BYOL has two neural networks, called online and target networks, which interact and learn from each other. Using an augmented view of an image, BYOL trains its online network to predict the target network's representation of another augmented view. This approach achieved state-of-the-art results when trained on the ImageNet dataset under the linear evaluation protocol. Additionally, compared to SimCLR, a strong contrastive baseline, BYOL suffers from much less performance drop when only random crops are used to augment images.
 
 
@@ -351,7 +349,7 @@ BYOL aims to learn a representation of $y_\theta$. It uses two neural networks: 
 * a projector $g_\theta$,
 * a predictor $q_\theta$.
 
-```{r ch01-figure06, echo=FALSE, out.width="80%", fig.cap="Figure 6. Bootstrap Your Own Latent", fig.align="center"}
+```{r ch01-figure06, echo=FALSE, out.width="80%", fig.cap="Bootstrap Your Own Latent", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/BYOL.png")
 ```
 
@@ -415,7 +413,7 @@ These patches are the same as tokens (eg. words) in NLP. The model is trained on
 Brain Team wanted to create simple but universally scalable architecture to follow the original Transformers architecture.
 
 
-```{r ch01-figure7, echo=FALSE, out.width="90%", fig.cap="Figure 7. Vision Transformer", fig.align="center"}
+```{r ch01-figure7, echo=FALSE, out.width="90%", fig.cap="Vision Transformer", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/ViT.png")
 ```
 
@@ -424,30 +422,26 @@ knitr::include_graphics("./figures/01-chapter1/ViT.png")
 
 Compared to NLP, where the input of the Transformer is a 1D sequence of token embeddings, images are 2D objects. Firstly, images needed to be represented differently to imitate original architectures as closely as possible. For that reason image $x\in \mathbb{R}^{ H \times  W \times  C}$ is reshaped into a sequence of flattened 2D patches $x_p\in \mathbb{R}^{ N \times \left( P^2 \cdot C \right)}$, where $\left(H,W\right)$ is the resolution of the original image, $C$ is the number of channels,$\left(P,P\right)$ is the resolution of each image patch, and $N =HW/P^2$ is the resulting number of patches, also the Transformer's effective input sequence length. The Transformer input is a fixed through all layers vector size $D$. The first step is to flatten the patches, usually 16x16, and map them to $D$ dimensions with a trainable linear projection, creating patch embeddings.
 
-\begin{equation}
-\tag{12}
+$$
 \mathbf{z}_{0} =\left[\mathbf{x}_{\text {class }} ; \mathbf{x}_{p}^{1} \mathbf{E} ; \mathbf{x}_{p}^{2} \mathbf{E} ; \cdots ; \mathbf{x}_{p}^{N} \mathbf{E}\right]+\mathbf{E}_{p o s}, \mathbf{E} \in \mathbb{R}^{\left(P^{2} \cdot C\right) \times D}, \mathbf{E}_{p o s} \in \mathbb{R}^{(N+1) \times D}
-\end{equation}
+$$
 
 To this sequence of "patch embeddings," a prefix learnable [class] token, like in BERT, is usually added. This token $\mathbf{z}_{0}^{0} = \mathbf{x}_{class}$ tells the model to classify the image and  increases dimension of vector z. Also, the state of this token at the output of the Transformer encoder $\left(\mathbf{z}_{L}^{0}\right)$, on which Layernorm is applied, serves as the image representation $y$.
 
-\begin{equation}
-\tag{13}
+$$
 \mathbf{y} =\operatorname{LN}\left(\mathbf{z}_{L}^{0}\right)
-\end{equation}
+$$
 
 
 Also, it is the only one to which the classification head is attached to during pre-training and fine-tuning. Classification head during pre-training is compiled of MLP with one hidden layer and a single linear layer at a fine-tuning time. Position embedding,a standard learnable 1D position embedding, are attached to the patch embeddings, serving as input to the encoder. The standard Transformer encoder consists of alternating layers of multiheaded self-attention and MLP blocks. After each block, a residual connection is applied.
 
-\begin{equation}
-\tag{14}
+$$
 \mathbf{z}_{\ell}^{\prime} =\operatorname{MSA}\left(\operatorname{LN}\left(\mathbf{z}_{\ell-1}\right)\right)+\mathbf{z}_{\ell-1},  \ell=1 \ldots L
-\end{equation}
+$$
 
-\begin{equation}
-\tag{15}
+$$
 \mathbf{z}_{\ell} =\operatorname{MLP}\left(\mathrm{LN}\left(\mathbf{z}_{\ell}^{\prime}\right)\right)+\mathbf{z}_{\ell}^{\prime}, \ell=1 \ldots L
-\end{equation}
+$$
 
 Vision Transformer has a significantly lower inductive bias than CNNs in image-specific information. VIT only has local and translationally equivariant MLP layers, while the self-attention layers are global. Two-dimensional neighborhood structure is used sparingly: the image is cut into patches at the beginning, and the position embeddings are resized as needed at the fine-tuning time. Alternatively, the input sequence can consist of a CNN's feature maps on which patch embedding projection is applied.
 Vision Transformers are pre-trained on large datasets, and fine-tuned to (smaller) downstream tasks. For fine-tuning projection head is removed and zero-initialized $D \times K$ feedforward layer is attached, $K$ being the number of downstream classes. It is also beneficial to use higher resolution then in pre-training. Also ViT can handle arbitrary sequence lengths, but the pre-trained position embeddings can become sufficient. It is necessary to point out that resolution adjustment and patch extraction are the only points at which an inductive bias about the 2D structure of the images is manually injected into the Vision Transformers

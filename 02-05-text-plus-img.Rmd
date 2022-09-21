@@ -23,20 +23,21 @@ After all, we would like to know why machine learning models do what they do. Fi
 
 
 
-```{r vltasks,echo=FALSE, out.width="70%", fig.align="center", fig.cap="Uppal et al. (2022): VisLang Paper Trends (previous 2 years)"}
+```{r vltasks,echo=FALSE, out.width="70%", fig.align="center", fig.cap="(ref:vltasks)"}
 knitr::include_graphics("figures/05-chapter2/vltasks.PNG")
 ```
-
+(ref:vltasks) @uppal2022multimodal: VisLang Paper Trends (previous 2 years)
 
 ### Data2vec
 
-With data2vec (@baevski2022data2vec), data scientists at Meta, formerly Facebook, developed an architecture that addresses some of the mentioned issues while highlighting the importance of sophisticated training schemes. Their algorithmic structure is able to work with either text, image or speech data. On top of that, the model is self-supervised based on a teacher-student relationship which reduces the need  for human labelling. It is not a universal model in the sense that it works with any input, nor is it even a general model in the sense that the algorithm is exactly the same for each modality. However, the overall model structure remains the same for either text, speech or image input data, while only the specific encoding, normalization and masking strategies are modality-specific. In that regard, it is a step towards a more general way of dealing with different modalities and it is very effective at doing so given the benchmark results on typical data sets. Particularly noteworthy is also the way they implement the self-supervised learning. Data2vec predicts contextualized and continuous representations rather than typically used discrete tokens such as sub-words. Working with latent representations of the input space has two advantages: not only is the number of prediction targets not a-priori limited, but they are also richer in information.
+With data2vec [@baevski2022data2vec], data scientists at Meta, formerly Facebook, developed an architecture that addresses some of the mentioned issues while highlighting the importance of sophisticated training schemes. Their algorithmic structure is able to work with either text, image or speech data. On top of that, the model is self-supervised based on a teacher-student relationship which reduces the need  for human labelling. It is not a universal model in the sense that it works with any input, nor is it even a general model in the sense that the algorithm is exactly the same for each modality. However, the overall model structure remains the same for either text, speech or image input data, while only the specific encoding, normalization and masking strategies are modality-specific. In that regard, it is a step towards a more general way of dealing with different modalities and it is very effective at doing so given the benchmark results on typical data sets. Particularly noteworthy is also the way they implement the self-supervised learning. Data2vec predicts contextualized and continuous representations rather than typically used discrete tokens such as sub-words. Working with latent representations of the input space has two advantages: not only is the number of prediction targets not a-priori limited, but they are also richer in information.
 
 
 
-```{r data2vecoverview,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Baevski et al. (2022): Data2vec Architecture - a teacher model creates contextualized latent targets on the basis of its top K layers (blue) as prediction task to train the student model"}
+```{r data2vecoverview,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:data2vecoverview)"}
 knitr::include_graphics("figures/05-chapter2/datavecoverview.png")
 ```
+(ref:data2vecoverview) @baevski2022data2vec: Data2vec Architecture - a teacher model creates contextualized latent targets on the basis of its top K layers (blue) as prediction task to train the student model
 
 
 Figure \@ref(fig:data2vecoverview) depicts the general model architecture. The two main components are a teacher and a student model which only differ in one aspect, the weights of the teacher model are an exponentially decaying average of the student's weights. The purpose of the teacher model is to create training targets for the student model.
@@ -62,12 +63,12 @@ In short, multi-head attention first projects the keys, queries and values with 
 As far as the vision transformer itself is concerned, datav2vec tests two different model sizes, a base model size of 12 and a large model of 24 transformer blocks. The masking strategy for images follows the Bert pretraining approach of image transformers, BEiT, proposed by (@bao2021beit). In particular, multiple adjacent blocks are being masked with random aspect ratio. The minimum size of a masked block is 16 patches. In total, 60% of patches were masked in the data2vec algorithm, which is an increase over the original 40% used by BEiT. However, the authors note that they found increased masking to be more accurate. The augmentation strategies are similar, as well. Resizing crops, horizontal flipping and colour jittering were used. Naturally, the student and teacher model are the given the same modified image. Finally, for image data, the model is measured on a classification task. Hence, the authors use a mean-pooling over all patches in the last transformer block and input that into a softmax-normalized projection that conducts the classification, which is again based on the BEiT model.
 
 
-```{r visiontransformer,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Dosovitskiy et al. (2021)"}
+```{r visiontransformer,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:visiontransformer)"}
 knitr::include_graphics("figures/05-chapter2/visiontransformer.png")
 ```
+(ref:visiontransformer) @DosovitskiyB0WZ21
 
-
-The natural language processing model is implemented with a PyTorch toolkit named fairseq and based on the RoBERTa (@liu2019roberta) architecture which redesigned the standard Bert model training procedure to make it more robust and effective. In particular,
+The natural language processing model is implemented with a PyTorch toolkit named fairseq and based on the RoBERTa [@liu2019roberta] architecture which redesigned the standard Bert model training procedure to make it more robust and effective. In particular,
 it increases hyperparameters such as the learning rate and the batch size. It also removes the next sentence prediction task to improve on the masked language modelling performance.
 In this case they follow (@sennrich2015neural) and encode sub-words as 50k byte-pairs. A separate embedding vector is learned for each type. For the masking, the Bert masking is being used. 15% of the embedded tokens are replaced,
 thereof 80 percent are learned masks, 10% are unchanged and the remaining 10% are replaced with random tokens in the vocabulary. Another strategy that the authors also consider is the wave2vec masking strategy
@@ -80,9 +81,10 @@ and a GELU activation function such that the output of the encoder is 50 kHz.
 As far as the results are concerend, data2vec achieved state-of-the-art performance in vision and language tasks among similar self-supervised models.
 
 
-```{r data2vecresults1,echo=FALSE, out.width="50%", fig.align="center", fig.cap="Baevski et al. (2022): data2vec performance (vision)"}
+```{r data2vecresults1,echo=FALSE, out.width="50%", fig.align="center", fig.cap="(ref:data2vecresults1)"}
 knitr::include_graphics("figures/05-chapter2/datavecresultsone.png")
 ```
+(ref:data2vecresults1) @baevski2022data2vec: data2vec performance (vision)
 
 Figure \@ref(fig:data2vecresults1) shows the model's performance in computer vision.
 Pretrained and fine-tuned simply on the data of the well known ImageNet-1K dataset,
@@ -91,12 +93,13 @@ predict single labels for images. The base model ViT-B comprises 86M parameteres
 prediction setup can work well as model training compared to classical local methods such as predicting visual tokens.
 MoCov3 (@chen2021empirical) is a self-supervised model trained on a contrastive loss. The most similar model is DINO (@caron2021emerging), which also uses a self-destillation setup to predict teacher outputs using a cross-entropy loss. However, their predicition target was the final layer rather than averaged layers while using differing images for teacher and student network. The well performing MAE model (@he2022masked) is a masked autoencoder which is trained on reconstructing masked pixels using an asymmetric encoder-decoder architecture. In contrast, MaskFeat (@wei2022masked) uses masked feature prediction. Notably, data2vec outperforms all of them although trained for the same amount or less. Particularly, MAE and MaskFeat use 1600 epochs rather than 800 like data2vec.
 
-```{r data2vecresults2,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Baevski et al. (2022): data2vec results (language)"}
+```{r data2vecresults2,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(res:data2vecresults2)"}
 knitr::include_graphics("figures/05-chapter2/datavecresultstwo.png")
 ```
+(res:data2vecresults2) @baevski2022data2vec: data2vec results (language)
 
 Figure \@ref(fig:data2vecresults2) shows the performance in the language domain.
-For the language domain, the model is evaluated on the GLUE benchmark (@wang2018glue).
+For the language domain, the model is evaluated on the GLUE benchmark [@wang2018glue].
 The model is pretained and fine-tuned seperately on the labelled data from each task. Acurracy
 is reported as the average across 5 tuning cycles. While data2vec achieves a higher average performance than the baseline model, there are tasks
 where the baseline model prevails. A large portion of the peformance difference seems to be driven
@@ -116,9 +119,10 @@ As seen in the previous section, data2vec can handle text, image or speech as in
 However, when we think about multimodal models, we usually think of working with different modalities at the same time. VilBert (@lu2019vilbert) is a natural extension of the iconic Bert architecture (@devlin2018bert) to vision-and-language modelling. An immediate question is whether vision and language inputs should be handled together in a single stream or in parallel. As we will see, it turns out that encoding inputs in parallel and working with parallel streams increases performance.
 At heart of that architecture is a co-attention mechanism which enables information exchange between both modalities.
 
-```{r vilbertarc,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Lu et al. (2019): VilBert's Dual Stream Architecture: dashed transformer modules can be repeated, co-attention modules allow sparse interaction between modalities."}
+```{r vilbertarc,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:vilbertarc)"}
 knitr::include_graphics("figures/05-chapter2/vilbertarc.png")
 ```
+(ref:vilbertarc) @lu2019vilbert: VilBert's Dual Stream Architecture: dashed transformer modules can be repeated, co-attention modules allow sparse interaction between modalities.
 
 Figure \@ref(fig:vilbertarc) shows the employed parallel stream architecture.
 Each modality is handled separately and fed into two Bert-style transformer models. This allows for both modalities to be handled according to their respective needs while co-attention layers allow for communication between the streams. For the language stream, the encoding uses the vocabulary plus a special classification token (cls), a sentence separation token (sep) and a masking token (mask). For the vision stream, image region features are extracted via a Faster R-CNN (@ren2015faster) model which was pretrained on the Visual Genome Dataset (@krishnavisualgenome).  Since image regions lack a natural ordering, its spatial location has to be encoded, as well. VilBert achieves that through a five dimensional vector that encapsulates the image coordinates and the fraction of the covered image area. Through projection, the dimensions of the positional encoding and visual features are matched and then summed. The image token marks the beginning of such an image region sequence while representing the whole image.
@@ -126,9 +130,10 @@ Each modality is handled separately and fed into two Bert-style transformer mode
 
 Through the dual stream architecture, the complexity of the model can be adjusted separately for each modality. An alternative approach would have to discretize the visual space via clustering and then use the resulting tokens in the same way as text tokens. The drawbacks of that approach are the potential loss of detail at the discretization stage and the loss of flexibility across modalities as a result of the same processing. Finally, a single stream architecture can interfer with pretaining of the language models. The model will have to be fine-tuned based on the created visual tokens. As those might be very different from the text tokens, there is potential for the pretained language model to be become 'damaged' in the process and lose capabilities - and idea that is also central to the Flamingo model presented later on.
 
-```{r vilbertattention,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Lu et al. (2019): Cross-Attention in VilBert"}
+```{r vilbertattention,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:vilbertattention)"}
 knitr::include_graphics("figures/05-chapter2/vilbertattention.PNG")
 ```
+(ref:vilbertattention) @lu2019vilbert: Cross-Attention in VilBert
 
 The key innovation in the  Vilbert paper (@lu2019vilbert) is the use of co-attention layers.
 In figure \@ref(fig:vilbertattention), the basic architecture is depicted. The co-attention module computes query, key and value matrices in a standard transformer attention fashion. However, it then feeds the keys and values from each modality
@@ -138,18 +143,21 @@ specific sections in the model, denoted by co-trm in figure \@ref(fig:vilbertarc
 An interesting question to ask is what is actually learned in those attention layers and how they correspond to human attention maps. (@sikarwar2022efficacy) analyze the efficacy of co-attention layers for VQA tasks in a VilBert network. Specifically, they compute the question conditioned image attention scores and compare them to human attention maps created in experiments. In those experiments, humans are tasked with unblurring specific image regions to answer the same questions one would expect the machine learning model to answer. Such human attention maps are collected in the VQA-HAT dataset (@das2017human). Rank correlation is used to compare attention maps. (@sikarwar2022efficacy) find that in a 6 layer network rank correlation plateaus at layer 4 and increases in the number of image regions proposed while encoding the images. Perhaps more surprisingly, they find a minimal influence of semantics on the generation of the attention maps.
 Randomly shuffling words in a sentence when testing the model performance barely changes the attention output, which suggests that keywords rather than sentence structures drive the attention output. Note however that while attention maps remained similar, the model's actual performance on answering the questions dropped noticably by approximately 15% such that it seems clear that coherent sentences are important for the overall VQA task, but not for the attention creation process. What are the keyword that drive cross-attention in VilBert? The evidence provided by the authors clearly shows that nouns are the most influential parts-of-speech when considering attention maps. On top of that, prepositions can sometimes help identify spatial relations. There is also some support for the hypothesis that removing Wh-words such as "who" and "where" can improve fine-grained attention maps in the final layer which might be worth exploring further as preprocessing for deeper networks. Another approach would be to search for ways to improve the way attention maps are generated by finding ways to include more of the available sentence information. Most notably, however, using object-based region proposals to process images can lead to bottlenecks that can prevent the model from learning sufficiently fine-grained attention maps as shown in figure \@ref(fig:vilbertmaps). Overall, humans are naturally good at VQA tasks. Hence, it is not surprising that attention maps which correlate well with human attention maps also improve model performance.
 
-```{r vilbertmaps,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Sikarwar et al. (2022): (Left to Right) Picture, Human Attention, 36 Regions, 72 Regions, 108 Regions. Similarity between human and model attention is measured using rank correlation."}
+```{r vilbertmaps,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:vilbertmaps)"}
 knitr::include_graphics("figures/05-chapter2/vilbertmaps.png")
 ```
+(ref:vilbertmaps) @sikarwar2022efficacy: (Left to Right) Picture, Human Attention, 36 Regions, 72 Regions, 108 Regions. Similarity between human and model attention is measured using rank correlation.
+
 Figure \@ref(fig:vilbertmaps) shows that the number of region proposals fed into the model after processing an image affects the ability of the model to produce adequate attention maps. In this particular case the question "How many fingers is the girl in the black shirt holding up?" was correctly answered by humans, as well as a VilBert model using 72 or 108 region proposals. It was answered incorrectly when using only 36 region proposals. Note however that in either case, the machine learning model captured the face of the wrong girl. The model using 72 regions also identified the wrong hand despite answering the question correctly. While the 108 region model identifies the correct hand holding up the fingers, it does not seem to prioritize it over the other identified hands in the picture. Hence, the attention maps are sufficiently different from the human attention map which highlights the need to look closer not only at how models are performing, but also into how their performance has been achieved.
 
 As far as the model training is concerned, VilBert is pretained and fine-tuned. The pretaining tasks comprise masked-multi-modal modelling and multi-modal alignment prediction performed on the Conceptual Captions dataset. That dataset contains about 3,1 million usable aligned image-caption pairs, which have been automatically scraped from web images. For the alignment task, the authors create unaligned images by randomly mismatching captions and images. For the masking task, 15% of the both the visual and language tokens are masked. The task is to reconstruct the mask from the remaining input in a classical Bert fashion. While the text masks are directly regressed like in Bert, the model predicts distributions over semantic classes for the image regions.
 This is achieved through minimizing the KL divergence, a measure for the similarity of distributions, between the output distribution of the pretrained model used in feature extraction and the VilBert predictions.
 
 The performance results are depicted in figure \@ref(fig:vilbertresults).
-```{r vilbertresults,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Lu et al. (2019): VilBert Performance"}
+```{r vilbertresults,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:vilbertresults)"}
 knitr::include_graphics("figures/05-chapter2/vilbertresults.PNG")
 ```
+(ref:vilbertresults) @lu2019vilbert: VilBert Performance
 
 As mentioned before, the dual stream architecture outperforms the single stream architecture. Furthermore, pretraining considerably boosts performace, as does finetuning.
 Interestingly, the authors also study the effect of the size of the dataset and effect of the architecture depth. Performance increases monotonically with dataset size, suggesting that performance can be further improved
@@ -167,9 +175,10 @@ Caption-Based Image Retrieval requires the model to find an image that correspon
 The VilBert model showed one way how to actually combine visual and language inputs. In contrast, data2vec showed how to design an unsupervised model and how influential the actual training process as well as contextualization can be.
 A natural question to ask is then is whether we can build a truly multimodal architecture like VilBert that is self-supervised like data2vec or at little task-specific training and how to optimized its training procedure. In particular, both VilBert and data2vec were tested on multiple tasks, but each task needs slight re-adjustments to the model as well as additional fine-tuning. Ideally, a multimodal architecture would not only be efficient in its initial training, but also easily adaptable to different tasks. Finding ways to not only work with different input modalities, but also with different task is crucial towards building a more general AI. A promising approach in that direction is few shot learning.  The following section presents Flamingo (@alayrac2022flamingo), a few shot multimodal architecture developed by Google which comprises key innovations such as handling arbitrarily interleaved vislang sequences as inputs, as well as ways to effectively combine pretained vision-only and language-only models. As such, it is a visually coditioned autoregressive text generation model.
 
-```{r flamingoexamples,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Alayrac et al. (2022): Flamingo Prompt-Output-Examples"}
+```{r flamingoexamples,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:flamingoexamples)"}
 knitr::include_graphics("figures/05-chapter2/flamingoexamples.PNG")
 ```
+(ref:flamingoexamples) @alayrac2022flamingo: Flamingo Prompt-Output-Examples
 
 Figure \@ref(fig:flamingoexamples) demonstrates Flamingos capabilities. It can function as chat bot, describe pictures, work with image sequences (videos) and in doing so, simply needs a few prompts.
 
@@ -181,9 +190,10 @@ To train Flamingo, the authors solve these challenges by foremost exploring ways
 mechanism ensures that those new cross-attention layers do not interfer at model initialization, thereby improving stability and final performance.
 
 
-```{r flamingoarc,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Alayrac et al. (2022): Flamingo Model Structure"}
+```{r flamingoarc,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:flamingoarc)"}
 knitr::include_graphics("figures/05-chapter2/flamingoarc.PNG")
 ```
+(ref:flamingoarc) @alayrac2022flamingo: Flamingo Model Structure
 
 
 Figure \@ref(fig:flamingoarc) shows the fundamental architecture of Flamingo.
@@ -211,6 +221,7 @@ The training objective is to minimize the weighted sum of dataset specific expec
 ```{r dataseteq,echo=FALSE, out.width="50%", fig.align="center"}
 knitr::include_graphics("figures/05-chapter2/dataseteq.png")
 ```
+
 Each dataset is weighted with a scalar $\lambda$ as datasets can be of different quality or feature different properties.
 Hence, it might be preferable to pay different attention to different datasets. According to the authors, tuning these weights was essential to overall performance. In practice, the optimization works as follows:
 a sample batch with visual language sequences from each dataset is used to compute the gradient of the loss in accordance to the weight of the dataset. Importantly, the authors find that it is beneficial to accumulate
@@ -228,9 +239,10 @@ to previous work is to concatenate the keys and values from the latent queries w
 improvements around two to three score points. Furthermore, a too large architecture can lead to instable trainings in conjunction with large frozen language model. The authors also test the perceiver against a transformer or MLP,
 which showed the perceiver to improve performance scores by around three to five points.
 
-```{r perceiver,echo=FALSE, out.width="50%", fig.align="center", fig.cap="Alayrac et al. (2022): Flamingo Perceiver-Resampler"}
+```{r perceiver,echo=FALSE, out.width="50%", fig.align="center", fig.cap="(ref:perceiver)"}
 knitr::include_graphics("figures/05-chapter2/perceiver.PNG")
 ```
+(ref:perceiver) @alayrac2022flamingo: Flamingo Perceiver-Resampler
 
 The main component that turns the frozen large language model into a functioning visual language model are the cross-attention layers depicted in figure \@ref(fig:flamingoattention). The number of layers added controls the number of free parameters and hence
 the complexity and expressiveness of the model. Keys and values of those layers are obtained from the visual features output by the perceiver while using language queries. Specifically, gated cross-attention dense layers are used. The layers are dense because the cross-attention layer is followed by a feed forward layer. They are gated because a tanh($\alpha$) gating mechanism is applied between layers. The gating mechanism ensures that the frozen large language model remains stable at initialization through introducing a learnable scalar parameter $\alpha$ initialized at 0. Without that initialization, training instabilities can occur.
@@ -240,30 +252,35 @@ The practical implementation of those attention layers works as follows: recall 
 while all text tokens attend to all visual tokens, a masking strategy is applied which ensures that in effect, language tokens only see a specific amount of visual tokens. Note however, that while the model can, unless
 specified otherwise, only attend to one image at a time, there is still a causal dependency to all previous images through the self-attention in the text-decoder.
 
-```{r flamingoattention,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Alayrac et al. (2022): Flamingo Gated Cross-Attention"}
+```{r flamingoattention,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:flamingoattention)"}
 knitr::include_graphics("figures/05-chapter2/flamingoattention.PNG")
 ```
+(ref:flamingoattention) @alayrac2022flamingo: Flamingo Gated Cross-Attention
 
 To evaluate the model, the authors chose 18 different vison-language benchmarks including video benchmarks as shown in \@ref(fig:flamingodatasets).
 
-```{r flamingodatasets,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Alayrac et al. (2022): Flamingo Datasets (Table2, p.19)"}
+```{r flamingodatasets,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:flamingodatasets)"}
 knitr::include_graphics("figures/05-chapter2/flamingodatasets.png")
 ```
+(ref:flamingodatasets) @alayrac2022flamingo: Flamingo Datasets (Table2, p.19)
 
 Note that seven benchmarks are used to validate design choices of the architecture. They are part of the development (dev) set. As those datasets could potentially report biased performance results, the remaining eleven datasets are solely used to estimate unbiased performance scores.
 Unfortunately, unbiased estimation in few-shot learning is not ubiquitous .
 Since hyperpameter tuning requires more prompts, it is easy to forget about them when counting how many shots in effect have been used, which can in turn lead to overestimation of performance (@perez2021true). As far as the Flamingo model is concerned, the authors take great care to evaluate it in a true few-shot fashion as coined by @perez2021true. Furthermore, most of the tasks require a generative answer (gen) which encompasses open-ended, more interesting tasks.
 
-```{r flamingoresult,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Alayrac et al. (2022): Flamingo Results without Fine-Tuning"}
+```{r flamingoresult,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:flamingoresult)"}
 knitr::include_graphics("figures/05-chapter2/flamingoresult.PNG")
 ```
+(ref:flamingoresult) @alayrac2022flamingo: Flamingo Results without Fine-Tuning
 The results portayed in figure \@ref(fig:flamingoresult) show that Flamingo does not only outperform all previous few shot models, but also the general state-of-the art on six tasks. It is also, not too surprisingly, evident that more shots and larger models lead to better performance.
 The in-context learning works analogous to GPT-3 (@brown2020language). Given a set of supporting examples (image, text), where text is the expected response based on the supporting visual input, a multimodal prompt is built by concatenating the examples in random order and adding the selected query image for the prediction.
 Interestingly, rather than using in-context learning with prompts, the authors also explore fine-tuning the model on the tasks which achieved state-of-the-art performance with few-shot learning. Fine-tuning the model is very expensive and requires additional hyperparameter tuning, but substantially improves results even further.
 
-```{r flamingfinetune,echo=FALSE, out.width="100%", fig.align="center", fig.cap="Alayrac et al. (2022): Flamingo Results with Fine-Tuning"}
+```{r flamingfinetune,echo=FALSE, out.width="100%", fig.align="center", fig.cap="(ref:flamingofinetune)"}
 knitr::include_graphics("figures/05-chapter2/flamingofinetune.png")
 ```
+(ref:flamingofinetune) @alayrac2022flamingo: Flamingo Results with Fine-Tuning
+
 One noticable exception that the authors remark upon is the classification performance of the model. In that realm, contrastive models outperform Flamingo. A working hypothesis is that training for text-image retrieval is particularly important on those tasks. Nevertheless, few-shot learning and open-ended generative capabilities provide great advantages over contrastive models both in terms of model training as well as the range of applications. Flamingo shows how to leverage a unifying stucture between models. Communication between models is key to reducing training overload and to enable multitasking models.
 
 ### Discussion

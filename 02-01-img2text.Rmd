@@ -34,21 +34,21 @@ COCO is a large-scale richly annotated Datatset, the progress of building consis
 In order to select representative object categories for images in COCO, researchers collected several categories from different dataset like PASCAL VOC [@pascalvoc] and other sources. All these object categories can be recognized by children between 4 to 8. The quality of the object categories were ensured by co-authors.Co-authors scale the categories from 1 to 5 depending on their common occurrence, practical applications and diversity from other categories. [@mccoco] The final number of the list is 91. All the categories from PASCAL VOC are also included in COCO. [@pascalvoc]
 
 With the help of representative object categories, COCO wants to collect a dataset which a majority of these images are non-iconic. All these images can be roughly divided into three types in Fig \@ref(fig:imagetype) :iconic-object images, iconic-scene images and non-iconic images.[@mccoco]
-(ref:crossref1) Type of images [@mccoco].
 
-```{r imagetype, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:crossref1)" }
+```{r imagetype, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:imagetype)" }
 knitr::include_graphics("figures/02-01/2.1 imagetype.png")
 ```
+(ref:imagetype) Type of images [@mccoco].
+
 Images are collected through two strategies, firstly images from Flickr which contains photos uploaded by amateur photographer with keywords are collected. Secondly, researchers will search for pairwise combination of object categories like "dog + car" to gather more non-iconic images and images with rich contextual relationships.[@mccoco]
 
 Due to the the scale of the dataset and the high cost of the annotation process, the design of a high quality annotation pipeline with efficient cost is a difficult task.
 The annotation pipeline in Fig \@ref(fig:cocoannotation) for COCO is splitted into three primary tasks: 1. category labeling, 2.instance spotting, and 3. instance segmenting.[@mccoco]
 
-(ref:crossref2) Annotation pipeline for COCO [@mccoco].
-
-```{r cocoannotation, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:crossref2)" }
+```{r cocoannotation, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:cocoannotation)" }
 knitr::include_graphics("figures/02-01/2.1 annotation pipeline.png")
 ```
+(ref:cocoannotation) Annotation pipeline for COCO [@mccoco].
 
 As we can see in the Fig \@ref(fig:cocoannotation), object categories in each image will be determined in the first step. Due to the large number of Datasets and categories, they used a hierarchical approach instead of doing binary classification for each category. All the 91 categories have divided into 11 super-categories.The worker will examine the existence of a single instance for a given super-category.
 Workers will only label one instance for each super-categories with an category’s icon.[@mccoco] For each image, 8 workers were asked to label it.This hierarchical approach has helped to reduce the time for labeling. However, the first phase still took ∼20k worker hours to complete.[@mccoco]
@@ -67,11 +67,11 @@ ImageNe containing millions of images has enabled breakthroughs in both object c
 
 With the help of Fig \@ref(fig:cococomparison), we could compare COCO with ImageNet PASCAL VOC and SUN from different aspects.[@mccoco]
 
-(ref:crossref3) Comparison COCO with other PASCAL VOC, SUN and ImageNet [@mccoco].
-
-```{r cococomparison, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:crossref3)" }
+```{r cococomparison, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:cococomparison)" }
 knitr::include_graphics("figures/02-01/2.1 coco comparison.png")
 ```
+(ref:cococomparison) Comparison COCO with other PASCAL VOC, SUN and ImageNet [@mccoco].
+
 The number of instances per category for all 91 categories for COCO and PASCAL VOC is shown in (a). Compare to PASCAL VOC, COCO has both more categories and more instances per categories.The number of object categories and the number of instances per category for all the datasets is shown in (d). MS COCO has fewer categories than ImageNet and SUN, but it has the most instances per category among all the dataset, which from the hypothesis of researchers might be useful for learning complex models capable of precise localization.[@mccoco]
 (b,c) show the number of annotated categories and annotated instances per image for MS COCO, ImageNet Detection, PASCAL VOC and SUN (average number of categories and instances are shown in parentheses). On average COCO contains 3.5 categories and 7.7 instances per image. ImageNet and PASCAL VOC both have less than 2 categories and 3 instances per image on average. SUN dataset has the most contextual information, 9,8 categories and 17 instances per image.
 (e) is the distribution of instance sizes for the MS COCO, ImageNet Detection, PASCAL VOC and SUN dataset.[@mccoco]
@@ -101,20 +101,20 @@ For example Herdade *et al*. [@HerdadeKBS19] proposed Transformer architecture f
 
 Although Transformer-based architectures have been widely implemented in sequence modeling tasks like machine translation and language understanding. However, its applicability for multi-modal tasks like image captioning is still largely under-explored. [@cornia2020m2]
 
-(ref:crossref4) $M^2$ Transformer [@cornia2020m2].
-
-```{r m2arc1, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:crossref4)" }
+```{r m2arc1, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:m2arc1)" }
 knitr::include_graphics("figures/02-01/2.2 m2arc1.png")
 ```
+(ref:m2arc1) $M^2$ Transformer [@cornia2020m2].
 
 A novel fully-attentive approach called Meshed-Memory Transformer for Image Captioning ($M^2$) for image captioning is proposed by Marcella *et al*[@cornia2020m2] with the aim of improving the design of both the image encoder and the language decoder. Compare to all previous image captioning models, $M^2$ ( see Fig. \@ref(fig:m2arc1) has two new novelties, the encoder encodes a multi-level representation of the relationships between image regions with respect to low-level and high-level relations, a priori knowledge can be learned and modeled by using persistent memory vectors. The multi-layer architecture exploits both low- and high-level visual relationships through a learned gating mechanism, which compute the weight at each level, therefore, a mesh-like connectivity between encoder and decoder layers is created for sentence generation process.[@cornia2020m2]
 
 ####  $M^2$ Transformer Architecture
 
-(ref:crossref5) $M^2$ Transformer Architecture [@cornia2020m2].
-```{r m2arc2, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:crossref5)" }
+```{r m2arc2, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:m2arc2)" }
 knitr::include_graphics("figures/02-01/2.1 m2.png")
 ```
+(ref:m2arc2) $M^2$ Transformer Architecture [@cornia2020m2].
+
 Fig \@ref(fig:m2arc2) shows the detailed architecture of $M^2$ Transformer. $M^2$ Transformer can be divided into Encoder (left) module and Decoder (right) module, both module has multiple layers. Given the input Image region $X$, it go through the Attention and feed forward layer. The relationship between image regions with a priori knowledge will be encoded in each encoding layer, the output of each encoding layers will be read by decoding layers to generate the caption for image word by word.[@cornia2020m2]
 
 All interactions between word and image-level features of the input image $X$ are modeled by using scaled dot-product attention. Attention operates on vectors of queries $Q$, keys $K$ and values $V$ , and takes a weighted sum of value vectors according to a similarity distribution between query and key vectors.
@@ -203,34 +203,33 @@ Decoder with multiple decoder layers, takes the input word vectors and the $t$-t
 
 ##### Comparison with other models on COCO Datasets
 
-The $M^2$ Transformer was evaluated on COCO [@mccoco]. COCO is the most commonly used Test dataset for image captioning. In stead of using the original COCO datsets, Marcella *et al*[@cornia2020m2] follows the split of COCO provided by Karpathy *et al* [@karpthy1]. Karpathy uses 5000 images for validation, 5000 images for testing and the rest for training.
+The $M^2$ Transformer was evaluated on COCO [@mccoco]. COCO is the most commonly used Test dataset for image captioning. In stead of using the original COCO datsets, @cornia2020m2 follows the split of COCO provided by @karpthy1. Karpathy uses 5000 images for validation, 5000 images for testing and the rest for training.
 
 For model evaluation and comparison, standard captioning metrics like BLEU [@papineni-etal-2002-bleu], METEOR [@meteor], ROUGE [@lin-2004-rouge,], CIDEr [@cider], and SPICE [@spice] which have been introduced in the second chapter are used.
 
-(ref:crossref6) Comparison with Transformer-based alternatives [@cornia2020m2]
-
-```{r compare1, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:crossref6)" }
+```{r compare1, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:compare1)" }
 knitr::include_graphics("figures/02-01/02-02 compare1.png")
 ```
+(ref:compare1) Comparison with Transformer-based alternatives [@cornia2020m2]
+
 Transformer model in original configuration with six layers  has been applied to captioning, researchers speculated that specific architectures are required for captioning, so variations of the original Transformer are compared with $M^2$ Transformer. Other Variations are Transformer with three layers and “Attention on Attention” (AoA) approach [@huang1] to the attentive layers, both in the encoder and in the decoder. [@cornia2020m2]
 The second part intends to evaluate the importance of the meshed connections between encoder and decoder layers. $M^2$ Transformer (1 to 1) is a reduced version of original $M^2$ Transformer, in which one encoder layer only connect to one corresponding decoder layer instead of connect to all the decoding layers.
 As we can see from the Fig \@ref(fig:compare1), the original Transformer has 121.8 CIDEr, compare with it, the reduced version of $M^2$ Transformer, we can see the improvement already (129.2 CIDEr). With the respect to meshed connectivity, which help to exploit relationships encoded at all layers and weights them with a sigmoid gating, we could observe better improvement in CIDEr from 129.2 to 131.2. Also the role of mem- ory vectors and the softmax gating schema for $M^2$ Transformer are also included in the table. Without the memory vector lead to the recution of the performance of nearly 1 CIDEr in both reduced $M^2$ Transformer and the original $M^2$ Transformer.[@cornia2020m2]
 
-(ref:crossref7) Comparison with the state of the art on the “Karpathy” test split, in single-model setting [@cornia2020m2]
-
-```{r compare2, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:crossref7)" }
+```{r compare2, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:compare2)" }
 knitr::include_graphics("figures/02-01/02-02 compare2.png")
 ```
+(ref:compare2) Comparison with the state of the art on the “Karpathy” test split, in single-model setting [@cornia2020m2].
+
 Fig \@ref(fig:compare2) compares the performance of $M^2$ Transformer with several recent proposals for image captioning.
 SCST [@8099614] and Up- Down [@8578734], use attention over the grid of features and attention over regions. RFNet [@renet], which uses a recurrent fusion network to merge different CNN features; GCN-LSTM [@GCN-LSTM] uses a Graph CNN to exploit pairwise relationships between image regions; SGAE [@Yang_2019_CVPR] uses instead auto-encoding scene graphs. The original AoANet [@huang1] approach uses attention on attention for encoding image regions and an LSTM language model. Finally, the ORT [@HerdadeKBS19] uses a plain Transformer and weights attention scores in the region encoder with pairwise distances between detections [@cornia2020m2].
 
 In Fig \@ref(fig:compare2), the $M^2$ Transformer exceeds all other models on BLEU-4, METEOR,CIDEr. The performance of $M^2$ Transformer was very close and competitive with SGAE on BLEU-1 and with ORT on SPICE.
 
-(ref:crossref8) "Examples of captions generated by M^2$ Transformer and the original Transformer model, as well as the corresponding ground-truths [@cornia2020m2]
-
-```{r example2, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:crossref8)" }
+```{r example2, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:example2)"}
 knitr::include_graphics("figures/02-01/02-02 example2.png")
 ```
+(ref:example2) Examples of captions generated by $M^2$ Transformer and the original Transformer model, as well as the corresponding ground-truths [@cornia2020m2].
 
 The Fig \@ref(fig:example2) shows some examples of captions generated by $M^2$ Transformer and the original Transformer model, as well as the corresponding ground-truths. According to the selected examples of captions, $M^2$ Transformer shows the ability to generate more accurate descriptions of the images, and the approaches could detect the more detailed relationships between image regions.[@cornia2020m2].
 

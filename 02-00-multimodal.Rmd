@@ -34,9 +34,10 @@ But how?
 There has been proposed a wide range of solutions:
 On one side of the spectrum, textual elements and visual ones are learned separately and then “combined” together whereas on the other side, the learning of textual and visual features takes place simultaneously/jointly.
 
-```{r, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="Left, Silberer et al., 2014: stacked autoencoders to learn higher-level embeddings from textual and visual modalities, encoded as vectors of attributes. Right, Bordes et al., 2020: textual and visual information fused in an Intermediate space denoted as “grounded space”; the “grounding objective function” is not applied directly on sentence embeddings but trained on this intermediate space, on which sentence embeddings are projected.", }
+```{r f02-00-01, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:f02-00-01)"}
 knitr::include_graphics("figures/02-chapter2/Img_Ch_Intro.png")
 ```
+(ref:f02-00-01) Left: @silberer2012learning: stacked autoencoders to learn higher-level embeddings from textual and visual modalities, encoded as vectors of attributes. Right: @bordes2020incorporating: textual and visual information fused in an Intermediate space denoted as "grounded space"; the "grounding objective function" is not applied directly on sentence embeddings but trained on this intermediate space, on which sentence embeddings are projected.
 
 For example, @silberer2012grounded implement a model where a one-to-one correspondence between textual and visual space is assumed.
 Text and visual representations are passed to two separate unimodal encoders and both outputs are then fed to a bimodal autoencoder.
