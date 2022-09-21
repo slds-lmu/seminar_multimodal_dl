@@ -45,12 +45,12 @@ Nowadays, a new research topic appeared in the machine learning community, and i
 Ever since the introduction of AlexNet in 2012, the problem of scaling convolutional neural networks has become the topic of active research. ConvNet can be scaled in all three dimensions: depth, width, or image size. One of the first researches in 2015 showed that network depth is crucial for image classification. The question whether stacking more layers enables the network to learn better leads He K., Zhang X., et al. to deep residual networks called ResNet [@ResNet], which will be described in this work. Later on, scaling networks by their depth became the most popular way to improve their performance.
 The second solution was to scale ConvNets by their width. Wider networks tend to be able to capture more fine-grained features and are easier to train @width.
 Lastly, scaling the image's resolution can improve the network's performance. With higher resolution input images, ConvNets could capture more fine-grained patterns. GPipe is one of the most famous networks created by this technique @gpipe.
-The question of possibility of scaling by all three dimensions was answered by Tan M. et al. in 2019 in the work presenting EfficientNet. This network was built by scaling up ConvNets by all three dimensions and will also be described here.
+The question of possibility of scaling by all three dimensions was answered by @EfficientNet in the work presenting EfficientNet. This network was built by scaling up ConvNets by all three dimensions and will also be described here.
 
 
 ### Deep residual networks
 
-The deep residual networks, called ResNets, [@esnet] were presented as the answer on the question whether stacking more layers would enable network to learn better. Until then one obstacle for simply stacking layers was the problem of vanishing/exploding gradients. It has been primarily addressed by normalized initialization and intermediate normalization layers. That enabled networks with tens of layers to start converging for stochastic gradient descent (SGD) with backpropagation.
+The deep residual networks, called ResNets [@ResNet], were presented as the answer on the question whether stacking more layers would enable network to learn better. Until then one obstacle for simply stacking layers was the problem of vanishing/exploding gradients. It has been primarily addressed by normalized initialization and intermediate normalization layers. That enabled networks with tens of layers to start converging for stochastic gradient descent (SGD) with backpropagation.
 
 Another obstacle was a degradation problem. It occurs when the network depth increases, followed by saturating and then rapidly decreasing accuracy. Overfitting is not caused by such degradation, and adding more layers to a suitably deep model leads to higher training error, which indicates that not all systems are similarly easy to optimize.
 
