@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2022-09-20" />
+<meta name="date" content="2022-09-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -89,7 +89,7 @@
 </ul></li>
 <li class="chapter" data-level="3" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html"><i class="fa fa-check"></i><b>3</b> Multimodal architectures</a><ul>
 <li class="chapter" data-level="3.1" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#c02-01-img2text"><i class="fa fa-check"></i><b>3.1</b> Image2Text</a></li>
-<li class="chapter" data-level="3.2" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#text-to-image-c02-02-text2image"><i class="fa fa-check"></i><b>3.2</b> Text-to-image {#c02-02-text2image</a></li>
+<li class="chapter" data-level="3.2" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#c02-02-text2img"><i class="fa fa-check"></i><b>3.2</b> Text-to-image</a></li>
 <li class="chapter" data-level="3.3" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#c02-03-img-support-text"><i class="fa fa-check"></i><b>3.3</b> Images supporting Language Models</a></li>
 <li class="chapter" data-level="3.4" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#c02-04-text-support-img"><i class="fa fa-check"></i><b>3.4</b> Text supporting Computer Vision Models</a></li>
 <li class="chapter" data-level="3.5" data-path="c02-00-multimodal.html"><a href="c02-00-multimodal.html#c02-05-text-plus-img"><i class="fa fa-check"></i><b>3.5</b> Models for both modalities</a></li>
@@ -131,11 +131,11 @@
 <p><em>Authors: Cem Akkus, Vladana Djakovic, Christopher Benjamin Marquardt</em></p>
 <p><em>Supervisor: Dr. Matthias Aßenmacher</em></p>
 <p>Natural Language Processing (NLP) has existed for about 50 years, but it is more relevant than ever. There have been several breakthroughs in this branch of machine learning that is concerned with spoken and written language. For example, learning internal representations of words was one of the greater advances of the last decade. Word embeddings (<span class="citation">Mikolov, Chen, et al. (<a href="#ref-Mikolov2013" role="doc-biblioref">2013</a><a href="#ref-Mikolov2013" role="doc-biblioref">a</a>)</span>, <span class="citation">Bojanowski et al. (<a href="#ref-Bojanowski2016" role="doc-biblioref">2016</a>)</span>) made it possible and allowed developers to encode words as dense vectors that capture their underlying semantic content. In this way, similar words are embedded close to each other in a lower-dimensional feature space. Another important challenge was solved by Encoder-decoder (also called sequence-to-sequence) architectures <span class="citation">Sutskever, Vinyals, and Le (<a href="#ref-Sutskever2014" role="doc-biblioref">2014</a>)</span>, which made it possible to map input sequences to output sequences of different lengths. They are especially useful for complex tasks like machine translation, video captioning or question answering. This approach makes minimal assumptions on the sequence structure and can deal with different word orders and active, as well as passive voice.</p>
-<p>A definitely significant state-of-the-art technique is Attention <span class="citation">Bahdanau, Cho, and Bengio (<a href="#ref-Bahdanau2014" role="doc-biblioref">2014</a>)</span>, which enables models to actively shift their focus – just like humans do. It allows following one thought at a time while suppressing information irrelevant to the task. As a consequence, it has been shown to significantly improve performance for tasks like machine translation. By giving the decoder access to directly look at the source, the bottleneck is avoided and at the same time, it provides a shortcut to faraway states and thus helps with the vanishing gradient problem. One of the most recent sequence data modeling techniques is Transformers (<span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (<a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>), which are solely based on attention and do not have to process the input data sequentially (like RNNs). Therefore, the deep learning model is better in remembering context-induced earlier in long sequences. It is the dominant paradigm in NLP currently and even makes better use of GPUs, because it can perform parallel operations. Transformer architectures like BERT (<span class="citation">Devlin et al. (<a href="#ref-Devlin2018" role="doc-biblioref">2018</a><a href="#ref-Devlin2018" role="doc-biblioref">c</a>)</span>), T5 (<span class="citation">Raffel et al. (<a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">b</a>)</span>) or GPT-3 (<span class="citation">T. Brown et al. (<a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>) are pre-trained on a large corpus and can be fine-tuned for specific language tasks. They have the capability to generate stories, poems, code and much more. With the help of the aforementioned breakthroughs, deep networks have been successful in retrieving information and finding representations of semantics in the modality text. In the next paragraphs, developments for another modality image are going to be presented.</p>
+<p>A definitely significant state-of-the-art technique is Attention <span class="citation">Bahdanau, Cho, and Bengio (<a href="#ref-Bahdanau2014" role="doc-biblioref">2014</a>)</span>, which enables models to actively shift their focus – just like humans do. It allows following one thought at a time while suppressing information irrelevant to the task. As a consequence, it has been shown to significantly improve performance for tasks like machine translation. By giving the decoder access to directly look at the source, the bottleneck is avoided and at the same time, it provides a shortcut to faraway states and thus helps with the vanishing gradient problem. One of the most recent sequence data modeling techniques is Transformers (<span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (<a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>), which are solely based on attention and do not have to process the input data sequentially (like RNNs). Therefore, the deep learning model is better in remembering context-induced earlier in long sequences. It is the dominant paradigm in NLP currently and even makes better use of GPUs, because it can perform parallel operations. Transformer architectures like BERT (<span class="citation">Devlin et al. (<a href="#ref-Devlin2018" role="doc-biblioref">2018</a><a href="#ref-Devlin2018" role="doc-biblioref">b</a>)</span>), T5 (<span class="citation">Raffel et al. (<a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">a</a>)</span>) or GPT-3 (<span class="citation">T. Brown et al. (<a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>) are pre-trained on a large corpus and can be fine-tuned for specific language tasks. They have the capability to generate stories, poems, code and much more. With the help of the aforementioned breakthroughs, deep networks have been successful in retrieving information and finding representations of semantics in the modality text. In the next paragraphs, developments for another modality image are going to be presented.</p>
 <p>Computer vision (CV) focuses on replicating parts of the complexity of the human visual system and enabling computers to identify and process objects in images and videos in the same way that humans do. In recent years it has become one of the main and widely applied fields of computer science. However, there are still problems that are current research topics, whose solutions depend on the research’s view on the topic. One of the problems is how to optimize deep convolutional neural networks for image classification. The accuracy of classification depends on width, depth and image resolution. One way to address the degradation of training accuracy is by introducing a deep residual learning framework <span class="citation">(He et al. <a href="#ref-ResNet" role="doc-biblioref">2015</a>)</span>. On the other hand, another less common method is to scale up ConvNets, to achieve better accuracy is by scaling up image resolution. Based on this observation, there was proposed a simple yet effective compound scaling method, called EfficientNets <span class="citation">(Tan and Le <a href="#ref-EfficientNet" role="doc-biblioref">2019</a>)</span>.</p>
-<p>Another state-of-the-art trend in computer vision is learning effective visual representations without human supervision. Discriminative approaches based on contrastive learning in the latent space have recently shown great promise, achieving state-of-the-art results, but the simple framework for contrastive learning of visual representations, which is called SimCLR, outperforms previous work <span class="citation">(T. Chen, Kornblith, Norouzi, and Hinton <a href="#ref-SimCLR" role="doc-biblioref">2020</a><a href="#ref-SimCLR" role="doc-biblioref">a</a>)</span>. However, another research proposes as an alternative a simple “swapped” prediction problem where we predict the code of a view from the representation of another view. Where features are learned by Swapping Assignments between multiple Views of the same image (SwAV) <span class="citation">(<span class="citeproc-not-found" data-reference-id="SwAV"><strong>???</strong></span>)</span>.
+<p>Another state-of-the-art trend in computer vision is learning effective visual representations without human supervision. Discriminative approaches based on contrastive learning in the latent space have recently shown great promise, achieving state-of-the-art results, but the simple framework for contrastive learning of visual representations, which is called SimCLR, outperforms previous work <span class="citation">(T. Chen, Kornblith, Norouzi, and Hinton <a href="#ref-SimCLR" role="doc-biblioref">2020</a><a href="#ref-SimCLR" role="doc-biblioref">a</a>)</span>. However, another research proposes as an alternative a simple “swapped” prediction problem where we predict the code of a view from the representation of another view. Where features are learned by Swapping Assignments between multiple Views of the same image (SwAV) <span class="citation">(Caron et al. <a href="#ref-SwAV" role="doc-biblioref">2020</a>)</span>.
 Further recent contrastive methods are trained by reducing the distance between representations of different augmented views of the same image (‘positive pairs’) and increasing the distance between representations of augmented views from different images (‘negative pairs’). Bootstrap Your Own Latent (BYOL) is a new algorithm for self-supervised learning of image representatios <span class="citation">(Grill, Strub, Altché, et al. <a href="#ref-BYOL" role="doc-biblioref">2020</a>)</span>.</p>
-<p>Self-attention-based architectures, in particular, Transformers have become the model of choice in natural language processing (NLP). Inspired by NLP successes, multiple works try combining CNN-like architectures with self-attention, some replacing the convolutions entirely. The latter models, while theoretically efficient, have not yet been scaled effectively on modern hardware accelerators due to the use of specialized attention patterns. Inspired by the Transformer scaling successes in NLP, one of the experiments is applying a standard Transformer directly to the image <span class="citation">(<span class="citeproc-not-found" data-reference-id="ImageT"><strong>???</strong></span>)</span>. Due to the widespread application of computer vision, these problems differ and are constantly being at the center of attention of more and more research.</p>
+<p>Self-attention-based architectures, in particular, Transformers have become the model of choice in natural language processing (NLP). Inspired by NLP successes, multiple works try combining CNN-like architectures with self-attention, some replacing the convolutions entirely. The latter models, while theoretically efficient, have not yet been scaled effectively on modern hardware accelerators due to the use of specialized attention patterns. Inspired by the Transformer scaling successes in NLP, one of the experiments is applying a standard Transformer directly to the image <span class="citation">(Dosovitskiy, Beyer, Kolesnikov, Weissenborn, Zhai, Unterthiner, Dehghani, Minderer, Heigold, Gelly, Uszkoreit, et al. <a href="#ref-ImageT" role="doc-biblioref">2020</a>)</span>. Due to the widespread application of computer vision, these problems differ and are constantly being at the center of attention of more and more research.</p>
 <p>With the rapid development in NLP and CV in recent years, it was just a question of time to merge both modalities to tackle multi-modal tasks. The release of DALL-E 2 just hints at what one can expect from this merge in the future. DALL-E 2 is able to create photorealistic images or even art from any given text input. So it takes the information of one modality and turns it into another modality. It needs multi-modal datasets to make this possible, which are still relatively rare. This shows the importance of available data and the ability to use it even more. Nevertheless, all modalities are in need of huge datasets to pre-train their models. It’s common to pre-train a model and fine-tune it afterwards for a specific task on another dataset. For example, every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset. The cardinality of the datasets used for CV is immense, but the datasets used for NLP are of a completely different magnitude. BERT uses the English Wikipedia and the Bookscorpus to pre-train the model. The latter consists of almost 1 billion words and 74 million sentences. The pre-training of GPT-3 is composed of five huge corpora: CommonCrawl, Books1 and Books2, Wikipedia and WebText2. Unlike language model pre-training that can leverage tremendous natural language data, vision-language tasks require high-quality image descriptions that are hard to obtain for free. Widely used pre-training datasets for VL-PTM are Microsoft Common Objects in Context (COCO), Visual Genome (VG), Conceptual Captions (CC), Flickr30k, LAION-400M and LAION-5B, which is now the biggest openly accessible image-text dataset.</p>
 <p>Besides the importance of pre-training data, there must also be a way to test or compare the different models. A reasonable approach is to compare the performance on specific tasks, which is called benchmarking. A nice feature of benchmarks is that they allow us to compare the models to a human baseline. Different metrics are used to compare the performance of the models. Accuracy is widely used, but there are also some others. For CV the most common benchmark datasets are ImageNet, ImageNetReaL, CIFAR-10(0), OXFORD-IIIT PET, OXFORD Flower 102, COCO and Visual Task Adaptation Benchmark (VTAB). The most common benchmarks for NLP are General Language Understanding Evaluation (GLUE), SuperGLUE, SQuAD 1.1, SQuAD 2.0, SWAG, RACE, ReCoRD, and CoNLL-2003. VTAB, GLUE and SuperGLUE also provide a public leader board. Cross-modal tasks such as Visual Question Answering (VQA), Visual Commonsense Reasoning (VCR), Natural Language Visual Reasoning (NLVR), Flickr30K, COCO and Visual Entailment are common benchmarks for VL-PTM.</p>
 
@@ -170,14 +170,13 @@ granular level, the models rather work with numerical than textual data.
 Thus, by using very basic techniques like one-hot encoding or
 bag-of-words, a text is converted into its equivalent vector of numbers
 without losing information.<br />
-In the example depicting one-hot encoding (see
-<a href="#fig:one-hot" reference-type="ref" reference="fig:one-hot">1</a>), there
+In the example depicting one-hot encoding (see Figure <a href="c01-00-intro-modalities.html#fig:onehot">2.1</a>), there
 are ten simple words and the dark squares indicate the only index with a
 non-zero value.</p>
-<div class="figure" style="text-align: center">
-<img src="figures/01-01-nlp/onehot_pilehvar_p10.png" alt="Ten one-hot encoded words (Source: Pilehvar and Camacho-Collados (2021))." width="70%" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:onehot"></span>
+<img src="figures/01-01-nlp/onehot_pilehvar_p10.png" alt="Ten one-hot encoded words (Source: Pilehvar and Camacho-Collados (2021))" width="70%" />
 <p class="caption">
-(#fig:fig:onehot)Ten one-hot encoded words (Source: <span class="citation">Pilehvar and Camacho-Collados (<a href="#ref-Pilehvar2021" role="doc-biblioref">2021</a>)</span>).
+FIGURE 2.1: Ten one-hot encoded words (Source: <span class="citation">Pilehvar and Camacho-Collados (<a href="#ref-Pilehvar2021" role="doc-biblioref">2021</a>)</span>)
 </p>
 </div>
 
@@ -215,15 +214,15 @@ hyperparameter). The values for the embedding are trainable parameters
 which are learned similarly to a model learning the weights for a dense
 layer. The dimensionality of the word representations is typically much
 smaller than the number of words in the dictionary. For example,
-<span class="citation">(Mikolov, Chen, et al. <a href="#ref-mikolov2013efficient" role="doc-biblioref">2013</a><a href="#ref-mikolov2013efficient" role="doc-biblioref">b</a>)</span> called dimensions between 50-100 modest for more than a
+<span class="citation">(Mikolov, Chen, et al. <a href="#ref-Mikolov2013" role="doc-biblioref">2013</a><a href="#ref-Mikolov2013" role="doc-biblioref">a</a>)</span> called dimensions between 50-100 modest for more than a
 few hundred million words. For small data sets, dimensionality for the
 word vectors could start at 8 and go up to 1024 for larger data sets. It
 is expected that higher dimensions can rather pick up intricate
 relationships between words if given enough data to learn from.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:embedPilehvarP11"></span>
 <img src="figures/01-01-nlp/embed_pilehvar_p11.png" alt="Three-dimensional word embeddings (Source: Pilehvar and Camacho-Collados (2021))." width="70%" />
 <p class="caption">
-(#fig:fig:embedPilehvarP11)Three-dimensional word embeddings (Source: <span class="citation">Pilehvar and Camacho-Collados (<a href="#ref-Pilehvar2021" role="doc-biblioref">2021</a>)</span>).
+FIGURE 2.2: Three-dimensional word embeddings (Source: <span class="citation">Pilehvar and Camacho-Collados (<a href="#ref-Pilehvar2021" role="doc-biblioref">2021</a>)</span>).
 </p>
 </div>
 
@@ -254,19 +253,14 @@ insight from before referring to the word endings being similar because
 in this instance the past tenses of both verbs walking and swimming are
 not similar in structure. Additionally, on the right side of the figure,
 there is a form of the commonly portrayed and easily understood
-Country-Capital example (see <span class="citation">(Mikolov, Chen, et al. <a href="#ref-mikolov2013efficient" role="doc-biblioref">2013</a><a href="#ref-mikolov2013efficient" role="doc-biblioref">b</a>)</span>).</p>
-<div class="figure" style="text-align: center">
+Country-Capital example (see <span class="citation">(Mikolov, Chen, et al. <a href="#ref-Mikolov2013" role="doc-biblioref">2013</a><a href="#ref-Mikolov2013" role="doc-biblioref">a</a>)</span>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:embedVectors"></span>
 <img src="figures/01-01-nlp/embed_vectors_google.png" alt="Three types of similarities as word embeddings (Source: Google (2022))." width="100%" />
 <p class="caption">
-(#fig:fig:embedVectors)Three types of similarities as word embeddings (Source: <span class="citation">Google (<a href="#ref-Google2022" role="doc-biblioref">2022</a>)</span>).
+FIGURE 2.3: Three types of similarities as word embeddings (Source: <span class="citation">Google (<a href="#ref-Google2022" role="doc-biblioref">2022</a>)</span>).
 </p>
 </div>
 
-<!--
-![Three types of similarities as word embeddings. Source:
-[@Google2022].](embed_vectors_google.png){#fig:embed_vectors
-width="100%"}
--->
 <p>Another way of using vector representations of words is in the field of
 translations. It has been presented that relations can be drawn from
 feature spaces of different languages. In below, the distributed word
@@ -276,10 +270,10 @@ suggests that mapping linearly between vector spaces of languages is
 feasible. Applying this simple method for a larger set of translations
 in English and Spanish led to remarkable results - achieving almost 90 %
 precision.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:embedTransl"></span>
 <img src="figures/01-01-nlp/embed_transl_mikolova_p2.png" alt="Representations of numbers in English and Spanish (Source: Mikolov, Le, and Sutskever (2013))." width="90%" />
 <p class="caption">
-(#fig:fig:embedTransl)Representations of numbers in English and Spanish (Source: <span class="citation">Mikolov, Le, and Sutskever (<a href="#ref-Mikolov2013a" role="doc-biblioref">2013</a>)</span>).
+FIGURE 2.4: Representations of numbers in English and Spanish (Source: <span class="citation">Mikolov, Le, and Sutskever (<a href="#ref-Mikolov2013a" role="doc-biblioref">2013</a>)</span>).
 </p>
 </div>
 
@@ -303,13 +297,13 @@ English. In addition, the used Vietnamese model contains numerous
 synonyms, which complicates making exact predictions (see
 <span class="citation">(Mikolov, Le, and Sutskever <a href="#ref-Mikolov2013a" role="doc-biblioref">2013</a>)</span>).<br />
 Turning the attention to one of the most impactful embedding techniques,
-word2vec. It was proposed by <span class="citation">(Mikolov, Chen, et al. <a href="#ref-mikolov2013efficient" role="doc-biblioref">2013</a><a href="#ref-mikolov2013efficient" role="doc-biblioref">b</a>)</span> and is not a singular
+word2vec. It was proposed by <span class="citation">(Mikolov, Chen, et al. <a href="#ref-Mikolov2013" role="doc-biblioref">2013</a><a href="#ref-Mikolov2013" role="doc-biblioref">a</a>)</span> and is not a singular
 algorithm. It can rather be seen as a family of model architectures and
 optimizations to learn word representations. Word2vec’s popularity also
 stems from its success on multiple downstream natural language
 processing tasks. It has a very simple structure which is based on a
 basic feed forward neural network. They published multiple papers (see
-<span class="citation">(Mikolov, Chen, et al. <a href="#ref-mikolov2013efficient" role="doc-biblioref">2013</a><a href="#ref-mikolov2013efficient" role="doc-biblioref">b</a>)</span>, <span class="citation">(Mikolov, Le, and Sutskever <a href="#ref-Mikolov2013a" role="doc-biblioref">2013</a>)</span>, <span class="citation">(Mikolov, Sutskever, et al. <a href="#ref-Mikolov2013b" role="doc-biblioref">2013</a>)</span>) that are stemming
+<span class="citation">(Mikolov, Chen, et al. <a href="#ref-Mikolov2013" role="doc-biblioref">2013</a><a href="#ref-Mikolov2013" role="doc-biblioref">a</a>)</span>, <span class="citation">(Mikolov, Le, and Sutskever <a href="#ref-Mikolov2013a" role="doc-biblioref">2013</a>)</span>, <span class="citation">(Mikolov, Sutskever, et al. <a href="#ref-Mikolov2013b" role="doc-biblioref">2013</a>)</span>) that are stemming
 around two different but related methods for learning word embeddings
 (see ). Firstly, the Continuous bag-of-words model aims to predict the
 middle word based on surrounding context words. Hence, it considers
@@ -319,10 +313,10 @@ Secondly, the Continuous skip-gram model only considers the current word
 and predicts others within a range before and after it in the same
 sentence. Both of the models use a softmax classifier for the output
 layer.</p>
-<div class="figure" style="text-align: center">
-<img src="figures/01-01-nlp/embed_arch_mikolov_p5.png" alt="CBOW and Skip-gram architecture (Source: Mikolov, Chen, et al. (2013b))." width="85%" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:embedArch"></span>
+<img src="figures/01-01-nlp/embed_arch_mikolov_p5.png" alt="CBOW and Skip-gram architecture (Source: Mikolov, Chen, et al. (2013a))." width="85%" />
 <p class="caption">
-(#fig:fig:embedArch)CBOW and Skip-gram architecture (Source: <span class="citation">Mikolov, Chen, et al. (<a href="#ref-mikolov2013efficient" role="doc-biblioref">2013</a><a href="#ref-mikolov2013efficient" role="doc-biblioref">b</a>)</span>).
+FIGURE 2.5: CBOW and Skip-gram architecture (Source: <span class="citation">Mikolov, Chen, et al. (<a href="#ref-Mikolov2013" role="doc-biblioref">2013</a><a href="#ref-Mikolov2013" role="doc-biblioref">a</a>)</span>).
 </p>
 </div>
 
@@ -354,12 +348,12 @@ recurrent neural networks with gated hidden units have trouble solving
 successfully. Deep RNNs may have a chance, but different architectures
 like encoder-decoder have proven to be the most effective. It can even
 deal with different word orders and active, as well as passive voice
-(<span class="citation">(Sutskever, Vinyals, and Le <a href="#ref-Sutskever2014" role="doc-biblioref">2014</a>)</span>). A simplified example of the encoder-decoder model
+<span class="citation">(Sutskever, Vinyals, and Le <a href="#ref-Sutskever2014" role="doc-biblioref">2014</a>)</span>. A simplified example of the encoder-decoder model
 can be seen in .</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:arch1Encdec"></span>
 <img src="figures/01-01-nlp/encdec_arch1_deepl.png" alt="Translation through simplified seq2seq model (Source: Manning, Goldie, and Hewitt (2022))." width="85%" />
 <p class="caption">
-(#fig:fig:arch1Encdec)Translation through simplified seq2seq model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+FIGURE 2.6: Translation through simplified seq2seq model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
 </p>
 </div>
 
@@ -379,10 +373,10 @@ of machine translation. After the context is passed to every hidden
 state of the decoder, the decoder RNN uses this information to produce
 the target sequence of length <span class="math inline">\(n_y\)</span>, which can of course vary from
 <span class="math inline">\(n_x\)</span>.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:encdecArchCho"></span>
 <img src="figures/01-01-nlp/encdec_arch_Cho.png" alt="Encoder-decoder architecture (Source: Cho et al. (2014))." width="56%" />
 <p class="caption">
-(#fig:fig:encdecArchCho)Encoder-decoder architecture (Source: <span class="citation">Cho et al. (<a href="#ref-Cho2014" role="doc-biblioref">2014</a>)</span>).
+FIGURE 2.7: Encoder-decoder architecture (Source: <span class="citation">Cho et al. (<a href="#ref-Cho2014" role="doc-biblioref">2014</a>)</span>).
 </p>
 </div>
 
@@ -414,10 +408,10 @@ through time could look like in . In particular, multiple hidden layers
 are recommended by the researchers. The idea is that lower layers
 compute lower-level features and higher layers compute higher-level
 features.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:encdecArch2"></span>
 <img src="figures/01-01-nlp/encdec_arch2_deepl.png" alt="Translation through seq2seq model (Source: Manning, Goldie, and Hewitt (2022))." width="70%" />
 <p class="caption">
-(#fig:fig:encdecArch2)Translation through seq2seq model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+FIGURE 2.8: Translation through seq2seq model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
 </p>
 </div>
 
@@ -482,10 +476,10 @@ to be translated with many words. As a consequence of no existing direct
 equivalents for this phrase, it is expected that there is not only one
 nearly non-zero score. In this snapshot, the attention distribution can
 be seen to have two significant contributors.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:attentionExStanford"></span>
 <img src="figures/01-01-nlp/attention_ex_stanford.png" alt="Translation process with attention mechanism (Source: Manning, Goldie, and Hewitt (2022))." width="90%" />
 <p class="caption">
-(#fig:fig:attentionExStanford)Translation process with attention mechanism (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+FIGURE 2.9: Translation process with attention mechanism (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
 </p>
 </div>
 
@@ -527,10 +521,10 @@ to perfect the phrase "zone économique européene". Additional
 qualitative analysis has shown that the model alignments are
 predominantly analogous to our intuition.<br />
 </p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:attentionfocus"></span>
 <img src="figures/01-01-nlp/attention_focus_bahdanau.png" alt="Attention alignments (Source: Bahdanau, Cho, and Bengio (2014))." width="50%" />
 <p class="caption">
-(#fig:fig:attentionfocus)Attention alignments (Source: <span class="citation">Bahdanau, Cho, and Bengio (<a href="#ref-Bahdanau2014" role="doc-biblioref">2014</a>)</span>).
+FIGURE 2.10: Attention alignments (Source: <span class="citation">Bahdanau, Cho, and Bengio (<a href="#ref-Bahdanau2014" role="doc-biblioref">2014</a>)</span>).
 </p>
 </div>
 
@@ -549,10 +543,10 @@ length) steps for distant word pairs to interact. Due to gradient
 problems, it is therefore hard to learn long-distance dependencies. In
 addition, the linear order is ingrained. Even though, as known, the
 sequential structure does not tell the whole story.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tfrnnlimstanford"></span>
 <img src="figures/01-01-nlp/transformer_rnnlim_stanford.png" alt="Sequential processing of recurrent model (Source: Manning, Goldie, and Hewitt (2022))." width="70%" />
 <p class="caption">
-(#fig:fig:tfrnnlimstanford)Sequential processing of recurrent model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+FIGURE 2.11: Sequential processing of recurrent model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
 </p>
 </div>
 
@@ -563,10 +557,10 @@ models and have O(sequence length). To be precise, future hidden states
 cannot be computed in full before past states have been computed. This
 inhibits training on massive data sets. indicates the minimum number of
 steps before the respective state can be calculated.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tfrnnlim2stanford"></span>
 <img src="figures/01-01-nlp/transformer_rnnlim2_stanford.png" alt="Sequential processing of recurrent model with number of steps indicated (Source: Manning, Goldie, and Hewitt (2022))." width="70%" />
 <p class="caption">
-(#fig:fig:tfrnnlim2stanford)Sequential processing of recurrent model with number of steps indicated (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+FIGURE 2.12: Sequential processing of recurrent model with number of steps indicated (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
 </p>
 </div>
 
@@ -581,7 +575,7 @@ allows for efficient pretraining and leads them to be the standard model
 architecture. In fact, all top models on the popular aggregate benchmark
 GLUE are pretrained and Transformer-based. Moreover, they have even
 shown promise outside of NLP, e.g. in Image Classification, Protein
-Folding and ML for Systems (see <span class="citation">(Dosovitskiy et al. <a href="#ref-dosovitskiy2020image" role="doc-biblioref">2020</a>)</span>, <span class="citation">(Jumper et al. <a href="#ref-Jumper2021" role="doc-biblioref">2021</a>)</span>,
+Folding and ML for Systems (see <span class="citation">(Dosovitskiy, Beyer, Kolesnikov, Weissenborn, Zhai, Unterthiner, Dehghani, Minderer, Heigold, Gelly, and others <a href="#ref-dosovitskiy2020image" role="doc-biblioref">2020</a>)</span>, <span class="citation">(Jumper et al. <a href="#ref-Jumper2021" role="doc-biblioref">2021</a>)</span>,
 <span class="citation">(Zhou et al. <a href="#ref-Zhou2020" role="doc-biblioref">2020</a>)</span>, respectively).<br />
 If recurrence has its flaws, another adjustment of the attention
 mechanism might be beneficial. Until now, it was defined from decoder to
@@ -593,10 +587,10 @@ architecture. depicts this process in which each word attends to all
 words in the previous layer. Even though in practice, most arrows are
 omitted eventually.<br />
 </p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tfselfa"></span>
 <img src="figures/01-01-nlp/transformer_self-attention_stanford.png" alt="Connections of classic attention mechanism (Source: Manning, Goldie, and Hewitt (2022))." width="70%" />
 <p class="caption">
-(#fig:fig:tfselfa)Connections of classic attention mechanism (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+FIGURE 2.13: Connections of classic attention mechanism (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
 </p>
 </div>
 
@@ -607,14 +601,13 @@ side of , there is exactly one key-value pair for each query (hash). In
 contrast, in self-attention, each key is matched to varying degrees by
 each query. Thus, a sum of values weighted by the query-key match is
 returned.</p>
-<div class="figure" style="text-align: center">
-<img src="figures/01-01-nlp/transformer_hash-table_stanford.png" alt="(ref:tfhashtable)" width="70%" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tfhashtable"></span>
+<img src="figures/01-01-nlp/transformer_hash-table_stanford.png" alt="Comparison of classic attention mechanism with self-attention with hash tables (Source: Manning, Goldie, and Hewitt (2022))." width="70%" />
 <p class="caption">
-(#fig:fig:tfhashtable)(ref:tfhashtable)
+FIGURE 2.14: Comparison of classic attention mechanism with self-attention with hash tables (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
 </p>
 </div>
-<p>(ref:tfhashtable) Comparison of classic attention mechanism with self-attention with
-hash tables (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).</p>
+
 <p>The process briefly described in the last paragraph can be summarized by
 the following steps that mainly follow <span class="citation">(Manning, Goldie, and Hewitt <a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>. Firstly, deriving
 query, key, and value for each word <span class="math inline">\(x_i\)</span> is necessary:
@@ -642,7 +635,7 @@ should specifically be not allowed to simply look ahead and observe more
 than the objective allows. Moreover, the word order is no longer
 encoder, and it is bag-of-words once again.<br />
 Fortunately, the previously mentioned weaknesses have been addressed for
-the original transformer-architecture proposed by <span class="citation">(Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. <a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>. The
+the original transformer-architecture proposed by <span class="citation">(Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, et al. <a href="#ref-Vaswani2017" role="doc-biblioref">2017</a><a href="#ref-Vaswani2017" role="doc-biblioref">a</a>)</span>. The
 first problem can be easily fixed by applying a feed forward layer to
 the output of attention. It provides non-linear activation as well as
 extra expressive power. Then, for cases in which bidirectionality
@@ -672,10 +665,10 @@ by Scaled Dot Product Attention (seen in below), which consists of
 computing the dot products of the query with its keys, dividing them by
 the dimension of keys <span class="math inline">\(\sqrt{d_k}\)</span>, and applying the softmax function
 next to receive the weights of the values.</p>
-<div class="figure" style="text-align: center">
-<img src="figures/01-01-nlp/transformers_scaled-dot-attention2_vaswani.png" alt="Scaled dot-product attention (Source: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (2017b))." width="18%" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tfsdpa"></span>
+<img src="figures/01-01-nlp/transformers_scaled-dot-attention2_vaswani.png" alt="Scaled dot-product attention (Source: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, et al. (2017a))." width="18%" />
 <p class="caption">
-(#fig:fig:tfsdpa)Scaled dot-product attention (Source: <span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (<a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>).
+FIGURE 2.15: Scaled dot-product attention (Source: <span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, et al. (<a href="#ref-Vaswani2017" role="doc-biblioref">2017</a><a href="#ref-Vaswani2017" role="doc-biblioref">a</a>)</span>).
 </p>
 </div>
 
@@ -688,10 +681,10 @@ relevant topics. Thus, each head focuses on separate features, and
 construct value vectors differently. Multi-headed self-attention is
 implemented by simply creating <span class="math inline">\(n\)</span> independent attention mechanisms and
 combining their outputs.</p>
-<div class="figure" style="text-align: center">
-<img src="figures/01-01-nlp/transformers_multi-head-attention2_vaswani.png" alt="Multi-head attention (Source: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (2017b))." width="34%" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tfmha"></span>
+<img src="figures/01-01-nlp/transformers_multi-head-attention2_vaswani.png" alt="Multi-head attention (Source: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, et al. (2017a))." width="34%" />
 <p class="caption">
-(#fig:fig:tfmha)Multi-head attention (Source: <span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (<a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>).
+FIGURE 2.16: Multi-head attention (Source: <span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, et al. (<a href="#ref-Vaswani2017" role="doc-biblioref">2017</a><a href="#ref-Vaswani2017" role="doc-biblioref">a</a>)</span>).
 </p>
 </div>
 
@@ -715,10 +708,10 @@ the decoder process is also repeated <span class="math inline">\(n\)</span> time
 to project the embeddings into a larger vector that has the length of
 the vocabulary size. At last, a softmax layer generates a probability
 distribution over the possible words.</p>
-<div class="figure" style="text-align: center">
-<img src="figures/01-01-nlp/transformer_arch_vaswani.png" alt="Transformer architecture (Source: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (2017b))." width="55%" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tfarch"></span>
+<img src="figures/01-01-nlp/transformer_arch_vaswani.png" alt="Transformer architecture (Source: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, et al. (2017a))." width="55%" />
 <p class="caption">
-(#fig:fig:tfarch)Transformer architecture (Source: <span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. (<a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>).
+FIGURE 2.17: Transformer architecture (Source: <span class="citation">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, et al. (<a href="#ref-Vaswani2017" role="doc-biblioref">2017</a><a href="#ref-Vaswani2017" role="doc-biblioref">a</a>)</span>).
 </p>
 </div>
 
@@ -744,17 +737,17 @@ parts are hidden to train the model to reconstruct them. This leads to
 building suitable parameter initializations and robust probability
 distributions over language.<br />
 </p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tfpretrain"></span>
 <img src="figures/01-01-nlp/transformer_pretrain_stanford.png" alt="Partly pre-trained model (Source: Manning, Goldie, and Hewitt (2022))." width="80%" />
 <p class="caption">
-(#fig:fig:tfpretrain)Partly pre-trained model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+FIGURE 2.18: Partly pre-trained model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
 </p>
 </div>
 
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tfpretrain2"></span>
 <img src="figures/01-01-nlp/transformer_pretrain2_stanford.png" alt="Jointly pre-trained model (Source: Manning, Goldie, and Hewitt (2022))." width="80%" />
 <p class="caption">
-(#fig:fig:tfpretrain2)Jointly pre-trained model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
+FIGURE 2.19: Jointly pre-trained model (Source: <span class="citation">Manning, Goldie, and Hewitt (<a href="#ref-Manning2022" role="doc-biblioref">2022</a>)</span>).
 </p>
 </div>
 
@@ -772,9 +765,9 @@ of the pretrained model, which is referred to as fine-tuning
 The specific architecture of a transformer model affects the type of
 pre-training, and favourable use cases. In the following, three
 different but very influential transformer architectures will be
-discussed. BERT can be seen as stacked encoders (<span class="citation">(Devlin et al. <a href="#ref-Devlin2018" role="doc-biblioref">2018</a><a href="#ref-Devlin2018" role="doc-biblioref">c</a>)</span>), T5 aims
-to combine the good parts of encoders and decoders (<span class="citation">(Raffel et al. <a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">b</a>)</span>),
-while GPT are stacked decoders (<span class="citation">(T. Brown et al. <a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>).</p>
+discussed. BERT can be seen as stacked encoders (<span class="citation">(Devlin et al. <a href="#ref-Devlin2018" role="doc-biblioref">2018</a><a href="#ref-Devlin2018" role="doc-biblioref">b</a>)</span>), T5 aims
+to combine the good parts of encoders and decoders (<span class="citation">(Raffel et al. <a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">a</a>)</span>),
+while GPT are stacked decoders (<span class="citation">(T. B. Brown et al. <a href="#ref-Brown2020" role="doc-biblioref">2020</a><a href="#ref-Brown2020" role="doc-biblioref">a</a>)</span>).</p>
 <div id="bert" class="section level4 hasAnchor">
 <h4><span class="header-section-number">2.1.6.1</span> BERT<a href="c01-00-intro-modalities.html#bert" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Transfer learning led to state-of-the-art results in natural language
@@ -809,7 +802,7 @@ for numerous tasks.</p>
 regarded as an application of the insights gathered by an extensive
 empirical study searching for the best transfer learning techniques. It
 is pretrained on Colossal Clean Crawled Corpus (C4), an open-source
-dataset. <span class="citation">(Raffel et al. <a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">b</a>)</span> found that the best pretraining objective to use
+dataset. <span class="citation">(Raffel et al. <a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">a</a>)</span> found that the best pretraining objective to use
 for the encoder component was span corruption. In short, different
 length word groups (spans) are replaced with unique placeholders, and
 let the model decode them. Text preprocessing is necessary for its
@@ -823,10 +816,10 @@ question answering, and classification tasks like sentiment analysis. T5
 can even be applied to regression tasks by training it to predict the
 string representation of a number (and not the number itself). Examples
 of potential use cases are depicted in below.</p>
-<div class="figure" style="text-align: center">
-<img src="figures/01-01-nlp/t5_stanford.png" alt="Applications of T5 model (Source: Raffel et al. (2019b))." width="80%" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:t5"></span>
+<img src="figures/01-01-nlp/t5_stanford.png" alt="Applications of T5 model (Source: Raffel et al. (2019a))." width="80%" />
 <p class="caption">
-(#fig:fig:t5)Applications of T5 model (Source: <span class="citation">Raffel et al. (<a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">b</a>)</span>).
+FIGURE 2.20: Applications of T5 model (Source: <span class="citation">Raffel et al. (<a href="#ref-Raffel2019" role="doc-biblioref">2019</a><a href="#ref-Raffel2019" role="doc-biblioref">a</a>)</span>).
 </p>
 </div>
 
@@ -859,10 +852,10 @@ of learning (without gradient steps) simply from examples provided via
 context. The tasks are specified by the in-context examples, and the
 conditional probability distribution simulates performing the task to an
 extent.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gpt3scaling"></span>
 <img src="figures/01-01-nlp/gpt3_comparison.png" alt="Comparison of number of parameters between Transformer-architectures (Source: Saifee (2020))." width="70%" />
 <p class="caption">
-(#fig:fig:gpt3scaling)Comparison of number of parameters between Transformer-architectures (Source: <span class="citation">Saifee (<a href="#ref-Saifee2020" role="doc-biblioref">2020</a>)</span>).
+FIGURE 2.21: Comparison of number of parameters between Transformer-architectures (Source: <span class="citation">Saifee (<a href="#ref-Saifee2020" role="doc-biblioref">2020</a>)</span>).
 </p>
 </div>
 
@@ -878,7 +871,7 @@ from the developments. Risks and harms among environmental and financial
 costs have been studied by <span class="citation">(Bender et al. <a href="#ref-Bender2021" role="doc-biblioref">2021</a>)</span>. They state that marginalized
 communities are not only less likely to benefit from LM progress, but
 also more likely to suffer from the environmental repercussions of
-increasing resource consumption. <span class="citation">(<span class="citeproc-not-found" data-reference-id="strubel2019energy"><strong>???</strong></span>)</span> estimated that training
+increasing resource consumption. <span class="citation">(Strubell, Ganesh, and McCallum <a href="#ref-Strubell2019" role="doc-biblioref">2019</a><a href="#ref-Strubell2019" role="doc-biblioref">a</a>)</span> estimated that training
 a Transformer (big) model resulted in 249t of <span class="math inline">\(CO_2\)</span>. To compare, an
 average human is responsible for approximately 5t of <span class="math inline">\(CO_2\)</span> per year
 (according to <span class="citation">(Ritchie, Roser, and Rosado <a href="#ref-Ritchie2020" role="doc-biblioref">2020</a>)</span>). In addition, they discovered that an
@@ -924,10 +917,10 @@ patterns (see ), interestingly, most of them could be neglected without
 notable performance loss (<span class="citation">(Voita et al. <a href="#ref-Voita2019" role="doc-biblioref">2019</a>)</span>). Probing attention maps can be
 tedious, but allows to gain knowledge of common patterns, such as an
 unexpected amount focusing on the delimiter token <span class="math display">\[SEP\]</span>.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ctattentionheads"></span>
 <img src="figures/01-01-nlp/ct_attention-heads.png" alt="Common patterns of attention heads (Source: Clark et al. (2019))." width="90%" />
 <p class="caption">
-(#fig:fig:ctattentionheads)Common patterns of attention heads (Source: <span class="citation">Clark et al. (<a href="#ref-Clark2019" role="doc-biblioref">2019</a>)</span>).
+FIGURE 2.22: Common patterns of attention heads (Source: <span class="citation">Clark et al. (<a href="#ref-Clark2019" role="doc-biblioref">2019</a>)</span>).
 </p>
 </div>
 
@@ -939,7 +932,7 @@ examples and is expected to generalize to unseen data. Annotating is not
 only costly but also difficult to gather for numerous languages,
 domains, and tasks. In practice, there is often only a very limited
 amount of labelled examples. Consequently, few-shot learning is a highly
-relevant research area (<span class="citation">(<span class="citeproc-not-found" data-reference-id="Schick2020"><strong>???</strong></span>)</span>). It defines a model that is
+relevant research area (<span class="citation">(Schick and Schütze <a href="#ref-Schick2020" role="doc-biblioref">2020</a>)</span>). It defines a model that is
 trained on a limited number of demonstrations to guide its predictions.
 Referring back to , the benefits of lower computational and
 environmental costs have to be mentioned.<br />
@@ -952,24 +945,24 @@ description, examples, and the prompt. In , the task is a translation
 from English to French, a few examples, as well as the word that should
 be translated are given. Moreover, zero-shot and one-shot learning refer
 to the model predicting with no and one learned example, respectively
-(<span class="citation">(T. Brown et al. <a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>).</p>
-<div class="figure" style="text-align: center">
-<img src="figures/01-01-nlp/gpt3_few-shot-learning.png" alt="Few-shot learning (Source: T. Brown et al. (2020))." width="50%" />
+(<span class="citation">(T. B. Brown et al. <a href="#ref-Brown2020" role="doc-biblioref">2020</a><a href="#ref-Brown2020" role="doc-biblioref">a</a>)</span>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gpt3fewshotlearning"></span>
+<img src="figures/01-01-nlp/gpt3_few-shot-learning.png" alt="Few-shot learning (Source: T. B. Brown et al. (2020a))." width="50%" />
 <p class="caption">
-(#fig:fig:gpt3fewshotlearning)Few-shot learning (Source: <span class="citation">T. Brown et al. (<a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>).
+FIGURE 2.23: Few-shot learning (Source: <span class="citation">T. B. Brown et al. (<a href="#ref-Brown2020" role="doc-biblioref">2020</a><a href="#ref-Brown2020" role="doc-biblioref">a</a>)</span>).
 </p>
 </div>
 
 <p>It is complicated to create the few-shot examples, since the application
 relies on them to express the task. This is why smaller models are
-susceptible to examples written unfavourably. In <span class="citation">(T. Brown et al. <a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>, it was
+susceptible to examples written unfavourably. In <span class="citation">(T. B. Brown et al. <a href="#ref-Brown2020" role="doc-biblioref">2020</a><a href="#ref-Brown2020" role="doc-biblioref">a</a>)</span>, it was
 shown that few-shot performance scales with the number of model
 parameters. Even though GPT-3’s in-context learning improved few-shot
 prompting capabilities, it is still sensitive to the order of training
 examples, decoding strategy, and hyperparameter selection. All of this
 combined with the fact that current research uses larger or held-out
 data sets leads to the suspicion that the true few-shot ability of
-language models is overestimated (see <span class="citation">(Perez, Kiela, and Cho <a href="#ref-perez2021true" role="doc-biblioref">2021</a>)</span>).<br />
+language models is overestimated (see <span class="citation">(Perez, Kiela, and Cho <a href="#ref-Perez2021" role="doc-biblioref">2021</a><a href="#ref-Perez2021" role="doc-biblioref">a</a>)</span>).<br />
 Moreover, <span class="citation">(Lialin et al. <a href="#ref-Lialin2022" role="doc-biblioref">2022</a>)</span> have found that common transformer models could
 not resolve compositional questions in a zero-shot fashion and that the
 model’s parameter count does not correlate with performance. This
@@ -1077,47 +1070,47 @@ Generally, identity mappings are not optimal, but new reformulations may help to
 </div>
 <div id="identity-mapping-by-shortcuts" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.2.4.1.2</span> Identity Mapping by Shortcuts<a href="c01-00-intro-modalities.html#identity-mapping-by-shortcuts" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Residual learning is adopted to every few stacked layers where a building block is defined as shown in Fig. 1:</p>
-<p><span class="math display">\[\begin{equation}
-\tag{1}
+<p>Residual learning is adopted to every few stacked layers where a building block is defined as shown in Figure <a href="c01-00-intro-modalities.html#fig:ch01-figure01">2.24</a>:</p>
+<p><span class="math display" id="eq:ch01-02-01">\[\begin{equation}
+\tag{2.1}
 y = F  \left( x,\left\{  W_i\right\} \right) + x
 \end{equation}\]</span></p>
 <p>x and y present the input and output vectors of the layers.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch01-figure01"></span>
-<img src="figures/01-chapter1/resnetBlock.png" alt="Figure 1. Building block of residual learning" width="35%" />
+<img src="figures/01-chapter1/resnetBlock.png" alt="Building block of residual learning" width="35%" />
 <p class="caption">
-FIGURE 2.1: Figure 1. Building block of residual learning
+FIGURE 2.24: Building block of residual learning
 </p>
 </div>
-<p>The function <span class="math inline">\(F \left( x,\left\{ W_i\right\} \right)\)</span> represents the residual mapping that is to be learned. For the example with two layers from Fig.1 that has two layers, <span class="math inline">\(F = W_2\sigma\left( W_1x\right)\)</span> in which <span class="math inline">\(\sigma\)</span> denotes the ReLU activation function, and to simplify the notations, biases are left out. The operation <span class="math inline">\(F + x\)</span> is conducted with a shortcut connection and element-wise addition. Afterward, He et al. applied second nonlinearity ( i.e., <span class="math inline">\(\sigma \left( y \right)\)</span>, Fig.1).</p>
-<p>The shortcut connections in Eq. (1) neither adds an extra parameter nor increases computation complexity, which enables comparisons between plain and residual networks that concurrently have the same number of parameters, depth, width, and computational cost (except for the negligible element-wise addition).
-Dimensions of x and F must be equal in Eq. (1). Alternatively, to match the dimensions, linear projection <span class="math inline">\(W_s\)</span> by the shortcut connections can be applied:</p>
-<p><span class="math display">\[\begin{equation}
-\tag{2}
+<p>The function <span class="math inline">\(F \left( x,\left\{ W_i\right\} \right)\)</span> represents the residual mapping that is to be learned. For the example with two layers from Figure <a href="c01-00-intro-modalities.html#fig:ch01-figure01">2.24</a> that has two layers, <span class="math inline">\(F = W_2\sigma\left( W_1x\right)\)</span> in which <span class="math inline">\(\sigma\)</span> denotes the ReLU activation function, and to simplify the notations, biases are left out. The operation <span class="math inline">\(F + x\)</span> is conducted with a shortcut connection and element-wise addition. Afterward, He et al. applied second non-linearity ( i.e., <span class="math inline">\(\sigma \left( y \right)\)</span>, <a href="c01-00-intro-modalities.html#fig:ch01-figure01">2.24</a>).</p>
+<p>The shortcut connections in Equation <a href="c01-00-intro-modalities.html#eq:ch01-02-01">(2.1)</a> neither adds an extra parameter nor increases computation complexity, which enables comparisons between plain and residual networks that concurrently have the same number of parameters, depth, width, and computational cost (except for the negligible element-wise addition).
+Dimensions of x and F must be equal in Equation <a href="c01-00-intro-modalities.html#eq:ch01-02-01">(2.1)</a>. Alternatively, to match the dimensions, linear projection <span class="math inline">\(W_s\)</span> by the shortcut connections can be applied:</p>
+<p><span class="math display" id="eq:ch01-02-02">\[\begin{equation}
+\tag{2.2}
 y = F  \left( x,\left\{  W_i\right\} \right)+ W_sx.
 \end{equation}\]</span></p>
-<p>The square matrix <span class="math inline">\(W_s\)</span> can be used in Eq. (1). However, experiments showed that identity mapping is enough to solve the degradation problem. Therefore, <span class="math inline">\(W_s\)</span> only aims to match dimensions. Although more levels are possible, it was experimented with function F having two or three layers without stating the exact form of it. Assuming F only has one layer, Eq (1) it is comparable to a linear layer: <span class="math inline">\(y = W_1 x + x\)</span>. The theoretical notations are about fully-connected layers, but convolutional layers were used. The function <span class="math inline">\(F \left( x,\left\{ W_i\right\} \right)\)</span> can be applied to represent multiple convolutional layers. Two feature maps are added element-wise, channel by channel.</p>
+<p>The square matrix <span class="math inline">\(W_s\)</span> can be used in Equation <a href="c01-00-intro-modalities.html#eq:ch01-02-02">(2.2)</a>. However, experiments showed that identity mapping is enough to solve the degradation problem. Therefore, <span class="math inline">\(W_s\)</span> only aims to match dimensions. Although more levels are possible, it was experimented with function F having two or three layers without stating the exact form of it. Assuming F only has one layer, Equation <a href="c01-00-intro-modalities.html#eq:ch01-02-01">(2.1)</a>, it is comparable to a linear layer: <span class="math inline">\(y = W_1 x + x\)</span>. The theoretical notations are about fully-connected layers, but convolutional layers were used. The function <span class="math inline">\(F \left( x,\left\{ W_i\right\} \right)\)</span> can be applied to represent multiple convolutional layers. Two feature maps are added element-wise, channel by channel.</p>
 </div>
 </div>
 <div id="network-architectures" class="section level4 hasAnchor">
 <h4><span class="header-section-number">2.2.4.2</span> Network Architectures<a href="c01-00-intro-modalities.html#network-architectures" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>To construct efficient residual network, various plain/residual networks were tested. They trained the network on benchmarked datasets, one of them being the ImageNet dataset, which will be used for a comparison of network architectures. Fig. 2 shows that every residual network needs a plain baseline network inspired by the VGG network <span class="citation">(<span class="citeproc-not-found" data-reference-id="vgg"><strong>???</strong></span>)</span> on which identity mapping by shortcuts is applied.</p>
+<p>To construct efficient residual network, various plain/residual networks were tested. They trained the network on benchmarked datasets, one of them being the ImageNet dataset, which will be used for a comparison of network architectures. Figure <a href="c01-00-intro-modalities.html#eq:ch01-02-02">(2.2)</a> shows that every residual network needs a plain baseline network inspired by the VGG network <span class="citation">(<span class="citeproc-not-found" data-reference-id="vgg"><strong>???</strong></span>)</span> on which identity mapping by shortcuts is applied.</p>
 <p><em>Plain Network</em> The philosophy of VGG nets 41 mainly inspires plain baselines. There are two rules that convolution layers, which usually have 3x3 filters, follow:</p>
 <ul>
 <li>feature maps with the same output size have the same number of layers;</li>
 <li>reducing the size of a feature map by half doubles the number of filters per layer to maintain time complexity per layer</li>
 </ul>
-<p>Convolutional layers with a stride of 2 perform downsampling directly. A global average pooling layer and a 1000-way fully-connected layer with softmax are at the end of the network. The number of weighted layers sums up to 34 in Fig. 2 (middle).Compared to VGG nets, this model has fewer filters and lower complexity. (Fig. 2, left).</p>
-<p><em>Residual Network</em> Based on the above plain network, additional shortcut connections (Fig. 2, right) turn the network into its associate residual variant. The identity shortcuts (Eq. (1)) can be directly used in the case of the exact dimensions of the input and output (solid line shortcuts in Fig. 2). For the different dimensions (dotted line shortcuts in Fig. 2), two options are considered:</p>
+<p>Convolutional layers with a stride of 2 perform downsampling directly. A global average pooling layer and a 1000-way fully-connected layer with softmax are at the end of the network. The number of weighted layers sums up to 34 in Figure <a href="c01-00-intro-modalities.html#fig:ch01-figure02">2.25</a> (middle).Compared to VGG nets, this model has fewer filters and lower complexity. (Figure <a href="c01-00-intro-modalities.html#fig:ch01-figure02">2.25</a>, left).</p>
+<p><em>Residual Network</em> Based on the above plain network, additional shortcut connections (Figure <a href="c01-00-intro-modalities.html#fig:ch01-figure02">2.25</a>, right) turn the network into its associate residual variant. The identity shortcuts (Equation <a href="c01-00-intro-modalities.html#eq:ch01-02-01">(2.1)</a>) can be directly used in the case of the exact dimensions of the input and output (solid line shortcuts in Figure <a href="c01-00-intro-modalities.html#fig:ch01-figure02">2.25</a>). For the different dimensions (dotted line shortcuts in Figure <a href="c01-00-intro-modalities.html#fig:ch01-figure02">2.25</a>), two options are considered:</p>
 <ul>
 <li>The shortcut still performs identity mapping, but with extra zero entries padded to cope with the increasing dimensions, without adding new parameters;</li>
-<li>The projection shortcut in Eq. (2) matches dimensions (due to 1×1 convolutions).</li>
+<li>The projection shortcut in Equation <a href="c01-00-intro-modalities.html#eq:ch01-02-02">(2.2)</a> matches dimensions (due to 1×1 convolutions).</li>
 </ul>
 <p>In both cases, shortcuts will be done with a stride of two when they go across feature maps of two sizes.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch01-figure02"></span>
-<img src="figures/01-chapter1/ResNet_architecture.png" alt="Figure 2. Architecture of ResNet" width="100%" />
+<img src="figures/01-chapter1/ResNet_architecture.png" alt="Architecture of ResNet" width="100%" />
 <p class="caption">
-FIGURE 2.2: Figure 2. Architecture of ResNet
+FIGURE 2.25: Architecture of ResNet
 </p>
 </div>
 </div>
@@ -1125,12 +1118,12 @@ FIGURE 2.2: Figure 2. Architecture of ResNet
 <div id="efficientnet" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.5</span> EfficientNet<a href="c01-00-intro-modalities.html#efficientnet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Until Tan M. introduced EfficientNet <span class="citation">(<span class="citeproc-not-found" data-reference-id="effecient"><strong>???</strong></span>)</span>, it was popular to scale only one of the three dimensions – depth, width, or image size. The empirical study shows that it is critical to balance all network dimensions, which can be achieved by simply scaling each with a constant ratio. Based on this observation, a simple yet effective compound scaling method was proposed, which uniformly scales network width, depth, and resolution with a set of fixed scaling coefficients.
-For example, if 2N times more computational resources are available. In that case, increasing the network depth by <span class="math inline">\(\alpha N\)</span>, width by <span class="math inline">\(\beta N\)</span>, and image size by <span class="math inline">\(\gamma N\)</span> would be possible.Here <span class="math inline">\(\alpha,\beta,\gamma\)</span> are constant coefficients determined by a small grid search on the original miniature model. Fig. 3 illustrates the difference between this scaling method and conventional methods.
+For example, if 2N times more computational resources are available. In that case, increasing the network depth by <span class="math inline">\(\alpha N\)</span>, width by <span class="math inline">\(\beta N\)</span>, and image size by <span class="math inline">\(\gamma N\)</span> would be possible.Here <span class="math inline">\(\alpha,\beta,\gamma\)</span> are constant coefficients determined by a small grid search on the original miniature model. Figure <a href="c01-00-intro-modalities.html#fig:ch01-figure03">2.26</a> illustrates the difference between this scaling method and conventional methods.
 A compound scaling method makes sense if an input image is bigger since a larger receptive field requires more layers and more significant channel features to capture fine-grained patterns. Theoretically and empirically, there has been a special relationship between network width and depth <span class="citation">(<span class="citeproc-not-found" data-reference-id="depthwidth"><strong>???</strong></span>)</span>. Existing MobileNets <span class="citation">(<span class="citeproc-not-found" data-reference-id="mobilenet"><strong>???</strong></span>)</span> and ResNet are used to demonstrated new scaling method.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch01-figure03"></span>
-<img src="figures/01-chapter1/Model_scaling.png" alt="Figure 3. Model scaling" width="100%" />
+<img src="figures/01-chapter1/Model_scaling.png" alt="Model scaling" width="100%" />
 <p class="caption">
-FIGURE 2.3: Figure 3. Model scaling
+FIGURE 2.26: Model scaling
 </p>
 </div>
 <div id="compound-model-scaling" class="section level4 hasAnchor">
@@ -1138,24 +1131,21 @@ FIGURE 2.3: Figure 3. Model scaling
 <div id="problem-formulation" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.2.5.1.1</span> Problem Formulation<a href="c01-00-intro-modalities.html#problem-formulation" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>A function <span class="math inline">\(Y_i = \mathcal{F}i \left( X_i \right)\)</span> with the operator <span class="math inline">\(\mathcal{F}_i\)</span>, output tensor <span class="math inline">\(Y_i\)</span>, input tensor <span class="math inline">\(X_i\)</span> of shape <span class="math inline">\(\left( H_i, W_i, C_i \right)\)</span>, spatial dimensions <span class="math inline">\(H_i\)</span>, <span class="math inline">\(W_i\)</span>, and channel dimension <span class="math inline">\(C_i\)</span> is called a ConvNet Layer <span class="math inline">\(i\)</span>. A ConvNet N appears as a list of composing layers:
-<span class="math display">\[\begin{equation}
-\tag{3}
+<span class="math display">\[
 \mathcal{N}=\mathcal{F_k}\odot \cdots \mathcal{F_2}\odot\mathcal{F_1}\left( X_1 \right)=\bigodot{j=1\cdots k}\mathcal{F_j}\left( X_1 \right)
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Effectively, these layers are often partitioned into multiple stages, and all layers in each stage share the same architecture. For example, ResNet has five stages, with all layers in every stage being the same convolutional type, except for the first layer that performs down-sampling. Therefore, a ConvNet can be defined as:</p>
-<p><span class="math display">\[\begin{equation}
-\tag{4}
- \mathcal{N}=\bigodot_{i=1\cdots s}\mathcal{F_i}^{L_i}\left( X_{\left( H_i, W_i, C_i  \right)} \right)
-\end{equation}\]</span></p>
+<p><span class="math display">\[
+\mathcal{N}=\bigodot_{i=1\cdots s}\mathcal{F_i}^{L_i}\left( X_{\left( H_i, W_i, C_i  \right)} \right)
+\]</span></p>
 <p>where <span class="math inline">\(\mathcal{F_i}^{L_i}\)</span> denotes layer <span class="math inline">\(\mathcal{F_i}\)</span> which is repeated <span class="math inline">\(L_i\)</span> times in stage <span class="math inline">\(i\)</span>, and <span class="math inline">\(\left( H_i, W_i, C_i \right)\)</span> is the shape of input tensor <span class="math inline">\(X\)</span> of layer <span class="math inline">\(i\)</span>.</p>
 <p>In comparison to the regular ConvNet focusing on best layer architecture <span class="math inline">\(\mathcal{F_i}\)</span> search, model scaling centers on the expansion of the network length <span class="math inline">\(\left( L_i\right)\)</span>, width <span class="math inline">\(\left( C_i \right)\)</span>, and/or resolution <span class="math inline">\(\left( H_i, W_i\right)\)</span> without changing <span class="math inline">\(\mathcal{F_i}\)</span> that was predefined in the baseline network. Although model scaling simplifies the design problem of the new resource constraints through the fixing <span class="math inline">\(\mathcal{F_i}\)</span>, different <span class="math inline">\(\left( L_i, H_i, W_i, C_i \right)\)</span> for each layer, the large designe space remains to be explored. To further reduce design space, all layers are restricted to be scaled uniformly with a constant ratio. In this case, the goal is to maximize the model’s accuracy for any given resource constraints, which can be presented as an optimization problem:</p>
-<p><span class="math display">\[\begin{equation}
-\tag{5}
-\max_{d,w,r}  Accuracy \left( \mathcal{N}\left( d,w,r \right) \right) \\
-s.t.\mathcal{N}\left( d,w,r \right)=\bigodot_{I=1...s}\hat{\mathcal{F}}{i}^{d\cdot \hat{L{i}}}\left( X_{\left\langle r\cdot \hat{H_i},r\cdot \hat{W_i},w\cdot \hat{C_i}\right\rangle} \right) \\
-Memory\left( \mathcal{N} \right)≤ targetMemory \\
-FLOPS\left( \mathcal{N} \right) ≤ targetFlops \\
-\end{equation}\]</span>
+<p><span class="math display">\[\begin{align*}
+\max_{d,w,r} &amp;\text{Accuracy} \left( \mathcal{N}\left( d,w,r \right) \right) \\
+s.t.\mathcal{N}\left( d,w,r \right) &amp;=\bigodot_{I=1...s}\hat{\mathcal{F}}{i}^{d\cdot \hat{L{i}}}\left( X_{\left\langle r\cdot \hat{H_i},r\cdot \hat{W_i},w\cdot \hat{C_i}\right\rangle} \right) \\
+Memory\left( \mathcal{N} \right) &amp;\leq\ targetMemory \\
+FLOPS\left( \mathcal{N} \right) &amp;\leq\ targetFlops
+\end{align*}\]</span>
 where w,d,r are coefficients for scaling network width, depth, and resolution; <span class="math inline">\(\left(\widehat{\mathcal{F}}_i, \widehat{L}_i, \widehat{H}_i, \widehat{W}_i, \widehat{C}_i \right)\)</span> are predefined parameters in baseline network.</p>
 </div>
 <div id="scaling-dimensions" class="section level5 hasAnchor">
@@ -1173,14 +1163,16 @@ where w,d,r are coefficients for scaling network width, depth, and resolution; <
 To confirm this thought, results of networks width <span class="math inline">\(w\)</span> without changing depth (<span class="math inline">\(d\)</span>=1.0) and resolution (<span class="math inline">\(r\)</span>=1.0) were compared with deeper (<span class="math inline">\(d\)</span>=2.0) and higher resolution (<span class="math inline">\(r\)</span>=2.0) networks. This showed that width scaling achieves much better accuracy under the same FLOPS cost. These results lead to the second observation:</p>
 <p><strong>Observation 2:</strong> To achieve better accuracy and efficiency, balancing all network width, depth, and resolution dimensions during ConvNet scaling is critical. Earlier researches have tried to arbitrarily balance network width and depth, but they all require tedious manual tuning.</p>
 <p>A new <strong>compound scaling method</strong>, which uses a compound coefficient <span class="math inline">\(\varphi\)</span> to uniformly scale network width, depth, and resolution in a principled way, was proposed.</p>
-<p><span class="math display">\[\begin{equation}
-\tag{6}
-depth: \mathcal{d}=\alpha^{\varphi} \\
-width: \mathcal{w}=\beta^{\varphi}\\
-resolution: \mathcal{r}=\gamma^{\varphi}\\
-s.t.  \alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\\
- \alpha \ge 1, \beta \ge 1, \gamma \ge 1\\
-\end{equation}\]</span></p>
+<p><span class="math display" id="eq:01-02-06">\[\begin{align}
+\begin{split}
+\text{depth:} &amp;\mathcal{d}=\alpha^{\varphi} \\
+\text{width:} &amp;\mathcal{w}=\beta^{\varphi}\\
+\text{resolution:} &amp;\mathcal{r}=\gamma^{\varphi}\\
+&amp;s.t.  \alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\\
+&amp;\alpha \ge 1, \beta \ge 1, \gamma \ge 1
+\end{split}
+ \tag{2.3}
+\end{align}\]</span></p>
 <p>where <span class="math inline">\(\alpha, \beta, \gamma\)</span> are constants that can be determined by a small grid search, <span class="math inline">\(\varphi\)</span> is a user-specified coefficient that controls how many more resources are available for model scaling, while <span class="math inline">\(\alpha, \beta, \gamma\)</span> specify how to assign these extra resources to network width, depth, and resolution, respectively. Notably, the FLOPS of a regular convolution op is proportional to <span class="math inline">\(d, w^{2}, r^{2}\)</span>, i.e., doubling network depth will double FLOPS, but doubling network width or Resolution will increase FLOPS by four times. Scaling a ConvNet with previous equation will approximately increase total FLOPS by <span class="math inline">\(\left( \alpha\cdot \beta^{2}\cdot \gamma^{2} \right)^{\varphi}\)</span>. In this paper, <span class="math inline">\(\alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\)</span> is constrain such that for any new <span class="math inline">\(\varphi\)</span>, the total FLOPS will approximately increase by <span class="math inline">\(2\varphi\)</span></p>
 </div>
 </div>
@@ -1190,8 +1182,8 @@ s.t.  \alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\\
 A new mobile-sized baseline called EfficientNet was developed to show the effectiveness of the new scaling method. Metrics that were used to estimate the efficacy are accuracy and FLOPS.
 The baseline efficient network that was created is named EfficientNet-B0. Afterward, this compound scaling method is applied in two steps:</p>
 <ul>
-<li><p><strong>STEP 1</strong>: By fixing <span class="math inline">\(\varphi = 1\)</span> and, assuming twice more resources available, a small grid search of $, , $ based Eq. (6) showed that the best values for EfficientNet-B0 are <span class="math inline">\(\alpha = 1.2, \beta = 1.1, \gamma=1.15\)</span>, under constraint of <span class="math inline">\(\alpha·\beta^2·\gamma^2 ≈2\)</span>.</p></li>
-<li><p><strong>STEP 2</strong>: Afterward fix <span class="math inline">\(\alpha,\beta,\gamma\)</span> as constants and scale up the baseline network with different <span class="math inline">\(\varphi\)</span> using Eq.(6) to construct EfficientNet-B1 to B7</p></li>
+<li><p><strong>STEP 1</strong>: By fixing <span class="math inline">\(\varphi = 1\)</span> and, assuming twice more resources available, a small grid search of $, , $ based Equation <a href="c01-00-intro-modalities.html#eq:01-02-06">(2.3)</a> showed that the best values for EfficientNet-B0 are <span class="math inline">\(\alpha = 1.2, \beta = 1.1, \gamma=1.15\)</span>, under constraint of <span class="math inline">\(\alpha·\beta^2·\gamma^2 ≈2\)</span>.</p></li>
+<li><p><strong>STEP 2</strong>: Afterward fix <span class="math inline">\(\alpha,\beta,\gamma\)</span> as constants and scale up the baseline network with different <span class="math inline">\(\varphi\)</span> using Equation <a href="c01-00-intro-modalities.html#eq:01-02-06">(2.3)</a> to construct EfficientNet-B1 to B7</p></li>
 </ul>
 <table>
 <thead>
@@ -1355,12 +1347,12 @@ Afterward, the depth of the network was increased and ResNet-50, ResNet-101, and
 <div id="contrastive-learning" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.7</span> Contrastive learning<a href="c01-00-intro-modalities.html#contrastive-learning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In recent years the problem of classification of the unlabeled dataset is becoming more widespread. More unlabeled datasets are being created in fields like medicine, the automotive industry, military, etc., requiring human labeling. Since the process is expensive and time-consuming, researchers assumed, it could be automated with contrastive learning frameworks. One of the first and most known contrastive learning frameworks is SimCLR <span class="citation">T. Chen, Kornblith, Norouzi, and Hinton (<a href="#ref-SimCLR" role="doc-biblioref">2020</a><a href="#ref-SimCLR" role="doc-biblioref">a</a>)</span>. The advantage of this framework is its simplicity, yet it achieves high accuracy on classification tasks. The main idea is to have two copies of the image, which are then used to train two networks and later compared. The problem with this framework is that it doubles the size of the dataset and reaches among all images, which can be computationally unfeasible in large datasets. Bootstrap Your Own Latent <span class="citation">Grill, Strub, Altché, et al. (<a href="#ref-BYOL" role="doc-biblioref">2020</a>)</span> was introduced to avoid making double-sized datasets. The idea was to bootstrap images’ representations, avoiding unnecessary image comparison. These two frameworks will be described in this work.
-Further improvements in the choice of creating two views of images and comparison techniques were presented in different frameworks such as Nearest-Neighbor Contrastive Learning (NNCLR) <span class="citation">(<span class="citeproc-not-found" data-reference-id="NNCLR"><strong>???</strong></span>)</span>, Open World Object Detection (ORE) <span class="citation">(<span class="citeproc-not-found" data-reference-id="ORE"><strong>???</strong></span>)</span>, Swapping Assignments between multiple Views (SwAV) <span class="citation">(<span class="citeproc-not-found" data-reference-id="SwAV"><strong>???</strong></span>)</span>, and many more.
+Further improvements in the choice of creating two views of images and comparison techniques were presented in different frameworks such as Nearest-Neighbor Contrastive Learning (NNCLR) <span class="citation">(<span class="citeproc-not-found" data-reference-id="NNCLR"><strong>???</strong></span>)</span>, Open World Object Detection (ORE) <span class="citation">(<span class="citeproc-not-found" data-reference-id="ORE"><strong>???</strong></span>)</span>, Swapping Assignments between multiple Views (SwAV) <span class="citation">Caron et al. (<a href="#ref-SwAV" role="doc-biblioref">2020</a>)</span>, and many more.
 This field is a constant research topic, and new, improved frameworks are being created to help researchers solve other tasks requiring labeled datasets.</p>
 </div>
 <div id="a-simple-framework-for-contrastive-learning-of-visual-representations" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.8</span> A Simple Framework for Contrastive Learning of Visual Representations<a href="c01-00-intro-modalities.html#a-simple-framework-for-contrastive-learning-of-visual-representations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Chen T. et al. intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations and called it SimCLR <span class="citation">T. Chen, Kornblith, Norouzi, and Hinton (<a href="#ref-SimCLR" role="doc-biblioref">2020</a><a href="#ref-SimCLR" role="doc-biblioref">a</a>)</span>. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.</p>
+<p><span class="citation">T. Chen, Kornblith, Norouzi, and Hinton (<a href="#ref-SimCLR" role="doc-biblioref">2020</a><a href="#ref-SimCLR" role="doc-biblioref">a</a>)</span> intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations and called it SimCLR. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.</p>
 <p>Intending to understand what qualifies good contrastive representation learning, the significant components of the framework were studied and resulted in:</p>
 <ul>
 <li>A contrastive prediction task requires combining multiple data augmentation operations, which results in effective representations. Unsupervised contrastive learning benefits from more significant data augmentation.</li>
@@ -1370,7 +1362,7 @@ This field is a constant research topic, and new, improved frameworks are being 
 </ul>
 <div id="the-contrastive-learning-framework" class="section level4 hasAnchor">
 <h4><span class="header-section-number">2.2.8.1</span> The Contrastive Learning Framework<a href="c01-00-intro-modalities.html#the-contrastive-learning-framework" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Like previous contrastive learning algorithms, in the SimCLR, a contrastive loss is used to learn representations by maximizing agreement between various augmented views of the same data example. This framework contains four significant components, which are shown in Fig. 4:</p>
+<p>Like previous contrastive learning algorithms, in the SimCLR, a contrastive loss is used to learn representations by maximizing agreement between various augmented views of the same data example. This framework contains four significant components, which are shown in Figure <a href="#fig:ch01-figure4"><strong>??</strong></a>:</p>
 <ol style="list-style-type: decimal">
 <li><p>A stochastic <em>data augmentation</em> module</p></li>
 <li><p>A neural network <em>base encoder</em></p></li>
@@ -1378,9 +1370,9 @@ This field is a constant research topic, and new, improved frameworks are being 
 <li><p>A <em>contrastive loss function</em></p></li>
 </ol>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch01-figure04"></span>
-<img src="figures/01-chapter1/SimCLR.png" alt="Figure 4. A simple framework for contrastive learning of visual representations" width="30%" />
+<img src="figures/01-chapter1/SimCLR.png" alt="A simple framework for contrastive learning of visual representations" width="30%" />
 <p class="caption">
-FIGURE 2.4: Figure 4. A simple framework for contrastive learning of visual representations
+FIGURE 2.27: A simple framework for contrastive learning of visual representations
 </p>
 </div>
 <div id="stochastic-data-augmentation-module" class="section level5 hasAnchor">
@@ -1394,9 +1386,9 @@ There are many data augmentation operations, the focus was on the most common on
 <li><strong>appearance transformation</strong>: color distortion (including color dropping), brightness, contrast, saturation, Gaussian blur, and Sobel filtering.</li>
 </ul>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch01-figure05"></span>
-<img src="figures/01-chapter1/augmentation.png" alt="Figure 5. Augmentation texhniques" width="80%" />
+<img src="figures/01-chapter1/augmentation.png" alt="Augmentation texhniques" width="80%" />
 <p class="caption">
-FIGURE 2.5: Figure 5. Augmentation texhniques
+FIGURE 2.28: Augmentation texhniques
 </p>
 </div>
 <p>Due to the image sizes in the ImageNet dataset, all images were always randomly cropped and resized to the same resolution. Later on, other targeted data augmentation transformations were applied to one branch, remaining the one as original i.e. <span class="math inline">\(t\left( x_{i}\right)= x_i\)</span>.
@@ -1421,10 +1413,9 @@ Applying just individual transformation is insufficient for the model to learn g
 <div id="contrastive-loss-function" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.2.8.1.4</span> Contrastive loss function<a href="c01-00-intro-modalities.html#contrastive-loss-function" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Given a set <span class="math inline">\(\left\{ \tilde{x}_{ik} \right\}\)</span> including a positive pair of examples <span class="math inline">\(\tilde{x}_{i}\)</span> and <span class="math inline">\(\tilde{x}_{j}\)</span>, the contrastive prediction task aims to identify <span class="math inline">\(\tilde{x}_{i}\)</span> in <span class="math inline">\(\left\{ \tilde{x}_{i} \right\}_{k\neq i}\)</span> for a given <span class="math inline">\(\tilde{x}_{i}\)</span>. In the case of positive examples, the loss function is as follows <span class="math inline">\(\left( i, j\right)\)</span> is defined as</p>
-<p><span class="math display">\[\begin{equation}
-\tag{7}
+<p><span class="math display">\[
 \mathcal{l}_{i,j} = −\log\frac{exp\left( \frac{sim(z_i,z_j)}{\tau} \right)}{\sum_{k=1}^{2N}\mathbb{I_{\left[ k\neq i \right]}}exp\left( \frac{sim(z_i,z_k)}{\tau} \right)}
-\end{equation}\]</span></p>
+\]</span></p>
 <p>where <span class="math inline">\(\mathbb{I_{\left[ k\neq i \right]}}\in\left\{ 0,1 \right\}\)</span> is an indicator function, <span class="math inline">\(\tau\)</span> denotes a temperature parameter and <span class="math inline">\(sim\left(\textbf{u,v} \right)= \frac{\textbf{u}^T\textbf{v}}{\left\| \textbf{u}\right\|\left\| \textbf{v} \right\|}\)</span> is a dot product between <span class="math inline">\(\mathcal{l}_2\)</span> normalized <span class="math inline">\(\textbf{u},\textbf{v}\)</span>.</p>
 <p>The final loss is calculated across all positive pairs, both <span class="math inline">\(\left( i,j \right)\)</span> and <span class="math inline">\(\left( j,i \right)\)</span>, in a mini-batch. It was named <strong>NT-Xent</strong>, the normalized temperature-scaled cross-entropy loss.</p>
 <p>The NT-Xent loss was compared against other commonly used contrastive loss functions, such as logistic loss and margin loss. Gradient analysis shows that <span class="math inline">\(l_2\)</span> normalization, cosine similarity, and temperature together effectively weight different examples, and a suitable temperature can make the model learn from hard negatives. The advantage of NT-Xent is that it weights the negatives by their relative hardness. Without normalization and proper temperature scaling, performance is significantly worse. Also, the contrastive task accuracy is higher, but the resulting representation is worse under linear evaluation.</p>
@@ -1433,7 +1424,7 @@ Applying just individual transformation is insufficient for the model to learn g
 </div>
 <div id="bootstrap-your-own-latent" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.9</span> Bootstrap Your Own Latent<a href="c01-00-intro-modalities.html#bootstrap-your-own-latent" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The fundamental idea of contrastive learning is to create pairs of images on which the framework would be trained. Creating negative pairs relies on large batch sizes, memory banks, or customized mining strategies which can be challenging in larger datasets. Grill J.B. at al. wanted to create a new approach that would achieve better performance than other contrastive methods without using negative pairs. A solution they have introduced is a method called Bootstrap Your Own Latent (BYOL) <span class="citation">Grill, Strub, Altché, et al. (<a href="#ref-BYOL" role="doc-biblioref">2020</a>)</span>. The idea was to bootstrap representations of images. As a result, BYOL is more robust to the choice of image augmentations.
+<p>The fundamental idea of contrastive learning is to create pairs of images on which the framework would be trained. Creating negative pairs relies on large batch sizes, memory banks, or customized mining strategies which can be challenging in larger datasets. <span class="citation">Grill, Strub, Altché, et al. (<a href="#ref-BYOL" role="doc-biblioref">2020</a>)</span> wanted to create a new approach that would achieve better performance than other contrastive methods without using negative pairs. A solution they have introduced is a method called Bootstrap Your Own Latent (BYOL). The idea was to bootstrap representations of images. As a result, BYOL is more robust to the choice of image augmentations.
 Furthermore, BYOL has two neural networks, called online and target networks, which interact and learn from each other. Using an augmented view of an image, BYOL trains its online network to predict the target network’s representation of another augmented view. This approach achieved state-of-the-art results when trained on the ImageNet dataset under the linear evaluation protocol. Additionally, compared to SimCLR, a strong contrastive baseline, BYOL suffers from much less performance drop when only random crops are used to augment images.</p>
 <div id="description-of-method" class="section level4 hasAnchor">
 <h4><span class="header-section-number">2.2.9.1</span> Description of method<a href="c01-00-intro-modalities.html#description-of-method" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1444,9 +1435,9 @@ Furthermore, BYOL has two neural networks, called online and target networks, wh
 <li>a predictor <span class="math inline">\(q_\theta\)</span>.</li>
 </ul>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch01-figure06"></span>
-<img src="figures/01-chapter1/BYOL.png" alt="Figure 6. Bootstrap Your Own Latent" width="80%" />
+<img src="figures/01-chapter1/BYOL.png" alt="Bootstrap Your Own Latent" width="80%" />
 <p class="caption">
-FIGURE 2.6: Figure 6. Bootstrap Your Own Latent
+FIGURE 2.29: Bootstrap Your Own Latent
 </p>
 </div>
 <p>The <em>target network</em> has the same architecture as the online network but uses different weights <span class="math inline">\(\xi\)</span>. It provides the regression targets to train the online network, and its parameters <span class="math inline">\(\xi\)</span> are an exponential moving average of the online parameters <span class="math inline">\(\theta\)</span>. Precisely, given a target decay rate <span class="math inline">\(\tau \in[0,1]\)</span>, after each training step, the following update
@@ -1552,32 +1543,28 @@ These patches are the same as tokens (eg. words) in NLP. The model is trained on
 <h4><span class="header-section-number">2.2.11.1</span> Vision Transformers<a href="c01-00-intro-modalities.html#vision-transformers" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Brain Team wanted to create simple but universally scalable architecture to follow the original Transformers architecture.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch01-figure7"></span>
-<img src="figures/01-chapter1/ViT.png" alt="Figure 7. Vision Transformer" width="90%" />
+<img src="figures/01-chapter1/ViT.png" alt="Vision Transformer" width="90%" />
 <p class="caption">
-FIGURE 2.7: Figure 7. Vision Transformer
+FIGURE 2.30: Vision Transformer
 </p>
 </div>
 <div id="method" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.2.11.1.1</span> Method<a href="c01-00-intro-modalities.html#method" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Compared to NLP, where the input of the Transformer is a 1D sequence of token embeddings, images are 2D objects. Firstly, images needed to be represented differently to imitate original architectures as closely as possible. For that reason image <span class="math inline">\(x\in \mathbb{R}^{ H \times W \times C}\)</span> is reshaped into a sequence of flattened 2D patches <span class="math inline">\(x_p\in \mathbb{R}^{ N \times \left( P^2 \cdot C \right)}\)</span>, where <span class="math inline">\(\left(H,W\right)\)</span> is the resolution of the original image, <span class="math inline">\(C\)</span> is the number of channels,<span class="math inline">\(\left(P,P\right)\)</span> is the resolution of each image patch, and <span class="math inline">\(N =HW/P^2\)</span> is the resulting number of patches, also the Transformer’s effective input sequence length. The Transformer input is a fixed through all layers vector size <span class="math inline">\(D\)</span>. The first step is to flatten the patches, usually 16x16, and map them to <span class="math inline">\(D\)</span> dimensions with a trainable linear projection, creating patch embeddings.</p>
-<p><span class="math display">\[\begin{equation}
-\tag{12}
+<p><span class="math display">\[
 \mathbf{z}_{0} =\left[\mathbf{x}_{\text {class }} ; \mathbf{x}_{p}^{1} \mathbf{E} ; \mathbf{x}_{p}^{2} \mathbf{E} ; \cdots ; \mathbf{x}_{p}^{N} \mathbf{E}\right]+\mathbf{E}_{p o s}, \mathbf{E} \in \mathbb{R}^{\left(P^{2} \cdot C\right) \times D}, \mathbf{E}_{p o s} \in \mathbb{R}^{(N+1) \times D}
-\end{equation}\]</span></p>
+\]</span></p>
 <p>To this sequence of “patch embeddings,” a prefix learnable [class] token, like in BERT, is usually added. This token <span class="math inline">\(\mathbf{z}_{0}^{0} = \mathbf{x}_{class}\)</span> tells the model to classify the image and increases dimension of vector z. Also, the state of this token at the output of the Transformer encoder <span class="math inline">\(\left(\mathbf{z}_{L}^{0}\right)\)</span>, on which Layernorm is applied, serves as the image representation <span class="math inline">\(y\)</span>.</p>
-<p><span class="math display">\[\begin{equation}
-\tag{13}
+<p><span class="math display">\[
 \mathbf{y} =\operatorname{LN}\left(\mathbf{z}_{L}^{0}\right)
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Also, it is the only one to which the classification head is attached to during pre-training and fine-tuning. Classification head during pre-training is compiled of MLP with one hidden layer and a single linear layer at a fine-tuning time. Position embedding,a standard learnable 1D position embedding, are attached to the patch embeddings, serving as input to the encoder. The standard Transformer encoder consists of alternating layers of multiheaded self-attention and MLP blocks. After each block, a residual connection is applied.</p>
-<p><span class="math display">\[\begin{equation}
-\tag{14}
+<p><span class="math display">\[
 \mathbf{z}_{\ell}^{\prime} =\operatorname{MSA}\left(\operatorname{LN}\left(\mathbf{z}_{\ell-1}\right)\right)+\mathbf{z}_{\ell-1},  \ell=1 \ldots L
-\end{equation}\]</span></p>
-<p><span class="math display">\[\begin{equation}
-\tag{15}
+\]</span></p>
+<p><span class="math display">\[
 \mathbf{z}_{\ell} =\operatorname{MLP}\left(\mathrm{LN}\left(\mathbf{z}_{\ell}^{\prime}\right)\right)+\mathbf{z}_{\ell}^{\prime}, \ell=1 \ldots L
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Vision Transformer has a significantly lower inductive bias than CNNs in image-specific information. VIT only has local and translationally equivariant MLP layers, while the self-attention layers are global. Two-dimensional neighborhood structure is used sparingly: the image is cut into patches at the beginning, and the position embeddings are resized as needed at the fine-tuning time. Alternatively, the input sequence can consist of a CNN’s feature maps on which patch embedding projection is applied.
 Vision Transformers are pre-trained on large datasets, and fine-tuned to (smaller) downstream tasks. For fine-tuning projection head is removed and zero-initialized <span class="math inline">\(D \times K\)</span> feedforward layer is attached, <span class="math inline">\(K\)</span> being the number of downstream classes. It is also beneficial to use higher resolution then in pre-training. Also ViT can handle arbitrary sequence lengths, but the pre-trained position embeddings can become sufficient. It is necessary to point out that resolution adjustment and patch extraction are the only points at which an inductive bias about the 2D structure of the images is manually injected into the Vision Transformers</p>
 </div>
@@ -1615,17 +1602,17 @@ The following chapter will inspect on the one hand pre-training resources and th
 <h4><span class="header-section-number">2.3.1.1</span> Natural Language Processing Datasets<a href="c01-00-intro-modalities.html#natural-language-processing-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div id="common-crawl" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.1.1</span> Common Crawl<a href="c01-00-intro-modalities.html#common-crawl" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>As already mentioned, extracting text from the internet is rather easy. More precisely there is a non-profit organization, called <a href="https://commoncrawl.org">Common Crawl</a>, which does exactly this. They provide copies of the internet to researchers, companies and individuals at no cost for the purpose of research and analysis. The Common Crawl corpus contains petabytes of data collected since 2008. Every month, Common Crawl releases a snapshot of the web obtained by randomly exploring and sampling URLs. It contains raw web page data, extracted metadata and text extractions. The advantages of Common Crawl come along with their disadvantages. The text is from diverse domains but with varying quality of data. To handle the raw nature of the datasets one often has to use a well-designed extraction and filter to use the datasets appropriately <span class="citation">(<span class="citeproc-not-found" data-reference-id="gao2020pile"><strong>???</strong></span>)</span>. GPT-3 ,for example, uses a filtered version of Common Crawl, which consists of 410 billion tokens <span class="citation">(T. Brown et al. <a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>. So data for NLP is freely available but one needs to use well-designed extraction and filtering to really use the dataset.</p>
+<p>As already mentioned, extracting text from the internet is rather easy. More precisely there is a non-profit organization, called <a href="https://commoncrawl.org">Common Crawl</a>, which does exactly this. They provide copies of the internet to researchers, companies and individuals at no cost for the purpose of research and analysis. The Common Crawl corpus contains petabytes of data collected since 2008. Every month, Common Crawl releases a snapshot of the web obtained by randomly exploring and sampling URLs. It contains raw web page data, extracted metadata and text extractions. The advantages of Common Crawl come along with their disadvantages. The text is from diverse domains but with varying quality of data. To handle the raw nature of the datasets one often has to use a well-designed extraction and filter to use the datasets appropriately <span class="citation">(Gao et al. <a href="#ref-gao2020pile" role="doc-biblioref">2020</a>)</span>. GPT-3 ,for example, uses a filtered version of Common Crawl, which consists of 410 billion tokens <span class="citation">(T. Brown et al. <a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>. So data for NLP is freely available but one needs to use well-designed extraction and filtering to really use the dataset.</p>
 </div>
 <div id="the-pile" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.1.2</span> The Pile<a href="c01-00-intro-modalities.html#the-pile" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Recent work <span class="citation">(<span class="citeproc-not-found" data-reference-id="rosset2020turing"><strong>???</strong></span>)</span> showed that diversity in training datasets improves general cross-domain knowledge and downstream generalization capability for language models. The Pile <span class="citation">(<span class="citeproc-not-found" data-reference-id="gao2020pile"><strong>???</strong></span>)</span> was introduced to address exactly these results. The Pile contains <span class="math inline">\(22\)</span> sub-datasets, including established NLP datasets, but also several newly introduced ones. The size of the <span class="math inline">\(22\)</span> sub-datasets, which can be categorized roughly into five categories, pile up to around <span class="math inline">\(825\)</span> GB of data.
+<p>Recent work <span class="citation">(Rosset <a href="#ref-rosset2020turing" role="doc-biblioref">2020</a>)</span> showed that diversity in training datasets improves general cross-domain knowledge and downstream generalization capability for language models. The Pile <span class="citation">(Gao et al. <a href="#ref-gao2020pile" role="doc-biblioref">2020</a>)</span> was introduced to address exactly these results. The Pile contains <span class="math inline">\(22\)</span> sub-datasets, including established NLP datasets, but also several newly introduced ones. The size of the <span class="math inline">\(22\)</span> sub-datasets, which can be categorized roughly into five categories, pile up to around <span class="math inline">\(825\)</span> GB of data.
 The following treemap shows the distribution of the dataset.</p>
 <p><img src="figures/01-chapter1/thePile.png" /></p>
-<p>While only 13% of the world’s population speaks English, the vast majority of NLP research is done on English. <span class="citation">(<span class="citeproc-not-found" data-reference-id="gao2020pile"><strong>???</strong></span>)</span> followed this trend, but did not explicitly filtered out other languages when collecting our the data. This leads to the fact that roughly 95% of the Pile is English. Also EuroParl <span class="citation">(Koehn <a href="#ref-koehn2005europarl" role="doc-biblioref">2005</a>)</span>, a multilingual parallel corpus introduced for machine translation, is included in the Pile. To train GPT-2 Open AI collected data from WebText. WebText is an internet dataset created by scraping URLs extracted from Reddit submissions with a minimum score for quality, but sadly it was never released to the public. Independent researchers reproduced the pipeline and released the resulting dataset, called OpenWebTextCorpus <span class="citation">(Gokaslan and Cohen <a href="#ref-Gokaslan2019OpenWeb" role="doc-biblioref">2019</a>)</span> (OWT). Eleuther created an enhanced version of the original OWT Corpus called OpenWebText2. It covers all Reddit submissions from 2005 up until April 2020. It covers content from multiple languages, document metadata, multiple dataset versions, and open source replication code.</p>
+<p>While only 13% of the world’s population speaks English, the vast majority of NLP research is done on English. <span class="citation">Gao et al. (<a href="#ref-gao2020pile" role="doc-biblioref">2020</a>)</span> followed this trend, but did not explicitly filtered out other languages when collecting our the data. This leads to the fact that roughly 95% of the Pile is English. Also EuroParl <span class="citation">(Koehn <a href="#ref-koehn2005europarl" role="doc-biblioref">2005</a>)</span>, a multilingual parallel corpus introduced for machine translation, is included in the Pile. To train GPT-2 Open AI collected data from WebText. WebText is an internet dataset created by scraping URLs extracted from Reddit submissions with a minimum score for quality, but sadly it was never released to the public. Independent researchers reproduced the pipeline and released the resulting dataset, called OpenWebTextCorpus <span class="citation">(Gokaslan and Cohen <a href="#ref-Gokaslan2019OpenWeb" role="doc-biblioref">2019</a>)</span> (OWT). Eleuther created an enhanced version of the original OWT Corpus called OpenWebText2. It covers all Reddit submissions from 2005 up until April 2020. It covers content from multiple languages, document metadata, multiple dataset versions, and open source replication code.</p>
 <p>They also explicitly included a dataset of mathematical problems (DeepMind Mathematics) to improve the mathematical ability of language models trained on the Pile. An ArXiv dataset was in included in the hopes that it will be a source of high quality text and math knowledge, and benefit potential downstream applications to research in these areas and also because arXiv papers are written in LaTeX. Training a language model to be able to generate papers written in LaTeX could be a huge benefit to the research community.</p>
 <p>Since CC needs further steps, due to the raw nature of CC, to really use is. Pile-CC is Common Crawl-based dataset, which can be used directly. It yields higher quality output than directly using the WET files.
-These were only some of the 22 included datasets. A more detailed description of the sub-dataset and the reasons why these were included can be found in the corresponding paper <span class="citation">(<span class="citeproc-not-found" data-reference-id="gao2020pile"><strong>???</strong></span>)</span>.</p>
+These were only some of the 22 included datasets. A more detailed description of the sub-dataset and the reasons why these were included can be found in the corresponding paper <span class="citation">(Gao et al. <a href="#ref-gao2020pile" role="doc-biblioref">2020</a>)</span>.</p>
 </div>
 <div id="multilingual-datasets" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.1.3</span> Multilingual Datasets<a href="c01-00-intro-modalities.html#multilingual-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h5>
@@ -1633,12 +1620,12 @@ These were only some of the 22 included datasets. A more detailed description of
 Perhaps the most multilingual corpus publicly available, containing 30k sentences in over 900 languages, is the Bible corpus <span class="citation">(Mayer and Cysouw <a href="#ref-mayer2014creating" role="doc-biblioref">2014</a>)</span>.
 Till now all datasets were freely available and almost directly usable. The next one is not public available for some reasons.</p>
 <p>To provide mT5 <span class="citation">(Xue et al. <a href="#ref-xue2020mt5" role="doc-biblioref">2020</a>)</span>, which is multilingual pre-trained text-to-text transformer, a suitable pre-training dataset, Google Research designed a dataset including more than 100 languages. The dataset is called mC4 <span class="citation">(Xue et al. <a href="#ref-xue2020mt5" role="doc-biblioref">2020</a>)</span>. Since some languages are relatively scarce on the internet, they used all of the 71 monthly web scrapes released so far by Common Crawl. It contains 6.6 billion pages and 6.3 trillion tokens. A smaller version of the mC4 is also used by Google Research. The smaller dataset C4 (Colossal Clean Common Crawl) was explicitly designed to be English only. The C4 dataset is a collection of about <span class="math inline">\(750\)</span>GB of English-language text sourced from the public Common Crawl web.</p>
-<p>Most of the datasets used in NLP are derived entirely from Common Crawl and <span class="citation">(<span class="citeproc-not-found" data-reference-id="rosset2020turing"><strong>???</strong></span>)</span> came to the result, that the current best practice in training large-scale language models involve using both large web scrapes and more targeted, higher-quality datasets, which the Pile directly addresses.</p>
+<p>Most of the datasets used in NLP are derived entirely from Common Crawl and <span class="citation">Rosset (<a href="#ref-rosset2020turing" role="doc-biblioref">2020</a>)</span> came to the result, that the current best practice in training large-scale language models involve using both large web scrapes and more targeted, higher-quality datasets, which the Pile directly addresses.</p>
 </div>
 <div id="bookscorpus" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.1.4</span> BooksCorpus<a href="c01-00-intro-modalities.html#bookscorpus" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>The last dataset for NLP is the BooksCorpus dataset <span class="citation">(<span class="citeproc-not-found" data-reference-id="zhu2015aligning"><strong>???</strong></span>)</span>. The BooksCorpus uses books from yet unplished authors from the web. Only books with more than 20k words were included to filter out shorter, noisier stories. This results in around 11k books from 16 different genres. So more than 74 million sentences can be used in pre-training. BooksCorpus contains a sample of books from <a href="https://www.smashwords.com">a distributor of indie ebooks</a>. Sadly a datasheet about the BooksCorpus was not releasd with the corresponing paper.</p>
-<p>Frankly there was just an paragraph about the content and the extraction inside the paper <span class="citation">(<span class="citeproc-not-found" data-reference-id="zhu2015aligning"><strong>???</strong></span>)</span>. <span class="citation">Bandy and Vincent (<a href="#ref-bandy2021addressing" role="doc-biblioref">2021</a>)</span> addressed exactly this short coming. They provided a retrospective datasheet about the BooksCorpus. Some of their major concerns were copyright violations, duplicate books, skewed genre representation, potentially skewed religious representation and also problematic content (18+ content). Little harm can be expected if an informed adults reads books with these concers, but how does a language model contribute to for example well-documented gender discrimination if it trains on these books.</p>
+<p>The last dataset for NLP is the BooksCorpus dataset <span class="citation">(Zhu et al. <a href="#ref-zhu2015aligning" role="doc-biblioref">2015</a>)</span>. The BooksCorpus uses books from yet unplished authors from the web. Only books with more than 20k words were included to filter out shorter, noisier stories. This results in around 11k books from 16 different genres. So more than 74 million sentences can be used in pre-training. BooksCorpus contains a sample of books from <a href="https://www.smashwords.com">a distributor of indie ebooks</a>. Sadly a datasheet about the BooksCorpus was not releasd with the corresponing paper.</p>
+<p>Frankly there was just an paragraph about the content and the extraction inside the paper <span class="citation">(Zhu et al. <a href="#ref-zhu2015aligning" role="doc-biblioref">2015</a>)</span>. <span class="citation">Bandy and Vincent (<a href="#ref-bandy2021addressing" role="doc-biblioref">2021</a>)</span> addressed exactly this short coming. They provided a retrospective datasheet about the BooksCorpus. Some of their major concerns were copyright violations, duplicate books, skewed genre representation, potentially skewed religious representation and also problematic content (18+ content). Little harm can be expected if an informed adults reads books with these concers, but how does a language model contribute to for example well-documented gender discrimination if it trains on these books.</p>
 <p>Since BookCorpus is no longer distributed, one has to visit the distributor of the <a href="https://www.smashwords.com">indie ebooks</a> and collect a own version of the BookCorpus. This is one of the user-based dataset, besides to the datasets of the Pile.</p>
 </div>
 </div>
@@ -1646,12 +1633,12 @@ Till now all datasets were freely available and almost directly usable. The next
 <h4><span class="header-section-number">2.3.1.2</span> Computer Vision Dataset<a href="c01-00-intro-modalities.html#computer-vision-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div id="imagenet" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.2.1</span> ImageNet<a href="c01-00-intro-modalities.html#imagenet" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>The next inspected modality is CV. Almost every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset. ImageNet uses the hierarchical structure of WordNet <span class="citation">(<span class="citeproc-not-found" data-reference-id="fellbaum2010wordnet"><strong>???</strong></span>)</span>. At the release of ImageNet-1k the amount of classes was unheard at this time point. Datasets like CIFAR-10 <span class="citation">(<span class="citeproc-not-found" data-reference-id="krizhevsky2009learning"><strong>???</strong></span>)</span> and CIFAR-100 <span class="citation">(<span class="citeproc-not-found" data-reference-id="krizhevsky2009learning"><strong>???</strong></span>)</span> had 10 or 100 classes, but ImageNet1k had 1000 different classes and this was not the only major improvement. They also increased the resolution from <span class="math inline">\(32 \times 32\)</span> to <span class="math inline">\(256 \times 256\)</span>. In all, there are roughly 1.2 million training images, 50,000 validation images, and 150,000 testing images. The ImageNet-1k dataset is a subset of the ImageNet dataset <span class="citation">(Deng et al. <a href="#ref-deng2009imagenet" role="doc-biblioref">2009</a>)</span>. The full ImageNet dataset is also called ImageNet-21k. It consists of more than 14 million images, divided in almost 22k classes. Because of this some paper described it as ImageNet-22k.</p>
+<p>The next inspected modality is CV. Almost every state-of-the-art CV model uses a classifier pre-trained on an ImageNet based dataset. ImageNet uses the hierarchical structure of WordNet <span class="citation">(Fellbaum <a href="#ref-fellbaum2010wordnet" role="doc-biblioref">2010</a>)</span>. At the release of ImageNet-1k the amount of classes was unheard at this time point. Datasets like CIFAR-10 <span class="citation">(Krizhevsky, Hinton, and others <a href="#ref-krizhevsky2009learning" role="doc-biblioref">2009</a>)</span> and CIFAR-100 <span class="citation">(Krizhevsky, Hinton, and others <a href="#ref-krizhevsky2009learning" role="doc-biblioref">2009</a>)</span> had 10 or 100 classes, but ImageNet1k had 1000 different classes and this was not the only major improvement. They also increased the resolution from <span class="math inline">\(32 \times 32\)</span> to <span class="math inline">\(256 \times 256\)</span>. In all, there are roughly 1.2 million training images, 50,000 validation images, and 150,000 testing images. The ImageNet-1k dataset is a subset of the ImageNet dataset <span class="citation">(Deng et al. <a href="#ref-deng2009imagenet" role="doc-biblioref">2009</a>)</span>. The full ImageNet dataset is also called ImageNet-21k. It consists of more than 14 million images, divided in almost 22k classes. Because of this some paper described it as ImageNet-22k.</p>
 <p>Those two dataset do not only differ by the amount of classes, but also by the type of labels. The labels of ImageNet-21k are not mutually exclusive. Because of this the pre-training wiht ImageNet-1k is far more popular. Also the ImageNet-21k dataset lacks an official train-validation split, which is just another reason why ImageNet-1k is more popular. The raw dataset ImageNet-21k is around 1.3 terabyte (TB). It’s also nice, that the the dataset of ImageNet are open available. The next dataset is in contrast to this, because it’s not freely available.</p>
 </div>
 <div id="joint-foto-tree-jft-entity-foto-tree-eft" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.2.2</span> Joint-Foto-Tree (JFT) &amp; Entity-Foto-Tree (EFT)<a href="c01-00-intro-modalities.html#joint-foto-tree-jft-entity-foto-tree-eft" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>The Joint-Foto-Tree (JFT) 300M is one of the follow up version of the JFT dataset <span class="citation">(<span class="citeproc-not-found" data-reference-id="hinton2015distilling"><strong>???</strong></span>)</span>. Given the name it consists of 300 million images and on average each image has 1.26 labels. The whole datasets has around 375 million labels. These labels can be divided into 18291 classes. These categories form a rich hierarchy with the maximum depth of hierarchy being 12 and maximum number of child for parent node being 2876 <span class="citation">(<span class="citeproc-not-found" data-reference-id="sun2017revisiting"><strong>???</strong></span>)</span>. For example there are labels for 1165 types of animals and 5720 types of vehicles. The work states that approximately 20% of the labels in this dataset are noisy <span class="citation">(<span class="citeproc-not-found" data-reference-id="sun2017revisiting"><strong>???</strong></span>)</span>, because the labels are generated automatically.</p>
+<p>The Joint-Foto-Tree (JFT) 300M is one of the follow up version of the JFT dataset <span class="citation">(Hinton et al. <a href="#ref-hinton2015distilling" role="doc-biblioref">2015</a>)</span>. Given the name it consists of 300 million images and on average each image has 1.26 labels. The whole datasets has around 375 million labels. These labels can be divided into 18291 classes. These categories form a rich hierarchy with the maximum depth of hierarchy being 12 and maximum number of child for parent node being 2876 <span class="citation">(Sun et al. <a href="#ref-sun2017revisiting" role="doc-biblioref">2017</a>)</span>. For example there are labels for 1165 types of animals and 5720 types of vehicles. The work states that approximately 20% of the labels in this dataset are noisy <span class="citation">(Sun et al. <a href="#ref-sun2017revisiting" role="doc-biblioref">2017</a>)</span>, because the labels are generated automatically.</p>
 <p>It also provides the fact, that the distribution is heavily long-tailed, which means that some of the classes have less than 100 images. There is also an extendend version of the JFT dataset.</p>
 <p>It’s called Entity-Foto-Tree (EFT), because the class labels are physical entities organized in a tree-like hierarchy, which contains 20 diversified verticals and consists of 100k classes. It’s even rarely used in practice by Google because of the intolerable large model size and the slow training speed <span class="citation">(Gao et al. <a href="#ref-gao2017knowledge" role="doc-biblioref">2017</a>)</span>. Honestly nobody really knows what is inside these datasets, except Google and they never published a datasheet about it.</p>
 <p>These datasets are often used for image classification, but localization-sensitive tasks like object detection and semantic segmentation are also of interest in CV.</p>
@@ -1663,7 +1650,7 @@ Till now all datasets were freely available and almost directly usable. The next
 </div>
 <div id="microsoft-common-objects-in-context-coco" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.2.4</span> Microsoft Common Objects in Context (COCO)<a href="c01-00-intro-modalities.html#microsoft-common-objects-in-context-coco" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Microsoft decided to employed a novel pipeline for gathering data with extensive use of Amazon Mechanical Turk. Their goal was to create a non-iconic image collection. Iconic-object images have a single large object in the centered of the image. By this they provide high quality object instances, but they also lack information of contextual important and non-canonical viewpoints <span class="citation">(T.-Y. Lin, Maire, Belongie, Hays, Perona, Ramanan, Dollár, and Zitnick <a href="#ref-lin2014microsoft" role="doc-biblioref">2014</a><a href="#ref-lin2014microsoft" role="doc-biblioref">a</a>)</span>. Recent work showed that non-iconic images are better at generalizing <span class="citation">(<span class="citeproc-not-found" data-reference-id="torralba2011unbiased"><strong>???</strong></span>)</span>. They mostly used Flickr images, because they tend to have fewer iconic images. This results in a collection of 328,000 images. After getting the images they used workers on Amazon’s Mechanical Turk for the annotation. The workers got a list with 91 categories and 11 super-categories. At first a worker had to decide if a super-category (e.g. animal) was present or not. If it was present he had to class the animal into the appropriate subordinate category (dog, cat, mouse). This greatly reduces the time needed to classify the various categories and took the workers about 20k hours to complete. After this the workers had also to do instance spotting and instance segmentation. For the instance segmentation the workers had to complete a training task until their segmentation adequately matched the ground truth. Only 1 in 3 workers passed this training stage. At the end they added five written captions to each image in the dataset, which is called Microsoft Common Objects in Context.</p>
+<p>Microsoft decided to employed a novel pipeline for gathering data with extensive use of Amazon Mechanical Turk. Their goal was to create a non-iconic image collection. Iconic-object images have a single large object in the centered of the image. By this they provide high quality object instances, but they also lack information of contextual important and non-canonical viewpoints <span class="citation">(T.-Y. Lin, Maire, Belongie, Hays, Perona, Ramanan, Dollár, and Zitnick <a href="#ref-lin2014microsoft" role="doc-biblioref">2014</a><a href="#ref-lin2014microsoft" role="doc-biblioref">a</a>)</span>. Recent work showed that non-iconic images are better at generalizing <span class="citation">(Torralba and Efros <a href="#ref-torralba2011unbiased" role="doc-biblioref">2011</a>)</span>. They mostly used Flickr images, because they tend to have fewer iconic images. This results in a collection of 328,000 images. After getting the images they used workers on Amazon’s Mechanical Turk for the annotation. The workers got a list with 91 categories and 11 super-categories. At first a worker had to decide if a super-category (e.g. animal) was present or not. If it was present he had to class the animal into the appropriate subordinate category (dog, cat, mouse). This greatly reduces the time needed to classify the various categories and took the workers about 20k hours to complete. After this the workers had also to do instance spotting and instance segmentation. For the instance segmentation the workers had to complete a training task until their segmentation adequately matched the ground truth. Only 1 in 3 workers passed this training stage. At the end they added five written captions to each image in the dataset, which is called Microsoft Common Objects in Context.</p>
 <p>At the end they utilized more than 70,000 worker hours to collect a amount of annotated object instances, which were gathered to drive the advancement of segmentation algorithms and others tasks. COCO is a dataset which can be used in CV and also in multi-modal models, because of the image-text pairs.</p>
 </div>
 </div>
@@ -1672,14 +1659,14 @@ Till now all datasets were freely available and almost directly usable. The next
 <p>The Pile is an attempt from Eleuther to mimic the dataset used for GPT-3 and LAION wants to achieve something similiar. Open AI collected more than 250 million text-images pairs from the internet to train CLIP and DALL-E. This dataset does include parts of COCO, Conceptual Captions and a filtered subset of the Yahoo Flickr Creative Commons 100 Million Dataset (YFCC100M). YFCC100M contains of a total of 100 million media objects. The collection provides a comprehensive snapshot of how photos and videos were taken, described, and shared over the years, from the inception of Flickr in 2004 until early 2014. Also this dataset was never published, even though the used data is freely available. To address this shortcoming, LAION created the LAION-400M.</p>
 <div id="laion-400m-5b" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.3.1</span> LAION 400M &amp; 5B<a href="c01-00-intro-modalities.html#laion-400m-5b" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>LAION-400M <span class="citation">(<span class="citeproc-not-found" data-reference-id="schuhmann2021laion"><strong>???</strong></span>)</span> consists of 400 million image-text pairs. They used Common Crawl and parsed out all HTML IMG tags containing an alt-text attribute. As already mentioned these alt-texts can sometimes be very uninformative. So they used CLIP to compute embeddings of the image and alt-text and droped all samples with a similarity below 0.3. The dataset also contains the CLIP embedding and kNN indices. <span class="citation">(<span class="citeproc-not-found" data-reference-id="schuhmann2021laion"><strong>???</strong></span>)</span> describes the procedure to create the dataset in an open manner. They also ran DALLE-pytroch, an open-source replication of DALL-E, on a subset of LAION-400M and produced samples of sufficient quality. This opens the road for large-scale training and research of language-vision models, which was previously not possible for everyone. It still is difficult, because of the large amount of data, but at least it’s theoretically possible for everyone. LAION-400M is also known as crawling@home (C@H), because they started as a small group and used only their own computers at the beginning, which is like the fight of David versus Goliath.</p>
+<p>LAION-400M <span class="citation">(Christoph Schuhmann et al. <a href="#ref-schuhmann2021laion" role="doc-biblioref">2021</a><a href="#ref-schuhmann2021laion" role="doc-biblioref">a</a>)</span> consists of 400 million image-text pairs. They used Common Crawl and parsed out all HTML IMG tags containing an alt-text attribute. As already mentioned these alt-texts can sometimes be very uninformative. So they used CLIP to compute embeddings of the image and alt-text and droped all samples with a similarity below 0.3. The dataset also contains the CLIP embedding and kNN indices. <span class="citation">Christoph Schuhmann et al. (<a href="#ref-schuhmann2021laion" role="doc-biblioref">2021</a><a href="#ref-schuhmann2021laion" role="doc-biblioref">a</a>)</span> describes the procedure to create the dataset in an open manner. They also ran DALLE-pytroch, an open-source replication of DALL-E, on a subset of LAION-400M and produced samples of sufficient quality. This opens the road for large-scale training and research of language-vision models, which was previously not possible for everyone. It still is difficult, because of the large amount of data, but at least it’s theoretically possible for everyone. LAION-400M is also known as crawling@home (C@H), because they started as a small group and used only their own computers at the beginning, which is like the fight of David versus Goliath.</p>
 <p>End of March 2022 the team of LAION released a <span class="math inline">\(14 \times\)</span> bigger than LAION-400M dataset called LAION-5B. It consists of 5.85 billion CLIP-filtered image-text pairs. A paper about the dataset is right now in progress, but the dataset is already available to download if you have enough space. The size of the dataset is about <span class="math inline">\(240\)</span> TB in <span class="math inline">\(384\)</span> or 80 TB in <span class="math inline">\(224\)</span>. Due to the nature of the extraction 2,3 billion contain English language, 2,2 billion samples from 100+ other languages and they also provide a <a href="https://rom1504.github.io/clip-retrieval/?back=https%3A%2F%2Fknn5.laion.ai&amp;index=laion5B&amp;useMclip=false">search demo</a>. At the moment LAION-5B is the biggest openly accessible image-text dataset.</p>
 <p>The amount of image-text pairs in LAION-400M or LAION-5B seems incomparable to COCO, but one has to keep in mind, that the text in the COCO dataset is gathered in a high-quality manner. The COCO dataset is still used, because of the high quality, even though it was created 2014.</p>
 </div>
 <div id="localized-narratives" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.3.2</span> Localized Narratives<a href="c01-00-intro-modalities.html#localized-narratives" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Localized Narratives choose a new form of connecting vision and language in multi-modal image annotations <span class="citation">(<span class="citeproc-not-found" data-reference-id="pont2020connecting"><strong>???</strong></span>)</span>. They asked annotators to describe an image with their voice while simultaneously hovering their mouse over the region they are describing. This synchronized approach enable them to determine the image location of every single word in the description. Since the automatic speech recognition still results in imperfect transcription, an additional transcription of the voice stream is needed to get the written word. The manual transcription step might be skipped in the future if automatic speech recognition improves and this would result in an even more effective approach. They collected Localized Narratives for, the earlier introduced, COCO <span class="citation">(T.-Y. Lin, Maire, Belongie, Hays, Perona, Ramanan, Dollár, and Zitnick <a href="#ref-lin2014microsoft" role="doc-biblioref">2014</a><a href="#ref-lin2014microsoft" role="doc-biblioref">a</a>)</span> dataset, ADE20K <span class="citation">(<span class="citeproc-not-found" data-reference-id="zhou2017scene"><strong>???</strong></span>)</span>, Flickr30k &amp; 32k datasets <span class="citation">(<span class="citeproc-not-found" data-reference-id="young2014image"><strong>???</strong></span>)</span> and 671k images of Open Images<span class="citation">(<span class="citeproc-not-found" data-reference-id="kuznetsova2020open"><strong>???</strong></span>)</span>.</p>
-<p>Localized Narratives can be used in many different multi-modal tasks, since it incorporates four synchronized modalities (Image, Text, Speech, Grounding). Another difference is that the captions are longer than in most previous datasets <span class="citation">(<span class="citeproc-not-found" data-reference-id="krishna2017visual"><strong>???</strong></span>; <span class="citeproc-not-found" data-reference-id="kuznetsova2020open"><strong>???</strong></span>; T.-Y. Lin, Maire, Belongie, Hays, Perona, Ramanan, Dollár, and Zitnick <a href="#ref-lin2014microsoft" role="doc-biblioref">2014</a><a href="#ref-lin2014microsoft" role="doc-biblioref">a</a>)</span> and models like Imagen <span class="citation">(Saharia et al. <a href="#ref-saharia2022photorealistic" role="doc-biblioref">2022</a><a href="#ref-saharia2022photorealistic" role="doc-biblioref">a</a>)</span> and Parti <span class="citation">(J. Yu, Xu, Koh, et al. <a href="#ref-parti" role="doc-biblioref">2022</a><a href="#ref-parti" role="doc-biblioref">a</a>)</span> work well with long prompts. Beside to that the 849k images with Localized Narratives are publicly available <span class="citation">(<span class="citeproc-not-found" data-reference-id="LocNarWeb"><strong>???</strong></span>)</span>.</p>
+<p>Localized Narratives choose a new form of connecting vision and language in multi-modal image annotations <span class="citation">(Pont-Tuset et al. <a href="#ref-pont2020connecting" role="doc-biblioref">2020</a>)</span>. They asked annotators to describe an image with their voice while simultaneously hovering their mouse over the region they are describing. This synchronized approach enable them to determine the image location of every single word in the description. Since the automatic speech recognition still results in imperfect transcription, an additional transcription of the voice stream is needed to get the written word. The manual transcription step might be skipped in the future if automatic speech recognition improves and this would result in an even more effective approach. They collected Localized Narratives for, the earlier introduced, COCO <span class="citation">(T.-Y. Lin, Maire, Belongie, Hays, Perona, Ramanan, Dollár, and Zitnick <a href="#ref-lin2014microsoft" role="doc-biblioref">2014</a><a href="#ref-lin2014microsoft" role="doc-biblioref">a</a>)</span> dataset, ADE20K <span class="citation">(Zhou et al. <a href="#ref-zhou2017scene" role="doc-biblioref">2017</a>)</span>, Flickr30k &amp; 32k datasets <span class="citation">(Young et al. <a href="#ref-young2014image" role="doc-biblioref">2014</a>)</span> and 671k images of Open Images<span class="citation">(Kuznetsova et al. <a href="#ref-kuznetsova2020open" role="doc-biblioref">2020</a>)</span>.</p>
+<p>Localized Narratives can be used in many different multi-modal tasks, since it incorporates four synchronized modalities (Image, Text, Speech, Grounding). Another difference is that the captions are longer than in most previous datasets <span class="citation">(Krishna et al. <a href="#ref-krishna2017visual" role="doc-biblioref">2017</a>; Kuznetsova et al. <a href="#ref-kuznetsova2020open" role="doc-biblioref">2020</a>; T.-Y. Lin, Maire, Belongie, Hays, Perona, Ramanan, Dollár, and Zitnick <a href="#ref-lin2014microsoft" role="doc-biblioref">2014</a><a href="#ref-lin2014microsoft" role="doc-biblioref">a</a>)</span> and models like Imagen <span class="citation">(Saharia et al. <a href="#ref-saharia2022photorealistic" role="doc-biblioref">2022</a><a href="#ref-saharia2022photorealistic" role="doc-biblioref">a</a>)</span> and Parti <span class="citation">(J. Yu, Xu, Koh, et al. <a href="#ref-parti" role="doc-biblioref">2022</a><a href="#ref-parti" role="doc-biblioref">a</a>)</span> work well with long prompts. Beside to that the 849k images with Localized Narratives are publicly available <span class="citation">(Website <a href="#ref-LocNarWeb" role="doc-biblioref">2020</a>)</span>.</p>
 </div>
 <div id="wudaomm" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.1.3.3</span> WuDaoMM<a href="c01-00-intro-modalities.html#wudaomm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
@@ -1839,7 +1826,7 @@ The .50:.05:.95 means that one uses 10 IoU thresholds of <span class="math inlin
 </div>
 <div id="ade20k" class="section level5 hasAnchor">
 <h5><span class="header-section-number">2.3.3.2.3</span> ADE20k<a href="c01-00-intro-modalities.html#ade20k" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Semantic segmentation can be done one ADE20K<span class="citation">(<span class="citeproc-not-found" data-reference-id="zhou2017scene"><strong>???</strong></span>)</span>. ADE are the first three letters of the name Adela Barriuso, who single handedly annotated the entire dataset and 20K is a reference to being roughly 20,000 images in the dataset. This dataset shows a high annotation complexity, because any image in ADE20K contains at least five objects, and the maximum number of object instances per image reaches 273. To asses the performance of a model on the ADE20K dataset one uses the mean IoU. It indicates the IoU between the predicted and ground-truth pixels, averaged over all the classes.</p>
+<p>Semantic segmentation can be done one ADE20K<span class="citation">(Zhou et al. <a href="#ref-zhou2017scene" role="doc-biblioref">2017</a>)</span>. ADE are the first three letters of the name Adela Barriuso, who single handedly annotated the entire dataset and 20K is a reference to being roughly 20,000 images in the dataset. This dataset shows a high annotation complexity, because any image in ADE20K contains at least five objects, and the maximum number of object instances per image reaches 273. To asses the performance of a model on the ADE20K dataset one uses the mean IoU. It indicates the IoU between the predicted and ground-truth pixels, averaged over all the classes.</p>
 <p>In contrast to the object detection task, the definition of TP, FP, and FN is slightly different as it is not based on a predefined threshold. TP is now the area of intersection between Ground Truth and segmentation mask. FP is the predicted area outside the Ground Truth. FN is the number of pixels in the Ground Truth area that the model failed to predict. The calculation of IoU is the same as in object detection tasks. It’s the intersection of the predicted and ground truth boxes aka. TP divided by the union of the predicted and ground truth boxes, which is essentially <span class="math inline">\(TP + FN + FP\)</span>.
 A example is shown down below.</p>
 <div class="figure">
@@ -1899,7 +1886,7 @@ A example is shown down below.</p>
 </div>
 <div id="other-benchmarks" class="section level4 hasAnchor">
 <h4><span class="header-section-number">2.3.3.5</span> Other Benchmarks<a href="c01-00-intro-modalities.html#other-benchmarks" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>As we don’t live in a world with unlimited resources, it’s also important to keep track of how much energy is consumed to train the models and how big the carbon footprint is. <span class="citation">Strubell, Ganesh, and McCallum (<a href="#ref-strubell2019energy" role="doc-biblioref">2019</a><a href="#ref-strubell2019energy" role="doc-biblioref">a</a>)</span> investigated some NLP models and benchmarked model training and development costs in terms of dollars and estimated <span class="math inline">\(CO_2\)</span> emissions. They came to the result that training a single BERT base model without hyperparameter tuning on GPUs requires the same energy as a trans-American flight. On average a human is responsible for 5t <span class="math inline">\(CO_2\)</span> per year and <span class="citation">Strubell, Ganesh, and McCallum (<a href="#ref-strubell2019energy" role="doc-biblioref">2019</a><a href="#ref-strubell2019energy" role="doc-biblioref">a</a>)</span> estimated that the training procedure of a big Transformer with neural architecture search emitted 284t of <span class="math inline">\(CO_2\)</span>. Works <span class="citation">(Lottick et al. <a href="#ref-lottick2019energy" role="doc-biblioref">2019</a>, @henderson2020towards)</span> have released online tools to benchmark their energy usage and initiatives such as the <a href="https://sites.google.com/view/sustainlp2020/organization">SustainNLP workshop</a> have since taken up the goal of prioritizing computationally efficient hardware and algorithms. These findings are just some points one should keep in mind.</p>
+<p>As we don’t live in a world with unlimited resources, it’s also important to keep track of how much energy is consumed to train the models and how big the carbon footprint is. <span class="citation">Strubell, Ganesh, and McCallum (<a href="#ref-strubell2019energy" role="doc-biblioref">2019</a><a href="#ref-strubell2019energy" role="doc-biblioref">b</a>)</span> investigated some NLP models and benchmarked model training and development costs in terms of dollars and estimated <span class="math inline">\(CO_2\)</span> emissions. They came to the result that training a single BERT base model without hyperparameter tuning on GPUs requires the same energy as a trans-American flight. On average a human is responsible for 5t <span class="math inline">\(CO_2\)</span> per year and <span class="citation">Strubell, Ganesh, and McCallum (<a href="#ref-strubell2019energy" role="doc-biblioref">2019</a><a href="#ref-strubell2019energy" role="doc-biblioref">b</a>)</span> estimated that the training procedure of a big Transformer with neural architecture search emitted 284t of <span class="math inline">\(CO_2\)</span>. Works <span class="citation">(Lottick et al. <a href="#ref-lottick2019energy" role="doc-biblioref">2019</a>, @henderson2020towards)</span> have released online tools to benchmark their energy usage and initiatives such as the <a href="https://sites.google.com/view/sustainlp2020/organization">SustainNLP workshop</a> have since taken up the goal of prioritizing computationally efficient hardware and algorithms. These findings are just some points one should keep in mind.</p>
 <p>In the following chapters we will see how the multimodal architectures use these datasets and also how they perform on the given benchmarks.</p>
 
 </div>
@@ -1912,13 +1899,13 @@ A example is shown down below.</p>
 <p>Antol, Stanislaw, Aishwarya Agrawal, Jiasen Lu, Margaret Mitchell, Dhruv Batra, C Lawrence Zitnick, and Devi Parikh. 2015. “Vqa: Visual Question Answering.” In <em>Proceedings of the Ieee International Conference on Computer Vision</em>, 2425–33.</p>
 </div>
 <div id="ref-Bahdanau2014">
-<p>Bahdanau, Dzmitry, Kyunghyun Cho, and Yoshua Bengio. 2014. “Neural Machine Translation by Jointly Learning to Align and Translate,” September. <a href="http://arxiv.org/abs/1409.0473">http://arxiv.org/abs/1409.0473</a>.</p>
+<p>Bahdanau, Dzmitry, Kyunghyun Cho, and Yoshua Bengio. 2014. “Neural Machine Translation by Jointly Learning to Align and Translate.” <a href="http://arxiv.org/abs/1409.0473">http://arxiv.org/abs/1409.0473</a>.</p>
 </div>
 <div id="ref-bandy2021addressing">
 <p>Bandy, Jack, and Nicholas Vincent. 2021. “Addressing" Documentation Debt" in Machine Learning Research: A Retrospective Datasheet for Bookcorpus.” <em>arXiv Preprint arXiv:2105.05241</em>.</p>
 </div>
 <div id="ref-Bender2021">
-<p>Bender, Emily M., Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell. 2021. “On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?” In <em>Proceedings of the 2021 Acm Conference on Fairness, Accountability, and Transparency</em>, 610–23. FAccT ’21. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3442188.3445922">https://doi.org/10.1145/3442188.3445922</a>.</p>
+<p>Bender, Emily M., Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell. 2021. “On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?” In <em>Proceedings of the 2021 Acm Conference on Fairness, Accountability, and Transparency</em>, 610–23. FAccT ’21. Virtual Event, Canada: Association for Computing Machinery. <a href="https://doi.org/10.1145/3442188.3445922">https://doi.org/10.1145/3442188.3445922</a>.</p>
 </div>
 <div id="ref-beyer2020we">
 <p>Beyer, Lucas, Olivier J Hénaff, Alexander Kolesnikov, Xiaohua Zhai, and Aäron van den Oord. 2020. “Are We Done with Imagenet?” <em>arXiv Preprint arXiv:2006.07159</em>.</p>
@@ -1927,7 +1914,7 @@ A example is shown down below.</p>
 <p>Birhane, Abeba, Vinay Uday Prabhu, and Emmanuel Kahembwe. 2021. “Multimodal Datasets: Misogyny, Pornography, and Malignant Stereotypes.” <em>arXiv Preprint arXiv:2110.01963</em>.</p>
 </div>
 <div id="ref-Bojanowski2016">
-<p>Bojanowski, Piotr, Edouard Grave, Armand Joulin, and Tomas Mikolov. 2016. “Enriching Word Vectors with Subword Information,” July. <a href="http://arxiv.org/abs/1607.04606">http://arxiv.org/abs/1607.04606</a>.</p>
+<p>Bojanowski, Piotr, Edouard Grave, Armand Joulin, and Tomas Mikolov. 2016. “Enriching Word Vectors with Subword Information.” <a href="http://arxiv.org/abs/1607.04606">http://arxiv.org/abs/1607.04606</a>.</p>
 </div>
 <div id="ref-bowman2021will">
 <p>Bowman, Samuel R, and George E Dahl. 2021. “What Will It Take to Fix Benchmarking in Natural Language Understanding?” <em>arXiv Preprint arXiv:2104.02145</em>.</p>
@@ -1935,26 +1922,32 @@ A example is shown down below.</p>
 <div id="ref-bromley1993signature">
 <p>Bromley, Jane, Isabelle Guyon, Yann LeCun, Eduard Säckinger, and Roopak Shah. 1993. “Signature Verification Using a" Siamese" Time Delay Neural Network.” <em>Advances in Neural Information Processing Systems</em> 6.</p>
 </div>
+<div id="ref-Brown2020">
+<p>Brown, Tom B., Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, et al. 2020a. “Language Models Are Few-Shot Learners.” <a href="http://arxiv.org/abs/2005.14165">http://arxiv.org/abs/2005.14165</a>.</p>
+</div>
 <div id="ref-brown2020language">
 <p>Brown, Tom, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, et al. 2020. “Language Models Are Few-Shot Learners.” <em>Advances in Neural Information Processing Systems</em> 33: 1877–1901.</p>
+</div>
+<div id="ref-SwAV">
+<p>Caron, Mathilde, Ishan Misra, Julien Mairal, Priya Goyal, Piotr Bojanowski, and Armand Joulin. 2020. “Unsupervised Learning of Visual Features by Contrasting Cluster Assignments.” <em>CoRR</em>. <a href="https://arxiv.org/abs/2006.09882">https://arxiv.org/abs/2006.09882</a>.</p>
 </div>
 <div id="ref-SimCLR">
 <p>Chen, Ting, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. 2020a. “A Simple Framework for Contrastive Learning of Visual Representations.” arXiv. <a href="https://doi.org/10.48550/ARXIV.2002.05709">https://doi.org/10.48550/ARXIV.2002.05709</a>.</p>
 </div>
 <div id="ref-Cho2014">
-<p>Cho, Kyunghyun, Bart van Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. 2014. “Learning Phrase Representations Using Rnn Encoder-Decoder for Statistical Machine Translation,” June. <a href="http://arxiv.org/abs/1406.1078">http://arxiv.org/abs/1406.1078</a>.</p>
+<p>Cho, Kyunghyun, Bart van Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. 2014. “Learning Phrase Representations Using Rnn Encoder-Decoder for Statistical Machine Translation.” <a href="http://arxiv.org/abs/1406.1078">http://arxiv.org/abs/1406.1078</a>.</p>
 </div>
 <div id="ref-Clark2019">
-<p>Clark, Kevin, Urvashi Khandelwal, Omer Levy, and Christopher D. Manning. 2019. “What Does Bert Look at? An Analysis of Bert’s Attention,” June. <a href="http://arxiv.org/abs/1906.04341">http://arxiv.org/abs/1906.04341</a>.</p>
+<p>Clark, Kevin, Urvashi Khandelwal, Omer Levy, and Christopher D. Manning. 2019. “What Does Bert Look at? An Analysis of Bert’s Attention.” <a href="http://arxiv.org/abs/1906.04341">http://arxiv.org/abs/1906.04341</a>.</p>
 </div>
 <div id="ref-Da2019">
-<p>Da, Jeff, and Jungo Kasai. 2019. “Cracking the Contextual Commonsense Code: Understanding Commonsense Reasoning Aptitude of Deep Contextual Representations,” October. <a href="http://arxiv.org/abs/1910.01157">http://arxiv.org/abs/1910.01157</a>.</p>
+<p>Da, Jeff, and Jungo Kasai. 2019. “Cracking the Contextual Commonsense Code: Understanding Commonsense Reasoning Aptitude of Deep Contextual Representations.” <a href="http://arxiv.org/abs/1910.01157">http://arxiv.org/abs/1910.01157</a>.</p>
 </div>
 <div id="ref-deng2009imagenet">
 <p>Deng, Jia, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei. 2009. “Imagenet: A Large-Scale Hierarchical Image Database.” In <em>2009 Ieee Conference on Computer Vision and Pattern Recognition</em>, 248–55. Ieee.</p>
 </div>
 <div id="ref-Devlin2018">
-<p>Devlin, Jacob, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2018c. “BERT: Pre-Training of Deep Bidirectional Transformers for Language Understanding,” October. <a href="http://arxiv.org/abs/1810.04805">http://arxiv.org/abs/1810.04805</a>.</p>
+<p>Devlin, Jacob, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2018b. “BERT: Pre-Training of Deep Bidirectional Transformers for Language Understanding.” <a href="http://arxiv.org/abs/1810.04805">http://arxiv.org/abs/1810.04805</a>.</p>
 </div>
 <div id="ref-dhamala2021bold">
 <p>Dhamala, Jwala, Tony Sun, Varun Kumar, Satyapriya Krishna, Yada Pruksachatkun, Kai-Wei Chang, and Rahul Gupta. 2021. “Bold: Dataset and Metrics for Measuring Biases in Open-Ended Language Generation.” In <em>Proceedings of the 2021 Acm Conference on Fairness, Accountability, and Transparency</em>, 862–72.</p>
@@ -1962,14 +1955,23 @@ A example is shown down below.</p>
 <div id="ref-dosovitskiy2020image">
 <p>Dosovitskiy, Alexey, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, et al. 2020. “An Image Is Worth 16x16 Words: Transformers for Image Recognition at Scale.” <em>arXiv Preprint arXiv:2010.11929</em>.</p>
 </div>
+<div id="ref-ImageT">
+<p>Dosovitskiy, Alexey, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, et al. 2020. “An Image Is Worth 16x16 Words: Transformers for Image Recognition at Scale.” <em>CoRR</em>. <a href="https://arxiv.org/abs/2010.11929">https://arxiv.org/abs/2010.11929</a>.</p>
+</div>
 <div id="ref-Ettinger2019">
-<p>Ettinger, Allyson. 2019. “What Bert Is Not: Lessons from a New Suite of Psycholinguistic Diagnostics for Language Models,” July. <a href="http://arxiv.org/abs/1907.13528">http://arxiv.org/abs/1907.13528</a>.</p>
+<p>Ettinger, Allyson. 2019. “What Bert Is Not: Lessons from a New Suite of Psycholinguistic Diagnostics for Language Models.” <a href="http://arxiv.org/abs/1907.13528">http://arxiv.org/abs/1907.13528</a>.</p>
+</div>
+<div id="ref-fellbaum2010wordnet">
+<p>Fellbaum, Christiane. 2010. “WordNet.” In <em>Theory and Applications of Ontology: Computer Applications</em>, 231–43. Springer.</p>
 </div>
 <div id="ref-Forbes2019">
-<p>Forbes, Maxwell, Ari Holtzman, and Yejin Choi. 2019. “Do Neural Language Representations Learn Physical Commonsense?” August. <a href="http://arxiv.org/abs/1908.02899">http://arxiv.org/abs/1908.02899</a>.</p>
+<p>Forbes, Maxwell, Ari Holtzman, and Yejin Choi. 2019. “Do Neural Language Representations Learn Physical Commonsense?” <a href="http://arxiv.org/abs/1908.02899">http://arxiv.org/abs/1908.02899</a>.</p>
 </div>
 <div id="ref-gao2017knowledge">
 <p>Gao, Jiyang, Zhen Li, Ram Nevatia, and others. 2017. “Knowledge Concentration: Learning 100k Object Classifiers in a Single Cnn.” <em>arXiv Preprint arXiv:1711.07607</em>.</p>
+</div>
+<div id="ref-gao2020pile">
+<p>Gao, Leo, Stella Biderman, Sid Black, Laurence Golding, Travis Hoppe, Charles Foster, Jason Phang, et al. 2020. “The Pile: An 800gb Dataset of Diverse Text for Language Modeling.” <em>arXiv Preprint arXiv:2101.00027</em>.</p>
 </div>
 <div id="ref-Gokaslan2019OpenWeb">
 <p>Gokaslan, Aaron, and Vanya Cohen. 2019. “OpenWebText Corpus.”</p>
@@ -2001,6 +2003,9 @@ A example is shown down below.</p>
 <div id="ref-ResNet">
 <p>He, Kaiming, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. 2015. “Deep Residual Learning for Image Recognition.” <em>CoRR</em>. <a href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.</p>
 </div>
+<div id="ref-hinton2015distilling">
+<p>Hinton, Geoffrey, Oriol Vinyals, Jeff Dean, and others. 2015. “Distilling the Knowledge in a Neural Network.” <em>arXiv Preprint arXiv:1503.02531</em> 2 (7).</p>
+</div>
 <div id="ref-hudson2019gqa">
 <p>Hudson, Drew A, and Christopher D Manning. 2019. “Gqa: A New Dataset for Real-World Visual Reasoning and Compositional Question Answering.” In <em>Proceedings of the Ieee/Cvf Conference on Computer Vision and Pattern Recognition</em>, 6700–6709.</p>
 </div>
@@ -2016,8 +2021,17 @@ A example is shown down below.</p>
 <div id="ref-kolesnikov2019large">
 <p>Kolesnikov, Alexander, Lucas Beyer, Xiaohua Zhai, Joan Puigcerver, Jessica Yung, Sylvain Gelly, and Neil Houlsby. 2019. “Large Scale Learning of General Visual Representations for Transfer.” <em>arXiv Preprint arXiv:1912.11370</em> 2 (8).</p>
 </div>
+<div id="ref-krishna2017visual">
+<p>Krishna, Ranjay, Yuke Zhu, Oliver Groth, Justin Johnson, Kenji Hata, Joshua Kravitz, Stephanie Chen, et al. 2017. “Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations.” <em>International Journal of Computer Vision</em> 123 (1): 32–73.</p>
+</div>
+<div id="ref-krizhevsky2009learning">
+<p>Krizhevsky, Alex, Geoffrey Hinton, and others. 2009. “Learning Multiple Layers of Features from Tiny Images.”</p>
+</div>
+<div id="ref-kuznetsova2020open">
+<p>Kuznetsova, Alina, Hassan Rom, Neil Alldrin, Jasper Uijlings, Ivan Krasin, Jordi Pont-Tuset, Shahab Kamali, et al. 2020. “The Open Images Dataset V4.” <em>International Journal of Computer Vision</em> 128 (7): 1956–81.</p>
+</div>
 <div id="ref-Lialin2022">
-<p>Lialin, Vladislav, Kevin Zhao, Namrata Shivagunde, and Anna Rumshisky. 2022. “Life After Bert: What Do Other Muppets Understand About Language?” May. <a href="http://arxiv.org/abs/2205.10696">http://arxiv.org/abs/2205.10696</a>.</p>
+<p>Lialin, Vladislav, Kevin Zhao, Namrata Shivagunde, and Anna Rumshisky. 2022. “Life After Bert: What Do Other Muppets Understand About Language?” <a href="http://arxiv.org/abs/2205.10696">http://arxiv.org/abs/2205.10696</a>.</p>
 </div>
 <div id="ref-lin2014microsoft">
 <p>Lin, Tsung-Yi, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr Dollár, and C Lawrence Zitnick. 2014a. “Microsoft Coco: Common Objects in Context.” In <em>European Conference on Computer Vision</em>, 740–55. Springer.</p>
@@ -2026,7 +2040,7 @@ A example is shown down below.</p>
 <p>Lin, Yongjie, Yi Chern Tan, and Robert Frank. 2019. “Open Sesame: Getting Inside BERT’s Linguistic Knowledge.” In <em>Proceedings of the 2019 ACL Workshop BlackboxNLP: Analyzing and Interpreting Neural Networks for NLP</em>. Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/w19-4825">https://doi.org/10.18653/v1/w19-4825</a>.</p>
 </div>
 <div id="ref-Liu2019">
-<p>Liu, Nelson F., Matt Gardner, Yonatan Belinkov, Matthew E. Peters, and Noah A. Smith. 2019. “Linguistic Knowledge and Transferability of Contextual Representations,” March. <a href="http://arxiv.org/abs/1903.08855">http://arxiv.org/abs/1903.08855</a>.</p>
+<p>Liu, Nelson F., Matt Gardner, Yonatan Belinkov, Matthew E. Peters, and Noah A. Smith. 2019. “Linguistic Knowledge and Transferability of Contextual Representations.” <a href="http://arxiv.org/abs/1903.08855">http://arxiv.org/abs/1903.08855</a>.</p>
 </div>
 <div id="ref-lottick2019energy">
 <p>Lottick, Kadan, Silvia Susai, Sorelle A Friedler, and Jonathan P Wilson. 2019. “Energy Usage Reports: Environmental Awareness as Part of Algorithmic Accountability.” <em>arXiv Preprint arXiv:1911.08354</em>.</p>
@@ -2046,14 +2060,11 @@ A example is shown down below.</p>
 <div id="ref-Mikolov2013">
 <p>Mikolov, Tomas, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013a. “Efficient Estimation of Word Representations in Vector Space.” <em>arXiv Preprint arXiv:1301.3781</em>.</p>
 </div>
-<div id="ref-mikolov2013efficient">
-<p>Mikolov, Tomas, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013b. “Efficient Estimation of Word Representations in Vector Space.” <em>arXiv Preprint arXiv:1301.3781</em>.</p>
-</div>
 <div id="ref-Mikolov2013a">
-<p>Mikolov, Tomas, Quoc V. Le, and Ilya Sutskever. 2013. “Exploiting Similarities Among Languages for Machine Translation,” September. <a href="http://arxiv.org/abs/1309.4168">http://arxiv.org/abs/1309.4168</a>.</p>
+<p>Mikolov, Tomas, Quoc V. Le, and Ilya Sutskever. 2013. “Exploiting Similarities Among Languages for Machine Translation.” <a href="http://arxiv.org/abs/1309.4168">http://arxiv.org/abs/1309.4168</a>.</p>
 </div>
 <div id="ref-Mikolov2013b">
-<p>Mikolov, Tomas, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013. “Distributed Representations of Words and Phrases and Their Compositionality,” October. <a href="http://arxiv.org/abs/1310.4546">http://arxiv.org/abs/1310.4546</a>.</p>
+<p>Mikolov, Tomas, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013. “Distributed Representations of Words and Phrases and Their Compositionality.” <a href="http://arxiv.org/abs/1310.4546">http://arxiv.org/abs/1310.4546</a>.</p>
 </div>
 <div id="ref-unsupBrain">
 <p>Mineault, Patrick. 2021. “Unsupervised Models of the Brain.” 2021. <a href="https://xcorr.net/2021/12/31/2021-in-review-unsupervised-brain-models/">https://xcorr.net/2021/12/31/2021-in-review-unsupervised-brain-models/</a>.</p>
@@ -2064,11 +2075,14 @@ A example is shown down below.</p>
 <div id="ref-parcalabescu-etal-2022-valse">
 <p>Parcalabescu, Letitia, Michele Cafagna, Lilitta Muradjan, Anette Frank, Iacer Calixto, and Albert Gatt. 2022. “VALSE: A Task-Independent Benchmark for Vision and Language Models Centered on Linguistic Phenomena.” In <em>Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</em>, 8253–80. Association for Computational Linguistics. <a href="https://aclanthology.org/2022.acl-long.567">https://aclanthology.org/2022.acl-long.567</a>.</p>
 </div>
-<div id="ref-perez2021true">
-<p>Perez, Ethan, Douwe Kiela, and Kyunghyun Cho. 2021. “True Few-Shot Learning with Language Models.” <em>Advances in Neural Information Processing Systems</em> 34: 11054–70.</p>
+<div id="ref-Perez2021">
+<p>Perez, Ethan, Douwe Kiela, and Kyunghyun Cho. 2021a. “True Few-Shot Learning with Language Models.” <a href="http://arxiv.org/abs/2105.11447">http://arxiv.org/abs/2105.11447</a>.</p>
 </div>
 <div id="ref-Pilehvar2021">
 <p>Pilehvar, Mohammad Taher, and Jose Camacho-Collados. 2021. <em>Embeddings in Natural Language Processing</em>. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-031-02177-0">https://doi.org/10.1007/978-3-031-02177-0</a>.</p>
+</div>
+<div id="ref-pont2020connecting">
+<p>Pont-Tuset, Jordi, Jasper Uijlings, Soravit Changpinyo, Radu Soricut, and Vittorio Ferrari. 2020. “Connecting Vision and Language with Localized Narratives.” In <em>European Conference on Computer Vision</em>, 647–64. Springer.</p>
 </div>
 <div id="ref-prabhu2020large">
 <p>Prabhu, Vinay Uday, and Abeba Birhane. 2020. “Large Image Datasets: A Pyrrhic Win for Computer Vision?” <em>arXiv Preprint arXiv:2006.16923</em>.</p>
@@ -2080,7 +2094,7 @@ A example is shown down below.</p>
 <p>Radford, Alec, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever. 2018. “Improving Language Understanding by Generative Pre-Training.”</p>
 </div>
 <div id="ref-Raffel2019">
-<p>Raffel, Colin, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J. 2019b. “Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer,” October. <a href="http://arxiv.org/abs/1910.10683">http://arxiv.org/abs/1910.10683</a>.</p>
+<p>Raffel, Colin, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J. Liu. 2019a. “Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer.” <a href="http://arxiv.org/abs/1910.10683">http://arxiv.org/abs/1910.10683</a>.</p>
 </div>
 <div id="ref-rajpurkar2018know">
 <p>Rajpurkar, Pranav, Robin Jia, and Percy Liang. 2018. “Know What You Don’t Know: Unanswerable Questions for Squad.” <em>arXiv Preprint arXiv:1806.03822</em>.</p>
@@ -2097,14 +2111,23 @@ A example is shown down below.</p>
 <div id="ref-Ritchie2020">
 <p>Ritchie, Hannah, Max Roser, and Pablo Rosado. 2020. “<span class="math inline">\(CO_2\)</span> And Greenhouse Gas Emissions.” <em>Our World in Data</em>.</p>
 </div>
+<div id="ref-rosset2020turing">
+<p>Rosset, Corby. 2020. “Turing-Nlg: A 17-Billion-Parameter Language Model by Microsoft.” <em>Microsoft Blog</em> 1 (2).</p>
+</div>
 <div id="ref-saharia2022photorealistic">
 <p>Saharia, Chitwan, William Chan, Saurabh Saxena, Lala Li, Jay Whang, Emily Denton, Seyed Kamyar Seyed Ghasemipour, et al. 2022a. “Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding.” <em>arXiv Preprint arXiv: Arxiv-2205.11487</em>.</p>
 </div>
 <div id="ref-Saifee2020">
 <p>Saifee, Moiz. 2020. “GPT-3: The New Mighty Language Model from Openai.”</p>
 </div>
+<div id="ref-Schick2020">
+<p>Schick, Timo, and Hinrich Schütze. 2020. “Exploiting Cloze Questions for Few Shot Text Classification and Natural Language Inference.” <a href="http://arxiv.org/abs/2001.07676">http://arxiv.org/abs/2001.07676</a>.</p>
+</div>
+<div id="ref-schuhmann2021laion">
+<p>Schuhmann, Christoph, Richard Vencu, Romain Beaumont, Robert Kaczmarczyk, Clayton Mullis, Aarush Katta, Theo Coombes, Jenia Jitsev, and Aran Komatsuzaki. 2021a. “Laion-400m: Open Dataset of Clip-Filtered 400 Million Image-Text Pairs.” <em>arXiv Preprint arXiv:2111.02114</em>.</p>
+</div>
 <div id="ref-Sejnowski2020">
-<p>Sejnowski, Terrence J. 2020. “The Unreasonable Effectiveness of Deep Learning in Artificial Intelligence.” <em>Proceedings of the National Academy of Sciences U.S.A. (2020) Https://Www.pnas.org/Content/Early/2020/01/23/1907373117</em>, February. <a href="https://doi.org/10.1073/pnas.1907373117">https://doi.org/10.1073/pnas.1907373117</a>.</p>
+<p>Sejnowski, Terrence J. 2020. “The Unreasonable Effectiveness of Deep Learning in Artificial Intelligence.” <em>Proceedings of the National Academy of Sciences U.S.A. (2020) Https://Www.pnas.org/Content/Early/2020/01/23/1907373117</em>. <a href="https://doi.org/10.1073/pnas.1907373117">https://doi.org/10.1073/pnas.1907373117</a>.</p>
 </div>
 <div id="ref-shao2019objects365">
 <p>Shao, Shuai, Zeming Li, Tianyuan Zhang, Chao Peng, Gang Yu, Xiangyu Zhang, Jing Li, and Jian Sun. 2019. “Objects365: A Large-Scale, High-Quality Dataset for Object Detection.” In <em>Proceedings of the Ieee/Cvf International Conference on Computer Vision</em>, 8430–9.</p>
@@ -2121,20 +2144,35 @@ A example is shown down below.</p>
 <div id="ref-srivastava2022beyond">
 <p>Srivastava, Aarohi, Abhinav Rastogi, Abhishek Rao, Abu Awal Md Shoeb, Abubakar Abid, Adam Fisch, Adam R Brown, et al. 2022. “Beyond the Imitation Game: Quantifying and Extrapolating the Capabilities of Language Models.” <em>arXiv Preprint arXiv:2206.04615</em>.</p>
 </div>
+<div id="ref-Strubell2019">
+<p>Strubell, Emma, Ananya Ganesh, and Andrew McCallum. 2019a. “Energy and Policy Considerations for Deep Learning in NLP.” In <em>Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics</em>, 3645–50. Florence, Italy: Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/P19-1355">https://doi.org/10.18653/v1/P19-1355</a>.</p>
+</div>
 <div id="ref-strubell2019energy">
-<p>Strubell, Emma, Ananya Ganesh, and Andrew McCallum. 2019a. “Energy and Policy Considerations for Deep Learning in Nlp.” <em>arXiv Preprint arXiv:1906.02243</em>.</p>
+<p>Strubell, Emma, Ananya Ganesh, and Andrew McCallum. 2019b. “Energy and Policy Considerations for Deep Learning in Nlp.” <em>arXiv Preprint arXiv:1906.02243</em>.</p>
+</div>
+<div id="ref-sun2017revisiting">
+<p>Sun, Chen, Abhinav Shrivastava, Saurabh Singh, and Abhinav Gupta. 2017. “Revisiting Unreasonable Effectiveness of Data in Deep Learning Era.” In <em>Proceedings of the Ieee International Conference on Computer Vision</em>, 843–52.</p>
 </div>
 <div id="ref-Sutskever2014">
-<p>Sutskever, Ilya, Oriol Vinyals, and Quoc V. Le. 2014. “Sequence to Sequence Learning with Neural Networks,” September. <a href="http://arxiv.org/abs/1409.3215">http://arxiv.org/abs/1409.3215</a>.</p>
+<p>Sutskever, Ilya, Oriol Vinyals, and Quoc V. Le. 2014. “Sequence to Sequence Learning with Neural Networks.” <a href="http://arxiv.org/abs/1409.3215">http://arxiv.org/abs/1409.3215</a>.</p>
 </div>
 <div id="ref-EfficientNet">
 <p>Tan, Mingxing, and Quoc V. Le. 2019. “EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks.” <a href="https://doi.org/10.48550/ARXIV.1905.11946">https://doi.org/10.48550/ARXIV.1905.11946</a>.</p>
+</div>
+<div id="ref-torralba2011unbiased">
+<p>Torralba, Antonio, and Alexei A Efros. 2011. “Unbiased Look at Dataset Bias.” In <em>CVPR 2011</em>, 1521–8. IEEE.</p>
+</div>
+<div id="ref-Vaswani2017">
+<p>Vaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. 2017a. “Attention Is All You Need.” <a href="http://arxiv.org/abs/1706.03762">http://arxiv.org/abs/1706.03762</a>.</p>
 </div>
 <div id="ref-vaswani2017attention">
 <p>Vaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017b. “Attention Is All You Need.” <em>Advances in Neural Information Processing Systems</em> 30.</p>
 </div>
 <div id="ref-Voita2019">
-<p>Voita, Elena, David Talbot, Fedor Moiseev, Rico Sennrich, and Ivan Titov. 2019. “Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned,” May. <a href="http://arxiv.org/abs/1905.09418">http://arxiv.org/abs/1905.09418</a>.</p>
+<p>Voita, Elena, David Talbot, Fedor Moiseev, Rico Sennrich, and Ivan Titov. 2019. “Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned.” <a href="http://arxiv.org/abs/1905.09418">http://arxiv.org/abs/1905.09418</a>.</p>
+</div>
+<div id="ref-LocNarWeb">
+<p>Website. 2020. “Localized Narratives Data and Visualization.” 2020. <a href="https://google.github.io/localized-narratives">https://google.github.io/localized-narratives</a>.</p>
 </div>
 <div id="ref-wenzek2019ccnet">
 <p>Wenzek, Guillaume, Marie-Anne Lachaux, Alexis Conneau, Vishrav Chaudhary, Francisco Guzmán, Armand Joulin, and Edouard Grave. 2019. “Ccnet: Extracting High Quality Monolingual Datasets from Web Crawl Data.” <em>arXiv Preprint arXiv:1911.00359</em>.</p>
@@ -2145,8 +2183,11 @@ A example is shown down below.</p>
 <div id="ref-darkMatter">
 <p>Yann, Lecun, and Misra Ishan. 2021. “Self-Supervised Learning: The Dark Matter of Intelligence.” 2021. <a href="https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/">https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/</a>.</p>
 </div>
+<div id="ref-young2014image">
+<p>Young, Peter, Alice Lai, Micah Hodosh, and Julia Hockenmaier. 2014. “From Image Descriptions to Visual Denotations: New Similarity Metrics for Semantic Inference over Event Descriptions.” <em>Transactions of the Association for Computational Linguistics</em> 2: 67–78.</p>
+</div>
 <div id="ref-parti">
-<p>Yu, Jiahui, Yuanzhong Xu, Jing Koh, Thang Luong, Gunjan Baid, Vijay Vasudevan, Alexander Ku, et al. 2022a. “Scaling Autoregressive Models for Content-Rich Text-to-Image Generation,” June. <a href="https://doi.org/10.48550/arXiv.2206.10789">https://doi.org/10.48550/arXiv.2206.10789</a>.</p>
+<p>Yu, Jiahui, Yuanzhong Xu, Jing Koh, Thang Luong, Gunjan Baid, Vijay Vasudevan, Alexander Ku, et al. 2022a. “Scaling Autoregressive Models for Content-Rich Text-to-Image Generation.” <a href="https://doi.org/10.48550/arXiv.2206.10789">https://doi.org/10.48550/arXiv.2206.10789</a>.</p>
 </div>
 <div id="ref-yuan2022wudaomm">
 <p>Yuan, Sha, Zhao Shuai, Leng Jiahong, Xue Zhao, Zhao Hanyu, and Tang Jie. 2022. “WuDaoMM: A Large-Scale Multi-Modal Dataset for Pre-Training Models.” <em>arXiv Preprint arXiv:2203.11480</em>.</p>
@@ -2157,8 +2198,14 @@ A example is shown down below.</p>
 <div id="ref-zhang2016yin">
 <p>Zhang, Peng, Yash Goyal, Douglas Summers-Stay, Dhruv Batra, and Devi Parikh. 2016. “Yin and Yang: Balancing and Answering Binary Visual Questions.” In <em>Proceedings of the Ieee Conference on Computer Vision and Pattern Recognition</em>, 5014–22.</p>
 </div>
+<div id="ref-zhou2017scene">
+<p>Zhou, Bolei, Hang Zhao, Xavier Puig, Sanja Fidler, Adela Barriuso, and Antonio Torralba. 2017. “Scene Parsing Through Ade20k Dataset.” In <em>Proceedings of the Ieee Conference on Computer Vision and Pattern Recognition</em>, 633–41.</p>
+</div>
 <div id="ref-Zhou2020">
-<p>Zhou, Yanqi, Sudip Roy, Amirali Abdolrashidi, Daniel Wong, Peter Ma, Qiumin Xu, Hanxiao Liu, et al. 2020. “Transferable Graph Optimizers for Ml Compilers.” <em>NeurIPS 2020</em>, October. <a href="http://arxiv.org/abs/2010.12438">http://arxiv.org/abs/2010.12438</a>.</p>
+<p>Zhou, Yanqi, Sudip Roy, Amirali Abdolrashidi, Daniel Wong, Peter Ma, Qiumin Xu, Hanxiao Liu, et al. 2020. “Transferable Graph Optimizers for Ml Compilers.” <em>NeurIPS 2020</em>. <a href="http://arxiv.org/abs/2010.12438">http://arxiv.org/abs/2010.12438</a>.</p>
+</div>
+<div id="ref-zhu2015aligning">
+<p>Zhu, Yukun, Ryan Kiros, Rich Zemel, Ruslan Salakhutdinov, Raquel Urtasun, Antonio Torralba, and Sanja Fidler. 2015. “Aligning Books and Movies: Towards Story-Like Visual Explanations by Watching Movies and Reading Books.” In <em>Proceedings of the Ieee International Conference on Computer Vision</em>, 19–27.</p>
 </div>
 <div id="ref-zhuang2021unsupervised">
 <p>Zhuang, Chengxu, Siming Yan, Aran Nayebi, Martin Schrimpf, Michael C Frank, James J DiCarlo, and Daniel LK Yamins. 2021. “Unsupervised Neural Network Models of the Ventral Visual Stream.” <em>Proceedings of the National Academy of Sciences</em> 118 (3): e2014196118.</p>

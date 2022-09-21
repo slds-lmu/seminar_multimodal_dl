@@ -127,7 +127,7 @@
 
 \title{Multimodal Deep Learning}
 \author{}
-\date{\vspace{-2.5em}2022-09-20}
+\date{\vspace{-2.5em}2022-09-21}
 
 \begin{document}
 \maketitle
@@ -308,8 +308,7 @@ granular level, the models rather work with numerical than textual data.
 Thus, by using very basic techniques like one-hot encoding or
 bag-of-words, a text is converted into its equivalent vector of numbers
 without losing information.\\
-In the example depicting one-hot encoding (see
-\protect\hyperlink{fig:one-hot}{1}), there
+In the example depicting one-hot encoding (see Figure \ref{fig:onehot}), there
 are ten simple words and the dark squares indicate the only index with a
 non-zero value.
 
@@ -319,7 +318,7 @@ non-zero value.
 
 }
 
-\caption{Ten one-hot encoded words (Source: \citet{Pilehvar2021}).}(\#fig:fig:onehot)
+\caption{Ten one-hot encoded words (Source: \citet{Pilehvar2021})}\label{fig:onehot}
 \end{figure}
 
 
@@ -358,7 +357,7 @@ hyperparameter). The values for the embedding are trainable parameters
 which are learned similarly to a model learning the weights for a dense
 layer. The dimensionality of the word representations is typically much
 smaller than the number of words in the dictionary. For example,
-\citep{mikolov2013efficient} called dimensions between 50-100 modest for more than a
+\citep{Mikolov2013} called dimensions between 50-100 modest for more than a
 few hundred million words. For small data sets, dimensionality for the
 word vectors could start at 8 and go up to 1024 for larger data sets. It
 is expected that higher dimensions can rather pick up intricate
@@ -370,7 +369,7 @@ relationships between words if given enough data to learn from.
 
 }
 
-\caption{Three-dimensional word embeddings (Source: \citet{Pilehvar2021}).}(\#fig:fig:embedPilehvarP11)
+\caption{Three-dimensional word embeddings (Source: \citet{Pilehvar2021}).}\label{fig:embedPilehvarP11}
 \end{figure}
 
 
@@ -402,7 +401,7 @@ insight from before referring to the word endings being similar because
 in this instance the past tenses of both verbs walking and swimming are
 not similar in structure. Additionally, on the right side of the figure,
 there is a form of the commonly portrayed and easily understood
-Country-Capital example (see \citep{mikolov2013efficient}).
+Country-Capital example (see \citep{Mikolov2013}).
 
 \begin{figure}
 
@@ -410,7 +409,7 @@ Country-Capital example (see \citep{mikolov2013efficient}).
 
 }
 
-\caption{Three types of similarities as word embeddings (Source: \citet{Google2022}).}(\#fig:fig:embedVectors)
+\caption{Three types of similarities as word embeddings (Source: \citet{Google2022}).}\label{fig:embedVectors}
 \end{figure}
 
 
@@ -431,7 +430,7 @@ precision.
 
 }
 
-\caption{Representations of numbers in English and Spanish (Source: \citet{Mikolov2013a}).}(\#fig:fig:embedTransl)
+\caption{Representations of numbers in English and Spanish (Source: \citet{Mikolov2013a}).}\label{fig:embedTransl}
 \end{figure}
 
 
@@ -456,13 +455,13 @@ English. In addition, the used Vietnamese model contains numerous
 synonyms, which complicates making exact predictions (see
 \citep{Mikolov2013a}).\\
 Turning the attention to one of the most impactful embedding techniques,
-word2vec. It was proposed by \citep{mikolov2013efficient} and is not a singular
+word2vec. It was proposed by \citep{Mikolov2013} and is not a singular
 algorithm. It can rather be seen as a family of model architectures and
 optimizations to learn word representations. Word2vec's popularity also
 stems from its success on multiple downstream natural language
 processing tasks. It has a very simple structure which is based on a
 basic feed forward neural network. They published multiple papers (see
-\citep{mikolov2013efficient}, \citep{Mikolov2013a}, \citep{Mikolov2013b}) that are stemming
+\citep{Mikolov2013}, \citep{Mikolov2013a}, \citep{Mikolov2013b}) that are stemming
 around two different but related methods for learning word embeddings
 (see ). Firstly, the Continuous bag-of-words model aims to predict the
 middle word based on surrounding context words. Hence, it considers
@@ -479,7 +478,7 @@ layer.
 
 }
 
-\caption{CBOW and Skip-gram architecture (Source: \citet{mikolov2013efficient}).}(\#fig:fig:embedArch)
+\caption{CBOW and Skip-gram architecture (Source: \citet{Mikolov2013}).}\label{fig:embedArch}
 \end{figure}
 
 
@@ -513,7 +512,7 @@ recurrent neural networks with gated hidden units have trouble solving
 successfully. Deep RNNs may have a chance, but different architectures
 like encoder-decoder have proven to be the most effective. It can even
 deal with different word orders and active, as well as passive voice
-(\citep{Sutskever2014}). A simplified example of the encoder-decoder model
+\citep{Sutskever2014}. A simplified example of the encoder-decoder model
 can be seen in .
 
 \begin{figure}
@@ -522,7 +521,7 @@ can be seen in .
 
 }
 
-\caption{Translation through simplified seq2seq model (Source: \citet{Manning2022}).}(\#fig:fig:arch1Encdec)
+\caption{Translation through simplified seq2seq model (Source: \citet{Manning2022}).}\label{fig:arch1Encdec}
 \end{figure}
 
 
@@ -550,7 +549,7 @@ the target sequence of length \(n_y\), which can of course vary from
 
 }
 
-\caption{Encoder-decoder architecture (Source: \citet{Cho2014}).}(\#fig:fig:encdecArchCho)
+\caption{Encoder-decoder architecture (Source: \citet{Cho2014}).}\label{fig:encdecArchCho}
 \end{figure}
 
 
@@ -596,7 +595,7 @@ features.
 
 }
 
-\caption{Translation through seq2seq model (Source: \citet{Manning2022}).}(\#fig:fig:encdecArch2)
+\caption{Translation through seq2seq model (Source: \citet{Manning2022}).}\label{fig:encdecArch2}
 \end{figure}
 
 
@@ -670,7 +669,7 @@ be seen to have two significant contributors.
 
 }
 
-\caption{Translation process with attention mechanism (Source: \citet{Manning2022}).}(\#fig:fig:attentionExStanford)
+\caption{Translation process with attention mechanism (Source: \citet{Manning2022}).}\label{fig:attentionExStanford}
 \end{figure}
 
 
@@ -727,7 +726,7 @@ predominantly analogous to our intuition.\\
 
 }
 
-\caption{Attention alignments (Source: \citet{Bahdanau2014}).}(\#fig:fig:attentionfocus)
+\caption{Attention alignments (Source: \citet{Bahdanau2014}).}\label{fig:attentionfocus}
 \end{figure}
 
 
@@ -754,7 +753,7 @@ sequential structure does not tell the whole story.
 
 }
 
-\caption{Sequential processing of recurrent model (Source: \citet{Manning2022}).}(\#fig:fig:tfrnnlimstanford)
+\caption{Sequential processing of recurrent model (Source: \citet{Manning2022}).}\label{fig:tfrnnlimstanford}
 \end{figure}
 
 
@@ -773,7 +772,7 @@ steps before the respective state can be calculated.
 
 }
 
-\caption{Sequential processing of recurrent model with number of steps indicated (Source: \citet{Manning2022}).}(\#fig:fig:tfrnnlim2stanford)
+\caption{Sequential processing of recurrent model with number of steps indicated (Source: \citet{Manning2022}).}\label{fig:tfrnnlim2stanford}
 \end{figure}
 
 
@@ -807,7 +806,7 @@ omitted eventually.\\
 
 }
 
-\caption{Connections of classic attention mechanism (Source: \citet{Manning2022}).}(\#fig:fig:tfselfa)
+\caption{Connections of classic attention mechanism (Source: \citet{Manning2022}).}\label{fig:tfselfa}
 \end{figure}
 
 
@@ -826,10 +825,8 @@ returned.
 
 }
 
-\caption{Comparison of classic attention mechanism with self-attention with
-hash tables (Source: \citet{Manning2022}).}(\#fig:fig:tfhashtable)
+\caption{Comparison of classic attention mechanism with self-attention with hash tables (Source: \citet{Manning2022}).}\label{fig:tfhashtable}
 \end{figure}
-
 
 
 
@@ -867,7 +864,7 @@ should specifically be not allowed to simply look ahead and observe more
 than the objective allows. Moreover, the word order is no longer
 encoder, and it is bag-of-words once again.\\
 Fortunately, the previously mentioned weaknesses have been addressed for
-the original transformer-architecture proposed by \citep{vaswani2017attention}. The
+the original transformer-architecture proposed by \citep{Vaswani2017}. The
 first problem can be easily fixed by applying a feed forward layer to
 the output of attention. It provides non-linear activation as well as
 extra expressive power. Then, for cases in which bidirectionality
@@ -904,7 +901,7 @@ next to receive the weights of the values.
 
 }
 
-\caption{Scaled dot-product attention (Source: \citet{vaswani2017attention}).}(\#fig:fig:tfsdpa)
+\caption{Scaled dot-product attention (Source: \citet{Vaswani2017}).}\label{fig:tfsdpa}
 \end{figure}
 
 
@@ -925,7 +922,7 @@ combining their outputs.
 
 }
 
-\caption{Multi-head attention (Source: \citet{vaswani2017attention}).}(\#fig:fig:tfmha)
+\caption{Multi-head attention (Source: \citet{Vaswani2017}).}\label{fig:tfmha}
 \end{figure}
 
 
@@ -957,7 +954,7 @@ distribution over the possible words.
 
 }
 
-\caption{Transformer architecture (Source: \citet{vaswani2017attention}).}(\#fig:fig:tfarch)
+\caption{Transformer architecture (Source: \citet{Vaswani2017}).}\label{fig:tfarch}
 \end{figure}
 
 
@@ -990,7 +987,7 @@ distributions over language.\\
 
 }
 
-\caption{Partly pre-trained model (Source: \citet{Manning2022}).}(\#fig:fig:tfpretrain)
+\caption{Partly pre-trained model (Source: \citet{Manning2022}).}\label{fig:tfpretrain}
 \end{figure}
 
 
@@ -1001,7 +998,7 @@ distributions over language.\\
 
 }
 
-\caption{Jointly pre-trained model (Source: \citet{Manning2022}).}(\#fig:fig:tfpretrain2)
+\caption{Jointly pre-trained model (Source: \citet{Manning2022}).}\label{fig:tfpretrain2}
 \end{figure}
 
 
@@ -1022,7 +1019,7 @@ pre-training, and favourable use cases. In the following, three
 different but very influential transformer architectures will be
 discussed. BERT can be seen as stacked encoders (\citep{Devlin2018}), T5 aims
 to combine the good parts of encoders and decoders (\citep{Raffel2019}),
-while GPT are stacked decoders (\citep{brown2020language}).
+while GPT are stacked decoders (\citep{Brown2020}).
 
 \hypertarget{bert}{%
 \subsubsection{BERT}\label{bert}}
@@ -1081,7 +1078,7 @@ of potential use cases are depicted in below.
 
 }
 
-\caption{Applications of T5 model (Source: \citet{Raffel2019}).}(\#fig:fig:t5)
+\caption{Applications of T5 model (Source: \citet{Raffel2019}).}\label{fig:t5}
 \end{figure}
 
 
@@ -1122,7 +1119,7 @@ extent.
 
 }
 
-\caption{Comparison of number of parameters between Transformer-architectures (Source: \citet{Saifee2020}).}(\#fig:fig:gpt3scaling)
+\caption{Comparison of number of parameters between Transformer-architectures (Source: \citet{Saifee2020}).}\label{fig:gpt3scaling}
 \end{figure}
 
 
@@ -1139,7 +1136,7 @@ from the developments. Risks and harms among environmental and financial
 costs have been studied by \citep{Bender2021}. They state that marginalized
 communities are not only less likely to benefit from LM progress, but
 also more likely to suffer from the environmental repercussions of
-increasing resource consumption. \citep{strubel2019energy} estimated that training
+increasing resource consumption. \citep{Strubell2019} estimated that training
 a Transformer (big) model resulted in 249t of \(CO_2\). To compare, an
 average human is responsible for approximately 5t of \(CO_2\) per year
 (according to \citep{Ritchie2020}). In addition, they discovered that an
@@ -1193,7 +1190,7 @@ unexpected amount focusing on the delimiter token \[SEP\].
 
 }
 
-\caption{Common patterns of attention heads (Source: \citet{Clark2019}).}(\#fig:fig:ctattentionheads)
+\caption{Common patterns of attention heads (Source: \citet{Clark2019}).}\label{fig:ctattentionheads}
 \end{figure}
 
 
@@ -1220,7 +1217,7 @@ description, examples, and the prompt. In , the task is a translation
 from English to French, a few examples, as well as the word that should
 be translated are given. Moreover, zero-shot and one-shot learning refer
 to the model predicting with no and one learned example, respectively
-(\citep{brown2020language}).
+(\citep{Brown2020}).
 
 \begin{figure}
 
@@ -1228,21 +1225,21 @@ to the model predicting with no and one learned example, respectively
 
 }
 
-\caption{Few-shot learning (Source: \citet{brown2020language}).}(\#fig:fig:gpt3fewshotlearning)
+\caption{Few-shot learning (Source: \citet{Brown2020}).}\label{fig:gpt3fewshotlearning}
 \end{figure}
 
 
 
 It is complicated to create the few-shot examples, since the application
 relies on them to express the task. This is why smaller models are
-susceptible to examples written unfavourably. In \citep{brown2020language}, it was
+susceptible to examples written unfavourably. In \citep{Brown2020}, it was
 shown that few-shot performance scales with the number of model
 parameters. Even though GPT-3's in-context learning improved few-shot
 prompting capabilities, it is still sensitive to the order of training
 examples, decoding strategy, and hyperparameter selection. All of this
 combined with the fact that current research uses larger or held-out
 data sets leads to the suspicion that the true few-shot ability of
-language models is overestimated (see \citep{perez2021true}).\\
+language models is overestimated (see \citep{Perez2021}).\\
 Moreover, \citep{Lialin2022} have found that common transformer models could
 not resolve compositional questions in a zero-shot fashion and that the
 model's parameter count does not correlate with performance. This
@@ -1383,10 +1380,10 @@ Generally, identity mappings are not optimal, but new reformulations may help to
 \hypertarget{identity-mapping-by-shortcuts}{%
 \paragraph{Identity Mapping by Shortcuts}\label{identity-mapping-by-shortcuts}}
 
-Residual learning is adopted to every few stacked layers where a building block is defined as shown in Fig. 1:
+Residual learning is adopted to every few stacked layers where a building block is defined as shown in Figure \ref{fig:ch01-figure01}:
 
 \begin{equation}
-\tag{1}
+\label{eq:ch01-02-01}
 y = F  \left( x,\left\{  W_i\right\} \right) + x
 \end{equation}
 
@@ -1398,25 +1395,25 @@ x and y present the input and output vectors of the layers.
 
 }
 
-\caption{Figure 1. Building block of residual learning}\label{fig:ch01-figure01}
+\caption{Building block of residual learning}\label{fig:ch01-figure01}
 \end{figure}
 
-The function \(F \left( x,\left\{ W_i\right\} \right)\) represents the residual mapping that is to be learned. For the example with two layers from Fig.1 that has two layers, \(F = W_2\sigma\left( W_1x\right)\) in which \(\sigma\) denotes the ReLU activation function, and to simplify the notations, biases are left out. The operation \(F + x\) is conducted with a shortcut connection and element-wise addition. Afterward, He et al.~applied second nonlinearity ( i.e., \(\sigma \left( y \right)\), Fig.1).
+The function \(F \left( x,\left\{ W_i\right\} \right)\) represents the residual mapping that is to be learned. For the example with two layers from Figure \ref{fig:ch01-figure01} that has two layers, \(F = W_2\sigma\left( W_1x\right)\) in which \(\sigma\) denotes the ReLU activation function, and to simplify the notations, biases are left out. The operation \(F + x\) is conducted with a shortcut connection and element-wise addition. Afterward, He et al.~applied second non-linearity ( i.e., \(\sigma \left( y \right)\), \ref{fig:ch01-figure01}).
 
-The shortcut connections in Eq. (1) neither adds an extra parameter nor increases computation complexity, which enables comparisons between plain and residual networks that concurrently have the same number of parameters, depth, width, and computational cost (except for the negligible element-wise addition).
-Dimensions of x and F must be equal in Eq. (1). Alternatively, to match the dimensions, linear projection \(W_s\) by the shortcut connections can be applied:
+The shortcut connections in Equation \eqref{eq:ch01-02-01} neither adds an extra parameter nor increases computation complexity, which enables comparisons between plain and residual networks that concurrently have the same number of parameters, depth, width, and computational cost (except for the negligible element-wise addition).
+Dimensions of x and F must be equal in Equation \eqref{eq:ch01-02-01}. Alternatively, to match the dimensions, linear projection \(W_s\) by the shortcut connections can be applied:
 
 \begin{equation}
-\tag{2}
+\label{eq:ch01-02-02}
 y = F  \left( x,\left\{  W_i\right\} \right)+ W_sx.
 \end{equation}
 
-The square matrix \(W_s\) can be used in Eq. (1). However, experiments showed that identity mapping is enough to solve the degradation problem. Therefore, \(W_s\) only aims to match dimensions. Although more levels are possible, it was experimented with function F having two or three layers without stating the exact form of it. Assuming F only has one layer, Eq (1) it is comparable to a linear layer: \(y = W_1 x + x\). The theoretical notations are about fully-connected layers, but convolutional layers were used. The function \(F \left( x,\left\{ W_i\right\} \right)\) can be applied to represent multiple convolutional layers. Two feature maps are added element-wise, channel by channel.
+The square matrix \(W_s\) can be used in Equation \eqref{eq:ch01-02-02}. However, experiments showed that identity mapping is enough to solve the degradation problem. Therefore, \(W_s\) only aims to match dimensions. Although more levels are possible, it was experimented with function F having two or three layers without stating the exact form of it. Assuming F only has one layer, Equation \eqref{eq:ch01-02-01}, it is comparable to a linear layer: \(y = W_1 x + x\). The theoretical notations are about fully-connected layers, but convolutional layers were used. The function \(F \left( x,\left\{ W_i\right\} \right)\) can be applied to represent multiple convolutional layers. Two feature maps are added element-wise, channel by channel.
 
 \hypertarget{network-architectures}{%
 \subsubsection{Network Architectures}\label{network-architectures}}
 
-To construct efficient residual network, various plain/residual networks were tested. They trained the network on benchmarked datasets, one of them being the ImageNet dataset, which will be used for a comparison of network architectures. Fig. 2 shows that every residual network needs a plain baseline network inspired by the VGG network \citet{vgg} on which identity mapping by shortcuts is applied.
+To construct efficient residual network, various plain/residual networks were tested. They trained the network on benchmarked datasets, one of them being the ImageNet dataset, which will be used for a comparison of network architectures. Figure \eqref{eq:ch01-02-02} shows that every residual network needs a plain baseline network inspired by the VGG network \citet{vgg} on which identity mapping by shortcuts is applied.
 
 \emph{Plain Network} The philosophy of VGG nets 41 mainly inspires plain baselines. There are two rules that convolution layers, which usually have 3x3 filters, follow:
 
@@ -1428,16 +1425,16 @@ To construct efficient residual network, various plain/residual networks were te
   reducing the size of a feature map by half doubles the number of filters per layer to maintain time complexity per layer
 \end{itemize}
 
-Convolutional layers with a stride of 2 perform downsampling directly. A global average pooling layer and a 1000-way fully-connected layer with softmax are at the end of the network. The number of weighted layers sums up to 34 in Fig. 2 (middle).Compared to VGG nets, this model has fewer filters and lower complexity. (Fig. 2, left).
+Convolutional layers with a stride of 2 perform downsampling directly. A global average pooling layer and a 1000-way fully-connected layer with softmax are at the end of the network. The number of weighted layers sums up to 34 in Figure \ref{fig:ch01-figure02} (middle).Compared to VGG nets, this model has fewer filters and lower complexity. (Figure \ref{fig:ch01-figure02}, left).
 
-\emph{Residual Network} Based on the above plain network, additional shortcut connections (Fig. 2, right) turn the network into its associate residual variant. The identity shortcuts (Eq. (1)) can be directly used in the case of the exact dimensions of the input and output (solid line shortcuts in Fig. 2). For the different dimensions (dotted line shortcuts in Fig. 2), two options are considered:
+\emph{Residual Network} Based on the above plain network, additional shortcut connections (Figure \ref{fig:ch01-figure02}, right) turn the network into its associate residual variant. The identity shortcuts (Equation \eqref{eq:ch01-02-01}) can be directly used in the case of the exact dimensions of the input and output (solid line shortcuts in Figure \ref{fig:ch01-figure02}). For the different dimensions (dotted line shortcuts in Figure \ref{fig:ch01-figure02}), two options are considered:
 
 \begin{itemize}
 \tightlist
 \item
   The shortcut still performs identity mapping, but with extra zero entries padded to cope with the increasing dimensions, without adding new parameters;
 \item
-  The projection shortcut in Eq. (2) matches dimensions (due to 1×1 convolutions).
+  The projection shortcut in Equation \eqref{eq:ch01-02-02} matches dimensions (due to 1×1 convolutions).
 \end{itemize}
 
 In both cases, shortcuts will be done with a stride of two when they go across feature maps of two sizes.
@@ -1448,14 +1445,14 @@ In both cases, shortcuts will be done with a stride of two when they go across f
 
 }
 
-\caption{Figure 2. Architecture of ResNet}\label{fig:ch01-figure02}
+\caption{Architecture of ResNet}\label{fig:ch01-figure02}
 \end{figure}
 
 \hypertarget{efficientnet}{%
 \subsection{EfficientNet}\label{efficientnet}}
 
 Until Tan M. introduced EfficientNet \citet{effecient}, it was popular to scale only one of the three dimensions -- depth, width, or image size. The empirical study shows that it is critical to balance all network dimensions, which can be achieved by simply scaling each with a constant ratio. Based on this observation, a simple yet effective compound scaling method was proposed, which uniformly scales network width, depth, and resolution with a set of fixed scaling coefficients.
-For example, if 2N times more computational resources are available. In that case, increasing the network depth by \(\alpha N\), width by \(\beta N\), and image size by \(\gamma N\) would be possible.Here \(\alpha,\beta,\gamma\) are constant coefficients determined by a small grid search on the original miniature model. Fig. 3 illustrates the difference between this scaling method and conventional methods.
+For example, if 2N times more computational resources are available. In that case, increasing the network depth by \(\alpha N\), width by \(\beta N\), and image size by \(\gamma N\) would be possible.Here \(\alpha,\beta,\gamma\) are constant coefficients determined by a small grid search on the original miniature model. Figure \ref{fig:ch01-figure03} illustrates the difference between this scaling method and conventional methods.
 A compound scaling method makes sense if an input image is bigger since a larger receptive field requires more layers and more significant channel features to capture fine-grained patterns. Theoretically and empirically, there has been a special relationship between network width and depth \citet{depthwidth}. Existing MobileNets \citet{mobilenet} and ResNet are used to demonstrated new scaling method.
 
 \begin{figure}
@@ -1464,7 +1461,7 @@ A compound scaling method makes sense if an input image is bigger since a larger
 
 }
 
-\caption{Figure 3. Model scaling}\label{fig:ch01-figure03}
+\caption{Model scaling}\label{fig:ch01-figure03}
 \end{figure}
 
 \hypertarget{compound-model-scaling}{%
@@ -1474,29 +1471,26 @@ A compound scaling method makes sense if an input image is bigger since a larger
 \paragraph{Problem Formulation}\label{problem-formulation}}
 
 A function \(Y_i = \mathcal{F}i \left( X_i \right)\) with the operator \(\mathcal{F}_i\), output tensor \(Y_i\), input tensor \(X_i\) of shape \(\left( H_i, W_i, C_i \right)\), spatial dimensions \(H_i\), \(W_i\), and channel dimension \(C_i\) is called a ConvNet Layer \(i\). A ConvNet N appears as a list of composing layers:
-\begin{equation}
-\tag{3}
+\[
 \mathcal{N}=\mathcal{F_k}\odot \cdots \mathcal{F_2}\odot\mathcal{F_1}\left( X_1 \right)=\bigodot{j=1\cdots k}\mathcal{F_j}\left( X_1 \right)
-\end{equation}
+\]
 
 Effectively, these layers are often partitioned into multiple stages, and all layers in each stage share the same architecture. For example, ResNet has five stages, with all layers in every stage being the same convolutional type, except for the first layer that performs down-sampling. Therefore, a ConvNet can be defined as:
 
-\begin{equation}
-\tag{4}
- \mathcal{N}=\bigodot_{i=1\cdots s}\mathcal{F_i}^{L_i}\left( X_{\left( H_i, W_i, C_i  \right)} \right)
-\end{equation}
+\[
+\mathcal{N}=\bigodot_{i=1\cdots s}\mathcal{F_i}^{L_i}\left( X_{\left( H_i, W_i, C_i  \right)} \right)
+\]
 
 where \(\mathcal{F_i}^{L_i}\) denotes layer \(\mathcal{F_i}\) which is repeated \(L_i\) times in stage \(i\), and \(\left( H_i, W_i, C_i \right)\) is the shape of input tensor \(X\) of layer \(i\).
 
 In comparison to the regular ConvNet focusing on best layer architecture \(\mathcal{F_i}\) search, model scaling centers on the expansion of the network length \(\left( L_i\right)\), width \(\left( C_i \right)\), and/or resolution \(\left( H_i, W_i\right)\) without changing \(\mathcal{F_i}\) that was predefined in the baseline network. Although model scaling simplifies the design problem of the new resource constraints through the fixing \(\mathcal{F_i}\), different \(\left( L_i, H_i, W_i, C_i \right)\) for each layer, the large designe space remains to be explored. To further reduce design space, all layers are restricted to be scaled uniformly with a constant ratio. In this case, the goal is to maximize the model's accuracy for any given resource constraints, which can be presented as an optimization problem:
 
-\begin{equation}
-\tag{5}
-\max_{d,w,r}  Accuracy \left( \mathcal{N}\left( d,w,r \right) \right) \\
-s.t.\mathcal{N}\left( d,w,r \right)=\bigodot_{I=1...s}\hat{\mathcal{F}}{i}^{d\cdot \hat{L{i}}}\left( X_{\left\langle r\cdot \hat{H_i},r\cdot \hat{W_i},w\cdot \hat{C_i}\right\rangle} \right) \\
-Memory\left( \mathcal{N} \right)≤ targetMemory \\
-FLOPS\left( \mathcal{N} \right) ≤ targetFlops \\
-\end{equation}
+\begin{align*}
+\max_{d,w,r} &\text{Accuracy} \left( \mathcal{N}\left( d,w,r \right) \right) \\
+s.t.\mathcal{N}\left( d,w,r \right) &=\bigodot_{I=1...s}\hat{\mathcal{F}}{i}^{d\cdot \hat{L{i}}}\left( X_{\left\langle r\cdot \hat{H_i},r\cdot \hat{W_i},w\cdot \hat{C_i}\right\rangle} \right) \\
+Memory\left( \mathcal{N} \right) &\leq\ targetMemory \\
+FLOPS\left( \mathcal{N} \right) &\leq\ targetFlops
+\end{align*}
 where w,d,r are coefficients for scaling network width, depth, and resolution; \(\left(\widehat{\mathcal{F}}_i, \widehat{L}_i, \widehat{H}_i, \widehat{W}_i, \widehat{C}_i \right)\) are predefined parameters in baseline network.
 
 \hypertarget{scaling-dimensions}{%
@@ -1524,14 +1518,16 @@ To confirm this thought, results of networks width \(w\) without changing depth 
 
 A new \textbf{compound scaling method}, which uses a compound coefficient \(\varphi\) to uniformly scale network width, depth, and resolution in a principled way, was proposed.
 
-\begin{equation}
-\tag{6}
-depth: \mathcal{d}=\alpha^{\varphi} \\
-width: \mathcal{w}=\beta^{\varphi}\\
-resolution: \mathcal{r}=\gamma^{\varphi}\\
-s.t.  \alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\\
- \alpha \ge 1, \beta \ge 1, \gamma \ge 1\\
-\end{equation}
+\begin{align}
+\begin{split}
+\text{depth:} &\mathcal{d}=\alpha^{\varphi} \\
+\text{width:} &\mathcal{w}=\beta^{\varphi}\\
+\text{resolution:} &\mathcal{r}=\gamma^{\varphi}\\
+&s.t.  \alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\\
+&\alpha \ge 1, \beta \ge 1, \gamma \ge 1
+\end{split}
+ \label{eq:01-02-06}
+\end{align}
 
 where \(\alpha, \beta, \gamma\) are constants that can be determined by a small grid search, \(\varphi\) is a user-specified coefficient that controls how many more resources are available for model scaling, while \(\alpha, \beta, \gamma\) specify how to assign these extra resources to network width, depth, and resolution, respectively. Notably, the FLOPS of a regular convolution op is proportional to \(d, w^{2}, r^{2}\), i.e., doubling network depth will double FLOPS, but doubling network width or Resolution will increase FLOPS by four times. Scaling a ConvNet with previous equation will approximately increase total FLOPS by \(\left( \alpha\cdot \beta^{2}\cdot \gamma^{2} \right)^{\varphi}\). In this paper, \(\alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\) is constrain such that for any new \(\varphi\), the total FLOPS will approximately increase by \(2\varphi\)
 
@@ -1544,9 +1540,9 @@ The baseline efficient network that was created is named EfficientNet-B0. Afterw
 
 \begin{itemize}
 \item
-  \textbf{STEP 1}: By fixing \(\varphi = 1\) and, assuming twice more resources available, a small grid search of \$\alpha, \beta, \gamma \$ based Eq. (6) showed that the best values for EfficientNet-B0 are \(\alpha = 1.2, \beta = 1.1, \gamma=1.15\), under constraint of \(\alpha·\beta^2·\gamma^2 ≈2\).
+  \textbf{STEP 1}: By fixing \(\varphi = 1\) and, assuming twice more resources available, a small grid search of \$\alpha, \beta, \gamma \$ based Equation \eqref{eq:01-02-06} showed that the best values for EfficientNet-B0 are \(\alpha = 1.2, \beta = 1.1, \gamma=1.15\), under constraint of \(\alpha·\beta^2·\gamma^2 ≈2\).
 \item
-  \textbf{STEP 2}: Afterward fix \(\alpha,\beta,\gamma\) as constants and scale up the baseline network with different \(\varphi\) using Eq.(6) to construct EfficientNet-B1 to B7
+  \textbf{STEP 2}: Afterward fix \(\alpha,\beta,\gamma\) as constants and scale up the baseline network with different \(\varphi\) using Equation \eqref{eq:01-02-06} to construct EfficientNet-B1 to B7
 \end{itemize}
 
 \begin{longtable}[]{@{}cc@{}}
@@ -1619,7 +1615,7 @@ This field is a constant research topic, and new, improved frameworks are being 
 \hypertarget{a-simple-framework-for-contrastive-learning-of-visual-representations}{%
 \subsection{A Simple Framework for Contrastive Learning of Visual Representations}\label{a-simple-framework-for-contrastive-learning-of-visual-representations}}
 
-Chen T. et al.~intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations and called it SimCLR \citet{SimCLR}. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.
+\citet{SimCLR} intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations and called it SimCLR. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.
 
 Intending to understand what qualifies good contrastive representation learning, the significant components of the framework were studied and resulted in:
 
@@ -1638,7 +1634,7 @@ Intending to understand what qualifies good contrastive representation learning,
 \hypertarget{the-contrastive-learning-framework}{%
 \subsubsection{The Contrastive Learning Framework}\label{the-contrastive-learning-framework}}
 
-Like previous contrastive learning algorithms, in the SimCLR, a contrastive loss is used to learn representations by maximizing agreement between various augmented views of the same data example. This framework contains four significant components, which are shown in Fig. 4:
+Like previous contrastive learning algorithms, in the SimCLR, a contrastive loss is used to learn representations by maximizing agreement between various augmented views of the same data example. This framework contains four significant components, which are shown in Figure \ref{fig:ch01-figure4}:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1658,7 +1654,7 @@ Like previous contrastive learning algorithms, in the SimCLR, a contrastive loss
 
 }
 
-\caption{Figure 4. A simple framework for contrastive learning of visual representations}\label{fig:ch01-figure04}
+\caption{A simple framework for contrastive learning of visual representations}\label{fig:ch01-figure04}
 \end{figure}
 
 \hypertarget{stochastic-data-augmentation-module}{%
@@ -1683,7 +1679,7 @@ There are many data augmentation operations, the focus was on the most common on
 
 }
 
-\caption{Figure 5. Augmentation texhniques}\label{fig:ch01-figure05}
+\caption{Augmentation texhniques}\label{fig:ch01-figure05}
 \end{figure}
 
 Due to the image sizes in the ImageNet dataset, all images were always randomly cropped and resized to the same resolution. Later on, other targeted data augmentation transformations were applied to one branch, remaining the one as original i.e.~\(t\left( x_{i}\right)= x_i\).
@@ -1721,10 +1717,9 @@ This step is performed because defining the contrastive loss on \(z_i\) instead 
 
 Given a set \(\left\{ \tilde{x}_{ik} \right\}\) including a positive pair of examples \(\tilde{x}_{i}\) and \(\tilde{x}_{j}\), the contrastive prediction task aims to identify \(\tilde{x}_{i}\) in \(\left\{ \tilde{x}_{i} \right\}_{k\neq i}\) for a given \(\tilde{x}_{i}\). In the case of positive examples, the loss function is as follows \(\left( i, j\right)\) is defined as
 
-\begin{equation}
-\tag{7}
+\[
 \mathcal{l}_{i,j} = −\log\frac{exp\left( \frac{sim(z_i,z_j)}{\tau} \right)}{\sum_{k=1}^{2N}\mathbb{I_{\left[ k\neq i \right]}}exp\left( \frac{sim(z_i,z_k)}{\tau} \right)}
-\end{equation}
+\]
 
 where \(\mathbb{I_{\left[ k\neq i \right]}}\in\left\{ 0,1 \right\}\) is an indicator function, \(\tau\) denotes a temperature parameter and \(sim\left(\textbf{u,v} \right)= \frac{\textbf{u}^T\textbf{v}}{\left\| \textbf{u}\right\|\left\| \textbf{v} \right\|}\) is a dot product between \(\mathcal{l}_2\) normalized \(\textbf{u},\textbf{v}\).
 
@@ -1735,7 +1730,7 @@ The NT-Xent loss was compared against other commonly used contrastive loss funct
 \hypertarget{bootstrap-your-own-latent}{%
 \subsection{Bootstrap Your Own Latent}\label{bootstrap-your-own-latent}}
 
-The fundamental idea of contrastive learning is to create pairs of images on which the framework would be trained. Creating negative pairs relies on large batch sizes, memory banks, or customized mining strategies which can be challenging in larger datasets. Grill J.B. at al.~wanted to create a new approach that would achieve better performance than other contrastive methods without using negative pairs. A solution they have introduced is a method called Bootstrap Your Own Latent (BYOL) \citet{BYOL}. The idea was to bootstrap representations of images. As a result, BYOL is more robust to the choice of image augmentations.
+The fundamental idea of contrastive learning is to create pairs of images on which the framework would be trained. Creating negative pairs relies on large batch sizes, memory banks, or customized mining strategies which can be challenging in larger datasets. \citet{BYOL} wanted to create a new approach that would achieve better performance than other contrastive methods without using negative pairs. A solution they have introduced is a method called Bootstrap Your Own Latent (BYOL). The idea was to bootstrap representations of images. As a result, BYOL is more robust to the choice of image augmentations.
 Furthermore, BYOL has two neural networks, called online and target networks, which interact and learn from each other. Using an augmented view of an image, BYOL trains its online network to predict the target network's representation of another augmented view. This approach achieved state-of-the-art results when trained on the ImageNet dataset under the linear evaluation protocol. Additionally, compared to SimCLR, a strong contrastive baseline, BYOL suffers from much less performance drop when only random crops are used to augment images.
 
 \hypertarget{description-of-method}{%
@@ -1759,7 +1754,7 @@ BYOL aims to learn a representation of \(y_\theta\). It uses two neural networks
 
 }
 
-\caption{Figure 6. Bootstrap Your Own Latent}\label{fig:ch01-figure06}
+\caption{Bootstrap Your Own Latent}\label{fig:ch01-figure06}
 \end{figure}
 
 The \emph{target network} has the same architecture as the online network but uses different weights \(\xi\). It provides the regression targets to train the online network, and its parameters \(\xi\) are an exponential moving average of the online parameters \(\theta\). Precisely, given a target decay rate \(\tau \in[0,1]\), after each training step, the following update
@@ -1834,7 +1829,7 @@ Brain Team wanted to create simple but universally scalable architecture to foll
 
 }
 
-\caption{Figure 7. Vision Transformer}\label{fig:ch01-figure7}
+\caption{Vision Transformer}\label{fig:ch01-figure7}
 \end{figure}
 
 \hypertarget{method}{%
@@ -1842,29 +1837,25 @@ Brain Team wanted to create simple but universally scalable architecture to foll
 
 Compared to NLP, where the input of the Transformer is a 1D sequence of token embeddings, images are 2D objects. Firstly, images needed to be represented differently to imitate original architectures as closely as possible. For that reason image \(x\in \mathbb{R}^{ H \times W \times C}\) is reshaped into a sequence of flattened 2D patches \(x_p\in \mathbb{R}^{ N \times \left( P^2 \cdot C \right)}\), where \(\left(H,W\right)\) is the resolution of the original image, \(C\) is the number of channels,\(\left(P,P\right)\) is the resolution of each image patch, and \(N =HW/P^2\) is the resulting number of patches, also the Transformer's effective input sequence length. The Transformer input is a fixed through all layers vector size \(D\). The first step is to flatten the patches, usually 16x16, and map them to \(D\) dimensions with a trainable linear projection, creating patch embeddings.
 
-\begin{equation}
-\tag{12}
+\[
 \mathbf{z}_{0} =\left[\mathbf{x}_{\text {class }} ; \mathbf{x}_{p}^{1} \mathbf{E} ; \mathbf{x}_{p}^{2} \mathbf{E} ; \cdots ; \mathbf{x}_{p}^{N} \mathbf{E}\right]+\mathbf{E}_{p o s}, \mathbf{E} \in \mathbb{R}^{\left(P^{2} \cdot C\right) \times D}, \mathbf{E}_{p o s} \in \mathbb{R}^{(N+1) \times D}
-\end{equation}
+\]
 
 To this sequence of ``patch embeddings,'' a prefix learnable {[}class{]} token, like in BERT, is usually added. This token \(\mathbf{z}_{0}^{0} = \mathbf{x}_{class}\) tells the model to classify the image and increases dimension of vector z. Also, the state of this token at the output of the Transformer encoder \(\left(\mathbf{z}_{L}^{0}\right)\), on which Layernorm is applied, serves as the image representation \(y\).
 
-\begin{equation}
-\tag{13}
+\[
 \mathbf{y} =\operatorname{LN}\left(\mathbf{z}_{L}^{0}\right)
-\end{equation}
+\]
 
 Also, it is the only one to which the classification head is attached to during pre-training and fine-tuning. Classification head during pre-training is compiled of MLP with one hidden layer and a single linear layer at a fine-tuning time. Position embedding,a standard learnable 1D position embedding, are attached to the patch embeddings, serving as input to the encoder. The standard Transformer encoder consists of alternating layers of multiheaded self-attention and MLP blocks. After each block, a residual connection is applied.
 
-\begin{equation}
-\tag{14}
+\[
 \mathbf{z}_{\ell}^{\prime} =\operatorname{MSA}\left(\operatorname{LN}\left(\mathbf{z}_{\ell-1}\right)\right)+\mathbf{z}_{\ell-1},  \ell=1 \ldots L
-\end{equation}
+\]
 
-\begin{equation}
-\tag{15}
+\[
 \mathbf{z}_{\ell} =\operatorname{MLP}\left(\mathrm{LN}\left(\mathbf{z}_{\ell}^{\prime}\right)\right)+\mathbf{z}_{\ell}^{\prime}, \ell=1 \ldots L
-\end{equation}
+\]
 
 Vision Transformer has a significantly lower inductive bias than CNNs in image-specific information. VIT only has local and translationally equivariant MLP layers, while the self-attention layers are global. Two-dimensional neighborhood structure is used sparingly: the image is cut into patches at the beginning, and the position embeddings are resized as needed at the fine-tuning time. Alternatively, the input sequence can consist of a CNN's feature maps on which patch embedding projection is applied.
 Vision Transformers are pre-trained on large datasets, and fine-tuned to (smaller) downstream tasks. For fine-tuning projection head is removed and zero-initialized \(D \times K\) feedforward layer is attached, \(K\) being the number of downstream classes. It is also beneficial to use higher resolution then in pre-training. Also ViT can handle arbitrary sequence lengths, but the pre-trained position embeddings can become sufficient. It is necessary to point out that resolution adjustment and patch extraction are the only points at which an inductive bias about the 2D structure of the images is manually injected into the Vision Transformers
@@ -2372,8 +2363,10 @@ On one side of the spectrum, textual elements and visual ones are learned separa
 
 }
 
-\caption{Left, Silberer et al., 2014: stacked autoencoders to learn higher-level embeddings from textual and visual modalities, encoded as vectors of attributes. Right, Bordes et al., 2020: textual and visual information fused in an Intermediate space denoted as “grounded space”; the “grounding objective function” is not applied directly on sentence embeddings but trained on this intermediate space, on which sentence embeddings are projected.}\label{fig:unnamed-chunk-1}
+\caption{Left: \citet{silberer2012learning}: stacked autoencoders to learn higher-level embeddings from textual and visual modalities, encoded as vectors of attributes. Right: \citet{bordes2020incorporating}: textual and visual information fused in an Intermediate space denoted as ``grounded space''; the ``grounding objective function'' is not applied directly on sentence embeddings but trained on this intermediate space, on which sentence embeddings are projected.}\label{fig:f02-00-01}
 \end{figure}
+
+
 
 For example, \citet{silberer2012grounded} implement a model where a one-to-one correspondence between textual and visual space is assumed.
 Text and visual representations are passed to two separate unimodal encoders and both outputs are then fed to a bimodal autoencoder.
@@ -2455,7 +2448,6 @@ In order to select representative object categories for images in COCO, research
 
 With the help of representative object categories, COCO wants to collect a dataset which a majority of these images are non-iconic. All these images can be roughly divided into three types in Fig \ref{fig:imagetype} :iconic-object images, iconic-scene images and non-iconic images.\citep{mccoco}
 
-
 \begin{figure}
 
 {\centering \includegraphics[width=1\linewidth]{figures/02-01/2.1 imagetype} 
@@ -2465,12 +2457,12 @@ With the help of representative object categories, COCO wants to collect a datas
 \caption{Type of images \citep{mccoco}.}\label{fig:imagetype}
 \end{figure}
 
+
+
 Images are collected through two strategies, firstly images from Flickr which contains photos uploaded by amateur photographer with keywords are collected. Secondly, researchers will search for pairwise combination of object categories like ``dog + car'' to gather more non-iconic images and images with rich contextual relationships.\citep{mccoco}
 
 Due to the the scale of the dataset and the high cost of the annotation process, the design of a high quality annotation pipeline with efficient cost is a difficult task.
 The annotation pipeline in Fig \ref{fig:cocoannotation} for COCO is splitted into three primary tasks: 1. category labeling, 2.instance spotting, and 3. instance segmenting.\citep{mccoco}
-
-
 
 \begin{figure}
 
@@ -2480,6 +2472,8 @@ The annotation pipeline in Fig \ref{fig:cocoannotation} for COCO is splitted int
 
 \caption{Annotation pipeline for COCO \citep{mccoco}.}\label{fig:cocoannotation}
 \end{figure}
+
+
 
 As we can see in the Fig \ref{fig:cocoannotation}, object categories in each image will be determined in the first step. Due to the large number of Datasets and categories, they used a hierarchical approach instead of doing binary classification for each category. All the 91 categories have divided into 11 super-categories.The worker will examine the existence of a single instance for a given super-category.
 Workers will only label one instance for each super-categories with an category's icon.\citep{mccoco} For each image, 8 workers were asked to label it.This hierarchical approach has helped to reduce the time for labeling. However, the first phase still took ∼20k worker hours to complete.\citep{mccoco}
@@ -2499,8 +2493,6 @@ ImageNe containing millions of images has enabled breakthroughs in both object c
 
 With the help of Fig \ref{fig:cococomparison}, we could compare COCO with ImageNet PASCAL VOC and SUN from different aspects.\citep{mccoco}
 
-
-
 \begin{figure}
 
 {\centering \includegraphics[width=1\linewidth]{figures/02-01/2.1 coco comparison} 
@@ -2509,6 +2501,8 @@ With the help of Fig \ref{fig:cococomparison}, we could compare COCO with ImageN
 
 \caption{Comparison COCO with other PASCAL VOC, SUN and ImageNet \citep{mccoco}.}\label{fig:cococomparison}
 \end{figure}
+
+
 
 The number of instances per category for all 91 categories for COCO and PASCAL VOC is shown in (a). Compare to PASCAL VOC, COCO has both more categories and more instances per categories.The number of object categories and the number of instances per category for all the datasets is shown in (d). MS COCO has fewer categories than ImageNet and SUN, but it has the most instances per category among all the dataset, which from the hypothesis of researchers might be useful for learning complex models capable of precise localization.\citep{mccoco}
 (b,c) show the number of annotated categories and annotated instances per image for MS COCO, ImageNet Detection, PASCAL VOC and SUN (average number of categories and instances are shown in parentheses). On average COCO contains 3.5 categories and 7.7 instances per image. ImageNet and PASCAL VOC both have less than 2 categories and 3 instances per image on average. SUN dataset has the most contextual information, 9,8 categories and 17 instances per image.
@@ -2537,8 +2531,6 @@ For example Herdade \emph{et al}. \citep{HerdadeKBS19} proposed Transformer arch
 
 Although Transformer-based architectures have been widely implemented in sequence modeling tasks like machine translation and language understanding. However, its applicability for multi-modal tasks like image captioning is still largely under-explored. \citep{cornia2020m2}
 
-
-
 \begin{figure}
 
 {\centering \includegraphics[width=1\linewidth]{figures/02-01/2.2 m2arc1} 
@@ -2548,12 +2540,12 @@ Although Transformer-based architectures have been widely implemented in sequenc
 \caption{\(M^2\) Transformer \citep{cornia2020m2}.}\label{fig:m2arc1}
 \end{figure}
 
+
+
 A novel fully-attentive approach called Meshed-Memory Transformer for Image Captioning (\(M^2\)) for image captioning is proposed by Marcella \emph{et al}\citep{cornia2020m2} with the aim of improving the design of both the image encoder and the language decoder. Compare to all previous image captioning models, \(M^2\) ( see Fig. \ref{fig:m2arc1} has two new novelties, the encoder encodes a multi-level representation of the relationships between image regions with respect to low-level and high-level relations, a priori knowledge can be learned and modeled by using persistent memory vectors. The multi-layer architecture exploits both low- and high-level visual relationships through a learned gating mechanism, which compute the weight at each level, therefore, a mesh-like connectivity between encoder and decoder layers is created for sentence generation process.\citep{cornia2020m2}
 
 \hypertarget{m2-transformer-architecture}{%
 \subsubsection{\texorpdfstring{\(M^2\) Transformer Architecture}{M\^{}2 Transformer Architecture}}\label{m2-transformer-architecture}}
-
-
 
 \begin{figure}
 
@@ -2563,6 +2555,8 @@ A novel fully-attentive approach called Meshed-Memory Transformer for Image Capt
 
 \caption{\(M^2\) Transformer Architecture \citep{cornia2020m2}.}\label{fig:m2arc2}
 \end{figure}
+
+
 
 Fig \ref{fig:m2arc2} shows the detailed architecture of \(M^2\) Transformer. \(M^2\) Transformer can be divided into Encoder (left) module and Decoder (right) module, both module has multiple layers. Given the input Image region \(X\), it go through the Attention and feed forward layer. The relationship between image regions with a priori knowledge will be encoded in each encoding layer, the output of each encoding layers will be read by decoding layers to generate the caption for image word by word.\citep{cornia2020m2}
 
@@ -2655,11 +2649,9 @@ Decoder with multiple decoder layers, takes the input word vectors and the \(t\)
 \hypertarget{comparison-with-other-models-on-coco-datasets}{%
 \paragraph{Comparison with other models on COCO Datasets}\label{comparison-with-other-models-on-coco-datasets}}
 
-The \(M^2\) Transformer was evaluated on COCO \citep{mccoco}. COCO is the most commonly used Test dataset for image captioning. In stead of using the original COCO datsets, Marcella \emph{et al}\citep{cornia2020m2} follows the split of COCO provided by Karpathy \emph{et al} \citep{karpthy1}. Karpathy uses 5000 images for validation, 5000 images for testing and the rest for training.
+The \(M^2\) Transformer was evaluated on COCO \citep{mccoco}. COCO is the most commonly used Test dataset for image captioning. In stead of using the original COCO datsets, \citet{cornia2020m2} follows the split of COCO provided by \citet{karpthy1}. Karpathy uses 5000 images for validation, 5000 images for testing and the rest for training.
 
 For model evaluation and comparison, standard captioning metrics like BLEU \citep{papineni-etal-2002-bleu}, METEOR \citep{meteor}, ROUGE \citep{lin-2004-rouge}, CIDEr \citep{cider}, and SPICE \citep{spice} which have been introduced in the second chapter are used.
-
-
 
 \begin{figure}
 
@@ -2670,11 +2662,11 @@ For model evaluation and comparison, standard captioning metrics like BLEU \cite
 \caption{Comparison with Transformer-based alternatives \citep{cornia2020m2}}\label{fig:compare1}
 \end{figure}
 
+
+
 Transformer model in original configuration with six layers has been applied to captioning, researchers speculated that specific architectures are required for captioning, so variations of the original Transformer are compared with \(M^2\) Transformer. Other Variations are Transformer with three layers and ``Attention on Attention'' (AoA) approach \citep{huang1} to the attentive layers, both in the encoder and in the decoder. \citep{cornia2020m2}
 The second part intends to evaluate the importance of the meshed connections between encoder and decoder layers. \(M^2\) Transformer (1 to 1) is a reduced version of original \(M^2\) Transformer, in which one encoder layer only connect to one corresponding decoder layer instead of connect to all the decoding layers.
 As we can see from the Fig \ref{fig:compare1}, the original Transformer has 121.8 CIDEr, compare with it, the reduced version of \(M^2\) Transformer, we can see the improvement already (129.2 CIDEr). With the respect to meshed connectivity, which help to exploit relationships encoded at all layers and weights them with a sigmoid gating, we could observe better improvement in CIDEr from 129.2 to 131.2. Also the role of mem- ory vectors and the softmax gating schema for \(M^2\) Transformer are also included in the table. Without the memory vector lead to the recution of the performance of nearly 1 CIDEr in both reduced \(M^2\) Transformer and the original \(M^2\) Transformer.\citep{cornia2020m2}
-
-
 
 \begin{figure}
 
@@ -2682,15 +2674,15 @@ As we can see from the Fig \ref{fig:compare1}, the original Transformer has 121.
 
 }
 
-\caption{Comparison with the state of the art on the ``Karpathy'' test split, in single-model setting \citep{cornia2020m2}}\label{fig:compare2}
+\caption{Comparison with the state of the art on the ``Karpathy'' test split, in single-model setting \citep{cornia2020m2}.}\label{fig:compare2}
 \end{figure}
+
+
 
 Fig \ref{fig:compare2} compares the performance of \(M^2\) Transformer with several recent proposals for image captioning.
 SCST \citep{8099614} and Up- Down \citep{8578734}, use attention over the grid of features and attention over regions. RFNet \citep{renet}, which uses a recurrent fusion network to merge different CNN features; GCN-LSTM \citep{GCN-LSTM} uses a Graph CNN to exploit pairwise relationships between image regions; SGAE \citep{Yang_2019_CVPR} uses instead auto-encoding scene graphs. The original AoANet \citep{huang1} approach uses attention on attention for encoding image regions and an LSTM language model. Finally, the ORT \citep{HerdadeKBS19} uses a plain Transformer and weights attention scores in the region encoder with pairwise distances between detections \citep{cornia2020m2}.
 
 In Fig \ref{fig:compare2}, the \(M^2\) Transformer exceeds all other models on BLEU-4, METEOR,CIDEr. The performance of \(M^2\) Transformer was very close and competitive with SGAE on BLEU-1 and with ORT on SPICE.
-
-
 
 \begin{figure}
 
@@ -2698,15 +2690,17 @@ In Fig \ref{fig:compare2}, the \(M^2\) Transformer exceeds all other models on B
 
 }
 
-\caption{"Examples of captions generated by M\^{}2\$ Transformer and the original Transformer model, as well as the corresponding ground-truths \citep{cornia2020m2}}\label{fig:example2}
+\caption{Examples of captions generated by \(M^2\) Transformer and the original Transformer model, as well as the corresponding ground-truths \citep{cornia2020m2}.}\label{fig:example2}
 \end{figure}
+
+
 
 The Fig \ref{fig:example2} shows some examples of captions generated by \(M^2\) Transformer and the original Transformer model, as well as the corresponding ground-truths. According to the selected examples of captions, \(M^2\) Transformer shows the ability to generate more accurate descriptions of the images, and the approaches could detect the more detailed relationships between image regions.\citep{cornia2020m2}.
 
 The \(M^2\) Transformer is a new Transformer- based architecture for image captioning. It improves the image encoding by learning a multi-level representation of the relationships between image regions while exploiting a priori knowledge from each encoding layer, and uses a mesh-like connectivity at decoding stage to exploit low- and high-level features at the language generation steps. The results of model evaluation with COCO shows that, the performance of \(M^2\) Transformer approach surpasses most of the recent approaches and achieves a new state of the art on COCO.\citep{cornia2020m2}.
 
-\hypertarget{text-to-image-c02-02-text2image}{%
-\section{Text-to-image \{\#c02-02-text2image}\label{text-to-image-c02-02-text2image}}
+\hypertarget{c02-02-text2img}{%
+\section{Text-to-image}\label{c02-02-text2img}}
 
 \emph{Author: Karol Urbańczyk}
 
@@ -2742,9 +2736,7 @@ Before diving into particular models, it would be worth introducing objective pr
 
 Introduced by \citet{InceptionScore2016}, Inception Score (IS) uses the Inception Net \citep{InceptionNet2015} trained on ImageNet data to classify the fake images generated by the assessed model. Then, it measures the average KL divergence between the marginal label distribution \(p(y)\) and the label distribution conditioned on the generated samples \(p(y|x)\).
 
-\begin{quote}
 \[exp(\mathop{{}\mathbb{E}}_{x}[KL(p(y|x) || p(y))])\]
-\end{quote}
 
 \(p(y)\) is desired to have high diversity (entropy), in other words: images from the generative model should represent a wide variety of classes. On the other hand, \(p(y|x)\) is desired to have low diversity, meaning that images should represent meaningful concepts. If a range of cat images is being generated, they all should be confidently classified by Inception Net as cats. The intention behind IS is that a generative model with a higher distance (KL divergence in this case) between these distributions should have a better score. IS is considered a metric that correlates well with human judgment, hence its popularity.
 
@@ -2752,9 +2744,7 @@ Introduced by \citet{InceptionScore2016}, Inception Score (IS) uses the Inceptio
 
 A metric that is generally considered to improve upon Inception Score is Fréchet Inception Distance (FID). \citet{FID2017} argue that the main drawback of IS is that it is not considering the real data at all. Therefore, FID again uses Inception Net, however this time it embeds the images (both fake and real samples) into feature space, stopping at a specific layer. In other words, some of the most-right layers of the net are being discarded. Feature vectors are then assumed to come from Gaussian distribution and the Fréchet distance is calculated between real and generated data distributions:
 
-\begin{quote}
 \[d^2((m, C), (m_{w}, C_{w})) = ||m-m_{w}||_{2}^2 + Tr(C+C_{w}-2(CC_{w})^{1/2})\]
-\end{quote}
 
 \((m, C)\) and \((m_{w}, C_{w})\) represent mean and covariance of generated and real data Gaussians respectively. Obviously, low FID levels are desired.
 
@@ -2766,8 +2756,10 @@ FID is considered to be consistent with human judgement and sensitive to image d
 
 }
 
-\caption{FID is evaluated for different noise types. From upper left to lower right: Gaussian noise, Gaussian blur, implanted black rectangles, swirled images, salt and pepper, CelebA dataset contaminated by ImageNet images. Figure from @FID2017.}\label{fig:fiddistortions}
+\caption{FID is evaluated for different noise types. From upper left to lower right: Gaussian noise, Gaussian blur, implanted black rectangles, swirled images, salt and pepper, CelebA dataset contaminated by ImageNet images. Figure from \citet{FID2017}.}\label{fig:fiddistortions}
 \end{figure}
+
+
 
 \textbf{Precision / recall}
 
@@ -2781,8 +2773,10 @@ Let \(P_{r}\) denote the probability distribution of the real data, and \(P_{g}\
 
 }
 
-\caption{Definition of precision and recall for distributions. Figure from @ImprovedPrecisionRecall2019.}\label{fig:precisionandrecall}
+\caption{Definition of precision and recall for distributions. Figure from \citet{ImprovedPrecisionRecall2019}.}\label{fig:precisionandrecall}
 \end{figure}
+
+
 
 For a more thorough explanation of metric calculation, one should follow the already mentioned \citet{ImprovedPrecisionRecall2019}.
 
@@ -2790,9 +2784,7 @@ For a more thorough explanation of metric calculation, one should follow the alr
 
 CLIP is a model from OpenAI {[}CLIP2021{]}. Its details can be found in the chapter about \emph{text-supporting computer vision models}. In principle, CLIP is capable of assessing the semantic similarity between the text caption and the image. CLIP score is defined as:
 
-\begin{quote}
 \[\mathop{{}\mathbb{E}}[s(f(image)*g(caption))]\]
-\end{quote}
 
 where the expectation is taken over the batch of generated images and \(s\) is the CLIP logit scale \citep{Glide2021}.
 
@@ -2824,9 +2816,7 @@ In a vanilla GAN, the Generator model (\(G\)) and Discriminator model (\(D\)) ar
 
 More formally, let \(p_{z}\) denote the prior distribution defined on the input noise vector \(z\). Then, the generator \(G(z)\) represents a function that is mapping this noisy random input to generated image \(x\). The discriminator \(D(x)\) outputs a probability that \(x\) comes from the real data rather than generator's distribution \(p_{g}\). In this framework, \(D\) shall maximize the probability of guessing the correct label of both real and fake data. \(G\) is trained to minimize \(log(1-D(G(z)))\). Now, such representation corresponds to the following value function (optimal solution):
 
-\begin{quote}
 \[\min_{G}\min_{D}V(D,G) = \mathop{{}\mathbb{E}}_{x \sim p_{data}(x)} [log(D(x))] + \mathop{{}\mathbb{E}}_{z \sim p_{z}(z)} [log(1-D(G(z)))]\]
-\end{quote}
 
 Figure \ref{fig:vanillagan} depicts this process in a visual way.
 
@@ -2836,8 +2826,10 @@ Figure \ref{fig:vanillagan} depicts this process in a visual way.
 
 }
 
-\caption{GAN framework as proposed in @GAN2014.}\label{fig:vanillagan}
+\caption{GAN framework as proposed in \citet{GAN2014}.}\label{fig:vanillagan}
 \end{figure}
+
+
 
 Some of the generated samples that had been achieved with this architecture already in 2014 can be seen in Figure \ref{fig:vanillagansamples}.
 
@@ -2847,8 +2839,10 @@ Some of the generated samples that had been achieved with this architecture alre
 
 }
 
-\caption{Samples from generators trained on different datasets: a) MNIST b) TFD, c) CIFAR-10 (MLP used for G and D) d) CIFAR-10 (CNN used). Highlighted columns show the nearest real example of the neighbouring sample. Figure from @GAN2014.}\label{fig:vanillagansamples}
+\caption{Samples from generators trained on different datasets: a) MNIST b) TFD, c) CIFAR-10 (MLP used for G and D) d) CIFAR-10 (CNN used). Highlighted columns show the nearest real example of the neighbouring sample. Figure from \citet{GAN2014}.}\label{fig:vanillagansamples}
 \end{figure}
+
+
 
 \hypertarget{conditioning-on-text}{%
 \subsubsection{Conditioning on Text}\label{conditioning-on-text}}
@@ -2861,8 +2855,10 @@ So far, only image generation has been covered, completely ignoring textual inpu
 
 }
 
-\caption{The proposed architecture of convolutional GAN that is conditioned on text. Text encoding $\varphi(t)$ is fed into both Generator and Discriminator. Before further convolutional processing, it is first projected to lower dimensionality in fully-connected layers and concatenated with image feature maps. Figure from @GANTextToImage2016.}\label{fig:gancls}
+\caption{The proposed architecture of convolutional GAN that is conditioned on text. Text encoding \(\varphi(t)\) is fed into both Generator and Discriminator. Before further convolutional processing, it is first projected to lower dimensionality in fully-connected layers and concatenated with image feature maps. Figure from \citet{GANTextToImage2016}.}\label{fig:gancls}
 \end{figure}
+
+
 
 \textbf{Text embeddings}
 
@@ -2874,8 +2870,10 @@ Since regular text embeddings are commonly trained in separation from visual mod
 
 }
 
-\caption{Figure from @GANTextToImage2016.}\label{fig:ganclsembeddings}
+\caption{Figure from \citet{GANTextToImage2016}.}\label{fig:ganclsembeddings}
 \end{figure}
+
+
 
 GoogLeNet is being used as an image encoder \(\phi\). For text encoding \(\varphi(t)\), authors use a character-level CNN combined with RNN. Essentially, the objective of the training is to minimize the distance between encoded image representation and text representation. The image encoder is then discarded and \(\varphi\) only is used as depicted in Figure \ref{fig:gancls}.
 
@@ -2897,8 +2895,10 @@ The motivation behind this concept comes from the fact that interpolating betwee
 
 }
 
-\caption{Interpolating between sentences. Figure from @GANTextToImage2016.}\label{fig:interpolatingbirds}
+\caption{Interpolating between sentences. Figure from \citet{GANTextToImage2016}.}\label{fig:interpolatingbirds}
 \end{figure}
+
+
 
 \textbf{Results}
 
@@ -2910,8 +2910,10 @@ The model achieves the best performance when both of the mentioned methods are i
 
 }
 
-\caption{Zero-shot generated birds using GAN, GAN-CLS, GAN-INT, GAN-INT-CLS. Figure from @GANTextToImage2016.}\label{fig:ganclszeroshot}
+\caption{Zero-shot generated birds using GAN, GAN-CLS, GAN-INT, GAN-INT-CLS. Figure from \citet{GANTextToImage2016}.}\label{fig:ganclszeroshot}
 \end{figure}
+
+
 
 \begin{figure}
 
@@ -2919,8 +2921,10 @@ The model achieves the best performance when both of the mentioned methods are i
 
 }
 
-\caption{Generated images using GAN-CLS on MS-COCO validation set. Figure from @GANTextToImage2016.}\label{fig:ganclsmscoco}
+\caption{Generated images using GAN-CLS on MS-COCO validation set. Figure from \citet{GANTextToImage2016}.}\label{fig:ganclsmscoco}
 \end{figure}
+
+
 
 \hypertarget{further-gan-like-development}{%
 \subsubsection{Further GAN-like development}\label{further-gan-like-development}}
@@ -2947,8 +2951,10 @@ without a random vector. Deliberate omission of the random vector results in the
 
 }
 
-\caption{Samples generated by StackGAN from unseen texts in CUB test set. Figure from @StackGAN2016.}\label{fig:stackgan}
+\caption{(ref:stackgan)}\label{fig:stackgan}
 \end{figure}
+
+
 
 \textbf{AttnGAN}
 
@@ -2960,8 +2966,10 @@ It is 2017 and many researchers believe attention is all they need \citep{Attent
 
 }
 
-\caption{Images generated by $G_{0}$, $G_{1}$, $G_{2}$. Two bottom rows show 5 most attended words by $G_{1}$ and $G_{2}$ respectively. Figure from @AttnGAN2017.}\label{fig:attngan}
+\caption{Images generated by \(G_{0}\), \(G_{1}\), \(G_{2}\). Two bottom rows show 5 most attended words by \(G_{1}\) and \(G_{2}\) respectively. Figure from \citet{AttnGAN2017}.}\label{fig:attngan}
 \end{figure}
+
+
 
 \textbf{DM-GAN}
 
@@ -2986,8 +2994,10 @@ Regular Autoencoder architecture aims at finding an identity function that is ca
 
 }
 
-\caption{Variational (probabilistic) Autoencoder architecture. Figure from @weng2018VAE.}\label{fig:vae}
+\caption{(ref:vae)}\label{fig:vae}
 \end{figure}
+
+(fig:vae) Variational (probabilistic) Autoencoder architecture. Figure from \citet{weng2018VAE}.
 
 \(q_{\phi}(z|x)\) denotes the encoder under the assumption that \(z\) comes from multivariate Gaussian. \(\mu\) and \(\sigma\) are being learned. Reconstruction process is modelled by conditional probability \(p_{\theta}(x|z)\), given samples latent vector \(z\).
 
@@ -3001,8 +3011,10 @@ The VQ-VAE (Vector Quantized VAE) \citep{VQVAE2017} differs from regular VAE in 
 
 }
 
-\caption{VQ-VAE architecture. Figure from @VQVAE2017.}\label{fig:vqvae}
+\caption{VQ-VAE architecture. Figure from \citet{VQVAE2017}.}\label{fig:vqvae}
 \end{figure}
+
+
 
 The idea is to map the output of the encoder to one of the vectors from the \(K\)-dimensional codebook. This process is called quantization and essentially means finding the vector that is the nearest neighbour to the encoder's output (in a sense of Euclidean distance). Since this moment, this newly found vector from the codebook is going to be used instead. The codebook itself is also subject to the learning process. One could argue that passing gradients during the training through such a discrete system might be problematic. VQ-VAE overcomes this problem by simply copying gradients from the decoder's input to the encoder's output. A great explanation of the training process and further mathematical details can be found in \citet{weng2018VAE} and \citet{UnderstandingVQVAE}.
 
@@ -3020,14 +3032,16 @@ During inference time text caption is again encoded into 256 tokens at most. The
 
 Results achieved with the original Dall-E attracted so much attention mainly due to its diversity and zero-shot capabilities. Dall-E was capable of producing better results compared to previous state-of-the-art models which were trained on data coming from the same domain as data used for evaluation. One comparison can be seen in Figure \ref{fig:dallephotorealism}.
 
-\textbackslash begin\{figure\}
+\begin{figure}
 
-\{\centering \includegraphics[width=0.8\linewidth]{figures/02-02-text-2-img/dallephotorealism}
+{\centering \includegraphics[width=0.8\linewidth]{figures/02-02-text-2-img/dallephotorealism} 
 
-\}
+}
 
-\textbackslash caption\{Human evaluation of Dall-E vs DF-GAN on text caption from MS-COCO dataset. When asked for realism and caption similarity, evaluators preferred Dall-E's results over 90\% of the time. Figure from \citet{DALLE1}.\}\label{fig:dallephotorealism}
-\textbackslash end\{figure\}
+\caption{Human evaluation of Dall-E vs DF-GAN on text caption from MS-COCO dataset. When asked for realism and caption similarity, evaluators preferred Dall-E's results over 90\textbackslash\% of the time. Figure from \citet{DALLE1}.}\label{fig:dallephotorealism}
+\end{figure}
+
+
 
 Outputs of some of the prior approaches described in this chapter compared with Dall-E can be seen in Figure \ref{fig:dalleexamples}.
 
@@ -3037,8 +3051,10 @@ Outputs of some of the prior approaches described in this chapter compared with 
 
 }
 
-\caption{Comparison of the results from Dall-E vs prior works on MS-COCO. Dall-E's outputs are chosen as the best out of 512 images, ranked by a contrastive model. Figure from @DALLE1.}\label{fig:dalleexamples}
+\caption{Comparison of the results from Dall-E vs prior works on MS-COCO. Dall-E's outputs are chosen as the best out of 512 images, ranked by a contrastive model. Figure from \citet{DALLE1}.}\label{fig:dalleexamples}
 \end{figure}
+
+
 
 \textbf{Limitations}
 
@@ -3055,15 +3071,11 @@ Before understanding the inner workings of GLIDE, it is important to introduce t
 
 Let's construct a Markov chain, where the initial data point is denoted by \(x_{0}\). In \(t\) steps, Gaussian noise is added to the data. The probability of the data at \(t\)-step can be characterized in the following way:
 
-\begin{quote}
 \[q(x_{t}|x_{t-1}):=N(x_{t};\sqrt{\alpha_{t}}x_{t-1},(1-\alpha_{t})I)\]
-\end{quote}
 
 where \((1-\alpha_{t})\) parametrizes the magnitude of the noise being added at each step. Now, if \(x_{t-1}\) were to be reconstructed from \(x_{t}\), a model needs to learn to predict estimates of gradients from the previous steps. The probability distribution of previous steps can be estimated as follows:
 
-\begin{quote}
 \[p_{\theta}(x_{t-1}|x_{t})=N(x_{t-1};\mu_{\theta}(x_{t}),\Sigma_{\theta}(x_{t}))\]
-\end{quote}
 
 where particular mean function \(\mu_{\theta}\) has been proposed by \citet{DenoisingDiffusion2020}. For a more detailed explanation of how this is later parametrized and trained, one could follow \citet{weng2021diffusion}.
 
@@ -3075,9 +3087,7 @@ The second component of the GLIDE is the diffusion model itself. U-Net-like arch
 
 Additionally, to make the model even more aware of the text's meaning, guidance is being used at inference time. In short, the idea is to control the direction of the diffusion process. The authors test two different approaches. First, they try guidance with the use of a separate classifier, OpenAI's CLIP in this case. However, better results were in general achieved by the classifier-free guidance process. The idea is to produce two different images at each step. One is conditioned on text, while the other one is not. Distance between them is calculated and then, after significant scaling, added to the image obtained without conditioning. This way, the model speeds up the progression of the image towards the meaning of the text. The process can be written the following way:
 
-\begin{quote}
-\[\hat{\epsilon_{\theta}}(x_{t}|y)=\epsilon_{\theta}(x_{t}|\emptyset)+s*(\epsilon_{\theta}(x_{t}|y)-\epsilon_{\theta}(x_{t}|\emptyset))\]
-\end{quote}
+\[\hat{\epsilon}_\theta(x_{t}|y)=\epsilon_{\theta}(x_{t}|\emptyset)+s*(\epsilon_{\theta}(x_{t}|y)-\epsilon_{\theta}(x_{t}|\emptyset))\]
 
 where \(s\) denotes the parameter for scaling the difference between mentioned images.
 
@@ -3091,8 +3101,10 @@ GLIDE achieves significantly more photorealistic results compared to its predece
 
 }
 
-\caption{Comparison of FID on MS-COCO 256×256. Figure from @Glide2021.}\label{fig:glidefid}
+\caption{Comparison of FID on MS-COCO 256×256. Figure from \citet{Glide2021}.}\label{fig:glidefid}
 \end{figure}
+
+
 
 Results are also preferred by human evaluators in terms of photorealism and the similarity of the image to its caption. Comparison to DALL-E 1 results can be seen in Figure \ref{fig:gliderealism}
 
@@ -3102,8 +3114,10 @@ Results are also preferred by human evaluators in terms of photorealism and the 
 
 }
 
-\caption{Win probabilities of GLIDE vs DALL-E. Figure from @Glide2021.}\label{fig:gliderealism}
+\caption{Win probabilities of GLIDE vs DALL-E. Figure from \citet{Glide2021}.}\label{fig:gliderealism}
 \end{figure}
+
+
 
 Finally, some of the cherry-picked images together with their corresponding captions can be seen in Figure \ref{fig:glideresults}.
 
@@ -3113,8 +3127,10 @@ Finally, some of the cherry-picked images together with their corresponding capt
 
 }
 
-\caption{Samples from GLIDE with classifier-free-guidance and s=3. Figure from @Glide2021.}\label{fig:glideresults}
+\caption{Samples from GLIDE with classifier-free-guidance and s=3. Figure from \citet{Glide2021}.}\label{fig:glideresults}
 \end{figure}
+
+
 
 \textbf{Limitations}
 
@@ -3126,8 +3142,10 @@ GLIDE suffers from two problems. First, it fails when being presented with a com
 
 }
 
-\caption{Failures happen mostly for unusual prompts. Figure from @Glide2021.}\label{fig:glidefails}
+\caption{Failures happen mostly for unusual prompts. Figure from \citet{Glide2021}.}\label{fig:glidefails}
 \end{figure}
+
+
 
 \hypertarget{dall-e-2-unclip}{%
 \subsection{Dall-E 2 / unCLIP}\label{dall-e-2-unclip}}
@@ -3154,8 +3172,10 @@ When compared to GLIDE, unCLIP shows it is capable of representing wider diversi
 
 }
 
-\caption{Comparison of FID on MS-COCO. The best results for unCLIP were reported with the guidance scale of 1.25. Figure from @DALLE2.}\label{fig:uncliptable}
+\caption{Comparison of FID on MS-COCO. The best results for unCLIP were reported with the guidance scale of 1.25. Figure from \citet{DALLE2}.}\label{fig:uncliptable}
 \end{figure}
+
+
 
 \begin{figure}
 
@@ -3163,8 +3183,10 @@ When compared to GLIDE, unCLIP shows it is capable of representing wider diversi
 
 }
 
-\caption{Image samples on MS-COCO text prompts. Figure from @DALLE2.}\label{fig:unclipimages}
+\caption{Image samples on MS-COCO text prompts. Figure from \citet{DALLE2}.}\label{fig:unclipimages}
 \end{figure}
+
+
 
 \textbf{Limitations}
 
@@ -3176,8 +3198,10 @@ UnCLIP suffers from very similar problems as its predecessor GLIDE. First, compo
 
 }
 
-\caption{'a red cube on top of a blue cube' Figure from @DALLE2.}\label{fig:cube}
+\caption{`a red cube on top of a blue cube' Figure from \citet{DALLE2}.}\label{fig:cube}
 \end{figure}
+
+
 
 \begin{figure}
 
@@ -3185,8 +3209,10 @@ UnCLIP suffers from very similar problems as its predecessor GLIDE. First, compo
 
 }
 
-\caption{'A sign that says deep learning.' Figure from @DALLE2.}\label{fig:sign}
+\caption{`A sign that says deep learning.' Figure from \citet{DALLE2}.}\label{fig:sign}
 \end{figure}
+
+
 
 \begin{figure}
 
@@ -3194,8 +3220,10 @@ UnCLIP suffers from very similar problems as its predecessor GLIDE. First, compo
 
 }
 
-\caption{'A high quality photo of Times Square.' Figure from @DALLE2.}\label{fig:timessquare}
+\caption{`A high quality photo of Times Square.' Figure from \citet{DALLE2}.}\label{fig:timessquare}
 \end{figure}
+
+
 
 \hypertarget{imagen-parti}{%
 \subsection{Imagen \& Parti}\label{imagen-parti}}
@@ -3216,8 +3244,10 @@ Both of the models improved the FID significantly compared to the previous works
 
 }
 
-\caption{Comparison of FID on MS-COCO. Figure from @Parti2022.}\label{fig:partiresults}
+\caption{Comparison of FID on MS-COCO. Figure from \citet{Parti2022}.}\label{fig:partiresults}
 \end{figure}
+
+
 
 Samples from Parti can be seen in Figure \ref{fig:partiimages}. They are included here on purpose - this is the current state-of-the-art as of the moment of writing!
 
@@ -3227,8 +3257,10 @@ Samples from Parti can be seen in Figure \ref{fig:partiimages}. They are include
 
 }
 
-\caption{Selected samples from Parti. Figure from @Parti2022.}\label{fig:partiimages}
+\caption{Selected samples from Parti. Figure from \citet{Parti2022}.}\label{fig:partiimages}
 \end{figure}
+
+
 
 \textbf{Limitations}
 
@@ -3293,8 +3325,10 @@ Another important area touches on biases and stereotypes which are intrinsically
 
 }
 
-\caption{Biased samples from Dall-E 2. Figure from @mishkin2022risks.}\label{fig:bias}
+\caption{Biased samples from Dall-E 2. Figure from \citet{mishkin2022risks}.}\label{fig:bias}
 \end{figure}
+
+
 
 In order to fully enable AI generation on the market, the problem of copyrights needs to be solved in the first place. It is definitely not clear who is the author of generated images. Is it the person who came with a text prompt and ran the model? Is it a model engineer? Author of the model's architecture? Owner of the data it has been trained on? Or maybe the model itself? Another question is what really is a creative contribution and eventually should result in copyright being granted. These and many others definitely require extensive debate and hopefully, legal solutions following it.
 
@@ -3320,7 +3354,7 @@ Again, the focus is on how to employ visual elements to obtain embeddings able t
 
 }
 
-\caption{Historical evolution of models which integrate visual information into pure language models. }\label{fig:img-hist}
+\caption{Historical evolution of models which integrate visual information into pure language models.}\label{fig:img-hist}
 \end{figure}
 
 \hypertarget{word-embeddings-survival-kit}{%
@@ -3367,8 +3401,10 @@ In recent years, the use of neural networks has made an ``automatic feature sele
 
 }
 
-\caption{From @kiela2014learning. Textual and visual features vectors are concatenated.}\label{fig:img-kiela2014-01}
+\caption{From \citet{kiela2014learning}. Textual and visual features vectors are concatenated.}\label{fig:img-kiela2014-01}
 \end{figure}
+
+
 
 Another notable example of concatenation/sequential combination of textual and visual modalities is the work of \citet{silberer2014learning}: textual and visual modalities are represented by separate vectors of textual and visual attributes. During training, these textual and visual inputs vectors are separately fed to denoising (unimodal) autoencoders, the training objective of which is the reconstruction of a certain corrupted input - e.g.~through masking noise - from a latent representation. Their outputs are then jointly fed to a bimodal autoencoder to be mapped to a multimodal space, on which a softmax layer (classification layer) is added, which allows the architecture to be fine-tuned for different tasks.
 
@@ -3391,8 +3427,10 @@ where \(v_{w^{'}}\) is a visual representation of a randomly chosen word \(w^{'}
 
 }
 
-\caption{From @lazaridou2015combining. The linguistic embedding of the word 'cat' is mapped to a visual space, such that the similarity of vector representations of words and associated images is maximized.}\label{fig:img-lazaridou2015-01}
+\caption{From \citet{lazaridou2015combining}. The linguistic embedding of the word `cat' is mapped to a visual space, such that the similarity of vector representations of words and associated images is maximized.}\label{fig:img-lazaridou2015-01}
 \end{figure}
+
+
 
 Similar instances of a cross-modal mapping can be found for example in \citet{kottur2016visual} (a multimodal extension of the CBOW model specification of word2vec) and in \citet{collell2017imagined}, where visual features are obtained from the forward pass of a CNN, pre-trained on ImageNet (\citet{deng2009imagenet}) and a mapping function from the textual space to the visual space is obtained as a result of the training process. Also in this case it is possible to generate a visual representation from the embedding of a certain word, not necessarily present in the training set. In particular, they propose two specifications of the mapping function: a simple linear mapping and neural network with a single hidden layer. Last but not least, \citet{hill2014learning} recognize that concrete nouns are more likely to have a visual representation. For this reason, they map a set of concrete words (CSLB, \citet{devereux2014centre}) to ``bags of perceptual/visual features'' and every time one of these words is encountered during training, the Skip-gram model they are using stops training on that sentence and instead continues the training on a newly created ``pseudo-sentence'', which takes into consideration the aforementioned bag of perceptual features. This list is unfortunately not exhaustive and there are other models with similar ideas, for example \citet{ailem2018probabilistic} or \citet{kiros2018illustrative}.
 
@@ -3444,8 +3482,10 @@ The model architecture would then be:
 
 }
 
-\caption{From @tan2020vokenization. Visually supervised the language model with token-related images, called Vokens.}\label{fig:img-tan2020-04}
+\caption{From \citet{tan2020vokenization}. Visually supervised the language model with token-related images, called Vokens.}\label{fig:img-tan2020-04}
 \end{figure}
+
+
 
 Everything sounds fantastic! There is only one small pitfall: a set of \(X\) of images for all tokens does not exist! Could we find a proxy for such a set? One might consider image-captioning datasets such as MS COCO (\citet{lin2014microsoft}). But also this suboptimal solution is problematic.
 
@@ -3455,8 +3495,10 @@ Everything sounds fantastic! There is only one small pitfall: a set of \(X\) of 
 
 }
 
-\caption{From @tan2020vokenization. Statistics of image-captioning dataset and other natural language corpora. VG, CC, Eng Wiki, and CNN/DM denote Visual Genome, Conceptual Captions, English Wikipedia, and CNN/Daily Mail, respectively. JSD represents Jensen–Shannon divergence to the English Wikipedia corpus.}\label{fig:img-tan2020-01}
+\caption{From \citet{tan2020vokenization}. Statistics of image-captioning dataset and other natural language corpora. VG, CC, Eng Wiki, and CNN/DM denote Visual Genome, Conceptual Captions, English Wikipedia, and CNN/Daily Mail, respectively. JSD represents Jensen--Shannon divergence to the English Wikipedia corpus.}\label{fig:img-tan2020-01}
 \end{figure}
+
+
 
 The \emph{Grounding Ratio} is defined as the proportion of tokens in a dataset which are related to a specific visual representation (i.e.~the tokens are \emph{visually grounded}), such as ``dog'', ``table'' and the like. In figure \ref{fig:img-tan2020-01} it is striking that only around one third of tokens contained in pure language corpora such Wiki103, English Wikipedia and CNN/DM are visually grounded in image captioning datasets\footnote{From an operative point of view, the authors consider a token type ``visually grounded'' if it has more than 100 occurrences in MS COCO}. It is not possible to rely (only) on image captioning datasets to build the Voken-Classification task. But the fact that a word/token does not have a visual representation in one of these datasets, it does not mean that it is not possible to visually represent the word/token. Would it be possible to associate images to words/tokens not directly visually grounded? Well, the answer is yes!
 
@@ -3466,8 +3508,10 @@ The \emph{Grounding Ratio} is defined as the proportion of tokens in a dataset w
 
 }
 
-\caption{From @tan2020vokenization. The Vokenization process. A contextualized image (visual token, Voken) is retrieved for every token in a sentence and with this visual token, visual supervision is performed.}\label{fig:img-tan2020-05}
+\caption{From \citet{tan2020vokenization}. The Vokenization process. A contextualized image (visual token, Voken) is retrieved for every token in a sentence and with this visual token, visual supervision is performed.}\label{fig:img-tan2020-05}
 \end{figure}
+
+
 
 The \textbf{Vokenization} is a process to \emph{assign} every token \(w_i\) contained in a sentence \(s\) to a visual representation (called \emph{voken}) originating not from a generative model but rather from a finite set of images \(X=\{x_1,...,x_n\}\). The voken \(v(w_i;s)\) is the image from \(X\) which maximizes the following \emph{Relevance Score Function}:
 \[v(w_i;s)=arg\ max_{x\in X}r_{\theta^{*}}(w_i,x,s)\]
@@ -3477,11 +3521,14 @@ This function takes into account not only the token \(w_i\) itself, but also the
 \paragraph{The Relevance Score Function: Model, Training, Inference}\label{the-relevance-score-function-model-training-inference}}
 
 The Relevance Score Function is defined as the inner product of the language feature representation \(f_{\theta}(w_i,s)\) and the visual feature representation \(g_{\theta}(x)\):
+
 \[f_{\theta}(w_i,s)^Tg_{\theta}(x)\]
+
 Supposing \(h_1,...,h_l\) and \(e\) are the embeddings originating from pre-trained language and visual encoders respectively (in the paper the authors use BERT and ResNeXt), the language and visual representations are obtained first by applying multi-layer perceptrons \(w\_mlp_{\theta}\) and \(x\_mlp_{\theta}\) to downproject the embeddings from the pre-trained models to a common vector space and secondly they are normalized (with L2-Norm):
 
 \[ \textbf{f}_{\theta}(w_{i};s)= \frac{w{\_}mlp_{\theta}(\textbf{h}_{i})}{||w{\_}mlp_{\theta}(\textbf{h}_{i})||} \]
 \[ \textbf{g}_{\theta}(x)= \frac{x{\_}mlp_{\theta}(\textbf{e})}{||x{\_}mlp_{\theta}(\textbf{e})||} \]
+
 With respect to the training of the model, to estimate the optimal value for the parameter \(\theta\), image-captioning datasets, which are collections of sentence-image pairs, are employed. Operationally, for every sentence \(s_k\) associated to image \(x_k\) in the image-captioning dataset, each token \(w_i\) in \(s\) is associated to \(x_k\) and the \emph{hinge loss} is used to estimate the optimal value of \(\theta^*\):
 
 \[ \mathcal{L}_{\theta}(s,x,x')=\sum_{i=1}^{l}max(0,M-r_{\theta}(w_{i},x,s)+r_{\theta}(w_{i},x',s))\]
@@ -3511,8 +3558,10 @@ Wikipedia defines \emph{imagination} as ``the production or simulation of novel 
 
 }
 
-\caption{From @lu2022imagination. The generator $G$ visualize imaginations close to the encoded texts by minimizing $\mathcal{L}_{GAN}$. The cross-modal encoder $E_c$ learns imagination-augmented language representation. Two-step learning procedure consists of: 1) pre-train a Transformer with visual supervision from large-scale language corpus and image set, 2) fine-tune the visually supervised pre-trained Transformer and the imagination-augmented cross-modal encoder on downstream tasks.}\label{fig:img-lu2022-01}
+\caption{From \citet{lu2022imagination}. The generator \(G\) visualize imaginations close to the encoded texts by minimizing \(\mathcal{L}_{GAN}\). The cross-modal encoder \(E_c\) learns imagination-augmented language representation. Two-step learning procedure consists of: 1) pre-train a Transformer with visual supervision from large-scale language corpus and image set, 2) fine-tune the visually supervised pre-trained Transformer and the imagination-augmented cross-modal encoder on downstream tasks.}\label{fig:img-lu2022-01}
 \end{figure}
+
+
 
 This framework has two main components:
 
@@ -3583,10 +3632,12 @@ Since the goal of these models is to enhance pure language models with the addit
 
 }
 
-\caption{From @hill2014learning: Each bar represents a different model settings and the dashed line indicates the pure linguistic benchmark model.}\label{fig:img-2014hill-01}
+\caption{From \citet{hill2014learning}: Each bar represents a different model settings and the dashed line indicates the pure linguistic benchmark model.
+In figure \ref{fig:img-2014hill-01} we can see that pure language models still perform better than models with visual inputs when it comes to the representation of abstract \emph{nouns}. Another example is \citet{kiela2017learning}: they found that their models perform better when tested on datasets with a higher degree of concreteness and the same conclusion is reached by \citet{collell2017imagined}, which state that visual information can empower the representations of concepts that are to a certain extent visual. To sum up, effective semantic representation of abstract concepts constitute the main limitation common to many of the models discussed in this section.}\label{fig:img-2014hill-01}
 \end{figure}
 
-In figure \ref{fig:img-2014hill-01} we can see that pure language models still perform better than models with visual inputs when it comes to the representation of abstract \emph{nouns}. Another example is \citet{kiela2017learning}: they found that their models perform better when tested on datasets with a higher degree of concreteness and the same conclusion is reached by \citet{collell2017imagined}, which state that visual information can empower the representations of concepts that are to a certain extent visual. To sum up, effective semantic representation of abstract concepts constitute the main limitation common to many of the models discussed in this section.
+
+
 
 \hypertarget{evaluation-in-the-post-transformers-era}{%
 \subsubsection{Evaluation In The Post-Transformers Era}\label{evaluation-in-the-post-transformers-era}}
@@ -3611,8 +3662,10 @@ As previously discussed, many Transformer-based models have universal vocation: 
 
 }
 
-\caption{From @tan2020vokenization. Results of vision-and-language pre-trained models (universal models) on GLUE tasks compared to baseline models (BERT).}\label{fig:img-tan2020-02}
+\caption{From \citet{tan2020vokenization}. Statistics of image-captioning dataset and other natural language corpora. VG, CC, Eng Wiki, and CNN/DM denote Visual Genome, Conceptual Captions, English Wikipedia, and CNN/Daily Mail, respectively. JSD represents Jensen--Shannon divergence to the English Wikipedia corpus.}\label{fig:img-tan2020-02}
 \end{figure}
+
+
 
 \begin{figure}
 
@@ -3620,8 +3673,10 @@ As previously discussed, many Transformer-based models have universal vocation: 
 
 }
 
-\caption{From @tan2020vokenization. Fine-tuning results of different pre-trained models w/ or w/o the voken classification task (denoted as“Voken-cls”).}\label{fig:img-tan2020-03}
+\caption{From \citet{tan2020vokenization}. Fine-tuning results of different pre-trained models w/ or w/o the voken classification task (denoted as``Voken-cls'').}\label{fig:img-tan2020-03}
 \end{figure}
+
+
 
 It is straightforward: unlike in the pre-Transformers Era, where grounded word embeddings could improve performance over baselines, Transformer-based universal models \textbf{do not} outperform pure language models such as BERT or RoBERTa. Nonetheless, the addition of visual supervision (the Voken-Classification task) in the pre-training framework can boost performance above the level of pure language models.
 
@@ -3633,8 +3688,10 @@ It is straightforward: unlike in the pre-Transformers Era, where grounded word e
 
 }
 
-\caption{From @pezzelle2021word. Spearman’s rank correlation between similarities computed with representations by all tested models and human similarity judgments in the five evaluation benchmarks.}\label{fig:img-pezzele2021-01}
+\caption{From \citet{pezzelle2021word}. Spearman's rank correlation between similarities computed with representations by all tested models and human similarity judgments in the five evaluation benchmarks.}\label{fig:img-pezzele2021-01}
 \end{figure}
+
+
 
 \begin{figure}
 
@@ -3642,8 +3699,10 @@ It is straightforward: unlike in the pre-Transformers Era, where grounded word e
 
 }
 
-\caption{From @pezzelle2021word. Correlation between model and human similarity ratings on WordSim353, SimLex999 and MEN. Each barplot reports results on both the whole benchmark and the most concrete subset of it.}\label{fig:img-pezzele2021-02}
+\caption{From \citet{pezzelle2021word}. Correlation between model and human similarity ratings on WordSim353, SimLex999 and MEN. Each barplot reports results on both the whole benchmark and the most concrete subset of it.}\label{fig:img-pezzele2021-02}
 \end{figure}
+
+
 
 From this \emph{intrinsic} evaluation perspective (which was popular in the pre-Transformers Era), vision and language models do not generally outperform domain-specific models such as BERT and also in this case the only real competitor of pure language models is a model with visual supervision (again, Vokenization).
 
@@ -3657,8 +3716,10 @@ Last but not least, few words need to be spent on a topic which has been steadil
 
 }
 
-\caption{From @lu2022imagination. Model-agnostic improvement in Few-shot Setting with GLUE benchmark.}\label{fig:img-lu2022-02}
+\caption{From \citet{lu2022imagination}. Model-agnostic improvement in Few-shot Setting with GLUE benchmark.}\label{fig:img-lu2022-02}
 \end{figure}
+
+
 
 This table from \citet{lu2022imagination}, where models are trained using only up to 5\% of the training set, shows for example the ability for a model supervised with ``imagination'' (which was a generated visual representation of a certain textual input) to outperform models with only simple visual supervision (the Voken-model). This is just an example, but the ability to perform well in \emph{few-shot} settings has become the touchstone of the evaluation modern multimodal models.
 
@@ -3675,9 +3736,10 @@ Last but not least, a mention needs to be made on concrete applications of these
 \hypertarget{appendix-selected-models---summary}{%
 \subsection{Appendix: Selected Models - Summary}\label{appendix-selected-models---summary}}
 
-The following table contains a summary of selected language models augmented with visual components. For each model, the following information are reported:
+A table (available \href{https://github.com/slds-lmu/seminar_multimodal_dl/blob/master/Table-ch2-3-final.pdf}{here}) contains a summary of selected language models augmented with visual components. For each model, the following information are reported:
 
 \begin{itemize}
+\tightlist
 \item
   Pure language model and pretraining data
 \item
@@ -3685,315 +3747,8 @@ The following table contains a summary of selected language models augmented wit
 \item
   Fusion strategy of the two modalities
 \item
-  Benchmarks/baselines for evaluation:
-
-  \(\color{green}\blacktriangle\) better performance over baseline(s)\\
-  \(\color{orange}\bullet\) mixed performance results over baseline(s)\\
-  \(\color{red}\blacktriangledown\) worse performance over baseline(s)\\
+  Benchmarks/baselines for evaluation
 \end{itemize}
-
-The table is available in a more readable format \href{Table-ch2-3-final.pdf}{here}.
-
-\begin{longtable}[]{@{}llllllllll@{}}
-\toprule
-\begin{minipage}[b]{0.00\columnwidth}\raggedright
-Year\strut
-\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\raggedright
-Paper\strut
-\end{minipage} & \begin{minipage}[b]{0.04\columnwidth}\raggedright
-Language model (LM)\strut
-\end{minipage} & \begin{minipage}[b]{0.02\columnwidth}\raggedright
-LM-Pre-training sources\strut
-\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright
-Visual elements (IMG)\strut
-\end{minipage} & \begin{minipage}[b]{0.05\columnwidth}\raggedright
-IMG-Pre-training sources\strut
-\end{minipage} & \begin{minipage}[b]{0.25\columnwidth}\raggedright
-Multimodal representation and model description\strut
-\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\raggedright
-Testset/Fine-tuning\strut
-\end{minipage} & \begin{minipage}[b]{0.05\columnwidth}\raggedright
-Baseline(s)/model settings/comparison to other models\strut
-\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedright
-Results\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2014\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Bruni, Elia, Nam-Khanh Tran, and Marco Baroni. ``Multimodal distributional semantics.''~Journal of artificial intelligence research~49 (2014): 1-47.\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-Distributional model expressed as a matrix with rows as ``semantic vectors'' representing the meaning of a set of target words. The model is based on co-occurrence counts of words (as a result, the matrix is a squared one).\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-- ukWaC, 1.9B tokens- Wackypedia, 820M tokens.\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-(i) Local descriptors to extract low-level visual features(ii) Assign local descriptors to cluster of visual words (bag of words) to build the vector representation of an image(iii) Sum up visual words co-occurrence to across all images/instances to get co-occurrence counts related to a target word (the resulting matrix is a squared one).\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-ESP-Game dataset, 100K images.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-Only words for which there is a related image are considered.Two steps to build multimodal representations:(i) Textual and visual matrices are concatenated and projected into a common latent multimodal space with a singular value decomposition. From this matrix, the ``textual mixed matrix'' and the ``visual mixed matrix'' are extracted(ii) Association between words is assessed with cosine similarityTwo fusion methods to estimate similarity of pairs:- Feature level fusion: linear combination of textual and visual mixed matrix and then similarity estimation- Scoring level fusion: word similarity computed on both textual and visual mixed matrices separately and then the final score is a linear combination of the twoIn both methods the weights in the linear combinations are hyperparameter.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-- WordSim353- MEN.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- Text mixed embeddings only- Visual mixed embeddings only- Equally weighted versions of feature and scoring level fusion model settings- Several ``fine tuned'' versions of fusion and scoring level fusion model settings.\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Multimodal word representations enhance performance of purely textual or visual embeddings\(\color{orange}\bullet\)No alternative model used as a means of comparison.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2014\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Hill, Felix, and Anna Korhonen. ``Learning abstract concept embeddings from multi-modal data: Since you probably can't see what I mean.''~Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP). 2014.\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-Skipgram.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-400m word Text8 Corpus.\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-Mapping of words w to a bag of perceptual features b(w), extracted from external sources and encoded in an associative array P. Generation of pseudo sentences based on these perceptual features to be fed into the language model.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- ESP-Game (100K images)- CSLB Property Norms.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-~Extension of the Skipgram injecting perceptual information by generating pseudo-sentences based on a bag-of-visual-words. A hyperparameter \(\alpha\) controls the level of perceptual information relative to linguistic input.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-USF Dataset.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- Concatenation of linguistic and perceptual features- Canonical Correlation Analysis applied on vectors of both modalities- SVD of matrix of concatenated multimodal representations.\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Concepts, which can directly be represented in the perceptual modality (e.g.~concrete verbs and nouns)\(\color{green}\blacktriangle\)Propagation of perceptual input from concrete concepts (nouns and verbs) to enhance the representation of abstract verbs, those for which no direct representation in the visual space is available\(\color{red}\blacktriangledown\)Abstract nouns (for which is more difficult to find a concrete visual representation) are still more efficiently learned from language-only models.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2014\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Douwe Kiela and Léon Bottou. 2014. Learning Image Embeddings using Convolutional Neural Networks for Improved Multi-Modal Semantics. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 36--45, Doha, Qatar. Association for Computational Linguistics.\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-Skipgram.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-- Text8 Corpus (400M words)- British National Corpus (100M words).\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-Seventh layer of a CNN to extract 6144-d features vectors for images, obtained in two ways:- CNN-Mean (average of all features vectors representing images)- CNN-Max (component-wise maximum of all features vectors)\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- ImageNet (12.5M images)- Esp-Game (100K images).\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-Concatenation of visual and textual embeddings.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-- MEN- WordSim353 (it captures not only ``relatedness'' but also ``similarity''.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- Skipgram (text-only baseline)- Embeddings - visual only.\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)CNN-Mean better on MEN: averaging might capture relatedness better. CNN-Max better on WordSim353.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2014\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Silberer, Carina, and Mirella Lapata. ``Learning grounded meaning representations with autoencoders.''~Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). 2014.\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-Vectors of textual attributes are extracted.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-- McRae et al.'s (2005).\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-Vectors of visual attributes are extracted.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-Same dataset as in Silberer et al.~(2013): taxonomy of 636 visualattributes (e.g., has wings, made of wood) andnearly 700K images from ImageNet (Deng et al.,2009) describing more than 500 of McRae et al.'s(2005) nouns.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-Stacked (denoising) autoencoders for each single modality and the outputs are concatenated and fed to a stacked bimodal autoencoder which map the inputs to a joint hidden layer.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-With McRae et al.'s (2005), two tasks:- word similarity- word categorization.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- Unimodal autoencoders only- Kernelized Canonical Correlation, Hardoon et al.~(2004)- Bruni et al.~(2014).\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Bimodal models outperform unimodal ones\(\color{red}\blacktriangledown\)Training is on attribute-based inputs. Not widely used in the field.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2015\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Lazaridou, Angeliki, Nghia The Pham, and Marco Baroni. ``Combining language and vision with a multimodal skip-gram model.''~arXiv preprint arXiv:1501.02598~(2015).\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-Skipgram.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-Wikipedia 2009, 800M Tokens.\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-Visual information for 5100 words with an entry in ImageNet, occur \textgreater500 times in the text corpus and have a~ concreteness score \(\geq\) 0.5; sample 100 images for each word and extract a 4096-d array with a CNN; average the vectors of 100 pictures associated to each word to get visual representation.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-ImageNet.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-The objective function is a linear composition of the language objective L-ling from the Skipgram and a visual objective L-vision.For the L-vision objective two variants are proposed:- MM Skipgram A (MMSA): aligning vectors of visual and linguistic representations (1:1 correspondence assumed)- MM Skipgram B (MMSB): estimate a cross-modal mapping matrix from linguistic onto visual representations.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-- MEN- SemSim- VisSim.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- Kiela and Bottou (2014)- Bruni et al.~(2014)- Silberer \& Lapata (2014)- Skipgram (text-only baseline)- Embeddings - visual only- Concatenation- SVD.\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Both MMSA and MMSB better than simpler models (linguistic/vision only, concatenation SVD)\(\color{orange}\bullet\)MMSA and MMSB competitive in relatedness and visual similarity, despite having often less training data than other models\(\color{orange}\bullet\)Visual grounding less effective with abstract words\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2017\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Collell, Guillem, Ted Zhang, and Marie-Francine Moens. ``Imagined visual representations as multimodal embeddings.''~Proceedings of the AAAI Conference on Artificial Intelligence. Vol. 31. No.~1. 2017.\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-300-d GloVe.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-Common Crawl corpus, 840B tokens, 2.2M words.\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-To extract visual features, the last hidden layer of~ a CNN is taken. For each concept, two different ways to combine the extracted visual features:- Averaging (averaging of al features vectors)- Maxpooling (component-wise maximum).\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-Imagenet.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-Mapping from language to vision. No need of 1:1 correspondence between linguistic and visual inputs. Two different mappings are considered:- Linear (MAP-Clin)- Neural Network (MAP-Cnn).\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-- MEN- WordSim353- SemSim- Simlex999-SimVerb3500- VisSim.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- Kiela and Bottou (2014)- Lazaridou et al.~(2015)- Silberer \& Lapata (2014)- GloVe (text-only baseline)- Concatenation.\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Outperformance in all instances where words have associated images in the training set\(\color{red}\blacktriangledown\)Performance on the zero-shot learning still inferior in many instances to the textual baselines.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2018\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Kiela, Douwe, et al.~``Learning visually grounded sentence representations.''~arXiv preprint arXiv:1707.06320~(2017).\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-- GloVe for word embeddings- Bidirectional LSTM for sentence representation.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-WebCrawl\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-Image features obtained from the final layer of a ResNet-101.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-MS COCO.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-Word embeddings are projected to a ground space with a linear mapping. Linear mapping and Bi-LSTM are trained jointly.Three methods to ground sentences in images, captions or both:- Cap2Img: predict latent features of an image from its caption by mapping the (final) hidden state h(T) of the Bi-LSTM to the latent representation of the image. A ranking loss is to be minimized- Cap2Cap: given the caption pair (x,y) describing the same image, the goal is to maximize the joint probability of y given x. Negative log-likelihood as loss.- Cap2Both: Goal is to minimize the two loss functions above.In another setting, grounded and sentence-only (Skipthought) representations are concatenated with layer normalization~ to get the final sentence representations. Goal is to include information on less concrete concepts which are not likely to be represented in image-captioning databases but are present in language corpora.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-Intrinsic evaluation of word embeddings:- MEN- SimLex 999- Rare Words- WordSim-353Extrinsic evaluations:- Movie review Sentiment (MR)- Product reviews (CR)- Subjectivity classification (SUBJ)- Opinion polarity (MPQA)- Paraphrase identification (MSRP)- Sentiment classification (SST)- SNLI (Entailment)- SICK (Entailment).\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- Skipthought (text-only baseline).\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Word embeddings are of higher quality than those obtained with GloVe, measured on the following similarity benchmarks: MEN, SimLex999, Rare Words and WordSim-353\(\color{green}\blacktriangle\)In extrinsic evaluations, grounding increases performance but it is not clear which one of the three grounding strategies considered is dominant\(\color{orange}\bullet\)Performance seems to be driven in a smaller amount of instances by a larger number of parameters rather than effectiveness of grounding\(\color{orange}\bullet\)Performance is better when dataset have a higher level of concreteness.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2020\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Bordes, Patrick, et al.~``Incorporating visual semantics into sentence representations within a grounded space.''~arXiv preprint arXiv:2002.02734~(2020).\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-- Skipthought.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-Toronto Book Corpus: 11M books, 74M ordered sentences, 13 words per sentence on average.\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-Processing of visual elements with a pre-trained Inception v3 network (Szegedy et al., 2016).\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-MS COCO: 118K/5K/41K (train/val/test) images.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-The objective function is composed of:- a textual objective Lt- a grounding objective Lg, which among its parameters has also those of the textual objective, which in turn profit from both objective functions.Lg is not applied directly on the sentence embeddings; it is trained on an intermediate space called the ``grounded space''. The sentence embeddings are projected to the grounded space with the projection function being a multi-layer perceptron. The goal is to move away from the 1:1 correspondence between textual and visual space.Lg the~ can be decomposed in two components, whose individual contribution is controlled by two hyperparameters:- Cluster Information (Cg): sentences associated with the same image(s) should be similar. The visual space is thus used to asses sentence similarity. The~ Max-margin ranking loss is used- Perceptual information (Pg): similarity between sentences in the grounded space~ should be correlated with similarity between corresponding images in the visual space. The loss is based on the negative Pearson correlation.Model scenarios include many compositions of the above mentioned elements.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-Intrinsic evaluation of word embeddings:- STS- SICKExtrinsic evaluations:- Movie review Sentiment (MR)- Product reviews (CR)- Subjectivity classification (SUBJ)- Opinion polarity (MPQA)- Paraphrase identification (MSRP)- Sentiment classification (SST)- SNLI (Entailment)- SICK (Entailment).\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- Skipthought (text-only baseline)For extrinsic evaluations:- Kiros et al.~(2014)- Kiela et al.~(2018)- Lazaridou et al.~(2015) - cross-modal- Collell et al.~(2017) - sequential/concatenation.\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Word embeddings are~ better than the textual benchmark for data with a high level of concreteness and are similar in performance with respect to more abstract concepts\(\color{green}\blacktriangle\)Projections on the grounded space are more effective than cross-modal projection and concatenation\(\color{orange}\bullet\)Not always best performance on entailment tasks (benchmarks SNLI, SICK).\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2020\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Tan, Hao, and Mohit Bansal. ``Vokenization: Improving language understanding with contextualized, visual-grounded supervision.''~arXiv preprint arXiv:2010.06775~(2020).\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-BERT, but it can be adapted to any language model (through Revokenization).\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-English Wikipedia.\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-ResNeXt.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-MS COCO.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-Language model with visual supervision. Each token in a sentence obtains a corresponding image (voken) assigned from a finite set of images. The voken is the image which maximize a Relevance Score Function between a token and all images in the aforementioned finite set of images. With this token-voken pairs a voken classification pre-training task is performed that can be built in pure language models alongside other pre-training tasks such MLM or Next-Sentence Prediction.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-- GLUE (only SST-2, QNLI, QQP, MNLI)- SQuAD- SWAG.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- BERT (various versions)- VilBert- VL-BERT- VisualBERT- Oscar- LXMERT.\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\) Improvement over the purely self-supervised language model on multiple language tasks.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2021\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Hu, Ronghang, and Amanpreet Singh. ``Unit: Multimodal multitask learning with a unified transformer.''~Proceedings of the IEEE/CVF International Conference on Computer Vision. 2021.\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-BERT-base with a learned task-specific vector (to capture task-specific information) as additional input, which is positioned at the beginning of the embedded token sequence.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-Pretrained version of the embeddings\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-CNN (ResNet-50) to extract visual features map + transformer encoder to encode the features map to a set of hidden states. A learned task-task specific vector (to capture task-specific information) is concatenated to the beginning of the visual feature list before entering the encoder (architecture inspired by DETR).\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- MS COCO- Visual Genome.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-To both modalities is then applied a domain agnostic transformer architecture. As input the transformer takes the hidden states of either language or visual encoders or concatenation of both together with a task specific query embedding sequence. Self attention is applied in each layer among decoder hidden states and cross attention is applied to the encoded input modalities. The output is a set of decoded hidden states to which a task-specific head is applied (two-layer MPLP with GeLU activation and cross entropy loss).Training is done jointly on multiple tasks. At each training iteration, a task is randomly selected.Three settings (third one is the model described above):1.) Single-task training: each model is trained separately on each task2.) Multi-task training with separate decoders: a specific decoder for each task and jointly trained on all tasks3.) Multi-task training with shared decoder. In this setting, there are still task-specific heads for each task.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-Extrinsic evaluation.: GLUE:- QNLI- QQP- MNLI- SST2.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-BERT (text-only baseline).\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Model setting (1), single task training, outperforms all other settings and is comparable to the text-only baseline\(\color{red}\blacktriangledown\)Model setting (3), domain-agnostic, multi-task training with shared decoder across modalities exhibits a lower performance compared to domain-specific transformer models like BERT, the text-only baseline.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2021\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Shahmohammadi, Hassan, Hendrik Lensch, and R. Harald Baayen. ``Learning zero-shot multifaceted visually grounded word embeddings via multi-task training.''~arXiv preprint arXiv:2104.07500~(2021).\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-- GloVe, 300d, 2.2M words- fastText, 300d, 2M.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-Pretrained version of the embeddings\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-Image vectors obtained by transferring the penultimate layer of pretrained Inception-V3 trained on ImageNet. A neural network with one hidden layer and tanh activation is used to~ project the image vectors into the initial hidden state of the GRUs employed in the model.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-MS COCO.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-Given embeddings originating from a pretrained text-only model, the goal is to generate a mapping matrix M to ground word embeddings visually (the mapping matrix is used in both directions, to map text to grounded space and to map grounded embeddings back to the textual space)This is obtained by performing three different tasks:(i) Next word prediction with a GRU, given previous words in the sentence provided as image caption, together with the~ related image embedding vector(ii) Same as (i) but the sentence is provided backwards to another GRU(iii) Binary classification task if the representation of a given sentence in the grounded space obtained from (i) and (ii) matched the associated image.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-Limited to intrinsic evaluation:- MEN- SimLex999- Rare Words- MTurk771- WordSim353- SimVerb3500.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- GloVe (text-only baseline)- fastText (text-only baseline)- Collell et al.~(2017)- Park \& Myaeng (2017)- Kiros et al.~(2018)- Kiela et al.~(2018).\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Textual baselines and related models are outperformed and the model seems to improve the textual vector space by aligning it with real-world relations from the images (similarity appears to be favoured by the model over relatedness)\(\color{green}\blacktriangle\)Embeddings related to less concrete words exhibit good quality compared to baselines.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2022\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Hsu, Chan-Jan, Hung-yi Lee, and Yu Tsao. ``XDBERT: Distilling Visual Information to BERT from Cross-Modal Systems to Improve Language Understanding.''~arXiv preprint arXiv:2204.07316~(2022).\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-- BERT- ELECTRA.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-Wikipedia.\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-CLIP as image-text matching system: two components, a text encoder (CLIP-T) and an image encoder (CLIP-ViT).\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-not specified.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-3 adaptive tasks:- Joint Masked Language Modelling (MLM)- Same Sentence Prediction (MATCH)- CLIP Token ClassificationAfter that, concatenation with cross-modal encoder is performed.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-- GLUE- SWAG- READ.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- BERT- ELECTRA.\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Better performance than pure language models, in particular in smaller datasets, which suggests that visual inputs improve generalization when the amount of training data is limited.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.00\columnwidth}\raggedright
-2022\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-Lu, Yujie, et al.~``Imagination-Augmented Natural Language Understanding.''~arXiv preprint arXiv:2204.08535~(2022).\strut
-\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
-- BERT-base- RoBERTa.\strut
-\end{minipage} & \begin{minipage}[t]{0.02\columnwidth}\raggedright
-Wikipedia.\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
-Same as in VOKENIZATION paper.\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-MS COCO.\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright
-The framework iACE is composed of two modules:1.) Imagination generator G: for each text input, VQGAN generates an ``imagined visual'' and CLIP is used to test how the generated image corresponds to the text and encodes the text and the image in a cross-modal embedding space and the objective function Lgan is to minimize the distance between these two embeddings2.) Imagination augmented cross-modal encoder. Specifically, CLIP is used, with the embeddings from the textual and visual encoder (fed with the visualized imaginations)~ within CLIP are then ``late fused''. The output is a set of ``imagination-augmented'' language representations.Learning procedure:1.) pre-training of a visually-supervised transformer following the Vokenization method2.) Imagination-augmented fine tuning, composed of two losses to be minimized:(i) L-imagine where the iACE framework tries to minimize the cross-entropy loss based on text embeddings and visually imagination embeddings, given a testsets and a number of classes to predict(ii)L-lang, where the visually supervised transformer only relies on textual inputsThe ``imagination-augmented'' is a composition of (i) and (ii) and the relative contribution of each loss is controlled with an hyperparameter.\strut
-\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
-From GLUE and SWAG:- SST-2- QNLI- QQP- MultiNLI- MRPC- STS-BFocus is on few-shots learning (considering from 0.1\% to 5\% of the training dataset).\strut
-\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
-- BERT (text-only baseline)- RoBERTa (text-only baseline)With and w/o Vokenization.\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-\(\color{green}\blacktriangle\)Better performance of iACE over visually supervised transformers (VOKEN) in all instances of few-shots learning. Imagination can help existing language models to perform better in a setting with small training set (which means ``less human annotated data'').\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
 
 \hypertarget{c02-04-text-support-img}{%
 \section{Text supporting Computer Vision Models}\label{c02-04-text-support-img}}
@@ -4428,13 +4183,15 @@ After all, we would like to know why machine learning models do what they do. Fi
 
 }
 
-\caption{Uppal et al. (2022): VisLang Paper Trends (previous 2 years)}\label{fig:vltasks}
+\caption{\citet{uppal2022multimodal}: VisLang Paper Trends (previous 2 years)}\label{fig:vltasks}
 \end{figure}
+
+
 
 \hypertarget{data2vec}{%
 \subsection{Data2vec}\label{data2vec}}
 
-With data2vec (\citet{baevski2022data2vec}), data scientists at Meta, formerly Facebook, developed an architecture that addresses some of the mentioned issues while highlighting the importance of sophisticated training schemes. Their algorithmic structure is able to work with either text, image or speech data. On top of that, the model is self-supervised based on a teacher-student relationship which reduces the need for human labelling. It is not a universal model in the sense that it works with any input, nor is it even a general model in the sense that the algorithm is exactly the same for each modality. However, the overall model structure remains the same for either text, speech or image input data, while only the specific encoding, normalization and masking strategies are modality-specific. In that regard, it is a step towards a more general way of dealing with different modalities and it is very effective at doing so given the benchmark results on typical data sets. Particularly noteworthy is also the way they implement the self-supervised learning. Data2vec predicts contextualized and continuous representations rather than typically used discrete tokens such as sub-words. Working with latent representations of the input space has two advantages: not only is the number of prediction targets not a-priori limited, but they are also richer in information.
+With data2vec \citep{baevski2022data2vec}, data scientists at Meta, formerly Facebook, developed an architecture that addresses some of the mentioned issues while highlighting the importance of sophisticated training schemes. Their algorithmic structure is able to work with either text, image or speech data. On top of that, the model is self-supervised based on a teacher-student relationship which reduces the need for human labelling. It is not a universal model in the sense that it works with any input, nor is it even a general model in the sense that the algorithm is exactly the same for each modality. However, the overall model structure remains the same for either text, speech or image input data, while only the specific encoding, normalization and masking strategies are modality-specific. In that regard, it is a step towards a more general way of dealing with different modalities and it is very effective at doing so given the benchmark results on typical data sets. Particularly noteworthy is also the way they implement the self-supervised learning. Data2vec predicts contextualized and continuous representations rather than typically used discrete tokens such as sub-words. Working with latent representations of the input space has two advantages: not only is the number of prediction targets not a-priori limited, but they are also richer in information.
 
 \begin{figure}
 
@@ -4442,8 +4199,10 @@ With data2vec (\citet{baevski2022data2vec}), data scientists at Meta, formerly F
 
 }
 
-\caption{Baevski et al. (2022): Data2vec Architecture - a teacher model creates contextualized latent targets on the basis of its top K layers (blue) as prediction task to train the student model}\label{fig:data2vecoverview}
+\caption{\citet{baevski2022data2vec}: Data2vec Architecture - a teacher model creates contextualized latent targets on the basis of its top K layers (blue) as prediction task to train the student model}\label{fig:data2vecoverview}
 \end{figure}
+
+
 
 Figure \ref{fig:data2vecoverview} depicts the general model architecture. The two main components are a teacher and a student model which only differ in one aspect, the weights of the teacher model are an exponentially decaying average of the student's weights. The purpose of the teacher model is to create training targets for the student model.
 In a first step, a modality is chosen and inputs are encoded according to the specific encoding scheme for that modality. A masked version is given to student model, but notably, the teacher model has access to an unmasked, complete view of the input data. Hence, the resulting training targets will be fully contextualized using a self-attention mechanism over the whole input data. The training targets are based on the top K layers of the teacher model depicted in blue in \ref{fig:data2vecoverview} . More specifically, denote by \(y_t\) the training target at time t and by \(a_t^l\) the outputs of the l-th block, then \(y_t = \frac{1}{K}\sum_{l=L-K+1}^{L} \hat{a}_t^l\), i.e.~the training targets are the average of the outputs of the top K layers of the teacher network after a normalization has been applied. Normalization helps to stabilize the training process and prevent model collapse which can be an issue with models that learn their own representation.
@@ -4472,10 +4231,12 @@ As far as the vision transformer itself is concerned, datav2vec tests two differ
 
 }
 
-\caption{Dosovitskiy et al. (2021)}\label{fig:visiontransformer}
+\caption{\citet{DosovitskiyB0WZ21}}\label{fig:visiontransformer}
 \end{figure}
 
-The natural language processing model is implemented with a PyTorch toolkit named fairseq and based on the RoBERTa (\citet{liu2019roberta}) architecture which redesigned the standard Bert model training procedure to make it more robust and effective. In particular,
+
+
+The natural language processing model is implemented with a PyTorch toolkit named fairseq and based on the RoBERTa \citep{liu2019roberta} architecture which redesigned the standard Bert model training procedure to make it more robust and effective. In particular,
 it increases hyperparameters such as the learning rate and the batch size. It also removes the next sentence prediction task to improve on the masked language modelling performance.
 In this case they follow (\citet{sennrich2015neural}) and encode sub-words as 50k byte-pairs. A separate embedding vector is learned for each type. For the masking, the Bert masking is being used. 15\% of the embedded tokens are replaced,
 thereof 80 percent are learned masks, 10\% are unchanged and the remaining 10\% are replaced with random tokens in the vocabulary. Another strategy that the authors also consider is the wave2vec masking strategy
@@ -4493,8 +4254,10 @@ As far as the results are concerend, data2vec achieved state-of-the-art performa
 
 }
 
-\caption{Baevski et al. (2022): data2vec performance (vision)}\label{fig:data2vecresults1}
+\caption{\citet{baevski2022data2vec}: data2vec performance (vision)}\label{fig:data2vecresults1}
 \end{figure}
+
+
 
 Figure \ref{fig:data2vecresults1} shows the model's performance in computer vision.
 Pretrained and fine-tuned simply on the data of the well known ImageNet-1K dataset,
@@ -4509,11 +4272,13 @@ MoCov3 (\citet{chen2021empirical}) is a self-supervised model trained on a contr
 
 }
 
-\caption{Baevski et al. (2022): data2vec results (language)}\label{fig:data2vecresults2}
+\caption{(res:data2vecresults2)}\label{fig:data2vecresults2}
 \end{figure}
 
+(\url{res:data2vecresults2}) \citet{baevski2022data2vec}: data2vec results (language)
+
 Figure \ref{fig:data2vecresults2} shows the performance in the language domain.
-For the language domain, the model is evaluated on the GLUE benchmark (\citet{wang2018glue}).
+For the language domain, the model is evaluated on the GLUE benchmark \citep{wang2018glue}.
 The model is pretained and fine-tuned seperately on the labelled data from each task. Acurracy
 is reported as the average across 5 tuning cycles. While data2vec achieves a higher average performance than the baseline model, there are tasks
 where the baseline model prevails. A large portion of the peformance difference seems to be driven
@@ -4540,8 +4305,10 @@ At heart of that architecture is a co-attention mechanism which enables informat
 
 }
 
-\caption{Lu et al. (2019): VilBert's Dual Stream Architecture: dashed transformer modules can be repeated, co-attention modules allow sparse interaction between modalities.}\label{fig:vilbertarc}
+\caption{\citet{lu2019vilbert}: VilBert's Dual Stream Architecture: dashed transformer modules can be repeated, co-attention modules allow sparse interaction between modalities.}\label{fig:vilbertarc}
 \end{figure}
+
+
 
 Figure \ref{fig:vilbertarc} shows the employed parallel stream architecture.
 Each modality is handled separately and fed into two Bert-style transformer models. This allows for both modalities to be handled according to their respective needs while co-attention layers allow for communication between the streams. For the language stream, the encoding uses the vocabulary plus a special classification token (cls), a sentence separation token (sep) and a masking token (mask). For the vision stream, image region features are extracted via a Faster R-CNN (\citet{ren2015faster}) model which was pretrained on the Visual Genome Dataset (\citet{krishnavisualgenome}). Since image regions lack a natural ordering, its spatial location has to be encoded, as well. VilBert achieves that through a five dimensional vector that encapsulates the image coordinates and the fraction of the covered image area. Through projection, the dimensions of the positional encoding and visual features are matched and then summed. The image token marks the beginning of such an image region sequence while representing the whole image.
@@ -4554,8 +4321,10 @@ Through the dual stream architecture, the complexity of the model can be adjuste
 
 }
 
-\caption{Lu et al. (2019): Cross-Attention in VilBert}\label{fig:vilbertattention}
+\caption{\citet{lu2019vilbert}: Cross-Attention in VilBert}\label{fig:vilbertattention}
 \end{figure}
+
+
 
 The key innovation in the Vilbert paper (\citet{lu2019vilbert}) is the use of co-attention layers.
 In figure \ref{fig:vilbertattention}, the basic architecture is depicted. The co-attention module computes query, key and value matrices in a standard transformer attention fashion. However, it then feeds the keys and values from each modality
@@ -4571,8 +4340,10 @@ Randomly shuffling words in a sentence when testing the model performance barely
 
 }
 
-\caption{Sikarwar et al. (2022): (Left to Right) Picture, Human Attention, 36 Regions, 72 Regions, 108 Regions. Similarity between human and model attention is measured using rank correlation.}\label{fig:vilbertmaps}
+\caption{\citet{sikarwar2022efficacy}: (Left to Right) Picture, Human Attention, 36 Regions, 72 Regions, 108 Regions. Similarity between human and model attention is measured using rank correlation.}\label{fig:vilbertmaps}
 \end{figure}
+
+
 
 Figure \ref{fig:vilbertmaps} shows that the number of region proposals fed into the model after processing an image affects the ability of the model to produce adequate attention maps. In this particular case the question ``How many fingers is the girl in the black shirt holding up?'' was correctly answered by humans, as well as a VilBert model using 72 or 108 region proposals. It was answered incorrectly when using only 36 region proposals. Note however that in either case, the machine learning model captured the face of the wrong girl. The model using 72 regions also identified the wrong hand despite answering the question correctly. While the 108 region model identifies the correct hand holding up the fingers, it does not seem to prioritize it over the other identified hands in the picture. Hence, the attention maps are sufficiently different from the human attention map which highlights the need to look closer not only at how models are performing, but also into how their performance has been achieved.
 
@@ -4587,8 +4358,10 @@ The performance results are depicted in figure \ref{fig:vilbertresults}.
 
 }
 
-\caption{Lu et al. (2019): VilBert Performance}\label{fig:vilbertresults}
+\caption{\citet{lu2019vilbert}: VilBert Performance}\label{fig:vilbertresults}
 \end{figure}
+
+
 
 As mentioned before, the dual stream architecture outperforms the single stream architecture. Furthermore, pretraining considerably boosts performace, as does finetuning.
 Interestingly, the authors also study the effect of the size of the dataset and effect of the architecture depth. Performance increases monotonically with dataset size, suggesting that performance can be further improved
@@ -4613,8 +4386,10 @@ A natural question to ask is then is whether we can build a truly multimodal arc
 
 }
 
-\caption{Alayrac et al. (2022): Flamingo Prompt-Output-Examples}\label{fig:flamingoexamples}
+\caption{\citet{alayrac2022flamingo}: Flamingo Prompt-Output-Examples}\label{fig:flamingoexamples}
 \end{figure}
+
+
 
 Figure \ref{fig:flamingoexamples} demonstrates Flamingos capabilities. It can function as chat bot, describe pictures, work with image sequences (videos) and in doing so, simply needs a few prompts.
 
@@ -4631,8 +4406,10 @@ mechanism ensures that those new cross-attention layers do not interfer at model
 
 }
 
-\caption{Alayrac et al. (2022): Flamingo Model Structure}\label{fig:flamingoarc}
+\caption{\citet{alayrac2022flamingo}: Flamingo Model Structure}\label{fig:flamingoarc}
 \end{figure}
+
+
 
 Figure \ref{fig:flamingoarc} shows the fundamental architecture of Flamingo.
 A pretained vision model as well as a pretained language model are frozen. Together they built the cornerstones of the model. The vision model is pretained using a contrastive text-image approach. Its role is to extract
@@ -4680,8 +4457,10 @@ which showed the perceiver to improve performance scores by around three to five
 
 }
 
-\caption{Alayrac et al. (2022): Flamingo Perceiver-Resampler}\label{fig:perceiver}
+\caption{\citet{alayrac2022flamingo}: Flamingo Perceiver-Resampler}\label{fig:perceiver}
 \end{figure}
+
+
 
 The main component that turns the frozen large language model into a functioning visual language model are the cross-attention layers depicted in figure \ref{fig:flamingoattention}. The number of layers added controls the number of free parameters and hence
 the complexity and expressiveness of the model. Keys and values of those layers are obtained from the visual features output by the perceiver while using language queries. Specifically, gated cross-attention dense layers are used. The layers are dense because the cross-attention layer is followed by a feed forward layer. They are gated because a tanh(\(\alpha\)) gating mechanism is applied between layers. The gating mechanism ensures that the frozen large language model remains stable at initialization through introducing a learnable scalar parameter \(\alpha\) initialized at 0. Without that initialization, training instabilities can occur.
@@ -4697,8 +4476,10 @@ specified otherwise, only attend to one image at a time, there is still a causal
 
 }
 
-\caption{Alayrac et al. (2022): Flamingo Gated Cross-Attention}\label{fig:flamingoattention}
+\caption{\citet{alayrac2022flamingo}: Flamingo Gated Cross-Attention}\label{fig:flamingoattention}
 \end{figure}
+
+
 
 To evaluate the model, the authors chose 18 different vison-language benchmarks including video benchmarks as shown in \ref{fig:flamingodatasets}.
 
@@ -4708,8 +4489,10 @@ To evaluate the model, the authors chose 18 different vison-language benchmarks 
 
 }
 
-\caption{Alayrac et al. (2022): Flamingo Datasets (Table2, p.19)}\label{fig:flamingodatasets}
+\caption{\citet{alayrac2022flamingo}: Flamingo Datasets (Table2, p.19)}\label{fig:flamingodatasets}
 \end{figure}
+
+
 
 Note that seven benchmarks are used to validate design choices of the architecture. They are part of the development (dev) set. As those datasets could potentially report biased performance results, the remaining eleven datasets are solely used to estimate unbiased performance scores.
 Unfortunately, unbiased estimation in few-shot learning is not ubiquitous .
@@ -4721,12 +4504,16 @@ Since hyperpameter tuning requires more prompts, it is easy to forget about them
 
 }
 
-\caption{Alayrac et al. (2022): Flamingo Results without Fine-Tuning}\label{fig:flamingoresult}
-\end{figure}
-
+\caption{\citet{alayrac2022flamingo}: Flamingo Results without Fine-Tuning
 The results portayed in figure \ref{fig:flamingoresult} show that Flamingo does not only outperform all previous few shot models, but also the general state-of-the art on six tasks. It is also, not too surprisingly, evident that more shots and larger models lead to better performance.
 The in-context learning works analogous to GPT-3 (\citet{brown2020language}). Given a set of supporting examples (image, text), where text is the expected response based on the supporting visual input, a multimodal prompt is built by concatenating the examples in random order and adding the selected query image for the prediction.
-Interestingly, rather than using in-context learning with prompts, the authors also explore fine-tuning the model on the tasks which achieved state-of-the-art performance with few-shot learning. Fine-tuning the model is very expensive and requires additional hyperparameter tuning, but substantially improves results even further.
+Interestingly, rather than using in-context learning with prompts, the authors also explore fine-tuning the model on the tasks which achieved state-of-the-art performance with few-shot learning. Fine-tuning the model is very expensive and requires additional hyperparameter tuning, but substantially improves results even further.}\label{fig:flamingoresult}
+\end{figure}
+
+
+
+
+
 
 \begin{figure}
 
@@ -4734,8 +4521,10 @@ Interestingly, rather than using in-context learning with prompts, the authors a
 
 }
 
-\caption{Alayrac et al. (2022): Flamingo Results with Fine-Tuning}\label{fig:flamingfinetune}
+\caption{\citet{alayrac2022flamingo}: Flamingo Results with Fine-Tuning}\label{fig:flamingfinetune}
 \end{figure}
+
+
 
 One noticable exception that the authors remark upon is the classification performance of the model. In that realm, contrastive models outperform Flamingo. A working hypothesis is that training for text-image retrieval is particularly important on those tasks. Nevertheless, few-shot learning and open-ended generative capabilities provide great advantages over contrastive models both in terms of model training as well as the range of applications. Flamingo shows how to leverage a unifying stucture between models. Communication between models is key to reducing training overload and to enable multitasking models.
 
@@ -4902,14 +4691,14 @@ Initially conceived as a generative multimodal translation model here we are esp
 
 \href{figures/03-01/perceiver-io.png}{Perceiver encoder stack shows how the cross-attention mechanism transforms large inputs into smaller ones that can be processed by a vanilla Transformer encoder \citep{jaegle2021perceiver}.}
 
-The Perceiver consists of a vanilla Transformer encoder block, with the follow-up paper, Perceiver IO, adding an analogous Transformer decoder in order to produce arbitrary multimodal outputs. The trick the Perceiver introduces in order to process nearly any sort of (concatenated) multimodal input is a specific cross-attention operation. Given a (very long) input in of size MxC a so-called latent array of size NxD is introduced, where N\textless\textless M. With the input array acting as Key and value and the latent array as the query a cross-attention block is applied between the two, this transforms the original input to a much smaller size, achieving higher than 300x compression. Perceiver IO is currently likely the most flexible model when it comes to processing and outputting arbitrary multimodal outputs, it also easily handles the learning of joint representation spaces at it can process very large input array of concatenated multimodal data such as long videos with audio or optical flow maps\citep{DBLP:conf/icml/JaegleGBVZC21}{[}@ jaegle2021perceiver{]}.
+The Perceiver consists of a vanilla Transformer encoder block, with the follow-up paper, Perceiver IO, adding an analogous Transformer decoder in order to produce arbitrary multimodal outputs. The trick the Perceiver introduces in order to process nearly any sort of (concatenated) multimodal input is a specific cross-attention operation. Given a (very long) input in of size \(M \times C\) a so-called latent array of size \(N\times D\) is introduced, where \(N\ll M\). With the input array acting as Key and value and the latent array as the query a cross-attention block is applied between the two, this transforms the original input to a much smaller size, achieving higher than 300x compression. Perceiver IO is currently likely the most flexible model when it comes to processing and outputting arbitrary multimodal outputs, it also easily handles the learning of joint representation spaces at it can process very large input array of concatenated multimodal data such as long videos with audio or optical flow maps\citep{DBLP:conf/icml/JaegleGBVZC21}{[}@ jaegle2021perceiver{]}.
 
 \hypertarget{hierarchical-perceiver}{%
 \paragraph{Hierarchical Perceiver}\label{hierarchical-perceiver}}
 
 \href{figures/03-01/hierarchical-perceiver.png}{The hourglass structure of the Hierarchical Perceiver (HiP)\citep{carreira2022hierarchical}.}
 
-With information about locality and compositionality being mostly lost in the Perceiver IO encoder this follow up paper imposes a hierarchical hourglass-like structure on the encoder-decoder stack. An input matrix with length M tokens is broken down into G groups, each M/G in size. For each group a separate latent array of size KxZ is initialized, and a cross-attention operation is applied between each group and its respective latent array, followed by a number of self-attention + MLP blocks. The set of output vectors of each group is then merged to form an intermediary matrix consisting of KG tokens. This intermediary matrix can be used as input to the next block, forming the hierarchical structure of the encoder. Besides embedding more of the locality and compositionality of data into the model, this architecture also improves upon computational costs on comparison to Perceiver IO\citep{carreira2022hierarchical}.
+With information about locality and compositionality being mostly lost in the Perceiver IO encoder this follow up paper imposes a hierarchical hourglass-like structure on the encoder-decoder stack. An input matrix with length M tokens is broken down into G groups, each M/G in size. For each group a separate latent array of size \(K \times Z\) is initialized, and a cross-attention operation is applied between each group and its respective latent array, followed by a number of self-attention + MLP blocks. The set of output vectors of each group is then merged to form an intermediary matrix consisting of KG tokens. This intermediary matrix can be used as input to the next block, forming the hierarchical structure of the encoder. Besides embedding more of the locality and compositionality of data into the model, this architecture also improves upon computational costs on comparison to Perceiver IO \citep{carreira2022hierarchical}.
 
 \hypertarget{multimodal-training-paradigms}{%
 \subsubsection{Multimodal Training Paradigms}\label{multimodal-training-paradigms}}
@@ -4940,7 +4729,7 @@ As we have elaborated extensively, we are faced with learning either joint or co
 
 As an example, for multimodal contrastive learning for joint representations we will first look at VATT \citep{DBLP:conf/nips/AkbariYQCCCG21}, short for Video-Audio-Text Transformer. In this paper the authors propose a simple framework for learning cross-modal embedding spaces across multiple (\textgreater= 2) modalities at once. They do so by introducing an extension to InfoNCE loss called Multiple-Instance-Learning-NCE (MIL-NCE). The model first linearly projects each modality into a feature vector and feeds it through a vanilla Transformer backbone. If the model is only used to contrast two modalities, then a normal InfoNCE loss is being used, for a video-audio-text triplet a semantically hierarchical coordinated space is learnt that enables us to compare video-audio and video-text by the cosine similarity. First a coordinated representation between the video and audio modality is constructed via the InfoNCE \citep{DBLP:conf/icml/ChenK0H20} loss. Then a coordinated representation between the text modality and the now joint video-audio modality is also constructed similarly as shown in this figure. This hierarchy in these coordinated representations is motivated by the different levels of semantic granularity of the modalities, therefore this granularity is introduced into the training as an inductive bias. The aggregation of the several InfoNCE at different levels serves as the central loss function for this training strategy. It quickly becomes evident how this principle of learning (hierarchical) coordinated embeddings spaces can serve to learn between any n-tuples of different modalities if the respective n-tuples exist in a dataset.
 
-MultiMAE \citep{bachmann2022multimae} is a different kind of paper in which the authors learn a joint representation of a concatenated input consisting of RGB images, depth, and semantic maps. The input is partitioned into patches with some of them randomly selected for masking. The flattened masked input is then fed into a multimodal ViT \citep{DBLP:conf/iclr/DosovitskiyB0WZ21} backbone. The authors then use different decoder blocks that act upon only the unimodal segments of the input. They hypothesize that the multimodal transformer can leverage cross-modal information in the input well enough as to embed multimodal semantic information in the output states. An additional global token that can access all input modalities is added for learning the joint representation. The task-specific decoders reconstruct their respective modality also by using one cross-attention module that can access information from the whole (multimodal) input. The aggregate reconstruction loss of all decoders serves as the model's loss function. This training strategy thereby produces a joint representation of an arbitrary ensemble of patched 2D modalities and can simultaneously learn to perform unimodal tasks as well.
+MultiMAE \citep{bachmann2022multimae} is a different kind of paper in which the authors learn a joint representation of a concatenated input consisting of RGB images, depth, and semantic maps. The input is partitioned into patches with some of them randomly selected for masking. The flattened masked input is then fed into a multimodal ViT \citep{DosovitskiyB0WZ21} backbone. The authors then use different decoder blocks that act upon only the unimodal segments of the input. They hypothesize that the multimodal transformer can leverage cross-modal information in the input well enough as to embed multimodal semantic information in the output states. An additional global token that can access all input modalities is added for learning the joint representation. The task-specific decoders reconstruct their respective modality also by using one cross-attention module that can access information from the whole (multimodal) input. The aggregate reconstruction loss of all decoders serves as the model's loss function. This training strategy thereby produces a joint representation of an arbitrary ensemble of patched 2D modalities and can simultaneously learn to perform unimodal tasks as well.
 
 \href{figures/03-01/multimae.png}{Masking and cross-modal prediction visualized for MultiMAE\citep{bachmann2022multimae}.}
 
@@ -5181,8 +4970,10 @@ Multimodel offers a pre-transformer approach to deal with different modalities o
 
 }
 
-\caption{Architecture of *MultiModel*. The outer boxes without text are the modality nets. From @Kaiser2017.}\label{fig:multimodel}
+\caption{Architecture of \emph{MultiModel}. The outer boxes without text are the modality nets. From \citet{Kaiser2017}.}\label{fig:multimodel}
 \end{figure}
+
+
 
 \hypertarget{unified-transformer-unit}{%
 \subsubsection{Unified Transformer (UniT)}\label{unified-transformer-unit}}
@@ -5198,8 +4989,10 @@ Even though UniT does not achieve sota or consistently outperforms its specialis
 
 }
 
-\caption{Modified transformer for UniT. The decoder follows the implementation of DETR [@Carion2020]. From @Hu2021.}\label{fig:unit}
+\caption{Modified transformer for UniT. The decoder follows the implementation of DETR \citep{Carion2020}. From \citet{Hu2021}.}\label{fig:unit}
 \end{figure}
+
+
 
 \hypertarget{ofa---once-for-all}{%
 \subsubsection{OFA - Once For All}\label{ofa---once-for-all}}
@@ -5217,8 +5010,10 @@ OFA proved to be a powerful model on the initial transformer architecture. Howev
 
 }
 
-\caption{*OFA*, the different input and output concepts can be seen here. From @Wang2022.}\label{fig:ofa}
+\caption{\emph{OFA}, the different input and output concepts can be seen here. From \citet{Wang2022}.}\label{fig:ofa}
 \end{figure}
+
+
 
 \hypertarget{gato---a-generalist-agent}{%
 \subsubsection{Gato - A Generalist Agent}\label{gato---a-generalist-agent}}
@@ -5251,8 +5046,10 @@ Multi-purpose models can also be thought of without the currently well-performin
 
 }
 
-\caption{Concept of pathways. Different tasks follow different paths to different expert models. From @Dean21, [Screenshot August 31th 2022](https://www.youtube.com/watch?v=Nf-d9CcEZ2w).}\label{fig:pathways}
+\caption{Concept of pathways. Different tasks follow different paths to different expert models. From \citet{Dean21}, \href{https://www.youtube.com/watch?v=Nf-d9CcEZ2w}{Screenshot August 31th 2022}.}\label{fig:pathways}
 \end{figure}
+
+
 
 \hypertarget{idea}{%
 \subsubsection{Idea}\label{idea}}
@@ -5281,8 +5078,10 @@ In the case of PathNet, each node is itself a neural network; thus, all data is 
 
 }
 
-\caption{Training *PathNet* on two tasks. At first random paths are initialized (1), then trained (2-3) and fixed (4). The same procedure is repeated for the next paths using the previously fixed paths and new parameters in all other nodes (5-9). From @Fernando2017.}\label{fig:pathnet}
+\caption{Training \emph{PathNet} on two tasks. At first random paths are initialized (1), then trained (2-3) and fixed (4). The same procedure is repeated for the next paths using the previously fixed paths and new parameters in all other nodes (5-9). From \citet{Fernando2017}.}\label{fig:pathnet}
 \end{figure}
+
+
 
 \hypertarget{limoe}{%
 \subsubsection{LIMoE}\label{limoe}}
@@ -5298,8 +5097,10 @@ for the token of both modalities.
 
 }
 
-\caption{Architecture of *LIMoE*. From @Mustafa2022.}\label{fig:LIMoE}
+\caption{Architecture of \emph{LIMoE}. From \citet{Mustafa2022}.}\label{fig:LIMoE}
 \end{figure}
+
+
 
 The model is trained using a contrastive objective. The contrastive loss, in this case, aims to maximize the paired visual and textual input while minimizing all combinations of unpaired embeddings. This objective can be achieved by using the dot-product as a similarity measure between the two embeddings of both modalities, which provide a differentiable
 operation through which the overall loss can be minimized. Additionally, to contrastive loss, the pitfalls of a multimodal MoE are also considered. One challenge in MoE is the correct balancing of routing to the experts, which is even more challenging when using unbalanced multimodal data. To address this issue, two new losses based on entropy are introduced. Entropy can be used as an appropriate term since it provides a valuable number for the uniformity of the distribution, which is necessary to balance the expert assignments. The losses are aimed at controlling the allocation of experts to tokens, which is also necessary to fulfill the assumptions for the implemented buffer. One loss considers the token level (local) routing distribution, and the other considers the overall expert routing distribution (global). The local loss aims to achieve no uniform behavior in expert allocation such that each token is indeed assigned to specific experts. In contrast, the overall global loss aims to achieve uniformity over all tokens to avoid a collapse in which tokens are solely assigned to a few experts which do not have the capacity to deal with all tokens. These losses are computed for each modality. Furthermore, already available losses for training MoE models were also added to avoid known downsides of MoE models. LIMoE was compared against similar models, which show the pitfalls of being solely dense and specialized on a task, which is also the case for two-tower setups like CLIP \citep{radford2021learning}. The test dataset was ImageNet \citep{deng2009imagenet} and COCO \citep{mccoco}. Overall, LIMoE-H/14 (largest model, 12 MoE-layers, 32 experts per layer) achieved strong performance considering that only one model was used for two modalities against specialist models in two-tower setups. It was also possible to outperform CLIP by a significant margin while using minimal additional parameters. Models that achieved similar results to LIMoE used at least twice the number of parameters for a forward pass.
@@ -5312,8 +5113,11 @@ modalities remains a field of research, as well as adding further modalities. Si
 Another model which is worth considering in the context of the Pathways proposal is muNet \citep{Gesmundo2022a}. The initial criticism of current inefficiencies in deep learning is addressed by providing a framework to avoid discarding knowledge. muNet is an approach to improving multitask learning with a focus on fine-tuning. In current practice for fine-tuning, a pre-trained model is copied and then explicitly trained on a task by overwriting previous knowledge, which addresses the same problem outlined by \citet{Dean21}.
 muNet evolves a pre-trained model on different tasks, using an EA to reuse already trained knowledge. An initial model is modified so that it becomes more and more optimized to fit specific tasks while keeping all previously learned knowledge. These modifications are so-called mutations applied to the model to score better. Eventually, a set of models is obtained, which includes new neural networks based majorly on the parameters of the initial model. The new modules can be seen as paths to task-specific modifications of the initial network. Although the network is not sparse, the concept of reusing many parts of a network while accounting for multiple tasks is to be mentioned in the context of the Pathways proposal.
 The EA of muNet starts with an initially proposed model that is mutated further on. All further mutations are stored so that after a set of candidates is available, the set can be split into models trained for this task (active population) and models for other tasks (inactive population). These two sets become the sets of candidates for the following task-specific iterations.
-Training a specific task follows three steps: sampling candidate models, mutating, training, and evaluation. The best scoring model is added to the active population for further mutation. A sample algorithm accounts for exploration and exploitation to get a candidate model for subsequent mutation. The active population is ordered in a descending list based on the model's score. Each list entry is then revisited, starting from the highest scoring model onward, so that the better performing models are considered first (exploitation). The draw probability is computed as: \[\mathbb P(m|t) = 0.5 ^{ \#timesSelected(m, t)}\]
-where: \[\#timesSelected(m, t)\] is the amount of previous mutations based on model \emph{m} for task \emph{t}). The more unsuccessful mutations the model has had before, the smaller the draw probability becomes. Thus, exploration is emphasized by considering previous attempts and allowing other models to be preferred. However, if this method does not yield a candidate, a model is drawn from the union of the inactive and active population.
+Training a specific task follows three steps: sampling candidate models, mutating, training, and evaluation. The best scoring model is added to the active population for further mutation. A sample algorithm accounts for exploration and exploitation to get a candidate model for subsequent mutation. The active population is ordered in a descending list based on the model's score. Each list entry is then revisited, starting from the highest scoring model onward, so that the better performing models are considered first (exploitation). The draw probability is computed as:
+
+\[\mathbb P(m|t) = 0.5 ^{ \#timesSelected(m, t)}\]
+
+Where \(\#timesSelected(m, t)\) is the amount of previous mutations based on model \emph{m} for task \emph{t}). The more unsuccessful mutations the model has had before, the smaller the draw probability becomes. Thus, exploration is emphasized by considering previous attempts and allowing other models to be preferred. However, if this method does not yield a candidate, a model is drawn from the union of the inactive and active population.
 Applying mutations is the next step in the algorithm. A random number of mutations are drawn from the set of possible mutations, which include:
 
 \begin{itemize}
