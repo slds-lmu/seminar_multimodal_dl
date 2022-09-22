@@ -244,33 +244,31 @@ In the case of EfficientNets, the results achieved by the previous state-of-the-
 
 ### Contrastive learning
 
-In recent years the problem of classification of the unlabeled dataset is becoming more widespread. More unlabeled datasets are being created in fields like medicine, the automotive industry, military, etc., requiring human labeling. Since the process is expensive and time-consuming, researchers assumed, it could be automated with contrastive learning frameworks. One of the first and most known contrastive learning frameworks is SimCLR @SimCLR. The advantage of this framework is its simplicity, yet it achieves high accuracy on classification tasks. The main idea is to have two copies of the image, which are then used to train two networks and later compared. The problem with this framework is that it doubles the size of the dataset and reaches among all images, which can be computationally unfeasible in large datasets. Bootstrap Your Own Latent @BYOL was introduced to avoid making double-sized datasets. The idea was to bootstrap images' representations, avoiding unnecessary image comparison. These two frameworks will be described in this work.
- Further improvements in the choice of creating two views of images and comparison techniques were presented in different frameworks such as Nearest-Neighbor Contrastive Learning (NNCLR) @NNCLR, Open World Object Detection (ORE) @ORE, Swapping Assignments between multiple Views (SwAV) @SwAV, and many more.
-This field is a constant research topic, and new, improved frameworks are being created to help researchers solve other tasks requiring labeled datasets.
+In recent years the problem of classification of unlabeled dataset is becoming more widespread. More unlabeled datasets requiring human labeling are created in fields like medicine, the automotive industry, military, etc. Since the process is expensive and time-consuming, researchers assumed it could be automated with contrastive learning frameworks. One of the first and most known contrastive learning frameworks is SimCLR [@SimCLR]. The advantage of this framework is its simplicity, yet it achieves high accuracy on classification tasks. The main idea is to have two copies of the image, which are then used to train two networks and that are compared. The problem with this framework is that it doubles the size of the dataset and reaches among all images, which can be computationally infeasible for large datasets. Bootstrap Your Own Latent [@BYOL] was introduced to avoid making double-sized datasets. The idea was to bootstrap image representations to avoid unnecessary image comparisons. These two frameworks will be described in this chapter.
+
+Further improvements in the choice of creating two views of images and comparison techniques were presented in different frameworks such as Nearest-Neighbor Contrastive Learning (NNCLR) [@NNCLR], Open World Object Detection (ORE) [@ORE], Swapping Assignments between multiple Views (SwAV) {@SwAV}, and many more.
+This field is a constant research topic and new improved frameworks are proposed on a constant basis to help researchers solve different tasks that requires labeled datasets.
 
 
-### A Simple Framework for Contrastive Learning of Visual Representations
+#### A Simple Framework for Contrastive Learning of Visual Representations
 
-@SimCLR intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations and called it SimCLR. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.
+@SimCLR intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations called SimCLR. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.
 
-  Intending to understand what qualifies good contrastive representation learning, the significant components of the framework were studied and resulted in:
+Intending to understand what qualifies good contrastive representation learning, the significant components of the framework were studied and resulted in:
 
 * A contrastive prediction task requires combining multiple data augmentation operations, which results in effective representations. Unsupervised contrastive learning benefits from more significant data augmentation.
-* The quality of the learned representations can be substantially improved by introducing a learnable nonlinear transformation between the representation and the contrastive loss.
+* The quality of the learned representations can be substantially improved by introducing a learn-able non-linear transformation between the representation and the contrastive loss.
 * Representation learning with contrastive cross-entropy loss can be improved by normalizing embeddings and adjusting the temperature parameter appropriately.
 * Unlike its supervised counterpart, contrastive learning benefits from larger batch sizes and extended training periods. Contrastive learning also benefits from deeper and broader networks, just as supervised learning does.
 
 
 #### The Contrastive Learning Framework
 
- Like previous contrastive learning algorithms,  in the SimCLR, a contrastive loss is used to learn representations by maximizing agreement between various augmented views of the same data example. This framework contains four significant components, which are shown in Figure \@ref(fig:ch01-figure4):
+Like for SimCLR, a contrastive loss is used to learn a representation by maximizing the agreement between various augmented views of the same data example. This framework contains four significant components, which are shown in Figure \@ref(fig:ch01-figure4):
 
 1. A stochastic *data augmentation* module
-
 2. A neural network *base encoder*
-
 3. A small neural network *projection head*
-
 4. A *contrastive loss function*
 
 ```{r ch01-figure04, echo=FALSE, out.width="30%", fig.cap="A simple framework for contrastive learning of visual representations", fig.align="center"}
@@ -280,13 +278,10 @@ knitr::include_graphics("./figures/01-chapter1/SimCLR.png")
 
 ##### Stochastic data augmentation module
 
-First, the minibatch of N examples is sampled randomly, and the contrastive prediction task is defined on pairs of augmented examples, resulting in 2N data points. A memory bank was not used to train the model, instead, the training batch size varied from 256 to 8192.
-Any given data example randomly returns two correlated views of the same example, denoted $\tilde{x}_{i}$ and $\tilde{x}_{j}$, which is known as a **positive pair**. **Negative pairs** are all other $2(N-1)$ pairs except the positive pair. In one view, some data augmentation techniques are applied.
-Data augmentation is widely embraced in supervised and unsupervised representation learning. Unfortunately, it has not been used to define the contrastive prediction task, which is mainly determined by changing the architecture. It was shown that choosing different data augmentation techniques can reduce the complexity of previous contrastive learning frameworks.
-There are many data augmentation operations, the focus was on the most common ones, which are:
+First, the minibatch of $N$ examples is sampled randomly, and the contrastive prediction task is defined on pairs of augmented examples, resulting in $2N$ data points. A memory bank was not used to train the model, instead, the training batch size varies from 256 to 8192. Any given data example randomly returns two correlated views of the same example, denoted $\tilde{x}_{i}$ and $\tilde{x}_{j}$, which is known as a **positive pair**. **Negative pairs** are all other $2(N-1)$ pairs. In one view, some data augmentation techniques are applied. Data augmentation is widely embraced in supervised and unsupervised representation learning. Unfortunately, it has not been used to define the contrastive prediction task, which is mainly determined by changing the architecture. It was shown that choosing different data augmentation techniques can reduce the complexity of previous contrastive learning frameworks. There are many data augmentation operations, the focus was on the most common ones, which are:
 
-* **spatial geometric transformation**: cropping and resizing (with horizontal flipping), rotation and cutout,
-*  **appearance transformation**:  color distortion (including color dropping), brightness, contrast, saturation, Gaussian blur, and Sobel filtering.
+* **Spatial geometric transformation**: cropping and resizing (with horizontal flipping), rotation and cutout,
+*  **Appearance transformation**:  color distortion (including color dropping), brightness, contrast, saturation, Gaussian blur, and Sobel filtering.
 
 ```{r ch01-figure05, echo=FALSE, out.width="80%", fig.cap="Augmentation texhniques", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/augmentation.png")
@@ -295,46 +290,44 @@ knitr::include_graphics("./figures/01-chapter1/augmentation.png")
 Due to the image sizes in the ImageNet dataset, all images were always randomly cropped and resized to the same resolution. Later on, other targeted data augmentation transformations were applied to one branch, remaining the one as original i.e. $t\left( x_{i}\right)= x_i$.
 Applying just individual transformation is insufficient for the model to learn good representations. The model's performance improves after composing augmentations, although the contrastive prediction task becomes more complex. The composition of augmentations that stood out were random cropping and random color distortion.
 
-It was also observed that stronger color augmentation significantly improves the linear evaluation of unsupervised learned models. Stronger color augmentations do not enhance the performance of supervised models when trained with the same augmentations. Based on the experiments, unsupervised contrastive learning benefits from stronger color data augmentation than supervised learning.
+It was also observed that stronger color augmentation significantly improves the linear evaluation of unsupervised learned models. Stronger color augmentations do not enhance the performance of supervised learning models when trained with the same augmentations. Based on the experiments, unsupervised contrastive learning benefits from stronger color data augmentation than supervised learning.
 
 ##### Neural network base encoder
 
-Neural network based encoder $f\left( \cdot  \right)$ extracts representation vectors from augmented data examples. This framework does not restrict a choice of the network architecture, although for simplicity the commonly used ResNet was picked and obtained $h_i=f\left( \tilde{x}_{i} \right)=ResNet\left(\tilde{x}_{i}\right)$ where $\textbf{h}_i\in \mathbb{R}^{d}$ is the output after the average pooling layer. Although increasing depth and width improves performance, the ResNet-50 was chosen. Furthermore, when the model size increases, the gap between supervised and unsupervised learning shrinks, suggesting that bigger models benefit from unsupervised learning more.
+Neural network based encoder $f\left( \cdot  \right)$ extracts multiple representation vectors from the augmented data examples. This framework does not restrict a choice of the network architecture, although for simplicity, the commonly used ResNet was picked and gives $h_i=f\left( \tilde{x}_{i} \right)=ResNet\left(\tilde{x}_{i}\right)$ where $\textbf{h}_i\in \mathbb{R}^{d}$ is the output after the average pooling layer. Although increasing depth and width improves performance, the ResNet-50 was chosen. Furthermore, when the model size increases, the gap between supervised and unsupervised learning shrinks, suggesting that bigger models benefit more from unsupervised learning.
 
 ##### Small neural network projection head
 
- A small neural network projection heads $g\left( \cdot  \right)$ that maps representations to the space where contrastive loss is applied. The importance of including a projection head, i.e., $g\left( h  \right)$ was evaluated. They have considered three different architectures for the head:
+A small neural network projection head $g\left( \cdot  \right)$ maps the representation to the space where the contrastive loss is applied to. The importance of including a projection head, i.e., $g\left( h  \right)$ was evaluated and they considered three different architectures for the head:
 
 1. identity mapping,
 2. linear projection,
-3. the default nonlinear projection with one additional hidden layer and ReLU activation function.
+3. the default non-linear projection with one additional hidden layer and ReLU activation function.
 
-The results showed that a nonlinear projection head is better than a linear projection and much better than no projection. It improves the representation quality of the layer before it. They have used a MLP with one hidden layer to obtain $z_i = g\left( \textbf{h}_i  \right) = W^{\left(  2\right)}\sigma \left(  W^{\left(  1\right)} \textbf{h}_i\right)$ where $\sigma$ is a ReLU non-linearity.
+The results showed that a non-linear projection head is better than a linear projection and much better than no projection. It improves the representation quality of the layer that is applied previous to it. They have used a MLP with one hidden layer to obtain $z_i = g\left( \textbf{h}_i  \right) = W^{\left(  2\right)}\sigma \left(  W^{\left(  1\right)} \textbf{h}_i\right)$ where $\sigma$ is a ReLU non-linearity transformation.
 
-This step is performed because defining the contrastive loss on $z_i$ instead of on $\textbf{h}_i$ would not lead to loss of information caused by contrastive loss. Especially, $z=g\left( h  \right)$ is trained to be invariant to data transformations. As a result, $g$ can remove information useful for a downstream task, such as object color or orientation. Using the nonlinear transformation $g\left( *  \right)$, $h$ can maintain and form more information.
+This step is performed because defining the contrastive loss on $z_i$ instead of on $\textbf{h}_i$ would not lead to a loss of information caused by contrastive loss. Especially, $z=g\left( h  \right)$ is trained to be invariant to data transformations. As a result, $g$ can remove information useful for a downstream task such as object color or orientation. Using the non-linear transformation $g\left( *  \right)$, $h$ can maintain and form more information.
 
 ##### Contrastive loss function
 
-Given a set $\left\{ \tilde{x}_{ik} \right\}$ including a positive pair of examples $\tilde{x}_{i}$ and $\tilde{x}_{j}$, the contrastive prediction task aims to identify $\tilde{x}_{i}$ in $\left\{ \tilde{x}_{i} \right\}_{k\neq i}$ for a given $\tilde{x}_{i}$. In the case of positive examples, the loss function is as follows  $\left(  i, j\right)$ is defined as
-
+Given a set $\left\{ \tilde{x}_{ik} \right\}$ including a positive pair of examples $\tilde{x}_{i}$ and $\tilde{x}_{j}$, the contrastive prediction task aims to identify $\tilde{x}_{i}$ in $\left\{ \tilde{x}_{i} \right\}_{k\neq i}$ for a given $\tilde{x}_{i}$. In the case of positive examples, the loss function is defined as
 $$
 \mathcal{l}_{i,j} = −\log\frac{exp\left( \frac{sim(z_i,z_j)}{\tau} \right)}{\sum_{k=1}^{2N}\mathbb{I_{\left[ k\neq i \right]}}exp\left( \frac{sim(z_i,z_k)}{\tau} \right)}
 $$
 
-where $\mathbb{I_{\left[ k\neq i \right]}}\in\left\{ 0,1 \right\}$ is an indicator function, $\tau$ denotes a temperature parameter and $sim\left(\textbf{u,v} \right)= \frac{\textbf{u}^T\textbf{v}}{\left\|  \textbf{u}\right\|\left\| \textbf{v} \right\|}$ is a dot product between $\mathcal{l}_2$ normalized $\textbf{u},\textbf{v}$.
+where $\mathbb{I_{\left[ k\neq i \right]}}\in\left\{ 0,1 \right\}$ is an indicator function, $\tau$ denotes a temperature parameter and $sim\left(\textbf{u,v} \right)= \frac{\textbf{u}^T\textbf{v}}{\left\|  \textbf{u}\right\|\left\| \textbf{v} \right\|}$ is a dot product between $\mathcal{l}_2$ and normalized $\textbf{u},\textbf{v}$.
 
 The final loss is calculated across all positive pairs, both $\left( i,j \right)$ and $\left( j,i \right)$, in a mini-batch. It was named **NT-Xent**, the normalized temperature-scaled cross-entropy loss.
 
-The NT-Xent loss was compared against other commonly used contrastive loss functions, such as logistic loss and margin loss. Gradient analysis shows that $l_2$ normalization, cosine similarity, and temperature together effectively weight different examples, and a suitable temperature can make the model learn from hard negatives. The advantage of NT-Xent is that it weights the negatives by their relative hardness. Without normalization and proper temperature scaling, performance is significantly worse. Also, the contrastive task accuracy is higher, but the resulting representation is worse under linear evaluation.
+The NT-Xent loss was compared against other commonly used contrastive loss functions, such as logistic loss and margin loss. Gradient analysis shows that $l_2$ normalization, cosine similarity, and temperature together effectively weight different examples and a suitable temperature can make the model learn from hard negatives. The advantage of NT-Xent is that it weights the negatives by their relative hardness. Without normalization and proper temperature scaling the performance is significantly worse. Also, the contrastive task accuracy is higher, but the resulting representation is worse under linear evaluation.
 
-
-### Bootstrap Your Own Latent
+#### Bootstrap Your Own Latent
 
 The fundamental idea of contrastive learning is to create pairs of images on which the framework would be trained. Creating negative pairs relies on large batch sizes, memory banks, or customized mining strategies which can be challenging in larger datasets. @BYOL wanted to create a new approach that would achieve better performance than other contrastive methods without using negative pairs. A solution they have introduced is a method called Bootstrap Your Own Latent (BYOL). The idea was to bootstrap representations of images. As a result, BYOL is more robust to the choice of image augmentations.
-Furthermore, BYOL has two neural networks, called online and target networks, which interact and learn from each other. Using an augmented view of an image, BYOL trains its online network to predict the target network's representation of another augmented view. This approach achieved state-of-the-art results when trained on the ImageNet dataset under the linear evaluation protocol. Additionally, compared to SimCLR, a strong contrastive baseline, BYOL suffers from much less performance drop when only random crops are used to augment images.
+Furthermore, BYOL has two neural networks, called online and target network, who interact and learn from each other. Using an augmented view of an image, BYOL trains its online network to predict the target network's representation of another augmented view. This approach achieved state-of-the-art results when trained on the ImageNet dataset under the linear evaluation protocol. Additionally, compared to SimCLR, a strong contrastive baseline, BYOL suffers from much less performance drop when only random crops are used to augment images.
 
 
-#### Description of method
+##### Description of the method
 
 BYOL aims to learn a representation of $y_\theta$. It uses two neural networks: *online* and *the target network* to achieve that. The *online network*  is determined by a set of weights $\theta$ and consists of:
 
@@ -346,40 +339,38 @@ BYOL aims to learn a representation of $y_\theta$. It uses two neural networks: 
 knitr::include_graphics("./figures/01-chapter1/BYOL.png")
 ```
 
-The *target network*  has the same architecture as the online network but uses different weights $\xi$. It provides the regression targets to train the online network, and its parameters $\xi$ are an exponential moving average of the online parameters $\theta$. Precisely, given a target decay rate $\tau \in[0,1]$, after each training step, the following update
-\begin{equation}
-\tag{8}
+The *target network* has the same architecture as the online network but uses different weights $\xi$. It provides the regression targets to train the online network, and its parameters $\xi$ are an exponential moving average of the online parameters $\theta$. Precisely, given a target decay rate $\tau \in[0,1]$, after each training step, the following update
+
+$$
 \xi \leftarrow \tau \xi+(1-\tau) \theta
-\end{equation}
+$$
+
 is performed.
-Firstly, image is sampled uniformly from $\mathcal{D}$, from which two distributions of image augmentations $\mathcal{T}$ and $\mathcal{T}^{\prime}$ are created. BYOL applies respectively two image augmentations $t \sim \mathcal{T}$ and $t^{\prime} \sim \mathcal{T}^{\prime}$, creating two augmented views $v \triangleq t(x)$ and $v^{\prime} \triangleq t^{\prime}(x)$. First augmented view $v$ is used at online network, resulting the output $y_{\theta} \triangleq f_{\theta}(v)$ and afterwards projection $z_{\theta} \triangleq g_{\theta}(y)$. Similarly, from second augmented view $v^{\prime}$ the target network outputs $y_{\xi}^{\prime} \triangleq f_{\xi}(v^{\prime})$ and the target projection $z_{\xi}^{\prime} \triangleq g_{\xi}(y^{\prime})$. Later on output a prediction of $q_{\theta}\left(z_{\theta}\right)$ of $z_{\xi}^{\prime}$ and $\ell_{2}$-normalize both $q_{\theta}\left(z_{\theta}\right)$ and $z_{\xi}^{\prime}$ to
+Firstly, an image is sampled uniformly from $\mathcal{D}$ from which two distributions of image augmentations $\mathcal{T}$ and $\mathcal{T}^{\prime}$ are created. BYOL applies respectively two image augmentations $t \sim \mathcal{T}$ and $t^{\prime} \sim \mathcal{T}^{\prime}$ creating two augmented views $v \triangleq t(x)$ and $v^{\prime} \triangleq t^{\prime}(x)$. First augmented view $v$ is used for the online network and result in the output $y_{\theta} \triangleq f_{\theta}(v)$ and afterwards the projection $z_{\theta} \triangleq g_{\theta}(y)$. Similarly, from the second augmented view $v^{\prime}$ the target network outputs $y_{\xi}^{\prime} \triangleq f_{\xi}(v^{\prime})$ and the target projection $z_{\xi}^{\prime} \triangleq g_{\xi}(y^{\prime})$. Later on output a prediction of $q_{\theta}\left(z_{\theta}\right)$ of $z_{\xi}^{\prime}$ and $\ell_{2}$-normalize both $q_{\theta}\left(z_{\theta}\right)$ and $z_{\xi}^{\prime}$ to
 
-\begin{equation}
-\tag{9}
+$$
 \overline{q_{\theta}}\left(z_{\theta}\right) \triangleq q_{\theta}\left(z_{\theta}\right) /\left\|q_{\theta}\left(z_{\theta}\right)\right\|_{2} \quad \textrm{and} \quad
-\bar{z}_{\xi}^{\prime} \triangleq z_{\xi}^{\prime} /\left\|z_{\xi}^{\prime}\right\|_{2}
-\end{equation}
+\bar{z}_{\xi}^{\prime} \triangleq z_{\xi}^{\prime} /\left\|z_{\xi}^{\prime}\right\|_{2}.
+$$
 
-Predictor only applies to the online pipeline, making the architecture asymmetric between the online and target pipeline. Lastly, the following mean squared error between the normalized predictions and target projections is defined.
+The predictor is only applied to the online pipeline, making the architecture asymmetric between the online and target pipeline. Lastly, the following mean squared error between the normalized predictions and target projections is defined:
 
-\begin{equation}
-\tag{10}
+$$
 \mathcal{L}_{\theta, \xi} \triangleq\left\|\overline{q_{\theta}}\left(z_{\theta}\right)-\bar{z}_{\xi}^{\prime}\right\|_{2}^{2}=2-2 \cdot \frac{\left\langle q_{\theta}\left(z_{\theta}\right), z_{\xi}^{\prime}\right\rangle}{\left\|q_{\theta}\left(z_{\theta}\right)\right\|_{2} \cdot\left\|z_{\xi}^{\prime}\right\|_{2}}
-\end{equation}
- Loss is symmetrized $\mathcal{L}_{\theta, \xi}$ by using $v^{\prime}$ for the online network and $v$ for the target network separately to calculate $\widetilde{\mathcal{L}}_{\theta, \xi}$. At each training step, a stochastic optimization step is applied to minimize $\mathcal{L}_{\theta, \xi}^{\mathrm{BYOL}}=\mathcal{L}_{\theta, \xi}+\widetilde{\mathcal{L}}_{\theta, \xi}$ with respect to $\theta$ only, but not $\xi$. BYOL's dynamics are summarized as
+$$
 
-\begin{equation}
-\tag{11}
-\theta \leftarrow \operatorname{optimizer}\left(\theta, \nabla_{\theta} \mathcal{L}_{\theta, \xi}^{\mathrm{BYOL}}, \eta\right)
-\end{equation}
+The loss is symmetrized $\mathcal{L}_{\theta, \xi}$ by using $v^{\prime}$ for the online network and $v$ for the target network separately to calculate $\widetilde{\mathcal{L}}_{\theta, \xi}$. At each training step, a stochastic optimization step is applied to minimize $\mathcal{L}_{\theta, \xi}^{\mathrm{BYOL}}=\mathcal{L}_{\theta, \xi}+\widetilde{\mathcal{L}}_{\theta, \xi}$ with respect to $\theta$ only but not $\xi$. BYOL's dynamics are summarized as
 
-where $\eta$ is a learning rate.
-At the end of the training, only the encoder $f_{\theta}$.
+$$
+\theta \leftarrow \operatorname{optimizer}\left(\theta, \nabla_{\theta} \mathcal{L}_{\theta, \xi}^{\mathrm{BYOL}}, \eta\right).
+$$
 
-### Comparison of contrastive learning frameworks
+where $\eta$ is a learning rate. At the end of the training, only the encoder $f_{\theta}$ is used.
 
- Of all frameworks, SimCLR is the most popular due to its simplicity. The ResNet-50 in 3 different hidden layer widths (width multipliers of 1×, 2×, and 4×) were used and trained for 1000 epochs each. The accuracy of these frameworks on the ImageNet dataset with few labels improved when the width of ResNet-50 increased. For SimCLR with ResNet-50 top-1 accuracy is 69.3 and top-5 accuracy is 89, while for ResNet-50(4x) top-1 accuracy is 85.8 and top-5 accuracy is 92.6. These results are comparable with supervised methods.
-BYOL framework was built to improve the results of SimCLR. It was also stated that the accuracy for baseline ResNet-50 is 74.3 and 91.6 for top-1 accuracy and top-5 accuracy. When using ResNet-50(4x), accuracies increase to 78.6 and 94.2 for top-1 and top-5, respectively. More information about performance can be found in table below
+#### Comparison of contrastive learning frameworks
+
+Of all frameworks, SimCLR is the most popular due to its simplicity. The ResNet-50 in 3 different hidden layer widths (width multipliers of $1\times$, $2\times$, and $4\times$) were used and trained for 1000 epochs each. The accuracy of these frameworks on the ImageNet dataset with few labels improved when the width of ResNet-50 increases. For SimCLR with ResNet-50 top-1 accuracy is 69.3 and top-5 accuracy is 89, while for ResNet-50(4x) top-1 accuracy is 85.8 and top-5 accuracy is 92.6. These results are comparable with supervised methods.
+The BYOL framework was built to improve the results of SimCLR. It was also stated that the accuracy for the baseline ResNet-50 is 74.3 and 91.6 for top-1 accuracy and top-5 accuracy. When using ResNet-50(4x), an increase in accuracy to 78.6 and 94.2 for top-1 and top-5 is observed, respectively. More information about performance can be found in following table:
 
 | Model    | Architecture|Param (M)| top-1 acc.|top-5 acc.|
 |:----------:|:-----------:|:-----------:|:-----------:|:---------:|
@@ -394,12 +385,12 @@ BYOL framework was built to improve the results of SimCLR. It was also stated th
 
 ### Transformers in Computer Vision
 
-Since the first appearance of the Transformers architecture in 2017 @TRANSFORMERS_NLP, it has become an irreplaceable part of all-natural language processing (NLP) models. The main advantage of Transformers is that they can be trained on a large text corpus and then fine-tuned on a smaller task-specific dataset, and this enabled model training of unspecified size with more than 100B parameters.
+Since the first appearance of the Transformers architecture in 2017 @TRANSFORMERS_NLP, it has become an irreplaceable part of all-natural language processing (NLP) models. The main advantage of Transformers is that they can be trained on a large text corpus and then fine-tuned on a smaller task-specific dataset. This enabled model training of unspecified size with more than 100B parameters.
 
-However, computer vision still relied on convolutional architectures. With datasets constantly growing and the diversity of the fields where computer vision tasks could be applied, researchers wanted to implement Transformers architecture in the CV field. Some works tried combining CNN-like architectures with self-attention @wang, and others attempted to replace convolutions entirely @selfa. Due to specialized attention patterns, the problem was that they have not yet been scaled effectively on modern hardware accelerators. Therefore, in large-scale image recognition, classic ResNet-like architectures are still state-of-the-art.
+However, computer vision still relied on convolutional architectures. With datasets constantly growing and the diversity of the fields computer vision tasks could be applied to, researchers wanted to implement Transformers architecture in the CV field. Some works aim for combining CNN-like architectures with self-attention [@wang]. Others attempted to replace convolutions entirely, e.g. @selfa. Due to specialized attention patterns, the problem was that they have not yet been scaled effectively on modern hardware accelerators. Therefore, in large-scale image recognition, classic ResNet-like architectures are still state-of-the-art.
 
-In 2021 Google research, Brain Team published the paper "An image is worth 16x16 words," where they introduced new Transformers-based architecture for CV called Vision Transformers (ViT) @vit. Based on the success of Transformer in NLP scaling, they aimed to apply standard Transformer directly to images, changing it as little as possible. The image is split into patches, and linear embeddings of these patches are provided as inputs to the Transformer.
-These patches are the same as tokens (eg. words) in NLP. The model is trained on image classification in a supervised fashion.
+In 2021 the Google research Brain Team published the paper "An image is worth $16\times 16$ words" where they introduced new Transformers-based architecture for CV called Vision Transformers (ViT) [@vit]. Based on the success of Transformer in NLP scaling, they aimed to apply standard Transformer directly to images with little as possible changes to the existing architecture. The image is split into patches and linear embeddings of these patches are provided as inputs to the Transformer.
+These patches are the same as tokens (e.g. words) in NLP. The model is trained for image classification in a supervised learning fashion.
 
 #### Vision Transformers
 
@@ -413,20 +404,20 @@ knitr::include_graphics("./figures/01-chapter1/ViT.png")
 
 ##### Method
 
-Compared to NLP, where the input of the Transformer is a 1D sequence of token embeddings, images are 2D objects. Firstly, images needed to be represented differently to imitate original architectures as closely as possible. For that reason image $x\in \mathbb{R}^{ H \times  W \times  C}$ is reshaped into a sequence of flattened 2D patches $x_p\in \mathbb{R}^{ N \times \left( P^2 \cdot C \right)}$, where $\left(H,W\right)$ is the resolution of the original image, $C$ is the number of channels,$\left(P,P\right)$ is the resolution of each image patch, and $N =HW/P^2$ is the resulting number of patches, also the Transformer's effective input sequence length. The Transformer input is a fixed through all layers vector size $D$. The first step is to flatten the patches, usually 16x16, and map them to $D$ dimensions with a trainable linear projection, creating patch embeddings.
+Compared to NLP, with 1-dimensional token embedding input for the Transformer, images are 2-dimensional objects. Firstly, images needed to be represented differently to imitate original architectures as close as possible. For that reason image $x\in \mathbb{R}^{ H \times  W \times  C}$ is reshaped into a sequence of flattened 2-dimensional patches $x_p\in \mathbb{R}^{ N \times \left( P^2 \cdot C \right)}$, where $\left(H,W\right)$ is the resolution of the original image, $C$ is the number of channels, $\left(P,P\right)$ is the resolution of each image patch, and $N =HW/P^2$ is the resulting number of patches, also the Transformer's effective input sequence length. The Transformer input through all layers is a fixed vector of size $D$. The first step is to flatten the patches, usually $16\times 16$ and map them to $D$ dimensions with a trainable linear projection to create patch embeddings.
 
 $$
 \mathbf{z}_{0} =\left[\mathbf{x}_{\text {class }} ; \mathbf{x}_{p}^{1} \mathbf{E} ; \mathbf{x}_{p}^{2} \mathbf{E} ; \cdots ; \mathbf{x}_{p}^{N} \mathbf{E}\right]+\mathbf{E}_{p o s}, \mathbf{E} \in \mathbb{R}^{\left(P^{2} \cdot C\right) \times D}, \mathbf{E}_{p o s} \in \mathbb{R}^{(N+1) \times D}
 $$
 
-To this sequence of "patch embeddings," a prefix learnable [class] token, like in BERT, is usually added. This token $\mathbf{z}_{0}^{0} = \mathbf{x}_{class}$ tells the model to classify the image and  increases dimension of vector z. Also, the state of this token at the output of the Transformer encoder $\left(\mathbf{z}_{L}^{0}\right)$, on which Layernorm is applied, serves as the image representation $y$.
+To this sequence of "patch embeddings", a prefix learnable [class] token, like in BERT, is usually added. This token $\mathbf{z}_{0}^{0} = \mathbf{x}_{class}$ tells the model to classify the image and increases the dimension of vector $z$. Also, the state of this token at the output of the Transformer encoder $\left(\mathbf{z}_{L}^{0}\right)$, on which the layernorm is applied, serves as the image representation $y$.
 
 $$
 \mathbf{y} =\operatorname{LN}\left(\mathbf{z}_{L}^{0}\right)
 $$
 
 
-Also, it is the only one to which the classification head is attached to during pre-training and fine-tuning. Classification head during pre-training is compiled of MLP with one hidden layer and a single linear layer at a fine-tuning time. Position embedding,a standard learnable 1D position embedding, are attached to the patch embeddings, serving as input to the encoder. The standard Transformer encoder consists of alternating layers of multiheaded self-attention and MLP blocks. After each block, a residual connection is applied.
+Furthermore, it is the only one to which the classification head is attached to during pre-training and fine-tuning. The classification head during pre-training is compiled of MLP with one hidden layer and a single linear layer at a fine-tuning time. Position embedding, a standard learnable 1-dimensional position embedding, are attached to the patch embeddings, serving as input to the encoder. The standard Transformer encoder consists of alternating layers of multiheaded self-attention and MLP blocks. After each block, a residual connection is applied.
 
 $$
 \mathbf{z}_{\ell}^{\prime} =\operatorname{MSA}\left(\operatorname{LN}\left(\mathbf{z}_{\ell-1}\right)\right)+\mathbf{z}_{\ell-1},  \ell=1 \ldots L
@@ -436,17 +427,17 @@ $$
 \mathbf{z}_{\ell} =\operatorname{MLP}\left(\mathrm{LN}\left(\mathbf{z}_{\ell}^{\prime}\right)\right)+\mathbf{z}_{\ell}^{\prime}, \ell=1 \ldots L
 $$
 
-Vision Transformer has a significantly lower inductive bias than CNNs in image-specific information. VIT only has local and translationally equivariant MLP layers, while the self-attention layers are global. Two-dimensional neighborhood structure is used sparingly: the image is cut into patches at the beginning, and the position embeddings are resized as needed at the fine-tuning time. Alternatively, the input sequence can consist of a CNN's feature maps on which patch embedding projection is applied.
-Vision Transformers are pre-trained on large datasets, and fine-tuned to (smaller) downstream tasks. For fine-tuning projection head is removed and zero-initialized $D \times K$ feedforward layer is attached, $K$ being the number of downstream classes. It is also beneficial to use higher resolution then in pre-training. Also ViT can handle arbitrary sequence lengths, but the pre-trained position embeddings can become sufficient. It is necessary to point out that resolution adjustment and patch extraction are the only points at which an inductive bias about the 2D structure of the images is manually injected into the Vision Transformers
+Vision Transformer has a significantly lower inductive bias than CNNs in image-specific information. VIT only has local and translational equivariant MLP layers, while the self-attention layers are global. A 2-dimensional neighborhood structure is used sparingly: the image is cut into patches at the beginning and the position embeddings are resized as needed at the fine-tuning time. Alternatively, the input sequence can consist of a CNN's feature map on which the patch embedding projection is applied.
+Vision Transformers are pre-trained on large datasets and fine-tuned to (smaller) downstream tasks. For fine-tuning, a projection head is removed and a zero-initialized $D \times K$ feedforward layer is attached with $K$ being the number of downstream classes. It is also beneficial to use higher resolution then in pre-training. Also ViT can handle arbitrary sequence lengths but the pre-trained position embeddings can become sufficient. It is necessary to point out that resolution adjustment and patch extraction are the only points at which an inductive bias about the 2-dimensional structure of the images is manually injected into the Vision Transformers
 
 
 ##### Experiments
 
 Similarly to BERT models, multiple versions of the model at various scales were created. They have created Base = "B", Large = "L", Huge = "H" versions of ViT, with 12, 24 and 32 layers and 86M, 307M and 632M parameters respectively.
 
-To explore model scalability, the already mentioned dataset ImageNet was used. In addition, ViT was compared against slightly modified ResNet, creating "ResNet(BiT)". The batch Normalization layer was replaced with Group Normalization and used standardized convolutions. Another network that it was compared to was Noisy Student @noisy, a large EfficientNet. Experiments showed that ViT Hughe with 14x14 input patch size outperformed both CNN-based networks with an accuracy of 88.5%, whereas ResNet BiT had 87.54% and Noisy Student 88.4%. Also, it is worth mentioning that ViT Large with 16x16 input patch size had 87.76% accuracy on the same dataset.
+To explore the model scalability, the previous mentioned dataset ImageNet was used. In addition, ViT was compared against a slightly modified ResNet called "ResNet(BiT)". The batch Normalization layer was replaced with Group Normalization and used standardized convolutions. Another network that it was compared to was Noisy Student [@noisy], a large EfficientNet. Experiments showed that ViT Hughe with $14\times 14$ input patch size outperformed both CNN-based networks with an accuracy of 88.5%, whereas ResNet BiT had 87.54% and Noisy Student 88.4%. It is worth mentioning that ViT Large with $16\times 16$ input patch size had 87.76% accuracy on the same dataset.
 Another thing worth pointing out is that ViT outperforms CNN-based architectures on all larger datasets yet performs slightly worse than CNN networks on a smaller dataset.
 
 ### Conclusion
 
-In this chapter, authors presented some of the current state-of-the-art approaches in Computer Vision. Nowdays, when technology is advancing each day, creating networks that would imitate human brain is more challenging. Still networks presented in this chapter are highly accurate and creating network which would out-performe them is challenging. Furthermore, it is noticeable that the application of CV is dictating the development of networks and frameworks which help humans with everyday tasks.
+In this chapter, the authors presented some of the current state-of-the-art approaches in Computer Vision. Nowadays, when technology is advancing each day, creating networks that would imitate human brain is more challenging. Still, the networks presented in this chapter are highly accurate and creating network which can out-perform them is challenging. Furthermore, it is noticeable that the application of CV is dictating the development of networks and frameworks which help humans with their everyday tasks.
