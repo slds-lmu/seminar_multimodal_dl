@@ -78,9 +78,10 @@ y = F  \left( x,\left\{  W_i\right\} \right) + x
 
 x and y present the input and output vectors of the layers. Figure \@ref(fig:ch01-figure01) visualizes the building block.
 
-```{r ch01-figure01, echo=FALSE, out.width="35%", fig.cap="Building block of residual learning", fig.align="center"}
+```{r ch01-figure01, echo=FALSE, out.width="35%", fig.cap="(ref:ch01-figure01)", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/resnetBlock.png")
 ```
+(ref:ch01-figure01) Building block of residual learning [@ResNet].
 
 The function $F \left( x,\left\{  W_i\right\} \right)$ represents the residual mapping that is to be learned. For the example with two layers from Figure \@ref(fig:ch01-figure01), $F = W_2\sigma\left( W_1x\right)$ in which $\sigma$ denotes the ReLU activation function. Biases are left out to simplify the notation. The operation $F + x$ is conducted with a shortcut connection and element-wise addition. Afterward, a second non-linear (i.e., $\sigma \left( y \right)$ transformation is applied.
 
@@ -114,17 +115,19 @@ Convolutional layers with a stride of 2 perform downsampling directly. A global 
 
 In both cases, shortcuts will be done with a stride of two when they go across feature maps of two sizes.
 
-```{r ch01-figure02, echo=FALSE, out.width="100%", fig.cap="Architecture of ResNet", fig.align="center"}
+```{r ch01-figure02, echo=FALSE, out.width="100%", fig.cap="(ref:ch01-figure02)", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/ResNet_architecture.png")
 ```
+(ref:ch01-figure02) Architecture of ResNet [@ResNet].
 
 ### EfficientNet
 
 Until @efficient introduced EfficientNet, it was popular to scale only one of the three dimensions – depth, width, or image size. The empirical study shows that it is critical to balance all network dimensions, which can be achieved by simply scaling each with a constant ratio. Based on this observation, a simple yet effective compound scaling method was proposed, which uniformly scales network width, depth, and resolution with a set of fixed scaling coefficients. For example, if $2N$ times more computational resources are available, increasing the network depth by $\alpha N$, width by $\beta N$, and image size by $\gamma N$ would be possible. Here $\alpha,\beta,\gamma$ are constant coefficients determined by a small grid search on the original miniature model. Figure \@ref(fig:ch01-figure03) illustrates the difference between this scaling method and conventional methods. A compound scaling method makes sense if an input image is bigger because a larger receptive field requires more layers and more significant channel features to capture fine-grained patterns. Theoretically and empirically, there has been a special relationship between network width and depth [@depthwidth]. Existing MobileNets [@mobilenet] and ResNets are used to demonstrated new scaling methods.
 
-```{r ch01-figure03, echo=FALSE, out.width="100%", fig.cap="Model scaling", fig.align="center"}
+```{r ch01-figure03, echo=FALSE, out.width="100%", fig.cap="(ref:ch01-figure03)", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/Model_scaling.png")
 ```
+(ref:ch01-figure03) Model scaling [@effecient].
 
 #### Compound Model Scaling
 
@@ -271,9 +274,10 @@ Like for SimCLR, a contrastive loss is used to learn a representation by maximiz
 3. A small neural network *projection head*
 4. A *contrastive loss function*
 
-```{r ch01-figure04, echo=FALSE, out.width="30%", fig.cap="A simple framework for contrastive learning of visual representations", fig.align="center"}
+```{r ch01-figure04, echo=FALSE, out.width="30%", fig.cap="(ref:ch01-figure04)", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/SimCLR.png")
 ```
+(ref:ch01-figure04) A simple framework for contrastive learning of visual representations [@SimCLR].
 
 
 ##### Stochastic data augmentation module
@@ -283,9 +287,10 @@ First, the minibatch of $N$ examples is sampled randomly, and the contrastive pr
 * **Spatial geometric transformation**: cropping and resizing (with horizontal flipping), rotation and cutout,
 *  **Appearance transformation**:  color distortion (including color dropping), brightness, contrast, saturation, Gaussian blur, and Sobel filtering.
 
-```{r ch01-figure05, echo=FALSE, out.width="80%", fig.cap="Augmentation texhniques", fig.align="center"}
+```{r ch01-figure05, echo=FALSE, out.width="80%", fig.cap="(ref:ch01-figure05)", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/augmentation.png")
 ```
+(ref:ch01-figure05) Augmentation texhniques [@SimCLR].
 
 Due to the image sizes in the ImageNet dataset, all images were always randomly cropped and resized to the same resolution. Later on, other targeted data augmentation transformations were applied to one branch, remaining the one as original i.e. $t\left( x_{i}\right)= x_i$.
 Applying just individual transformation is insufficient for the model to learn good representations. The model's performance improves after composing augmentations, although the contrastive prediction task becomes more complex. The composition of augmentations that stood out were random cropping and random color distortion.
@@ -335,9 +340,10 @@ BYOL aims to learn a representation of $y_\theta$. It uses two neural networks: 
 * a projector $g_\theta$,
 * a predictor $q_\theta$.
 
-```{r ch01-figure06, echo=FALSE, out.width="80%", fig.cap="Bootstrap Your Own Latent", fig.align="center"}
+```{r ch01-figure06, echo=FALSE, out.width="80%", fig.cap="(ref:ch01-figure06)", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/BYOL.png")
 ```
+(ref:ch01-figure06) Bootstrap Your Own Latent [@BYOL].
 
 The *target network* has the same architecture as the online network but uses different weights $\xi$. It provides the regression targets to train the online network, and its parameters $\xi$ are an exponential moving average of the online parameters $\theta$. Precisely, given a target decay rate $\tau \in[0,1]$, after each training step, the following update
 
@@ -397,10 +403,10 @@ These patches are the same as tokens (e.g. words) in NLP. The model is trained f
 Brain Team wanted to create simple but universally scalable architecture to follow the original Transformers architecture.
 
 
-```{r ch01-figure7, echo=FALSE, out.width="90%", fig.cap="Vision Transformer", fig.align="center"}
+```{r ch01-figure7, echo=FALSE, out.width="90%", fig.cap="(ref:ch01-figure7)", fig.align="center"}
 knitr::include_graphics("./figures/01-chapter1/ViT.png")
 ```
-
+(ref:ch01-figure7) Vision Transformer [@vit].
 
 ##### Method
 
