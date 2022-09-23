@@ -176,7 +176,7 @@ neural-network-base-encoder
 small-neural-network-projection-head
 contrastive-loss-function
 bootstrap-your-own-latent
-description-of-method
+description-of-the-method
 comparison-of-contrastive-learning-frameworks
 transformers-in-computer-vision
 vision-transformers

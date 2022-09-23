@@ -127,7 +127,7 @@
 
 \title{Multimodal Deep Learning}
 \author{}
-\date{\vspace{-2.5em}2022-09-21}
+\date{\vspace{-2.5em}2022-09-23}
 
 \begin{document}
 \maketitle
@@ -1299,17 +1299,17 @@ as few-shot learning.
 \hypertarget{history}{%
 \subsection{History}\label{history}}
 
-The first research about visual perception comes from neurophysiological research performed in the 1950s and 1960s on cats, where they used cats as a model to understand how human vision is compounded. Scientists concluded that human vision is hierarchical, and neurons detect simple features like edges, followed by more complex features like shapes and more complex visual representations. Inspired by this knowledge, computer scientists focused on recreating human neurological structures.
+The first research about visual perception comes from neurophysiological research performed in the 1950s and 1960s on cats. The researchers used cats as a model to understand how human vision is compounded. Scientists concluded that human vision is hierarchical and neurons detect simple features like edges followed by more complex features like shapes and even more complex visual representations. Inspired by this knowledge, computer scientists focused on recreating human neurological structures.
 
-At around the same time, as computers became more advanced, computer scientists worked on imitating human neurons' behavior and simulating a hypothetical neural network. In his book ``The Organization of Behaviour''(1949) Donald Hebbin stated that neural pathways strengthen over each successive use, especially between neurons that tend to fire at the same time, thus beginning the long journey towards quantifying the complex processes of the brain. The first Hebbian network, inspired by this neurological research, was successfully implemented at MIT in 1954 \citet{history1}.
+At around the same time, as computers became more advanced, computer scientists worked on imitating human neurons' behavior and simulating a hypothetical neural network. In his book ``The Organization of Behaviour'' (1949) Donald Hebbian stated that neural pathways strengthen over each successive use, especially between neurons that tend to fire at the same time, thus beginning the long journey towards quantifying the complex processes of the brain. The first Hebbian network, inspired by this neurological research, was successfully implemented at MIT in 1954 \citep{history1}.
 
 New findings led to the establishment of the field of artificial intelligence in 1956 on-campus at Dartmouth College. Scientists began to develop ideas and research how to create techniques that would imitate the human eye.
 
-In 1959 early research on developing neural networks was performed at Stanford University, where models called ``ADALINE'' and ``MADALINE,'' Multiple ADAptive LINear Elements, were developed. Those models aimed to recognize binary patterns and could predict the next bit \citet{history2}.
+In 1959 early research on developing neural networks was performed at Stanford University, where models called ``ADALINE'' and ``MADALINE,'' (Multiple ADAptive LINear Elements) were developed. Those models aimed to recognize binary patterns and could predict the next bit \citep{history2}.
 
-Starting optimism about Computer Vision and neural networks disappeared after 1969 and the publication of the book ``Perceptrons'' by Marvin Minsky, founder of the MIT AI Lab. According to the authors of this book, the single perception approach to neural networks could not be translated effectively into multi-layered neural networks. The period that followed was known as AI Winter, which lasted until 2010, when the technological development of computer and the internet became widely used. In 2012 breakthroughs in Computer Vision happened at the ImageNet Large Scale Visual Recognition Challenge (ILSVEC). The team from the University of Toronto issued a deep neural network called AlexNet \citet{alexnet} that changed the field of artificial intelligent Computer Vision (CV). AlexNet achieved an error rate of 16.4\%.
+Starting optimism about Computer Vision and neural networks disappeared after 1969 and the publication of the book ``Perceptrons'' by Marvin Minsky, founder of the MIT AI Lab, stated that the single perception approach to neural networks could not be translated effectively into multi-layered neural networks. The period that followed was known as AI Winter, which lasted until 2010, when the technological development of computer and the internet became widely used. In 2012 breakthroughs in Computer Vision happened at the ImageNet Large Scale Visual Recognition Challenge (ILSVEC). The team from the University of Toronto issued a deep neural network called AlexNet \citep{alexnet} that changed the field of artificial intelligent and Computer Vision (CV). AlexNet achieved an error rate of 16.4\%.
 
-From then until today, Computer Vision has been one of the fastest developing fields. Researchers are competing to develop a model that would be the most similar to the human eye and help humans in everyday life. In this work the author will describe only a few recent state-of-the-art models.
+From then until today, Computer Vision has been one of the fastest developing fields. Researchers are competing to develop a model that would be the most similar to the human eye and help humans in their everyday life. In this chapter the author will describe only a few recent state-of-the-art models.
 
 \hypertarget{supervised-and-unsupervised-learning}{%
 \subsection{Supervised and unsupervised learning}\label{supervised-and-unsupervised-learning}}
@@ -1324,7 +1324,7 @@ As part of artificial intelligence (AI) and machine learning (ML), there are two
   unsupervised learning.
 \end{itemize}
 
-Supervised learning \citet{supervised} is used to train algorithms on labeled datasets that accurately classify data or predict outcomes. With labeled inputs and outputs model can measure its accuracy and learn over time. We can distinguish two types of data mining problems:
+Supervised learning \citep{supervised} is used to train algorithms on labeled datasets that accurately classify data or predict outcomes. With labeled data, the model can measure its accuracy and learn over time. Among others, we can distinguish between two common supervised learning problems:
 
 \begin{itemize}
 \tightlist
@@ -1334,7 +1334,7 @@ Supervised learning \citet{supervised} is used to train algorithms on labeled da
   regression.
 \end{itemize}
 
-In unsupervised learning \citet{unsupervised}, unlabelled datasets are analyzed and clustered using machine learning algorithms. These algorithms aim to discover hidden patterns or data groupings without previous human intervention. The ability to find similarities and differences in information is mainly used for three main tasks:
+In unsupervised learning \citep{unsupervised}, unlabelled datasets are analyzed and clustered using machine learning algorithms. These algorithms aim to discover hidden patterns or data groupings without previous human intervention. The ability to find similarities and differences in information is mainly used for three main tasks:
 
 \begin{itemize}
 \tightlist
@@ -1346,16 +1346,17 @@ In unsupervised learning \citet{unsupervised}, unlabelled datasets are analyzed 
   dimensionality reduction.
 \end{itemize}
 
-Solving the problems where the dataset can be both labeled and unlabeled requires asemi-supervised approach that lies between supervised and unsupervised learning. It is useful when extracting relevant features from data that is complex and when data is high volume, i.e., medical images.
-Nowadays, a new research topic appeared in the machine learning community, and it is Self-Supervised Learning. Self-Supervised learning is a process where the model trains itself to learn one part of the input from another \citet{selfsup}. As a subset of unsupervised learning, it involves machines labeling, categorizing, and analyzing information independently and drawing conclusions based on connections and correlations. It can also be considered an autonomous form of supervised learning since it does not require human input to label data. Unlike unsupervised learning, self-supervised learning does not focus on clustering nor grouping \citet{selfsup2}. One part of Self-Supervised learning is contrastive learning, which is used to learn the general features of an unlabeled dataset identifying similar and dissimilar data points. It is utilized to train the model to learn about our data without any annotations or labels \citet{contrastive}.
+Solving the problems where the dataset can be both labeled and unlabeled requires a semi-supervised approach that lies between supervised and unsupervised learning. It is useful when extracting relevant features from complex and high volume data, i.e., medical images.
+
+Nowadays, a new research topic appeared in the machine learning community, Self-Supervised Learning. Self-Supervised learning is a process where the model trains itself to learn one part of the input from another \citep{selfsup}. As a subset of unsupervised learning, it involves machines labeling, categorizing, and analyzing information independently and drawing conclusions based on connections and correlations. It can also be considered as an autonomous form of supervised learning since it does not require human input to label data. Unlike unsupervised learning, self-supervised learning does not focus on clustering nor grouping \citep{selfsup2}. One part of Self-Supervised learning is contrastive learning, which is used to learn the general features of an unlabeled dataset identifying similar and dissimilar data points. It is utilized to train the model to learn about our data without any annotations or labels \citep{contrastive}.
 
 \hypertarget{scaling-networks}{%
 \subsection{Scaling networks}\label{scaling-networks}}
 
-Ever since the introduction of AlexNet in 2012, the problem of scaling convolutional neural networks has become the topic of active research. ConvNet can be scaled in all three dimensions: depth, width, or image size. One of the first researches in 2015 showed that network depth is crucial for image classification. The question whether stacking more layers enables the network to learn better leads He K., Zhang X., et al.~to deep residual networks called ResNet \citep{ResNet}, which will be described in this work. Later on, scaling networks by their depth became the most popular way to improve their performance.
-The second solution was to scale ConvNets by their width. Wider networks tend to be able to capture more fine-grained features and are easier to train \citet{width}.
-Lastly, scaling the image's resolution can improve the network's performance. With higher resolution input images, ConvNets could capture more fine-grained patterns. GPipe is one of the most famous networks created by this technique \citet{gpipe}.
-The question of possibility of scaling by all three dimensions was answered by \citet{EfficientNet} in the work presenting EfficientNet. This network was built by scaling up ConvNets by all three dimensions and will also be described here.
+Ever since the introduction of AlexNet in 2012, the problem of scaling convolutional neural networks (ConvNet) has become the topic of active research. ConvNet can be scaled in all three dimensions: depth, width, or image size. One of the first researches in 2015 showed that network depth is crucial for image classification. The question whether stacking more layers enables the network to learn better leads to deep residual networks called ResNet \citep{ResNet}, which will be described in this work. Later on, scaling networks by their depth became the most popular way to improve their performance.
+The second solution was to scale ConvNets by their width. Wider networks tend to be able to capture more fine-grained features and are easier to train \citep{width}.
+Lastly, scaling the image's resolution can improve the network's performance. With higher resolution input images, ConvNets could capture more fine-grained patterns. GPipe \citep{gpipe} is one of the most famous networks created by this technique.
+The question of possibility of scaling by all three dimensions was answered by \citet{EfficientNet} in the work presenting Efficient Net. This network was built by scaling up ConvNets by all three dimensions and will also be described here.
 
 \hypertarget{deep-residual-networks}{%
 \subsection{Deep residual networks}\label{deep-residual-networks}}
@@ -1364,7 +1365,7 @@ The deep residual networks, called ResNets \citep{ResNet}, were presented as the
 
 Another obstacle was a degradation problem. It occurs when the network depth increases, followed by saturating and then rapidly decreasing accuracy. Overfitting is not caused by such degradation, and adding more layers to a suitably deep model leads to higher training error, which indicates that not all systems are similarly easy to optimize.
 
-For example, it was suggested to consider a shallower architecture and its deeper counterpart that adds more layers. One way to avoid the degradation problem is to create a deeper model, where the auxiliary layers are identity mappings, and other layers are copied from a shallower model. The deeper model should produce no higher training error than its shallower counterpart. However, in practice, it is not the case, and it is hard to find comparably good to construct or better solutions. The solution to this degradation problem proposed by them is a deep residual learning framework.
+For example, it was suggested to consider a shallower architecture and its deeper counterpart that adds more layers. One way to avoid the degradation problem is to create a deeper model, where the auxiliary layers are identity mappings and other layers are copied from a shallower model. The deeper model should produce no higher training error than its shallower counterpart. However, in practice it is not the case and it is hard to find comparably good constructs or better solutions. The solution to this degradation problem proposed by them is a deep residual learning framework.
 
 \hypertarget{deep-residual-learning}{%
 \subsubsection{Deep Residual Learning}\label{deep-residual-learning}}
@@ -1372,22 +1373,22 @@ For example, it was suggested to consider a shallower architecture and its deepe
 \hypertarget{residual-learning}{%
 \paragraph{Residual Learning}\label{residual-learning}}
 
-The idea of residual learning is to replace the approximation of underlying mapping \(H\left( x\right)\), which is approximated by a few stacked layers (not necessarily the entire net), with an approximation of residual function \(F(x):= H\left( x \right) − x\). Here x denotes the inputs to the first of these layers, and it is assumed that both inputs and outputs have the same dimensions. The original function change its form \(F\left( x \right)+x\).
+The idea of residual learning is to replace the approximation of underlying mapping \(H\left( x\right)\), which is approximated by a few stacked layers (not necessarily the entire net), with an approximation of residual function \(F(x):= H\left( x \right) − x\). Here x denotes the inputs to the first of these layers, and it is assumed that both inputs and outputs have the same dimensions. The original function changes its form \(F\left( x \right)+x\).
 
-A counterintuitive phenomenon about degradation motivated this reformulation. The new deeper model should have no more significant training error when added layers are constructed as identity mappings. However,due to degradation problem, solvers may have challenges approximating identity mappings by multiple nonlinear layers. Using the residual learning reformulation, can drive the weights of the nonlinear layers toward zero to approach identity mappings if they are optimal.
-Generally, identity mappings are not optimal, but new reformulations may help to precondition the problem. When an optimal function is closer to an identity mapping than a zero mapping, finding perturbations concerning an identity mapping should be easier than learning the function from scratch.
+A counter-intuitive phenomenon about degradation motivated this reformulation. The new deeper model should not have a more significant training error when compared to a construction using identity mappings. However, due to the degradation problem, solvers may have challenges approximating identity mappings by multiple non-linear layers. Using the residual learning reformulation can drive the weights of the non-linear layers toward zero to approach identity mappings if they are optimal.
+Generally, identity mappings are not optimal, but new reformulations may help to pre-condition the problem. When an optimal function is closer to an identity mapping than a zero mapping, finding perturbations concerning an identity mapping should be easier than learning the function from scratch.
 
 \hypertarget{identity-mapping-by-shortcuts}{%
 \paragraph{Identity Mapping by Shortcuts}\label{identity-mapping-by-shortcuts}}
 
-Residual learning is adopted to every few stacked layers where a building block is defined as shown in Figure \ref{fig:ch01-figure01}:
+Residual learning is adopted to every few stacked layers where a building block is defined:
 
 \begin{equation}
 \label{eq:ch01-02-01}
 y = F  \left( x,\left\{  W_i\right\} \right) + x
 \end{equation}
 
-x and y present the input and output vectors of the layers.
+x and y present the input and output vectors of the layers. Figure \ref{fig:ch01-figure01} visualizes the building block.
 
 \begin{figure}
 
@@ -1395,46 +1396,48 @@ x and y present the input and output vectors of the layers.
 
 }
 
-\caption{Building block of residual learning}\label{fig:ch01-figure01}
+\caption{Building block of residual learning \citep{ResNet}.}\label{fig:ch01-figure01}
 \end{figure}
 
-The function \(F \left( x,\left\{ W_i\right\} \right)\) represents the residual mapping that is to be learned. For the example with two layers from Figure \ref{fig:ch01-figure01} that has two layers, \(F = W_2\sigma\left( W_1x\right)\) in which \(\sigma\) denotes the ReLU activation function, and to simplify the notations, biases are left out. The operation \(F + x\) is conducted with a shortcut connection and element-wise addition. Afterward, He et al.~applied second non-linearity ( i.e., \(\sigma \left( y \right)\), \ref{fig:ch01-figure01}).
 
-The shortcut connections in Equation \eqref{eq:ch01-02-01} neither adds an extra parameter nor increases computation complexity, which enables comparisons between plain and residual networks that concurrently have the same number of parameters, depth, width, and computational cost (except for the negligible element-wise addition).
-Dimensions of x and F must be equal in Equation \eqref{eq:ch01-02-01}. Alternatively, to match the dimensions, linear projection \(W_s\) by the shortcut connections can be applied:
+
+The function \(F \left( x,\left\{ W_i\right\} \right)\) represents the residual mapping that is to be learned. For the example with two layers from Figure \ref{fig:ch01-figure01}, \(F = W_2\sigma\left( W_1x\right)\) in which \(\sigma\) denotes the ReLU activation function. Biases are left out to simplify the notation. The operation \(F + x\) is conducted with a shortcut connection and element-wise addition. Afterward, a second non-linear (i.e., \(\sigma \left( y \right)\) transformation is applied.
+
+The shortcut connections in Equation \eqref{eq:ch01-02-01} neither adds an extra parameter nor increases computation complexity and enables a comparisons between plain and residual networks that concurrently have the same number of parameters, depth, width, and computational cost (except for the negligible element-wise addition).
+The dimensions of \(x\) and \(F\) in Equation \eqref{eq:ch01-02-01} must be equal. Alternatively, to match the dimensions, linear projection \(W_s\) by the shortcut connections can be applied:
 
 \begin{equation}
 \label{eq:ch01-02-02}
 y = F  \left( x,\left\{  W_i\right\} \right)+ W_sx.
 \end{equation}
 
-The square matrix \(W_s\) can be used in Equation \eqref{eq:ch01-02-02}. However, experiments showed that identity mapping is enough to solve the degradation problem. Therefore, \(W_s\) only aims to match dimensions. Although more levels are possible, it was experimented with function F having two or three layers without stating the exact form of it. Assuming F only has one layer, Equation \eqref{eq:ch01-02-01}, it is comparable to a linear layer: \(y = W_1 x + x\). The theoretical notations are about fully-connected layers, but convolutional layers were used. The function \(F \left( x,\left\{ W_i\right\} \right)\) can be applied to represent multiple convolutional layers. Two feature maps are added element-wise, channel by channel.
+The square matrix \(W_s\) can be used in Equation \eqref{eq:ch01-02-02}. However, experiments showed that identity mapping is enough to solve the degradation problem. Therefore, \(W_s\) only aims to match the dimensions. Although more levels are possible, it was experimented with function \(F\) having two or three layers without stating the exact form of it. Assuming \(F\) only has one layer (Equation \eqref{eq:ch01-02-01}) it is comparable to a linear layer: \(y = W_1 x + x\). The theoretical notations are about fully-connected layers, but convolutional layers were used. The function \(F \left( x,\left\{ W_i\right\} \right)\) can be applied to represent multiple convolutional layers. Two feature maps are added element-wise, channel by channel.
 
 \hypertarget{network-architectures}{%
 \subsubsection{Network Architectures}\label{network-architectures}}
 
-To construct efficient residual network, various plain/residual networks were tested. They trained the network on benchmarked datasets, one of them being the ImageNet dataset, which will be used for a comparison of network architectures. Figure \eqref{eq:ch01-02-02} shows that every residual network needs a plain baseline network inspired by the VGG network \citet{vgg} on which identity mapping by shortcuts is applied.
+Various plain/residual networks were tested to construct an efficient residual network. They trained the network on benchmarked datasets, e.g.~the ImageNet dataset, that are used for a comparison of network architectures. Figure \eqref{eq:ch01-02-02} shows that every residual network needs a plain baseline network inspired by the VGG \citep{vgg} network on which identity mapping by shortcuts is applied.
 
-\emph{Plain Network} The philosophy of VGG nets 41 mainly inspires plain baselines. There are two rules that convolution layers, which usually have 3x3 filters, follow:
+\emph{Plain Network:} The philosophy of VGG nets 41 mainly inspires the plain baselines. Two rules convolution layers, which usually have \(3\times 3\) filters, follow are:
 
 \begin{itemize}
 \tightlist
 \item
   feature maps with the same output size have the same number of layers;
 \item
-  reducing the size of a feature map by half doubles the number of filters per layer to maintain time complexity per layer
+  reducing the size of a feature map by half doubles the number of filters per layer to maintain time complexity per layer.
 \end{itemize}
 
-Convolutional layers with a stride of 2 perform downsampling directly. A global average pooling layer and a 1000-way fully-connected layer with softmax are at the end of the network. The number of weighted layers sums up to 34 in Figure \ref{fig:ch01-figure02} (middle).Compared to VGG nets, this model has fewer filters and lower complexity. (Figure \ref{fig:ch01-figure02}, left).
+Convolutional layers with a stride of 2 perform downsampling directly. A global average pooling layer and a 1000-way fully-connected layer with softmax are at the end of the network. The number of weighted layers sums up to 34 (Figure \ref{fig:ch01-figure02}, middle). Compared to VGG nets, this model has fewer filters and lower complexity (Figure \ref{fig:ch01-figure02}, left).
 
-\emph{Residual Network} Based on the above plain network, additional shortcut connections (Figure \ref{fig:ch01-figure02}, right) turn the network into its associate residual variant. The identity shortcuts (Equation \eqref{eq:ch01-02-01}) can be directly used in the case of the exact dimensions of the input and output (solid line shortcuts in Figure \ref{fig:ch01-figure02}). For the different dimensions (dotted line shortcuts in Figure \ref{fig:ch01-figure02}), two options are considered:
+\emph{Residual Network:} Based on the above plain network, additional shortcut connections (Figure \ref{fig:ch01-figure02}, right) turn the network into its associate residual variant. The identity shortcuts (Equation \eqref{eq:ch01-02-01}) can be directly used in the case of the exact dimensions of the input and output (solid line shortcuts in Figure \ref{fig:ch01-figure02}). For the different dimensions (dotted line shortcuts in Figure \ref{fig:ch01-figure02}), two options are considered:
 
 \begin{itemize}
 \tightlist
 \item
   The shortcut still performs identity mapping, but with extra zero entries padded to cope with the increasing dimensions, without adding new parameters;
 \item
-  The projection shortcut in Equation \eqref{eq:ch01-02-02} matches dimensions (due to 1×1 convolutions).
+  The projection shortcut in Equation \eqref{eq:ch01-02-02} matches dimensions (due to \(1\times 1\) convolutions).
 \end{itemize}
 
 In both cases, shortcuts will be done with a stride of two when they go across feature maps of two sizes.
@@ -1445,15 +1448,15 @@ In both cases, shortcuts will be done with a stride of two when they go across f
 
 }
 
-\caption{Architecture of ResNet}\label{fig:ch01-figure02}
+\caption{Architecture of ResNet \citep{ResNet}.}\label{fig:ch01-figure02}
 \end{figure}
+
+
 
 \hypertarget{efficientnet}{%
 \subsection{EfficientNet}\label{efficientnet}}
 
-Until Tan M. introduced EfficientNet \citet{effecient}, it was popular to scale only one of the three dimensions -- depth, width, or image size. The empirical study shows that it is critical to balance all network dimensions, which can be achieved by simply scaling each with a constant ratio. Based on this observation, a simple yet effective compound scaling method was proposed, which uniformly scales network width, depth, and resolution with a set of fixed scaling coefficients.
-For example, if 2N times more computational resources are available. In that case, increasing the network depth by \(\alpha N\), width by \(\beta N\), and image size by \(\gamma N\) would be possible.Here \(\alpha,\beta,\gamma\) are constant coefficients determined by a small grid search on the original miniature model. Figure \ref{fig:ch01-figure03} illustrates the difference between this scaling method and conventional methods.
-A compound scaling method makes sense if an input image is bigger since a larger receptive field requires more layers and more significant channel features to capture fine-grained patterns. Theoretically and empirically, there has been a special relationship between network width and depth \citet{depthwidth}. Existing MobileNets \citet{mobilenet} and ResNet are used to demonstrated new scaling method.
+Until \citet{efficient} introduced EfficientNet, it was popular to scale only one of the three dimensions -- depth, width, or image size. The empirical study shows that it is critical to balance all network dimensions, which can be achieved by simply scaling each with a constant ratio. Based on this observation, a simple yet effective compound scaling method was proposed, which uniformly scales network width, depth, and resolution with a set of fixed scaling coefficients. For example, if \(2N\) times more computational resources are available, increasing the network depth by \(\alpha N\), width by \(\beta N\), and image size by \(\gamma N\) would be possible. Here \(\alpha,\beta,\gamma\) are constant coefficients determined by a small grid search on the original miniature model. Figure \ref{fig:ch01-figure03} illustrates the difference between this scaling method and conventional methods. A compound scaling method makes sense if an input image is bigger because a larger receptive field requires more layers and more significant channel features to capture fine-grained patterns. Theoretically and empirically, there has been a special relationship between network width and depth \citep{depthwidth}. Existing MobileNets \citep{mobilenet} and ResNets are used to demonstrated new scaling methods.
 
 \begin{figure}
 
@@ -1461,8 +1464,10 @@ A compound scaling method makes sense if an input image is bigger since a larger
 
 }
 
-\caption{Model scaling}\label{fig:ch01-figure03}
+\caption{Model scaling \citep{effecient}.}\label{fig:ch01-figure03}
 \end{figure}
+
+
 
 \hypertarget{compound-model-scaling}{%
 \subsubsection{Compound Model Scaling}\label{compound-model-scaling}}
@@ -1470,12 +1475,12 @@ A compound scaling method makes sense if an input image is bigger since a larger
 \hypertarget{problem-formulation}{%
 \paragraph{Problem Formulation}\label{problem-formulation}}
 
-A function \(Y_i = \mathcal{F}i \left( X_i \right)\) with the operator \(\mathcal{F}_i\), output tensor \(Y_i\), input tensor \(X_i\) of shape \(\left( H_i, W_i, C_i \right)\), spatial dimensions \(H_i\), \(W_i\), and channel dimension \(C_i\) is called a ConvNet Layer \(i\). A ConvNet N appears as a list of composing layers:
+A function \(Y_i = \mathcal{F}_i \left( X_i \right)\) with the operator \(\mathcal{F}_i\), output tensor \(Y_i\), input tensor \(X_i\) of shape \(\left( H_i, W_i, C_i \right)\), spatial dimensions \(H_i\), \(W_i\), and channel dimension \(C_i\) is called a ConvNet Layer \(i\). A ConvNet N appears as a list of composing layers:
 \[
 \mathcal{N}=\mathcal{F_k}\odot \cdots \mathcal{F_2}\odot\mathcal{F_1}\left( X_1 \right)=\bigodot{j=1\cdots k}\mathcal{F_j}\left( X_1 \right)
 \]
 
-Effectively, these layers are often partitioned into multiple stages, and all layers in each stage share the same architecture. For example, ResNet has five stages, with all layers in every stage being the same convolutional type, except for the first layer that performs down-sampling. Therefore, a ConvNet can be defined as:
+Effectively, these layers are often partitioned into multiple stages and all layers in each stage share the same architecture. For example, ResNet has five stages with all layers in every stage being the same convolutional type except for the first layer that performs down-sampling. Therefore, a ConvNet can be defined as:
 
 \[
 \mathcal{N}=\bigodot_{i=1\cdots s}\mathcal{F_i}^{L_i}\left( X_{\left( H_i, W_i, C_i  \right)} \right)
@@ -1483,7 +1488,7 @@ Effectively, these layers are often partitioned into multiple stages, and all la
 
 where \(\mathcal{F_i}^{L_i}\) denotes layer \(\mathcal{F_i}\) which is repeated \(L_i\) times in stage \(i\), and \(\left( H_i, W_i, C_i \right)\) is the shape of input tensor \(X\) of layer \(i\).
 
-In comparison to the regular ConvNet focusing on best layer architecture \(\mathcal{F_i}\) search, model scaling centers on the expansion of the network length \(\left( L_i\right)\), width \(\left( C_i \right)\), and/or resolution \(\left( H_i, W_i\right)\) without changing \(\mathcal{F_i}\) that was predefined in the baseline network. Although model scaling simplifies the design problem of the new resource constraints through the fixing \(\mathcal{F_i}\), different \(\left( L_i, H_i, W_i, C_i \right)\) for each layer, the large designe space remains to be explored. To further reduce design space, all layers are restricted to be scaled uniformly with a constant ratio. In this case, the goal is to maximize the model's accuracy for any given resource constraints, which can be presented as an optimization problem:
+In comparison to the regular ConvNet focusing on the best layer architecture search \(\mathcal{F_i}\), model scaling centers on the expansion of the network length \(\left( L_i\right)\), width \(\left( C_i \right)\), and/or resolution \(\left( H_i, W_i\right)\) without changing \(\mathcal{F_i}\) that was predefined in the baseline network. Although model scaling simplifies the design problem of the new resource constraints through fixing \(\mathcal{F_i}\), a different large design space \(\left( L_i, H_i, W_i, C_i \right)\) for each layer remains to be explored. To further reduce the design space, all layers are restricted to be scaled uniformly with a constant ratio. In this case, the goal is to maximize the model's accuracy for any given resource constraint, which is presented as an optimization problem:
 
 \begin{align*}
 \max_{d,w,r} &\text{Accuracy} \left( \mathcal{N}\left( d,w,r \right) \right) \\
@@ -1491,32 +1496,32 @@ s.t.\mathcal{N}\left( d,w,r \right) &=\bigodot_{I=1...s}\hat{\mathcal{F}}{i}^{d\
 Memory\left( \mathcal{N} \right) &\leq\ targetMemory \\
 FLOPS\left( \mathcal{N} \right) &\leq\ targetFlops
 \end{align*}
-where w,d,r are coefficients for scaling network width, depth, and resolution; \(\left(\widehat{\mathcal{F}}_i, \widehat{L}_i, \widehat{H}_i, \widehat{W}_i, \widehat{C}_i \right)\) are predefined parameters in baseline network.
+where \(w,d,r\) are coefficients for scaling network width, depth, and resolution; \(\left(\widehat{\mathcal{F}}_i, \widehat{L}_i, \widehat{H}_i, \widehat{W}_i, \widehat{C}_i \right)\) are predefined parameters of the baseline network.
 
 \hypertarget{scaling-dimensions}{%
 \paragraph{Scaling Dimensions}\label{scaling-dimensions}}
 
-The main difficulty of this optimization problem is that the optimal \emph{d, w, r} depend on each other, and the values change under different resource constraints. Due to this difficulty, conventional methods mostly scale ConvNets in one of these dimensions:
+The main difficulty of this optimization problem is that the optimal \(d, w, r\) depend on each other and the values are changing under different resource constraints. Due to this difficulty, conventional methods mostly scale ConvNets in one of these dimensions:
 
-\textbf{Depth (\(d\)):} One of the most significant networks previously described as ResNet. As it was described, the problem of ResNets is that accuracy gain of a very deep network diminishes. For example, ResNet-1000 has similar accuracy to ResNet-101 even though it has many more layers.
+\textbf{Depth (\(d\)):} One of the most significant networks previously described is the ResNet. As it was described, the problem of ResNets is that accuracy gain of a very deep network diminishes. For example, ResNet-1000 has similar accuracy to ResNet-101 even though it contains many more layers.
 
-\textbf{Width (\(w\)):} Scaling network width is commonly used for small-size models. However, wide but shallow networks tend to have difficulty grasping higher-level features.
+\textbf{Width (\(w\)):} Scaling network width is commonly used for small-sized models. However, wide but shallow networks tend to have difficulty grasping higher-level features.
 
-\textbf{Resolution (\(r\)):} Starting from 224x224 in early ConvNets, modern ConvNets tend to use 299x299 or 331x331 for better accuracy. GPipe \citet{gpipe} recently achieved state-of-the-art ImageNet accuracy with 480x480 Resolution. Higher resolutions, such as 600x600, are also widely used in object detection ConvNets.
+\textbf{Resolution (\(r\)):} Starting from \(224\times 224\) in early ConvNets, modern ConvNets tend to use \(299\times 299\) or \(331\times 331\) for better accuracy. GPipe \citep{gpipe} recently achieved state-of-the-art ImageNet accuracy with \(480\times 480\) resolution. Higher resolutions, such as \(600\times 600\), are also widely used in ConvNets for object detection.
 
 The above analyses lead to the first observation:
 
-\textbf{Observation 1:} Scaling up any network width, depth, or resolution dimension improves accuracy, without gain diminishes for bigger models.
+\textbf{Observation 1:} Scaling up any network width, depth, or resolution dimension improves accuracy. Without the upscaling, the gain diminishes for bigger models.
 
 \hypertarget{compound-scaling}{%
 \paragraph{Compound Scaling}\label{compound-scaling}}
 
-Firstly, it was observed that different scaling dimensions are not independent because higher resolution images require increased network depth. The larger receptive fields can help capture similar features that include more pixels in bigger images. Similarly, network width should be increased when the resolution is higher to capture more fine-grained patterns. The intuition suggests that different scaling dimensions should be coordinated and balanced rather than conventional scaling in single dimensions.
-To confirm this thought, results of networks width \(w\) without changing depth (\(d\)=1.0) and resolution (\(r\)=1.0) were compared with deeper (\(d\)=2.0) and higher resolution (\(r\)=2.0) networks. This showed that width scaling achieves much better accuracy under the same FLOPS cost. These results lead to the second observation:
+Firstly, it was observed that different scaling dimensions are not independent because higher resolution images also require to increase the network depth. The larger receptive fields can help capture similar features that include more pixels in bigger images. Similarly, network width should be increased when the resolution is higher to capture more fine-grained patterns. The intuition suggests that different scaling dimensions should be coordinated and balanced rather than conventional scaling in single dimensions.
+To confirm this thought, results of networks with width \(w\) without changing depth (\(d\)=1.0) and resolution (\(r\)=1.0) were compared with deeper (\(d\)=2.0) and higher resolution (\(r\)=2.0) networks. This showed that width scaling achieves much better accuracy under the same FLOPS. These results lead to the second observation:
 
-\textbf{Observation 2:} To achieve better accuracy and efficiency, balancing all network width, depth, and resolution dimensions during ConvNet scaling is critical. Earlier researches have tried to arbitrarily balance network width and depth, but they all require tedious manual tuning.
+\textbf{Observation 2:} To achieve better accuracy and efficiency, balancing the network width, depth, and resolution dimensions during ConvNet scaling is critical. Earlier researches have tried to arbitrarily balance network width and depth, but they all require tedious manual tuning.
 
-A new \textbf{compound scaling method}, which uses a compound coefficient \(\varphi\) to uniformly scale network width, depth, and resolution in a principled way, was proposed.
+A new \textbf{compound scaling method}, which uses a compound coefficient \(\varphi\) to uniformly scale network width, depth, and resolution in a principled way was proposed:
 
 \begin{align}
 \begin{split}
@@ -1529,20 +1534,20 @@ A new \textbf{compound scaling method}, which uses a compound coefficient \(\var
  \label{eq:01-02-06}
 \end{align}
 
-where \(\alpha, \beta, \gamma\) are constants that can be determined by a small grid search, \(\varphi\) is a user-specified coefficient that controls how many more resources are available for model scaling, while \(\alpha, \beta, \gamma\) specify how to assign these extra resources to network width, depth, and resolution, respectively. Notably, the FLOPS of a regular convolution op is proportional to \(d, w^{2}, r^{2}\), i.e., doubling network depth will double FLOPS, but doubling network width or Resolution will increase FLOPS by four times. Scaling a ConvNet with previous equation will approximately increase total FLOPS by \(\left( \alpha\cdot \beta^{2}\cdot \gamma^{2} \right)^{\varphi}\). In this paper, \(\alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\) is constrain such that for any new \(\varphi\), the total FLOPS will approximately increase by \(2\varphi\)
+where \(\alpha, \beta, \gamma\) are constants that can be determined by a small grid search, \(\varphi\) is a user-specified coefficient that controls how many more resources are available for model scaling, while \(\alpha, \beta, \gamma\) specify how to assign these extra resources to the network width, depth, and resolution, respectively. Notably, the FLOPS of a regular convolution operation is proportional to \(d, w^{2}, r^{2}\), i.e., doubling network depth will double the FLOPS, but doubling network width or resolution will increase the FLOPS by four times. Scaling a ConvNet following Equation \eqref{eq:01-02-06} will approximately increase the total number of FLOPS by \(\left( \alpha\cdot \beta^{2}\cdot \gamma^{2} \right)^{\varphi}\). In this chapter, \(\alpha\cdot \beta^{2}\cdot \gamma^{2}\approx 2\) is constrained such that for any new \(\varphi\) the total number of FLOPS will approximately increase by \(2\varphi\).
 
 \hypertarget{efficientnet-architecture}{%
 \subsubsection{EfficientNet Architecture}\label{efficientnet-architecture}}
 
 A good baseline network is essential because model scaling does not affect its layer operators \(F*[i]\). Therefore this method is also estimated on ConvNets.
 A new mobile-sized baseline called EfficientNet was developed to show the effectiveness of the new scaling method. Metrics that were used to estimate the efficacy are accuracy and FLOPS.
-The baseline efficient network that was created is named EfficientNet-B0. Afterward, this compound scaling method is applied in two steps:
+The baseline efficient network that was created is named EfficientNet-B0. Afterwards, this compound scaling method is applied in two steps:
 
 \begin{itemize}
 \item
-  \textbf{STEP 1}: By fixing \(\varphi = 1\) and, assuming twice more resources available, a small grid search of \$\alpha, \beta, \gamma \$ based Equation \eqref{eq:01-02-06} showed that the best values for EfficientNet-B0 are \(\alpha = 1.2, \beta = 1.1, \gamma=1.15\), under constraint of \(\alpha·\beta^2·\gamma^2 ≈2\).
+  \textbf{STEP 1}: By fixing \(\varphi = 1\) and, assuming twice more resources available, a small grid search of \$\alpha, \beta, \gamma \$ based on Equation \eqref{eq:01-02-06} showed that the best values for EfficientNet-B0 are \(\alpha = 1.2, \beta = 1.1, \gamma=1.15\) under the constraint of \(\alpha·\beta^2·\gamma^2 ≈2\).
 \item
-  \textbf{STEP 2}: Afterward fix \(\alpha,\beta,\gamma\) as constants and scale up the baseline network with different \(\varphi\) using Equation \eqref{eq:01-02-06} to construct EfficientNet-B1 to B7
+  \textbf{STEP 2}: Afterwards, fix \(\alpha,\beta,\gamma\) as constants and scale up the baseline network with different \(\varphi\) using Equation \eqref{eq:01-02-06} to construct EfficientNet-B1 to B7.
 \end{itemize}
 
 \begin{longtable}[]{@{}cc@{}}
@@ -1564,11 +1569,9 @@ EfficientNet-B7 & 66M parameters\tabularnewline
 Indeed, even better performance is achievable by searching for \(\alpha,\beta,\gamma\) directly around a large model, but the search cost becomes prohibitively more expensive on larger models. This method searches once on a small baseline network, then scales the coefficient for all other models.
 
 \hypertarget{results-and-comparison-of-the-networks}{%
-\subsection{Results and comparison of the networks}\label{results-and-comparison-of-the-networks}}
+\subsubsection{Results and comparison of the networks}\label{results-and-comparison-of-the-networks}}
 
-To demonstrate the performance of both networks, ResNet and EfficientNets were trained and evaluated on the benchmark ImageNet 2012 classification dataset consisting of 1000 classes.
-Since deeper scaling should provide better results in the case of ResNet, it was trained with increased depth each time. First meaningful results were obtained in ResNet-34, which peformed better than plain-34 baseline by 3,5\% when top-1 acc. is compared. They also compared tree versions of ResNet: (A) zero-padding shortcuts, for increasing dimensions, and all shortcuts are parameter-free (B) projection shortcuts, for increasing dimensions, and other shortcuts are identity; and (C) all shortcuts are projections. Each version improved both top-1 and top-5 accuracy.
-Afterward, the depth of the network was increased and ResNet-50, ResNet-101, and ResNet-152 were created. Each increase in depth leads to higher accuracy. In deeper models, the trade-off between accuracy increase and deeper model is not worth describing. All results are shown in the table below.
+To demonstrate the performance of both networks, ResNet and EfficientNets were trained and evaluated on the ImageNet 2012 classification dataset consisting out of 1000 classes. Since deeper scaling should provide better results in the case of ResNet, it was trained with increased depth each time. First meaningful results were obtained in ResNet-34, which performed 3.5 \% better than plain-34 baseline when top-1 accuracy is compared. They also compared three versions of ResNet: (A) zero-padding shortcuts (increasing dimensions, all shortcuts are parameter-free) (B) projection shortcuts (increasing dimensions, other shortcuts are identity), and (C) all shortcuts are projections. Each version improved both, the top-1 and top-5 accuracy. Afterward, the depth of the network was increased and ResNet-50, ResNet-101, and ResNet-152 were created. Each increase in depth leads to higher accuracy. In deeper models, the trade-off between accuracy increase and deeper model is not worth describing. All results are shown in the following table:
 
 \begin{longtable}[]{@{}ccc@{}}
 \toprule
@@ -1587,35 +1590,36 @@ ResNet-152 & \textbf{78.57} & \textbf{94.29}\tabularnewline
 \bottomrule
 \end{longtable}
 
-In the case of EfficientNets, the results achieved by the previous state-of-the-art networks on the same ImageNet dataset were aimed to improve. Among all state-of-the-art networks, EfficientNets were compared with ResNets-50 and ResNet-152. They compared the results of networks derivated by changing scaling parameters EfficientNet-B0 to EfficientNet-B7. The results of each network were better than the previous one. Also, they have shown that EfficientNet-B0 outperforms ResNet-50 and that EfficientNet-B1 outperforms ResNet-152. This means that scaling through all three dimensions can provide better results than scaling through just one dimension. The drawback of this approach is the computational power, which makes it less popular than previous methods. Again, all results are shown in the table below.
+In the case of EfficientNets, the results achieved by the previous state-of-the-art networks on the same ImageNet dataset were aimed to improve. Among all state-of-the-art networks, EfficientNets were compared with ResNets-50 and ResNet-152. They compared the results of networks deviated by changing scaling parameters EfficientNet-B0 to EfficientNet-B7. The results of each network were better than the previous one. Also, they have shown that EfficientNet-B0 outperforms ResNet-50 and that EfficientNet-B1 outperforms ResNet-152. This means that scaling through all three dimensions can provide better results than scaling through just one dimension. The drawback of this approach is the computational power which makes it less popular than the previous methods. Again, all results are shown in the following table:
 
 \begin{longtable}[]{@{}ccc@{}}
 \toprule
 Model & top-1 acc. & top-5 acc.\tabularnewline
 \midrule
 \endhead
-EfficientNet-B0 ResNet-50 & 77.1 76 & 93.3 93\tabularnewline
-EfficientNet-B1 ResNet-152 & 79.1 77.8 & 94.4 93.8\tabularnewline
+EfficientNet-B0 / ResNet-50 & 77.1 / 76 & 93.3 / 93\tabularnewline
+EfficientNet-B1 / ResNet-152 & 79.1 / 77.8 & 94.4 / 93.8\tabularnewline
 EfficientNet-B2 & 80.1 & 94.9\tabularnewline
-EfficientNet-B3 ResNeXt-101 & 81.6 80.9 & 95.7 95.6\tabularnewline
+EfficientNet-B3 / ResNeXt-101 & 81.6 / 80.9 & 95.7 / 95.6\tabularnewline
 EfficientNet-B4 & 82.9 & 96.4\tabularnewline
 EfficientNet-B5 & 83.6 & 96.7\tabularnewline
 EfficientNet-B6 & 84 & 96.8\tabularnewline
-EfficientNet-B7 GPipe & \textbf{84.3} 84.3 & \textbf{97} 97\tabularnewline
+EfficientNet-B7 / GPipe & \textbf{84.3} / 84.3 & \textbf{97} / 97\tabularnewline
 \bottomrule
 \end{longtable}
 
 \hypertarget{contrastive-learning}{%
 \subsection{Contrastive learning}\label{contrastive-learning}}
 
-In recent years the problem of classification of the unlabeled dataset is becoming more widespread. More unlabeled datasets are being created in fields like medicine, the automotive industry, military, etc., requiring human labeling. Since the process is expensive and time-consuming, researchers assumed, it could be automated with contrastive learning frameworks. One of the first and most known contrastive learning frameworks is SimCLR \citet{SimCLR}. The advantage of this framework is its simplicity, yet it achieves high accuracy on classification tasks. The main idea is to have two copies of the image, which are then used to train two networks and later compared. The problem with this framework is that it doubles the size of the dataset and reaches among all images, which can be computationally unfeasible in large datasets. Bootstrap Your Own Latent \citet{BYOL} was introduced to avoid making double-sized datasets. The idea was to bootstrap images' representations, avoiding unnecessary image comparison. These two frameworks will be described in this work.
-Further improvements in the choice of creating two views of images and comparison techniques were presented in different frameworks such as Nearest-Neighbor Contrastive Learning (NNCLR) \citet{NNCLR}, Open World Object Detection (ORE) \citet{ORE}, Swapping Assignments between multiple Views (SwAV) \citet{SwAV}, and many more.
-This field is a constant research topic, and new, improved frameworks are being created to help researchers solve other tasks requiring labeled datasets.
+In recent years the problem of classification of unlabeled dataset is becoming more widespread. More unlabeled datasets requiring human labeling are created in fields like medicine, the automotive industry, military, etc. Since the process is expensive and time-consuming, researchers assumed it could be automated with contrastive learning frameworks. One of the first and most known contrastive learning frameworks is SimCLR \citep{SimCLR}. The advantage of this framework is its simplicity, yet it achieves high accuracy on classification tasks. The main idea is to have two copies of the image, which are then used to train two networks and that are compared. The problem with this framework is that it doubles the size of the dataset and reaches among all images, which can be computationally infeasible for large datasets. Bootstrap Your Own Latent \citep{BYOL} was introduced to avoid making double-sized datasets. The idea was to bootstrap image representations to avoid unnecessary image comparisons. These two frameworks will be described in this chapter.
+
+Further improvements in the choice of creating two views of images and comparison techniques were presented in different frameworks such as Nearest-Neighbor Contrastive Learning (NNCLR) \citep{NNCLR}, Open World Object Detection (ORE) \citep{ORE}, Swapping Assignments between multiple Views (SwAV) \{\citet{SwAV}\}, and many more.
+This field is a constant research topic and new improved frameworks are proposed on a constant basis to help researchers solve different tasks that requires labeled datasets.
 
 \hypertarget{a-simple-framework-for-contrastive-learning-of-visual-representations}{%
-\subsection{A Simple Framework for Contrastive Learning of Visual Representations}\label{a-simple-framework-for-contrastive-learning-of-visual-representations}}
+\subsubsection{A Simple Framework for Contrastive Learning of Visual Representations}\label{a-simple-framework-for-contrastive-learning-of-visual-representations}}
 
-\citet{SimCLR} intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations and called it SimCLR. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.
+\citet{SimCLR} intended to analyze and describe a better approach to learning visual representations without human supervision. They have introduced a simple framework for contrastive learning of visual representations called SimCLR. As they claim, SimCLR outperforms previous work, is more straightforward, and does not require a memory bank.
 
 Intending to understand what qualifies good contrastive representation learning, the significant components of the framework were studied and resulted in:
 
@@ -1624,7 +1628,7 @@ Intending to understand what qualifies good contrastive representation learning,
 \item
   A contrastive prediction task requires combining multiple data augmentation operations, which results in effective representations. Unsupervised contrastive learning benefits from more significant data augmentation.
 \item
-  The quality of the learned representations can be substantially improved by introducing a learnable nonlinear transformation between the representation and the contrastive loss.
+  The quality of the learned representations can be substantially improved by introducing a learn-able non-linear transformation between the representation and the contrastive loss.
 \item
   Representation learning with contrastive cross-entropy loss can be improved by normalizing embeddings and adjusting the temperature parameter appropriately.
 \item
@@ -1634,10 +1638,11 @@ Intending to understand what qualifies good contrastive representation learning,
 \hypertarget{the-contrastive-learning-framework}{%
 \subsubsection{The Contrastive Learning Framework}\label{the-contrastive-learning-framework}}
 
-Like previous contrastive learning algorithms, in the SimCLR, a contrastive loss is used to learn representations by maximizing agreement between various augmented views of the same data example. This framework contains four significant components, which are shown in Figure \ref{fig:ch01-figure4}:
+Like for SimCLR, a contrastive loss is used to learn a representation by maximizing the agreement between various augmented views of the same data example. This framework contains four significant components, which are shown in Figure \ref{fig:ch01-figure4}:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
   A stochastic \emph{data augmentation} module
 \item
@@ -1654,23 +1659,22 @@ Like previous contrastive learning algorithms, in the SimCLR, a contrastive loss
 
 }
 
-\caption{A simple framework for contrastive learning of visual representations}\label{fig:ch01-figure04}
+\caption{A simple framework for contrastive learning of visual representations \citep{SimCLR}.}\label{fig:ch01-figure04}
 \end{figure}
+
+
 
 \hypertarget{stochastic-data-augmentation-module}{%
 \paragraph{Stochastic data augmentation module}\label{stochastic-data-augmentation-module}}
 
-First, the minibatch of N examples is sampled randomly, and the contrastive prediction task is defined on pairs of augmented examples, resulting in 2N data points. A memory bank was not used to train the model, instead, the training batch size varied from 256 to 8192.
-Any given data example randomly returns two correlated views of the same example, denoted \(\tilde{x}_{i}\) and \(\tilde{x}_{j}\), which is known as a \textbf{positive pair}. \textbf{Negative pairs} are all other \(2(N-1)\) pairs except the positive pair. In one view, some data augmentation techniques are applied.
-Data augmentation is widely embraced in supervised and unsupervised representation learning. Unfortunately, it has not been used to define the contrastive prediction task, which is mainly determined by changing the architecture. It was shown that choosing different data augmentation techniques can reduce the complexity of previous contrastive learning frameworks.
-There are many data augmentation operations, the focus was on the most common ones, which are:
+First, the minibatch of \(N\) examples is sampled randomly, and the contrastive prediction task is defined on pairs of augmented examples, resulting in \(2N\) data points. A memory bank was not used to train the model, instead, the training batch size varies from 256 to 8192. Any given data example randomly returns two correlated views of the same example, denoted \(\tilde{x}_{i}\) and \(\tilde{x}_{j}\), which is known as a \textbf{positive pair}. \textbf{Negative pairs} are all other \(2(N-1)\) pairs. In one view, some data augmentation techniques are applied. Data augmentation is widely embraced in supervised and unsupervised representation learning. Unfortunately, it has not been used to define the contrastive prediction task, which is mainly determined by changing the architecture. It was shown that choosing different data augmentation techniques can reduce the complexity of previous contrastive learning frameworks. There are many data augmentation operations, the focus was on the most common ones, which are:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{spatial geometric transformation}: cropping and resizing (with horizontal flipping), rotation and cutout,
+  \textbf{Spatial geometric transformation}: cropping and resizing (with horizontal flipping), rotation and cutout,
 \item
-  \textbf{appearance transformation}: color distortion (including color dropping), brightness, contrast, saturation, Gaussian blur, and Sobel filtering.
+  \textbf{Appearance transformation}: color distortion (including color dropping), brightness, contrast, saturation, Gaussian blur, and Sobel filtering.
 \end{itemize}
 
 \begin{figure}
@@ -1679,23 +1683,25 @@ There are many data augmentation operations, the focus was on the most common on
 
 }
 
-\caption{Augmentation texhniques}\label{fig:ch01-figure05}
+\caption{Augmentation texhniques \citep{SimCLR}.}\label{fig:ch01-figure05}
 \end{figure}
+
+
 
 Due to the image sizes in the ImageNet dataset, all images were always randomly cropped and resized to the same resolution. Later on, other targeted data augmentation transformations were applied to one branch, remaining the one as original i.e.~\(t\left( x_{i}\right)= x_i\).
 Applying just individual transformation is insufficient for the model to learn good representations. The model's performance improves after composing augmentations, although the contrastive prediction task becomes more complex. The composition of augmentations that stood out were random cropping and random color distortion.
 
-It was also observed that stronger color augmentation significantly improves the linear evaluation of unsupervised learned models. Stronger color augmentations do not enhance the performance of supervised models when trained with the same augmentations. Based on the experiments, unsupervised contrastive learning benefits from stronger color data augmentation than supervised learning.
+It was also observed that stronger color augmentation significantly improves the linear evaluation of unsupervised learned models. Stronger color augmentations do not enhance the performance of supervised learning models when trained with the same augmentations. Based on the experiments, unsupervised contrastive learning benefits from stronger color data augmentation than supervised learning.
 
 \hypertarget{neural-network-base-encoder}{%
 \paragraph{Neural network base encoder}\label{neural-network-base-encoder}}
 
-Neural network based encoder \(f\left( \cdot \right)\) extracts representation vectors from augmented data examples. This framework does not restrict a choice of the network architecture, although for simplicity the commonly used ResNet was picked and obtained \(h_i=f\left( \tilde{x}_{i} \right)=ResNet\left(\tilde{x}_{i}\right)\) where \(\textbf{h}_i\in \mathbb{R}^{d}\) is the output after the average pooling layer. Although increasing depth and width improves performance, the ResNet-50 was chosen. Furthermore, when the model size increases, the gap between supervised and unsupervised learning shrinks, suggesting that bigger models benefit from unsupervised learning more.
+Neural network based encoder \(f\left( \cdot \right)\) extracts multiple representation vectors from the augmented data examples. This framework does not restrict a choice of the network architecture, although for simplicity, the commonly used ResNet was picked and gives \(h_i=f\left( \tilde{x}_{i} \right)=ResNet\left(\tilde{x}_{i}\right)\) where \(\textbf{h}_i\in \mathbb{R}^{d}\) is the output after the average pooling layer. Although increasing depth and width improves performance, the ResNet-50 was chosen. Furthermore, when the model size increases, the gap between supervised and unsupervised learning shrinks, suggesting that bigger models benefit more from unsupervised learning.
 
 \hypertarget{small-neural-network-projection-head}{%
 \paragraph{Small neural network projection head}\label{small-neural-network-projection-head}}
 
-A small neural network projection heads \(g\left( \cdot \right)\) that maps representations to the space where contrastive loss is applied. The importance of including a projection head, i.e., \(g\left( h \right)\) was evaluated. They have considered three different architectures for the head:
+A small neural network projection head \(g\left( \cdot \right)\) maps the representation to the space where the contrastive loss is applied to. The importance of including a projection head, i.e., \(g\left( h \right)\) was evaluated and they considered three different architectures for the head:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1705,36 +1711,35 @@ A small neural network projection heads \(g\left( \cdot \right)\) that maps repr
 \item
   linear projection,
 \item
-  the default nonlinear projection with one additional hidden layer and ReLU activation function.
+  the default non-linear projection with one additional hidden layer and ReLU activation function.
 \end{enumerate}
 
-The results showed that a nonlinear projection head is better than a linear projection and much better than no projection. It improves the representation quality of the layer before it. They have used a MLP with one hidden layer to obtain \(z_i = g\left( \textbf{h}_i \right) = W^{\left( 2\right)}\sigma \left( W^{\left( 1\right)} \textbf{h}_i\right)\) where \(\sigma\) is a ReLU non-linearity.
+The results showed that a non-linear projection head is better than a linear projection and much better than no projection. It improves the representation quality of the layer that is applied previous to it. They have used a MLP with one hidden layer to obtain \(z_i = g\left( \textbf{h}_i \right) = W^{\left( 2\right)}\sigma \left( W^{\left( 1\right)} \textbf{h}_i\right)\) where \(\sigma\) is a ReLU non-linearity transformation.
 
-This step is performed because defining the contrastive loss on \(z_i\) instead of on \(\textbf{h}_i\) would not lead to loss of information caused by contrastive loss. Especially, \(z=g\left( h \right)\) is trained to be invariant to data transformations. As a result, \(g\) can remove information useful for a downstream task, such as object color or orientation. Using the nonlinear transformation \(g\left( * \right)\), \(h\) can maintain and form more information.
+This step is performed because defining the contrastive loss on \(z_i\) instead of on \(\textbf{h}_i\) would not lead to a loss of information caused by contrastive loss. Especially, \(z=g\left( h \right)\) is trained to be invariant to data transformations. As a result, \(g\) can remove information useful for a downstream task such as object color or orientation. Using the non-linear transformation \(g\left( * \right)\), \(h\) can maintain and form more information.
 
 \hypertarget{contrastive-loss-function}{%
 \paragraph{Contrastive loss function}\label{contrastive-loss-function}}
 
-Given a set \(\left\{ \tilde{x}_{ik} \right\}\) including a positive pair of examples \(\tilde{x}_{i}\) and \(\tilde{x}_{j}\), the contrastive prediction task aims to identify \(\tilde{x}_{i}\) in \(\left\{ \tilde{x}_{i} \right\}_{k\neq i}\) for a given \(\tilde{x}_{i}\). In the case of positive examples, the loss function is as follows \(\left( i, j\right)\) is defined as
-
+Given a set \(\left\{ \tilde{x}_{ik} \right\}\) including a positive pair of examples \(\tilde{x}_{i}\) and \(\tilde{x}_{j}\), the contrastive prediction task aims to identify \(\tilde{x}_{i}\) in \(\left\{ \tilde{x}_{i} \right\}_{k\neq i}\) for a given \(\tilde{x}_{i}\). In the case of positive examples, the loss function is defined as
 \[
 \mathcal{l}_{i,j} = −\log\frac{exp\left( \frac{sim(z_i,z_j)}{\tau} \right)}{\sum_{k=1}^{2N}\mathbb{I_{\left[ k\neq i \right]}}exp\left( \frac{sim(z_i,z_k)}{\tau} \right)}
 \]
 
-where \(\mathbb{I_{\left[ k\neq i \right]}}\in\left\{ 0,1 \right\}\) is an indicator function, \(\tau\) denotes a temperature parameter and \(sim\left(\textbf{u,v} \right)= \frac{\textbf{u}^T\textbf{v}}{\left\| \textbf{u}\right\|\left\| \textbf{v} \right\|}\) is a dot product between \(\mathcal{l}_2\) normalized \(\textbf{u},\textbf{v}\).
+where \(\mathbb{I_{\left[ k\neq i \right]}}\in\left\{ 0,1 \right\}\) is an indicator function, \(\tau\) denotes a temperature parameter and \(sim\left(\textbf{u,v} \right)= \frac{\textbf{u}^T\textbf{v}}{\left\| \textbf{u}\right\|\left\| \textbf{v} \right\|}\) is a dot product between \(\mathcal{l}_2\) and normalized \(\textbf{u},\textbf{v}\).
 
 The final loss is calculated across all positive pairs, both \(\left( i,j \right)\) and \(\left( j,i \right)\), in a mini-batch. It was named \textbf{NT-Xent}, the normalized temperature-scaled cross-entropy loss.
 
-The NT-Xent loss was compared against other commonly used contrastive loss functions, such as logistic loss and margin loss. Gradient analysis shows that \(l_2\) normalization, cosine similarity, and temperature together effectively weight different examples, and a suitable temperature can make the model learn from hard negatives. The advantage of NT-Xent is that it weights the negatives by their relative hardness. Without normalization and proper temperature scaling, performance is significantly worse. Also, the contrastive task accuracy is higher, but the resulting representation is worse under linear evaluation.
+The NT-Xent loss was compared against other commonly used contrastive loss functions, such as logistic loss and margin loss. Gradient analysis shows that \(l_2\) normalization, cosine similarity, and temperature together effectively weight different examples and a suitable temperature can make the model learn from hard negatives. The advantage of NT-Xent is that it weights the negatives by their relative hardness. Without normalization and proper temperature scaling the performance is significantly worse. Also, the contrastive task accuracy is higher, but the resulting representation is worse under linear evaluation.
 
 \hypertarget{bootstrap-your-own-latent}{%
-\subsection{Bootstrap Your Own Latent}\label{bootstrap-your-own-latent}}
+\subsubsection{Bootstrap Your Own Latent}\label{bootstrap-your-own-latent}}
 
 The fundamental idea of contrastive learning is to create pairs of images on which the framework would be trained. Creating negative pairs relies on large batch sizes, memory banks, or customized mining strategies which can be challenging in larger datasets. \citet{BYOL} wanted to create a new approach that would achieve better performance than other contrastive methods without using negative pairs. A solution they have introduced is a method called Bootstrap Your Own Latent (BYOL). The idea was to bootstrap representations of images. As a result, BYOL is more robust to the choice of image augmentations.
-Furthermore, BYOL has two neural networks, called online and target networks, which interact and learn from each other. Using an augmented view of an image, BYOL trains its online network to predict the target network's representation of another augmented view. This approach achieved state-of-the-art results when trained on the ImageNet dataset under the linear evaluation protocol. Additionally, compared to SimCLR, a strong contrastive baseline, BYOL suffers from much less performance drop when only random crops are used to augment images.
+Furthermore, BYOL has two neural networks, called online and target network, who interact and learn from each other. Using an augmented view of an image, BYOL trains its online network to predict the target network's representation of another augmented view. This approach achieved state-of-the-art results when trained on the ImageNet dataset under the linear evaluation protocol. Additionally, compared to SimCLR, a strong contrastive baseline, BYOL suffers from much less performance drop when only random crops are used to augment images.
 
-\hypertarget{description-of-method}{%
-\subsubsection{Description of method}\label{description-of-method}}
+\hypertarget{description-of-the-method}{%
+\paragraph{Description of the method}\label{description-of-the-method}}
 
 BYOL aims to learn a representation of \(y_\theta\). It uses two neural networks: \emph{online} and \emph{the target network} to achieve that. The \emph{online network} is determined by a set of weights \(\theta\) and consists of:
 
@@ -1754,44 +1759,44 @@ BYOL aims to learn a representation of \(y_\theta\). It uses two neural networks
 
 }
 
-\caption{Bootstrap Your Own Latent}\label{fig:ch01-figure06}
+\caption{Bootstrap Your Own Latent \citep{BYOL}.}\label{fig:ch01-figure06}
 \end{figure}
 
+
+
 The \emph{target network} has the same architecture as the online network but uses different weights \(\xi\). It provides the regression targets to train the online network, and its parameters \(\xi\) are an exponential moving average of the online parameters \(\theta\). Precisely, given a target decay rate \(\tau \in[0,1]\), after each training step, the following update
-\begin{equation}
-\tag{8}
+
+\[
 \xi \leftarrow \tau \xi+(1-\tau) \theta
-\end{equation}
+\]
+
 is performed.
-Firstly, image is sampled uniformly from \(\mathcal{D}\), from which two distributions of image augmentations \(\mathcal{T}\) and \(\mathcal{T}^{\prime}\) are created. BYOL applies respectively two image augmentations \(t \sim \mathcal{T}\) and \(t^{\prime} \sim \mathcal{T}^{\prime}\), creating two augmented views \(v \triangleq t(x)\) and \(v^{\prime} \triangleq t^{\prime}(x)\). First augmented view \(v\) is used at online network, resulting the output \(y_{\theta} \triangleq f_{\theta}(v)\) and afterwards projection \(z_{\theta} \triangleq g_{\theta}(y)\). Similarly, from second augmented view \(v^{\prime}\) the target network outputs \(y_{\xi}^{\prime} \triangleq f_{\xi}(v^{\prime})\) and the target projection \(z_{\xi}^{\prime} \triangleq g_{\xi}(y^{\prime})\). Later on output a prediction of \(q_{\theta}\left(z_{\theta}\right)\) of \(z_{\xi}^{\prime}\) and \(\ell_{2}\)-normalize both \(q_{\theta}\left(z_{\theta}\right)\) and \(z_{\xi}^{\prime}\) to
+Firstly, an image is sampled uniformly from \(\mathcal{D}\) from which two distributions of image augmentations \(\mathcal{T}\) and \(\mathcal{T}^{\prime}\) are created. BYOL applies respectively two image augmentations \(t \sim \mathcal{T}\) and \(t^{\prime} \sim \mathcal{T}^{\prime}\) creating two augmented views \(v \triangleq t(x)\) and \(v^{\prime} \triangleq t^{\prime}(x)\). First augmented view \(v\) is used for the online network and result in the output \(y_{\theta} \triangleq f_{\theta}(v)\) and afterwards the projection \(z_{\theta} \triangleq g_{\theta}(y)\). Similarly, from the second augmented view \(v^{\prime}\) the target network outputs \(y_{\xi}^{\prime} \triangleq f_{\xi}(v^{\prime})\) and the target projection \(z_{\xi}^{\prime} \triangleq g_{\xi}(y^{\prime})\). Later on output a prediction of \(q_{\theta}\left(z_{\theta}\right)\) of \(z_{\xi}^{\prime}\) and \(\ell_{2}\)-normalize both \(q_{\theta}\left(z_{\theta}\right)\) and \(z_{\xi}^{\prime}\) to
 
-\begin{equation}
-\tag{9}
+\[
 \overline{q_{\theta}}\left(z_{\theta}\right) \triangleq q_{\theta}\left(z_{\theta}\right) /\left\|q_{\theta}\left(z_{\theta}\right)\right\|_{2} \quad \textrm{and} \quad
-\bar{z}_{\xi}^{\prime} \triangleq z_{\xi}^{\prime} /\left\|z_{\xi}^{\prime}\right\|_{2}
-\end{equation}
+\bar{z}_{\xi}^{\prime} \triangleq z_{\xi}^{\prime} /\left\|z_{\xi}^{\prime}\right\|_{2}.
+\]
 
-Predictor only applies to the online pipeline, making the architecture asymmetric between the online and target pipeline. Lastly, the following mean squared error between the normalized predictions and target projections is defined.
+The predictor is only applied to the online pipeline, making the architecture asymmetric between the online and target pipeline. Lastly, the following mean squared error between the normalized predictions and target projections is defined:
 
-\begin{equation}
-\tag{10}
+\[
 \mathcal{L}_{\theta, \xi} \triangleq\left\|\overline{q_{\theta}}\left(z_{\theta}\right)-\bar{z}_{\xi}^{\prime}\right\|_{2}^{2}=2-2 \cdot \frac{\left\langle q_{\theta}\left(z_{\theta}\right), z_{\xi}^{\prime}\right\rangle}{\left\|q_{\theta}\left(z_{\theta}\right)\right\|_{2} \cdot\left\|z_{\xi}^{\prime}\right\|_{2}}
-\end{equation}
-Loss is symmetrized \(\mathcal{L}_{\theta, \xi}\) by using \(v^{\prime}\) for the online network and \(v\) for the target network separately to calculate \(\widetilde{\mathcal{L}}_{\theta, \xi}\). At each training step, a stochastic optimization step is applied to minimize \(\mathcal{L}_{\theta, \xi}^{\mathrm{BYOL}}=\mathcal{L}_{\theta, \xi}+\widetilde{\mathcal{L}}_{\theta, \xi}\) with respect to \(\theta\) only, but not \(\xi\). BYOL's dynamics are summarized as
+\]
 
-\begin{equation}
-\tag{11}
-\theta \leftarrow \operatorname{optimizer}\left(\theta, \nabla_{\theta} \mathcal{L}_{\theta, \xi}^{\mathrm{BYOL}}, \eta\right)
-\end{equation}
+The loss is symmetrized \(\mathcal{L}_{\theta, \xi}\) by using \(v^{\prime}\) for the online network and \(v\) for the target network separately to calculate \(\widetilde{\mathcal{L}}_{\theta, \xi}\). At each training step, a stochastic optimization step is applied to minimize \(\mathcal{L}_{\theta, \xi}^{\mathrm{BYOL}}=\mathcal{L}_{\theta, \xi}+\widetilde{\mathcal{L}}_{\theta, \xi}\) with respect to \(\theta\) only but not \(\xi\). BYOL's dynamics are summarized as
 
-where \(\eta\) is a learning rate.
-At the end of the training, only the encoder \(f_{\theta}\).
+\[
+\theta \leftarrow \operatorname{optimizer}\left(\theta, \nabla_{\theta} \mathcal{L}_{\theta, \xi}^{\mathrm{BYOL}}, \eta\right).
+\]
+
+where \(\eta\) is a learning rate. At the end of the training, only the encoder \(f_{\theta}\) is used.
 
 \hypertarget{comparison-of-contrastive-learning-frameworks}{%
-\subsection{Comparison of contrastive learning frameworks}\label{comparison-of-contrastive-learning-frameworks}}
+\subsubsection{Comparison of contrastive learning frameworks}\label{comparison-of-contrastive-learning-frameworks}}
 
-Of all frameworks, SimCLR is the most popular due to its simplicity. The ResNet-50 in 3 different hidden layer widths (width multipliers of 1×, 2×, and 4×) were used and trained for 1000 epochs each. The accuracy of these frameworks on the ImageNet dataset with few labels improved when the width of ResNet-50 increased. For SimCLR with ResNet-50 top-1 accuracy is 69.3 and top-5 accuracy is 89, while for ResNet-50(4x) top-1 accuracy is 85.8 and top-5 accuracy is 92.6. These results are comparable with supervised methods.
-BYOL framework was built to improve the results of SimCLR. It was also stated that the accuracy for baseline ResNet-50 is 74.3 and 91.6 for top-1 accuracy and top-5 accuracy. When using ResNet-50(4x), accuracies increase to 78.6 and 94.2 for top-1 and top-5, respectively. More information about performance can be found in table below
+Of all frameworks, SimCLR is the most popular due to its simplicity. The ResNet-50 in 3 different hidden layer widths (width multipliers of \(1\times\), \(2\times\), and \(4\times\)) were used and trained for 1000 epochs each. The accuracy of these frameworks on the ImageNet dataset with few labels improved when the width of ResNet-50 increases. For SimCLR with ResNet-50 top-1 accuracy is 69.3 and top-5 accuracy is 89, while for ResNet-50(4x) top-1 accuracy is 85.8 and top-5 accuracy is 92.6. These results are comparable with supervised methods.
+The BYOL framework was built to improve the results of SimCLR. It was also stated that the accuracy for the baseline ResNet-50 is 74.3 and 91.6 for top-1 accuracy and top-5 accuracy. When using ResNet-50(4x), an increase in accuracy to 78.6 and 94.2 for top-1 and top-5 is observed, respectively. More information about performance can be found in following table:
 
 \begin{longtable}[]{@{}ccccc@{}}
 \toprule
@@ -1811,12 +1816,12 @@ BYOL & ResNet-200 (x2) & 250 & 79.6 & 94.8\tabularnewline
 \hypertarget{transformers-in-computer-vision}{%
 \subsection{Transformers in Computer Vision}\label{transformers-in-computer-vision}}
 
-Since the first appearance of the Transformers architecture in 2017 \citet{TRANSFORMERS_NLP}, it has become an irreplaceable part of all-natural language processing (NLP) models. The main advantage of Transformers is that they can be trained on a large text corpus and then fine-tuned on a smaller task-specific dataset, and this enabled model training of unspecified size with more than 100B parameters.
+Since the first appearance of the Transformers architecture in 2017 \citet{TRANSFORMERS_NLP}, it has become an irreplaceable part of all-natural language processing (NLP) models. The main advantage of Transformers is that they can be trained on a large text corpus and then fine-tuned on a smaller task-specific dataset. This enabled model training of unspecified size with more than 100B parameters.
 
-However, computer vision still relied on convolutional architectures. With datasets constantly growing and the diversity of the fields where computer vision tasks could be applied, researchers wanted to implement Transformers architecture in the CV field. Some works tried combining CNN-like architectures with self-attention \citet{wang}, and others attempted to replace convolutions entirely \citet{selfa}. Due to specialized attention patterns, the problem was that they have not yet been scaled effectively on modern hardware accelerators. Therefore, in large-scale image recognition, classic ResNet-like architectures are still state-of-the-art.
+However, computer vision still relied on convolutional architectures. With datasets constantly growing and the diversity of the fields computer vision tasks could be applied to, researchers wanted to implement Transformers architecture in the CV field. Some works aim for combining CNN-like architectures with self-attention \citep{wang}. Others attempted to replace convolutions entirely, e.g.~\citet{selfa}. Due to specialized attention patterns, the problem was that they have not yet been scaled effectively on modern hardware accelerators. Therefore, in large-scale image recognition, classic ResNet-like architectures are still state-of-the-art.
 
-In 2021 Google research, Brain Team published the paper ``An image is worth 16x16 words,'' where they introduced new Transformers-based architecture for CV called Vision Transformers (ViT) \citet{vit}. Based on the success of Transformer in NLP scaling, they aimed to apply standard Transformer directly to images, changing it as little as possible. The image is split into patches, and linear embeddings of these patches are provided as inputs to the Transformer.
-These patches are the same as tokens (eg. words) in NLP. The model is trained on image classification in a supervised fashion.
+In 2021 the Google research Brain Team published the paper ``An image is worth \(16\times 16\) words'' where they introduced new Transformers-based architecture for CV called Vision Transformers (ViT) \citep{vit}. Based on the success of Transformer in NLP scaling, they aimed to apply standard Transformer directly to images with little as possible changes to the existing architecture. The image is split into patches and linear embeddings of these patches are provided as inputs to the Transformer.
+These patches are the same as tokens (e.g.~words) in NLP. The model is trained for image classification in a supervised learning fashion.
 
 \hypertarget{vision-transformers}{%
 \subsubsection{Vision Transformers}\label{vision-transformers}}
@@ -1829,25 +1834,27 @@ Brain Team wanted to create simple but universally scalable architecture to foll
 
 }
 
-\caption{Vision Transformer}\label{fig:ch01-figure7}
+\caption{Vision Transformer \citep{vit}.}\label{fig:ch01-figure7}
 \end{figure}
+
+
 
 \hypertarget{method}{%
 \paragraph{Method}\label{method}}
 
-Compared to NLP, where the input of the Transformer is a 1D sequence of token embeddings, images are 2D objects. Firstly, images needed to be represented differently to imitate original architectures as closely as possible. For that reason image \(x\in \mathbb{R}^{ H \times W \times C}\) is reshaped into a sequence of flattened 2D patches \(x_p\in \mathbb{R}^{ N \times \left( P^2 \cdot C \right)}\), where \(\left(H,W\right)\) is the resolution of the original image, \(C\) is the number of channels,\(\left(P,P\right)\) is the resolution of each image patch, and \(N =HW/P^2\) is the resulting number of patches, also the Transformer's effective input sequence length. The Transformer input is a fixed through all layers vector size \(D\). The first step is to flatten the patches, usually 16x16, and map them to \(D\) dimensions with a trainable linear projection, creating patch embeddings.
+Compared to NLP, with 1-dimensional token embedding input for the Transformer, images are 2-dimensional objects. Firstly, images needed to be represented differently to imitate original architectures as close as possible. For that reason image \(x\in \mathbb{R}^{ H \times W \times C}\) is reshaped into a sequence of flattened 2-dimensional patches \(x_p\in \mathbb{R}^{ N \times \left( P^2 \cdot C \right)}\), where \(\left(H,W\right)\) is the resolution of the original image, \(C\) is the number of channels, \(\left(P,P\right)\) is the resolution of each image patch, and \(N =HW/P^2\) is the resulting number of patches, also the Transformer's effective input sequence length. The Transformer input through all layers is a fixed vector of size \(D\). The first step is to flatten the patches, usually \(16\times 16\) and map them to \(D\) dimensions with a trainable linear projection to create patch embeddings.
 
 \[
 \mathbf{z}_{0} =\left[\mathbf{x}_{\text {class }} ; \mathbf{x}_{p}^{1} \mathbf{E} ; \mathbf{x}_{p}^{2} \mathbf{E} ; \cdots ; \mathbf{x}_{p}^{N} \mathbf{E}\right]+\mathbf{E}_{p o s}, \mathbf{E} \in \mathbb{R}^{\left(P^{2} \cdot C\right) \times D}, \mathbf{E}_{p o s} \in \mathbb{R}^{(N+1) \times D}
 \]
 
-To this sequence of ``patch embeddings,'' a prefix learnable {[}class{]} token, like in BERT, is usually added. This token \(\mathbf{z}_{0}^{0} = \mathbf{x}_{class}\) tells the model to classify the image and increases dimension of vector z. Also, the state of this token at the output of the Transformer encoder \(\left(\mathbf{z}_{L}^{0}\right)\), on which Layernorm is applied, serves as the image representation \(y\).
+To this sequence of ``patch embeddings'', a prefix learnable {[}class{]} token, like in BERT, is usually added. This token \(\mathbf{z}_{0}^{0} = \mathbf{x}_{class}\) tells the model to classify the image and increases the dimension of vector \(z\). Also, the state of this token at the output of the Transformer encoder \(\left(\mathbf{z}_{L}^{0}\right)\), on which the layernorm is applied, serves as the image representation \(y\).
 
 \[
 \mathbf{y} =\operatorname{LN}\left(\mathbf{z}_{L}^{0}\right)
 \]
 
-Also, it is the only one to which the classification head is attached to during pre-training and fine-tuning. Classification head during pre-training is compiled of MLP with one hidden layer and a single linear layer at a fine-tuning time. Position embedding,a standard learnable 1D position embedding, are attached to the patch embeddings, serving as input to the encoder. The standard Transformer encoder consists of alternating layers of multiheaded self-attention and MLP blocks. After each block, a residual connection is applied.
+Furthermore, it is the only one to which the classification head is attached to during pre-training and fine-tuning. The classification head during pre-training is compiled of MLP with one hidden layer and a single linear layer at a fine-tuning time. Position embedding, a standard learnable 1-dimensional position embedding, are attached to the patch embeddings, serving as input to the encoder. The standard Transformer encoder consists of alternating layers of multiheaded self-attention and MLP blocks. After each block, a residual connection is applied.
 
 \[
 \mathbf{z}_{\ell}^{\prime} =\operatorname{MSA}\left(\operatorname{LN}\left(\mathbf{z}_{\ell-1}\right)\right)+\mathbf{z}_{\ell-1},  \ell=1 \ldots L
@@ -1857,21 +1864,21 @@ Also, it is the only one to which the classification head is attached to during 
 \mathbf{z}_{\ell} =\operatorname{MLP}\left(\mathrm{LN}\left(\mathbf{z}_{\ell}^{\prime}\right)\right)+\mathbf{z}_{\ell}^{\prime}, \ell=1 \ldots L
 \]
 
-Vision Transformer has a significantly lower inductive bias than CNNs in image-specific information. VIT only has local and translationally equivariant MLP layers, while the self-attention layers are global. Two-dimensional neighborhood structure is used sparingly: the image is cut into patches at the beginning, and the position embeddings are resized as needed at the fine-tuning time. Alternatively, the input sequence can consist of a CNN's feature maps on which patch embedding projection is applied.
-Vision Transformers are pre-trained on large datasets, and fine-tuned to (smaller) downstream tasks. For fine-tuning projection head is removed and zero-initialized \(D \times K\) feedforward layer is attached, \(K\) being the number of downstream classes. It is also beneficial to use higher resolution then in pre-training. Also ViT can handle arbitrary sequence lengths, but the pre-trained position embeddings can become sufficient. It is necessary to point out that resolution adjustment and patch extraction are the only points at which an inductive bias about the 2D structure of the images is manually injected into the Vision Transformers
+Vision Transformer has a significantly lower inductive bias than CNNs in image-specific information. VIT only has local and translational equivariant MLP layers, while the self-attention layers are global. A 2-dimensional neighborhood structure is used sparingly: the image is cut into patches at the beginning and the position embeddings are resized as needed at the fine-tuning time. Alternatively, the input sequence can consist of a CNN's feature map on which the patch embedding projection is applied.
+Vision Transformers are pre-trained on large datasets and fine-tuned to (smaller) downstream tasks. For fine-tuning, a projection head is removed and a zero-initialized \(D \times K\) feedforward layer is attached with \(K\) being the number of downstream classes. It is also beneficial to use higher resolution then in pre-training. Also ViT can handle arbitrary sequence lengths but the pre-trained position embeddings can become sufficient. It is necessary to point out that resolution adjustment and patch extraction are the only points at which an inductive bias about the 2-dimensional structure of the images is manually injected into the Vision Transformers
 
 \hypertarget{experiments}{%
 \paragraph{Experiments}\label{experiments}}
 
 Similarly to BERT models, multiple versions of the model at various scales were created. They have created Base = ``B'', Large = ``L'', Huge = ``H'' versions of ViT, with 12, 24 and 32 layers and 86M, 307M and 632M parameters respectively.
 
-To explore model scalability, the already mentioned dataset ImageNet was used. In addition, ViT was compared against slightly modified ResNet, creating ``ResNet(BiT)''. The batch Normalization layer was replaced with Group Normalization and used standardized convolutions. Another network that it was compared to was Noisy Student \citet{noisy}, a large EfficientNet. Experiments showed that ViT Hughe with 14x14 input patch size outperformed both CNN-based networks with an accuracy of 88.5\%, whereas ResNet BiT had 87.54\% and Noisy Student 88.4\%. Also, it is worth mentioning that ViT Large with 16x16 input patch size had 87.76\% accuracy on the same dataset.
+To explore the model scalability, the previous mentioned dataset ImageNet was used. In addition, ViT was compared against a slightly modified ResNet called ``ResNet(BiT)''. The batch Normalization layer was replaced with Group Normalization and used standardized convolutions. Another network that it was compared to was Noisy Student \citep{noisy}, a large EfficientNet. Experiments showed that ViT Hughe with \(14\times 14\) input patch size outperformed both CNN-based networks with an accuracy of 88.5\%, whereas ResNet BiT had 87.54\% and Noisy Student 88.4\%. It is worth mentioning that ViT Large with \(16\times 16\) input patch size had 87.76\% accuracy on the same dataset.
 Another thing worth pointing out is that ViT outperforms CNN-based architectures on all larger datasets yet performs slightly worse than CNN networks on a smaller dataset.
 
 \hypertarget{conclusion}{%
 \subsection{Conclusion}\label{conclusion}}
 
-In this chapter, authors presented some of the current state-of-the-art approaches in Computer Vision. Nowdays, when technology is advancing each day, creating networks that would imitate human brain is more challenging. Still networks presented in this chapter are highly accurate and creating network which would out-performe them is challenging. Furthermore, it is noticeable that the application of CV is dictating the development of networks and frameworks which help humans with everyday tasks.
+In this chapter, the authors presented some of the current state-of-the-art approaches in Computer Vision. Nowadays, when technology is advancing each day, creating networks that would imitate human brain is more challenging. Still, the networks presented in this chapter are highly accurate and creating network which can out-perform them is challenging. Furthermore, it is noticeable that the application of CV is dictating the development of networks and frameworks which help humans with their everyday tasks.
 
 \hypertarget{c01-03-benchmarks}{%
 \section{Resources and Benchmarks for NLP, CV and multimodal tasks}\label{c01-03-benchmarks}}
