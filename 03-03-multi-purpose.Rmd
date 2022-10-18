@@ -4,23 +4,53 @@
 
 *Supervisor: Rasmus Hvingelby*
 
-
-### Intro
-
 After we read about adding further modalities besides video and text, we will look at models that aim to be as generalizable as possible, that not
 just allow different modalities but also try to achieve multitasking. This section will survey previous attempts for multimodal and multitasking models.
 Recent developments showed that transformers [@vaswani2017attention] proved to be the best-suited models for text (BERT, @Devlin2018) and vision (ViT @dosovitskiy2020image). Thus many recent attempts are also based on the transformer architecture to different degrees. Furthermore, we will also present an early model that is not transformer-based yet found similar behavior in generalizability.
 We will look further into cutting-edge development in the second half of the section, where the Pathways proposal by Google [@Dean21] will be revisited, as well as attempts in the broader context of this work. The chapter will conclude with an outlook and a discussion on how the field will likely evolve.
+At first, multitask learning will be introduced, which forms a basis for defining multi-purpose models later on. Existing multi-purpose models will be surveyed and compared. Subsequently, current
+issues and challenges will be focused and how existing approaches deal with them. In the end, the chapter will conclude
+with a discussion on the subject.
+
+
+#### Multi-Task Learning
+\# TODO Introduce MTL
+To introduce the concept of multi-purpose models, a short introduction to multi-task-learning is necessary. Multi-modal learning,
+that we alread introduced, aims at improving abstract representations by unlocking more senses to perceive the world. Mulit-task learning [Caruana todo],
+also aims to improve models by training on multiple tasks. It is assumed that adding more tasks, increases the generalization capability of the model.
+The transferable knowledge of a task is used in different settings. For example a model can be trained on predicting different ....
+CV (more obvious tasks) -> go down to NLP and the models capability in nlp
+For a more in-depth overview of mulit-task learning, we rever to @Crawshaw2020.
+- catastrophic Forgetting
+
+#### Mixture-of-Experts
+\# TODO Add general idea of moe
 
 #### Multi-Purpose Models
+\# TODO Adapt to new structure
 
+--
 Since the early years of machine learning, multitask and multimodal learning paradigms have been around.
-Multitask learning [@Crawshaw2020] is the paradigm of training a model on different tasks with the intention that the model transfers the learned knowledge to new tasks, such that fewer resources are required to learn new them. Akin to humans, it is intended that the model benefits from previously learned tasks. Humans do not learn everything new from scratch and spend far fewer resources on learning because knowledge can be transferred. It is thus assumed that deep learning models tend to generalize better when trained on multiple tasks.
+Multitask learning [@Crawshaw2020] is the paradigm of training a model on different tasks with the intention that the model transfers the learned
+knowledge to new tasks, such that fewer resources are required to learn new them. Akin to humans, it is intended that the model benefits from previously
+learned tasks. Humans do not learn everything new from scratch and spend far fewer resources on learning because knowledge can be transferred.
+It is thus assumed that deep learning models tend to generalize better when trained on multiple tasks.
 Multimodal learning [@Baltrusaitis2019] is a paradigm in which a deep learning model is supplied with multiple modalities like images, text,
-tables, and so on. As in multitask learning, this approach is also inspired by natural intelligence since intelligent beings perceive the world through multiple senses. It is thus assumed that multimodal models achieve better performance due to the increased variety of the provided data.
-We want to marry the two paradigms to form a so-called multi-purpose paradigm for this work. Multi-purpose models are capable of being multimodal and multitask. We assume that this merge improves the generalizability of the models even further.
+tables, and so on. As in multitask learning, this approach is also inspired by natural intelligence since intelligent beings perceive the world through
+multiple senses. It is thus assumed that multimodal models achieve better performance due to the increased variety of the provided data.
+We want to marry the two paradigms to form a so-called multi-purpose paradigm for this work. Multi-purpose models are capable of being multimodal and multitask.
+We assume that this merge improves the generalizability of the models even further.
+--
 
-### Previous Work
+After the introduction of multitask learning, we can now define the concept of a multipurpose model. Multipurpose models marry the concept of multitask learning and multimodal learning.
+These models can perceive different modalities and are trained on multiple tasks. Combining both concepts, it can also be assumed that the benefits of both concepts,
+yet also the challenges, are inherited. On the one side, a better generalization can be assumed, yet also issues remain.
+A multi-purpose model is thus a model trained on different multimodal or unimodal tasks. An example would be a model that is trained on visual, text and visual-text tasks aimed to
+generalize in a inductive transfer meaning that the model can predict targets without having the targets in training data.
+
+### Overview of Mulit-Purpose Models
+In this section an overview of existing multi-purpose models will be outlined. The models about to be looked at are all from recent years, with the oldest one (MultiModel) from 2017. At the end of
+this section the models will be compared and set in the greater context of multi-purpose models.
 
 #### MultiModel
 
@@ -77,6 +107,7 @@ Gato was evaluated on RL-based tasks against specialist RL agents, where Gato pe
 Similar to OFA, Gato can tokenize all input, whose output can be used to solve the problems Gato is trained on. It was shown that Gato could sometimes transfer knowledge on unseen tasks. However, this did not succeed all over.
 
 #### Comparison
+\# TODO Compare more in-depth
 
 We revisited four multi-purpose models (Multimodel, UniT, OFA, and GATO), of which three were based on the transformer architecture. The last two models transformed the tasks into seq2seq problems to use the standard transformer. UniT is the only model that does not use autoregressive sequence generation, while MultiModel produces the output autoregressively too.
 Almost all models require some particular module to produce the eventual output: visualizer and image generator in OFA, the task-specific heads in UniT, or the modality nets in Multimodel. On the other side, GATO is more generalizable in its domain since it only produces text and action tokens for games and robotics, which can be translated more easily.
