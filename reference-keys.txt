@@ -326,7 +326,7 @@ conclusion-pathways
 discussion-3
 c03-04-usecase
 historical-overview
-how-to-use-models
+how-to-use-these-models
 different-tasks-and-modalities
 discussion-and-prospects
 conclusion-1

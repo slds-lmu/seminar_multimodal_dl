@@ -127,7 +127,7 @@
 
 \title{Multimodal Deep Learning}
 \author{}
-\date{\vspace{-2.5em}2022-09-23}
+\date{\vspace{-2.5em}2022-10-24}
 
 \begin{document}
 \maketitle
@@ -2713,7 +2713,7 @@ The \(M^2\) Transformer is a new Transformer- based architecture for image capti
 
 \emph{Supervisor: Jann Goschenhofer}
 
-Have you ever wondered what a painting artist could bring you if you ordered \emph{a high-quality oil painting of a psychedelic hamster dragon}? Probably not. Nevertheless, one of the answers could be:
+Have you ever wondered what a painting artist could paint for you if you ordered \emph{a high-quality oil painting of a psychedelic hamster dragon}? Probably not. Nevertheless, one of the answers could be:
 
 \begin{figure}
 
@@ -2724,20 +2724,20 @@ Have you ever wondered what a painting artist could bring you if you ordered \em
 \caption{Hamster dragon}\label{fig:hamsterdragon}
 \end{figure}
 
-The catch is that there is no human artist. The above picture comes from a 3.5-billion parameter model called GLIDE by OpenAI \citep{Glide2021}. Every single value of every pixel was generated from a distribution that the model had to learn in the first place. Before generating the image, GLIDE abstracted what `hamster' and `dragon' are from looking at millions of training images. Only then, it was able to create and combine them successfully into a meaningful visual representation. Welcome to the world of current text-to-image modelling!
+The catch is that there is no human artist. The above picture comes from a 3.5-billion parameter model called GLIDE by OpenAI \citep{Glide2021}. Every single value of every pixel was generated from a distribution that the model had to learn in the first place. Before generating the image, GLIDE abstracted the concepts of `hamster' and `dragon' from looking at millions of training images. Only then, it was able to create and combine them successfully into a meaningful visual representation. Welcome to the world of current text-to-image modelling!
 
-The cross-modal field of text-to-image models has developed significantly over recent years. What was considered unimaginable only a few years ago, today constitutes a new benchmark for researchers. New breakthroughs are being published every couple of months. What might be even more important, possible business use cases are emerging, which attracts investment from the greatest players in AI research. However, a further trend of closed-source models is continuing and the text-to-image field is probably one the most obvious ones where it can be noticed. We might need to get used to the fact that the greatest capabilities will soon be monopolized by few companies.
+The cross-modal field of text-to-image models has developed significantly over recent years. What was considered unimaginable only a few years ago, today constitutes a new benchmark for researchers. New breakthroughs are being published every couple of months. Following these, possible business use cases are emerging, which attracts investment from the greatest players in AI research. However, a further trend of closed-source models is continuing and the text-to-image field is probably one the most obvious ones where it can be noticed. We might need to get used to the fact that the greatest capabilities will soon be monopolized by few companies.
 
 At the same time, the general public is becoming aware of the field itself and the disruption potential it brings. Crucial questions are already emerging. What constitutes art? What does the concept of being an author mean? The result of a generative model is in a sense a combination, or variation, of the abstracts it has seen in the past. But the same stands for a human author. Therefore, is a discussion about the prejudices and biases needed? Answers to all of these will require refinement through an extensive discussion. The last section of this chapter will try to highlight the most important factors that will need to be considered.
 
 However, the primary intention of this chapter is to present the reader with a perspective on how the field was developing chronologically. Starting with the introduction of GANs, through the first cross-domain models, and ending with state-of-the-art achievements (as of September 2022), it will also try to grasp the most important concepts without being afraid of making technical deep dives.
 
-The author is aware that since the rapid development pace makes it nearly impossible for this section to stay up-to-date, it might very soon not be fully covering the field. However, it must be stressed that the cutting-edge capabilities of the recent models tend to come from the scale and software engineering tricks. Therefore, focusing on the core concepts should hopefully make this chapter have a universal character, at least for some time. This design choice also explains why many important works did not make it to this publication. Just to name a few of them: GAWWN \citep{GAWWN2016}, MirrorGAN \citep{MirrorGAN2019}, or most recent ones: LAFITE \citep{LAFITE2021}, Make-a-Scene \citep{MakeAScene2022} or CogView \citep{CogView2021}. In one way or another, all of them pushed the research frontier one step further, which is widely acknowledged. Therefore, it needs to be clearly stated - the final selection of this chapter's content is a purely subjective decision of the author.
+The author is aware that since the rapid development pace makes it nearly impossible for this section to stay up-to-date, it might very soon not be fully covering the field. However, it must be stressed that the cutting-edge capabilities of the recent models tend to come from the scale and software engineering tricks. Therefore, focusing on the core concepts should hopefully gives this chapter a universal character, at least for some time. This design choice also explains why many important works did not make it to this publication. Just to name a few of them as honorable mentions: GAWWN \citep{GAWWN2016}, MirrorGAN \citep{MirrorGAN2019}, or most recent ones: LAFITE \citep{LAFITE2021}, Make-a-Scene \citep{MakeAScene2022} or CogView \citep{CogView2021}. In one way or another, all of them pushed the research frontier one step further. Therefore, it needs to be clearly stated - the final selection of this chapter's content is a purely subjective decision of the author.
 
 \hypertarget{seeking-objectivity}{%
 \subsection{Seeking objectivity}\label{seeking-objectivity}}
 
-Before diving into particular models, it would be worth introducing objective procedures that could help assess how consecutive works are performing in comparison to their predecessors. Unfortunately, objectivity in comparing generative models is very hard to capture since there is no straight way to draw deterministic conclusions about the model's performance \citep{Evaluation2015}. However, multiple quantitative and qualitative techniques have been developed to make up for it. Unfortunately, there is no general consensus as to which measures should be used. An extensive comparison has been performed by \citet{EvaluationComparison2018}. A few of them that seem to be most widely used in the current research are presented below.
+Before diving into particular models, we introduce objective evaluation procedures that help assess the performance of consecutive works in comparison to their predecessors. Unfortunately, objectivity in comparing generative models is very hard to capture since there is no straight way to draw deterministic conclusions about the model's performance \citep{Evaluation2015}. However, multiple quantitative and qualitative techniques have been developed to make up for it. Unfortunately, there is no general consensus as to which measures should be used. An extensive comparison has been performed by \citet{EvaluationComparison2018}. A few of the most widely used ones in current research are presented below.
 
 \textbf{Inception Score (IS)}
 
@@ -2749,11 +2749,11 @@ Introduced by \citet{InceptionScore2016}, Inception Score (IS) uses the Inceptio
 
 \textbf{Fréchet Inception Distance (FID)}
 
-A metric that is generally considered to improve upon Inception Score is Fréchet Inception Distance (FID). \citet{FID2017} argue that the main drawback of IS is that it is not considering the real data at all. Therefore, FID again uses Inception Net, however this time it embeds the images (both fake and real samples) into feature space, stopping at a specific layer. In other words, some of the most-right layers of the net are being discarded. Feature vectors are then assumed to come from Gaussian distribution and the Fréchet distance is calculated between real and generated data distributions:
+A metric that is generally considered to improve upon Inception Score is the Fréchet Inception Distance (FID). \citet{FID2017} argue that the main drawback of IS is that it is not considering the real data at all. Therefore, FID again uses Inception Net, however this time it embeds the images (both fake and real samples) into feature space, stopping at a specific layer. In other words, some of the ultimate layers of the network are being discarded. Feature vectors are then assumed to follow a Gaussian distribution and the Fréchet distance is calculated between real and generated data distributions:
 
 \[d^2((m, C), (m_{w}, C_{w})) = ||m-m_{w}||_{2}^2 + Tr(C+C_{w}-2(CC_{w})^{1/2})\]
 
-\((m, C)\) and \((m_{w}, C_{w})\) represent mean and covariance of generated and real data Gaussians respectively. Obviously, low FID levels are desired.
+where \((m, C)\) and \((m_{w}, C_{w})\) represent mean and covariance of generated and real data Gaussians respectively. Obviously, low FID levels are desired.
 
 FID is considered to be consistent with human judgement and sensitive to image distortions, which are both desired properties. Figure \ref{fig:fiddistortions} shows how FID increases (worsens) for different types of noise being added to images.
 
@@ -2768,11 +2768,11 @@ FID is considered to be consistent with human judgement and sensitive to image d
 
 
 
-\textbf{Precision / recall}
+\textbf{Precision / Recall}
 
 Precision and recall are one of the most widely used metrics in many Machine Learning problem formulations. However, their classic definition cannot be applied to generative models due to the lack of objective labels. \citet{GenerativePrecisionRecall2018} came up with a novel definition of these metrics calculated directly from distributions, which was further improved by \citet{ImprovedPrecisionRecall2019}. The argument behind the need for such an approach is that metrics such as IS or FID provide only a one-dimensional view of the model's performance, ignoring the trade-off between precision and recall. A decent FID result might very well mean high recall (large variation, i.e.~wide range of data represented by the model), high precision (realistic images), or anything in between.
 
-Let \(P_{r}\) denote the probability distribution of the real data, and \(P_{g}\) be the distribution of the generated data. In short, recall is trying to answer how big part of \(P_{r}\) can be generated from \(P_{g}\), while precision is trying to grasp how many generated images fall within \(P_{r}\).
+Let \(P_{r}\) denote the probability distribution of the real data, and \(P_{g}\) be the distribution of the generated data. In short, recall measures to which extend \(P_{r}\) can be generated from \(P_{g}\), while precision is trying to grasp how many generated images fall within \(P_{r}\).
 
 \begin{figure}
 
@@ -2785,11 +2785,11 @@ Let \(P_{r}\) denote the probability distribution of the real data, and \(P_{g}\
 
 
 
-For a more thorough explanation of metric calculation, one should follow the already mentioned \citet{ImprovedPrecisionRecall2019}.
+See \citet{ImprovedPrecisionRecall2019} for a more thorough explanation.
 
 \textbf{CLIP score}
 
-CLIP is a model from OpenAI {[}CLIP2021{]}. Its details can be found in the chapter about \emph{text-supporting computer vision models}. In principle, CLIP is capable of assessing the semantic similarity between the text caption and the image. CLIP score is defined as:
+CLIP is a model from OpenAI {[}CLIP2021{]} which is explained in detail in the chapter about \emph{text-supporting computer vision models}. In principle, CLIP is capable of assessing the semantic similarity between the text caption and the image. Following this rationale, the CLIP score can be used as metric and is defined as:
 
 \[\mathop{{}\mathbb{E}}[s(f(image)*g(caption))]\]
 
@@ -2797,7 +2797,7 @@ where the expectation is taken over the batch of generated images and \(s\) is t
 
 \textbf{Human evaluations}
 
-It is common that researchers report also qualitative measures. Many potential applications of the models are focused on deceiving the human spectator, which motivates reporting of metrics that are based on human evaluation. Many variations can be found, therefore none is going to be presented here. However, the general idea is to test for:
+It is common that researchers report also qualitative measures. Many potential applications of the models are focused on deceiving the human spectator, which motivates reporting of metrics that are based on human evaluation. The general concept of these evaluation is to test for:
 
 \begin{itemize}
 \tightlist
@@ -2812,16 +2812,16 @@ Usually, a set of images is presented to a human, whose task is to assess their 
 \hypertarget{generative-adversarial-networks}{%
 \subsection{Generative Adversarial Networks}\label{generative-adversarial-networks}}
 
-The appearance of Generative Adversarial Networks (GAN) was a major milestone in the development of generative models. Introduced by \citet{GAN2014}, the idea of GANs presented new architecture and training regime, which corresponded to a minimax two-player game between Generator and Discriminator (hence the word \emph{adversarial}).
+The appearance of Generative Adversarial Networks (GAN) was a major milestone in the development of generative models. Introduced by \citet{GAN2014}, the idea of GANs presented a novel architecture and training regime, which corresponds to a minimax two-player game between a Generator and a Discriminator (hence the word \emph{adversarial}).
 
-GANs can be considered as an initial enabler for the field of text-to-image to exist in the first place and for a long time, GAN-like models were achieving state-of-the-art results, which makes it more than justified to present their core concepts in this book.
+GANs can be considered as an initial enabler for the field of text-to-image models and for a long time, GAN-like models were achieving state-of-the-art results, hence the presentation of their core concepts in this chapter
 
 \hypertarget{vanilla-gan-for-image-generation}{%
 \subsubsection{Vanilla GAN for Image Generation}\label{vanilla-gan-for-image-generation}}
 
-In a vanilla GAN, the Generator model (\(G\)) and Discriminator model (\(D\)) are optimized together in a minimax game, where \(G\) aims at generating a sample so convincing, that \(D\) will not be able to distinguish if it comes from real or generated images distribution. On the other hand, \(D\) is being trained to discriminate between the two. Originally, multilayer perceptron was proposed as a model architecture for both \(D\) and \(G\), although in theory any differentiable function could be used.
+In a vanilla GAN, the Generator model (\(G\)) and Discriminator model (\(D\)) are optimized together in a minimax game, where \(G\) aims at generating a sample so convincing, that \(D\) will not be able to distinguish whether it comes from a real or generated image distribution. On the other hand, \(D\) is being trained to discriminate between the two. Originally, a multilayer perceptron was proposed as a model architecture for both \(D\) and \(G\), although in theory any differentiable function could be used.
 
-More formally, let \(p_{z}\) denote the prior distribution defined on the input noise vector \(z\). Then, the generator \(G(z)\) represents a function that is mapping this noisy random input to generated image \(x\). The discriminator \(D(x)\) outputs a probability that \(x\) comes from the real data rather than generator's distribution \(p_{g}\). In this framework, \(D\) shall maximize the probability of guessing the correct label of both real and fake data. \(G\) is trained to minimize \(log(1-D(G(z)))\). Now, such representation corresponds to the following value function (optimal solution):
+More formally, let \(p_{z}\) denote the prior distribution defined on the input noise vector \(z\). Then, the generator \(G(z)\) represents a function that is mapping this noisy random input to the generated image \(x\). The discriminator \(D(x)\) outputs a probability that \(x\) comes from the real data rather than generator's distribution \(p_{g}\). In this framework, \(D\) shall maximize the probability of guessing the correct label of both real and fake data. \(G\) is trained to minimize \(log(1-D(G(z)))\). Now, such representation corresponds to the following value function (optimal solution):
 
 \[\min_{G}\min_{D}V(D,G) = \mathop{{}\mathbb{E}}_{x \sim p_{data}(x)} [log(D(x))] + \mathop{{}\mathbb{E}}_{z \sim p_{z}(z)} [log(1-D(G(z)))]\]
 
@@ -2854,7 +2854,7 @@ Some of the generated samples that had been achieved with this architecture alre
 \hypertarget{conditioning-on-text}{%
 \subsubsection{Conditioning on Text}\label{conditioning-on-text}}
 
-So far, only image generation has been covered, completely ignoring textual input. \citet{GANTextToImage2016} introduced an interesting concept of conditioning DC-GAN (GAN with CNNs as Generator and Discriminator) on textual embeddings. A separate model is being trained and used for encoding the text. Then, result embeddings are concatenated with the noise vector and fed into the Generator. Discriminator takes embeddings as an input as well. The resulting model is referred to as GAN-INT-CLS. Both abbreviations (INT and CLS) stand for specific training choices, which are going to be explained later in the chapter. The overview of the proposed architecture can be seen in Figure \ref{fig:gancls}.
+So far, only image generation has been covered, completely ignoring textual input. \citet{GANTextToImage2016} introduced an interesting concept of conditioning DC-GAN (GAN with CNNs as Generator and Discriminator) on textual embeddings. A separate model is being trained and used for encoding the text. Then, result embeddings are concatenated with the noise vector and fed into the Generator and the Discriminator takes embeddings as an input as well. The resulting model is referred to as GAN-INT-CLS. Both abbreviations (INT and CLS) stand for specific training choices, which are going to be explained later in the chapter. The overview of the proposed architecture can be seen in Figure \ref{fig:gancls}.
 
 \begin{figure}
 
@@ -2862,7 +2862,7 @@ So far, only image generation has been covered, completely ignoring textual inpu
 
 }
 
-\caption{The proposed architecture of convolutional GAN that is conditioned on text. Text encoding \(\varphi(t)\) is fed into both Generator and Discriminator. Before further convolutional processing, it is first projected to lower dimensionality in fully-connected layers and concatenated with image feature maps. Figure from \citet{GANTextToImage2016}.}\label{fig:gancls}
+\caption{The proposed architecture of the convolutional GAN that is conditioned on text. Text encoding \(\varphi(t)\) is fed into both the Generator and the Discriminator. Before further convolutional processing, it is first projected to lower dimensionality in fully-connected layers and concatenated with image feature maps. Figure from \citet{GANTextToImage2016}.}\label{fig:gancls}
 \end{figure}
 
 
@@ -2882,15 +2882,15 @@ Since regular text embeddings are commonly trained in separation from visual mod
 
 
 
-GoogLeNet is being used as an image encoder \(\phi\). For text encoding \(\varphi(t)\), authors use a character-level CNN combined with RNN. Essentially, the objective of the training is to minimize the distance between encoded image representation and text representation. The image encoder is then discarded and \(\varphi\) only is used as depicted in Figure \ref{fig:gancls}.
+GoogLeNet is being used as an image encoder \(\phi\). For text encoding \(\varphi(t)\), authors use a character-level CNN combined with RNN. Essentially, the objective of the training is to minimize the distance between the encoded image and text representations. The image encoder is then discarded and \(\varphi\) only is used as depicted in Figure \ref{fig:gancls}.
 
 \textbf{GAN-CLS}
 
-CLS stands for Conditional Latent Space, which essentially means GAN is conditioned on the embedded text. However, in order to fully grasp how exactly the model is conditioned on the input, we need the go beyond architectural choices. It is also crucial to present a specific training regime that was introduced for GAN-CLS and the motivation behind it.
+CLS stands for Conditional Latent Space, which essentially means the GAN is conditioned on the embedded text. However, in order to fully grasp how exactly the model is conditioned on the input, we need to go beyond architectural choices. It is also crucial to present a specific training regime that was introduced for GAN-CLS and the motivation behind it.
 
-One of the possible ways how the system could be trained is to view text-image pairs as joint observations and train the discriminator to classify the entire pair as real or fake. However, in such a case discriminator does not have an understanding of whether the image matches the meaning of the text. This is because the discriminator does not distinguish between two types of error that exist, namely when the image is unrealistic or when it is realistic but the text does not match.
+One way to train the system is to view text-image pairs as joint observations and train the discriminator to classify the entire pair as real or fake. However, in such a case the discriminator does not have an understanding of whether the image matches the meaning of the text. This is because the discriminator does not distinguish between two types of error that exist, namely when the image is unrealistic or when it is realistic but the text does not match.
 
-A proposed solution to this problem is to present the discriminator with three observations at a time, all of which are included later in the loss function. These three are: \{real image with right text\}, \{real image with wrong text\}, \{fake image with right text\}. Intention is that discriminator should classify them as \{true\}, \{false\}, \{false\}, respectively.
+A proposed solution to this problem is to present the discriminator with three observations at a time, all of which are included later in the loss function. These three are: \{real image with right text\}, \{real image with wrong text\}, \{fake image with right text\}. The intention is that the discriminator should classify them as \{true\}, \{false\}, \{false\}, respectively.
 
 \textbf{GAN-INT}
 
@@ -2936,11 +2936,11 @@ The model achieves the best performance when both of the mentioned methods are i
 \hypertarget{further-gan-like-development}{%
 \subsubsection{Further GAN-like development}\label{further-gan-like-development}}
 
-Generative Adversarial Networks were a leading approach for text-to-image models for most of the field's short history. In the following years after introducing GAN-INT-CLS, new concepts were emerging, trying to push the results further. Many of them had GAN architecture as their core part. In this section, a few such ideas are presented. The intention is to quickly skim through the most important ones. A curious reader should follow the corresponding papers.
+Generative Adversarial Networks were a leading approach for text-to-image models for most of the field's short history. In the following years after the introduction of GAN-INT-CLS, new concepts were emerging, trying to push the results further. Many of them had a GAN architecture as their core part. In this section, a few such ideas are presented. The intention is to quickly skim through the most important ones. A curious reader should follow the corresponding papers.
 
 \textbf{StackGAN}
 
-\citet{StackGAN2016} introduced what they called StackGAN. The main contribution of the paper which also found its place in other researchers' works, was the idea to \emph{stack} more than one generator-discriminator pair inside the architecture. Stage-II (second pair) generator is supposed to improve the results from Stage-I, taking into account only:
+\citet{StackGAN2016} introduced what the StackGAN. The main contribution of the paper which also found its place in other researchers' works, was the idea to \emph{stack} more than one generator-discriminator pair inside the architecture. Stage-II (second pair) generator is supposed to improve the results from Stage-I, taking into account only:
 
 \begin{itemize}
 \tightlist
@@ -2984,7 +2984,7 @@ Another important milestone was DM-GAN (Dynamic Memory GAN) \citep{DMGAN2019}. A
 
 \textbf{DF-GAN}
 
-Last but not least, DF-GAN (Deep Fusion GAN) \citep{DFGAN2020} improves the results by proposing three concepts. One-Stage Text-to-Image Backbone focuses on providing an architecture that is capable of abandoning the idea of multiple stacked generators and using a single one instead. It achieves that by a smart combination of a couple of factors, i.a. hinge loss and use of residual blocks. Additionally, Matching-Aware Gradient Penalty helps achieve high semantic consistency between text and image and regularizes the learning process. Finally, One-Way Output helps the process converge more effectively.
+Last but not least, DF-GAN (Deep Fusion GAN) \citep{DFGAN2020} improves the results by proposing three concepts. One-Stage Text-to-Image Backbone focuses on providing an architecture that is capable of abandoning the idea of multiple stacked generators and using a single one instead. It achieves that by a smart combination of a couple of factors, i.a. hinge loss and the use of residual blocks. Additionally, Matching-Aware Gradient Penalty helps achieve high semantic consistency between text and image and regularizes the learning process. Finally, One-Way Output helps the process converge more effectively.
 
 \hypertarget{dall-e-1}{%
 \subsection{Dall-E 1}\label{dall-e-1}}
@@ -2993,7 +2993,7 @@ OpenAI's Dall-E undoubtedly took the text-to-image field to another level. For t
 
 \textbf{Variational Autoencoder (VAE)}
 
-Regular Autoencoder architecture aims at finding an identity function that is capable of finding a meaningful representation of the data in lower-dimensional space and then reconstructing it. It is considered an unsupervised learning method for reducing dimensionality, however, trained in a supervised regime with the data itself being the label. The component performing reduction is called an encoder, while the part responsible for reconstruction is called a decoder. The idea behind Variational Autoencoder \citep{VAE2013} is similar, however, instead of learning the mapping to a static low-dimensional vector, the model learns its distribution. This design equips the decoder part with desired generative capabilities, as sampling from the latent low-dimensional space will result in varying data being generated. The architecture is depicted in Figure \ref{fig:vae}.
+The regular Autoencoder architecture aims at finding an identity function that is capable of finding a meaningful representation of the data in lower-dimensional space and then reconstructing it. It is considered an unsupervised learning method for dimensionality reduction, however, trained in a supervised regime with the data itself being the label. The component performing the reduction is called an encoder, while the part responsible for the reconstruction is called a decoder. The idea behind Variational Autoencoder \citep{VAE2013} is similar, however, instead of learning the mapping to a static low-dimensional vector, the model learns its distribution. This design equips the decoder part with desired generative capabilities, as sampling from the latent low-dimensional space will result in varying data being generated. The architecture is depicted in Figure \ref{fig:vae}.
 
 \begin{figure}
 
@@ -3001,16 +3001,16 @@ Regular Autoencoder architecture aims at finding an identity function that is ca
 
 }
 
-\caption{(ref:vae)}\label{fig:vae}
+\caption{Variational (probabilistic) Autoencoder architecture. Figure from \citet{weng2018VAE}.}\label{fig:vae}
 \end{figure}
 
-(fig:vae) Variational (probabilistic) Autoencoder architecture. Figure from \citet{weng2018VAE}.
+
 
 \(q_{\phi}(z|x)\) denotes the encoder under the assumption that \(z\) comes from multivariate Gaussian. \(\mu\) and \(\sigma\) are being learned. Reconstruction process is modelled by conditional probability \(p_{\theta}(x|z)\), given samples latent vector \(z\).
 
 \textbf{VQ-VAE / dVAE}
 
-The VQ-VAE (Vector Quantized VAE) \citep{VQVAE2017} differs from regular VAE in the way it approaches encoding the latent space. Instead of mapping data into continuous distribution, the Vector Quantized version does it in a discrete way. This is motivated by the fact that for many data modalities it is more natural to represent them in a discrete way (e.g.~speech, human language, reasoning about objects in images, etc.). VQ-VAE achieves that by using a separate codebook of vectors. The architecture is depicted in Figure \ref{fig:vqvae}.
+The VQ-VAE (Vector Quantized VAE) \citep{VQVAE2017} differs from the regular VAE in the way it approaches encoding the latent space. Instead of mapping data into a continuous distribution, the Vector Quantized version does it in a discrete way. This is motivated by the fact that for many data modalities it is more natural to represent them in a discrete way (e.g.~speech, human language, reasoning about objects in images, etc.). VQ-VAE achieves that by using a separate codebook of vectors. The architecture is depicted in Figure \ref{fig:vqvae}.
 
 \begin{figure}
 
@@ -3029,11 +3029,11 @@ Dall-E, however, is using what is called dVAE. Essentially, it is a VQ-VAE with 
 
 \textbf{Dall-E system}
 
-Dall-E is composed of two stages. The above introduction of VQ-VAE was necessary to understand the first one. It really is nothing more than training dVAE to compress 256x256 images into a 32x32 grid of tokens. This model will play a crucial role in the second stage.
+Dall-E is composed of two stages. The above introduction of VQ-VAE was necessary to understand the first one. Essentially, it is training dVAE to compress 256x256 images into a 32x32 grid of tokens. This model will play a crucial role in the second stage.
 
-The second stage is about learning the prior distribution of text-image pairs. First, the text is byte-pair-encoded \citep{BPE2015} into a maximum of 256 tokens, where vocabulary is of 16384 size. Next, the image representation encoded by previously trained dVAE is unrolled (from 32x32 grid to 1024 tokens) and concatenated to the text tokens. This sequence (of 256+1024 tokens) is used as an input for huge transformer-like architecture. Its goal is to autoregressively model the next token prediction.
+The second stage is about learning the prior distribution of text-image pairs. First, the text is byte-pair \citep{BPE2015} encoded into a maximum of 256 tokens, where the vocabulary is of size 16384. Next, the image representation encoded by previously trained dVAE is unrolled (from 32x32 grid to 1024 tokens) and concatenated to the text tokens. This sequence (of 256+1024 tokens) is used as an input for a huge transformer-like architecture. Its goal is to autoregressively model the next token prediction.
 
-During inference time text caption is again encoded into 256 tokens at most. The generation process starts with predicting all of the next 1024 image-related tokens. They are later decoded with the dVAE decoder that was trained in the first step. Its output represents the final image.
+During inference time, the text caption is again encoded into 256 tokens at most. The generation process starts with predicting all of the next 1024 image-related tokens. They are later decoded with the dVAE decoder that was trained in the first step. Its output represents the final image.
 
 \textbf{Results}
 
@@ -3045,7 +3045,7 @@ Results achieved with the original Dall-E attracted so much attention mainly due
 
 }
 
-\caption{Human evaluation of Dall-E vs DF-GAN on text caption from MS-COCO dataset. When asked for realism and caption similarity, evaluators preferred Dall-E's results over 90\textbackslash\% of the time. Figure from \citet{DALLE1}.}\label{fig:dallephotorealism}
+\caption{Human evaluation of Dall-E vs DF-GAN on text captions from the MS-COCO dataset. When asked for realism and caption similarity, evaluators preferred Dall-E's results over 90\textbackslash\% of the time. Figure from \citet{DALLE1}.}\label{fig:dallephotorealism}
 \end{figure}
 
 
@@ -3070,37 +3070,37 @@ Although Dall-E made a huge step forward in text-to-image modelling, it still sh
 \hypertarget{glide}{%
 \subsection{GLIDE}\label{glide}}
 
-Introduced by \citet{Glide2021}, GLIDE started an era of huge-scale diffusion models. The concept of diffusion has already been used in the area of Deep Learning for some time before. However, the authors of the GLIDE took a step further and combined it together with text-based guidance which is supposed to steer the learning process in the direction of the text's meaning. This powerful method was proven to achieve outstanding results which remain competitive with current state-of-the-art models at the moment of writing.
+Introduced by \citet{Glide2021}, GLIDE started an era of huge-scale diffusion models. The concept of diffusion has already been used in the area of Deep Learning for some time before. However, the authors of GLIDE took a step further and combined it together with text-based guidance which is supposed to steer the learning process in the direction of the text's meaning. This powerful method was proven to achieve outstanding results which remain competitive with current state-of-the-art models at the time of writing.
 
 \textbf{Diffusion models}
 
-Before understanding the inner workings of GLIDE, it is important to introduce the core concept that is driving it, namely diffusion. The idea of diffusion comes from physics. In short, it corresponds to the process of diffusing particles, for example of one fluid in another. Normally it has a unidirectional character, in other words, it cannot be reversed. However, as \citet{Diffusion2015} managed to show, and \citet{DenoisingDiffusion2020} later improved, if the data diffusion process is modelled as a Markov chain with Gaussian noise being added in consecutive steps, it is possible to learn how to reverse it. This reversed process is exactly how images are generated by the model from pure random noise.
+Before understanding the inner workings of GLIDE, it is important to introduce the core concept that is driving it, namely diffusion. The idea of diffusion originates from physics. In short, it corresponds to the process of diffusing particles, for example of one fluid in another. Normally it has a unidirectional character, in other words, it cannot be reversed. However, as \citet{Diffusion2015} managed to show, and \citet{DenoisingDiffusion2020} later improved, if the data diffusion process is modelled as a Markov chain with Gaussian noise being added in consecutive steps, it is possible to learn how to reverse it. This reversed process is exactly how images are generated by the model from pure random noise.
 
-Let's construct a Markov chain, where the initial data point is denoted by \(x_{0}\). In \(t\) steps, Gaussian noise is added to the data. The probability of the data at \(t\)-step can be characterized in the following way:
+Let us construct a Markov chain, where the initial data point is denoted by \(x_{0}\). In \(t\) steps, Gaussian noise is added to the data. The distribution of the data at \(t\)-step can be characterized in the following way:
 
 \[q(x_{t}|x_{t-1}):=N(x_{t};\sqrt{\alpha_{t}}x_{t-1},(1-\alpha_{t})I)\]
 
-where \((1-\alpha_{t})\) parametrizes the magnitude of the noise being added at each step. Now, if \(x_{t-1}\) were to be reconstructed from \(x_{t}\), a model needs to learn to predict estimates of gradients from the previous steps. The probability distribution of previous steps can be estimated as follows:
+where \((1-\alpha_{t})\) parametrizes the magnitude of the noise being added at each step. Now, if \(x_{t-1}\) was to be reconstructed from \(x_{t}\), a model needs to learn to predict estimates of gradients from the previous steps. The probability distribution of previous steps can be estimated as follows:
 
 \[p_{\theta}(x_{t-1}|x_{t})=N(x_{t-1};\mu_{\theta}(x_{t}),\Sigma_{\theta}(x_{t}))\]
 
-where particular mean function \(\mu_{\theta}\) has been proposed by \citet{DenoisingDiffusion2020}. For a more detailed explanation of how this is later parametrized and trained, one could follow \citet{weng2021diffusion}.
+where the mean function \(\mu_{\theta}\) was proposed by \citet{DenoisingDiffusion2020}. For a more detailed explanation of how this is later parametrized and trained, one could follow \citet{weng2021diffusion}.
 
 \textbf{GLIDE system}
 
-GLIDE can essentially be broken down into two parts. First of them is the pretrained Transformer model, which in principle is responsible for creating the text embeddings. The last token embedding is used as a class embedding (text representation) in later stages. Additionally, all tokens from the last embedding layer are being used (\emph{attended to}) by all attention layers in the diffusion model itself. This makes the model aware of the text meaning while reconstructing the previous step in the Markov chain.
+GLIDE can essentially be broken down into two parts. The first of them is the pretrained Transformer model, which in principle is responsible for creating the text embeddings. The last token embedding is used as a class embedding (text representation) in later stages. Additionally, all tokens from the last embedding layer are being used (\emph{attended to}) by all attention layers in the diffusion model itself. This makes the model aware of the text meaning while reconstructing the previous step in the Markov chain.
 
-The second component of the GLIDE is the diffusion model itself. U-Net-like architecture with multiple attention blocks is used here. This part's sole goal is to model \(p_{\theta}(x_{t-1}|x_{t},y)\), where \(y\) corresponds to last token embedding mentioned above. Or, to put it differently, to predict \(\epsilon_{\theta}(x_{t}|y)\) since the problem can be reframed as calculating the amount of noise being added at each step.
+The second component of the GLIDE is the diffusion model itself. A U-Net-like architecture with multiple attention blocks is used here. This part's sole goal is to model \(p_{\theta}(x_{t-1}|x_{t},y)\), where \(y\) corresponds to last token embedding mentioned above. Or, to put it differently, to predict \(\epsilon_{\theta}(x_{t}|y)\) since the problem can be reframed as calculating the amount of noise being added at each step.
 
-Additionally, to make the model even more aware of the text's meaning, guidance is being used at inference time. In short, the idea is to control the direction of the diffusion process. The authors test two different approaches. First, they try guidance with the use of a separate classifier, OpenAI's CLIP in this case. However, better results were in general achieved by the classifier-free guidance process. The idea is to produce two different images at each step. One is conditioned on text, while the other one is not. Distance between them is calculated and then, after significant scaling, added to the image obtained without conditioning. This way, the model speeds up the progression of the image towards the meaning of the text. The process can be written the following way:
+Additionally, to make the model even more aware of the text's meaning, guidance is being used at inference time. In short, the idea is to control the direction of the diffusion process. The authors test two different approaches. First, they try guidance with the use of a separate classifier, OpenAI's CLIP in this case. However, better results were in general achieved by the classifier-free guidance process. The idea is to produce two different images at each step. One is conditioned on text, while the other one is not. Distance between them is calculated and then, after significant scaling, added to the image obtained without conditioning. This way, the model speeds up the progression of the image towards the meaning of the text. This process can be written as:
 
 \[\hat{\epsilon}_\theta(x_{t}|y)=\epsilon_{\theta}(x_{t}|\emptyset)+s*(\epsilon_{\theta}(x_{t}|y)-\epsilon_{\theta}(x_{t}|\emptyset))\]
 
-where \(s\) denotes the parameter for scaling the difference between mentioned images.
+where \(s\) denotes the parameter for scaling the difference between the mentioned images.
 
 \textbf{Results}
 
-GLIDE achieves significantly more photorealistic results compared to its predecessors. FID reported on the MS-COCO 256x256 dataset can be seen in Figure \ref{fig:glidefid}. It is worth noting that GLIDE was not trained on this dataset, hence its zero-shot capabilities are even more impressing.
+GLIDE achieves significantly more photorealistic results compared to its predecessors. FID scores reported on the MS-COCO 256x256 dataset can be seen in Figure \ref{fig:glidefid}. It is worth noting that GLIDE was not trained on this dataset, hence its zero-shot capabilities are even more impressing.
 
 \begin{figure}
 
@@ -3113,7 +3113,7 @@ GLIDE achieves significantly more photorealistic results compared to its predece
 
 
 
-Results are also preferred by human evaluators in terms of photorealism and the similarity of the image to its caption. Comparison to DALL-E 1 results can be seen in Figure \ref{fig:gliderealism}
+Results are also preferred by human evaluators in terms of photorealism and the similarity of the image to its caption. A comparison to DALL-E 1 results can be seen in Figure \ref{fig:gliderealism}
 
 \begin{figure}
 
@@ -3157,21 +3157,21 @@ GLIDE suffers from two problems. First, it fails when being presented with a com
 \hypertarget{dall-e-2-unclip}{%
 \subsection{Dall-E 2 / unCLIP}\label{dall-e-2-unclip}}
 
-The contribution that probably attracted the most attention in the field is known under the name Dall-E 2 \citep{DALLE2}. For the first time, wide public of people not coming from Deep Learning research had picked up so much interest in its potential applications. This might be due to a great PR that could be seen from the authors, namely OpenAI. Dall-E 2, also known as just Dall-E, or unCLIP, has been advertised as a successor of Dall-E 1, on which results it significantly improved. In reality, the architecture and the results it achieved are much more similar to that of GLIDE. Additionally, social media has been flooded with images generated by the model. This was possible thanks to OpenAI giving access to it to everybody who was interested and patient enough to get through a waiting list. However, the model itself again remains unpublished. Another factor that might have contributed to Dall-E's success were its inpainting and outpainting capabilities. Although, it is worth mentioning they were already also possible with GLIDE.
+The contribution that probably attracted the most attention in the field is known under the name Dall-E 2 \citep{DALLE2}. For the first time, the wider public had picked interest in its potential applications. This might be due to a great PR that could be seen from the authors, namely OpenAI. Dall-E 2, also known as just Dall-E, or unCLIP, has been advertised as a successor of Dall-E 1, on which results it significantly improved. In reality, the architecture and the results it achieved are much more similar to that of GLIDE. Additionally, social media has been flooded with images generated by the model. This was possible thanks to OpenAI giving access to it to everybody who was interested and patient enough to get through a waiting list. However, the model itself again remains unpublished. Another factor that might have contributed to Dall-E's success were its inpainting and outpainting capabilities. Although, it is worth mentioning they were already also possible with GLIDE.
 
-The novelty contribution of the model remains debatable from the perspective of scientific research. UnCLIP is rather a very smart combination of what was already produced by OpenAI but is now re-engineered and applied in a new way. Nevertheless, the model represents a significant leap forward, which is why it cannot be omitted in this chapter.
+In essence, UnCLIP is a very smart combination of pior work from OpenAI that was re-engineered and applied in a novel way. Nevertheless, the model represents a significant leap forward, which is why it cannot be omitted in this chapter.
 
 \textbf{Dall-E 2 system}
 
 UnCLIP consists of two components: prior and decoder. Let \(x\) be the image and \(y\) its caption. \(z_{i}\) and \(z_{t}\) are CLIP image and text embedding of this \((x, y)\) pair. Then, \emph{prior} \(P(z_{i}|y)\) is responsible for producing CLIP image embeddings conditioned on the text caption. A decoder \(P(x|z_{i},y)\) outputs an image conditioned on the CLIP image embedding and, again, the text caption itself.
 
-For the \emph{prior} authors try two different approaches, namely autoregressive and diffusion models. The latter ended up yielding slightly better results. Diffusion prior is nothing else than a Transformer taking as an input a special sequence of encoded text prompt, CLIP text embedding, embedding for the diffusion step, and noised CLIP image embedding.
+For the \emph{prior} authors try two different approaches, namely autoregressive and diffusion models. The latter ended up yielding slightly better results. The diffusion prior isa Transformer taking as an input a special sequence of an encoded text prompt, CLIP text embedding, embedding for the diffusion step, and a noised CLIP image embedding.
 
-The decoder consists of diffusion models again. Firstly, a GLIDE-like model takes CLIP image embedding as its \(x_{t}\) instead of the pure noise that was used in its original version. Similarly to the original GLIDE, classifier-free guidance is applied, however with slight differences. Lastly, two diffusion upsampler models are trained to bring images first from 64x64 to 256x256, and then from 256x256 to 1024x1024 resolution. Authors find there is no benefit of conditioning these models on text captions. Finally, unCLIP can be summarized as a mixture of GLIDE and CLIP with a lot of engineering behind it.
+The decoder consists of diffusion models again. Firstly, a GLIDE-like model takes a CLIP image embedding as its \(x_{t}\) instead of the pure noise that was used in its original version. Similarly to the original GLIDE, classifier-free guidance is applied, however with slight differences. Lastly, two diffusion upsampler models are trained to bring images first from 64x64 to 256x256, and then from 256x256 to 1024x1024 resolution. The authors found no benefit in conditioning these models on text captions. Finally, unCLIP can be summarized as a mixture of GLIDE and CLIP with a lot of engineering behind it.
 
 \textbf{Results}
 
-When compared to GLIDE, unCLIP shows it is capable of representing wider diversity of the data, while achieving a similar level of photorealism and caption similarity. Comparison to previous works on the MS-COCO dataset shows that unCLIP achieves unprecedented FID (Figure \ref{fig:uncliptable}). A few output examples calculated on MS-COCO captions can be found in Figure \ref{fig:unclipimages}.
+When compared to GLIDE, unCLIP shows it is capable of representing a wider diversity of the data, while achieving a similar level of photorealism and caption similarity. Comparison to previous works on the MS-COCO dataset shows that unCLIP achieves unprecedented FID (Figure \ref{fig:uncliptable}). A few output examples calculated on MS-COCO captions can be found in Figure \ref{fig:unclipimages}.
 
 \begin{figure}
 
@@ -3197,7 +3197,7 @@ When compared to GLIDE, unCLIP shows it is capable of representing wider diversi
 
 \textbf{Limitations}
 
-UnCLIP suffers from very similar problems as its predecessor GLIDE. First, compositionality in the images tends to sometimes be confused by the model. Failure cases can be seen in Figure \ref{fig:cube}. Second, UnCLIP struggles with generating coherent text inside an image (Figure \ref{fig:sign}). Authors hypothesize that using CLIP embeddings, although improved diversity, might be responsible for making these problems more evident than in GLIDE. Lastly, UnCLIP often fails with delivering details in highly complex scenes (Figure \ref{fig:timessquare}). Again, according to the authors, this might be a result of the fact that the decoder is producing only 64x64 images which are later upsampled.
+UnCLIP suffers from very similar problems as its predecessor GLIDE. First, compositionality in the images tends to sometimes be confused by the model. Failure cases can be seen in Figure \ref{fig:cube}. Second, UnCLIP struggles with generating coherent text inside an image (Figure \ref{fig:sign}). The authors hypothesize that using CLIP embeddings, although improving diversity, might be responsible for making these problems more evident than in GLIDE. Lastly, UnCLIP often fails with delivering details in highly complex scenes (Figure \ref{fig:timessquare}). Again, according to the authors, this might be a result of the fact that the decoder is producing only 64x64 images which are later upsampled.
 
 \begin{figure}
 
@@ -3235,7 +3235,7 @@ UnCLIP suffers from very similar problems as its predecessor GLIDE. First, compo
 \hypertarget{imagen-parti}{%
 \subsection{Imagen \& Parti}\label{imagen-parti}}
 
-Only a few months after unCLIP was released by OpenAI, for the first time Google came into play with its new autoregressive model called Imagen \citep{Imagen2022}. Another one followed just two months later - Parti \citep{Parti2022}. Both of these models pushed the boundaries even further, although they take entirely different approaches. None of them is introducing a completely new way of looking at the problem of text-to-image generation. Their advancements come from engineering and further scaling existing solutions. However, it must be stressed that currently (September 2022) they are delivering the most outstanding results on the market.
+Only a few months after unCLIP was released by OpenAI, for the first time Google came into play with its new autoregressive model called Imagen \citep{Imagen2022}. Another one followed just two months later - Parti \citep{Parti2022}. Both of these models pushed the boundaries even further, although they take entirely different approaches. None of them is introducing a completely new way of looking at the problem of text-to-image generation. Their advancements come from engineering and further scaling existing solutions. However, it must be stressed that currently (September 2022) they are delivering the most outstanding results.
 
 Imagen is a diffusion model. Its main contribution is that instead of using a text encoder trained on image captions, it actually uses a huge pretrained NLP model called T5-XXL \citep{T5XXL2019} that is taken off the shelf and frozen. Authors argue that this helps the model understand language much more deeply, as it has seen more diverse and complex texts than just image captions.
 
@@ -3271,7 +3271,7 @@ Samples from Parti can be seen in Figure \ref{fig:partiimages}. They are include
 
 \textbf{Limitations}
 
-\citet{Parti2022} mention an extensive list of problems, with which Parti still struggles. At this point, all of them can be treated as a set that is common to almost all the models available on the market. Among others, they touch:
+\citet{Parti2022} mention an extensive list of problems, with which Parti still struggles. At this point, all of them can be treated as a set that is common to almost all available models. Among others, they touch:
 
 \begin{itemize}
 \tightlist
@@ -3296,7 +3296,7 @@ Lastly, it is important to mention a couple of different topics, or trends, whic
 
 \textbf{Open- vs closed-source}
 
-The first trend that has emerged only recently is AI labs refusing to open-source their state-of-the-art models. This is in clear opposition to how the entire AI community was behaving from the very beginning of the recent Deep Learning boom. Apparently, possible commercial opportunities that come along with owning the software are too big to be ignored. The trend is very disruptive for the market - it is clear that the community is currently witnessing the maturation of AI business models. Needless to say, it is followed by all the greatest AI labs, just to name a few: OpenAI, DeepMind, Google Brain, Meta AI, and many others. As long as commercial achievements will have an edge over academic community research, it is highly doubtful that the trend will be reversed. However, it needs to be stressed that all of them are still issuing more or less detailed technical specifications of their work in a form of scientific papers, which is definitely a positive factor. We, as a community, can only hope it will not change in the future.
+The first trend that has emerged only recently is AI labs to not open-source their state-of-the-art models and training data. This is in clear opposition to how the entire AI community was behaving from the very beginning of the recent Deep Learning era Apparently, possible commercial opportunities that come along with owning the software are too big to be ignored. The trend is very disruptive - it is clear that the community is currently witnessing the maturation of AI business models. Needless to say, it is followed by all the greatest AI labs, just to name a few: OpenAI, DeepMind, Google Brain, Meta AI, and many others. As long as commercial achievements will have an edge over academic community research, it is highly doubtful that the trend will be reversed. However, it needs to be stressed that all of them are still issuing more or less detailed technical specifications of their work in the form of scientific papers, which is definitely a positive factor. We, as a community, can only hope it will not change in the future.
 
 \textbf{Open-Source Community}
 
@@ -3320,7 +3320,7 @@ Image generation that can be done in a controllable manner has undoubtedly huge 
 
 \textbf{Ethics / Conclusion}
 
-Automated image generation poses an array of serious questions of ethical character. Fortunately, many of them are already very well recognized by the community. For example, OpenAI elaborates extensively on the risks and limitations of their Dall-E 2 in this blog post by \citet{mishkin2022risks}. A few of the most important topics are going to be presented here.
+Automated image generation poses an array of serious questions of ethical character. Fortunately, many of them are already very well recognized by the community. For example, OpenAI elaborates extensively on the risks and limitations of their Dall-E 2 in this blog post by \citet{mishkin2022risks}. A few of the most important topics are presented here.
 
 The first and very significant risk is the potential misuse of the models. Fake image generation can easily be used for harassment and disinformation. Especially combined with inpainting, which is capable of erasing or adding objects to real scenes, it poses a non-trivial challenge for researchers on how to responsibly share their work.
 
@@ -3337,7 +3337,7 @@ Another important area touches on biases and stereotypes which are intrinsically
 
 
 
-In order to fully enable AI generation on the market, the problem of copyrights needs to be solved in the first place. It is definitely not clear who is the author of generated images. Is it the person who came with a text prompt and ran the model? Is it a model engineer? Author of the model's architecture? Owner of the data it has been trained on? Or maybe the model itself? Another question is what really is a creative contribution and eventually should result in copyright being granted. These and many others definitely require extensive debate and hopefully, legal solutions following it.
+In order to fully enable AI generation, the problem of copyrights needs to be solved in the first place. It is definitely not clear who is the author of generated images. Is it the person who came up with a text prompt and ran the model? Is it a model engineer? The author of the model's architecture? The owner of the data it has been trained on? Or maybe the model itself? Another question is what really is a creative contribution and eventually should result in copyright being granted. These and many others definitely require extensive debate and hopefully, legal solutions following it.
 
 \hypertarget{c02-03-img-support-text}{%
 \section{Images supporting Language Models}\label{c02-03-img-support-text}}
@@ -3777,11 +3777,11 @@ Seeking an improvement that makes a difference in the shorter term, researchers 
 \end{quote}
 
 This insight seems to directly inspire most model choices presented in this chapter.
-Each network can be seen as an attempt of its company to employ their vast available resources on a large scale, with a particular focus on dataset sizes.
-These mostly become feasible through the adaptation of recent findings in natural language processing (NLP; see chapter \ref{c01-01-sota-nlp}) to computer vision (CV).
+Each network can be seen as an attempt of its creators to employ their vast available resources on a large scale, with a particular focus on dataset sizes.
+This mostly becomes feasible through the adaptation of recent findings in natural language processing (NLP; see chapter \ref{c01-01-sota-nlp}) to computer vision (CV).
 On the one hand, architectural concepts firstly popularized in NLP are translated to CV \citep[e.g., self-supervised learning or the Vision Transformer;][]{ImageT} (see chapter \ref{c01-02-sota-cv}).
 On the other hand, these powerful new NLP models, mostly Transformers \citep{vaswani2017attention}, support bigger models from the inside as text encoding building blocks; hence the name of this chapter.
-There are subsections on the recent and relevant CV models CLIP \citep{radford2021learning}, ALIGN \citep{jia2021scaling} and Florence \citep{yuan2021florence} and a discussion of some relevant core concepts.
+Throughout this chapter, we will introduce recent relevant CV models CLIP \citep{radford2021learning}, ALIGN \citep{jia2021scaling} and Florence \citep{yuan2021florence} and discuss their underlying core concepts.
 The strong performances confirm the potential, hinted at by the impressive GPT-3 \citep{brown2020language}, of improving CV and increasing scale with the help of NLP.
 
 \hypertarget{concepts}{%
@@ -3798,7 +3798,7 @@ A common way to tackle this would be to try out various changes on the architect
 But this kind of adaptation, inscribing expert knowledge into the model, seems to repeat the mistake pointed out by \citet{sutton2019bitterlesson}; ``micromanaging'' a model is likely to thwart future scaling.
 
 The researchers of CLIP, ALIGN and Florence follow a different approach, based on scale.
-They try to increase sample size as much as possible and work with tremendous numbers of observations:
+They try to increase sample size as much as possible and work with tremendous numbers of training observations:
 
 \begin{itemize}
 \tightlist
@@ -3810,12 +3810,12 @@ They try to increase sample size as much as possible and work with tremendous nu
   1.8 billion \citep[ALIGN;][]{jia2021scaling}
 \end{itemize}
 
-These are achieved with the vast amount of image-text pairs produced by and readily available on the internet.
+These large-scale dataset are generated using the vast amount of image-text pairs produced by and readily available on the internet.
 Thus, error prone, cost and labor intensive (difficult to scale), manual labeling is avoided.
 Unfortunately, the models trained on web data also become vulnerable to their downsides.
-Because of the extremely noisy nature of them, still some form of pre-processing is needed, e.g., filtering for English language, excluding graphic content and, optionally, removing images with non-informative alt-texts.
+Because of their extremely noisy nature, still some form of pre-processing is needed, e.g., filtering for English language, excluding graphic content and, optionally, removing images with non-informative alt-texts.
 This makes some degree of dataset curation, and therefore arbitrary choices, necessary.
-Likewise, the social biases inherent to the internet are reproduced and furthermore, while the approach improves data efficiency to some degree (see next subsection \ref{contrObj}), the poor performance of deep learning in this area is not substantially enhanced and mainly just compensated for with a super scalable source of supervision \citep{radford2021learning}.
+Likewise, the social biases inherent to the internet are reproduced and furthermore, while this approach improves data efficiency to some degree (see next subsection \ref{contrObj}), the poor performance of deep learning in this area is not substantially enhanced and mainly just compensated for with a super scalable source of supervision \citep{radford2021learning}.
 
 \hypertarget{contrObj}{%
 \subsubsection{Contrastive objective}\label{contrObj}}
@@ -3870,7 +3870,7 @@ A reason for the good performance of contrastive learning could be that, while c
 
 
 But in the end, rather than theoretical considerations, the driving factor for using this objective is data efficiency.
-As can be seen in figure \ref{fig:data-efficiency}, \citet{radford2021learning} start their search for an adequate pre-train model (more on this in subsection \ref{foundMod}) by experimenting with a Transformer-based language model predicting the exact captions of an image.
+As can be seen in figure \ref{fig:data-efficiency}, \citet{radford2021learning} start their search for an adequate pre-trained model (more on this in subsection \ref{foundMod}) by experimenting with a Transformer-based language model predicting the exact captions of an image.
 It turns out that this approach trains three times slower, in terms of data efficiency, compared to a simpler baseline of predicting a bag-of-words text encoding.
 Additionally, switching to the contrastive objective of CLIP improves data efficiency by a factor of four.
 
@@ -3880,7 +3880,7 @@ Additionally, switching to the contrastive objective of CLIP improves data effic
 
 }
 
-\caption{Data efficiency of contrastive objective. Development of zero-shot accuracy (see next subsection \ref{foundMod}) on ImageNet with increasing number of instances of training data seen by models. The contrastive objective reaches same accuracies as the generative approach with only a seventh of the amount of data \citep{radford2021learning}.}\label{fig:data-efficiency}
+\caption{Data efficiency of contrastive objective. Development of zero-shot accuracy (see next subsection \ref{foundMod}) on ImageNet with increasing number of instances of training data processed by the models. The contrastive objective reaches similar accuracy scores as the generative approach with only a seventh of the amount of data \citep{radford2021learning}.}\label{fig:data-efficiency}
 \end{figure}
 
 
@@ -3896,20 +3896,20 @@ To extend the capabilities of those models additional network building blocks ar
 The first models which are considered foundation models today began to appear in NLP.
 The term, later coined by \citet{bommasani2021opportunities}, refers to models that are noteworthy due to their large scale and ability to adapt to a wide variety of downstream tasks.
 An early example is BERT \citep{Devlin2018}.
-A lot of the time, foundation models have an unfinished touch to them and the true scope of their capabilities cannot be sketched out clearly.
-This generally is the case, because the desired abilities of neural networks are not designed for explicitly, but rather emerge during their implementation.
-\citet{bommasani2021opportunities} cite GPT-3's ability to perform certain types of new tasks soley by confronting it with the right natural language prompt.
+Often, foundation models have an unfinished touch to them and the true scope of their capabilities cannot be sketched out clearly.
+This generally is the case because the desired abilities of neural networks are not designed for explicitly, but rather emerge during their implementation and usage on downstream tasks.
+\citet{bommasani2021opportunities} cite GPT-3's ability to perform certain types of new tasks solely by confronting it with the right natural language prompt.
 E.g., it is possible to get GPT-3 to summarize a paragraph by appending ``TL;DR'' (too long, didn't read) to the prompt, which is a common pattern on the internet to signal a following summery.
-This is called ``in-context learning'' \citep{brown2020language}.
-It is apparent that one can make up plenty of unexpected ways to employ these models and it cannot be known whether there is a further way no one thought of yet.
+This is referred to as ``in-context learning'' \citep{brown2020language}.
+It is apparent that one can make up plenty of unexpected ways to employ these models and it remains unknown whether there is a further way no one thought of yet.
 This means possibly saving computational and data collection costs down the line, which ineptly is true for malicious use cases, e.g., surveillance, too.
 
-Foundation models build on the concept of transfer-learning, i.e., pre-training a model on a task that is feasible to do and applying it to the desired task downstream.
+Foundation models build on the concept of transfer-learning, i.e., pre-training a model on a feasible source task and applying it to the desired downstream task.
 In the context of this chapter this means pre-training on web-scale data (see subsection \ref{webScaleData}) and evaluating performance on various common classification datasets.
 E.g., \citet{radford2021learning} name the SVHN dataset as a proxy for the task ``street number transcription'' with the caveat ``on the distribution of Google Street View photos'', but they remark that a lot of datasets have no obvious, specific task associated, e.g., CIFAR-10.
 They use these kind of datasets for measuring the ``robustness to distribution shift and domain generation'' of their model, which still is a topic of great interest as mentioned in subsection \ref{webScaleData}.
-When there is no further fine-tuning on the downstream task, i.e., no resuming of training on the new dataset, this is called zero-shooting.
-It has the clear advantage of evaluating performance more unbiased, as processes like overfitting to the data-generating distribution will not distort results.
+When there is no further fine-tuning on the downstream task, i.e., no resuming of training on the new target dataset, this is referred to as zero-shooting.
+Zero-shooting has the clear advantage of evaluating performance more unbiased, as processes like overfitting to the data-generating distribution will not distort results.
 
 Figure \ref{fig:zero-shooting} shows how contrastive models perform zero-shot transfer.
 In the case of image classification all available classes are encoded by the language model.
@@ -3938,10 +3938,10 @@ After an initial encoding of all images, the ones most similar to the encoded na
 The first of the large scale contrastive CV models that were published is CLIP, short for Contrastive Language-Image Pre-training \citep{radford2021learning}.
 The components of its name are explained in previous subsections \ref{contrObj}, \ref{webScaleData} and \ref{foundMod} and are the crucial concepts of ALIGN and Florence as well.
 CLIP is a product of OpenAI, but its code is freely available and the different versions can be accessed as \href{https://github.com/openai/CLIP}{python modules}.
-Not released is its dataset.
+The dataset used for training is not released though.
 
-A lot of preliminary work stems from \citet{zhang2020contrastive}, whose paper firstly describes contrastive representation learning using image-text pairs.
-Their implementation of the contrastive loss function \eqref{eq:contrLoss} is
+A lot of preliminary work stems from \citet{zhang2020contrastive}, who introduced contrastive representation learning using image-text pairs.
+Their implementation of the contrastive loss function \eqref{eq:contrLoss} follows
 
 \begin{equation}
   \ell_1^{V_\text{img}, V_\text{txt}} = - \log \frac{\exp(\langle v_\text{img}^1, v_\text{txt}^1 \rangle / \tau)}{\sum_{k=1}^{N} \exp(\langle v_\text{img}^1, v_\text{txt}^k \rangle / \tau)},
@@ -3956,7 +3956,7 @@ This can be viewed as a symmetric cross entropy loss over the cosine similarity 
 \textbf{Architecture}
 
 The text encoder for CLIP (see figure \ref{fig:contr-vs-pred-learn}) is a modified Transformer \citep{vaswani2017attention}, which was also used for GPT-2 \citep{radford2019language}.
-For the image encoder multiple sub-networks are tested:
+For the image encoder multiple sub-networks are evaluated:
 
 \begin{itemize}
 \tightlist
@@ -3980,11 +3980,11 @@ In order to help the model understand the context of the words, the class labels
 This increases the models zero-shot accuracy on ImageNet by 1.3 percentage points (pp).
 When ensembling 80 different context prompts\footnote{Prompts like: ``A photo of a big \{label\}.'', ``A photo of a small \{label\}.'' \citep{radford2021learning}} \citet{radford2021learning} improve ImageNet accuracy by an additional 3.5pp, which adds up to a total of nearly 5pp.
 The average performance gain across 36 datasets is reported to be 5pp.
-It is likewise possible to directly communicate visual concepts like ``picture'', ``macro'', ``drawing'' or even ``dog'' to the model.
+It is similarly possible to directly communicate visual concepts like ``picture'', ``macro'', ``drawing'' or even ``dog'' to the model.
 
 \textbf{Robustness}
 
-Figure \ref{fig:performance-clip} reports the performance of CLIP and a ResNet101, whose training on ImageNet was stopped at the point it reached the same accuracy as zero-shot CLIP.
+Figure \ref{fig:performance-clip} illustrates the performance of CLIP and a ResNet101, whose training on ImageNet was stopped at the point it reached the same accuracy as zero-shot CLIP.
 It can be deduced that the methods studied in the paper of \citet{radford2021learning} constitute an important step towards closing the robustness gap mentioned earlier (see subsection \ref{webScaleData}).
 While the performance of the ResNet101 deteriorates with datasets generated from more and more different data distributions compared to ImageNet, CLIP remains fairly accurate.
 Note that these findings have to be taken with a grain of salt.
@@ -4028,12 +4028,12 @@ The red area indicates relevant pixels and appears much more focused for CLIP-Re
 The approach of \citet{jia2021scaling} is largely similar to CLIP.
 They reiterate the necessity of large-scale vision datasets, but assert that even CLIP's data collection process still involves a non-trivial amount of data curation.
 They propose that the amount of additional observations obtained through minimizing the amount of filtering makes up for the increased noise.
-The result is a dataset with 1.8 billion image-text pairs.
+Following this rationale, they create a training dataset with 1.8 billion image-text pairs.
 The corresponding model is named ALIGN, short for ``A Large-scale ImaGe and Noisy-text embedding'', whose acronym hints at the contrastive loss, which aligns vector encodings in the representation space (see subsection \ref{contrObj}).
 
 \textbf{Architecture}
 
-ALIGN follows the dual encoder architecture employed by \citet{zhang2020contrastive} and \citet{radford2021learning}, but uses part of BERT-Large as the text and EfficientNet-L2 as the image encoder, which they jointly train from scratch.
+ALIGN follows the dual encoder architecture employed by \citet{zhang2020contrastive} and \citet{radford2021learning}, but uses a part of BERT-Large as the text and EfficientNet-L2 as the image encoder, which they jointly train from scratch.
 The model has around 800 million parameters \citep{alford2021alignparams}.
 Subsection \ref{performanceComp} goes into more detail about the performance of ALIGN and compares all three models discussed in this subsection.
 
@@ -4042,7 +4042,7 @@ Subsection \ref{performanceComp} goes into more detail about the performance of 
 The contrastive loss function aligns the latent representations of the different modalities.
 In other words, the explicit objective is that similar vector encodings implicate similar inputs.
 This means arithmetic operations like the ones mentioned in chapter \ref{c01-01-sota-nlp} are not only meaningful on encodings belonging to the same modality, but to different modalities.
-E.g., one can add up the image encoding of a picture of the Eiffel tower and the text encoding of the word ``snow'' and retrieve pictures with high cosine similarity to the result, see figure \ref{fig:img-txt-addition}.
+E.g., one can add up the image encoding of a picture of the Eiffel tower and the text encoding of the word ``snow'' and retrieve pictures with high cosine similarity as a result, see figure \ref{fig:img-txt-addition} for an illustration.
 
 \begin{figure}
 
@@ -4058,10 +4058,10 @@ E.g., one can add up the image encoding of a picture of the Eiffel tower and the
 \hypertarget{florence}{%
 \subsubsection{Florence}\label{florence}}
 
-While in principle the approach of \citet{yuan2021florence} does not largely differ from the others, the focus of this paper is more about making a true foundation model.
+While in principle the approach of \citet{yuan2021florence} does not largely differ from the others, the focus of this paper is more about creating a true foundation model.
 In order to achieve this, they propose a map of possible vision applications which the try to cover via extending the core model with modules.
 As figure \ref{fig:florence-dimensions} depicts, they want to advance into the dimensions of fine-grained object detection, dynamic action recognition and true multimodal tasks.
-Because of their big ambitions, they name their model Florence after ``the birthplace of Renaissance'' \citep{yuan2021florence}.
+Due to their big ambitions, they name their model Florence after ``the birthplace of Renaissance'' \citep{yuan2021florence}.
 
 \begin{figure}
 
@@ -4076,7 +4076,7 @@ Because of their big ambitions, they name their model Florence after ``the birth
 
 \textbf{Architecture}
 
-For the two encoders of the pre-trained core they use a hierarchical Vision Transformer (CoSwin Transformer) for images and a Transformer similar to CLIP's for text.
+As the two encoders for the pre-trained core they use a hierarchical Vision Transformer (CoSwin Transformer) for images and a Transformer similar to CLIP's for text.
 Their 893 million parameters are also jointly trained from scratch on 900 million image-text pairs.
 The alignment happens in the so called image-label-description space which is encoded through a special version of the contrastive loss function which regards all image-text pairs with the same label as positive instances.
 Figure \ref{fig:florence-architecture} depicts their version of figure \ref{fig:contr-viz} where one can schematically see how they flexibly add modules to the pre-trained core in order to adapt to various downstream tasks.
@@ -4095,7 +4095,7 @@ Figure \ref{fig:florence-architecture} depicts their version of figure \ref{fig:
 \hypertarget{performanceComp}{%
 \subsection{Performance comparison}\label{performanceComp}}
 
-Throughout the papers of \citet{radford2021learning}, \citet{jia2021scaling} and \citet{yuan2021florence} is was possible the collect three tables with reported performance measures.
+Throughout the papers of \citet{radford2021learning}, \citet{jia2021scaling} and \citet{yuan2021florence} we were able to collect three tables with reported performance measures to compare these approaches.
 
 Table \ref{fig:table1} summarizes the zero-shot accuracies on four different ImageNet variants.
 Unfortunately \citet{yuan2021florence} only stated their performance on the original ImageNet, where they beat CLIP and ALIGN by a margin of 7.3pp.
@@ -4113,7 +4113,7 @@ The results on the other three ImageNet pendants are mixed and there is no clear
 
 
 Table \ref{fig:table2} concerns zero-shot image retrieval on the Flickr30K and the MSCOCO dataset (see chapter \ref{c01-03-benchmarks}).
-Even though there are not many major score differences, there is a clear ranking with CLIP on third, ALIGN on second and Florence on first place.
+Even though there are not many major score differences, there is a clear ranking with CLIP on third, ALIGN on second and Florence on the first place.
 
 \begin{figure}
 
@@ -4126,10 +4126,10 @@ Even though there are not many major score differences, there is a clear ranking
 
 
 
-The most comprehensive comparison is comprised in table \ref{fig:table3}.
+The most comprehensive comparison is shown in table \ref{fig:table3}.
 It depicts the accuracy of zero-shot CLIP and Florence on various datasets as well as the scores of all three models fine tuned to the respective datasets.
 Florence beats CLIP in nearly all evaluations, for the zero-shot setting as well as for fine tuned performance.
-\citet{jia2021scaling} only report on four of the twelve dataset, where they lead half of the time.
+\citet{jia2021scaling} only report on four of these twelve datasets, where they win half of the time.
 
 \begin{figure}
 
@@ -4142,7 +4142,7 @@ Florence beats CLIP in nearly all evaluations, for the zero-shot setting as well
 
 
 
-Summing up, ALIGN achieves its goal of replicating CLIP's impressive performance while dramatically reducing data curation efforts and Florence has the overall top performance.
+Summing up, ALIGN achieves its goal of replicating CLIP's impressive performance while dramatically reducing the required data curation effort and Florence has the overall top performance.
 This could be attributed to its custom loss, maybe to \citet{yuan2021florence} striking the best balance between sample size and data curation or to Florence having the best sub-networks; or a combination of all three.
 
 Once again note that none of the training datasets were made publicly available.
@@ -4153,12 +4153,12 @@ It cannot be guaranteed that all benchmarks were evaluated on unseen datasets.
 
 One can access the pre-trained CLIP models on \href{https://github.com/openai/CLIP}{Github} and they even found their way into simple command line tools already.
 For example there is a CLI named \href{https://github.com/yurijmikhalevich/rclip}{rclip}, which can be used for personal image retrieval, wrapping the \emph{ViT-B/32} CLIP architecture.
-On my (mid-range) laptop I was able to find seemingly good matches for search terms which I tried out inside a folder containing about 100 pictures.
+On a (mid-range, regular) laptop, we were able to find seemingly good matches for search terms which we tried out inside a folder containing about 100 different pictures.
 After an initial caching one request took about ten seconds.
-Furthermore CLIP continues to be used inside new models, e.g., DALL\(\cdot\)E 2, where it is responsible for image embedding \citep{ramesh2022hierarchical}.
-Also, there is an effort to replicate CLIP's training dataset called LAION-400M \citep{schuhmann2022laion}.
+Furthermore CLIP continues to be used inside new models, e.g., DALL\(\cdot\)E 2, where it is used for the image embedding \citep{ramesh2022hierarchical}.
+Also, there is a crowd-sourcing effort to replicate CLIP's training dataset called LAION-400M \citep{schuhmann2022laion}.
 To validate the image-text pairs collected for this, their cosine similarity is computed using CLIP and instances with a value too low are discarded.
-As to my knowledge nothing was made publicly available as part of the other two papers.
+To our knowledge no resources were open-sourced as part of the other two papers ALIGN and FLORENCE.
 
 \hypertarget{c02-05-text-plus-img}{%
 \section{Models for both modalities}\label{c02-05-text-plus-img}}
@@ -5083,12 +5083,12 @@ Eventually, it is also necessary to consider the societal impact. The bias probl
 
 
 
-As we have seen in subsection \ref{c02-02-text2img}, with the help of multimodal deep learning computers can create images only based on text prompts. This new ability is also used in arts in the field of `generative art' or also known as `computer art'. The new movement comprises all artwork where the human artist cedes control to an autonomous system \citep{galanter2016generative}. In this way everyone, even artistically untalented people, can easily create pictures as the computer does the work for you. In some way, the computer becomes the artist with some sort of creativity, a distinct human ability. In this chapter we want to give an overview about how computers improved over time in generating images and how this is used in the art scene. For instance in Figure \ref{fig:Logo} we used the seal of the Ludwig Maximilians Universtiy and changed the style to Van Gogh's \href{https://wallpaperaccess.com/full/787825.jpg}{Sunflower painting} by the \href{https://www.tensorflow.org/tutorials/generative/style_transfer}{Neural Stlye Transfer Algorithm} and the method \href{https://colab.research.google.com/drive/1ZAus_gn2RhTZWzOWUpPERNC0Q8OhZRTZ\#scrollTo=FhhdWrSxQhwg}{CLIP + VQGAN}.
+As we have seen in subsection \ref{c02-02-text2img}, computers can create images only based on text prompts via multimodal deep learning. This capability is also used in digital arts in the field of `generative art' or also known as `computer art'. The new movement comprises all artwork where the human artist cedes control to an autonomous system \citep{galanter2016generative}. In this way everyone, even artistically untrained people, can easily create pictures as the computer takes over the image generation. In some way, the computer becomes the artist with some sort of creativity, a distinct human ability. In this chapter, we want to give an overview about how computers improved over time in generating images and how this is used in the contemporary arts scene. For instance in Figure \ref{fig:Logo} we used the seal of the Ludwig Maximilians University and changed the style to Van Gogh's \href{https://wallpaperaccess.com/full/787825.jpg}{Sunflower painting} by the \href{https://www.tensorflow.org/tutorials/generative/style_transfer}{Neural Stlye Transfer Algorithm} and the method \href{https://colab.research.google.com/drive/1ZAus_gn2RhTZWzOWUpPERNC0Q8OhZRTZ\#scrollTo=FhhdWrSxQhwg}{CLIP + VQGAN} which fuses the logo with sunflowers in a Van-Gogh-style way.
 
 \hypertarget{historical-overview}{%
 \subsection{Historical Overview}\label{historical-overview}}
 
-The first attempt to use AI to generate pictures was made by Google engineer Alexander \citet{mordvintsev_2015} and his ``DeepDream'' Software. He used Convolution Neural Networks to generate very interesting and abstract images based on the activation of a layer, visualizing the patterns learned by a neural network. Below you can see a picture of a Labrador after processed by the DeepDream algorithm.
+The first attempt to use AI to generate pictures was made by the engineer Alexander \citet{mordvintsev_2015} and his ``DeepDream'' Software. He used Convolution Neural Networks to generate very interesting and abstract images based on the activation of a layer, visualizing the patterns learned by a neural network. Below you can see a picture of a Labrador after it was processed by the DeepDream algorithm.
 
 \begin{figure}
 
@@ -5101,7 +5101,7 @@ The first attempt to use AI to generate pictures was made by Google engineer Ale
 
 
 
-In the following year, \citet{StyleTransfer} investigated methods to transfer the style of pictures. This method was used to transfer the stlye of Van Gogh's Sunflower painting to the LMU seal in the beginning of this chapter (see Figure \ref{fig:Logo}). Besides, below in Figure \ref{fig:StyleTransfer2} you can see the same Labrador picture from Figure \ref{fig:DeepDream} in \href{https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky\%2C_1913_-_Composition_7.jpg}{Kandinsky style}.
+In the following year, \citet{StyleTransfer} investigated methods to transfer the style of pictures. This method was used to transfer the style of Van Gogh's Sunflower painting to the LMU seal at the beginning of this chapter (see Figure \ref{fig:Logo}). Besides, below in Figure \ref{fig:StyleTransfer2} you can see the same Labrador picture from Figure \ref{fig:DeepDream} in \href{https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky\%2C_1913_-_Composition_7.jpg}{Kandinsky style}.
 
 \begin{figure}
 
@@ -5114,7 +5114,7 @@ In the following year, \citet{StyleTransfer} investigated methods to transfer th
 
 
 
-Furthermore, the architecture of Generative Adversarial Networks (GANs), which was first introduced by Google Researcher \citet{NIPS2014_5ca3e9b1}, was used by NVIDIA researches \citet{karras2019style} to create very realistic fake images with their architecture StyleGAN. For instance, you can create pictures of people who do not exist, but look totally realistic (see Figure \ref{fig:GAN}).
+Furthermore, the architecture of Generative Adversarial Networks (GANs), which was first introduced by \citet{NIPS2014_5ca3e9b1}, was used by another research group \citet{karras2019style} to create very realistic fake images with their architecture StyleGAN. For instance, one can create pictures of people who do not exist, but look totally realistic (see Figure \ref{fig:GAN}).
 
 \begin{figure}
 
@@ -5127,21 +5127,21 @@ Furthermore, the architecture of Generative Adversarial Networks (GANs), which w
 
 
 
-Nevertheless, it was almost not possible to control the exact output of these early forms of AI art. There was no option to make specifications of how the result should look like in detail. For instance, you always get a human face with the earlier mentioned StyleGAN application, but you cannot specify to generate a blond girl with blue eyes. This can be achieved by applying the artist-critic paradigm \citep{8477754}: First of all, the computer as artist generates a picture based on what the Neural Network learned in the training phase (e.g.~StyleGAN learns to generate pictures of human faces). Additionally, you also need a critic that tells the computer if the output satisfies the concrete idea of the human artist. For this reason multimodal deep learning models emerged in the field of generative art. Here you can control the output with the help of text prompting. In this way you can check if the generated picture matches the initial text description. Looking at our StyleGAN example, the multimodal architecture supervises if the output picture is indeed a blond girl with blue eyes. A new class of models for generating pictures evolved.
+Nevertheless, it was almost impossible to control the exact output of these early forms of AI art. There was no option to make specifications of how the result should look like in detail. For instance, you always get a human face with the earlier mentioned StyleGAN application, but you cannot specify to generate a blond girl with green eyes. This can be achieved by applying the artist-critic paradigm \citep{8477754}: Thereby, the computer as an artist generates a picture based on what the Neural Network learned in the training phase (e.g.~StyleGAN learns to generate pictures of human faces). Additionally, a critic is used to tell the computer if the output satisfies the concrete idea of the human artist. For this reason multimodal deep learning models emerged in the field of generative art. Here, one can control the output with the help of text prompting. In this way one can check if the generated picture matches the initial text description. Looking at the previous StyleGAN example, the multimodal architecture supervises whether the output picture is indeed a blond girl with green eyes or not. A new class of models for generating pictures evolved.
 
-This idea was used by OpenAI for their models DALL-E \citep{DALLE} and CLIP \citep{CLIP} which were released in January 2021. Both architectures are critics for multimodal models. Only a few days after the release, Ryan Murdock combined CLIP (critic) with the already existing Neural Net ``BigGAN'' (artist) in his ``The Big Sleep'' software. Furthermore, \citet{StyleGAN} developed StyleCLIP, a combination of StyleGAN (artist) and CLIP (critic) to edit parts of images via text instructions. In the following months, Katherine Corwson combined CLIP with the existing VQGAN algorithm. She also hooked up CLIP with guided diffusion models as artists. This approach was further investigated by OpenAI that published a paper \citep{DiffusionModels} in May 2021 about guided diffusion models. Moreover, in December 2021 they introduced GLIDE \citep{GLIDE}, a model with CLIP or classifier-free guidance as critics and diffusion models as artists. For more technical details about text2img methods like DALL-E and GLIDE look at subsection \ref{c02-02-text2img}
+This idea was used by OpenAI for their models DALL-E \citep{DALLE} and CLIP \citep{CLIP} which were released in January 2021. Both architectures are critics for multimodal models. Only a few days after the release, Ryan Murdock combined CLIP (critic) with the already existing Neural Net ``BigGAN'' (artist) in his ``The Big Sleep'' software. Furthermore, \citet{StyleGAN} developed StyleCLIP, a combination of StyleGAN (artist) and CLIP (critic) to edit parts of images via text instructions. In the following months, Katherine Crowson combined CLIP as critic with the existing VQGAN algorithm as an artist. She also hooked up CLIP with guided diffusion models as artists to yield more fine-grained results. This approach was further investigated by OpenAI that published a paper \citep{DiffusionModels} in May 2021 about guided diffusion models. Moreover, in December 2021 they introduced GLIDE \citep{GLIDE}, a model with CLIP or classifier-free guidance as critics and diffusion models as artists. For more technical details about text2img methods like DALL-E and GLIDE refer to subsection \ref{c02-02-text2img}
 or for text supporting CV models like CLIP at subsection \ref{c02-04-text-support-img}.
 
-\hypertarget{how-to-use-models}{%
-\subsection{How to use models?}\label{how-to-use-models}}
+\hypertarget{how-to-use-these-models}{%
+\subsection{How to use these models?}\label{how-to-use-these-models}}
 
-A lot of different notebooks are publicly available to apply the different pre-trained models. In general, all notebooks work pretty similar: You only need to enter your text prompt in the code and after running the notebook the computer generates a picture based on your instruction. It is easy and no coding knowledge required. Moreover, there are also some API and GUI applications (e.g.~\href{https://multimodal.art/mindseye}{MindsEye beta}), and in this way no programming is needed at all. Using these models it is important to think about how exactly you enter your text prompt. You can influence the output in a desired way with little changes in your short text instruction. This is also known as prompt engineering. For instance, in the beginning of this chapter, we entered ``in the style of Van Gogh'' to change the style of the LMU seal. Besides, a special trick is to append ``unreal engine'' \citep{unrealEngine} which makes picture more realistic and higher in quality. This seems surprising, but the models were trained on data from the internet including pictures of the software company Epic Games that has a popular 3D video game engine called ``Unreal Engine''. This is one of the most popular prompting tricks.
+A lot of different notebooks are publicly available to apply the different pre-trained models. In general, all notebooks work pretty similar: one only needs to enter a text prompt in the code and after running the notebook the computer generates a picture based on these instructions. It is relatively easy and no prior coding knowledge is required. Moreover, there are also some API and GUI applications (e.g.~\href{https://multimodal.art/mindseye}{MindsEye beta}) where no programming knowledge is needed at all. Using these models, it is important to think about how exactly once enters the respective text prompt. One can influence the output in a desired way with little changes in the short text instruction. This is also known as ``prompt engineering''. For instance, in the beginning of this chapter, we entered the prompt ``in the style of Van Gogh'' to change the style of the LMU seal. In this context, a special trick is to append ``unreal engine'' \citep{unrealEngine} which makes the resulting pictures more realistic with higher quality. This seems surprising at first, but the models were trained on data from the internet including pictures of the software company Epic Games that has a popular 3D video game engine called ``Unreal Engine''. This is one of the most popular prompting tricks.
 
-Unfortunately, OpenAI has never released DALL-E. There is only an open-source version called ruDALL-E \citep{ruDALLE} that was trained on Russian language data. Besides, hugging face hosts DALL-E mini \citep{DALLEmini} where you can generate pictures, but do not have access to the model itself. PyTorch offers a replication of the DALL-E code \citep{DALLEpytorch} but no trained model. Furthermore, CLIP was released without publishing the used training data. However, there exists an open source data set with CLIP embeddings called LAION-400m \citep{LAION}. In the following, we used different publicly available notebooks to try out the different models \href{https://colab.research.google.com/drive/1NCceX2mbiKOSlAd_o7IU7nA9UskKN5WR?usp=sharing}{CLIP + BigGAN},
+Unfortunately, OpenAI has never released DALL-E. There is only an open-source version called ruDALL-E \citep{ruDALLE} that was trained on Russian language data. Besides, hugging face hosts DALL-E mini \citep{DALLEmini} where one can generate pictures, but does not have access to the model itself. PyTorch offers a replication of the DALL-E code \citep{DALLEpytorch} but no trained model. Furthermore, CLIP was released without publishing the used training data. However, there exists an open source data set with CLIP embeddings called LAION-400m \citep{LAION}. In the following, we used different publicly available notebooks to try out the different models \href{https://colab.research.google.com/drive/1NCceX2mbiKOSlAd_o7IU7nA9UskKN5WR?usp=sharing}{CLIP + BigGAN},
 \href{https://colab.research.google.com/drive/1ZAus_gn2RhTZWzOWUpPERNC0Q8OhZRTZ\#scrollTo=FhhdWrSxQhwg}{CLIP + VQGAN},
 \href{https://colab.research.google.com/drive/12a_Wrfi2_gwwAuN3VvMTwVMz9TfqctNj\#scrollTo=X5gODNAMEUCR}{CLIP + Guided Diffusion},
 \href{https://colab.research.google.com/github/openai/glide-text2im/blob/main/notebooks/text2im.ipynb}{GLIDE}
-with the text prompt \emph{``a fall landscape with a small cottage next to a lake''} (see Figure \ref{fig:comparison1}) and \emph{``panda mad scientist mixing sparkling chemicals, artstation''} (see Figure \ref{fig:comparison2}). The first prompt shows pretty realistic results, whereas the second prompt results in more different and crazier outputs. That is because the panda-prompt is more abstract than the first one and in this way more difficult to illustrate. In addtition, some of the notebooks run on lower resolution due to computational limitations. Besides, GLIDE is also downsized by the publisher: The released smaller model consists of 300 million parameters, whereas the unreleased model has about 3.5 billion parameters \citep{GLIDE}. So better results are possible with higher computational power and other implementations of the models.
+with the text prompt \emph{``a fall landscape with a small cottage next to a lake''} (see Figure \ref{fig:comparison1}) and \emph{``panda mad scientist mixing sparkling chemicals, artstation''} (see Figure \ref{fig:comparison2}). The first prompt shows pretty realistic results, whereas the second prompt results in more different and ``crazy'' outputs. That is because the panda-prompt is more abstract than the first one and hence more difficult to illustrate. In addition, some of the notebooks run on lower resolution due to computational limitations. Besides, GLIDE is also downsized by the publisher: The released smaller model consists of 300 million parameters, whereas the unreleased model has about 3.5 billion parameters \citep{GLIDE}. So better results are possible with higher computational power and other implementations of the models.
 
 \begin{figure}
 
@@ -5168,9 +5168,9 @@ with the text prompt \emph{``a fall landscape with a small cottage next to a lak
 \hypertarget{different-tasks-and-modalities}{%
 \subsection{Different tasks and modalities}\label{different-tasks-and-modalities}}
 
-So far, we concentrated on the two modalities text and image. Combining both of them, you can tackle different tasks with the models mentioned above. The main usage is to generate images based on a text prompt. Therefore, you can start from noise or you can chose a real image as starting point \citep{qiao2022initial}. This was done in the beginning with the LMU seal by CLIP + VQGAN (see Figure \ref{fig:Logo}): instead of starting from noise, the model started from the LMU seal as initialization and then used the prompt ``in style of Van Gogh''. The video captures how the model develops during fitting. In the end the typical Van Gogh sunflowers emerge as well as what could be a part of Van Gogh's face.
+So far, we concentrated on the two modalities text and image. Combining both of them, one can tackle different tasks with the models mentioned above. The main usage is to generate images based on a text prompt. Therefore, one can start from noise or but is also possible to chose a real image as starting point \citep{qiao2022initial}. This was done in the beginning with the LMU seal by CLIP + VQGAN (see Figure \ref{fig:Logo}): instead of starting from noise, the model started from the LMU seal as initialization and then used the prompt ``in style of Van Gogh''. The video captures how the model develops during fitting. In the end, the typical Van Gogh sunflowers emerge as well as what could be a part of Van Gogh's face.
 
-Besides, you can edit, extend, crop and search images with models like GLIDE \citep{GLIDE}. For instance, \citet{GLIDE} fine-tuend the model for text-conditional image inpainting (see figure \ref{fig:inpainting}). By marking some area in the pictures, here in green, and adding a text prompt, you can edit pictures very easily and precise. This is quite impressive as the model needs to understand from the text prompt which object should be filled in and then do this in the right stlye of the surrounding to produce a realistic outcome. Another idea is to use a sketch of a drawing and let the model fill in the details based on a text caption (see figure \ref{fig:sketch} below). This allows controlled changes of parts of pictures with relatively little effort. In this way GLIDE can be used to generate pictures out of nothing, but also to edit pictures in a specific way. Furthermore, it is also possible to combine other modalities as well (see more details in subsection \ref{c03-01-further-modalities}). For instance, \citet{WZRD} accompanies your video with suitable audio. Or it is even imaginable to create sculptures with 3D-printers \citep{3D}.
+Furthermore, one can edit, extend, crop and search images with models like GLIDE \citep{GLIDE}. For instance, \citet{GLIDE} fine-tuend the model for text-conditional image inpainting (see figure \ref{fig:inpainting}). By marking some area in the pictures, here in green, and adding a text prompt, one can edit pictures very easily and precisely. This is quite impressive as the model needs to understand from the text prompt which object should be filled in and then do this in the correct style of the surrounding to produce a realistic outcome. Another idea is to use a sketch of a drawing and let the model fill in the details based on a text caption (see figure \ref{fig:sketch} below). This allows controlled changes of parts of pictures with relatively little effort. In this way, GLIDE can be used to generate pictures out of random noise, but also to edit pictures in a specific way. Furthermore, it is also possible to combine other modalities as well (see more details in subsection \ref{c03-01-further-modalities}). For instance, \citet{WZRD} accompanies custom videos with suitable audio. It is even imaginable to create sculptures with 3D-printers \citep{3D}.
 
 \begin{figure}
 
@@ -5197,15 +5197,15 @@ Besides, you can edit, extend, crop and search images with models like GLIDE \ci
 \hypertarget{discussion-and-prospects}{%
 \subsection{Discussion and prospects}\label{discussion-and-prospects}}
 
-In the last years methods to generate images via text prompting improved tremendously and a new field in arts arised. It is surprising how these models are able to create images only based on a short text instruction. This is quite impressive as AI achieved some kind of creativity. It is up for discussion to which extent the computer is becoming the artist in generative arts and in this way replacing the human artist. However, there is still no direct loss function that can calculate how aesthetically pleasing a picture is \citep{bias}. This is probably also quite subjective and cannot be answered for everyone in the same way. Most of the time the computer works as aid for the creative process by generating multiple images. Then, the human artist can pick the best outcome or vary the text prompt to improve the output in a desired way. However, the better AI becomes, the less the human artist needs to intervene in this process.
+In the last years, methods to generate images via text prompting improved tremendously and a new field of art arised. It is surprising how these models are able to create images only based on a short text instruction. This is quite impressive as AI achieved some level of creativity. It is up for discussion to which extent the computer is becoming the artist in generative arts and in this way replacing the human artist. However, there is still no direct loss function that can calculate how aesthetically pleasing a picture is \citep{bias}. This is probably also quite subjective and cannot be answered for everyone in the same way. Most of the time the computer works as aid for the creative process by generating multiple images. Then, the human artist can pick the best outcome or vary the text prompt to improve the output in a desired way. However, the better the AI becomes, the less the human artist needs to intervene in this process.
 
-Furthermore, as the output becomes more and more realistic, there is the risk that these methods are abused to facilitate plagiarism or create fake content and spread misleading information \citep{misconduct}. After all, the output looks totally realistic, but are completely made-up and generated by the computer. For this reason, some organisations like Open-AI do not release all their models (e.g.~DALL-E) or downstream models (e.g.~CLIP). On the other hand from a scientific point of view, it is important to get access to such models to continue research.
+Furthermore, as the output becomes more and more realistic, there is the risk that these methods are abused to facilitate plagiarism or create fake content and spread misleading information \citep{misconduct}. After all, the outputs look totally realistic, but are completely made-up and generated by the computer. For this reason, some organisations like Open-AI do not release all their models (e.g.~DALL-E) or downstream models (e.g.~CLIP). On the other hand, from a scientific point of view, it is important to get access to such models to continue research.
 
-Moreover, similarly to most Deep Learning algorithms, these models are affected by biases in the input data \citep{bias_ML}. For instance, \citet{bias} points out that CLIP text embeddings associate a human being more with a man than a woman. In this way it might be likelier that our models generate a man with the text prompt ``human being'' than a woman. This effect needs to be further investigated and should be removed.
+Moreover, similarly to most Deep Learning algorithms, these models are affected by biases in the input data \citep{bias_ML}. For instance, \citet{bias} points out that CLIP text embeddings associate a human being more with a man than with a woman. In this way it might be more likely that our models generate a man with the text prompt ``human being'' than a woman. This effect needs to be further investigated and should be removed.
 
-After all, generative arts can be used to create Non Fungible Tokens (NFT) really easily. NFTs are digital artworks where a special digital signature is added making them unique and in this way non-fungible \citep{NFT}. The digital artwork is bought and sold online, often by cryptocurrency. That is why this field is also called Cryptoart. This provides the perfect platform to sell generative arts. However, this trading market is quite new and controversial like crypotcurrency in general.
+After all, generative arts can be used to create Non Fungible Tokens (NFT) relatively easily. NFTs are digital artworks where a special digital signature is added making them unique and in this way non-fungible \citep{NFT}. The digital artwork is bought and sold online, often by means of cryptocurrency. That is why this field is also called Cryptoart. This provides the perfect platform to sell generative arts. However, this trading market is quite new and controversial, similar to crypotcurrency trading in general.
 
-In conclusion, generative arts is quite a new and impressive field. It combines technology with arts, two rather opposite fields. The methods are already really impressive and still getting better and better. For instance, this year Open AI already published DALLE-2 \citep{DALLE2} that outperforms DALLE-1. It remains highly interesting to follow up the developments in this field.
+In conclusion, generative arts is a new and impressive field. It combines technology with arts, two rather opposite fields. The methods are already really impressive and are still getting better and better. For instance, this year Open AI already published DALLE-2 \citep{DALLE2} that outperforms DALLE-1. It remains highly interesting to follow up with the developments in this field.
 
 \hypertarget{conclusion-1}{%
 \chapter{Conclusion}\label{conclusion-1}}
