@@ -14,11 +14,11 @@
 > --- @sutton2019bitterlesson
 
 This insight seems to directly inspire most model choices presented in this chapter.
-Each network can be seen as an attempt of its company to employ their vast available resources on a large scale, with a particular focus on dataset sizes.
-These mostly become feasible through the adaptation of recent findings in natural language processing (NLP; see chapter \@ref(c01-01-sota-nlp)) to computer vision (CV).
+Each network can be seen as an attempt of its creators to employ their vast available resources on a large scale, with a particular focus on dataset sizes.
+This mostly becomes feasible through the adaptation of recent findings in natural language processing (NLP; see chapter \@ref(c01-01-sota-nlp)) to computer vision (CV).
 On the one hand, architectural concepts firstly popularized in NLP are translated to CV [e.g., self-supervised learning or the Vision Transformer\; @ImageT] (see chapter \@ref(c01-02-sota-cv)).
 On the other hand, these powerful new NLP models, mostly Transformers [@vaswani2017attention], support bigger models from the inside as text encoding building blocks; hence the name of this chapter.
-There are subsections on the recent and relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@yuan2021florence] and a discussion of some relevant core concepts.
+Throughout this chapter, we will introduce recent relevant CV models CLIP [@radford2021learning], ALIGN [@jia2021scaling] and Florence [@yuan2021florence] and discuss their underlying core concepts.
 The strong performances confirm the potential, hinted at by the impressive GPT-3 [@brown2020language], of improving CV and increasing scale with the help of NLP.
 
 ### Concepts
@@ -34,18 +34,18 @@ But this kind of adaptation, inscribing expert knowledge into the model, seems t
 <!-- E.g., introducing long short term memory to recurrent neural networks (RNN) improved them in the short term, but made them more computationally expensive, while not solving their core problem of poor parallelization, which resulted in it being outcompeted by the heavily parallelizable transformer architecture. | Does this really make sense?-->
 
 The researchers of CLIP, ALIGN and Florence follow a different approach, based on scale.
-They try to increase sample size as much as possible and work with tremendous numbers of observations:
+They try to increase sample size as much as possible and work with tremendous numbers of training observations:
 
 * 400 million [CLIP\; @radford2021learning]
 * 900 million [Florence\; @yuan2021florence]
 * 1.8 billion [ALIGN\; @jia2021scaling]
 
-These are achieved with the vast amount of image-text pairs produced by and readily available on the internet.
+These large-scale dataset are generated using the vast amount of image-text pairs produced by and readily available on the internet.
 Thus, error prone, cost and labor intensive (difficult to scale), manual labeling is avoided.
-Unfortunately, the models trained on web data also become vulnerable to their <!-- kind of heavy -->downsides.
-Because of the extremely noisy nature of them, still some form of pre-processing is needed, e.g., filtering for English language, excluding graphic content and, optionally, removing images with non-informative alt-texts.
+Unfortunately, the models trained on web data also become vulnerable to their downsides.
+Because of their extremely noisy nature, still some form of pre-processing is needed, e.g., filtering for English language, excluding graphic content and, optionally, removing images with non-informative alt-texts.
 This makes some degree of dataset curation, and therefore arbitrary choices, necessary.
-Likewise, the social biases inherent to the internet are reproduced and furthermore, while the approach improves data efficiency to some degree (see next subsection \@ref(contrObj)), the poor performance of deep learning in this area is not substantially enhanced and mainly just compensated for with a super scalable source of supervision [@radford2021learning].
+Likewise, the social biases inherent to the internet are reproduced and furthermore, while this approach improves data efficiency to some degree (see next subsection \@ref(contrObj)), the poor performance of deep learning in this area is not substantially enhanced and mainly just compensated for with a super scalable source of supervision [@radford2021learning].
 
 #### Contrastive objective {#contrObj}
 
@@ -88,14 +88,14 @@ knitr::include_graphics('figures/02-04-text-support-img/tian-predictive-vs-contr
 (ref:contr-vs-pred-learn) Predictive vs. contrastive learning: Predictive losses are measured in the output space while contrastive losses are measured is in the representation space, indicated by red dotted boxes [@tian2020contrastive].
 
 But in the end, rather than theoretical considerations, the driving factor for using this objective is data efficiency.
-As can be seen in figure \@ref(fig:data-efficiency), @radford2021learning start their search for an adequate pre-train model (more on this in subsection \@ref(foundMod)) by experimenting with a Transformer-based language model predicting the exact captions of an image.
+As can be seen in figure \@ref(fig:data-efficiency), @radford2021learning start their search for an adequate pre-trained model (more on this in subsection \@ref(foundMod)) by experimenting with a Transformer-based language model predicting the exact captions of an image.
 It turns out that this approach trains three times slower, in terms of data efficiency, compared to a simpler baseline of predicting a bag-of-words text encoding.
 Additionally, switching to the contrastive objective of CLIP improves data efficiency by a factor of four.
 
 ```{r data-efficiency, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:data-efficiency)'}
 knitr::include_graphics('figures/02-04-text-support-img/data-efficiency.png')
 ```
-(ref:data-efficiency) Data efficiency of contrastive objective. Development of zero-shot accuracy (see next subsection \@ref(foundMod)) on ImageNet with increasing number of instances of training data seen by models. The contrastive objective reaches same accuracies as the generative approach with only a seventh of the amount of data [@radford2021learning].
+(ref:data-efficiency) Data efficiency of contrastive objective. Development of zero-shot accuracy (see next subsection \@ref(foundMod)) on ImageNet with increasing number of instances of training data processed by the models. The contrastive objective reaches similar accuracy scores as the generative approach with only a seventh of the amount of data [@radford2021learning].
 
 Nonetheless, the switch to contrastive learning leads to some limitations.
 Its rigidity demands certain extra steps and forfeits the high flexibility of generative models.
@@ -107,20 +107,20 @@ To extend the capabilities of those models additional network building blocks ar
 The first models which are considered foundation models today began to appear in NLP.
 The term, later coined by @bommasani2021opportunities, refers to models that are noteworthy due to their large scale and ability to adapt to a wide variety of downstream tasks.
 An early example is BERT [@Devlin2018].
-A lot of the time, foundation models have an unfinished touch to them and the true scope of their capabilities cannot be sketched out clearly.
-This generally is the case, because the desired abilities of neural networks are not designed for explicitly, but rather emerge during their implementation.
-@bommasani2021opportunities cite GPT-3's ability to perform certain types of new tasks soley by confronting it with the right natural language prompt.
+Often, foundation models have an unfinished touch to them and the true scope of their capabilities cannot be sketched out clearly.
+This generally is the case because the desired abilities of neural networks are not designed for explicitly, but rather emerge during their implementation and usage on downstream tasks.
+@bommasani2021opportunities cite GPT-3's ability to perform certain types of new tasks solely by confronting it with the right natural language prompt.
 E.g., it is possible to get GPT-3 to summarize a paragraph by appending "TL;DR" (too long, didn't read) to the prompt, which is a common pattern on the internet to signal a following summery.
-This is called "in-context learning" [@brown2020language].
-It is apparent that one can make up plenty of unexpected ways to employ these models and it cannot be known whether there is a further way no one thought of yet.
+This is referred to as "in-context learning" [@brown2020language].
+It is apparent that one can make up plenty of unexpected ways to employ these models and it remains unknown whether there is a further way no one thought of yet.
 This means possibly saving computational and data collection costs down the line, which ineptly is true for malicious use cases, e.g., surveillance, too.
 
-Foundation models build on the concept of transfer-learning, i.e., pre-training a model on a task that is feasible to do and applying it to the desired task downstream.
+Foundation models build on the concept of transfer-learning, i.e., pre-training a model on a feasible source task and applying it to the desired downstream task.
 In the context of this chapter this means pre-training on web-scale data (see subsection \@ref(webScaleData)) and evaluating performance on various common classification datasets.
 E.g., @radford2021learning name the SVHN dataset as a proxy for the task "street number transcription" with the caveat "on the distribution of Google Street View photos", but they remark that a lot of datasets have no obvious, specific task associated, e.g., CIFAR-10.
 They use these kind of datasets for measuring the "robustness to distribution shift and domain generation" of their model, which still is a topic of great interest as mentioned in subsection \@ref(webScaleData).
-When there is no further fine-tuning on the downstream task, i.e., no resuming of training on the new dataset, this is called zero-shooting.
-It has the clear advantage of evaluating performance more unbiased, as processes like overfitting to the data-generating distribution will not distort results.
+When there is no further fine-tuning on the downstream task, i.e., no resuming of training on the new target dataset, this is referred to as zero-shooting.
+Zero-shooting has the clear advantage of evaluating performance more unbiased, as processes like overfitting to the data-generating distribution will not distort results.
 
 Figure \@ref(fig:zero-shooting) shows how contrastive models perform zero-shot transfer.
 In the case of image classification all available classes are encoded by the language model.
@@ -141,10 +141,10 @@ knitr::include_graphics('figures/02-04-text-support-img/zero-shooting.png')
 The first of the large scale contrastive CV models that were published is CLIP, short for Contrastive Language-Image Pre-training [@radford2021learning].
 The components of its name are explained in previous subsections \@ref(contrObj), \@ref(webScaleData) and \@ref(foundMod) and are the crucial concepts of ALIGN and Florence as well.
 CLIP is a product of OpenAI, but its code is freely available and the different versions can be accessed as [python modules](https://github.com/openai/CLIP).
-Not released is its dataset.
+The dataset used for training is not released though.
 
-A lot of preliminary work stems from @zhang2020contrastive, whose paper firstly describes contrastive representation learning using image-text pairs.
-Their implementation of the contrastive loss function \@ref(eq:contrLoss) is
+A lot of preliminary work stems from @zhang2020contrastive, who introduced contrastive representation learning using image-text pairs.
+Their implementation of the contrastive loss function \@ref(eq:contrLoss) follows
 
 \begin{equation}
   \ell_1^{V_\text{img}, V_\text{txt}} = - \log \frac{\exp(\langle v_\text{img}^1, v_\text{txt}^1 \rangle / \tau)}{\sum_{k=1}^{N} \exp(\langle v_\text{img}^1, v_\text{txt}^k \rangle / \tau)},
@@ -159,7 +159,7 @@ This can be viewed as a symmetric cross entropy loss over the cosine similarity 
 **Architecture**
 
 The text encoder for CLIP (see figure \@ref(fig:contr-vs-pred-learn)) is a modified Transformer [@vaswani2017attention], which was also used for GPT-2 [@radford2019language].
-For the image encoder multiple sub-networks are tested:
+For the image encoder multiple sub-networks are evaluated:
 
 * ResNets: ResNet-50, ResNet-101
 * ResNets which follow EfficientNet-style model scaling: RN50x4, RN50x16, RN50x64
@@ -177,11 +177,11 @@ In order to help the model understand the context of the words, the class labels
 This increases the models zero-shot accuracy on ImageNet by 1.3 percentage points (pp).
 When ensembling 80 different context prompts^[Prompts like: "A photo of a big {label}.", "A photo of a small {label}." [@radford2021learning]] @radford2021learning improve ImageNet accuracy by an additional 3.5pp, which adds up to a total of nearly 5pp.
 The average performance gain across 36 datasets is reported to be 5pp.
-It is likewise possible to directly communicate visual concepts like "picture", "macro", "drawing" or even "dog" to the model.
+It is similarly possible to directly communicate visual concepts like "picture", "macro", "drawing" or even "dog" to the model.
 
 **Robustness**
 
-Figure \@ref(fig:performance-clip) reports the performance of CLIP and a ResNet101, whose training on ImageNet was stopped at the point it reached the same accuracy as zero-shot CLIP.
+Figure \@ref(fig:performance-clip) illustrates the performance of CLIP and a ResNet101, whose training on ImageNet was stopped at the point it reached the same accuracy as zero-shot CLIP.
 It can be deduced that the methods studied in the paper of @radford2021learning constitute an important step towards closing the robustness gap mentioned earlier (see subsection \@ref(webScaleData)).
 While the performance of the ResNet101 deteriorates with datasets generated from more and more different data distributions compared to ImageNet, CLIP remains fairly accurate.
 Note that these findings have to be taken with a grain of salt.
@@ -212,12 +212,12 @@ knitr::include_graphics('figures/02-04-text-support-img/attention-of-ViT.png')
 The approach of @jia2021scaling is largely similar to CLIP.
 They reiterate the necessity of large-scale vision datasets, but assert that even CLIP's data collection process still involves a non-trivial amount of data curation.
 They propose that the amount of additional observations obtained through minimizing the amount of filtering makes up for the increased noise.
-The result is a dataset with 1.8 billion image-text pairs.
+Following this rationale, they create a training dataset with 1.8 billion image-text pairs.
 The corresponding model is named ALIGN, short for "A Large-scale ImaGe and Noisy-text embedding", whose acronym hints at the contrastive loss, which aligns vector encodings in the representation space (see subsection \@ref(contrObj)).
 
 **Architecture**
 
-ALIGN follows the dual encoder architecture employed by @zhang2020contrastive and @radford2021learning, but uses part of BERT-Large as the text and EfficientNet-L2 as the image encoder, which they jointly train from scratch.
+ALIGN follows the dual encoder architecture employed by @zhang2020contrastive and @radford2021learning, but uses a part of BERT-Large as the text and EfficientNet-L2 as the image encoder, which they jointly train from scratch.
 The model has around 800 million parameters [@alford2021alignparams].
 Subsection \@ref(performanceComp) goes into more detail about the performance of ALIGN and compares all three models discussed in this subsection.
 
@@ -226,7 +226,7 @@ Subsection \@ref(performanceComp) goes into more detail about the performance of
 The contrastive loss function aligns the latent representations of the different modalities.
 In other words, the explicit objective is that similar vector encodings implicate similar inputs.
 This means arithmetic operations like the ones mentioned in chapter \@ref(c01-01-sota-nlp) are not only meaningful on encodings belonging to the same modality, but to different modalities.
-E.g., one can add up the image encoding of a picture of the Eiffel tower and the text encoding of the word "snow" and retrieve pictures with high cosine similarity to the result, see figure \@ref(fig:img-txt-addition).
+E.g., one can add up the image encoding of a picture of the Eiffel tower and the text encoding of the word "snow" and retrieve pictures with high cosine similarity as a result, see figure \@ref(fig:img-txt-addition) for an illustration.
 
 ```{r img-txt-addition, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:img-txt-addition)'}
 knitr::include_graphics('figures/02-04-text-support-img/align-word-and-image-addition.png')
@@ -235,10 +235,10 @@ knitr::include_graphics('figures/02-04-text-support-img/align-word-and-image-add
 
 #### Florence
 
-While in principle the approach of @yuan2021florence does not largely differ from the others, the focus of this paper is more about making a true foundation model.
+While in principle the approach of @yuan2021florence does not largely differ from the others, the focus of this paper is more about creating a true foundation model.
 In order to achieve this, they propose a map of possible vision applications which the try to cover via extending the core model with modules.
 As figure \@ref(fig:florence-dimensions) depicts, they want to advance into the dimensions of fine-grained object detection, dynamic action recognition and true multimodal tasks.
-Because of their big ambitions, they name their model Florence after "the birthplace of Renaissance" [@yuan2021florence].
+Due to their big ambitions, they name their model Florence after "the birthplace of Renaissance" [@yuan2021florence].
 
 ```{r florence-dimensions, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:florence-dimensions)'}
 knitr::include_graphics('figures/02-04-text-support-img/florence-dimensions.png')
@@ -247,7 +247,7 @@ knitr::include_graphics('figures/02-04-text-support-img/florence-dimensions.png'
 
 **Architecture**
 
-For the two encoders of the pre-trained core they use a hierarchical Vision Transformer (CoSwin Transformer) for images and a Transformer similar to CLIP's for text.
+As the two encoders for the pre-trained core they use a hierarchical Vision Transformer (CoSwin Transformer) for images and a Transformer similar to CLIP's for text.
 Their 893 million parameters are also jointly trained from scratch on 900 million image-text pairs.
 The alignment happens in the so called image-label-description space which is encoded through a special version of the contrastive loss function which regards all image-text pairs with the same label as positive instances.
 Figure \@ref(fig:florence-architecture) depicts their version of figure \@ref(fig:contr-viz) where one can schematically see how they flexibly add modules to the pre-trained core in order to adapt to various downstream tasks.
@@ -259,7 +259,7 @@ knitr::include_graphics('figures/02-04-text-support-img/florence-architecture.pn
 
 ### Performance comparison {#performanceComp}
 
-Throughout the papers of @radford2021learning, @jia2021scaling and @yuan2021florence is was possible the collect three tables with reported performance measures.
+Throughout the papers of @radford2021learning, @jia2021scaling and @yuan2021florence we were able to collect three tables with reported performance measures to compare these approaches.
 
 Table \@ref(fig:table1) summarizes the zero-shot accuracies on four different ImageNet variants.
 Unfortunately @yuan2021florence only stated their performance on the original ImageNet, where they beat CLIP and ALIGN by a margin of 7.3pp.
@@ -272,24 +272,24 @@ knitr::include_graphics('figures/02-04-text-support-img/table-imagenet.png')
 
 
 Table \@ref(fig:table2) concerns zero-shot image retrieval on the Flickr30K and the MSCOCO dataset (see chapter \@ref(c01-03-benchmarks)).
-Even though there are not many major score differences, there is a clear ranking with CLIP on third, ALIGN on second and Florence on first place.
+Even though there are not many major score differences, there is a clear ranking with CLIP on third, ALIGN on second and Florence on the first place.
 
 ```{r table2, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:table2)'}
 knitr::include_graphics('figures/02-04-text-support-img/table-img-txt-retrieval.png')
 ```
 (ref:table2) Zero-shot image and text retrieval [@yuan2021florence].
 
-The most comprehensive comparison is comprised in table \@ref(fig:table3).
+The most comprehensive comparison is shown in table \@ref(fig:table3).
 It depicts the accuracy of zero-shot CLIP and Florence on various datasets as well as the scores of all three models fine tuned to the respective datasets.
 Florence beats CLIP in nearly all evaluations, for the zero-shot setting as well as for fine tuned performance.
-@jia2021scaling only report on four of the twelve dataset, where they lead half of the time.
+@jia2021scaling only report on four of these twelve datasets, where they win half of the time.
 
 ```{r table3, echo=FALSE, out.width='100%', fig.align='center', fig.cap='(ref:table3)'}
 knitr::include_graphics('figures/02-04-text-support-img/table-misc-datasets.png')
 ```
 (ref:table3) Top-1 Accuracy of CLIP, Florence and ALIGN on various datasets.
 
-Summing up, ALIGN achieves its goal of replicating CLIP's impressive performance while dramatically reducing data curation efforts and Florence has the overall top performance.
+Summing up, ALIGN achieves its goal of replicating CLIP's impressive performance while dramatically reducing the required data curation effort and Florence has the overall top performance.
 This could be attributed to its custom loss, maybe to @yuan2021florence striking the best balance between sample size and data curation or to Florence having the best sub-networks; or a combination of all three.
 
 Once again note that none of the training datasets were made publicly available.
@@ -299,9 +299,9 @@ It cannot be guaranteed that all benchmarks were evaluated on unseen datasets.
 
 One can access the pre-trained CLIP models on [Github](https://github.com/openai/CLIP) and they even found their way into simple command line tools already.
 For example there is a CLI named [rclip](https://github.com/yurijmikhalevich/rclip), which can be used for personal image retrieval, wrapping the _ViT-B/32_ CLIP architecture.
-On my (mid-range) laptop I was able to find seemingly good matches for search terms which I tried out inside a folder containing about 100 pictures.
+On a (mid-range, regular) laptop, we were able to find seemingly good matches for search terms which we tried out inside a folder containing about 100 different pictures.
 After an initial caching one request took about ten seconds.
-Furthermore CLIP continues to be used inside new models, e.g., DALL$\cdot$E 2, where it is responsible for image embedding [@ramesh2022hierarchical].
-Also, there is an effort to replicate CLIP's training dataset called LAION-400M [@schuhmann2022laion].
+Furthermore CLIP continues to be used inside new models, e.g., DALL$\cdot$E 2, where it is used for the image embedding [@ramesh2022hierarchical].
+Also, there is a crowd-sourcing effort to replicate CLIP's training dataset called LAION-400M [@schuhmann2022laion].
 To validate the image-text pairs collected for this, their cosine similarity is computed using CLIP and instances with a value too low are discarded.
-As to my knowledge nothing was made publicly available as part of the other two papers.
+To our knowledge no resources were open-sourced as part of the other two papers ALIGN and FLORENCE.
