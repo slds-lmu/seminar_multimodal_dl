@@ -12,24 +12,44 @@ At first, multitask learning will be introduced, which forms a basis for definin
 issues and challenges will be focused and how existing approaches deal with them. In the end, the chapter will conclude
 with a discussion on the subject.
 
+### Prerequisites
+In this section, we will define the concept of multi-purpose models and introduce the necessary prerequisites to make the later described models more accessible.
+We will introduce the definition of multi-purpose models and concepts that this book has not covered.
+
 
 #### Multi-Task Learning
-\# TODO Introduce MTL
-To introduce the concept of multi-purpose models, a short introduction to multi-task-learning is necessary. Multi-modal learning,
-that we alread introduced, aims at improving abstract representations by unlocking more senses to perceive the world. Mulit-task learning [Caruana todo],
-also aims to improve models by training on multiple tasks. It is assumed that adding more tasks, increases the generalization capability of the model.
-The transferable knowledge of a task is used in different settings. For example a model can be trained on predicting different ....
-CV (more obvious tasks) -> go down to NLP and the models capability in nlp
-For a more in-depth overview of mulit-task learning, we rever to @Crawshaw2020.
-- catastrophic Forgetting
+
+After the extensive overview of multimodal learning [in the previous chapter](#c02-00-multimodal), we now need to introduce multitask learning as another concept to define
+multipurpose models. Multitask learning [@Caruana1997, @Crawshaw2020] is a paradigm in machine learning in which models are trained on multiple tasks simultaneously.
+Tasks are the specific challenges a model is trained to solve, like object recognition, coreference resolution, or image captioning. Usually, this happens using a single
+model, which is inefficient, and does not leverage helpful knowledge gained from solving other tasks. It is assumed that different tasks include similar patterns that the
+model can exploit and use to solve other tasks more efficiently. The equivalent of human intelligence is the transfer of knowledge for new tasks since humans do not need
+to learn each task from scratch but recall previous knowledge that can be induced in the new situation. However, this assumption does not always hold since some tasks may
+require opposing resources, so performance drops. For a more in-depth overview of multitask learning, we refer to [@Caruana1997] and [@Crawshaw2020].
 
 #### Mixture-of-Experts
-\# TODO Add general idea of moe
+Another prerequisite to this chapter is the mixture-of-expert (MoE) (@Jacobs1991, @Jordan1994, @Shaazer2017) architecture, which was aimed at increasing the overal
+ model size while still keeping inference time reasonably low.
+MoE is an ensemble of different neural networks inside the layer. MoEs allow for being more computationally efficient while still keeping or even improving performance.
+The neural networks are not used for every forward pass but only if the data is well suited to be dealt with by a specific expert. Training MoEs usually requires balancing
+the experts so that routing does not collapse into one or a few experts. An additional gating network decides which of the experts is called. Gating can be implemented so that
+only *K* experts are used, which reduces the computational costs for inference.
+
+#### Evolutionary Algorithms
+An evolutionary algorithm is used to optimize a discrete problem where derivative-based algorithms cannot be applied. The algorithm is based on a population
+(in the domain to be optimized) and a fitness function (can be used to evaluate how close a member of the population is to the optimum). Parts of the population are chosen
+to create offspring either by mutation or recombination. The resulting population is then evaluated with respect to their fitness function, and only the best-suited individuals are kept.
+The same procedure is repeated based on the resulting population until a specific criterion is met (e.g., convergence). While evolving the population, it is necessary to balance exploration
+and exploitation to find the desired outcome. Since EAs are research topics themselves and may vary heavily, we refer to [@Baeck1993] and, more recently, to [@Doerr2021] for further insights.
+
 
 #### Multi-Purpose Models
-\# TODO Adapt to new structure
+Now multipurpose models can be defined as multimodal-multitask models. Akin to the underlying assumptions of both learning paradigms, it can also be deduced
+that multipurpose models mimic human intelligence by reusing knowledge from different tasks and also perceiving through multiple senses through multimodality.
 
---
+<!--Examples ?-->
+
+<!--
 Since the early years of machine learning, multitask and multimodal learning paradigms have been around.
 Multitask learning [@Crawshaw2020] is the paradigm of training a model on different tasks with the intention that the model transfers the learned
 knowledge to new tasks, such that fewer resources are required to learn new them. Akin to humans, it is intended that the model benefits from previously
@@ -40,13 +60,13 @@ tables, and so on. As in multitask learning, this approach is also inspired by n
 multiple senses. It is thus assumed that multimodal models achieve better performance due to the increased variety of the provided data.
 We want to marry the two paradigms to form a so-called multi-purpose paradigm for this work. Multi-purpose models are capable of being multimodal and multitask.
 We assume that this merge improves the generalizability of the models even further.
---
 
 After the introduction of multitask learning, we can now define the concept of a multipurpose model. Multipurpose models marry the concept of multitask learning and multimodal learning.
 These models can perceive different modalities and are trained on multiple tasks. Combining both concepts, it can also be assumed that the benefits of both concepts,
 yet also the challenges, are inherited. On the one side, a better generalization can be assumed, yet also issues remain.
 A multi-purpose model is thus a model trained on different multimodal or unimodal tasks. An example would be a model that is trained on visual, text and visual-text tasks aimed to
 generalize in a inductive transfer meaning that the model can predict targets without having the targets in training data.
+-->
 
 ### Overview of Mulit-Purpose Models
 In this section an overview of existing multi-purpose models will be outlined. The models about to be looked at are all from recent years, with the oldest one (MultiModel) from 2017. At the end of
@@ -57,7 +77,9 @@ this section the models will be compared and set in the greater context of multi
 A first prominent multi-purpose model is the so-called MultiModel [@Kaiser2017]. This model, from the pre-transformer time, combines multiple architectural approaches from different fields to tackle both multimodality and multiple tasks.
 The model consists of four essential modules: the so-called modality nets, the encoder, the  I/O Mixer, and the decoder. The modality nets function as translators between the data and a suitable representation for the inner modules. They also follow the purpose of back-translating to create the output. For language tasks, the modality net is a tokenizer that outputs the appropriate embeddings, while for vision tasks, convolution operations transform the images into the proper representation. Furthermore, there are also nets for audio and categorical modalities.
 The modality net tokenizes the input sequences for the language task, which are then embedded in a unifying vector space and passed on to the encoder. To produce the output, the representations from the decoder are fed into a simple feed-forward network on which a softmax function is used to predict the next token.
-For the architecture and the chapter generally, it is necessary to recall the concept of Mixture of Experts (MoE) (@Jacobs1991, @Jordan1994, @Shaazer2017), which is an ensemble of different neural networks inside the layer. The neural networks are not used for every forward pass but only if the data is well suited to be dealt with by a specific expert. MoEs allow for being more computationally efficient while still keeping or even improving performance. Training MoEs usually requires balancing the experts so that routing does not collapse into one or a few experts. An additional gating network decides which of the experts is called. Gating can be implemented so that only *K* experts are used, which reduces the computational costs for inference.
+
+<!-- For the architecture and the chapter generally, it is necessary to recall the concept of Mixture of Experts (MoE) (@Jacobs1991, @Jordan1994, @Shaazer2017), which is an ensemble of different neural networks inside the layer. The neural networks are not used for every forward pass but only if the data is well suited to be dealt with by a specific expert. MoEs allow for being more computationally efficient while still keeping or even improving performance. Training MoEs usually requires balancing the experts so that routing does not collapse into one or a few experts. An additional gating network decides which of the experts is called. Gating can be implemented so that only *K* experts are used, which reduces the computational costs for inference.
+-->
 The core model consists of the encoder, the I/O mixer, and the decoder. Input is passed from the modality nets to the encoder first. Subsequently, the encoder passes its output further to the I/O mixer and the decoder. The decoder produces the output sequence. However, producing an autoregressive sequence requires knowledge of the previously generated sequence. Thus the output of the decoder is read by the I/O mixer, which provides the decoder with the necessary information about the previous sequence. The I/O mixer passes its output back to the decoder to create a feedback loop. Both decoder and I/O mixer require modality nets to read and write in the target domain.
 The encoder consists of multiple convolution operations and a mixture-of-expert layer block. The I/O mixer and the decoder combine their dual input using cross attention. A positional encoding conceptually similar to the one in transformers was also used for the attention mechanism.
 MultiModel was trained on eight datasets, from which six were from the language domain and COCO [@mccoco] and ImageNet [@ImageNet] from the vision domain. For training, four experts in the MoE layers were used. The combined trained MultiModel on ImageNet and machine translation were below state-of-the-art (sota) models. Also, the combined model did not achieve significantly better results than a specialist model, which is the same model but trained solely on one task. However, it was found that the combined model did perform much better on a low-resource task than the respective specialist model.
@@ -101,17 +123,44 @@ As in OFA, problems are transformed into a seq2seq problem, on which a transform
 
 $$\left [ x_{\textrm{Text}}, x_{\textrm{Images}}, x_{\textrm{Discrete and Continuous Values}}, |, y_{\textrm{Action}} \right ]$$
 
+$$ s_{1:L} = \left [ \left [ y_{1:k}^1, x_{1:m}^1, z_{1:n}^1, '|', a_{1:A}^1 \right ] \right ], ..., \left [ \left [ y_{1:k}^T, x_{1:m}^T, z_{1:n}^T, '|', a_{1:A}^T \right ] \right ]$$
+so that T(k + m + n + 1 + A) tokens are used in a sequence, underlining the restricted length issue. The sequential nature of the architecture can be seen here, the input, the action is conditioned on, is provided before the 
+separator token, and the action to be predicted is on the right. This scheme makes the objective more accessible, since language prediction only requires the previous token of the text, so that
+no token needs to be masked.
+
 Using this approach, the transformer can predict the next action autoregressively since it is a sequential problem. In the case of text, the action token is also a text token. Since it is only necessary to predict the action based on the previous values, a mask function is added to the cross-entropy loss function, which masks the previous values so that only the next action is predicted and not the input conditioned on. The masking function is always one for text since every previous text token is necessary for language modeling.
 Gato was evaluated on RL-based tasks against specialist RL agents, where Gato performed worse than the specialist agents or at a human level. On unseen tasks, Gato required fine-tuning since few-shot learning is not feasible due to the input length restrictions in transformers. However, the results were mixed. Some improvements were possible, and the expert was outperformed, but in other cases, massive fine-tuning efforts only led to small gains. It was found that the generalist agent outperformed the specialist agent (only trained for this task) most of the time. Only at Atari Boxing [@atari], Gato was outperformed by the specialist model. Both performed much lower than another task-specific model used as a baseline. In robotics, Gato showed comparable behavior to the baseline sota model. Additionally, Gato also showed capabilities in image captioning and dialogue modeling, although these aspects were not elaborated further.
 
 Similar to OFA, Gato can tokenize all input, whose output can be used to solve the problems Gato is trained on. It was shown that Gato could sometimes transfer knowledge on unseen tasks. However, this did not succeed all over.
 
 #### Comparison
-\# TODO Compare more in-depth
+<!-- Reviewing the introduced models, we see a pattern towards seq2seq models, which already started with MultiModel and became even more prominent in 2022 with Gato and OFA. UniT stands out
+from this pattern as a model that uses seperate encoders for each modality. It furthermore also requires task-specific heads which commpute solutions not in a sequential manner. However,
+also seq2seq models require additional modules to produce solutions. These modules are modality nets for MultiModel and the XXX for OFA. Gato is rather agnostic towards solving different tasks 
+in different modalities.
+Many models also use 
 
 We revisited four multi-purpose models (Multimodel, UniT, OFA, and GATO), of which three were based on the transformer architecture. The last two models transformed the tasks into seq2seq problems to use the standard transformer. UniT is the only model that does not use autoregressive sequence generation, while MultiModel produces the output autoregressively too.
 Almost all models require some particular module to produce the eventual output: visualizer and image generator in OFA, the task-specific heads in UniT, or the modality nets in Multimodel. On the other side, GATO is more generalizable in its domain since it only produces text and action tokens for games and robotics, which can be translated more easily.
 None of the models besides OFA achieved sota results. Compared to specialist models, the general models were comparable in their results. Multimodel, OFA, and GATO showed transferability on low-resource or unseen tasks. However, more research in this direction is highly recommended. Multimodel was only compared on a low-resource task against a specialist model, which was trained on, and OFA was not compared to another model for the unseen task. GATO performed better than a specialist model, trained from scratch on most unseen tasks, but failed against the untrained specialist model in Atari Boxing.
+-->
+
+A challenge for multi-purpose models is the comparison. Due to many modalities and tasks, the intersections of the models become smaller increasing the difficulty of comparison.
+However, a trend toward seq2seq models can be seen with Multimodel, OFA, and GATO solving tasks in a seq2seq manner. The most prominent similarity is the transformer architecture used entirely (encoder & decoder) in OFA and truncated (decoder only) in GATO.
+Another significant similarity between both architectures is the use of special tokens akin to escape tokens in programming. In GATO, the special token is '|', indicating that a specific action is following that is conditioned on the previous tokens and the location tokens in OFA. In both settings, a unique ordering for the architecture is required to solve tasks appropriately, which is different. While Gato can solve tasks from robotics and game playing, OFA can also generate images. For both tasks, however, the architectures require specific modules to decode the tokens into the respective modality.
+GATO and OFA both use a shared representation space. Minor details differ, so the image tokenization process is different, and additionally, GATO can encode more modalities than the published version of OFA (although extending OFA is theoretically possible).
+Multimodel also shows some similarities. The architecture is from the pre-transformer age, but also brings many characteristics of the transformer architecture (use of attention and positional encodings). Since the output in the presented version only produced text, there is no necessity for escape tokens, that were used in OFA and GATO. The necessity to produce the modality-specific output in modality nets is also similar to the  decoder module in OFA that produces images, although the tokens are already produced in OFA and the modality nets are crucial parts of Multimodel.
+UniT follows an entirely different approach, that is more pragmatic by leveraging the contextual capabilities of the transformer decoder. *M* modalities can be encoded as a sequence on which the transformer decoder fuses the modalities and learns the relationships. The use of special tokens for each task and task-specific heads, focus the model on the requested task yet also improves the necessity for tuning the model specifically.
+None of the models besides OFA achieved sota results. Compared to specialist models, the general models were comparable in their results. Multimodel, OFA, and GATO showed transferability on low-resource or unseen tasks. However, more research in this direction is highly recommended. Multimodel was only compared on a low-resource task against a specialist model, which was trained on, and OFA was not compared to another model for the unseen task. GATO performed better than a specialist model, trained from scratch on most unseen tasks, but failed against the untrained specialist model in Atari Boxing.
+
+
+
+| Model         | Approach                              | Modalities                                                | Outperformed Specialist Model?            | Year  |
+|---            |---                                    |---                                                        |---                                        |---    |
+| OFA           | Seq2Seq                               | Vision, Text                                              | Yes                                       | 2022  |
+| GATO          | Seq2Seq                               | Vision, Text, Robotics, Discrete Entities (e.g., Buttons) | Yes                                       | 2022  |
+| UniT          | *m* Encoders, task-specific head      | Vision, Text                                              | No                                        | 2021  |
+| MultiModel    | Different *modality nets* for Seq2Seq | Vision, Text (in output only text)                        | Unknown (Excelled on low resource task)   | 2017  |
 
 ### Pathway Proposal
 
@@ -137,7 +186,10 @@ In this section, related architectures will be revisited to provide an overview 
 
 #### PathNet
 
-An earlier approach for a sparse multitask network, which looks deceptively similar, is PathNet [@Fernando2017]. PathNet is a training algorithm that reuses knowledge from a previously learned task without the risk of catastrophic forgetting (knowledge gets overwritten), thus using the positive aspects of multitask learning. The objective of PathNet is built upon an evolutionary algorithm (EA). An evolutionary algorithm is used to optimize a discrete problem where derivative-based algorithms cannot be applied. The algorithm is based on a population (in the domain to be optimized) and a fitness function (can be used to evaluate how close a member of the population is to the optimum). Parts of the population are chosen to create offspring either by mutation or recombination. The resulting population is then evaluated with respect to their fitness function, and only the best-suited individuals are kept. The same procedure is repeated based on the resulting population until a specific criterion is met (e.g., convergence). While evolving the population, it is necessary to balance exploration and exploitation to find the desired outcome. Since EAs are research topics themselves and may vary heavily, we refer to [@Baeck1993] and, more recently, to [@Doerr2021] for further insights. Neural networks are often depicted as a graph in which the input is directed to all nodes in hidden layers, and their output is again passed to all nodes in the next hidden layer or an output layer.
+An earlier approach for a sparse multitask network, which looks deceptively similar, is PathNet [@Fernando2017]. PathNet is a training algorithm that reuses knowledge from a previously learned task without the risk of catastrophic forgetting (knowledge gets overwritten), thus using the positive aspects of multitask learning. The objective of PathNet is built upon an evolutionary algorithm (EA).
+<!-- An evolutionary algorithm is used to optimize a discrete problem where derivative-based algorithms cannot be applied. The algorithm is based on a population (in the domain to be optimized) and a fitness function (can be used to evaluate how close a member of the population is to the optimum). Parts of the population are chosen to create offspring either by mutation or recombination. The resulting population is then evaluated with respect to their fitness function, and only the best-suited individuals are kept. The same procedure is repeated based on the resulting population until a specific criterion is met (e.g., convergence). While evolving the population, it is necessary to balance exploration and exploitation to find the desired outcome. Since EAs are research topics themselves and may vary heavily, we refer to [@Baeck1993] and, more recently, to [@Doerr2021] for further insights.
+-->
+Neural networks are often depicted as a graph in which the input is directed to all nodes in hidden layers, and their output is again passed to all nodes in the next hidden layer or an output layer.
 In the case of PathNet, each node is itself a neural network; thus, all data is passed to each node. The training algorithm finds the best paths for a specific task through the network. At first random paths through the network are initialized, then the paths are trained for *T* epochs. After training, the paths are evaluated against each other, where the winning path overwrites the losing path. To achieve exploration, however, the overwritten path is mutated. The path is intended to deviate a little by also visiting neighboring nodes to achieve exploration. Until a specific criterion (e.g., number of epochs) to stop is reached, the current paths are frozen so that no more modifications to the parameters of the networks on this path are possible. All other parameters are newly initialized again. Also, a different, task-specific head is initialized. The same procedure is now done again for another task. The main difference is that the previously obtained path, including the trained networks, is frozen during training so that the model can transfer knowledge from the previous task to the new task. The model finds appropriate paths throughout the network until the stopping criterion is met. PathNet was evaluated on supervised learning tasks and on reinforcement learning scenarios. Learning from scratch and fine-tuning a PathNet, trained on the first task, were chosen as a baseline. Fine-tuning is ran on top of the first model, which PathNet trains for the first task. Overall, PathNet improved training time and prediction quality for the second task compared to standard fine-tuning and learning from scratch. PathNet has shown that positive transfer in a Pathways-alike architecture is possible. Different tasks can reuse the knowledge from training on previous tasks.
 
 ```{r pathnet, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="(ref:pathnet)"}
