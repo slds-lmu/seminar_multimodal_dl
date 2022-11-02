@@ -1,8 +1,8 @@
 ## Image2Text {#c02-01-img2text}
 
-*Author: Luyang Chu
+*Author: Luyang Chu*
 
-*Supervisor: Christian Heumann
+*Supervisor: Christian Heumann*
 
 Image captioning means autonomously producing descriptive sentences for images. It has stimulated interest in both natural language processing and computer vision research in recent years. Image captioning is a key task that requires a semantic comprehension of images as well as the capacity to generate accurate and precise description sentences.
 
