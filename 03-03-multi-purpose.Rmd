@@ -3,103 +3,100 @@
 *Author: Philipp Koch*
 
 *Supervisor: Rasmus Hvingelby*
-In this chapter, we will broaden the focus to include multi-task learning additionally to multi-modal learning. We will call this combination multi-purpose models.
-Many multi-purpose models have been introduced in recent years, and the field gained traction.
-First, we will provide an in-depth overview of existing multi-purpose models and compare the different models. In the second part, challenges in the field will also be
-discussed by reviewing the Pathways proposal [@Dean2021] and promising work addressing current issues.
+
+
+In this chapter, we will broaden the focus to include multi-task learning additionally to multi-modal learning. We will call this mixture multi-purpose models.
+Many multi-purpose models have been introduced in recent years, and the field gained traction (@Kaiser2017, @Hu2021, @Wang2022, @Reed2022).
+First, we will provide an in-depth overview of existing multi-purpose models and compare them. In the second part, challenges in the field will also be
+discussed by reviewing the Pathways proposal [@Dean21] and promising work addressing current issues.
 
 
 ### Prerequisites
-In this section, we will define the concept of multi-purpose models and lay out the necessary prerequisites to make the later described models more accessible.
-We will introduce the definition of multi-purpose models and concepts that this book has not covered.
+
+At first, we will define the concept of multi-purpose models and lay out the necessary prerequisites to make the later described models more accessible.
+We will introduce the definition of multi-purpose models and further concepts that this book has not covered so far.
 
 
 #### Multi-Task Learning
 
 After the extensive overview of multimodal learning [in the previous chapter](#c02-00-multimodal), we now need to introduce multitask learning as another concept to define
-multipurpose models. Multitask learning [@Caruana1997, @Crawshaw2020] is a paradigm in machine learning in which models are trained on multiple tasks simultaneously.
-Tasks are the specific challenges a model is trained to solve, like object recognition, coreference resolution, or image captioning. Usually, this happens using a single
-model, which is inefficient, and does not leverage helpful knowledge gained from solving other tasks. It is assumed that different tasks include similar patterns that the
-model can exploit and use to solve other tasks more efficiently. The equivalent of human intelligence is the transfer of knowledge for new tasks since humans do not need
-to learn each task from scratch but recall previous knowledge that can be induced in the new situation. However, this assumption does not always hold since some tasks may
-require opposing resources, so performance drops. For a more in-depth overview of multitask learning, we refer to [@Caruana1997] and [@Crawshaw2020].
+multipurpose models.
 
-#### Mixture-of-Experts
-Another prerequisite to this chapter is the mixture-of-expert (MoE) (@Jacobs1991, @Jordan1994, @Shaazer2017) architecture, which was aimed at increasing the overal
- model size while still keeping inference time reasonably low.
-MoE is an ensemble of different neural networks inside the layer. MoEs allow for being more computationally efficient while still keeping or even improving performance.
-The neural networks are not used for every forward pass but only if the data is well suited to be dealt with by a specific expert. Training MoEs usually requires balancing
-the experts so that routing does not collapse into one or a few experts. An additional gating network decides which of the experts is called. Gating can be implemented so that
-only *K* experts are used, which reduces the computational costs for inference.
+Multitask learning (@Caruana1997, @Crawshaw2020) is a paradigm in machine learning in which models are trained on multiple tasks simultaneously.
+Tasks are the specific problems a model is trained to solve, like object recognition, language modeling, or image captioning. Usually, this happens using a single model,
+which does not leverage helpful knowledge gained from solving other tasks. It is assumed that different tasks include similar patterns that the model can exploit and use
+to solve other tasks more efficiently. The equivalent in human intelligence is the transfer of knowledge for new tasks since humans do not need to learn each task from scratch
+but recall previous knowledge that can be reused in the new situation. However, this assumption only sometimes holds since some tasks may require opposing resources, so
+performance decreases.
+
+Multitask learning thus aims to achieve better generalization by teaching the model how to solve different tasks so that the model learns relationships that can be used
+further on. For a more in-depth overview of multitask learning, we refer to [@Caruana1997] and [@Crawshaw2020].
+
+
+#### Mixture-of-Experts {#03-03-MoE}
+
+Another prerequisite to this chapter is the mixture-of-expert (MoE) (@Jacobs1991, @Jordan1994, @Shaazer2017) architecture, which is aimed at increasing the overall model
+size while still keeping inference time reasonably low.In an MoE, not all parts of the net are used but just a subset. The *experts* are best suited to deal with the input
+allowing the model to be sparse.
+
+MoE is an ensemble of different neural networks inside the layer. MoEs allow for being more computationally efficient while still keeping or even improving performance. The
+neural networks are not used for every forward pass but only if the data is well suited to be dealt with by a specific expert. Training MoEs usually requires balancing the
+experts so that routing does not collapse into one or a few experts. An additional gating network decides which of the experts is called. Gating can be implemented so that
+only *K* experts are used, which reduces the computational costs for inference by allowing the model to be more sparse.
+
 
 #### Evolutionary Algorithms {#03-03-EA}
-An evolutionary algorithm is used to optimize a discrete problem where derivative-based algorithms cannot be applied. The algorithm is based on a population
-(in the domain to be optimized) and a fitness function (can be used to evaluate how close a member of the population is to the optimum). Parts of the population are chosen
+
+An evolutionary algorithm is used to optimize a problem over a discrete space where derivative-based algorithms cannot be applied. The algorithm is based on a population
+(in the domain to be optimized) and a fitness function that can be used to evaluate how close a member of the population is to the optimum. Parts of the population are chosen
 to create offspring either by mutation or recombination. The resulting population is then evaluated with respect to their fitness function, and only the best-suited individuals are kept.
 The same procedure is repeated based on the resulting population until a specific criterion is met (e.g., convergence). While evolving the population, it is necessary to balance exploration
 and exploitation to find the desired outcome. Since EAs are research topics themselves and may vary heavily, we refer to [@Baeck1993] and, more recently, to [@Doerr2021] for further insights.
 
 
 #### Multi-Purpose Models
+
 Now multipurpose models can be defined as multimodal-multitask models. Akin to the underlying assumptions of both learning paradigms, it can also be deduced
-that multipurpose models mimic human intelligence by reusing knowledge from different tasks and also perceiving through multiple senses through multimodality.
+that multipurpose models mimic human intelligence by marrying the concepts of multiple perceptions and transferring knowledge about different tasks for better generalization.
 
-<!--Examples ?-->
-
-<!--
-Since the early years of machine learning, multitask and multimodal learning paradigms have been around.
-Multitask learning [@Crawshaw2020] is the paradigm of training a model on different tasks with the intention that the model transfers the learned
-knowledge to new tasks, such that fewer resources are required to learn new them. Akin to humans, it is intended that the model benefits from previously
-learned tasks. Humans do not learn everything new from scratch and spend far fewer resources on learning because knowledge can be transferred.
-It is thus assumed that deep learning models tend to generalize better when trained on multiple tasks.
-Multimodal learning [@Baltrusaitis2019] is a paradigm in which a deep learning model is supplied with multiple modalities like images, text,
-tables, and so on. As in multitask learning, this approach is also inspired by natural intelligence since intelligent beings perceive the world through
-multiple senses. It is thus assumed that multimodal models achieve better performance due to the increased variety of the provided data.
-We want to marry the two paradigms to form a so-called multi-purpose paradigm for this work. Multi-purpose models are capable of being multimodal and multitask.
-We assume that this merge improves the generalizability of the models even further.
-
-After the introduction of multitask learning, we can now define the concept of a multipurpose model. Multipurpose models marry the concept of multitask learning and multimodal learning.
-These models can perceive different modalities and are trained on multiple tasks. Combining both concepts, it can also be assumed that the benefits of both concepts,
-yet also the challenges, are inherited. On the one side, a better generalization can be assumed, yet also issues remain.
-A multi-purpose model is thus a model trained on different multimodal or unimodal tasks. An example would be a model that is trained on visual, text and visual-text tasks aimed to
-generalize in a inductive transfer meaning that the model can predict targets without having the targets in training data.
--->
 
 ### Overview of Mulit-Purpose Models
-In this section an overview of existing multi-purpose models will be outlined. The models about to be looked at are all from recent years, with the oldest one (MultiModel) from 2017. At the end of
-this section the models will be compared and set in the greater context of multi-purpose models.
+
+In this section, we will closely examine existing multipurpose models. The main focus will be on how combining different modalities and tasks is achieved. At the end of
+this section, all models will be compared to provide a comprehensive overview of promising paths.
+
 
 #### MultiModel
 
-A first prominent multi-purpose model is the so-called MultiModel [@Kaiser2017]. This model, from the pre-transformer time, combines multiple architectural approaches from different
-fields to tackle both multimodality and multiple tasks. The model consists of four essential modules: the so-called modality nets, the encoder, the  I/O Mixer, and the decoder. The
-modality nets function as translators between the data and a suitable representation for the inner modules. They also follow the purpose of back-translating to create the output. For
-language tasks, the modality net is a tokenizer that outputs the appropriate embeddings, while for vision tasks, convolution operations transform the images into the proper representation.
-Furthermore, there are also nets for audio and categorical modalities.
-The modality net tokenizes the input sequences for the language task, which are then embedded in a unifying vector space and passed on to the encoder. To produce the output, the representations
-from the decoder are fed into a simple feed-forward network on which a softmax function is used to predict the next token.
+The first prominent multi-purpose model is the so-called MultiModel [@Kaiser2017]. This model, from the pre-transformer era, combines multiple architectural approaches
+from different fields to tackle both multimodality and multiple tasks. The model consists of four essential modules: the so-called modality nets, the encoder, the  I/O Mixer, and the decoder.
 
-<!-- For the architecture and the chapter generally, it is necessary to recall the concept of Mixture of Experts (MoE) (@Jacobs1991, @Jordan1994, @Shaazer2017), which is an ensemble of different
-neural networks inside the layer. The neural networks are not used for every forward pass but only if the data is well suited to be dealt with by a specific expert. MoEs allow for being more
-computationally efficient while still keeping or even improving performance. Training MoEs usually requires balancing the experts so that routing does not collapse into one or a few experts. An
-additional gating network decides which of the experts is called. Gating can be implemented so that only *K* experts are used, which reduces the computational costs for inference.
--->
-The core model consists of the encoder, the I/O mixer, and the decoder. Input is passed from the modality nets to the encoder first. Subsequently, the encoder passes its output further to the
-I/O mixer and the decoder. The decoder produces the output sequence. However, producing an autoregressive sequence requires knowledge of the previously generated sequence. Thus the output of
-the decoder is read by the I/O mixer, which provides the decoder with the necessary information about the previous sequence. The I/O mixer passes its output back to the decoder to create a
-feedback loop. Both decoder and I/O mixer require modality nets to read and write in the target modality.
-The encoder consists of multiple convolution operations and a mixture-of-expert layer block. The I/O mixer and the decoder combine their dual input using cross attention. A positional encoding
-conceptually similar to the one in transformers was also used for the attention mechanism.
-MultiModel was trained on eight datasets, from which six were from the language modality and COCO [@mccoco] and ImageNet [@ImageNet] from vision. For training, four experts in the MoE layers were
-used. The combined trained MultiModel on ImageNet and machine translation were below state-of-the-art (sota) models. Also, the combined model did not achieve significantly better results than a
-specialist model, which is the same model but trained solely on one task. However, it was found that the combined model did perform much better on a low-resource task than the respective
-specialist model. Multimodel offers a pre-transformer approach to deal with different modalities on multiple tasks; although it was only used to generate text, the setup allows extending
-to other modalities easily.
+The modality nets function as translators between real world data and a suitable representation for the inner modules. They also follow the purpose of back-translating,
+from the representation to the real world, to create output. For language tasks, the modality net is a tokenizer that outputs the appropriate embeddings, while for vision tasks,
+convolution operations transform the images into the proper representation. Furthermore, there are also nets for audio and categorical modalities. The modality nets embed the input
+into a unifying vector space which can be passed to the encoder. To produce the output, the representations from the decoder are fed into another modality net to produce the output.
+Language and categories are the only target modalities that have respective modality nets.
+
+The core model consists of the encoder, the I/O mixer, and the decoder. Input is passed from the modality nets to the encoder first. Subsequently, the encoder passes its output further
+to the I/O mixer and the decoder. The decoder produces the output sequence. However, producing an autoregressive sequence requires knowledge of the previously generated sequence. Thus
+the output of the decoder is also read by the I/O mixer, which provides the decoder with the necessary information about the previous sequence. The I/O mixer passes its output back to the
+decoder to provide the necessary information. The decoder and I/O mixer require modality nets to read and write in the target modality. The encoder consists of multiple convolution operations
+and a [mixture-of-expert](#03-03-MoE) layer. The I/O mixer and the decoder combine their dual input using cross-attention. A positional encoding conceptually similar to the one in transformers
+is used for the attention mechanism.
+
+MultiModel was trained on eight datasets, from which six were from the language modality and COCO [@mccoco] and ImageNet [@ImageNet] from vision. For training, four experts in the MoE layers
+were used. The combined trained MultiModel on ImageNet and machine translation were below state-of-the-art (sota) models. Also, the combined model did not achieve significantly better results
+than a specialist model, which is the same model but trained solely on one task. However, it was found that the combined model did perform much better on a low-resource task than the respective
+specialist model.
+
+Multimodel offers a pre-transformer approach to deal with different modalities on multiple tasks; although it was only used to generate text and categorization, the setup allows extending to
+other modalities easily.
 
 ```{r multimodel, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="(ref:multimodel)"}
 knitr::include_graphics("figures/03-03-multipurpose/multimodel.png")
 ```
 (ref:multimodel) Architecture of *MultiModel*. The outer boxes without text are the modality nets. From @Kaiser2017.
+
 
 #### Unified Transformer (UniT)
 
@@ -225,20 +222,16 @@ model in Atari Boxing.
 | OFA           | Seq2Seq                               | Vision, Text                                              | Yes                                       | 33M-930M          | 2022  |
 | GATO          | Seq2Seq                               | Vision, Text, Robotics, Discrete Entities (e.g., Buttons) | Yes                                       | 79M-1.18B         | 2022  |
 | UniT          | *m* Encoders, task-specific head      | Vision, Text                                              | No                                        | 201M              | 2021  |
-| MultiModel    | Different *modality nets* for Seq2Seq | Vision, Text (in output only text)                        | Unknown (Excelled on low resource task)   | Unknown           | 2017  |
+| MultiModel    | Different *modality nets* for Seq2Seq | Vision, Text (output only in text)                        | No (Excelled on low resource task)        | Unknown           | 2017  |
 
 
-### Limitations and Other Approaches
-Although models have become more capable of solving complex tasks throughout different modalities, significant limitations remain. 
+### Pathways and Promising Works
+Although models have become more capable of solving complex tasks, significant limitations remain. 
 A persisting issue in current deep learning is the necessity to train from scratch and disregard already acquainted knowledge, which is highly ineffective compared to human intelligence. Another
 issue arises from the evergrowing, dense networks that require more and more resources.
-In the Pathways Proposal [@Dean21], a new paradigm was introduced: models should be sparse and capable of transferring knowledge akin to humans.
-<!--Multi-purpose models can also be thought of without the currently well-performing transformer architecture. A proposal for a new approach to multi-purpose models was introduced as Pathways
-[@Dean21] aiming to address current pitfalls in deep learning. Current deep learning consists mainly of large dense neural networks trained for a specific task. This paradigm is limiting so that
-no transfer between tasks is possible, and every time a model is trained, it needs to learn from scratch (or needs to be fine-tuned, where the initial knowledge is lost in the process). Human
-intelligence can also transfer knowledge between tasks, so it is not necessary to learn everything from scratch. However, transfer in deep learning models is not sufficiently possible, which is
-a severe constraint.
--->
+
+In this section, we will review the Pathways proposal [@Dean21] and promising techniques to address these issues. Overcoming these problems would be especially beneficial for multipurpose
+models. Reusability of knowledge is crucial for the multitask perspective, and improving the performance of potentially billion-parameter-sized models will also have a significant positive impact.
 
 ```{r pathways, fig.align = 'center', out.width = '80%',echo=FALSE, fig.cap="(ref:pathways)"}
 knitr::include_graphics("figures/03-03-multipurpose/Pathways.png")
@@ -267,11 +260,12 @@ which is currently the largest
 language model using 540 billion parameters, Minerva [@Lewkowycz2022]. Minerva is based on PaLM, and Parti [@parti], a text-to-image generator.
 
 
+<!--
 ### Promising Works
 In this section, we will provide an overview about novel architectures, that introduced promising solutions to the problems described in the Pathways proposal. These architectures are not 
 required to be multipurpose architectures but offer solutions to the outlined problems.
 
-<!--In this section, we will introduce models that are able to alleviate the problems, which where outlined in the Pathways Proposal and which offer new techniques to increase the capabilities
+In this section, we will introduce models that are able to alleviate the problems, which where outlined in the Pathways Proposal and which offer new techniques to increase the capabilities
 of multipurpose models.  
 In this section, related architectures will be revisited to provide an overview of how close current research has come to achieving a model like the Pathways proposal.-->
 
@@ -402,12 +396,12 @@ Furthermore, it also becomes necessary to conduct research into scaling these co
 for training and testing might offer insights into how transfer between tasks might succeed and fail. 
 
 LIMoE offers a promising architecture with respect to performance. Due to the sparsity of the MoE-layer, LIMoE is faster, while it also outperforms previous dense models. Using MoE-layers in
-transformers might also be a viable path for architectures like OFA and GATO. Combining the flexible encoding techniques of these models with the sparsity of LIMoE might result in even more capable
+transformers might also be a viable path for models like OFA and GATO. Combining the flexible encoding techniques of these models with the sparsity of LIMoE might result in even more capable
 and efficient models. We, therefore, recommend further research in this direction.
 
 Another potential path for future research is intelligent routing for evolving methods like muNet and Pathnet. Evolutionary models offer a promising approach to leveraging previous knowledge.
-However, the resulting models are taylored to a particular task. Novel routing techniques to send data to dedicated expert nodes, might help models generalize, as it was outlined in the Pathways
-proposal.
+However, the resulting models are tailored to a particular task. Novel routing techniques to send data to dedicated expert nodes in a complex network of models might help models generalize,
+as was outlined in the Pathways proposal.
 
 
 ### Discussion
@@ -429,9 +423,9 @@ Also, the environmental impact of training large models needs to be considered s
 also have a larger carbon footprint.
 -->
 
-We introduced multipurpose models that have become capable of solving tasks from different modalities. The transformer architecture also boosted the development in this field, in which three of
-the four presented models were transformer-based. Multipurpose models offer a chance to use one model instead of many different expert-models. Some multipurpose models (GATO, OFA) also outperformed
-expert-models. However, GATO also showed inferior performance on ATARI Boxing compared to competing models. 
+We introduced multipurpose models that have become capable of solving multiple tasks from different modalities. The transformer architecture also boosted the development in this field, in which
+three of the four presented models were transformer-based. Multipurpose models offer a chance to use one model instead of many different expert-models. Some multipurpose models (GATO, OFA)
+also outperformed expert-models. However, GATO also showed inferior performance on ATARI Boxing compared to competing models. 
 We also introduced promising novel architectures that alleviate or may solve problems in current multipurpose models.
 However, further issues remain that have not been solved by research to this day:
 
