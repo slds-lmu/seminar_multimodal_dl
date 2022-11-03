@@ -157,74 +157,74 @@ Z &= AddNorm(M_{mem}(X))\notag \\
 \tilde{X}&=AddNorm(F(Z))
 \end{align}
 
-Finally the **Full Encoder** has multiple encoding layers in a sequential fashion, therefore the $i$-th layer uses the output set computed by layer $i − 1$, higher encoding layers can exploit and refine relationships identified by previous layers, $n$ encoding layers will produce the output $\tilde{X} = (\tilde{X}^1 \dots \tilde{X}^n)$ [@cornia2020m2].
+Finally the **Full Encoder** has multiple encoder layers in a sequential fashion, therefore the $i$-th layer uses the output set computed by layer $i − 1$, higher encoding layers can exploit and refine relationships identified by previous layers, $n$ encoding layers will produce the output $\tilde{X} = (\tilde{X}^1 \dots \tilde{X}^n)$ [@cornia2020m2].
 
 ##### Meshed Decoder
 
 The decoder depends on both previously generated words and image region encodings.
-**Meshed Cross-Attention** can take the advantage of all the encoding layers to generate sentences for the image. On the right side of the Fig \@ref(fig:m2arc2) shows the structure of the Meshed Decoder. The input sequence vector $Y$ and the output from all encoding layers $\tilde{X}$ are connected by Meshed Attention operator gated through cross-attentions. The meshed attention operator can be formally defined as [@cornia2020m2]:
+**Meshed Cross-Attention** can take  advantage of all the encoder layers to generate captions for the image. On the right side of the Fig. \@ref(fig:m2arc2) the structure of the meshed decoder is shown. The input sequence vector $Y$ and the outputs from all encoder layers $\tilde{X}$ are connected by the meshed attention operator gated through cross-attention. The meshed attention operator can is formally defined as [@cornia2020m2]:
 
 \begin{equation}
 M_{mesh}(\tilde{X}, Y) =\sum_{i = 1}^{N}\alpha_i C(\tilde{X^i}, Y)
 \end{equation}
 
-$C(·, ·)$ stands for the encoder-decoder cross-attention, it could be defined with queries from decoder and the keys and values from encoder.[@cornia2020m2]
+$C(·,·)$ stands for the encoder-decoder cross-attention, it is defined with queries from decoder, while the keys and values come from the encoder [@cornia2020m2].
 
 \begin{equation}
 C(\tilde{X^i}, Y) = Attention(W_q Y, W_k \tilde{X^i}, W_v \tilde{X^i})
 \end{equation}
 
-$\alpha_i$ is a matrix of weights same size as the cross-attention results, $\alpha_i$ models both single contribution of each encoding layer and the relative importance between different layers.[@cornia2020m2]
+$\alpha_i$ is a matrix of weights of the same size as the cross-attention results, $\alpha_i$ models both single contribution of each encoder layer and the relative importance between different layers [@cornia2020m2].
 
 \begin{equation}
 \alpha_i = \sigma(W_i [Y,C(\tilde{X^i}, Y)]+ b_i)
 \end{equation}
 
-The [·,·] indicates concatenation and $\sigma$ is the sigmoid activation function, $W_i$ is a weight matrix, and $b_i$ is a learnable bias vector.[@cornia2020m2]
+The [·,·] indicates concatenation and $\sigma(·)$ is the sigmoid activation function here, $W_i$ is a weight matrix, and $b_i$ is a learnable bias vector [@cornia2020m2].
 
-In decoding layers the prediction of a word should only depend on the word generated previously, so the decoder layer comprises a masked self- attention operation, the operator build connection between queries derived from the $t$-th element of its input sequence Y with keys and values from left sub-sequence,i.e. $Y_{≤t}$.
+In decoder layers the prediction of a word should only depend on the previously generated word, so the decoder layer comprises a masked self-attention operation, which means that the operator can only make connections between queries derived from the $t$-th element of its input sequence Y with keys and values from left sub-sequence, i.e. $Y_{≤t}$.
 
-Simlilar as the Encoding layer, the decoder layer also contains a position-wise feed-forward layer, so the decoder layer can be finally defined as [@cornia2020m2]:
+Simlilar as the encoder layers, the decoder layers also contain a position-wise feed-forward layer, so the decoder layer can be finally defined as [@cornia2020m2]:
 
 \begin{align}
 Z &= AddNorm(M_{mesh}(X,AddNorm(S_{mask}(Y ))) \notag \\
 \tilde{Y} &= AddNorm(F(Z)),
 \end{align}
 
-$S_{mask}$ indicates a masked self-attention over time.[@cornia2020m2]
-Decoder with multiple decoder layers, takes the input word vectors and the $t$-th element of its output sequence to make the prediction of a word for $t + 1$, conditioned on th $Y_{≤t}$. Finally the decoder takes a linear projection and a softmax operation, which encodes a probability over words in the dictionary.[@cornia2020m2]
+where $S_{mask}$ indicates a masked self-attention over time [@cornia2020m2].
+The full decoder with multiple decoder layers takes the input word vectors as well as the $t$-th element (and all elements prior to it) of its output sequence to make the prediction for the word at $t + 1$, conditioned on th $Y_{≤t}$. Finally the decoder takes a linear projection and a softmax operation, which can be seen as a probability distribution over all words in the vocabulary [@cornia2020m2].
 
-##### Comparison with other models on COCO Datasets
+##### Comparison with other models on the MS COCO data sets
 
-The $M^2$ Transformer was evaluated on COCO [@mccoco]. COCO is the most commonly used Test dataset for image captioning. In stead of using the original COCO datsets, @cornia2020m2 follows the split of COCO provided by @karpthy1. Karpathy uses 5000 images for validation, 5000 images for testing and the rest for training.
+The $M^2$ Transformer was evaluated on MS COCO, which is still one of the most commonly used test data set for image captioning. Instead of using the original MS COCO dat set, @cornia2020m2 follow the split of MS COCO provided by @karpthy1. Karpathy uses 5000 images for validation, 5000 images for testing and the rest for training.
 
-For model evaluation and comparison, standard captioning metrics like BLEU [@papineni-etal-2002-bleu], METEOR [@meteor], ROUGE [@lin-2004-rouge,], CIDEr [@cider], and SPICE [@spice] which have been introduced in the second chapter are used.
+For model evaluation and comparison, standard metrics for evaluating generated sequences, like BLEU [@papineni-etal-2002-bleu], METEOR [@meteor], ROUGE [@lin-2004-rouge,], CIDEr [@cider], and SPICE [@spice], which have been introduced in the second chapter, are used.
 
 ```{r compare1, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:compare1)" }
 knitr::include_graphics("figures/02-01/02-02 compare1.png")
 ```
-(ref:compare1) Comparison with Transformer-based alternatives [@cornia2020m2]
+(ref:compare1) Comparison of $M^2$ with Transformer-based alternatives [@cornia2020m2]
 
-Transformer model in original configuration with six layers  has been applied to captioning, researchers speculated that specific architectures are required for captioning, so variations of the original Transformer are compared with $M^2$ Transformer. Other Variations are Transformer with three layers and “Attention on Attention” (AoA) approach [@huang1] to the attentive layers, both in the encoder and in the decoder. [@cornia2020m2]
-The second part intends to evaluate the importance of the meshed connections between encoder and decoder layers. $M^2$ Transformer (1 to 1) is a reduced version of original $M^2$ Transformer, in which one encoder layer only connect to one corresponding decoder layer instead of connect to all the decoding layers.
-As we can see from the Fig \@ref(fig:compare1), the original Transformer has 121.8 CIDEr, compare with it, the reduced version of $M^2$ Transformer, we can see the improvement already (129.2 CIDEr). With the respect to meshed connectivity, which help to exploit relationships encoded at all layers and weights them with a sigmoid gating, we could observe better improvement in CIDEr from 129.2 to 131.2. Also the role of mem- ory vectors and the softmax gating schema for $M^2$ Transformer are also included in the table. Without the memory vector lead to the recution of the performance of nearly 1 CIDEr in both reduced $M^2$ Transformer and the original $M^2$ Transformer.[@cornia2020m2]
+The transformer architecture in its original configuration with six layers has been applied for captioning, researchers speculated that specific architectures might be required for captioning, so variations of the original transformer are compared with $M^2$ Transformer. Other variations are a transformer with three layers and the “Attention on Attention” (AoA) approach [@huang1] to the attentive layers, both in the encoder and in the decoder [@cornia2020m2].
+The second part intends to evaluate the importance of the meshed connections between encoder and decoder layers. $M^2$ Transformer (1 to 1) is a reduced version of the original $M^2$ Transformer, in which one encoder layer is connected to only corresponding decoder layer instead of being connected to all the decoder layers.
+As one can see from the Fig. \@ref(fig:compare1), the original Transformer has a 121.8 CIDEr score, which is lower than the reduced version of $M^2$ Transformer, showing an improvement to 129.2 CIDEr. With respect to meshed connectivity, which helps to exploit relationships encoded at all layers and weights them with a sigmoid gating, one can observe a further improvement in CIDEr from 129.2 to 131.2. Also the role of memory vectors and the softmax gating schema for $M^2$ Transformer are also included in the table. Eliminating the memory vector leads to a reduction of the performance by nearly 1 point in CIDEr in both the reduced $M^2$ Transformer and the original $M^2$ Transformer [@cornia2020m2].
 
 ```{r compare2, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:compare2)" }
 knitr::include_graphics("figures/02-01/02-02 compare2.png")
 ```
-(ref:compare2) Comparison with the state of the art on the “Karpathy” test split, in single-model setting [@cornia2020m2].
+(ref:compare2) Comparison with the state-of-the-art on the “Karpathy” test split, in single-model setting [@cornia2020m2].
 
-Fig \@ref(fig:compare2) compares the performance of $M^2$ Transformer with several recent proposals for image captioning.
-SCST [@8099614] and Up- Down [@8578734], use attention over the grid of features and attention over regions. RFNet [@renet], which uses a recurrent fusion network to merge different CNN features; GCN-LSTM [@GCN-LSTM] uses a Graph CNN to exploit pairwise relationships between image regions; SGAE [@Yang_2019_CVPR] uses instead auto-encoding scene graphs. The original AoANet [@huang1] approach uses attention on attention for encoding image regions and an LSTM language model. Finally, the ORT [@HerdadeKBS19] uses a plain Transformer and weights attention scores in the region encoder with pairwise distances between detections [@cornia2020m2].
+Fig \@ref(fig:compare2) compares the performance of $M^2$ Transformer with several recently proposed models for image captioning.
+SCST [@8099614] and Up-Down [@8578734], use attention over the grid of features and attention over regions. RFNet [@renet] uses a recurrent fusion network to merge different CNN features; GCN-LSTM [@GCN-LSTM] uses a Graph CNN to exploit pairwise relationships between image regions; SGAE [@Yang_2019_CVPR] uses scene graphs instead ofauto-encoding. The original AoA-Net [@huang1] approach uses attention on attention for encoding image regions and an LSTM language model. Finally, the ORT [@HerdadeKBS19] uses a plain transformer and weights attention scores in the region encoder with pairwise distances between detections [@cornia2020m2].
 
-In Fig \@ref(fig:compare2), the $M^2$ Transformer exceeds all other models on BLEU-4, METEOR,CIDEr. The performance of $M^2$ Transformer was very close and competitive with SGAE on BLEU-1 and with ORT on SPICE.
+In Fig. \@ref(fig:compare2), the $M^2$ Transformer exceeds all other models on BLEU-4, METEOR, and CIDEr. The performance of the $M^2$ Transformer was very close and competitive with SGAE on BLEU-1 and with ORT with respect to SPICE.
 
 ```{r example2, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:example2)"}
 knitr::include_graphics("figures/02-01/02-02 example2.png")
 ```
 (ref:example2) Examples of captions generated by $M^2$ Transformer and the original Transformer model, as well as the corresponding ground-truths [@cornia2020m2].
 
-The Fig \@ref(fig:example2) shows some examples of captions generated by $M^2$ Transformer and the original Transformer model, as well as the corresponding ground-truths. According to the selected examples of captions, $M^2$ Transformer shows the ability to generate more accurate descriptions of the images, and the approaches could detect the more detailed relationships between image regions.[@cornia2020m2].
+Fig. \@ref(fig:example2) shows some examples of captions generated by $M^2$ Transformer and the original transformer model, as well as the corresponding ground-truths. According to the selected examples of captions, $M^2$ Transformer shows the ability to generate more accurate descriptions of the images, and the approach could detect the more detailed relationships between image regions [@cornia2020m2].
 
-The $M^2$ Transformer is a new Transformer- based architecture for image captioning. It improves the image encoding by learning a multi-level representation of the relationships between image regions while exploiting a priori knowledge from each encoding layer, and uses a mesh-like connectivity at decoding stage to exploit low- and high-level features at the language generation steps. The results of model evaluation with COCO shows that, the performance of $M^2$ Transformer approach surpasses most of the recent approaches and achieves a new state of the art on COCO.[@cornia2020m2].
+The $M^2$ Transformer is a new transformer-based architecture for image captioning. It improves the image encoding by learning a multi-level representation of the relationships between image regions while exploiting a priori knowledge from each encoder layer, and uses a mesh-like connectivity at decoding stage to exploit low- and high-level features at the language generation steps. The results of model evaluation with MS COCO shows that the performance of the $M^2$ Transformer approach surpasses most of the recent approaches and achieves a new state of the art on MS COCO [@cornia2020m2].
 
