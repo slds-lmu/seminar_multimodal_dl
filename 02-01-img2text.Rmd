@@ -29,84 +29,77 @@ The 3,819 object categories split them to object detection datasets (person, cha
 
 #### Image Collection and Annotation for MS COCO
 
-COCO is a large-scale richly annotated Datatset, the progress of building consists of two phases:Data collection and image annotation.
+MS COCO is a large-scale richly annotated data set, the progress of building consisted of two phases: data collection and image annotation.
 
-In order to select representative object categories for images in COCO, researchers collected several categories from different dataset like PASCAL VOC [@pascalvoc] and other sources. All these object categories can be recognized by children between 4 to 8. The quality of the object categories were ensured by co-authors.Co-authors scale the categories from 1 to 5 depending on their common occurrence, practical applications and diversity from other categories. [@mccoco] The final number of the list is 91. All the categories from PASCAL VOC are also included in COCO. [@pascalvoc]
+In order to select representative object categories for images in MS COCO, researchers collected several categories from different existing data sets like PASCAL VOC [@pascalvoc] and other sources. All these object categories could, according to the authors, be recognized by children between 4 to 8. The quality of the object categories was ensured by co-authors. Co-authors rated the categories on a scale from 1 to 5 depending on their common occurrence, practical applicability and diversity from other categories [@mccoco]. The final number of categories on their list was 91. All the categories from PASCAL VOC are included in MS COCO.
 
-With the help of representative object categories, COCO wants to collect a dataset which a majority of these images are non-iconic. All these images can be roughly divided into three types in Fig \@ref(fig:imagetype) :iconic-object images, iconic-scene images and non-iconic images.[@mccoco]
+With the help of representative object categories, the authors of MS COCO wanted to collect a data set in which a majority of the included images are non-iconic. All included images can be roughly divided into three types according to Fig. \@ref(fig:imagetype): iconic-object images, iconic-scene images and non-iconic images [@mccoco].
 
 ```{r imagetype, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:imagetype)" }
 knitr::include_graphics("figures/02-01/2.1 imagetype.png")
 ```
-(ref:imagetype) Type of images [@mccoco].
+(ref:imagetype) Type of images in the data set [@mccoco].
 
-Images are collected through two strategies, firstly images from Flickr which contains photos uploaded by amateur photographer with keywords are collected. Secondly, researchers will search for pairwise combination of object categories like "dog + car" to gather more non-iconic images and images with rich contextual relationships.[@mccoco]
+Images are collected through two strategies: firstly images from Flickr, a platform for photos uploaded by amateur photographers, with their keywords are collected. Secondly, researchers searched for pairwise combinations of object categories like "dog + car" to gather more non-iconic images and images with rich contextual relationships [@mccoco].
 
-Due to the the scale of the dataset and the high cost of the annotation process, the design of a high quality annotation pipeline with efficient cost is a difficult task.
-The annotation pipeline in Fig \@ref(fig:cocoannotation) for COCO is splitted into three primary tasks: 1. category labeling, 2.instance spotting, and 3. instance segmenting.[@mccoco]
+Due to the scale of the dataset and the high cost of the annotation process, the design of a high quality annotation pipeline with efficient cost depicted a difficult task. The annotation pipeline in Fig. \@ref(fig:cocoannotation) for MS COCO was split into three primary tasks: 1. category labeling, 2.instance spotting, and 3. instance segmentation [@mccoco].
 
 ```{r cocoannotation, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:cocoannotation)" }
 knitr::include_graphics("figures/02-01/2.1 annotation pipeline.png")
 ```
-(ref:cocoannotation) Annotation pipeline for COCO [@mccoco].
+(ref:cocoannotation) Annotation pipeline for MS COCO [@mccoco].
 
-As we can see in the Fig \@ref(fig:cocoannotation), object categories in each image will be determined in the first step. Due to the large number of Datasets and categories, they used a hierarchical approach instead of doing binary classification for each category. All the 91 categories have divided into 11 super-categories.The worker will examine the existence of a single instance for a given super-category.
-Workers will only label one instance for each super-categories with an category’s icon.[@mccoco] For each image, 8 workers were asked to label it.This hierarchical approach has helped to reduce the time for labeling. However, the first phase still took ∼20k worker hours to complete.[@mccoco]
+As we can see in the Fig \@ref(fig:cocoannotation), object categories in each image were determined in the first step. Due to the large number of data sets and categories, they used a hierarchical approach instead of doing binary classification for each category. All the 91 categories were grouped into 11 super-categories. The annotator did then examine for each single instance whether it belongs to one of the given super-categories.
+Workers only had to label one instance for each of the super-categories with a category’s icon [@mccoco]. For each image, eight workers were asked to label it. This hierarchical approach helped to reduce the time for labeling. However, the first phase still took ∼20k worker hours to be completed.
 
-In the next step, all instances of the object categories in an image were labeled, at most 10 instances of a given category per image will be labeled by each worker. In both instance spotting and instance segmenting steps, the location of the instance found by a worker in the previous stage can be seen by the current worker. Each image was labeled by 8 workers for a total of ∼10k worker hours.[@mccoco]
+In the next step, all instances of the object categories in an image were labeled, at most 10 instances of a given category per image were labeled by each worker. In both the instance spotting and the instance segmentation steps, the location of the instance found by a worker in the previous stage could be seen by the current worker. Each image was labeled again by eight workers summing up to a total of ∼10k worker hours.
 
-In the final segmenting stage, each object instance is segmented, the segmentation for other instances and the specification of the object instance by a worker in the previous stage will also shown to the worker.Segmenting 2.5 Mio object instances is an extremely time consuming task which requires over 22 worker hours per 1,000 segmentations.To minimize cost and improve the quality of segmentation, all workers are required to complete a training task for each object category.
-In roder to ensure a better quality, an explicit verification step on each segmented instance was performed.
+In the final segmenting stage, each object instance was segmented, the segmentation for other instances and the specification of the object instance by a worker in the previous stage were again shown to the worker. Segmenting 2.5 million object instances was an extremely time consuming task which required over 22 worker hours per 1,000 segmentations. To minimize cost and improve the quality of segmentation, all workers were required to complete a training task for each object category.
+In order to ensure a better quality, an explicit verification step on each segmented instance was performed as well.
 
-#### Comparison with other Datasets
+#### Comparison with other data sets
 
-In recent years, researchers have developed several pre-trained datasets and benchmarks which helped the developemnt of Algorithms for CV.
-Each of these datasets varies significantly in size, list of labeled categories and types of images.
-In the previos part we also introduced the different research main focus of some Datasets like ImageNet [@deng2009imagenet], PASCAL VOC [@pascalvoc] and SUN [@sun]
-ImageNe containing millions of images has enabled breakthroughs in both object classification and detection research using a new class of deep learning algorithms. It was created to capture a large number of object categories, many of which are fine-grained. SUN focuses on labeling scene types and the objects that commonly occur in them. Finally, PASCAL VOC’s primary application is object detection in natural images. MS COCO is designed for the detection and segmentation of objects occurring in their natural context.[@mccoco]
+In recent years, researchers have developed several pre-training data sets and benchmarks which helped the developemnt of algorithms for CV.
+Each of these data sets varies significantly in size, number of categories and types of images.
+In the previos part, we also introduced the different research focus of some data sets like e.g. ImageNet [@deng2009imagenet], PASCAL VOC [@pascalvoc] and SUN [@sun].
+ImageNet, containing millions of images, has enabled major breakthroughs in both object classification and detection research using a new class of deep learning algorithms. It was created with the intention to capture a large number of object categories, many of which are fine-grained. SUN focuses on labeling scene types and the objects that commonly occur in them. Finally, PASCAL VOC’s primary application is in object detection in natural images. MS COCO is designed for the detection and segmentation of objects occurring in their natural context [@mccoco].
 
-With the help of Fig \@ref(fig:cococomparison), we could compare COCO with ImageNet PASCAL VOC and SUN from different aspects.[@mccoco]
+With the help of Fig. \@ref(fig:cococomparison), one can compare MS COCO to ImageNet, PASCAL VOC and SUN with respect to different aspects [@mccoco].
 
 ```{r cococomparison, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:cococomparison)" }
 knitr::include_graphics("figures/02-01/2.1 coco comparison.png")
 ```
-(ref:cococomparison) Comparison COCO with other PASCAL VOC, SUN and ImageNet [@mccoco].
+(ref:cococomparison) Comparison MS COCO with PASCAL VOC, SUN and ImageNet [@mccoco].
 
-The number of instances per category for all 91 categories for COCO and PASCAL VOC is shown in (a). Compare to PASCAL VOC, COCO has both more categories and more instances per categories.The number of object categories and the number of instances per category for all the datasets is shown in (d). MS COCO has fewer categories than ImageNet and SUN, but it has the most instances per category among all the dataset, which from the hypothesis of researchers might be useful for learning complex models capable of precise localization.[@mccoco]
-(b,c) show the number of annotated categories and annotated instances per image for MS COCO, ImageNet Detection, PASCAL VOC and SUN (average number of categories and instances are shown in parentheses). On average COCO contains 3.5 categories and 7.7 instances per image. ImageNet and PASCAL VOC both have less than 2 categories and 3 instances per image on average. SUN dataset has the most contextual information, 9,8 categories and 17 instances per image.
-(e) is the distribution of instance sizes for the MS COCO, ImageNet Detection, PASCAL VOC and SUN dataset.[@mccoco]
+The number of instances per category for all 91 categories in MS COCO and PASCAL VOC is shown in subfigure \@ref(fig:cococomparison) (a). Compared to PASCAL VOC, MS COCO has both more categories and (on average) more instances per category. The number of object categories and the number of instances per category for all the datasets is shown in subfigure \@ref(fig:cococomparison) (d). MS COCO has fewer categories than ImageNet and SUN, but it has the highest average number of instances per category among all the data sets, which from the perspective of authors might be useful for learning complex models capable of precise localization [@mccoco].
+Subfigures \@ref(fig:cococomparison) (b) and (c) show the number of annotated categories and annotated instances per image for MS COCO, ImageNet, PASCAL VOC and SUN (average number of categories and instances are shown in parentheses). On average MS COCO contains 3.5 categories and 7.7 instances per image. ImageNet and PASCAL VOC both have on average less than 2 categories and 3 instances per image. The SUN data set has the most contextual information, on average 9.8 categories and 17 instances per image. Subfigure \@ref(fig:cococomparison) (e) depicts the distribution of instance sizes for the MS COCO, ImageNet Detection, PASCAL VOC and SUN data set.
 
 #### Discussion
 
-COCO is a new large scale data set for detecting and segmenting objects found in everyday life, with the aim of the state-of-the-art in object recognition and scene understanding. It focuses on non-iconic images of objects in natural environments and contains rich contextual information with many objects present per image. COCO is typical vision datasets, which are labor intensive and costly to create.
-With the vast cost and over 70,000 worker hours, 2.5 Mio instances were annotated to drive the advancement of object detection and segmentation algorithms. COCO is a good benchmark for the field of CV.[@mccoco]
-The COCO Team also shows directions for future. For example “stuff” label like "sky", "grass" and "street" etc, may also be included in the dataset since “stuff” categories provide significant contextual information for the object detection.
-
-<!-- teaching only a narrow set of visual concepts; -->
-<!-- standard vision models are good at one task and one task only, and require significant effort to adapt to a new task; -->
-<!-- models that perform well on benchmarks have disappointingly poor performance on stress tests -->
-
+MS COCO is a large scale data set for detecting and segmenting objects found in everyday life, with the aim of improving the state-of-the-art in object recognition and scene understanding. It focuses on non-iconic images of objects in natural environments and contains rich contextual information with many objects present per image. MS COCO is one of the typically used vision data sets, which are labor intensive and costly to create.
+With the vast cost and over 70,000 worker hours, 2.5 Mio instances were annotated to drive the advancement of object detection and segmentation algorithms. MS COCO is still a good benchmark for the field of CV [@mccoco].
+The MS COCO Team also shows directions for future. For example “stuff” label like "sky", "grass", and "street", etc, may also be included in the dataset since “stuff” categories provide significant contextual information for the object detection.
 
 ### Models for Image captioning
 
-The image captioning task generalizes describe the visual content of an image in natural language, so it requires an algorithm to understand and model the relationships between visual and textual elements, and to generate a sequence of output words.[@cornia2020m2]
-In the last few years, collections of methods have been proposed for image captioning. Earlier approaches based on generations pf simple templates, which contains the output produced from the object detector or attribute predictor. [@Socher10connectingmodalities], [@5487377].
-With the sequential nature of language, most research on image captioning has focused on deep learning techniques,especially using Recurrent Neural Network models (RNNs)[@vinyals],[@karpthy1] or LSTMs. Mostly, RNNs are used as languages models, and visual information and sequence generation will be encoded from the output of a CNN. With the aim of modelling the relationships between image regions, words, graph convolution neural network in the image encoding phase [@yao1] or single-layer attention mechanisms [@xu1] on the image encoding side have been proposed to incorporate more semantic and spatial relationships between objects.
-RNN-based-models are widely adopted, however, the model has its limitation on representation power and sequential nature.[@cornia2020m2]
-Recently, new fully-attentive models, in which the use of self-attention has replaced the recurrence,have been proposed. New approaches apply the Transformer models [@NIPS2017_3f5ee243] and BERT [@devlin-etal-2019-bert] models to image captioning tasks.
-Transformer consists of an encoder with a stack of self-attention and feed-forward layers, and a decoder which uses self-attention on words and cross-attention over the output of the last encoder layer.[@cornia2020m2]. In some Transformer based approaches, a Transformer-like encoder was paired with an LSTM decoder. While the aforementioned approaches have exploited the original Transformer architecture.
-For example Herdade *et al*. [@HerdadeKBS19] proposed Transformer architecture for image captioning with the focus on geometric relations between input objects at the same time. Specially,an additional geometric weight between object pairs which is used to scale attention weights are computed. Similarly, an extension of the attention operator in which the final attended information is weighted by a gate guided by the context was introduced by Huang *et al*. [@huang1],[@cornia2020m2].
+The image captioning task is generally to describe the visual content of an image in natural language, so it requires an algorithm to understand and model the relationships between visual and textual elements, and to generate a sequence of output words [@cornia2020m2].
+In the last few years, collections of methods have been proposed for image captioning. Earlier approaches were based on generations of simple templates, which contained the output produced from the object detector or attribute predictor [@Socher10connectingmodalities], [@5487377].
+With the sequential nature of language, most research on image captioning has focused on deep learning techniques, using especially Recurrent Neural Network models (RNNs) [@vinyals], [@karpthy1] or one of their special variants (e.g. LSTMs). Mostly, RNNs are used for sequence generation as languages models, while visual information is encoded in the output of a CNN. With the aim of modelling the relationships between image regions and words, graph convolution neural networks in the image encoding phase [@yao1] or single-layer attention mechanisms [@xu1] on the image encoding side have been proposed to incorporate more semantic and spatial relationships between objects.
+RNN-based models are widely adopted, however, the model has its limitation on representation power and due to its sequential nature [@cornia2020m2].
+Recently, new fully-attentive models, in which the use of self-attention has replaced the recurrence, have been proposed. New approaches apply the Transformer architecture [@NIPS2017_3f5ee243] and BERT [@devlin-etal-2019-bert] models to solve image captioning tasks.
+The transformer consists of an encoder with a stack of self-attention and feed-forward layers, and a decoder which uses (masked) self-attention on words and cross-attention over the output of the last encoder layer [@cornia2020m2]. In some other transformer-based approaches, a transformer-like encoder was paired with an LSTM decoder, while the aforementioned approaches have exploited the original transformer architecture.
+Others [@HerdadeKBS19] proposed a transformer architecture for image captioning with the focus on geometric relations between input objects at the same time. Specifically, additional geometric weights between object pairs, which is used to scale attention weights, are computed. Similarly, an extension of the attention operator, in which the final attended information is weighted by a gate guided by the context, was introduced at a similar time [@huang1].
 
 ### Meshed-Memory Transformer for Image Captioning ($M^2$)
 
-Although Transformer-based architectures have been widely implemented in sequence modeling tasks like machine translation and language understanding. However, its applicability for multi-modal tasks like image captioning is still largely under-explored. [@cornia2020m2]
+Transformer-based architectures have been widely implemented in sequence modeling tasks like machine translation and language understanding. However, their applicability for multi-modal tasks like image captioning has still been largely under-explored [@cornia2020m2].
 
 ```{r m2arc1, fig.align = 'center', out.width = '100%',echo=FALSE, fig.cap="(ref:m2arc1)" }
 knitr::include_graphics("figures/02-01/2.2 m2arc1.png")
 ```
 (ref:m2arc1) $M^2$ Transformer [@cornia2020m2].
 
-A novel fully-attentive approach called Meshed-Memory Transformer for Image Captioning ($M^2$) for image captioning is proposed by Marcella *et al*[@cornia2020m2] with the aim of improving the design of both the image encoder and the language decoder. Compare to all previous image captioning models, $M^2$ ( see Fig. \@ref(fig:m2arc1) has two new novelties, the encoder encodes a multi-level representation of the relationships between image regions with respect to low-level and high-level relations, a priori knowledge can be learned and modeled by using persistent memory vectors. The multi-layer architecture exploits both low- and high-level visual relationships through a learned gating mechanism, which compute the weight at each level, therefore, a mesh-like connectivity between encoder and decoder layers is created for sentence generation process.[@cornia2020m2]
+A novel fully-attentive approach called Meshed-Memory Transformer for Image Captioning ($M^2$) was proposed in 2020 [@cornia2020m2] with the aim of improving the design of both the image encoder and the language decoder. Compared to all previous image captioning models, $M^2$ (see Fig. \@ref(fig:m2arc1) has two new novelties: The encoder encodes a multi-level representation of the relationships between image regions with respect to low-level and high-level relations, and a-priori knowledge can be learned and modeled by using persistent memory vectors. The multi-layer architecture exploits both low- and high-level visual relationships through a learned gating mechanism, which computes the weight at each level, therefore, a mesh-like connectivity between encoder and decoder layers is created for the sentence generation process [@cornia2020m2].
 
 ####  $M^2$ Transformer Architecture
 
@@ -115,9 +108,9 @@ knitr::include_graphics("figures/02-01/2.1 m2.png")
 ```
 (ref:m2arc2) $M^2$ Transformer Architecture [@cornia2020m2].
 
-Fig \@ref(fig:m2arc2) shows the detailed architecture of $M^2$ Transformer. $M^2$ Transformer can be divided into Encoder (left) module and Decoder (right) module, both module has multiple layers. Given the input Image region $X$, it go through the Attention and feed forward layer. The relationship between image regions with a priori knowledge will be encoded in each encoding layer, the output of each encoding layers will be read by decoding layers to generate the caption for image word by word.[@cornia2020m2]
+Fig. \@ref(fig:m2arc2) shows the detailed architecture of $M^2$ Transformer. It can be divided into the encoder (left) module and the decoder (right) module, both modules with multiple layers. Given the input image region $X$, the image is passed through the attention and feed forward layers. The relationship between image regions with a-priori knowledge will be encoded in each encoding layer, the output of each encoding layers will be read by decoding layers to generate the caption for image word by word [@cornia2020m2].
 
-All interactions between word and image-level features of the input image $X$ are modeled by using scaled dot-product attention. Attention operates on vectors of queries $Q$, keys $K$ and values $V$ , and takes a weighted sum of value vectors according to a similarity distribution between query and key vectors.
+All interactions between word and image-level features of the input image $X$ are modeled by using scaled dot-product attention. Attention operates on vectors of queries $q$, keys $k$ and values $n$, and takes a weighted sum of the value vectors according to a similarity distribution between query and key vectors.
 Attention can be defined as follows [@cornia2020m2]:
 
 \begin{equation}
@@ -129,17 +122,17 @@ where $Q$ is a matrix of $n_q$ query vectors, $K$ and $V$ both contain $n_k$ key
 
 ##### Memory-Augmented Encoder
 
-For the given image region $X$ , attention can be used to obtain a permutation in- variant encoding of $X$ through the self-attention operations, the operator from the Transformer can be defined as follows [@cornia2020m2]:
+For the given image region $X$, attention can be used to obtain a permutation invariant encoding of $X$ through the self-attention operations, the operator from the Transformer can be defined as follows [@cornia2020m2]:
 
 \begin{equation}
 S(X) = Attention(W_q X, W_k X, W_vX)
 \end{equation}
 
-In this case, queries, keys, and values are linear projections of the input features,$W_q$, $W_k$, $W_v$ are learnable weights, they depend solely on the pairwise similarities between linear projections of the input set X. The self-attention operator encodes the pairwise relationships inside the input.
+In this case, queries, keys, and values are linear projections of the input features, and $W_q$, $W_k$, $W_v$ are their learnable weights, they depend solely on the pairwise similarities between linear projections of the input set X. The self-attention operator encodes the pairwise relationships inside the input.
 But self-attention also has its limitation: a prior knowledge on relationships between image regions can not be modelled.
-To overcome the limitation, Marcella *et al*[@cornia2020m2] introduce **Memory-Augmented Attention** operator by extending the keys and values with additional prior information,which does not depend on image region $X$.
+To overcome the limitation, the authors introduce a **Memory-Augmented Attention** operator by extending the keys and values with additional prior information, which does not depend on image region $X$.
 The additional keys and values are initialized as plain learnable vectors which can be directly updated via SGD.
-The operator can be defined as [@cornia2020m2]:
+The operator can be defined as follows [@cornia2020m2]:
 
 \begin{align}
 M_{mem}(X) &=  Attention(W_qX, K, V ) \notag \\
@@ -147,24 +140,24 @@ K &=  [W_kX, M_k]\notag \\
 V &= [W_vX, M_v]
 \end{align}
 
-$M_k$ and $M_v$ are learnable matrices, with $n_m$ rows. [·,·] indicates concatenation. The additional keys and value could help to retrieve a priori knowledge from Input while remaining the quries unchanged.[@cornia2020m2]
+$M_k$ and $M_v$ are learnable matrices, with $n_m$ rows, [·,·] indicates concatenation. The additional keys and value could help to retrieve a priori knowledge from input while keeping the quries unchanged [@cornia2020m2].
 
-For the **Encoding Layer**, Memory-augmented operator is d into a Transformer-like layer, the output applied to position-wise feed-forward layer [@cornia2020m2]:
+For the **Encoding Layer**, a memory-augmented operator d is injected into a transformer-like layer, the output is fed into a position-wise feed-forward layer [@cornia2020m2]:
 
 \begin{equation}
 F(X)_i= U\sigma(V X_i + b) + c;
 \end{equation}
 
-$X_i$ indicates the $i$-th vector of the input set, and $F(X)_i$ the $i$-th vector of the output. Also, $\sigma(·)$ is the ReLU activation function, $V$ and $U$ are learnable weight matrices, $b$ and $c$ are bias terms.[@cornia2020m2]
+$X_i$ indicates the $i$-th vector of the input set, and $F(X)_i$ the $i$-th vector of the output. Also, $\sigma(·)$ is the ReLU activation function, $V$ and $U$ are learnable weight matrices, $b$ and $c$ are bias terms [@cornia2020m2].
 
-Each components will be included in a residual connection and a layer norm operation. The complete definition of an encoding layer can be finally written as [@cornia2020m2]:
+Each component will be complemented by a residual connection and the layer norm operation. The complete definition of an encoding layer can be finally written as [@cornia2020m2]:
 
 \begin{align}
 Z &= AddNorm(M_{mem}(X))\notag \\
 \tilde{X}&=AddNorm(F(Z))
 \end{align}
 
-Finally the **Full Encoder** has multiple encoding layers in sequence, therefore the $i$-th layer uses the output set computed by layer $i − 1$, higher encoding Layers can exploit and refine relationships identified by previous layers, $N$ encoding layers will produce the output $\tilde{X} = (\tilde{X}^1 \dots \tilde{X}^n)$.[@cornia2020m2]
+Finally the **Full Encoder** has multiple encoding layers in a sequential fashion, therefore the $i$-th layer uses the output set computed by layer $i − 1$, higher encoding layers can exploit and refine relationships identified by previous layers, $n$ encoding layers will produce the output $\tilde{X} = (\tilde{X}^1 \dots \tilde{X}^n)$ [@cornia2020m2].
 
 ##### Meshed Decoder
 
