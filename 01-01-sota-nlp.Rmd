@@ -30,7 +30,8 @@ undoubtedly prefer structured and well-defined fixed-length inputs. On a
 granular level, the models rather work with numerical than textual data.
 Thus, by using very basic techniques like one-hot encoding or
 bag-of-words, a text is converted into its equivalent vector of numbers
-without losing information.\
+without losing information. \
+
 In the example depicting one-hot encoding (see Figure \@ref(fig:onehot)), there
 are ten simple words and the dark squares indicate the only index with a
 non-zero value.
@@ -44,7 +45,8 @@ In contrast, there are multiple non-zero values while using
 bag-of-words, which is another way of extracting features from text to
 use in modelling where we measure if a word is present from a vocabulary
 of known words. It is called bag-of-words because the order is
-disregarded here.\
+disregarded here. \
+
 Treating words as atomic units has some plausible reasons, like
 robustness and simplicity. It was even argued that simple models on a
 huge amount of data outperform complex models trained on less data.
@@ -64,7 +66,8 @@ latter occurs because the similarity between words is not captured.
 Therefore, previously learned information cannot be used. Besides,
 assigning a distinct vector to each word is a limitation, which becomes
 especially obvious for languages with large vocabularies and many rare
-words.\
+words. \
+
 To combat the downfalls of simple word representations, word embeddings
 enable to use efficient and dense representations in which similar words
 have a similar encoding. So words that are closer in the vector space
@@ -74,7 +77,7 @@ hyperparameter). The values for the embedding are trainable parameters
 which are learned similarly to a model learning the weights for a dense
 layer. The dimensionality of the word representations is typically much
 smaller than the number of words in the dictionary. For example,
-[@Mikolov2013] called dimensions between 50-100 modest for more than a
+@Mikolov2013 called dimensions between 50-100 modest for more than a
 few hundred million words. For small data sets, dimensionality for the
 word vectors could start at 8 and go up to 1024 for larger data sets. It
 is expected that higher dimensions can rather pick up intricate
@@ -94,17 +97,18 @@ context cannot be captured. This is due to the words having static
 precomputed representations in traditional embedding techniques. Thus,
 the word \"bank\" can either refer to a financial institution or a river
 bank. Contextual embedding methods offer a solution, but more about them
-will follow later.\
+will follow later. \
+
 It should be noted that words can have various degrees of similarity. In
 the context of inflectional languages, it becomes obvious because words
 are adjusted to articulate grammatical categories. For example, in a
 subspace of the original vector, nouns that have similar endings can be
 found. However, it even exceeds simple syntactic regularities. With
 straightforward operations on the word vectors, it can be displayed that
-vector ("King") - vector ("Man") + vector ("Woman") equals a vector that
+$vector(\text{King}) - vector(\text{Man}) + vector(\text{Woman})$ equals a vector that
 is closest in vector space (and therefore in meaning) to the word
 \"Queen\". A simple visualization of this relationship can be seen in
-the left graph below (see ). The three coordinate systems are
+the left graph below (see Figure \@ref(fig:embedVectors)). The three coordinate systems are
 representations of higher dimensions that are depicted in this way via
 dimension reduction techniques. Furthermore, the verb-to-tense
 relationship is expressed in the middle graphic, which extends the
@@ -112,13 +116,12 @@ insight from before referring to the word endings being similar because
 in this instance the past tenses of both verbs walking and swimming are
 not similar in structure. Additionally, on the right side of the figure,
 there is a form of the commonly portrayed and easily understood
-Country-Capital example (see [@Mikolov2013]).
+Country-Capital example (see @Mikolov2013).
 
 ```{r embedVectors, echo=FALSE, out.width="100%", fig.cap="(ref:embedVectors)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/embed_vectors_google.png")
 ```
 (ref:embedVectors) Three types of similarities as word embeddings (Source: @Google2022).
-
 
 Another way of using vector representations of words is in the field of
 translations. It has been presented that relations can be drawn from
@@ -153,17 +156,18 @@ This can be ascribed to both languages not having a good one-to-one
 correspondence because the concept of a word is different than in
 English. In addition, the used Vietnamese model contains numerous
 synonyms, which complicates making exact predictions (see
-[@Mikolov2013a]).\
+@Mikolov2013a). \
+
 Turning the attention to one of the most impactful embedding techniques,
-word2vec. It was proposed by [@Mikolov2013] and is not a singular
+word2vec. It was proposed by @Mikolov2013 and is not a singular
 algorithm. It can rather be seen as a family of model architectures and
 optimizations to learn word representations. Word2vec's popularity also
 stems from its success on multiple downstream natural language
 processing tasks. It has a very simple structure which is based on a
 basic feed forward neural network. They published multiple papers (see
-[@Mikolov2013], [@Mikolov2013a], [@Mikolov2013b]) that are stemming
+@Mikolov2013], @Mikolov2013a, @Mikolov2013b) that are stemming
 around two different but related methods for learning word embeddings
-(see ). Firstly, the Continuous bag-of-words model aims to predict the
+(see Figure \@ref(fig:embedArch)). Firstly, the Continuous bag-of-words model aims to predict the
 middle word based on surrounding context words. Hence, it considers
 components before and after the target word. As the order of words in
 the context is not relevant, it is called a bag-of-words model.
@@ -178,7 +182,7 @@ knitr::include_graphics("./figures/01-01-nlp/embed_arch_mikolov_p5.png")
 (ref:embedArch) CBOW and Skip-gram architecture (Source: @Mikolov2013).
 
 
-Then, [@Bojanowski2016] built on skip-gram models by accounting for the
+Then, @Bojanowski2016 built on skip-gram models by accounting for the
 morphology (internal structure) of words. A different classical
 embedding architecture that has to be at least mentioned is the GloVe
 model, which does not use a neural network but incorporates local
@@ -197,7 +201,7 @@ it becomes obvious that input sequences need to be mapped to output
 sequences of different lengths. To manage this type of input and output,
 a design with two main parts could be useful. The first one is called
 the encoder because, in this part of the network, a variable length
-input sequence is transformed into a state with a fixed state. Next, the
+input sequence is transformed into a fixed state. Next, the
 second component called the decoder maps the encoded state to an output
 of a variable length sequence. As a whole, it is known as an
 encoder-decoder or sequence-to-sequence architecture and has become an
@@ -207,7 +211,7 @@ successfully. Deep RNNs may have a chance, but different architectures
 like encoder-decoder have proven to be the most effective. It can even
 deal with different word orders and active, as well as passive voice
 [@Sutskever2014]. A simplified example of the encoder-decoder model
-can be seen in .
+can be seen in \@ref(fig:arch1Encdec).
 
 ```{r arch1Encdec, echo=FALSE, out.width="85%", fig.cap="(ref:arch1Encdec)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/encdec_arch1_deepl.png")
@@ -215,9 +219,9 @@ knitr::include_graphics("./figures/01-01-nlp/encdec_arch1_deepl.png")
 (ref:arch1Encdec) Translation through simplified seq2seq model (Source: @Manning2022).
 
 Before going through the equations quantifying the concepts, it makes
-sense to examine the sequence-to-sequence design closer by studying
-proposed by [@Cho2014]. An encoder-RNN processes the input sequence of
-length $n_x$ and computes a fixed-length context vector C, which is
+sense to examine the sequence-to-sequence design
+proposed by @Cho2014. An encoder-RNN processes the input sequence of
+length $n_x$ and computes a fixed-length context vector $C$, which is
 usually the final hidden state of the encoder or a simple function of
 the hidden states. After the input sequence is processed, it is added to
 the hidden state and passed forward in time through the recurrent
@@ -238,7 +242,7 @@ knitr::include_graphics("./figures/01-01-nlp/encdec_arch_Cho.png")
 
 At the latest through the above illustration, it is clear that the
 decoder is particularly interesting to look at in the form of equations.
-The notations mainly follow [@Cho2014]. The decoder is another type of
+The notation mainly follows @Cho2014. The decoder is another type of
 RNN which is trained to predict the target based on the hidden state at
 the last time step. However, unlike regular RNNs, it is also conditioned
 on the output of the last time step ($y_{t-1}$) and a summary of the
@@ -248,10 +252,10 @@ $$h_d^{[t]} = f(h_d^{[t-1]},y^{[t-1]},c).
     \label{eqn:h_dec}$$
 
 Similarly, each conditional probability is given by the following, where
-f is a non-linear activation function (and must produce probabilities in
+$f$ is a non-linear activation function (and must produce probabilities in
 , e.g. the softmax function):
 
-$$P(y^{[t]}|y^{[1]},...,y^{[t-1]},c) = f(h_d^{[t]}, y^{[t-1]}, c).     \label{eqn:P_dec}$$
+$$P(y^{[t]}|y^{[1]}, \dots ,y^{[t-1]},c) = f(h_d^{[t]}, y^{[t-1]}, c).     \label{eqn:P_dec}$$
 
 The two parts are jointly trained to maximize the conditional
 log-likelihood, where $\theta$ denotes the set of model parameters and
@@ -265,8 +269,9 @@ The best probability is usually found by using the beam search
 algorithm. The core idea of it is that on each step of the decoder, we
 keep track of the $k$ most probable partial translations (which are
 called hypotheses).\
+
 Examining the translation presented in with hidden units unrolled
-through time could look like in . In particular, multiple hidden layers
+through time could look like in \@ref(fig:encdecArch2). In particular, multiple hidden layers
 are recommended by the researchers. The idea is that lower layers
 compute lower-level features and higher layers compute higher-level
 features.
@@ -281,17 +286,17 @@ have been found to be effective in both components of the
 sequence-to-sequence architecture. Furthermore, it was revealed that
 deep LSTMs significantly outperform shallow LSTMs. Each additional layer
 reduced perplexity by nearly 10%, possibly due to their much larger
-hidden state. For example, [@Sutskever2014] used deep LSTMs with 4
+hidden state. For example, @Sutskever2014 used deep LSTMs with 4
 layers and 1000 cells at each layer for 1000-dimensional word
 embeddings. Thus, in total, 8000 real numbers are used to represent a
 sentence. For simplification, the neural networks are in the following
 referred to as RNNs which is not contradicting the insights of this
-paragraph as LSTMs are a type of gated RNNS ([@Sutskever2014]).
+paragraph as LSTMs are a type of gated RNNS [@Sutskever2014].
 
 ### Attention
 
 Although encoder-decoder architectures simplified dealing with variable
-length sequences, they also caused complications. Due to its design, the
+length sequences, they also caused complications. Due to their design, the
 encoding of the source sentence is a single vector representation
 (context vector). The problem is that this state must compress all
 information about the source sentence in a single vector and is commonly
@@ -304,9 +309,10 @@ factors less than 1 multiplied with each other at every point. To
 illustrate, the last sentence is an ideal example of one in which an
 encoder-decoder approach could have difficulty coping. In particular, if
 the sentences are longer than the ones in the training corpus
-([@Manning2022]).\
+[@Manning2022].\
+
 Due to the aforementioned reasons, an extension to the
-sequence-to-sequence architecture was proposed by [@Bahdanau2014], which
+sequence-to-sequence architecture was proposed by @Bahdanau2014, which
 learns to align and translate jointly. For every generated word, the
 model scans through some positions in the source sentence where the most
 relevant information is located. Afterwards, based on the context around
@@ -318,6 +324,7 @@ solution to the problem. Then, it mitigates the vanishing gradient
 problem, since there is now a shortcut to faraway states. Consequently,
 incorporating the attention mechanism has been shown to considerably
 boost the performance of models on NLP tasks.\
+
 A walkthrough of the example below should resolve any outstanding
 questions regarding the procedure of the attention mechanism. The source
 sentence is seen on the bottom left, which is given in French and acts
@@ -344,7 +351,7 @@ knitr::include_graphics("./figures/01-01-nlp/attention_ex_stanford.png")
 (ref:attentionExStanford) Translation process with attention mechanism (Source: @Manning2022).
 
 The following equations aim to compactly represent the relations brought
-forward in the last paragraphs and mainly follow [@Manning2022]. The
+forward in the last paragraphs and mainly follow @Manning2022. The
 attention scores $e^{[t]}$ are computed by scalarly combining the hidden
 state of the decoder with all of the hidden states of the encoder:
 
@@ -370,7 +377,7 @@ as in the non-attention sequence-to-sequence model are the final steps:
 $$o^{[t]} = f(a^{[t]} h_d^{[t]}).$$
 
 By visualizing the attention distribution, also called alignments (see
-[@Bahdanau2014]), it is easy to observe what the decoder was focusing on
+@Bahdanau2014), it is easy to observe what the decoder was focusing on
 and understand why it chose a specific translation. The x-axis of the
 plot of below corresponds to the words in the source sentence (English)
 and the y-axis to the words in the generated translation (French). Each
@@ -396,15 +403,16 @@ knitr::include_graphics("./figures/01-01-nlp/attention_focus_bahdanau.png")
 
 ### Transformer
 
-For this subsection, [@Manning2022] constitutes the main source.\
+For this section, @Manning2022 constitutes the main source.\
+
 RNNs are unrolled from one side to the other. Thus, from left to right
 and right to left. This encodes linear locality, which is a useful
 heuristic because nearby words often affect each other's meaning. But
 how is it when distant words need to interact with each other? For
-instance, when we mention a person at the beginning of a text portion
+instance, if we mention a person at the beginning of a text portion
 and refer back to them only at the very end, the whole text in between
-needs to be tracked back (see below). Hence, RNNs take O(sequence
-length) steps for distant word pairs to interact. Due to gradient
+needs to be tracked back (see below). Hence, RNNs take $O(\text{sequence
+length})$ steps for distant word pairs to interact. Due to gradient
 problems, it is therefore hard to learn long-distance dependencies. In
 addition, the linear order is ingrained. Even though, as known, the
 sequential structure does not tell the whole story.
@@ -417,7 +425,7 @@ knitr::include_graphics("./figures/01-01-nlp/transformer_rnnlim_stanford.png")
 GPUs can perform multiple calculations simultaneously and could help to
 reduce the execution time of the deep learning algorithm massively.
 However, forward and backward passes lack parallelizability in recurrent
-models and have O(sequence length). To be precise, future hidden states
+models and have $O(\text{sequence length})$. To be precise, future hidden states
 cannot be computed in full before past states have been computed. This
 inhibits training on massive data sets. indicates the minimum number of
 steps before the respective state can be calculated.
@@ -438,8 +446,9 @@ allows for efficient pretraining and leads them to be the standard model
 architecture. In fact, all top models on the popular aggregate benchmark
 GLUE are pretrained and Transformer-based. Moreover, they have even
 shown promise outside of NLP, e.g. in Image Classification, Protein
-Folding and ML for Systems (see [@dosovitskiy2020image], [@Jumper2021],
-[@Zhou2020], respectively).\
+Folding and ML for Systems (see @dosovitskiy2020image, @Jumper2021,
+@Zhou2020, respectively).\
+
 If recurrence has its flaws, another adjustment of the attention
 mechanism might be beneficial. Until now, it was defined from decoder to
 encoder. Alternatively, attention could also be from one state to all
@@ -470,7 +479,7 @@ knitr::include_graphics("./figures/01-01-nlp/transformer_hash-table_stanford.png
 (ref:tfhashtable) Comparison of classic attention mechanism with self-attention with hash tables (Source: @Manning2022).
 
 The process briefly described in the last paragraph can be summarized by
-the following steps that mainly follow [@Manning2022]. Firstly, deriving
+the following steps that mainly follow @Manning2022. Firstly, deriving
 query, key, and value for each word $x_i$ is necessary:
 $$q_i = W^Q x_i , \hspace{3mm} k_i = W^K x_i, \hspace{3mm} v_i = W^V x_i$$
 
@@ -490,7 +499,7 @@ $$a_{i} = \displaystyle \sum_j \alpha_{ij} v_j$$
 
 Multiple advantages of incorporating self-attention instead of
 recurrences have been revealed. Since all words interact at every layer,
-the maximum interaction distance is O(1) and is a crucial upgrade. In
+the maximum interaction distance is $O(1)$ and is a crucial upgrade. In
 addition, the model is deeply bidirectional because each word attends to
 the context in both directions. As a result of these advances, all word
 representations per layer can be computed in parallel. Nevertheless,
@@ -502,23 +511,26 @@ bidirectionality is not always desired. In language modelling, the model
 should specifically be not allowed to simply look ahead and observe more
 than the objective allows. Moreover, the word order is no longer
 encoder, and it is bag-of-words once again.\
+
 Fortunately, the previously mentioned weaknesses have been addressed for
-the original transformer-architecture proposed by [@Vaswani2017]. The
+the original transformer-architecture proposed by @Vaswani2017. The
 first problem can be easily fixed by applying a feed forward layer to
 the output of attention. It provides non-linear activation as well as
 extra expressive power. Then, for cases in which bidirectionality
 contradicts the learning objective, future states can be masked so that
 attention is restricted to previous states. Moreover, the loss of the
 word can be corrected by adding position representations to the inputs.\
+
 The more complex deep learning models are, the closer they become to
 model the complexity of the real world. That is why the transformer
 encoder and decoder consist of many layers of self-attention with a feed
 forward network, which is necessary to extract both syntactic and
 semantic features from sentences. Otherwise, using word embeddings,
 which are semantically deep representations between words, would be
-unnecessary (see [@Sejnowski2020]). At the same time, training deep
+unnecessary [@Sejnowski2020]. At the same time, training deep
 networks can be troublesome. Therefore, some tricks are applied to help
 with the training process.\
+
 One of them is to pass the \"raw\" embeddings directly to the next
 layer, which prevents forgetting or misrepresent important information
 as it is passed through many layers. This process is called residual
@@ -529,7 +541,7 @@ uninformative variation by normalizing within each layer to mean zero
 and standard deviation to one weakens this effect. Another challenge is
 caused by the dot product tending to take on extreme values because of
 the variance scaling with increasing dimensionality $d_k$. It is solved
-by Scaled Dot Product Attention (seen in below), which consists of
+by Scaled Dot Product Attention (see Figure \@ref(fig:tfsdpa)), which consists of
 computing the dot products of the query with its keys, dividing them by
 the dimension of keys $\sqrt{d_k}$, and applying the softmax function
 next to receive the weights of the values.
@@ -555,7 +567,7 @@ knitr::include_graphics("./figures/01-01-nlp/transformers_multi-head-attention2_
 (ref:tfmha) Multi-head attention (Source: @Vaswani2017).
 
 At this point, every part that constitutes the encoder in the
-transformer architecture has been introduced (see ). First, positional
+transformer architecture has been introduced (see Figure \@ref(fig:tfarch)). First, positional
 encodings are included in the input embeddings. There are multiple
 options to realize this step, e.g. through sinusoids. The multi-head
 attention follows, which was just mentioned. \"Add & Norm\" stands for
@@ -596,7 +608,7 @@ Additionally, most of the parameters are usually randomly initialized.
 presents the network discussed, in which the word \"movie\" gets the
 same embedding irrespective of the sentence it appears in. On the
 contrary, parameters in modern NLP architectures are initialized via
-pretraining (see ). Furthermore, during the pretraining, certain input
+pretraining (see Figure \@ref(fig:tfpretrain)). Furthermore, during the pretraining, certain input
 parts are hidden to train the model to reconstruct them. This leads to
 building suitable parameter initializations and robust probability
 distributions over language.\
@@ -621,13 +633,14 @@ endless amounts of data, so that, it eventually contains the best
 possible approximation of language understanding. Afterwards, the
 training data for the new task is applied to slightly modify the weights
 of the pretrained model, which is referred to as fine-tuning
-([@Manning2022]).\
+[@Manning2022].\
+
 The specific architecture of a transformer model affects the type of
 pre-training, and favourable use cases. In the following, three
 different but very influential transformer architectures will be
-discussed. BERT can be seen as stacked encoders ([@Devlin2018]), T5 aims
-to combine the good parts of encoders and decoders ([@Raffel2019]),
-while GPT are stacked decoders ([@Brown2020]).
+discussed. BERT can be seen as stacked encoders [@Devlin2018], T5 aims
+to combine the good parts of encoders and decoders [@Raffel2019],
+while GPT are stacked decoders [@Brown2020].
 
 #### BERT
 
@@ -648,6 +661,7 @@ words. Initially, BERT had an additional objective of whether one
 sentence follows another, which is known as next sentence prediction.
 However, it was dropped in later work due to having an insignificant
 effect.\
+
 BERT is hugely versatile and was greatly popular after its release.
 Fine-tuning BERT led to outstanding results on a variety of
 applications, including question answering, sentiment analysis and text
@@ -663,7 +677,7 @@ The Text-To-Text Transfer Transformer (T5) is a new model that can be
 regarded as an application of the insights gathered by an extensive
 empirical study searching for the best transfer learning techniques. It
 is pretrained on Colossal Clean Crawled Corpus (C4), an open-source
-dataset. [@Raffel2019] found that the best pretraining objective to use
+dataset. @Raffel2019 found that the best pretraining objective to use
 for the encoder component was span corruption. In short, different
 length word groups (spans) are replaced with unique placeholders, and
 let the model decode them. Text preprocessing is necessary for its
@@ -687,7 +701,7 @@ knitr::include_graphics("./figures/01-01-nlp/t5_stanford.png")
 
 As previously stated, the neural architecture influences the type of
 pretraining. The original GPT architecture consists of a Transformer
-decoder with 12 layers (see [@Radford2018]). For decoders, it is
+decoder with 12 layers [@Radford2018]. For decoders, it is
 sensible to simply pretrain them as language models. Afterwards, they
 can be used as generators to fine-tune their probability of predicting
 the next word conditioned on the previous words. The models are suitable
@@ -697,6 +711,7 @@ transfer learning. They are fine-tuned by randomly initializing a
 softmax classifier on top of the pretrained model and training both
 (with only a very small learning rate and a small number of epochs) so
 that the gradient propagates through the whole network.\
+
 The success of BERT in 2018 prompted a \"gold rush\" in NLP, in which
 ever greater language models were created. One that topped the headlines
 and used a customer supercluster for computation was the third iteration
@@ -705,7 +720,7 @@ a famous example of current research focusing on scaling up neural
 language models. While the largest T5 model has 11 billion parameters,
 GPT-3 has 175 billion parameters. Moreover, the training data set
 contains around 500 billion tokens of text, while the average young
-american child hears around 6 million words per year (see [@Hart1995]).
+american child hears around 6 million words per year [@Hart1995].
 The results of huge language models suggest that they perform some form
 of learning (without gradient steps) simply from examples provided via
 context. The tasks are specified by the in-context examples, and the
@@ -724,25 +739,26 @@ knitr::include_graphics("./figures/01-01-nlp/gpt3_comparison.png")
 As the last chapter ended with GPT-3 and emphasized the concerning trend
 of ever larger language models, one could ask which other costs arise
 from the developments. Risks and harms among environmental and financial
-costs have been studied by [@Bender2021]. They state that marginalized
+costs have been studied by @Bender2021. They state that marginalized
 communities are not only less likely to benefit from LM progress, but
 also more likely to suffer from the environmental repercussions of
-increasing resource consumption. [@Strubell2019] estimated that training
+increasing resource consumption. @Strubell2019 estimated that training
 a Transformer (big) model resulted in 249t of $CO_2$. To compare, an
 average human is responsible for approximately 5t of $CO_2$ per year
-(according to [@Ritchie2020]). In addition, they discovered that an
+[@Ritchie2020]. In addition, they discovered that an
 estimated increase of 0.1 in BLEU score increased computation costs by
 \$ 150,000 (for English to German translations). Furthermore, larger
 models require more data to sufficiently train them. This has resulted
 in large but poorly documented training data sets. Multiple risks can be
 mitigated if there is a common understanding of the model's learnings.\
+
 Moreover, it has been argued that datasets consisting of web data
 over-represent hegemonic views and encode bias towards marginalized
 communities. This is among other factors due to internet access being
 unevenly distributed. In particular, there is an over-representation of
 younger internet users and those from developed countries. It is
 generally naive to educate AI systems on all aspects of the complex
-world, and hope for the beautiful to prevail ([@Bender2021]).
+world, and hope for the beautiful to prevail [@Bender2021].
 
 #### Improving Understanding of Transformer-based models
 
@@ -755,22 +771,24 @@ attention in search of an improved understanding of large transformer
 models. BERT is a smaller model out of the more popular ones, and its
 attention is naturally interpretable because the attention weight
 indicates how significant a word is for the next representation of the
-current word ([@Clark2019]). In the following, some of the findings are
+current word [@Clark2019]. In the following, some of the findings are
 going to be shared.\
+
 BERT representations are rather hierarchical than linear, and they
 include information about parts of speech, syntactic chunks and roles
-(see [@Lin2019] and [@Liu2019]) Furthermore, it has semantic knowledge.
+[@Lin2019,@Liu2019] Furthermore, it has semantic knowledge.
 For example, BERT can recognize e.g. that \"to tip a chef\" is better
 than \"to tip a robin\" but worse than \"to tip a waiter\"
 ([@Ettinger2019]). However, it makes sense that BERT has issues with
 knowledge that is assumed and not mentioned, which especially refers to
-visual and perceptual properties ([@Da2019]). Additionally, BERT
+visual and perceptual properties [@Da2019]. Additionally, BERT
 struggles with inferences, e.g. even though it is known that \"people
 walk into houses\" and \"houses are big\", it cannot infer that \"houses
-are bigger than people\" ([@Forbes2019]).\
+are bigger than people\" [@Forbes2019].\
+
 While it is true that different transformer heads attend to various
 patterns (see ), interestingly, most of them could be neglected without
-notable performance loss ([@Voita2019]). Probing attention maps can be
+notable performance loss [@Voita2019]. Probing attention maps can be
 tedious, but allows to gain knowledge of common patterns, such as an
 unexpected amount focusing on the delimiter token \[SEP\].
 
@@ -787,21 +805,22 @@ examples and is expected to generalize to unseen data. Annotating is not
 only costly but also difficult to gather for numerous languages,
 domains, and tasks. In practice, there is often only a very limited
 amount of labelled examples. Consequently, few-shot learning is a highly
-relevant research area ([@Schick2020]). It defines a model that is
+relevant research area [@Schick2020]. It defines a model that is
 trained on a limited number of demonstrations to guide its predictions.
 Referring back to , the benefits of lower computational and
 environmental costs have to be mentioned.\
+
 Traditional fine-tuning uses a large corpus of example tasks, and the
 model is updated repeatedly with gradient steps so that it adapts to the
 task with minimal accuracy error.
 
 In contrast, few-shot applications have to complete tasks at test time
 with only forward passes. They have three main parts: the task
-description, examples, and the prompt. In , the task is a translation
+description, examples, and the prompt. In Figure \@ref(gpt3fewshotlearning), the task is a translation
 from English to French, a few examples, as well as the word that should
 be translated are given. Moreover, zero-shot and one-shot learning refer
 to the model predicting with no and one learned example, respectively
-([@Brown2020]).
+[@Brown2020].
 
 ```{r gpt3fewshotlearning, echo=FALSE, out.width="50%", fig.cap="(ref:gpt3fewshotlearning)", fig.align="center"}
 knitr::include_graphics("./figures/01-01-nlp/gpt3_few-shot-learning.png")
@@ -810,15 +829,16 @@ knitr::include_graphics("./figures/01-01-nlp/gpt3_few-shot-learning.png")
 
 It is complicated to create the few-shot examples, since the application
 relies on them to express the task. This is why smaller models are
-susceptible to examples written unfavourably. In [@Brown2020], it was
+susceptible to examples written unfavourably. In @Brown2020, it was
 shown that few-shot performance scales with the number of model
 parameters. Even though GPT-3's in-context learning improved few-shot
 prompting capabilities, it is still sensitive to the order of training
 examples, decoding strategy, and hyperparameter selection. All of this
 combined with the fact that current research uses larger or held-out
 data sets leads to the suspicion that the true few-shot ability of
-language models is overestimated (see [@Perez2021]).\
-Moreover, [@Lialin2022] have found that common transformer models could
+language models is overestimated [@Perez2021].\
+
+Moreover, @Lialin2022 have found that common transformer models could
 not resolve compositional questions in a zero-shot fashion and that the
 model's parameter count does not correlate with performance. This
 indicates a limitation for zero-shot prompting with the existing

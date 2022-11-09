@@ -2,7 +2,7 @@
 
 *Authors: Cem Akkus, Vladana Djakovic, Christopher Benjamin Marquardt*
 
-*Supervisor: Dr. Matthias Aßenmacher*
+*Supervisor: Matthias Aßenmacher*
 
 
 Natural Language Processing (NLP) has existed for about 50 years, but it is more relevant than ever. There have been several breakthroughs in this branch of machine learning that is concerned with spoken and written language. For example, learning internal representations of words was one of the greater advances of the last decade. Word embeddings (@Mikolov2013, @Bojanowski2016) made it possible and allowed developers to encode words as dense vectors that capture their underlying semantic content. In this way, similar words are embedded close to each other in a lower-dimensional feature space. Another important challenge was solved by Encoder-decoder (also called sequence-to-sequence) architectures @Sutskever2014, which made it possible to map input sequences to output sequences of different lengths. They are especially useful for complex tasks like machine translation, video captioning or question answering. This approach makes minimal assumptions on the sequence structure and can deal with different word orders and active, as well as passive voice.
