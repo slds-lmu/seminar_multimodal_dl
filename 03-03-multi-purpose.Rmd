@@ -8,7 +8,7 @@
 In this chapter, we will broaden the focus to include multitask learning additionally to multimodal learning. We will call this approach multipurpose models.
 Many multipurpose models have been introduced in recent years (@Kaiser2017, @Hu2021, @Wang2022, @Reed2022), and the field gained attention.
 First, we will provide an in-depth overview of existing multipurpose models and compare them. In the second part, challenges in the field will also be
-discussed by reviewing the Pathways proposal [@Dean21] and promising work addressing current issues for the progress of mulitpurpose models.
+discussed by reviewing the Pathways proposal [@Dean21] and promising work addressing current issues for the progress of multipurpose models.
 
 
 ### Prerequisites
@@ -36,7 +36,7 @@ further on. For a more in-depth overview of multitask learning, we refer to [@Ca
 #### Mixture-of-Experts {#03-03-MoE}
 
 Another prerequisite to this chapter is the mixture-of-expert (MoE) (@Jacobs1991, @Jordan1994, @Shaazer2017) architecture, which is aimed at increasing the overall model
-size while still keeping inference time reasonably low.In an MoE, not all parts of the net are used but just a subset. The *experts* are best suited to deal with the input
+size while still keeping inference time reasonably low. In an MoE, not all parts of the net are used but just a subset. The *experts* are best suited to deal with the input
 allowing the model to be sparse.
 
 MoE is an ensemble of different neural networks inside the layer. MoEs allow for being more computationally efficient while still keeping or even improving performance. The
@@ -169,7 +169,7 @@ is predicted and not the conditions for the action. The masking function is alwa
 Gato was evaluated on reinforcement-learning-based (RL) tasks against specialist RL agents, where Gato performed worse than the specialist agents. On unseen tasks, Gato required fine-tuning since
 few-shot learning is not feasible due to the input length restrictions in transformers. However, the results were mixed. Some improvements were possible, and the expert was outperformed, but
 in other cases, massive fine-tuning efforts only led to small gains. It was found that the generalist agent outperformed the specialist agent (particularly trained for this task) most of the time.
-Only at Atari Boxing [@atari], Gato was outperformed by the specialist Gato model. Both performed much lower than another task-specific model used as a baseline. In robotics, Gato showed comparable
+Only at the specific Atari Boxing [@atari] task, Gato was outperformed by the specialist Gato model. Both performed much lower than another task-specific model used as a baseline. In robotics, Gato showed comparable
 behavior to the baseline SOTA model. Additionally, Gato also showed capabilities in image captioning and dialogue modeling, although these aspects were not elaborated further.
 
 Like OFA, Gato can sequentialize all input and produce a sequential output that can be back-transformed to solve a task. It was shown that Gato could sometimes transfer knowledge on unseen tasks and outperform the specialist agent most of the time.
@@ -198,7 +198,7 @@ contextual capabilities of the transformer decoder.
 focus the model on the requested task yet also requires tuning the model specifically.
 
 None of the models besides OFA achieved SOTA results. Compared to specialist models, the general models were comparable in their results (Gato, UniT, MultiModel). MultiModel, OFA, and Gato showed transferability on
-low-resource or unseen tasks. However, more research in this direction is highly recommended. MultiModel was only compared on a low-resource task against a specialist model, which was trained on,
+low-resource or unseen tasks. However, more research in this direction is highly recommended. MultiModel was only compared on a low-resource task against a specialist model,
 and OFA was not compared to another model for the unseen task. Gato performed better than a specialist model, trained from scratch on most unseen tasks, but failed against the untrained specialist
 model in Atari Boxing.
 
@@ -218,7 +218,7 @@ multipurpose models becomes essential.
 ### Pathways and Promising Works
 Although models have become more capable of solving complex tasks, significant limitations remain. 
 A persisting issue in current deep learning is the necessity to train from scratch and disregard already obtained knowledge, which is highly ineffective compared to human intelligence. Another
-issue arises from the evergrowing, dense networks that require more and more resources.
+issue arises from the evergrowing, dense networks that requires more and more resources.
 
 In this section, we will review the Pathways proposal [@Dean21] and promising techniques to address these issues. Overcoming these problems would be especially beneficial for multipurpose
 models. Reusability of knowledge is crucial for the multitask perspective, and improving the performance of potentially billion-parameter-sized models will also have a significant positive impact.
@@ -230,9 +230,9 @@ knitr::include_graphics("figures/03-03-multipurpose/Pathways.png")
 
 
 #### Pathways Proposal
-Pathways [@Dean21] follows a different idea to overcome the problems mentioned above. The model consists of a large graph through which data can be forward passed. The nodes of the network are neural
+Pathways [@Dean21] follows a different idea than previously seen methods. The model consists of a large graph through which data can be forward passed. The nodes of the network are neural
 networks themselves. A pass through this network does not include passing all nodes and thus not all neural networks, but only a few. The pass follows a specific path from one entry to the
-network's exit. The underlying idea behind this is similar to the mixture-of-expert models described above. Only the specific networks dedicated to solving this problem are to be called.
+network's exit. The underlying idea behind this is similar to the mixture-of-expert models described previously. Only the specific networks dedicated to solving a problem are to be activated during inference.
 
 At this point, it is necessary to recall that multitask learning aims to generalize better on new tasks since the knowledge about previously learned tasks can be applied. This idea is the
 foundation of Pathways too, where specialist networks (nodes) are combined in a larger network. It is assumed that the model's generalization capabilities increase significantly by finding
@@ -244,8 +244,7 @@ decreased inference time since only few parts of the networks are activated duri
 Another aspect of the Pathways proposal includes the improvement of current hardware limitations. It is already observable that Moore's Law (*each n years, the compute capacity doubles*) has
 been slowing down substantially, while deep learning research has grown exponentially in the late 2010s [@Dean20]. Thus, hardware also needs to be adapted to the growing demand in deep learning.
 In the context of the pathway proposal, a novel framework for Google data centers has been introduced, aiming to reduce overhead during computation and access specific parts of the model to
-utilize the technical advantages of sparse networks. As in dense models, it is not necessary to use the whole network but only chunks of it, which is in contrast to previous dense models, which
-require the whole model to be accessed. So far, two large pre-trained models have been introduced based on the new training framework. One is the Pathways Language Model (PaLM) [Chowdhery2022],
+utilize the technical advantages of sparse networks. As opposed to dense models where a whole model must be accessed, with sparse networks it is not necessary to use the whole network but only chunks of it. So far, two large pre-trained models have been introduced based on the new training framework. One is the Pathways Language Model (PaLM) [Chowdhery2022],
 which is currently the largest language model using 540 billion parameters, Minerva [@Lewkowycz2022]. Minerva is based on PaLM, and Parti [@parti],
 
 
@@ -295,7 +294,7 @@ knitr::include_graphics("figures/03-03-multipurpose/LIMoE.png")
 (ref:LIMoE) Architecture of *LIMoE*. From @Mustafa2022.
 
 The model is trained using a contrastive objective. In this case, the contrastive loss aims to maximize the paired visual and textual input while minimizing all combinations of unpaired embeddings.
-This objective can be achieved by using the dot-product as a similarity measure between the two embeddings of both modalities, which provide a differentiable
+This objective can be achieved by using the dot-product as a similarity measure between the embeddings of both modalities, which provide a differentiable
 operation through which the overall loss can be minimized.
 
 Additionally, the pitfalls of a multimodal MoE are also considered. One challenge in MoE is the correct balancing of
@@ -344,7 +343,7 @@ Applying mutations is the next step in the algorithm. A random number of mutatio
 - **Layer Removal** is used to skip layers while still using all other layers of the parent model in a frozen state.
 - **Hyperparameter Change**: samples hyperparameters close to the ones of the parent model. A list of neighboring values is constructed from which a parameter is drawn.
 
-Subsequently, the models are trained on the task and scored. If the mutated model is better than the parent model, it is also added to this task's set of active models. This routine is done for
+Subsequently, the models are trained on the task and scored. If the mutated model is better than the parent model, it is also added to the task's set of active models. This routine is done for
 all tasks iteratively and can be repeated several times. Ultimately, only the best scoring models are kept for each task, yielding a list of models each fit to a particular task.
 muNet was evaluated for fine-tuning against a ViT instance, which was aimed at being the most generalizable one [@Steiner2021]. The evaluation benchmarks consisted of multiple classification problems
 (to simulate multitasking). ViT was fine-tuned on all of these tasks as a baseline. In contrast, another ViT was evolved using muNet, on which the baseline model was evaluated again. The approach using
@@ -371,12 +370,12 @@ as was outlined in the Pathways proposal.
 ### Discussion
 
 We reviewed multipurpose models that have become capable of solving multiple tasks from different modalities. The transformer architecture also boosted the development in this field, in which
-three of the four presented models were transformer-based and from recent years. Multipurpose models offer an opportunity to use one model instead of many different expert-models. Furthermore, some
+three of the four presented models were transformer-based and from recent years. Multipurpose models offers an opportunity to use one model instead of many different expert-models. Furthermore, some
 multipurpose models (Gato, OFA) also outperformed expert-models. However, Gato also showed inferior performance on ATARI Boxing compared to competing models, indicating that research is still
 required to explore the relationship between tasks. We also presented promising novel architectures that alleviate or may solve problems in current multipurpose models.
 However, further issues remain that have not been solved by research to this day:
 
- - A pitfall of models of these sizes is the low accessibility. Researchers need to access the model through an API since running these models on a few GPUs will be highly questionable. It might be
+ - A pitfall of models of these sizes is the low accessibility. Researchers need to access the model through an API since running these models on a few GPUs will likely be infeasible. It might be
    unlikely to see a BERT-like engagement with the community of researchers if the access to models remains limited. On the contrary, more open-source collaborations, as seen with
    [EleutherAI](www.eleuther.ai) or [Huggingface](www.huggingface.co), might evolve as well as a countermovement and techniques like distillation [@Hinton2015] might become more critical.
 
