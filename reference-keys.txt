@@ -226,14 +226,14 @@ c02-00-multimodal
 c02-01-img2text
 microsoft-coco-common-objects-in-context
 image-collection-and-annotation-for-ms-coco
-comparison-with-other-datasets
+comparison-with-other-data-sets
 discussion
 models-for-image-captioning
 meshed-memory-transformer-for-image-captioning-m2
 m2-transformer-architecture
 memory-augmented-encoder
 meshed-decoder
-comparison-with-other-models-on-coco-datasets
+comparison-with-other-models-on-the-ms-coco-data-sets
 c02-02-text2img
 seeking-objectivity
 generative-adversarial-networks
@@ -334,4 +334,5 @@ discussion-and-prospects
 conclusion-1
 epilogue
 new-influential-architectures
+creating-videos
 acknowledgements

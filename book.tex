@@ -127,7 +127,7 @@
 
 \title{Multimodal Deep Learning}
 \author{}
-\date{\vspace{-2.5em}2022-11-09}
+\date{\vspace{-2.5em}2022-11-15}
 
 \begin{document}
 \maketitle
@@ -154,9 +154,35 @@
 \chapter*{Preface}\label{preface}}
 
 
+\emph{Author: Matthias Aßenmacher}
+
 In the last few years, there have been several breakthroughs in the methodologies used in Natural Language Processing (NLP) as well as Computer Vision (CV). Beyond these improvements on single-modality models, large-scale multi-modal approaches have become a very active area of research.
 
 In this seminar, we reviewed these approaches and attempted to create a solid overview of the field, starting with the current state-of-the-art approaches in the two subfields of Deep Learning individually. Further, modeling frameworks are discussed where one modality is transformed into the other Chapter \ref{c02-01-img2text} and Chapter \ref{c02-02-text2img}), as well as models in which one modality is utilized to enhance representation learning for the other (Chapter \ref{c02-03-img-support-text} and Chapter \ref{c02-04-text-support-img}). To conclude the second part, architectures with a focus on handling both modalities simultaneously are introduced (Chapter \ref{c02-05-text-plus-img}). Finally, we also cover other modalities (Chapter \ref{c03-01-further-modalities} and Chapter \ref{c03-02-structured-unstructured}) as well as general-purpose multi-modal models (Chapter \ref{c03-03-multi-purpose}), which are able to handle different tasks on different modalities within one unified architecture. One interesting application (Generative Art, Chapter \ref{c03-04-usecase}) eventually caps off this booklet.
+
+\hypertarget{citation}{%
+\section*{Citation}\label{citation}}
+
+
+If you refer to the book, please use the following citation (authors in alphabetical order):
+
+\begin{verbatim}
+@misc{seminar_22_multimodal,
+  title = {Multimodal Deep Learning},
+  author = {Akkus, Cem and Chu, Luyang and Djakovic, Vladana and
+            Jauch-Walser, Steffen and Koch, Philipp and Loss,
+            Giacomo and Marquardt, Christopher and Moldovan,
+            Marco and Sauter, Nadja and Schneider, Maximilian
+            and Schulte, Ricker and Urbanczyk, Karol and
+            Goschenhofer, Jann and Heumann, Christian and
+            Hvingelby, Rasmus and Schalk, Daniel and
+            Aßenmacher, Matthias},
+  url = {https://slds-lmu.github.io/seminar_multimodal_dl/},
+  day = {30},
+  month = {Sep},
+  year = {2022}
+}
+\end{verbatim}
 
 \begin{figure}
 \centering
@@ -194,30 +220,6 @@ We deviated in several ways:
   We emphasized collaboration. Students wrote the introduction to chapters in teams and reviewed each others individual texts.
 \end{enumerate}
 
-\hypertarget{citation}{%
-\section*{Citation}\label{citation}}
-
-
-If you refer to the book, please use the following citation (authors in alphabetical order):
-
-\begin{verbatim}
-@misc{seminar_22_multimodal,
-  title = {Multimodal Deep Learning},
-  author = {Akkus, Cem and Chu, Luyang and Djakovic, Vladana and
-            Jauch-Walser, Steffen and Koch, Philipp and Loss,
-            Giacomo and Marquardt, Christopher and Moldovan,
-            Marco and Sauter, Nadja and Schneider, Maximilian
-            and Schulte, Ricker and Urbanczyk, Karol and
-            Goschenhofer, Jann and Heumann, Christian and
-            Hvingelby, Rasmus and Schalk, Daniel and
-            Aßenmacher, Matthias},
-  url = {https://slds-lmu.github.io/seminar_multimodal_dl/},
-  day = {30},
-  month = {Sep},
-  year = {2022}
-}
-\end{verbatim}
-
 \hypertarget{technical-setup}{%
 \section*{Technical Setup}\label{technical-setup}}
 
@@ -234,21 +236,21 @@ For details, head over to the \href{https://github.com/slds-lmu/seminar_multimod
 
 \emph{Author: Nadja Sauter}
 
-\emph{Supervisor: Matthias Assenmacher}
+\emph{Supervisor: Matthias Aßenmacher}
 
 \hypertarget{introduction-to-multimodal-deep-learning}{%
 \section{Introduction to Multimodal Deep Learning}\label{introduction-to-multimodal-deep-learning}}
 
-There are five basic human senses: hearing, touch, smell, taste and sight. Processing these five modalities, we are able to perceive and understand the world around us. Thus, multimodal means to combine different channels of information simultaneously to understand our surroundings. For example, when toddlers learn the word ``cat'', they use different modalities by saying the word out loud, pointing on cats and making sounds like ``meow''. Using the human learning process as a role model, AI researchers also try to combine different modalities to train deep learning models. On a superficial level, deep learning algorithms are based on a neural network that is trained to optimize some objective which is mathematically defined via the so-called loss function. The optimization of minimizing the loss is done by a mathematical operation called gradient descent. Consequently, deep learning models can only handle numeric input and can only result in a numeric output. However, in multimodal tasks we are often confronted with unstructured data like pictures or text. Thus, the first major problem is how to represent the input numerically. The second issue with regard to multimodal tasks is how exactly to combine different modalities. For instance, a typical task could be to train a deep learning model to generate a picture of a cat. First of all, the computer needs to understand the text input ``cat'' and then somehow translate this information into a specific image. Therefore, it is necessary to identify the contextual relationships between words in the text input and the spatial pixel relationships in the image output. What might be easy for a toddler in pre-school, is a huge challenge for the computer. Both have to learn some understanding of the word ``cat'' that comprises the meaning and appearance of the animal. A common approach in artificial intelligence (AI) is to generate a high-level embedding that represents the cat numerically as a vector in some latent space. However, to achieve this, different approaches and algorithmic architectures have been developed in recent years. This book gives an overview of the different methods used in state-of-the-art multimodal deep learning to overcome challenges arising with unstructured data and combining inputs of different modalities.
+There are five basic human senses: hearing, touch, smell, taste and sight. Possessing these five modalities, we are able to perceive and understand the world around us. Thus, ``multimodal'' means to combine different channels of information simultaneously to understand our surroundings. For example, when toddlers learn the word ``cat'', they use different modalities by saying the word out loud, pointing on cats and making sounds like ``meow''. Using the human learning process as a role model, artificial intelligence (AI) researchers also try to combine different modalities to train deep learning models. On a superficial level, deep learning algorithms are based on a neural network that is trained to optimize some objective which is mathematically defined via the so-called loss function. The optimization, i.e.~minimizing the loss, is done via a numerical procedure called gradient descent. Consequently, deep learning models can only handle numeric input and can only result in a numeric output. However, in multimodal tasks we are often confronted with unstructured data like pictures or text. Thus, the first major problem is how to represent the input numerically. The second issue with regard to multimodal tasks is how exactly to combine different modalities. For instance, a typical task could be to train a deep learning model to generate a picture of a cat. First of all, the computer needs to understand the text input ``cat'' and then somehow translate this information into a specific image. Therefore, it is necessary to identify the contextual relationships between words in the text input and the spatial relationships betweent pixels in the image output. What might be easy for a toddler in pre-school, is a huge challenge for the computer. Both have to learn some understanding of the word ``cat'' that comprises the meaning and appearance of the animal. A common approach in modern deep learning is to generate embeddings that represent the cat numerically as a vector in some latent space. However, to achieve this, different approaches and algorithmic architectures have been developed in recent years. This book gives an overview of the different methods used in state-of-the-art (SOTA) multimodal deep learning to overcome challenges arising from unstructured data and combining inputs of different modalities.
 
 \hypertarget{outline-of-the-booklet}{%
 \section{Outline of the Booklet}\label{outline-of-the-booklet}}
 
-Since multimodal models often use text and images as input or output, methods of Natural Language Processing (NLP) and Computer Vision (CV) are introduced as foundation in Chapter \ref{c01-00-intro-modalities}. Methods in the area of NLP try to handle text data, whereas CV deals with image processing. With regard to NLP (subsection \ref{c01-01-sota-nlp}), one concept of major importance is the so-called word embedding, which is nowadays an essential part of all mutlimodal deep learning architectures. This concept also sets the foundation for transformer-based models like BERT \citep{BERT}, which achieved a huge improvement in several NLP tasks. Especially the attention mechanism \citep{attention} of transformers revolutionized NLP models which is why most of them rely on the transformer as a backbone. In Computer Vision (subsection \ref{c01-02-sota-cv}) different network architectures, namely ResNet \citep{ResNet}, EfficientNet \citep{EfficientNet}, SimCLR \citep{SimCLR} and BYOL \citep{BYOL}, will be introduced. Here it is of great interest to compare the different approaches in CV and their performance on challenging benchmarks. For this reason, the last subsection \ref{c01-03-benchmarks} of chapter 1 gives an overall overview of different data sets, pre-training tasks and benchmarks for CV as well as for NLP.
+Since multimodal models often use text and images as input or output, methods of Natural Language Processing (NLP) and Computer Vision (CV) are introduced as foundation in Chapter \ref{c01-00-intro-modalities}. Methods in the area of NLP try to handle text data, whereas CV deals with image processing. With regard to NLP (subsection \ref{c01-01-sota-nlp}), one concept of major importance is the so-called word embedding, which is nowadays an essential part of (nearly) all multimodal deep learning architectures. This concept also sets the foundation for transformer-based models like BERT \citep{BERT}, which achieved a huge improvement in several NLP tasks. Especially the (self-)attention mechanism \citep{attention} of transformers revolutionized NLP models, which is why most of them rely on the transformer as a backbone. In Computer Vision (subsection \ref{c01-02-sota-cv}) different network architectures, namely ResNet \citep{ResNet}, EfficientNet \citep{EfficientNet}, SimCLR \citep{SimCLR} and BYOL \citep{BYOL}, will be introduced. In both fields it is of great interest to compare the different approaches and their performance on challenging benchmarks. For this reason, the last subsection \ref{c01-03-benchmarks} of Chapter \ref{c01-00-intro-modalities} gives an overall overview of different data sets, pre-training tasks and benchmarks for CV as well as for NLP.
 
-The second Chapter (see \ref{c02-00-multimodal}) focuses on different multimodal architectures, covering a wide variety of how text and images can be combined. The presented models combine and advance different methods of NLP and CV. First of all, looking at Img2Text tasks (subsection \ref{c02-01-img2text}), the data set Microsoft COCO for object recognition \citep{COCO} and the meshed-memory transformer for Image Captioning (M\textsuperscript{2} Transformer) \citep{meshed_memory} will be presented. Contrariwise, researchers developed methods to generate pictures based on a short text prompt (subsection \ref{c02-02-text2img}). The first models accomplishing this task were generative adversarial networks (GANs) \citep{GAN} and Variational Autoencoders (VAEs) \citep{VAE}. These methods were improved in recent year and today state-of-the art transformer architectures with text-guided diffusion models like DALL-E \citep{DALLE} and GLIDE \citep{GLIDE} achieve remarkable results. Another interesting question is how images can be utilized to support language models (subsection \ref{c02-03-img-support-text}). This can be done via sequential embeddings, more advanced grounded embeddings or, again, inside transformers. On the other hand, you can also look at text supporting CV models like CLIP \citep{CLIP}, ALIGN \citep{ALIGN} and Florence \citep{yuan2021florence} (subsection \ref{c02-04-text-support-img}). They use foundation models meaning reusing models (e.g.~CLIP inside DALL-E 2) as well as a contrastive loss for connecting text with images. Besides, zero-shooting makes it possible to classify new and unseen data. Especially the open-source architecture CLIP \citep{CLIP} for image classification and generation attracted a lot of attention last year. In the end of the second chapter, some further architectures to handle text and images simultaneously are introduced (subsection \ref{c02-05-text-plus-img}). For instance, Data2Vec uses the same learning method for speech, vision and language and in this way aims to find a general approach to handle different modalities in the same way. Furthermore, VilBert \citep{VilBert} extends the popular BERT architecture to handle both image and text as input by implementing co-attention. This method is also used in Google's Deepmind Flamingo \citep{Flamingo}. In addition, Flamingo aims to tackle multiple tasks with a single visual language model via few-shot learning and freezing the pre-trained vision and language model.
+The second Chapter (see \ref{c02-00-multimodal}) focuses on different multimodal architectures, covering a wide variety of how text and images can be combined. The presented models combine and advance different methods of NLP and CV. First of all, looking at Img2Text tasks (subsection \ref{c02-01-img2text}), the data set Microsoft COCO for object recognition \citep{COCO} and the meshed-memory transformer for Image Captioning (M\textsuperscript{2} Transformer) \citep{meshed_memory} will be presented. Contrariwise, researchers developed methods to generate pictures based on a short text prompt (subsection \ref{c02-02-text2img}). The first models accomplishing this task were generative adversarial networks (GANs) \citep{GAN} and Variational Autoencoders (VAEs) \citep{VAE}. These methods were improved in recent years and today's SOTA transformer architectures and text-guided diffusion models like DALL-E \citep{DALLE} and GLIDE \citep{GLIDE} achieve remarkable results. Another interesting question is how images can be utilized to support language models (subsection \ref{c02-03-img-support-text}). This can be done via sequential embeddings, more advanced grounded embeddings or, again, inside transformers. On the other hand, one can also look at text supporting CV models like CLIP \citep{CLIP}, ALIGN \citep{ALIGN} and Florence \citep{yuan2021florence} (subsection \ref{c02-04-text-support-img}). They use foundation models meaning reusing models (e.g.~CLIP inside DALL-E 2) as well as a contrastive loss for connecting text with images. Besides, zero-shooting makes it possible to classify new and unseen data without expensive fine-tuning. Especially the open-source architecture CLIP \citep{CLIP} for image classification and generation attracted a lot of attention last year. In the end of the second chapter, some further architectures to handle text and images simultaneously are introduced (subsection \ref{c02-05-text-plus-img}). For instance, Data2Vec uses the same learning method for speech, vision and language and in this way aims to find a general approach to handle different modalities in one architecture. Furthermore, VilBert \citep{VilBert} extends the popular BERT architecture to handle both image and text as input by implementing co-attention. This method is also used in Google's Deepmind Flamingo \citep{Flamingo}. In addition, Flamingo aims to tackle multiple tasks with a single visual language model via few-shot learning and freezing the pre-trained vision and language model.
 
-In the last chapter (see \ref{c03-00-further}), methods are introduced that are also able to handle modalities other than text and image, like e.g.~video or speech. The overall goal here is to find a general multimodal architecture based on challenges rather than modalities. Therefore, one needs to handle problems of multimodal fusion and alignment and decide whether you use a join or coordinated representation (subsection \ref{c03-01-further-modalities}). Moreover we go more into detail about how exactly to combine structured and unstructured data (subsection \ref{c03-02-structured-unstructured}). Therefore, different fusion strategies which evolved in recent years will be presented. This is illustrated in this book by two use cases in survival analysis and economics. Besides this, another interesting research question is how to tackle different tasks in one so called multi-purpose model (subsection \ref{c03-03-multi-purpose}) like it is intended to be done by Google researchers \citet{Pathways} and their Pahtway model. Last but not least, we show one exemplary application of Multimodal Deep Learning in the arts scene where image generation models like DALL-E \citep{DALLE} are used to create art pieces in the area of Generative Arts (subsection \ref{c03-04-usecase}).
+In the last chapter (see \ref{c03-00-further}), methods are introduced that are also able to handle modalities other than text and image, like e.g.~video, speech or tabular data. The overall goal here is to find a general multimodal architecture based on challenges rather than modalities. Therefore, one needs to handle problems of multimodal fusion and alignment and decide whether you use a join or coordinated representation (subsection \ref{c03-01-further-modalities}). Moreover we go more into detail about how exactly to combine structured and unstructured data (subsection \ref{c03-02-structured-unstructured}). Therefore, different fusion strategies which evolved in recent years will be presented. This is illustrated in this book by two use cases in survival analysis and economics. Besides this, another interesting research question is how to tackle different tasks in one so called multi-purpose model (subsection \ref{c03-03-multi-purpose}) like it is intended to be created by Google researchers \citep{Pathways} in their ``Pathway'' model. Last but not least, we show one exemplary application of Multimodal Deep Learning in the arts scene where image generation models like DALL-E \citep{DALLE} are used to create art pieces in the area of Generative Arts (subsection \ref{c03-04-usecase}).
 
 \hypertarget{c01-00-intro-modalities}{%
 \chapter{Introducing the modalities}\label{c01-00-intro-modalities}}
@@ -2356,33 +2358,31 @@ In the following chapters we will see how the multimodal architectures use these
 \emph{Supervisor: Christian Heumann}
 
 Multimodal learning refers to the process of learning representations from different types of input modalities, such as image data, text or speech.
-Due to methodological breakthroughs in the fields of Natural Language Processing (NLP) as well as Computer Vision (CV), in recent years multimodal models have gained increasing attention as they are able to strengthen predictions and better emulate the way humans learn.
+Due to methodological breakthroughs in the fields of Natural Language Processing (NLP) as well as Computer Vision (CV) in recent years, multimodal models have gained increasing attention as they are able to strengthen predictions and better emulate the way humans learn.
 This chapter focuses on discussing images and text as input data.
 The remainder of the chapter is structured as follows:
 
 The first part ``Image2Text'' discusses how transformer-based architectures improve meaningful captioning for complex images using a new large scale, richly annotated dataset COCO \citep{mccoco, cornia2020m2}.
-Whether it is seeing a photograph and describing it or parsing a complex scene and describing its context, it is not a difficult task for humans.
-But it is much more complex and challenging for computers.
+While looking at a photograph and describing it or parsing a complex scene and describing its context is not a difficult task for humans, it appears to be much more complex and challenging for computers.
 We start with focusing on images as input modalities.
 In 2014 Microsoft COCO was developed with a primary goal of advancing the state-of-the-art (SOTA) in object recognition by diving deeper into a broader question of scene understanding \citep{mccoco}.
-COCO stands for Common Objects in Context.
+``COCO'' in this case is the acronym for \emph{Common Objects in Context}.
 It addresses three core problems in scene understanding: object detection (non-iconic views), segmentation, and captioning.
-For tasks like machine translation and language understanding in NLP, transformer-based architecture is widely used.
-However, the potential of these applications in the multi-modal context has not been fully covered.
-With the help of the COCO dataset, a transformer-based architecture: Meshed-Memory Transformer for Image Captioning (\(M^2\)) will be introduced to improve both image encoding and the language generation steps \citep{cornia2020m2}.
-The performance of the (\(M^2\)) Transformer and different fully-attentive models will be evaluated and compared on the COCO dataset.
+While for tasks like machine translation and language understanding in NLP, transformer-based architecture are already widely used, the potential for applications in the multi-modal context has not been fully covered yet.
+With the help of the MS COCO dataset, the transformer-based architecture ``Meshed-Memory Transformer for Image Captioning'' (\(M^2\)) will be introduced, which was able to improve both image encoding and the language generation steps \citep{cornia2020m2}.
+The performance of \(M^2\) and other different fully-attentive models will be compared on the MS COCO dataset.
 
-Next, in \emph{Text-to-Image}, the idea of incorporating textual input in order to generate visual representations is described. Current advancements in this field have been made possible largely due to recent breakthroughs in NLP, which first allowed for learning contextual representations of text. Transformer-like architectures are being used to encode the input into embedding vectors, which are later helpful in guiding the process of image generation. The chapter discusses the development of the field in chronological order, looking into details of the most recent milestones. Concepts such as GAN, VAE, VQ-VAE, diffusion, and autoregressive models are covered to let the reader better understand what are the roots of the current research and where it is heading. Some of the most outstanding outputs generated by state-of-the-art works are also presented in the chapter.
+Next, in \emph{Text2Image}, the idea of incorporating textual input in order to generate visual representations is described. Current advancements in this field have been made possible largely due to recent breakthroughs in NLP, which first allowed for learning contextual representations of text. Transformer-like architectures are being used to encode the input into embedding vectors, which are later helpful in guiding the process of image generation. The chapter discusses the development of the field in chronological order, looking into details of the most recent milestones. Concepts such as generative adversarial networks (GAN), variational auto-encoders (VAE), VAE with vector quantization (VQ-VAE), diffusion, and autoregressive models are covered to provide the reader with a better understanding of the roots of the current research and where it might be heading. Some of the most outstanding outputs generated by state-of-the-art works are also presented in the chapter.
 
 The third part, ``Images supporting Language Models'', deals with the integration of visual elements in pure textual language models.
 Distributional semantic models such as Word2Vec and BERT assume that the meaning of a given word or sentence can be understood by looking at how (in which context) and when the word or the sentence appear in the text corpus, namely from its ``distribution'' within the text.
 But this assumption has been historically questioned, because words and sentences must be grounded in other perceptual dimensions in order to understand their meaning \citep[see for example the ``symbol grounding problem'';][]{harnad1990symbol}.
-For these reasons, a broad range of models has been developed with the aim to improve pure language models, leveraging on the addition of other perceptual information, such as visual ones.
-This subchapter focuses in particular on the integration of visual elements (images) to support pure language models for various tasks at the word-level and sentence-level.
-The starting point is always a language model, on which visual representations (extracted often with the help of large pools of images like MS COCO, see chapter ``Img2Text'' for further references) are to be ``integrated''.
+For these reasons, a broad range of models has been developed with the aim to improve pure language models, leveraging the addition of other perceptual dimensions, such as the visual one.
+This subchapter focuses in particular on the integration of visual elements (here: images) to support pure language models for various tasks at the word-/token-level as well as on the sentence-level.
+The starting point in this case is always a language model, into which visual representations (extracted often with the help of large pools of images rom data sets like MS COCO, see chapter ``Img2Text'' for further references) are to be ``integrated''.
 But how?
 There has been proposed a wide range of solutions:
-On one side of the spectrum, textual elements and visual ones are learned separately and then ``combined'' together whereas on the other side, the learning of textual and visual features takes place simultaneously/jointly.
+On one side of the spectrum, textual elements and visual ones are learned separately and then ``combined'' afterwards, whereas on the other side, the learning of textual and visual features takes place simultaneously/jointly.
 
 \begin{figure}
 
@@ -2390,47 +2390,47 @@ On one side of the spectrum, textual elements and visual ones are learned separa
 
 }
 
-\caption{Left: \citet{silberer2012learning}: stacked autoencoders to learn higher-level embeddings from textual and visual modalities, encoded as vectors of attributes. Right: \citet{bordes2020incorporating}: textual and visual information fused in an Intermediate space denoted as ``grounded space''; the ``grounding objective function'' is not applied directly on sentence embeddings but trained on this intermediate space, on which sentence embeddings are projected.}\label{fig:f02-00-01}
+\caption{Left: \citet{silberer2014learning} stack autoencoders to learn higher-level embeddings from textual and visual modalities, encoded as vectors of attributes. Right: \citet{bordes2020incorporating} fuse textual and visual information in an intermediate space denoted as ``grounded space''; the ``grounding objective function'' is not applied directly on sentence embeddings but trained on this intermediate space, on which sentence embeddings are projected.}\label{fig:f02-00-01}
 \end{figure}
 
 
 
-For example, \citet{silberer2012grounded} implement a model where a one-to-one correspondence between textual and visual space is assumed.
+For example, \citet{silberer2014learning} implement a model where a one-to-one correspondence between textual and visual space is assumed.
 Text and visual representations are passed to two separate unimodal encoders and both outputs are then fed to a bimodal autoencoder.
 On the other side, \citet{bordes2020incorporating} propose a ``text objective function'' whose parameters are shared with an additional ``grounded objective function''.
 The training of the latter takes place in what the authors called a ``grounded space'', which allows to avoid the one-to-one correspondence between textual and visual space.
-These are just introductory examples and between these two approaches there are many shades of gray (maybe more than fifty\ldots).
+These are just introductory examples and between these two approaches there are many shades of gray (probably even more than fifty ..).
 These models exhibit in many instances better performance than pure language models, but they still struggle on some aspects, for example when they deal with abstract words and sentences.
 
-Afterwards, in ``Text supporting Image Models'', approaches where natural language is used as supervision for CV models are described.
-Intuitively these models should be more powerful compared to models supervised solely by manually labeled data, simply because there is much more training data available.
+Afterwards, in the subchapter on ``Text supporting Image Models'', approaches where natural language is used as additional supervision for CV models are described.
+Intuitively these models should be more powerful compared to models supervised solely by manually labeled data, simply because there is much more signal available in the training data.
 
-An important example for this is the CLIP model \citep{radford2021learning} with its new dataset WIT (WebImageText) comprising 400 million text-image pairs scraped from the internet.
-Similar to ``Text2Image'' the recent successes in NLP have inspired new approaches in this field.
-Most importantly pre-train methods, which directly learn from raw text \citep[e. g. GPT-n, Generative Pre-trained Transformer;][]{brown2020language}.
-So, CLIP stands for Contrastive Language-Image Pre-training.
+One prominent example for this is the CLIP model \citep{radford2021learning} with its new dataset WIT (WebImageText) comprising 400 million text-image pairs scraped from the internet.
+Similar to ``Text2Image'' the recent success stories in NLP have inspired most of the new approaches in this field.
+Most importantly pre-training methods, which directly learn from raw text \citep[e.g.~GPT-n, Generative Pre-trained Transformer;][]{brown2020language}.
+So, the acronym CLIP stands for \_C\_ontrastive \_L\_anguage-\_I\_mage \_P\_re-training here.
 A transformer-like architecture is used for jointly pre-training a text encoder and an image encoder.
-For this the contrastive goal to correctly predict which natural language text pertains to which image inside a certain batch, is employed.
+For this, the contrastive goal to correctly predict which natural language text pertains to which image inside a certain batch, is employed.
 Training this way turned out to be more efficient than to generate captions for images.
-This leads to a flexible model, which at test time uses the learned text encoder as a ``zero-shot'' classifier on embeddings of the target dataset's classes.
-The model, for example, can perform optical character recognition, geo-location and action-recognition.
+This leads to a flexible model, which at test time uses the Learned text encoder as a ``zero-shot'' classifier on embeddings of the target dataset's classes.
+The model, for example, can perform optical character recognition, geo-location detection and action-recognition.
 Performance-wise CLIP can be competitive with task-specific supervised models, while never seeing an instance of the specific dataset before.
 This suggests an important step towards closing the ``robustness gap'', where machine learning models fail to meet the expectations set by their previous performance -- especially on ImageNet test-sets -- on new datasets.
 
-Finally, ``Text plus Images'' discusses how text and image inputs can be incorporated into a single unifying framework in order to get closer to a general self-supervised learning model.
-There are two key advantages that make such a model particularly interesting.
+Finally, the subchapter ``Models for both modalities'' discusses how text and image inputs can be incorporated into a single unifying framework in order to get closer to a general self-supervised learning framework.
+There are two key advantages that make such an architecture particularly interesting.
 Similar to models mentioned in previous parts, devoid of human labelling, self-supervised models don't suffer from the same capacity constraints as regular supervised learning models.
 On top of that, while there have been notable advances in dealing with different modalities using single modality models, it is often unclear to which extend a model structure generalizes across different modalities.
 Rather than potentially learning modality-specific biases, a general multipurpose framework can help increase robustness while also simplifying the learner portfolio.
 In order to investigate different challenges and trends in vision-and-language modelling,
 this section takes a closer look at three different models, namely data2vec (\citet{baevski2022data2vec}), VilBert (\citet{lu2019vilbert}) and Flamingo (\citet{alayrac2022flamingo})
-Data2vec is a new multimodal self-supervised learning model which uses a single framework for either speech, natural language processing or computer vision.
+Data2vec is a new multimodal self-supervised learning model which uses a single framework to process either speech, natural language or visual information.
 This is in contrast to earlier models which used different algorithms for different modalities.
 The core idea of data2vec, developed by MetaAI, is to predict latent representations of the full input data based on a masked view of the input in a self-distillation setup using a standard transformer architecture. (\citet{baevski2022data2vec})
-As a result, the main improvement is in the framework itself, not the underlying models themselves.
+As a result, the main improvement is in the framework itself, not the underlying architectures themselves.
 For example, the transformer architecture being used follows \citet{vaswani2017attention}.
-Through their parallelizability, transformers have several advantages over CNNs particularly when
-large amounts of data are being used, making them the standard approach in vision-language modelling. (\citet{dosovitskiy2020image})
+Through their parallelizability, transformers have several advantages over RNNs/CNNs particularly when
+large amounts of data are being used, making them the de-facto standard approach in vision-language modelling. (\citet{dosovitskiy2020image})
 VilBert is an earlier model that in contrast to data2vec can handle cross-modality tasks.
 Finally, Flamingo is a modern few shot learning model which features 80B parameters -
 significantly more than the other two models. Through a large language model incorporated in its architecture, it has great text generating capabilities to tackle open-ended tasks. It also poses the question how to efficiently train increasingly large models and shows the effectiveness of using perceiver architectures (\citet{jaegle2021perceiver}) to encode inputs from different modalities as well as how to leverage communication between pretrained and frozen models.
@@ -2438,42 +2438,42 @@ significantly more than the other two models. Through a large language model inc
 \hypertarget{c02-01-img2text}{%
 \section{Image2Text}\label{c02-01-img2text}}
 
-*Author: Luyang Chu
+\emph{Author: Luyang Chu}
 
-*Supervisor: Christian Heumann
+\emph{Supervisor: Christian Heumann}
 
-Image captioning means autonomously producing descriptive sentences for images. It has stimulated interest in both natural language processing and computer vision research in recent years. Image captioning is a key task that requires a semantic comprehension of images as well as the capacity to generate accurate and precise description sentences.
+Image captioning refers to the task of producing descriptive text for given images. It has stimulated interest in both natural language processing and computer vision research in recent years. Image captioning is a key task that requires a semantic comprehension of images as well as the capacity to generate accurate and precise description sentences.
 
 \hypertarget{microsoft-coco-common-objects-in-context}{%
 \subsection{Microsoft COCO: Common Objects in Context}\label{microsoft-coco-common-objects-in-context}}
 
-Understanding of visual scenes plays an important role in computer vision research (CV).Many tasks are included in it, such as image classification, object detection, object localization and semantic scene labeling.
-Through the computer vision research history, Image Datasets have played a critical role. They are not only essential for training and evaluating new algorithms, but also lead the research to new challenging directions.\citep{mccoco} In the early year, researchers developed Datasets \citep{deng2009imagenet},\citep{sun},\citep{pascalvoc} which enabled the direct comparison of hundreds of image recognition algorithms, that was the early evolution in object recognition. Recent years, ImageNet \citep{deng2009imagenet} which contains millions of images has enabled breakthroughs in both object classification and detection research using new deep learning algorithms.
+The uderstanding of visual scenes plays an important role in computer vision (CV) research. It includes many tasks, such as image classification, object detection, object localization and semantic scene labeling.
+Through the CV research history, high-quality image datasets have played a critical role. They are not only essential for training and evaluating new algorithms, but also lead the research to new challenging directions \citep{mccoco}. In the early years, researchers developed Datasets \citep{deng2009imagenet},\citep{sun},\citep{pascalvoc} which enabled the direct comparison of hundreds of image recognition algorithms, which led to an early evolution in object recognition. In the more recent past, ImageNet \citep{deng2009imagenet}, which contains millions of images, has enabled breakthroughs in both object classification and detection research using new deep learning algorithms.
 
-With the goal of advancing the state-of-art in object recognition especially scene understanding, a new large scale data called Microsoft COCO was published in 2014. MS COCO focuses on three core problems in scene understanding: detecting non-iconic views, detecting the semantic relationships between objects and precise localization of image objects.\citep{mccoco}
+With the goal of advancing the state-of-the-art in object recognition, especially scene understanding, a new large scale data called ``Microsoft Common Objects in Context'' (MS COCO) was published in 2014. MS COCO focuses on three core problems in scene understanding: detecting non-iconic views, detecting the semantic relationships between objects and determining the precise localization of objects \citep{mccoco}.
 
-MS COCO Dataset contains 91 common object categories with a total of 328,000 images as well as 2,500,000 labeled instances. All these images could be recognized by a 4 year old child. 82 categories include more than 5000 labeled The labeled instances which may support the detection of relationships between objects in COCO. In order to provide precise localization of object instances, only ``Thing'' categories like car, table, dog will be included. Objects which do not have clear boundaries like sky, sea, grass, will not be included. In current object recognition research, algorithms perform well on images with iconic views. These images always contains the single object category in the center of the image. To accomplish the goal of detecting the contextual relationships between objects, more complex images with multiple objects or natural images which comes from our daily life are gathered for the Dataset.
+The MS COCO data set contains 91 common object categories with a total of 328,000 images as well as 2,500,000 instance labels. The authors claim, that all of these images could be recognized by a 4 year old child. 82 of the categories include more than 5000 labeled instances. These labeled instances wmay support the detection of relationships between objects in MS COCO. In order to provide precise localization of object instances, only ``Thing'' categories like e.g.~car, table, or dog were included. Objects which do not have clear boundaries like e.g.~sky, sea, or grass, were not included. In current object recognition research, algorithms perform well on images with iconic views. Images with iconic view are defined as containing the one single object category of interest in the center of the image. To accomplish the goal of detecting the contextual relationships between objects, more complex images with multiple objects or natural images, coming from our daily life, are also gathered for the data set.
 
-In addition to MC COCO, researchers have been working on the development of new large databases. In recent years many new large databases like ImageNet, PASCAL VOC and SUN have been developed in the field of computer vision. Each of this dataset has its on specific focus.
+In addition to MS COCO, researchers have been working on the development of new large databases. In recent years many new large databases like ImageNet, PASCAL VOC \citep{pascalvoc} and SUN \citep{sun} have been developed in the field of computer vision. Each of this dataset has its on specific focus.
 
 Datasets for object recognition can be roughly split into three groups: object classification, object detection and semantic scene labeling.
 
-Object classification requires binary labels to indicate whether objects are present in an image, ImageNet \citep{deng2009imagenet} is clearly distinguishable from other datasets in terms of the dataset sizes. ImageNet is containing 22k categories with 500-1000 images each.\citep{mccoco}, in conparison to other datasets,the ImageNet dataset contains over 14 million labeled images with both entry-level and fine-grained categories by using WordNet Hierarchy and has enabled significant advances in image classification.
+Object classification requires binary labels to indicate whether objects are present in an image, ImageNet \citep{deng2009imagenet} is clearly distinguishable from other datasets in terms of the data set size. ImageNet contains 22k categories with 500-1000 images each.In comparison to other data sets, the ImageNet data set contains thus over 14 million labeled images with both entity-level and fine-grained categories by using the WordNet hierarchy and has enabled significant advances in image classification.
 
-Detecting an object includes two steps, first is to ensure that an object from a specified class is present, the second step is to localize the object in the image with a bounding box. This can be implemented into tasks like face detection or pedestrians detection. The PASCAL VOC \citep{pascalvoc} dataset is used to help the detection of basic object categories. With 20 object categories and over 11,000 images, PASCAL VOC labeled over 27,000 object instance by using bounding boxes. Almost 7,000 object instances from them had detailed segmentations. \citep{mccoco}
+Detecting an object includes two steps: first is to ensure that an object from a specified class is present, the second step is to localize the object in the image with a given bounding box. This can be implemented to solve tasks like face detection or pedestrians detection. The PASCAL VOC \citep{pascalvoc} data set can be used to help with the detection of basic object categories. With 20 object categories and over 11,000 images, PASCAL VOC contains over 27,000 labeled object instances by additionally using bounding boxes. Almost 7,000 object instances from them come with detailed segmentations \citep{mccoco}.
 
-Labeling semantic objects in a scene requires that each pixel of an image be labeled as belonging to a category, such as sky, chair, etc, but individual instances of objects do not need to be segmented. \citep{mccoco} Some objects like sky, grass, street can also be defined and labeled in this way.
-The dataset SUN \citep{sun} combines many of the properties of both object detection and semantic scene labeling datasets for the task of scene understanding, it contains 908 scene categories from the WordNet dictionary \citep{WordNet} with segmented objects.
-The 3,819 object categories split them to object detection datasets (person, chair) and to semantic scene labeling (wall, sky, floor). \citep{mccoco}
+Labeling semantic objects in a scene requires that each pixel of an image is labeled with respect to belonging to a category, such as sky, chair, etc., but individual instances of objects do not need to be segmented \citep{mccoco}. Some objects like sky, grass, street can also be defined and labeled in this way.
+The SUN data set \citep{sun} combines many of the properties of both object detection and semantic scene labeling data sets for the task of scene understanding, it contains 908 scene categories from the WordNet dictionary \citep{WordNet} with segmented objects.
+The 3,819 object categories split them to object detection datasets (person, chair) and to semantic scene labeling (wall, sky, floor) \citep{mccoco}.
 
 \hypertarget{image-collection-and-annotation-for-ms-coco}{%
 \subsubsection{Image Collection and Annotation for MS COCO}\label{image-collection-and-annotation-for-ms-coco}}
 
-COCO is a large-scale richly annotated Datatset, the progress of building consists of two phases:Data collection and image annotation.
+MS COCO is a large-scale richly annotated data set, the progress of building consisted of two phases: data collection and image annotation.
 
-In order to select representative object categories for images in COCO, researchers collected several categories from different dataset like PASCAL VOC \citep{pascalvoc} and other sources. All these object categories can be recognized by children between 4 to 8. The quality of the object categories were ensured by co-authors.Co-authors scale the categories from 1 to 5 depending on their common occurrence, practical applications and diversity from other categories. \citep{mccoco} The final number of the list is 91. All the categories from PASCAL VOC are also included in COCO. \citep{pascalvoc}
+In order to select representative object categories for images in MS COCO, researchers collected several categories from different existing data sets like PASCAL VOC \citep{pascalvoc} and other sources. All these object categories could, according to the authors, be recognized by children between 4 to 8. The quality of the object categories was ensured by co-authors. Co-authors rated the categories on a scale from 1 to 5 depending on their common occurrence, practical applicability and diversity from other categories \citep{mccoco}. The final number of categories on their list was 91. All the categories from PASCAL VOC are included in MS COCO.
 
-With the help of representative object categories, COCO wants to collect a dataset which a majority of these images are non-iconic. All these images can be roughly divided into three types in Fig \ref{fig:imagetype} :iconic-object images, iconic-scene images and non-iconic images.\citep{mccoco}
+With the help of representative object categories, the authors of MS COCO wanted to collect a data set in which a majority of the included images are non-iconic. All included images can be roughly divided into three types according to Fig. \ref{fig:imagetype}: iconic-object images, iconic-scene images and non-iconic images \citep{mccoco}.
 
 \begin{figure}
 
@@ -2481,15 +2481,14 @@ With the help of representative object categories, COCO wants to collect a datas
 
 }
 
-\caption{Type of images \citep{mccoco}.}\label{fig:imagetype}
+\caption{Type of images in the data set \citep{mccoco}.}\label{fig:imagetype}
 \end{figure}
 
 
 
-Images are collected through two strategies, firstly images from Flickr which contains photos uploaded by amateur photographer with keywords are collected. Secondly, researchers will search for pairwise combination of object categories like ``dog + car'' to gather more non-iconic images and images with rich contextual relationships.\citep{mccoco}
+Images are collected through two strategies: firstly images from Flickr, a platform for photos uploaded by amateur photographers, with their keywords are collected. Secondly, researchers searched for pairwise combinations of object categories like ``dog + car'' to gather more non-iconic images and images with rich contextual relationships \citep{mccoco}.
 
-Due to the the scale of the dataset and the high cost of the annotation process, the design of a high quality annotation pipeline with efficient cost is a difficult task.
-The annotation pipeline in Fig \ref{fig:cocoannotation} for COCO is splitted into three primary tasks: 1. category labeling, 2.instance spotting, and 3. instance segmenting.\citep{mccoco}
+Due to the scale of the dataset and the high cost of the annotation process, the design of a high quality annotation pipeline with efficient cost depicted a difficult task. The annotation pipeline in Fig. \ref{fig:cocoannotation} for MS COCO was split into three primary tasks: 1. category labeling, 2.instance spotting, and 3. instance segmentation \citep{mccoco}.
 
 \begin{figure}
 
@@ -2497,28 +2496,28 @@ The annotation pipeline in Fig \ref{fig:cocoannotation} for COCO is splitted int
 
 }
 
-\caption{Annotation pipeline for COCO \citep{mccoco}.}\label{fig:cocoannotation}
+\caption{Annotation pipeline for MS COCO \citep{mccoco}.}\label{fig:cocoannotation}
 \end{figure}
 
 
 
-As we can see in the Fig \ref{fig:cocoannotation}, object categories in each image will be determined in the first step. Due to the large number of Datasets and categories, they used a hierarchical approach instead of doing binary classification for each category. All the 91 categories have divided into 11 super-categories.The worker will examine the existence of a single instance for a given super-category.
-Workers will only label one instance for each super-categories with an category's icon.\citep{mccoco} For each image, 8 workers were asked to label it.This hierarchical approach has helped to reduce the time for labeling. However, the first phase still took ∼20k worker hours to complete.\citep{mccoco}
+As we can see in the Fig \ref{fig:cocoannotation}, object categories in each image were determined in the first step. Due to the large number of data sets and categories, they used a hierarchical approach instead of doing binary classification for each category. All the 91 categories were grouped into 11 super-categories. The annotator did then examine for each single instance whether it belongs to one of the given super-categories.
+Workers only had to label one instance for each of the super-categories with a category's icon \citep{mccoco}. For each image, eight workers were asked to label it. This hierarchical approach helped to reduce the time for labeling. However, the first phase still took ∼20k worker hours to be completed.
 
-In the next step, all instances of the object categories in an image were labeled, at most 10 instances of a given category per image will be labeled by each worker. In both instance spotting and instance segmenting steps, the location of the instance found by a worker in the previous stage can be seen by the current worker. Each image was labeled by 8 workers for a total of ∼10k worker hours.\citep{mccoco}
+In the next step, all instances of the object categories in an image were labeled, at most 10 instances of a given category per image were labeled by each worker. In both the instance spotting and the instance segmentation steps, the location of the instance found by a worker in the previous stage could be seen by the current worker. Each image was labeled again by eight workers summing up to a total of ∼10k worker hours.
 
-In the final segmenting stage, each object instance is segmented, the segmentation for other instances and the specification of the object instance by a worker in the previous stage will also shown to the worker.Segmenting 2.5 Mio object instances is an extremely time consuming task which requires over 22 worker hours per 1,000 segmentations.To minimize cost and improve the quality of segmentation, all workers are required to complete a training task for each object category.
-In roder to ensure a better quality, an explicit verification step on each segmented instance was performed.
+In the final segmenting stage, each object instance was segmented, the segmentation for other instances and the specification of the object instance by a worker in the previous stage were again shown to the worker. Segmenting 2.5 million object instances was an extremely time consuming task which required over 22 worker hours per 1,000 segmentations. To minimize cost and improve the quality of segmentation, all workers were required to complete a training task for each object category.
+In order to ensure a better quality, an explicit verification step on each segmented instance was performed as well.
 
-\hypertarget{comparison-with-other-datasets}{%
-\subsubsection{Comparison with other Datasets}\label{comparison-with-other-datasets}}
+\hypertarget{comparison-with-other-data-sets}{%
+\subsubsection{Comparison with other data sets}\label{comparison-with-other-data-sets}}
 
-In recent years, researchers have developed several pre-trained datasets and benchmarks which helped the developemnt of Algorithms for CV.
-Each of these datasets varies significantly in size, list of labeled categories and types of images.
-In the previos part we also introduced the different research main focus of some Datasets like ImageNet \citep{deng2009imagenet}, PASCAL VOC \citep{pascalvoc} and SUN \citep{sun}
-ImageNe containing millions of images has enabled breakthroughs in both object classification and detection research using a new class of deep learning algorithms. It was created to capture a large number of object categories, many of which are fine-grained. SUN focuses on labeling scene types and the objects that commonly occur in them. Finally, PASCAL VOC's primary application is object detection in natural images. MS COCO is designed for the detection and segmentation of objects occurring in their natural context.\citep{mccoco}
+In recent years, researchers have developed several pre-training data sets and benchmarks which helped the developemnt of algorithms for CV.
+Each of these data sets varies significantly in size, number of categories and types of images.
+In the previos part, we also introduced the different research focus of some data sets like e.g.~ImageNet \citep{deng2009imagenet}, PASCAL VOC \citep{pascalvoc} and SUN \citep{sun}.
+ImageNet, containing millions of images, has enabled major breakthroughs in both object classification and detection research using a new class of deep learning algorithms. It was created with the intention to capture a large number of object categories, many of which are fine-grained. SUN focuses on labeling scene types and the objects that commonly occur in them. Finally, PASCAL VOC's primary application is in object detection in natural images. MS COCO is designed for the detection and segmentation of objects occurring in their natural context \citep{mccoco}.
 
-With the help of Fig \ref{fig:cococomparison}, we could compare COCO with ImageNet PASCAL VOC and SUN from different aspects.\citep{mccoco}
+With the help of Fig. \ref{fig:cococomparison}, one can compare MS COCO to ImageNet, PASCAL VOC and SUN with respect to different aspects \citep{mccoco}.
 
 \begin{figure}
 
@@ -2526,37 +2525,36 @@ With the help of Fig \ref{fig:cococomparison}, we could compare COCO with ImageN
 
 }
 
-\caption{Comparison COCO with other PASCAL VOC, SUN and ImageNet \citep{mccoco}.}\label{fig:cococomparison}
+\caption{Comparison MS COCO with PASCAL VOC, SUN and ImageNet \citep{mccoco}.}\label{fig:cococomparison}
 \end{figure}
 
 
 
-The number of instances per category for all 91 categories for COCO and PASCAL VOC is shown in (a). Compare to PASCAL VOC, COCO has both more categories and more instances per categories.The number of object categories and the number of instances per category for all the datasets is shown in (d). MS COCO has fewer categories than ImageNet and SUN, but it has the most instances per category among all the dataset, which from the hypothesis of researchers might be useful for learning complex models capable of precise localization.\citep{mccoco}
-(b,c) show the number of annotated categories and annotated instances per image for MS COCO, ImageNet Detection, PASCAL VOC and SUN (average number of categories and instances are shown in parentheses). On average COCO contains 3.5 categories and 7.7 instances per image. ImageNet and PASCAL VOC both have less than 2 categories and 3 instances per image on average. SUN dataset has the most contextual information, 9,8 categories and 17 instances per image.
-(e) is the distribution of instance sizes for the MS COCO, ImageNet Detection, PASCAL VOC and SUN dataset.\citep{mccoco}
+The number of instances per category for all 91 categories in MS COCO and PASCAL VOC is shown in subfigure \ref{fig:cococomparison} (a). Compared to PASCAL VOC, MS COCO has both more categories and (on average) more instances per category. The number of object categories and the number of instances per category for all the datasets is shown in subfigure \ref{fig:cococomparison} (d). MS COCO has fewer categories than ImageNet and SUN, but it has the highest average number of instances per category among all the data sets, which from the perspective of authors might be useful for learning complex models capable of precise localization \citep{mccoco}.
+Subfigures \ref{fig:cococomparison} (b) and (c) show the number of annotated categories and annotated instances per image for MS COCO, ImageNet, PASCAL VOC and SUN (average number of categories and instances are shown in parentheses). On average MS COCO contains 3.5 categories and 7.7 instances per image. ImageNet and PASCAL VOC both have on average less than 2 categories and 3 instances per image. The SUN data set has the most contextual information, on average 9.8 categories and 17 instances per image. Subfigure \ref{fig:cococomparison} (e) depicts the distribution of instance sizes for the MS COCO, ImageNet Detection, PASCAL VOC and SUN data set.
 
 \hypertarget{discussion}{%
 \subsubsection{Discussion}\label{discussion}}
 
-COCO is a new large scale data set for detecting and segmenting objects found in everyday life, with the aim of the state-of-the-art in object recognition and scene understanding. It focuses on non-iconic images of objects in natural environments and contains rich contextual information with many objects present per image. COCO is typical vision datasets, which are labor intensive and costly to create.
-With the vast cost and over 70,000 worker hours, 2.5 Mio instances were annotated to drive the advancement of object detection and segmentation algorithms. COCO is a good benchmark for the field of CV.\citep{mccoco}
-The COCO Team also shows directions for future. For example ``stuff'' label like ``sky'', ``grass'' and ``street'' etc, may also be included in the dataset since ``stuff'' categories provide significant contextual information for the object detection.
+MS COCO is a large scale data set for detecting and segmenting objects found in everyday life, with the aim of improving the state-of-the-art in object recognition and scene understanding. It focuses on non-iconic images of objects in natural environments and contains rich contextual information with many objects present per image. MS COCO is one of the typically used vision data sets, which are labor intensive and costly to create.
+With the vast cost and over 70,000 worker hours, 2.5 Mio instances were annotated to drive the advancement of object detection and segmentation algorithms. MS COCO is still a good benchmark for the field of CV \citep{mccoco}.
+The MS COCO Team also shows directions for future. For example ``stuff'' label like ``sky'', ``grass'', and ``street'', etc, may also be included in the dataset since ``stuff'' categories provide significant contextual information for the object detection.
 
 \hypertarget{models-for-image-captioning}{%
 \subsection{Models for Image captioning}\label{models-for-image-captioning}}
 
-The image captioning task generalizes describe the visual content of an image in natural language, so it requires an algorithm to understand and model the relationships between visual and textual elements, and to generate a sequence of output words.\citep{cornia2020m2}
-In the last few years, collections of methods have been proposed for image captioning. Earlier approaches based on generations pf simple templates, which contains the output produced from the object detector or attribute predictor. \citep{Socher10connectingmodalities}, \citep{5487377}.
-With the sequential nature of language, most research on image captioning has focused on deep learning techniques,especially using Recurrent Neural Network models (RNNs)\citep{vinyals},\citep{karpthy1} or LSTMs. Mostly, RNNs are used as languages models, and visual information and sequence generation will be encoded from the output of a CNN. With the aim of modelling the relationships between image regions, words, graph convolution neural network in the image encoding phase \citep{yao1} or single-layer attention mechanisms \citep{xu1} on the image encoding side have been proposed to incorporate more semantic and spatial relationships between objects.
-RNN-based-models are widely adopted, however, the model has its limitation on representation power and sequential nature.\citep{cornia2020m2}
-Recently, new fully-attentive models, in which the use of self-attention has replaced the recurrence,have been proposed. New approaches apply the Transformer models \citep{NIPS2017_3f5ee243} and BERT \citep{devlin-etal-2019-bert} models to image captioning tasks.
-Transformer consists of an encoder with a stack of self-attention and feed-forward layers, and a decoder which uses self-attention on words and cross-attention over the output of the last encoder layer.\citep{cornia2020m2}. In some Transformer based approaches, a Transformer-like encoder was paired with an LSTM decoder. While the aforementioned approaches have exploited the original Transformer architecture.
-For example Herdade \emph{et al}. \citep{HerdadeKBS19} proposed Transformer architecture for image captioning with the focus on geometric relations between input objects at the same time. Specially,an additional geometric weight between object pairs which is used to scale attention weights are computed. Similarly, an extension of the attention operator in which the final attended information is weighted by a gate guided by the context was introduced by Huang \emph{et al}. \citep{huang1},\citep{cornia2020m2}.
+The image captioning task is generally to describe the visual content of an image in natural language, so it requires an algorithm to understand and model the relationships between visual and textual elements, and to generate a sequence of output words \citep{cornia2020m2}.
+In the last few years, collections of methods have been proposed for image captioning. Earlier approaches were based on generations of simple templates, which contained the output produced from the object detector or attribute predictor \citep{Socher10connectingmodalities}, \citep{5487377}.
+With the sequential nature of language, most research on image captioning has focused on deep learning techniques, using especially Recurrent Neural Network models (RNNs) \citep{vinyals}, \citep{karpthy1} or one of their special variants (e.g.~LSTMs). Mostly, RNNs are used for sequence generation as languages models, while visual information is encoded in the output of a CNN. With the aim of modelling the relationships between image regions and words, graph convolution neural networks in the image encoding phase \citep{yao1} or single-layer attention mechanisms \citep{xu1} on the image encoding side have been proposed to incorporate more semantic and spatial relationships between objects.
+RNN-based models are widely adopted, however, the model has its limitation on representation power and due to its sequential nature \citep{cornia2020m2}.
+Recently, new fully-attentive models, in which the use of self-attention has replaced the recurrence, have been proposed. New approaches apply the Transformer architecture \citep{NIPS2017_3f5ee243} and BERT \citep{devlin-etal-2019-bert} models to solve image captioning tasks.
+The transformer consists of an encoder with a stack of self-attention and feed-forward layers, and a decoder which uses (masked) self-attention on words and cross-attention over the output of the last encoder layer \citep{cornia2020m2}. In some other transformer-based approaches, a transformer-like encoder was paired with an LSTM decoder, while the aforementioned approaches have exploited the original transformer architecture.
+Others \citep{HerdadeKBS19} proposed a transformer architecture for image captioning with the focus on geometric relations between input objects at the same time. Specifically, additional geometric weights between object pairs, which is used to scale attention weights, are computed. Similarly, an extension of the attention operator, in which the final attended information is weighted by a gate guided by the context, was introduced at a similar time \citep{huang1}.
 
 \hypertarget{meshed-memory-transformer-for-image-captioning-m2}{%
 \subsection{\texorpdfstring{Meshed-Memory Transformer for Image Captioning (\(M^2\))}{Meshed-Memory Transformer for Image Captioning (M\^{}2)}}\label{meshed-memory-transformer-for-image-captioning-m2}}
 
-Although Transformer-based architectures have been widely implemented in sequence modeling tasks like machine translation and language understanding. However, its applicability for multi-modal tasks like image captioning is still largely under-explored. \citep{cornia2020m2}
+Transformer-based architectures have been widely implemented in sequence modeling tasks like machine translation and language understanding. However, their applicability for multi-modal tasks like image captioning has still been largely under-explored \citep{cornia2020m2}.
 
 \begin{figure}
 
@@ -2569,7 +2567,7 @@ Although Transformer-based architectures have been widely implemented in sequenc
 
 
 
-A novel fully-attentive approach called Meshed-Memory Transformer for Image Captioning (\(M^2\)) for image captioning is proposed by Marcella \emph{et al}\citep{cornia2020m2} with the aim of improving the design of both the image encoder and the language decoder. Compare to all previous image captioning models, \(M^2\) ( see Fig. \ref{fig:m2arc1} has two new novelties, the encoder encodes a multi-level representation of the relationships between image regions with respect to low-level and high-level relations, a priori knowledge can be learned and modeled by using persistent memory vectors. The multi-layer architecture exploits both low- and high-level visual relationships through a learned gating mechanism, which compute the weight at each level, therefore, a mesh-like connectivity between encoder and decoder layers is created for sentence generation process.\citep{cornia2020m2}
+A novel fully-attentive approach called Meshed-Memory Transformer for Image Captioning (\(M^2\)) was proposed in 2020 \citep{cornia2020m2} with the aim of improving the design of both the image encoder and the language decoder. Compared to all previous image captioning models, \(M^2\) (see Fig. \ref{fig:m2arc1} has two new novelties: The encoder encodes a multi-level representation of the relationships between image regions with respect to low-level and high-level relations, and a-priori knowledge can be learned and modeled by using persistent memory vectors. The multi-layer architecture exploits both low- and high-level visual relationships through a learned gating mechanism, which computes the weight at each level, therefore, a mesh-like connectivity between encoder and decoder layers is created for the sentence generation process \citep{cornia2020m2}.
 
 \hypertarget{m2-transformer-architecture}{%
 \subsubsection{\texorpdfstring{\(M^2\) Transformer Architecture}{M\^{}2 Transformer Architecture}}\label{m2-transformer-architecture}}
@@ -2585,9 +2583,9 @@ A novel fully-attentive approach called Meshed-Memory Transformer for Image Capt
 
 
 
-Fig \ref{fig:m2arc2} shows the detailed architecture of \(M^2\) Transformer. \(M^2\) Transformer can be divided into Encoder (left) module and Decoder (right) module, both module has multiple layers. Given the input Image region \(X\), it go through the Attention and feed forward layer. The relationship between image regions with a priori knowledge will be encoded in each encoding layer, the output of each encoding layers will be read by decoding layers to generate the caption for image word by word.\citep{cornia2020m2}
+Fig. \ref{fig:m2arc2} shows the detailed architecture of \(M^2\) Transformer. It can be divided into the encoder (left) module and the decoder (right) module, both modules with multiple layers. Given the input image region \(X\), the image is passed through the attention and feed forward layers. The relationship between image regions with a-priori knowledge will be encoded in each encoding layer, the output of each encoding layers will be read by decoding layers to generate the caption for image word by word \citep{cornia2020m2}.
 
-All interactions between word and image-level features of the input image \(X\) are modeled by using scaled dot-product attention. Attention operates on vectors of queries \(Q\), keys \(K\) and values \(V\) , and takes a weighted sum of value vectors according to a similarity distribution between query and key vectors.
+All interactions between word and image-level features of the input image \(X\) are modeled by using scaled dot-product attention. Attention operates on vectors of queries \(q\), keys \(k\) and values \(n\), and takes a weighted sum of the value vectors according to a similarity distribution between query and key vectors.
 Attention can be defined as follows \citep{cornia2020m2}:
 
 \begin{equation}
@@ -2600,17 +2598,17 @@ where \(Q\) is a matrix of \(n_q\) query vectors, \(K\) and \(V\) both contain \
 \hypertarget{memory-augmented-encoder}{%
 \paragraph{Memory-Augmented Encoder}\label{memory-augmented-encoder}}
 
-For the given image region \(X\) , attention can be used to obtain a permutation in- variant encoding of \(X\) through the self-attention operations, the operator from the Transformer can be defined as follows \citep{cornia2020m2}:
+For the given image region \(X\), attention can be used to obtain a permutation invariant encoding of \(X\) through the self-attention operations, the operator from the Transformer can be defined as follows \citep{cornia2020m2}:
 
 \begin{equation}
 S(X) = Attention(W_q X, W_k X, W_vX)
 \end{equation}
 
-In this case, queries, keys, and values are linear projections of the input features,\(W_q\), \(W_k\), \(W_v\) are learnable weights, they depend solely on the pairwise similarities between linear projections of the input set X. The self-attention operator encodes the pairwise relationships inside the input.
+In this case, queries, keys, and values are linear projections of the input features, and \(W_q\), \(W_k\), \(W_v\) are their learnable weights, they depend solely on the pairwise similarities between linear projections of the input set X. The self-attention operator encodes the pairwise relationships inside the input.
 But self-attention also has its limitation: a prior knowledge on relationships between image regions can not be modelled.
-To overcome the limitation, Marcella \emph{et al}\citep{cornia2020m2} introduce \textbf{Memory-Augmented Attention} operator by extending the keys and values with additional prior information,which does not depend on image region \(X\).
+To overcome the limitation, the authors introduce a \textbf{Memory-Augmented Attention} operator by extending the keys and values with additional prior information, which does not depend on image region \(X\).
 The additional keys and values are initialized as plain learnable vectors which can be directly updated via SGD.
-The operator can be defined as \citep{cornia2020m2}:
+The operator can be defined as follows \citep{cornia2020m2}:
 
 \begin{align}
 M_{mem}(X) &=  Attention(W_qX, K, V ) \notag \\
@@ -2618,67 +2616,67 @@ K &=  [W_kX, M_k]\notag \\
 V &= [W_vX, M_v]
 \end{align}
 
-\(M_k\) and \(M_v\) are learnable matrices, with \(n_m\) rows. {[}·,·{]} indicates concatenation. The additional keys and value could help to retrieve a priori knowledge from Input while remaining the quries unchanged.\citep{cornia2020m2}
+\(M_k\) and \(M_v\) are learnable matrices, with \(n_m\) rows, {[}·,·{]} indicates concatenation. The additional keys and value could help to retrieve a priori knowledge from input while keeping the quries unchanged \citep{cornia2020m2}.
 
-For the \textbf{Encoding Layer}, Memory-augmented operator is d into a Transformer-like layer, the output applied to position-wise feed-forward layer \citep{cornia2020m2}:
+For the \textbf{Encoding Layer}, a memory-augmented operator d is injected into a transformer-like layer, the output is fed into a position-wise feed-forward layer \citep{cornia2020m2}:
 
 \begin{equation}
 F(X)_i= U\sigma(V X_i + b) + c;
 \end{equation}
 
-\(X_i\) indicates the \(i\)-th vector of the input set, and \(F(X)_i\) the \(i\)-th vector of the output. Also, \(\sigma(·)\) is the ReLU activation function, \(V\) and \(U\) are learnable weight matrices, \(b\) and \(c\) are bias terms.\citep{cornia2020m2}
+\(X_i\) indicates the \(i\)-th vector of the input set, and \(F(X)_i\) the \(i\)-th vector of the output. Also, \(\sigma(·)\) is the ReLU activation function, \(V\) and \(U\) are learnable weight matrices, \(b\) and \(c\) are bias terms \citep{cornia2020m2}.
 
-Each components will be included in a residual connection and a layer norm operation. The complete definition of an encoding layer can be finally written as \citep{cornia2020m2}:
+Each component will be complemented by a residual connection and the layer norm operation. The complete definition of an encoding layer can be finally written as \citep{cornia2020m2}:
 
 \begin{align}
 Z &= AddNorm(M_{mem}(X))\notag \\
 \tilde{X}&=AddNorm(F(Z))
 \end{align}
 
-Finally the \textbf{Full Encoder} has multiple encoding layers in sequence, therefore the \(i\)-th layer uses the output set computed by layer \(i − 1\), higher encoding Layers can exploit and refine relationships identified by previous layers, \(N\) encoding layers will produce the output \(\tilde{X} = (\tilde{X}^1 \dots \tilde{X}^n)\).\citep{cornia2020m2}
+Finally the \textbf{Full Encoder} has multiple encoder layers in a sequential fashion, therefore the \(i\)-th layer uses the output set computed by layer \(i − 1\), higher encoding layers can exploit and refine relationships identified by previous layers, \(n\) encoding layers will produce the output \(\tilde{X} = (\tilde{X}^1 \dots \tilde{X}^n)\) \citep{cornia2020m2}.
 
 \hypertarget{meshed-decoder}{%
 \paragraph{Meshed Decoder}\label{meshed-decoder}}
 
 The decoder depends on both previously generated words and image region encodings.
-\textbf{Meshed Cross-Attention} can take the advantage of all the encoding layers to generate sentences for the image. On the right side of the Fig \ref{fig:m2arc2} shows the structure of the Meshed Decoder. The input sequence vector \(Y\) and the output from all encoding layers \(\tilde{X}\) are connected by Meshed Attention operator gated through cross-attentions. The meshed attention operator can be formally defined as \citep{cornia2020m2}:
+\textbf{Meshed Cross-Attention} can take advantage of all the encoder layers to generate captions for the image. On the right side of the Fig. \ref{fig:m2arc2} the structure of the meshed decoder is shown. The input sequence vector \(Y\) and the outputs from all encoder layers \(\tilde{X}\) are connected by the meshed attention operator gated through cross-attention. The meshed attention operator can is formally defined as \citep{cornia2020m2}:
 
 \begin{equation}
 M_{mesh}(\tilde{X}, Y) =\sum_{i = 1}^{N}\alpha_i C(\tilde{X^i}, Y)
 \end{equation}
 
-\(C(·, ·)\) stands for the encoder-decoder cross-attention, it could be defined with queries from decoder and the keys and values from encoder.\citep{cornia2020m2}
+\(C(·,·)\) stands for the encoder-decoder cross-attention, it is defined with queries from decoder, while the keys and values come from the encoder \citep{cornia2020m2}.
 
 \begin{equation}
 C(\tilde{X^i}, Y) = Attention(W_q Y, W_k \tilde{X^i}, W_v \tilde{X^i})
 \end{equation}
 
-\(\alpha_i\) is a matrix of weights same size as the cross-attention results, \(\alpha_i\) models both single contribution of each encoding layer and the relative importance between different layers.\citep{cornia2020m2}
+\(\alpha_i\) is a matrix of weights of the same size as the cross-attention results, \(\alpha_i\) models both single contribution of each encoder layer and the relative importance between different layers \citep{cornia2020m2}.
 
 \begin{equation}
 \alpha_i = \sigma(W_i [Y,C(\tilde{X^i}, Y)]+ b_i)
 \end{equation}
 
-The {[}·,·{]} indicates concatenation and \(\sigma\) is the sigmoid activation function, \(W_i\) is a weight matrix, and \(b_i\) is a learnable bias vector.\citep{cornia2020m2}
+The {[}·,·{]} indicates concatenation and \(\sigma(·)\) is the sigmoid activation function here, \(W_i\) is a weight matrix, and \(b_i\) is a learnable bias vector \citep{cornia2020m2}.
 
-In decoding layers the prediction of a word should only depend on the word generated previously, so the decoder layer comprises a masked self- attention operation, the operator build connection between queries derived from the \(t\)-th element of its input sequence Y with keys and values from left sub-sequence,i.e.~\(Y_{≤t}\).
+In decoder layers the prediction of a word should only depend on the previously generated word, so the decoder layer comprises a masked self-attention operation, which means that the operator can only make connections between queries derived from the \(t\)-th element of its input sequence Y with keys and values from left sub-sequence, i.e.~\(Y_{≤t}\).
 
-Simlilar as the Encoding layer, the decoder layer also contains a position-wise feed-forward layer, so the decoder layer can be finally defined as \citep{cornia2020m2}:
+Simlilar as the encoder layers, the decoder layers also contain a position-wise feed-forward layer, so the decoder layer can be finally defined as \citep{cornia2020m2}:
 
 \begin{align}
 Z &= AddNorm(M_{mesh}(X,AddNorm(S_{mask}(Y ))) \notag \\
 \tilde{Y} &= AddNorm(F(Z)),
 \end{align}
 
-\(S_{mask}\) indicates a masked self-attention over time.\citep{cornia2020m2}
-Decoder with multiple decoder layers, takes the input word vectors and the \(t\)-th element of its output sequence to make the prediction of a word for \(t + 1\), conditioned on th \(Y_{≤t}\). Finally the decoder takes a linear projection and a softmax operation, which encodes a probability over words in the dictionary.\citep{cornia2020m2}
+where \(S_{mask}\) indicates a masked self-attention over time \citep{cornia2020m2}.
+The full decoder with multiple decoder layers takes the input word vectors as well as the \(t\)-th element (and all elements prior to it) of its output sequence to make the prediction for the word at \(t + 1\), conditioned on th \(Y_{≤t}\). Finally the decoder takes a linear projection and a softmax operation, which can be seen as a probability distribution over all words in the vocabulary \citep{cornia2020m2}.
 
-\hypertarget{comparison-with-other-models-on-coco-datasets}{%
-\paragraph{Comparison with other models on COCO Datasets}\label{comparison-with-other-models-on-coco-datasets}}
+\hypertarget{comparison-with-other-models-on-the-ms-coco-data-sets}{%
+\paragraph{Comparison with other models on the MS COCO data sets}\label{comparison-with-other-models-on-the-ms-coco-data-sets}}
 
-The \(M^2\) Transformer was evaluated on COCO \citep{mccoco}. COCO is the most commonly used Test dataset for image captioning. In stead of using the original COCO datsets, \citet{cornia2020m2} follows the split of COCO provided by \citet{karpthy1}. Karpathy uses 5000 images for validation, 5000 images for testing and the rest for training.
+The \(M^2\) Transformer was evaluated on MS COCO, which is still one of the most commonly used test data set for image captioning. Instead of using the original MS COCO dat set, \citet{cornia2020m2} follow the split of MS COCO provided by \citet{karpthy1}. Karpathy uses 5000 images for validation, 5000 images for testing and the rest for training.
 
-For model evaluation and comparison, standard captioning metrics like BLEU \citep{papineni-etal-2002-bleu}, METEOR \citep{meteor}, ROUGE \citep{lin-2004-rouge}, CIDEr \citep{cider}, and SPICE \citep{spice} which have been introduced in the second chapter are used.
+For model evaluation and comparison, standard metrics for evaluating generated sequences, like BLEU \citep{papineni-etal-2002-bleu}, METEOR \citep{meteor}, ROUGE \citep{lin-2004-rouge}, CIDEr \citep{cider}, and SPICE \citep{spice}, which have been introduced in the second chapter, are used.
 
 \begin{figure}
 
@@ -2686,14 +2684,14 @@ For model evaluation and comparison, standard captioning metrics like BLEU \cite
 
 }
 
-\caption{Comparison with Transformer-based alternatives \citep{cornia2020m2}}\label{fig:compare1}
+\caption{Comparison of \(M^2\) with Transformer-based alternatives \citep{cornia2020m2}}\label{fig:compare1}
 \end{figure}
 
 
 
-Transformer model in original configuration with six layers has been applied to captioning, researchers speculated that specific architectures are required for captioning, so variations of the original Transformer are compared with \(M^2\) Transformer. Other Variations are Transformer with three layers and ``Attention on Attention'' (AoA) approach \citep{huang1} to the attentive layers, both in the encoder and in the decoder. \citep{cornia2020m2}
-The second part intends to evaluate the importance of the meshed connections between encoder and decoder layers. \(M^2\) Transformer (1 to 1) is a reduced version of original \(M^2\) Transformer, in which one encoder layer only connect to one corresponding decoder layer instead of connect to all the decoding layers.
-As we can see from the Fig \ref{fig:compare1}, the original Transformer has 121.8 CIDEr, compare with it, the reduced version of \(M^2\) Transformer, we can see the improvement already (129.2 CIDEr). With the respect to meshed connectivity, which help to exploit relationships encoded at all layers and weights them with a sigmoid gating, we could observe better improvement in CIDEr from 129.2 to 131.2. Also the role of mem- ory vectors and the softmax gating schema for \(M^2\) Transformer are also included in the table. Without the memory vector lead to the recution of the performance of nearly 1 CIDEr in both reduced \(M^2\) Transformer and the original \(M^2\) Transformer.\citep{cornia2020m2}
+The transformer architecture in its original configuration with six layers has been applied for captioning, researchers speculated that specific architectures might be required for captioning, so variations of the original transformer are compared with \(M^2\) Transformer. Other variations are a transformer with three layers and the ``Attention on Attention'' (AoA) approach \citep{huang1} to the attentive layers, both in the encoder and in the decoder \citep{cornia2020m2}.
+The second part intends to evaluate the importance of the meshed connections between encoder and decoder layers. \(M^2\) Transformer (1 to 1) is a reduced version of the original \(M^2\) Transformer, in which one encoder layer is connected to only corresponding decoder layer instead of being connected to all the decoder layers.
+As one can see from the Fig. \ref{fig:compare1}, the original Transformer has a 121.8 CIDEr score, which is lower than the reduced version of \(M^2\) Transformer, showing an improvement to 129.2 CIDEr. With respect to meshed connectivity, which helps to exploit relationships encoded at all layers and weights them with a sigmoid gating, one can observe a further improvement in CIDEr from 129.2 to 131.2. Also the role of memory vectors and the softmax gating schema for \(M^2\) Transformer are also included in the table. Eliminating the memory vector leads to a reduction of the performance by nearly 1 point in CIDEr in both the reduced \(M^2\) Transformer and the original \(M^2\) Transformer \citep{cornia2020m2}.
 
 \begin{figure}
 
@@ -2701,15 +2699,15 @@ As we can see from the Fig \ref{fig:compare1}, the original Transformer has 121.
 
 }
 
-\caption{Comparison with the state of the art on the ``Karpathy'' test split, in single-model setting \citep{cornia2020m2}.}\label{fig:compare2}
+\caption{Comparison with the state-of-the-art on the ``Karpathy'' test split, in single-model setting \citep{cornia2020m2}.}\label{fig:compare2}
 \end{figure}
 
 
 
-Fig \ref{fig:compare2} compares the performance of \(M^2\) Transformer with several recent proposals for image captioning.
-SCST \citep{8099614} and Up- Down \citep{8578734}, use attention over the grid of features and attention over regions. RFNet \citep{renet}, which uses a recurrent fusion network to merge different CNN features; GCN-LSTM \citep{GCN-LSTM} uses a Graph CNN to exploit pairwise relationships between image regions; SGAE \citep{Yang_2019_CVPR} uses instead auto-encoding scene graphs. The original AoANet \citep{huang1} approach uses attention on attention for encoding image regions and an LSTM language model. Finally, the ORT \citep{HerdadeKBS19} uses a plain Transformer and weights attention scores in the region encoder with pairwise distances between detections \citep{cornia2020m2}.
+Fig \ref{fig:compare2} compares the performance of \(M^2\) Transformer with several recently proposed models for image captioning.
+SCST \citep{8099614} and Up-Down \citep{8578734}, use attention over the grid of features and attention over regions. RFNet \citep{renet} uses a recurrent fusion network to merge different CNN features; GCN-LSTM \citep{GCN-LSTM} uses a Graph CNN to exploit pairwise relationships between image regions; SGAE \citep{Yang_2019_CVPR} uses scene graphs instead ofauto-encoding. The original AoA-Net \citep{huang1} approach uses attention on attention for encoding image regions and an LSTM language model. Finally, the ORT \citep{HerdadeKBS19} uses a plain transformer and weights attention scores in the region encoder with pairwise distances between detections \citep{cornia2020m2}.
 
-In Fig \ref{fig:compare2}, the \(M^2\) Transformer exceeds all other models on BLEU-4, METEOR,CIDEr. The performance of \(M^2\) Transformer was very close and competitive with SGAE on BLEU-1 and with ORT on SPICE.
+In Fig. \ref{fig:compare2}, the \(M^2\) Transformer exceeds all other models on BLEU-4, METEOR, and CIDEr. The performance of the \(M^2\) Transformer was very close and competitive with SGAE on BLEU-1 and with ORT with respect to SPICE.
 
 \begin{figure}
 
@@ -2722,12 +2720,12 @@ In Fig \ref{fig:compare2}, the \(M^2\) Transformer exceeds all other models on B
 
 
 
-The Fig \ref{fig:example2} shows some examples of captions generated by \(M^2\) Transformer and the original Transformer model, as well as the corresponding ground-truths. According to the selected examples of captions, \(M^2\) Transformer shows the ability to generate more accurate descriptions of the images, and the approaches could detect the more detailed relationships between image regions.\citep{cornia2020m2}.
+Fig. \ref{fig:example2} shows some examples of captions generated by \(M^2\) Transformer and the original transformer model, as well as the corresponding ground-truths. According to the selected examples of captions, \(M^2\) Transformer shows the ability to generate more accurate descriptions of the images, and the approach could detect the more detailed relationships between image regions \citep{cornia2020m2}.
 
-The \(M^2\) Transformer is a new Transformer- based architecture for image captioning. It improves the image encoding by learning a multi-level representation of the relationships between image regions while exploiting a priori knowledge from each encoding layer, and uses a mesh-like connectivity at decoding stage to exploit low- and high-level features at the language generation steps. The results of model evaluation with COCO shows that, the performance of \(M^2\) Transformer approach surpasses most of the recent approaches and achieves a new state of the art on COCO.\citep{cornia2020m2}.
+The \(M^2\) Transformer is a new transformer-based architecture for image captioning. It improves the image encoding by learning a multi-level representation of the relationships between image regions while exploiting a priori knowledge from each encoder layer, and uses a mesh-like connectivity at decoding stage to exploit low- and high-level features at the language generation steps. The results of model evaluation with MS COCO shows that the performance of the \(M^2\) Transformer approach surpasses most of the recent approaches and achieves a new state of the art on MS COCO \citep{cornia2020m2}.
 
 \hypertarget{c02-02-text2img}{%
-\section{Text-to-image}\label{c02-02-text2img}}
+\section{Text2Image}\label{c02-02-text2img}}
 
 \emph{Author: Karol Urbańczyk}
 
@@ -3778,7 +3776,7 @@ A table (available \href{https://github.com/slds-lmu/seminar_multimodal_dl/blob/
 \end{itemize}
 
 \hypertarget{c02-04-text-support-img}{%
-\section{Text supporting Computer Vision Models}\label{c02-04-text-support-img}}
+\section{Text supporting Vision Models}\label{c02-04-text-support-img}}
 
 \emph{Author: Max Schneider}
 
@@ -5520,15 +5518,15 @@ In conclusion, generative arts is a new and impressive field. It combines techno
 
 \emph{Author: Nadja Sauter}
 
-\emph{Supervisor: Matthias Assenmacher}
+\emph{Supervisor: Matthias Aßenmacher}
 
-It is very impressive how multimodal architectures developed especially over the course of the last two years. Particularly, methods to generate pictures based on text prompts like DALL-E became incredibly good in their job. A lot of people are fascinated by the stunning results and a huge hype about these AI generated images evolved in the internet, especially on twitter. In this way, the models were not only investigated by researchers but also by the AI online Community (e.g.~Katherine Crowson alias \href{https://twitter.com/RiversHaveWings}{Rivers Have Wings}). Even in the art scene these methods attracted a lot of attention as shown in our use case ``Generative Arts'' (subsection \ref{c03-04-usecase}). Apart from that, it is possible to deploy these methods commercially, for instance in the film production or gaming industry (e.g.~creating characters for games). However, this also results into problems of copyright.
+It is very impressive how multimodal architectures have developed, especially over the course of the last two years. Particularly, methods to generate pictures based on text prompts, like DALL-E, became incredibly good at their ``job''. A lot of people are fascinated by the stunning results and a huge hype about these AI generated images evolved in the internet, especially on twitter. In this way, the models were not only investigated by researchers but also by the online community (e.g.~Katherine Crowson alias \href{https://twitter.com/RiversHaveWings}{Rivers Have Wings}). Even in the art scene these methods attracted a lot of attention as shown in our use case ``enerative Arts'' (subsection \ref{c03-04-usecase}). Apart from that, it is possible to deploy these methods commercially, for instance in the film production or gaming industry (e.g.~creating characters for games). However, this might also result in problems of copyright, an issue which has not yet been dealt with until now.
 
-It is impressive how realistic and precise outputs are achieved by such architectures. On the other hand, these methods can also be abused to spread misleading information as it is often very difficult to distinguish between a fake or a real picture by only looking at it. This can be systematically used to manipulate the public opinion by spreading AI manipulated media, also called deep fakes. That's why researchers like \citet{explainaility} demand automated tools which are capable of detecting these fabrications. Apart from taht, like most Deep Learning models, multimodal architectures are not free from bias which also needs to be investigated further \citep{bias}. Besides, the algorithms are very complex which is why they are called ``black-box'' models, meaning that one cannot directly retrace how the model came to a certain solution or decision. This may limit their social acceptance and usability as the underlying process is not credible and transparent enough \citep{explainaility}. For instance, in medical applications like e.g.~predicting the presence or absence of cancer, apart from the decision of the AI the reasoning and the certainty are highly relevant for doctors and patients.
+It is also impressive how realistic and precise outputs are achieved by such architectures. On the other hand, these methods can also be abused to spread misleading information as it is often very difficult to distinguish between a fake or a real picture by only looking at it. This can be systematically used to manipulate the public opinion by spreading AI manipulated media, also called deep fakes. That's why researchers like \citet{explainaility} demand automated tools which are capable of detecting these fabrications. Apart from that, like most deep learning models, multimodal architectures are not free from bias which also needs to be investigated further \citep{bias}. Besides, the algorithms are very complex which is why they are often called ``black-box'' models, meaning that one cannot directly retrace how the model came to a certain solution or decision. This may limit their social acceptance and usability as the underlying process is not credible and transparent enough \citep{explainaility}. For instance, in medical applications like e.g.~predicting the presence or absence of cancer, apart from the decision of the AI the reasoning and the certainty are highly relevant for doctors and patients.
 
-Furthermore, there is a clear trend in recent years to build more and more complex architectures in order to achieve higher performance. For instance OpenAI's language model GPT-2 has about 1.5 Billion parameter \citep{Radford2019LanguageMA} whereas its successor GPT-3 has about 175 Billion parameters \citep{GPT3}. Increasing the number of parameters often helps to improve model performance, but all of these parameters need to be trained and stored which takes a lot of time, enormous computational power and storage. For example, training GPT-2 took about one week (168 hours) of training on 32 TPUv3 chips \citep{environment}. The researchers \citet{environment} estimated that the cloud compute costs for training GPT-2 add up to about \$12,902--\$43,008. Apart from the enormous expenses, this also contributes to our environmental burden as this process is really energy intensive. Due to missing power draw data on GPT-2's training hardware, the researchers weren't able to calculate the CO\textsubscript{2} emission. However, for the popular BERT architecture with 110M parameters they calculated cloud compute costs of \$3,751-\$12,571, energy consumption of 1,507 kWh and a Carbon footprint of 1,438 lbs of CO\textsubscript{2}. In comparison, the footprint of flying from New York to San Francisco by plane for one passenger is about 1,984 lbs of CO\textsubscript{2}. In conclusion training BERT once results in almost the same footprint as this long-haul flight. On top of this, these numbers are only for one training run. Developing a new model or adapting it often takes several fitting and tuning phases.
+Furthermore, there is a clear trend in recent years to build more and more complex architectures in order to achieve higher performance. For instance OpenAI's language model GPT-2 has had about 1.5 billion parameters \citep{Radford2019LanguageMA}, whereas its successor GPT-3 had about 175 billion parameters \citep{GPT3}. Increasing the number of parameters often helps improving model performance, but all of these parameters need to be trained and stored which takes a lot of time, enormous computational power and storage. For example, training GPT-2 took about one week (168 hours) of training time on 32 TPUv3 chips \citep{environment}. The researchers (\citet{environment}) estimated that the cloud compute costs for training GPT-2 added up to about \$12,902--\$43,008. Apart from the enormous expenses, this also contributes to our environmental burden as this process is really energy intensive. Due to missing power draw data on GPT-2's training hardware, the researchers weren't able to calculate the CO\textsubscript{2} emission. However, for the popular BERT architecture with 110M parameters they calculated cloud compute costs of \$3,751-\$12,571, energy consumption of 1,507 kWh and a Carbon footprint of 1,438 lbs of CO\textsubscript{2}. In comparison, the footprint of flying from New York to San Francisco by plane for one passenger is about 1,984 lbs of CO\textsubscript{2}. In conclusion training BERT once results in almost the same footprint as this long-haul flight. On top of this, these numbers are only for one training run. Developing a new model or adapting it often takes several fitting and tuning phases.
 
-Moreover, the computational power as well as the necessary hardware, technology and financial means to run these models can only be provided by big technology companies like e.g.~Google, Facebook or Open AI. This results in a disparate access between researchers in academia versus industry. Furthermore, the companies often do not publish their models as they are their `product' and intellectual property. In this way it is not possible to reproduce their work and findings independently. Besides, from an economic point of view, this may be the foundation of a monopoly which can be dangerous for economic competition and could abused by the Tech Giants.
+Moreover, the computational power as well as the necessary hardware, technology and financial means to run these models can oftentimes only be provided by big technology companies like e.g.~Google, Facebook or OpenAI. This results in a disparate access between researchers in academia versus industry. Furthermore, the companies sometimes tend do not publishing their (best) models as they are their ``product'' and contribute to the company's intellectual property. In this way it is not possible to reproduce their work and findings independently. Besides, from an economic point of view, this may be the foundation of a monopoly which might be dangerous for economic competition and holds the possibility of abuse.
 
 \hypertarget{epilogue}{%
 \chapter{Epilogue}\label{epilogue}}
@@ -5544,14 +5542,14 @@ certain architectures, improvements or ideas had net yet even been published whe
 and came up with the chapter topics in February 2022. Yet, as you might have seen, in some cases the
 students were even able to incorporate ongoing research published over the course of the seminar.
 Thus, this epilogue tries to put the content of this booklet into context and relate it to what is
-currently happening. Thereby we will focus on mainly three aspects:
+currently happening. Thereby we will focus on two aspects:
 
 \begin{itemize}
 \tightlist
 \item
   New influential (or even state-of-the-art) architectures
 \item
-  ..
+  Extending existing architectures to videos (instead of ``only'' images)
 \end{itemize}
 
 \hypertarget{new-influential-architectures}{%
@@ -5559,6 +5557,12 @@ currently happening. Thereby we will focus on mainly three aspects:
 
 In \href{./c02-00-multimodal.html\#c02-02-text2img}{\textbf{Chapter 3.2: ``Text2Image''}} and \href{./c03-00-further.html\#c03-04-usecase}{\textbf{Chapter 4.4: "Generative Art}} some important models for generating images/art from free-text prompts have been presented. However, one example of an even better (at least perceived this way by many people) generative model was just published by researchers from Björn Ommer's group at LMU: \emph{``High-Resolution Image Synthesis with Latent Diffusion Models''}\\
 They introduced a model called \emph{Stable Diffusion} which allows users to generate photorealisitic images. Further (as opposed to numerous other architectures, it is available open-source and can even be tried out via \href{https://huggingface.co/spaces/stabilityai/stable-diffusion}{huggingface}.
+
+\hypertarget{creating-videos}{%
+\section{Creating videos}\label{creating-videos}}
+
+Also more recently, research has focussed on not only creating images from natural language input but also videos. The \emph{Imagen} architecture, which was developed by researchers at Google Research (Brain Team), was extended with respect to also creating videos (see \href{https://imagen.research.google/video/}{their project homepage}).
+Yet, this is only on of many possible examples of research being conducted in this direction. The interested reader is refered to \href{https://imagen.research.google/video/paper.pdf}{the paper accompanying their project}.
 
 We hope that this little outlook can adequately round off this nice piece of academic work created by extremely motivated students and we hope that you enjoyed reading.
 
