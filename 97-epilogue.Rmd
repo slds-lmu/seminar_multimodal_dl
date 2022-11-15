@@ -11,14 +11,19 @@ certain architectures, improvements or ideas had net yet even been published whe
 and came up with the chapter topics in February 2022. Yet, as you might have seen, in some cases the
 students were even able to incorporate ongoing research published over the course of the seminar.
 Thus, this epilogue tries to put the content of this booklet into context and relate it to what is 
-currently happening. Thereby we will focus on mainly three aspects:
+currently happening. Thereby we will focus on two aspects:
 
 - New influential (or even state-of-the-art) architectures
-- ..
+- Extending existing architectures to videos (instead of "only" images)
 
 ## New influential architectures
 
 In [**Chapter 3.2: "Text2Image"**](./c02-00-multimodal.html#c02-02-text2img) and [**Chapter 4.4: "Generative Art**](./c03-00-further.html#c03-04-usecase) some important models for generating images/art from free-text prompts have been presented. However, one example of an even better (at least perceived this way by many people) generative model was just published by researchers from Björn Ommer's group at LMU: _"High-Resolution Image Synthesis with Latent Diffusion Models"_  
 They introduced a model called _Stable Diffusion_ which allows users to generate photorealisitic images. Further (as opposed to numerous other architectures, it is available open-source and can even be tried out via [huggingface](https://huggingface.co/spaces/stabilityai/stable-diffusion).
+
+## Creating videos
+
+Also more recently, research has focussed on not only creating images from natural language input but also videos. The _Imagen_ architecture, which was developed by researchers at Google Research (Brain Team), was extended with respect to also creating videos (see [their project homepage](https://imagen.research.google/video/)).
+Yet, this is only on of many possible examples of research being conducted in this direction. The interested reader is refered to [the paper accompanying their project](https://imagen.research.google/video/paper.pdf).
 
 We hope that this little outlook can adequately round off this nice piece of academic work created by extremely motivated students and we hope that you enjoyed reading.

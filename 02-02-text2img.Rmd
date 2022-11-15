@@ -1,4 +1,4 @@
-## Text-to-image {#c02-02-text2img}
+## Text2Image {#c02-02-text2img}
 
 *Author: Karol Urbańczyk*
 

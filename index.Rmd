@@ -25,6 +25,8 @@ is.html = !is.null(output) && output == "html"
 
 # Preface {-}
 
+*Author: Matthias Aßenmacher*
+
 <!---
 ```{r cover, cache=FALSE, out.width="500", fig.align="center", echo=FALSE, eval = is.html}
 # knitr::include_graphics('images/cover.png')
@@ -38,29 +40,6 @@ In this seminar, we reviewed these approaches and attempted to create a solid ov
 <!---
 Cover by [\@YvonneDoinel](https://twitter.com/YvonneDoinel)
 -->
-
-![Creative Commons License](figures/by-nc-sa.png)
-
-This book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
-
-
-\mainmatter
-
-# Foreword {-}
-
-*Author: Matthias Aßenmacher*
-
-This book is the result of an experiment in university teaching. We were inspired by a group of other PhD Students around Christoph Molnar, who conducted another [seminar on Interpretable Machine Learning](https://compstat-lmu.github.io/iml_methods_limitations/) in this format.
-Instead of letting every student work on a seminar paper, which more or less isolated from the other students, we wanted to foster collaboration between the students and enable them to produce a tangible outout (that isn't written to spend the rest of its time in (digital) drawers).
-In the summer term 2022, some Statistics, Data Science and Computer Science students signed up for our seminar entitled "Multimodal Deep Learning" and had (before kick-off meeting) no idea what they had signed up for: Having written an entire book by the end of the semester.
-
-We were bound by the examination rules for conducting the seminar, but otherwise we could deviate from the traditional format.
-We deviated in several ways:
-
-1. Each student project is a chapter of this booklet, linked contentwise to other chapers since there's partly a large overlap between the topics.
-1. We gave challenges to the students, instead of papers. The challenge was to investigate a specific impactful recent model or method from the field of NLP, Computer Vision or Multimodal Learning.
-1. We designed the work to live beyond the seminar.
-1. We emphasized collaboration. Students wrote the introduction to chapters in teams and reviewed each others individual texts.
 
 ## Citation {-}
 
@@ -83,6 +62,28 @@ If you refer to the book, please use the following citation (authors in alphabet
   year = {2022}
 }
 ```
+
+![Creative Commons License](figures/by-nc-sa.png)
+
+This book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+\mainmatter
+
+# Foreword {-}
+
+*Author: Matthias Aßenmacher*
+
+This book is the result of an experiment in university teaching. We were inspired by a group of other PhD Students around Christoph Molnar, who conducted another [seminar on Interpretable Machine Learning](https://compstat-lmu.github.io/iml_methods_limitations/) in this format.
+Instead of letting every student work on a seminar paper, which more or less isolated from the other students, we wanted to foster collaboration between the students and enable them to produce a tangible outout (that isn't written to spend the rest of its time in (digital) drawers).
+In the summer term 2022, some Statistics, Data Science and Computer Science students signed up for our seminar entitled "Multimodal Deep Learning" and had (before kick-off meeting) no idea what they had signed up for: Having written an entire book by the end of the semester.
+
+We were bound by the examination rules for conducting the seminar, but otherwise we could deviate from the traditional format.
+We deviated in several ways:
+
+1. Each student project is a chapter of this booklet, linked contentwise to other chapers since there's partly a large overlap between the topics.
+1. We gave challenges to the students, instead of papers. The challenge was to investigate a specific impactful recent model or method from the field of NLP, Computer Vision or Multimodal Learning.
+1. We designed the work to live beyond the seminar.
+1. We emphasized collaboration. Students wrote the introduction to chapters in teams and reviewed each others individual texts.
 
 <!-- Technical setup -->
 ## Technical Setup {-}
