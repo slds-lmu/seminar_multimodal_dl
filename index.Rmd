@@ -23,7 +23,7 @@ output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 is.html = !is.null(output) && output == "html"
 ```
 
- ```{r cover, cache=FALSE, out.width="800", fig.align="center", fig.cap="LMU seal (left) style-transferred to Van Gogh's Sunflower painting (center) and blended with the prompt - Van Gogh, sunflowers - via CLIP+VGAN (right).", echo=FALSE, eval = is.html}
+ ```{r cover, cache=FALSE, out.width="500", fig.align="center", echo=FALSE, eval = is.html}
 knitr::include_graphics('figures/titelbild.png')
 ``` 
 
