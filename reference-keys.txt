@@ -113,6 +113,14 @@ fig:flamingoattention
 fig:flamingodatasets
 fig:flamingoresult
 fig:flamingfinetune
+fig:joint-coordinated
+fig:fusion
+fig:translation
+fig:nuwa
+fig:perceiver-io
+fig:hierarchical-perceiver
+fig:data2vec
+fig:multimae
 fig:struc-vs-unstrc
 fig:fusion-strategies
 fig:cheerla-model
@@ -296,7 +304,6 @@ multimodal-training-paradigms
 uni-modal-modality-agnostic-self-supervised-learning
 multimodal-self-supervised-learning
 personal-research-general-non-contrastive-multimodal-representation-learning
-looking-forward
 c03-02-structured-unstructured
 intro
 taxonomy-structured-vs.-unstructured-data
