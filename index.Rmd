@@ -12,8 +12,8 @@ lof: False
 site: bookdown::bookdown_site
 description: "."
 graphics: yes
+cover-image: figures/titelbild.png
 ---
-<!---cover-image: figures/titelbild.png-->
 
 ```{r setup, include=FALSE}
 options(
