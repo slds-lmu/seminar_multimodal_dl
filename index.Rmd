@@ -12,8 +12,8 @@ lof: False
 site: bookdown::bookdown_site
 description: "."
 graphics: yes
-cover-image: figures/titelbild.png
 ---
+<!--- cover-image: images/cover.png -->
 
 ```{r setup, include=FALSE}
 options(
@@ -23,13 +23,14 @@ output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 is.html = !is.null(output) && output == "html"
 ```
 
- ```{r cover, cache=FALSE, out.width="500", fig.align="center", echo=FALSE, eval = is.html}
-knitr::include_graphics('figures/titelbild.png')
-``` 
-
 # Preface {-}
 
 *Author: Matthias Aßenmacher*
+
+
+```{r cover, cache=FALSE, out.width="800", fig.align="center", fig.cap="LMU seal (left) style-transferred to Van Gogh's Sunflower painting (center) and blended with the prompt - Van Gogh, sunflowers - via CLIP+VGAN (right).", echo=FALSE, eval = is.html}
+knitr::include_graphics('figures/titelbild.png')
+```
 
 In the last few years, there have been several breakthroughs in the methodologies used in Natural Language Processing (NLP) as well as Computer Vision (CV). Beyond these improvements on single-modality models, large-scale multi-modal approaches have become a very active area of research.
 
