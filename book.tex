@@ -1035,7 +1035,7 @@ pre-training, and favourable use cases. In the following, three
 different but very influential transformer architectures will be
 discussed. BERT can be seen as stacked encoders \citep{Devlin2018}, T5 aims
 to combine the good parts of encoders and decoders \citep{Raffel2019},
-while GPT are stacked decoders \citep{Brown2020}.
+while GPT are stacked decoders \citep{brown2020language}.
 
 \hypertarget{bert}{%
 \subsubsection{BERT}\label{bert}}
@@ -1239,7 +1239,7 @@ description, examples, and the prompt. In Figure \ref{gpt3fewshotlearning}, the 
 from English to French, a few examples, as well as the word that should
 be translated are given. Moreover, zero-shot and one-shot learning refer
 to the model predicting with no and one learned example, respectively
-\citep{Brown2020}.
+\citep{brown2020language}.
 
 \begin{figure}
 
@@ -1247,14 +1247,14 @@ to the model predicting with no and one learned example, respectively
 
 }
 
-\caption{Few-shot learning (Source: \citet{Brown2020}).}\label{fig:gpt3fewshotlearning}
+\caption{Few-shot learning (Source: \citet{brown2020language}).}\label{fig:gpt3fewshotlearning}
 \end{figure}
 
 
 
 It is complicated to create the few-shot examples, since the application
 relies on them to express the task. This is why smaller models are
-susceptible to examples written unfavourably. In \citet{Brown2020}, it was
+susceptible to examples written unfavourably. In \citet{brown2020language}, it was
 shown that few-shot performance scales with the number of model
 parameters. Even though GPT-3's in-context learning improved few-shot
 prompting capabilities, it is still sensitive to the order of training
