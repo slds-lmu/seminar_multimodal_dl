@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2022-11-16" />
+<meta name="date" content="2022-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1498,7 +1498,7 @@ FIGURE 3.78: <span class="citation">Alayrac et al. (<a href="#ref-alayrac2022fla
 </p>
 </div>
 
-<p>The results portayed in figure <a href="c02-00-multimodal.html#fig:flamingoresult">3.78</a> show that Flamingo does not only outperform all previous few shot models, but also the general state-of-the art on six tasks. It is also, not too surprisingly, evident that more shots and larger models lead to better performance. The in-context learning works analogous to GPT-3 (<span class="citation">T. Brown et al. (<a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>). Given a set of supporting examples (image, text), where text is the expected response based on the supporting visual input, a multimodal prompt is built by concatenating the examples in random order and adding the selected query image for the prediction. Interestingly, rather than using in-context learning with prompts, the authors also explore fine-tuning the model on the tasks which achieved state-of-the-art performance with few-shot learning. Fine-tuning the model is very expensive and requires additional hyperparameter tuning, but substantially improves results even further.</p>
+<p>The results portayed in figure <a href="c02-00-multimodal.html#fig:flamingoresult">3.78</a> show that Flamingo does not only outperform all previous few shot models, but also the general state-of-the art on six tasks. It is also, not too surprisingly, evident that more shots and larger models lead to better performance. The in-context learning works analogous to GPT-3 <span class="citation">(T. Brown et al. <a href="#ref-brown2020language" role="doc-biblioref">2020</a>)</span>. Given a set of supporting examples (image, text), where text is the expected response based on the supporting visual input, a multimodal prompt is built by concatenating the examples in random order and adding the selected query image for the prediction. Interestingly, rather than using in-context learning with prompts, the authors also explore fine-tuning the model on the tasks which achieved state-of-the-art performance with few-shot learning. Fine-tuning the model is very expensive and requires additional hyperparameter tuning, but substantially improves results even further.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:flamingfinetune"></span>
 <img src="figures/05-chapter2/flamingofinetune.png" alt="Alayrac et al. (2022): Flamingo Results with Fine-Tuning" width="100%" />
 <p class="caption">
