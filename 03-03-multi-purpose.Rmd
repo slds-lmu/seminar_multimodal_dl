@@ -33,7 +33,7 @@ Multitask learning thus aims to achieve better generalization by teaching the mo
 further on. For a more in-depth overview of multitask learning, we refer to [@Caruana1997] and [@Crawshaw2020].
 
 
-#### Mixture-of-Experts {#03-03-MoE}
+#### Mixture-of-Experts {#c03-03-MoE}
 
 Another prerequisite to this chapter is the mixture-of-expert (MoE) (@Jacobs1991, @Jordan1994, @Shaazer2017) architecture, which is aimed at increasing the overall model
 size while still keeping inference time reasonably low. In an MoE, not all parts of the net are used but just a subset. The *experts* are best suited to deal with the input
@@ -45,7 +45,7 @@ experts so that routing does not collapse into one or a few experts. An addition
 only *K* experts are used, which reduces the computational costs for inference by allowing the model to be more sparse.
 
 
-#### Evolutionary Algorithms {#03-03-EA}
+#### Evolutionary Algorithms {#c03-03-EA}
 
 An evolutionary algorithm is used to optimize a problem over a discrete space where derivative-based algorithms cannot be applied to. The algorithm is based on a population
 (in the domain to be optimized) and a fitness function that can be used to evaluate how close a member of the population is to the optimum. Parts of the population are chosen
@@ -81,7 +81,7 @@ The core model consists of the encoder, the I/O mixer, and the decoder. Input is
 to the I/O mixer and the decoder. The decoder produces the output sequence. However, producing an autoregressive sequence requires knowledge of the previously generated sequence. Thus
 the output of the decoder is also read by the I/O mixer, which provides the decoder with the necessary information about the previous sequence. The I/O mixer passes its output back to the
 decoder to provide the necessary information. The decoder and I/O mixer require modality nets to read and write in the target modality. The encoder consists of multiple convolution operations
-and a [mixture-of-expert](#03-03-MoE) layer. The I/O mixer and the decoder combine their dual input using cross-attention. A positional encoding conceptually similar to the one in transformers [@vaswani2017attention]
+and a [mixture-of-expert](#c03-03-MoE) layer. The I/O mixer and the decoder combine their dual input using cross-attention. A positional encoding conceptually similar to the one in transformers [@vaswani2017attention]
 is used for the attention mechanism.
 
 MultiModel was trained on eight datasets, from which six were from the language modality and COCO [@mccoco] and ImageNet [@ImageNet] from vision. For training, four experts in the MoE layers
@@ -130,7 +130,7 @@ knitr::include_graphics("figures/03-03-multipurpose/UniT.png")
 Another multipurpose transformer is OFA (Once For All) [@Wang2022]. To utilize the sequence-to-sequence (seq2seq) architecture of the transformer, all input is transformed into a seq2seq problem.
 
 While MultiModel and UniT use specific modules for a modality (modality nets and modality-specific encoders), a different approach is used for OFA. All input is sequentialized and embedded in a shared
-representation space. Since tokenizing an image using a vocabulary is not feasible, a similar approach to ViT [@dosovitskiy2020image] is used (where input is flattened to 16 x 16) to 
+representation space. Since tokenizing an image using a vocabulary is not feasible, a similar approach to ViT [@dosovitskiy2020image] is used (where input is flattened to 16 x 16) to
 obtain a sequence of $P$ representations. These representations are in the same dimension as the token embeddings from text input, which are tokenized using Byte-Pair-Encoding
 [@sennrich-etal-2016-neural]. After feeding the embeddings through the encoder, the decoder produces the output as a sequence again. However, in this case, images are represented as a sequence of
 tokens, similar to the image-patch vocabulary in DALL-E [@pmlr-v139-ramesh21a]. Furthermore, a special sequence for bounding boxes is also used for object detection and recognition. To generate
@@ -180,7 +180,7 @@ Like OFA, Gato can sequentialize all input and produce a sequential output that 
 Although many tasks and modalities lead to a curse of dimensionality for comparison, the architectures and the respective modifications of the introduced systems remain simple to compare.
 
 A trend toward seq2seq models can be seen with MultiModel, OFA, and Gato solving tasks in a seq2seq manner. The most prominent similarity is the transformer architecture used entirely
-(encoder & decoder) in OFA and truncated (decoder only) in Gato. Another significant similarity between both architectures is the use of a particular ordering of input and output. 
+(encoder & decoder) in OFA and truncated (decoder only) in Gato. Another significant similarity between both architectures is the use of a particular ordering of input and output.
 In Gato, the sequence is organized around predicting an action using a special token, while OFA produces a sequence as a solution which can be the bounding box or the sequence of an image
 to be fed in the generator module. While Gato can solve tasks from robotics and game playing, OFA can also generate images. However, both architectures require specific modules to decode the tokens into
 the respective modality.
@@ -216,7 +216,7 @@ multipurpose models becomes essential.
 
 
 ### Pathways and Promising Works
-Although models have become more capable of solving complex tasks, significant limitations remain. 
+Although models have become more capable of solving complex tasks, significant limitations remain.
 A persisting issue in current deep learning is the necessity to train from scratch and disregard already obtained knowledge, which is highly ineffective compared to human intelligence. Another
 issue arises from the evergrowing, dense networks that requires more and more resources.
 
@@ -319,7 +319,7 @@ the MoE-architecture, leading to a single model that can outperform current stat
 muNet [@Gesmundo2022a] is an architecture that maximizes the reusability of previously learned knowledge by using an evoluationary algorithm to evolve a new model.
 The authors address the current practice for fine-tuning, where a pre-trained model is copied and then explicitly trained on a task by overwriting previous knowledge.
 
-An initial model is evolved by using an [evoluationary algorithm](#03-03-EA) to fit specific tasks, while keeping the previously learned knowledge.
+An initial model is evolved by using an [evoluationary algorithm](#c03-03-EA) to fit specific tasks, while keeping the previously learned knowledge.
 Eventually, a set of models is obtained, which includes new neural networks, based majorly on the parameters of the initial model. The new modules can be seen as paths to task-specific
 modifications of the initial network.
 
@@ -349,14 +349,14 @@ muNet was evaluated for fine-tuning against a ViT instance, which was aimed at b
 (to simulate multitasking). ViT was fine-tuned on all of these tasks as a baseline. In contrast, another ViT was evolved using muNet, on which the baseline model was evaluated again. The approach using
 muNet outperformed the fine-tuned ViT while using significantly fewer parameters.
 
-muNet offers a simple, evolutionary-based approach for fine-tuning and keeping all previously acquired knowledge safe, thus maximizing reusability. 
+muNet offers a simple, evolutionary-based approach for fine-tuning and keeping all previously acquired knowledge safe, thus maximizing reusability.
 
 
 ### Conclusion Pathways
 The introduced models show promising novel features that might improve multipurpose models. However, these models can only be improved if research is done to combine the distinct concepts. PathNet
 and muNet offer novel approaches to leverage already acquired knowledge, while LIMoE improves handling different modalities in a single, sparse model.
 Furthermore, it also becomes necessary to conduct research into scaling these concepts up. Since the multitask-related models (PathNet and muNet) only included a few tasks, introducing more tasks
-for training and testing might offer insights into how transfer between tasks succeeds and fails. 
+for training and testing might offer insights into how transfer between tasks succeeds and fails.
 
 LIMoE offers a promising architecture with respect to performance. Due to the sparsity of the MoE-layer, LIMoE is faster, while it also outperforms previous dense models. Using MoE-layers in
 transformers might also be a viable path for models like OFA and Gato. Combining the flexible encoding techniques of these models with the relative sparsity of LIMoE might result in even more capable
