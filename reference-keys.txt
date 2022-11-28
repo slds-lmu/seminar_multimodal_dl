@@ -317,8 +317,8 @@ conclusion-and-outlook
 c03-03-multi-purpose
 prerequisites
 multitask-learning
-mixture-of-experts-03-03-moe
-evolutionary-algorithms-03-03-ea
+c03-03-MoE
+c03-03-EA
 multipurpose-models
 overview-of-mulitpurpose-models
 multimodel

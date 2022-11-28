@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2022-11-17" />
+<meta name="date" content="2022-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -445,8 +445,8 @@ performance decreases.</p>
 <p>Multitask learning thus aims to achieve better generalization by teaching the model how to solve different tasks so that the model learns relationships that can be used
 further on. For a more in-depth overview of multitask learning, we refer to <span class="citation">(Caruana <a href="#ref-Caruana1997" role="doc-biblioref">1997</a>)</span> and <span class="citation">(Crawshaw <a href="#ref-Crawshaw2020" role="doc-biblioref">2020</a>)</span>.</p>
 </div>
-<div id="mixture-of-experts-03-03-moe" class="section level4 hasAnchor">
-<h4><span class="header-section-number">4.3.1.2</span> Mixture-of-Experts {#03-03-MoE}<a href="c03-00-further.html#mixture-of-experts-03-03-moe" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="c03-03-MoE" class="section level4 hasAnchor">
+<h4><span class="header-section-number">4.3.1.2</span> Mixture-of-Experts<a href="c03-00-further.html#c03-03-MoE" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Another prerequisite to this chapter is the mixture-of-expert (MoE) (<span class="citation">Jacobs et al. (<a href="#ref-Jacobs1991" role="doc-biblioref">1991</a>)</span>, <span class="citation">Jordan and Jacobs (<a href="#ref-Jordan1994" role="doc-biblioref">1994</a>)</span>, <span class="citation">Shazeer et al. (<a href="#ref-Shaazer2017" role="doc-biblioref">2017</a>)</span>) architecture, which is aimed at increasing the overall model
 size while still keeping inference time reasonably low. In an MoE, not all parts of the net are used but just a subset. The <em>experts</em> are best suited to deal with the input
 allowing the model to be sparse.</p>
@@ -455,8 +455,8 @@ neural networks are not used for every forward pass but only if the data is well
 experts so that routing does not collapse into one or a few experts. An additional gating network decides which of the experts is called. Gating can be implemented so that
 only <em>K</em> experts are used, which reduces the computational costs for inference by allowing the model to be more sparse.</p>
 </div>
-<div id="evolutionary-algorithms-03-03-ea" class="section level4 hasAnchor">
-<h4><span class="header-section-number">4.3.1.3</span> Evolutionary Algorithms {#03-03-EA}<a href="c03-00-further.html#evolutionary-algorithms-03-03-ea" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="c03-03-EA" class="section level4 hasAnchor">
+<h4><span class="header-section-number">4.3.1.3</span> Evolutionary Algorithms<a href="c03-00-further.html#c03-03-EA" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>An evolutionary algorithm is used to optimize a problem over a discrete space where derivative-based algorithms cannot be applied to. The algorithm is based on a population
 (in the domain to be optimized) and a fitness function that can be used to evaluate how close a member of the population is to the optimum. Parts of the population are chosen
 to create offspring either by mutation or recombination. The resulting population is then evaluated with respect to their fitness function, and only the best-suited individuals are kept.
@@ -486,7 +486,7 @@ Language and categories are the only target modalities that have respective moda
 to the I/O mixer and the decoder. The decoder produces the output sequence. However, producing an autoregressive sequence requires knowledge of the previously generated sequence. Thus
 the output of the decoder is also read by the I/O mixer, which provides the decoder with the necessary information about the previous sequence. The I/O mixer passes its output back to the
 decoder to provide the necessary information. The decoder and I/O mixer require modality nets to read and write in the target modality. The encoder consists of multiple convolution operations
-and a <a href="#03-03-MoE">mixture-of-expert</a> layer. The I/O mixer and the decoder combine their dual input using cross-attention. A positional encoding conceptually similar to the one in transformers <span class="citation">(Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. <a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>
+and a <a href="c03-00-further.html#c03-03-MoE">mixture-of-expert</a> layer. The I/O mixer and the decoder combine their dual input using cross-attention. A positional encoding conceptually similar to the one in transformers <span class="citation">(Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, et al. <a href="#ref-vaswani2017attention" role="doc-biblioref">2017</a><a href="#ref-vaswani2017attention" role="doc-biblioref">b</a>)</span>
 is used for the attention mechanism.</p>
 <p>MultiModel was trained on eight datasets, from which six were from the language modality and COCO <span class="citation">(T.-Y. Lin, Maire, Belongie, Hays, Perona, Ramanan, Dollár, and Zitnick <a href="#ref-mccoco" role="doc-biblioref">2014</a><a href="#ref-mccoco" role="doc-biblioref">b</a>)</span> and ImageNet <span class="citation">(Russakovsky et al. <a href="#ref-ImageNet" role="doc-biblioref">2015</a>)</span> from vision. For training, four experts in the MoE layers
 were used. The combined trained MultiModel on ImageNet and machine translation were below state-of-the-art (SOTA) models. Also, the combined model did not achieve significantly better results
@@ -752,7 +752,7 @@ the MoE-architecture, leading to a single model that can outperform current stat
 <h4><span class="header-section-number">4.3.3.4</span> muNet (Multitask Network)<a href="c03-00-further.html#munet-multitask-network" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>muNet <span class="citation">(Gesmundo and Dean <a href="#ref-Gesmundo2022a" role="doc-biblioref">2022</a>)</span> is an architecture that maximizes the reusability of previously learned knowledge by using an evoluationary algorithm to evolve a new model.
 The authors address the current practice for fine-tuning, where a pre-trained model is copied and then explicitly trained on a task by overwriting previous knowledge.</p>
-<p>An initial model is evolved by using an <a href="#03-03-EA">evoluationary algorithm</a> to fit specific tasks, while keeping the previously learned knowledge.
+<p>An initial model is evolved by using an <a href="c03-00-further.html#c03-03-EA">evoluationary algorithm</a> to fit specific tasks, while keeping the previously learned knowledge.
 Eventually, a set of models is obtained, which includes new neural networks, based majorly on the parameters of the initial model. The new modules can be seen as paths to task-specific
 modifications of the initial network.</p>
 <p>The EA of muNet starts with an initially proposed model that is mutated further on. All further mutations are stored so that after a set of candidates is available, the set can be split into
