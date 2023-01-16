@@ -816,7 +816,7 @@ task with minimal accuracy error.
 
 In contrast, few-shot applications have to complete tasks at test time
 with only forward passes. They have three main parts: the task
-description, examples, and the prompt. In Figure \@ref(gpt3fewshotlearning), the task is a translation
+description, examples, and the prompt. In Figure \@ref(fig:gpt3fewshotlearning), the task is a translation
 from English to French, a few examples, as well as the word that should
 be translated are given. Moreover, zero-shot and one-shot learning refer
 to the model predicting with no and one learned example, respectively
